@@ -88,9 +88,12 @@ export const api = {
         });
         const data = await handleResponse(res);
         if (data.token) localStorage.setItem('token', data.token);
+        if (data.user) storage.setCurrentUser(data.user);
         return data;
       } catch (err) {
-        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token')) throw err;
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
         
         // Static deployment fallback
         const users = storage.getUsers();
@@ -105,7 +108,6 @@ export const api = {
         localStorage.setItem('token', token);
         storage.setCurrentUser(user);
 
-        // Ensure default resume exists for user
         const resumes = storage.getResumes();
         if (resumes.length === 0) {
           storage.saveResumes([{ ...DEFAULT_DEMO_RESUME, userId: user.id }]);
@@ -124,9 +126,12 @@ export const api = {
         });
         const data = await handleResponse(res);
         if (data.token) localStorage.setItem('token', data.token);
+        if (data.user) storage.setCurrentUser(data.user);
         return data;
       } catch (err) {
-        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token')) throw err;
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
         
         // Static deployment fallback
         const user = {
@@ -154,8 +159,13 @@ export const api = {
         });
         const data = await handleResponse(res);
         if (data.token) localStorage.setItem('token', data.token);
+        if (data.user) storage.setCurrentUser(data.user);
         return data;
       } catch (err) {
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
+
         // Static deployment fallback
         const guestId = Date.now();
         const user = {
@@ -168,7 +178,6 @@ export const api = {
         localStorage.setItem('token', token);
         storage.setCurrentUser(user);
 
-        // Add initial sample resume for guest
         const resumes = storage.getResumes();
         if (!resumes.some((r) => r.userId === user.id)) {
           resumes.push({
@@ -192,10 +201,10 @@ export const api = {
         });
         if (!res.ok) throw new Error('Failed');
         const data = await handleResponse(res);
+        if (data.user) storage.setCurrentUser(data.user);
         return data.user;
       } catch (err) {
-        // Static deployment fallback
-        return storage.getCurrentUser() || { id: 'guest_user', email: 'guest@local', name: 'Guest User', isGuest: true };
+        return storage.getCurrentUser();
       }
     },
 
@@ -213,6 +222,10 @@ export const api = {
         });
         return await handleResponse(res);
       } catch (err) {
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
+
         // Static deployment fallback
         const user = storage.getCurrentUser();
         const userId = user ? user.id : 'demo-user-id';
@@ -235,6 +248,10 @@ export const api = {
         });
         return await handleResponse(res);
       } catch (err) {
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
+
         // Static deployment fallback
         const resumes = storage.getResumes();
         const resume = resumes.find((r) => r.id === id);
@@ -252,6 +269,10 @@ export const api = {
         });
         return await handleResponse(res);
       } catch (err) {
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
+
         // Static deployment fallback
         const user = storage.getCurrentUser();
         const userId = user ? user.id : 'demo-user-id';
@@ -279,6 +300,10 @@ export const api = {
         });
         return await handleResponse(res);
       } catch (err) {
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
+
         // Static deployment fallback
         const resumes = storage.getResumes();
         const index = resumes.findIndex((r) => r.id === id);
@@ -302,6 +327,10 @@ export const api = {
         });
         return await handleResponse(res);
       } catch (err) {
+        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
+          throw err;
+        }
+
         // Static deployment fallback
         let resumes = storage.getResumes();
         resumes = resumes.filter((r) => r.id !== id);
@@ -311,4 +340,5 @@ export const api = {
     }
   }
 };
+
 
