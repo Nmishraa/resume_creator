@@ -11,7 +11,7 @@ ResumeCraft is a modern, full-stack web application for creating, tailoring, and
 - ⚡ **Live Interactive Preview**: Instant real-time rendering as you edit your personal information, experience, education, and skills.
 - 🔐 **Authentication**: Support for Email Login/Signup, Guest Mode, and 1-Click Demo Login using JWT & bcrypt encryption.
 - 📥 **Export to PDF**: Single-click high-resolution PDF download rendered directly in the browser via `html2pdf.js`.
-- 🗄️ **PostgreSQL & Prisma Integration**: Data persistence using PostgreSQL and Prisma ORM with structured JSON resume storage.
+- 🗄️ **Database & Prisma Integration**: Data persistence using Prisma ORM with SQLite (zero-config local) or PostgreSQL database support.
 
 ---
 
@@ -26,8 +26,7 @@ ResumeCraft is a modern, full-stack web application for creating, tailoring, and
 ## 🚀 Quick Start Guide
 
 ### 1. Prerequisites
-- **Node.js**: v18.x or higher
-- **PostgreSQL**: v14.x or higher
+- **Node.js**: v18.x or higher *(SQLite is built-in; no external database server installation required!)*
 
 ### 2. Installation & Setup
 
@@ -50,7 +49,7 @@ ResumeCraft is a modern, full-stack web application for creating, tailoring, and
 
 4. **Initialize Database**:
    ```bash
-   # Push schema to database
+   # Push schema to local database
    npm run db:push
 
    # Seed default demo account & sample resume
@@ -74,7 +73,7 @@ ResumeCraft is a modern, full-stack web application for creating, tailoring, and
 | `npm run server` | Starts Express API backend server only |
 | `npm run build` | Builds frontend production bundle |
 | `npm run lint` | Runs ESLint code quality checks |
-| `npm run db:push` | Pushes Prisma schema to PostgreSQL database |
+| `npm run db:push` | Pushes Prisma schema to SQLite / PostgreSQL database |
 | `npm run db:seed` | Seeds database with demo user & sample resumes |
 
 ---
