@@ -218,6 +218,67 @@ export default function Login({ onAuthSuccess }) {
           </button>
         </p>
       </div>
+
+      {/* SEO & Discoverability Landing Section */}
+      <section style={{ maxWidth: '900px', width: '100%', marginTop: '3.5rem', padding: '0 1rem', color: '#334155' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.75rem' }}>
+            Free Online AI Resume Creator & CV Builder
+          </h2>
+          <p style={{ fontSize: '1rem', color: '#64748b', maxWidth: '680px', margin: '0 auto' }}>
+            Build professional, ATS-friendly resumes in minutes with modern templates, live preview, and instant PDF download.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+          <div style={{ background: '#ffffff', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#1e293b', marginBottom: '0.5rem' }}>⚡ Fast & ATS-Friendly</h3>
+            <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: '1.5' }}>
+              Designed to pass automated Applicant Tracking Systems used by top recruiters and tech companies.
+            </p>
+          </div>
+
+          <div style={{ background: '#ffffff', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#1e293b', marginBottom: '0.5rem' }}>📄 Instant PDF Export</h3>
+            <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: '1.5' }}>
+              Export clean, pixel-perfect PDF resumes directly to your device with zero hidden costs.
+            </p>
+          </div>
+
+          <div style={{ background: '#ffffff', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#1e293b', marginBottom: '0.5rem' }}>🎨 Modern Templates</h3>
+            <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: '1.5' }}>
+              Choose from polished templates tailored for software engineers, designers, project managers, and students.
+            </p>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div style={{ background: '#f8fafc', padding: '2rem', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: '#0f172a', marginBottom: '1.5rem', textAlign: 'center' }}>
+            Frequently Asked Questions
+          </h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+            <div>
+              <h4 style={{ fontSize: '1rem', fontWeight: '600', color: '#1e293b', marginBottom: '0.3rem' }}>
+                How do I make a resume using ResumeCraft?
+              </h4>
+              <p style={{ fontSize: '0.9rem', color: '#475569' }}>
+                Simply click "Guest Access" or sign in with email, enter your work experience, education, and skills into the interactive editor, and click export to download your resume PDF.
+              </p>
+            </div>
+            <div>
+              <h4 style={{ fontSize: '1rem', fontWeight: '600', color: '#1e293b', marginBottom: '0.3rem' }}>
+                Is this resume creator completely free?
+              </h4>
+              <p style={{ fontSize: '0.9rem', color: '#475569' }}>
+                Yes, ResumeCraft is 100% free to build, edit, and download your resumes without subscriptions or paywalls.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+

@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Explicit rules for AI Search Engines & Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://resumecreator26.netlify.app/sitemap.xml
