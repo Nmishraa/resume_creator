@@ -20,4 +20,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://resumecreator26.netlify.app/sitemap.xml
+Sitemap: https://smartresumecraft.netlify.app/sitemap.xml
