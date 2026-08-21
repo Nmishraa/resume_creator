@@ -2,6 +2,8 @@
 
 ResumeCraft is a modern, full-stack web application for creating, tailoring, and managing professional resumes with AI job compatibility matching, multiple template styles, dynamic section editing, and client-side PDF export.
 
+👉 **Live Application**: [https://smartresumecraft.netlify.app/](https://smartresumecraft.netlify.app/)
+
 ---
 
 ## ✨ Features
