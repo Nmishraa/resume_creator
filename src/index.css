@@ -416,22 +416,25 @@ body {
 
 .editor-layout {
   display: grid;
-  grid-template-columns: 550px 1fr;
+  grid-template-columns: 540px 1fr;
   height: calc(100vh - 72px);
-  background: white;
+  min-height: calc(100vh - 72px);
+  overflow: hidden;
+  background-color: #f8fafc;
 }
 
 .editor-sidebar {
-  background: white;
+  background: #ffffff;
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
+  min-width: 0;
 }
 
 .editor-toolbar {
-  padding: 1.25rem 2rem;
+  padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
@@ -645,30 +648,32 @@ body {
 /* --- PREMIUM EDITOR STYLES --- */
 .editor-layout {
   display: grid;
-  grid-template-columns: 440px 1fr;
-  height: 100vh;
+  grid-template-columns: 540px 1fr;
+  height: calc(100vh - 72px);
+  min-height: calc(100vh - 72px);
   overflow: hidden;
   background-color: #f8fafc;
 }
 
 .editor-sidebar {
   border-right: 1px solid rgba(226, 232, 240, 0.8);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   z-index: 10;
+  min-width: 0;
   box-shadow: 10px 0 30px rgba(0, 0, 0, 0.03);
 }
 
 .editor-toolbar {
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.9);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -676,16 +681,17 @@ body {
 
 .preview-pane {
   background: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-    radial-gradient(at 50% 0%, rgba(236, 72, 153, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.08) 0px, transparent 50%),
-    #ffffff;
-  padding: 4rem;
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 50%),
+    #f1f5f9;
+  padding: 2.5rem 1.5rem;
   overflow-y: auto;
+  overflow-x: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  perspective: 1000px;
+  min-width: 0;
+  width: 100%;
 }
 
 /* Glassy Input Fields */

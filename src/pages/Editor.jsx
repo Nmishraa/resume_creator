@@ -356,70 +356,73 @@ export default function Editor() {
       {/* Left Sidebar (Form Controls) */}
       <div className="editor-sidebar">
         {/* Toolbar */}
-        <div className="editor-toolbar">
-          <button className="btn btn-secondary" style={{ padding: '0.6rem 1rem' }} onClick={() => navigate('/dashboard')}>
-            <ArrowLeft size={18} /> Back
-          </button>
+        <div className="editor-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', padding: '0.85rem 1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button className="btn btn-secondary" style={{ padding: '0.45rem 0.8rem', fontSize: '0.82rem' }} onClick={() => navigate('/dashboard')}>
+              <ArrowLeft size={16} /> Back
+            </button>
 
-          {/* Live Floating ATS Score Pill */}
-          <div style={{ position: 'relative' }}>
-            <div 
-              className={`live-ats-pill ${atsPillClass}`}
-              onClick={() => setShowAtsPopover(!showAtsPopover)}
-              title="Click to view real-time ATS checklist"
-            >
-              <ShieldCheck size={16} />
-              <span>ATS: {liveAts.score}/100</span>
-            </div>
-
-            {showAtsPopover && (
+            {/* Live Floating ATS Score Pill */}
+            <div style={{ position: 'relative' }}>
               <div 
-                style={{
-                  position: 'absolute',
-                  top: '120%',
-                  left: 0,
-                  background: 'white',
-                  border: '1px solid #cbd5e1',
-                  borderRadius: 12,
-                  padding: '1rem',
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
-                  width: 280,
-                  zIndex: 100
-                }}
+                className={`live-ats-pill ${atsPillClass}`}
+                onClick={() => setShowAtsPopover(!showAtsPopover)}
+                title="Click to view real-time ATS checklist"
+                style={{ padding: '0.35rem 0.6rem', fontSize: '0.78rem' }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#0f172a' }}>Live ATS Score Checklist</span>
-                  <button className="btn-secondary" style={{ width: 22, height: 22, padding: 0 }} onClick={() => setShowAtsPopover(false)}>
-                    <X size={12} />
-                  </button>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.78rem', color: '#475569' }}>
-                  {liveAts.feedback.map((item, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                      <span style={{ color: item.includes('100%') ? '#10b981' : '#f59e0b', fontWeight: 900 }}>•</span>
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
+                <ShieldCheck size={15} />
+                <span>ATS: {liveAts.score}/100</span>
               </div>
-            )}
+
+              {showAtsPopover && (
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '120%',
+                    left: 0,
+                    background: 'white',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: 12,
+                    padding: '1rem',
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    width: 270,
+                    zIndex: 100
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#0f172a' }}>Live ATS Score Checklist</span>
+                    <button className="btn-secondary" style={{ width: 22, height: 22, padding: 0 }} onClick={() => setShowAtsPopover(false)}>
+                      <X size={12} />
+                    </button>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.78rem', color: '#475569' }}>
+                    {liveAts.feedback.map((item, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <span style={{ color: item.includes('100%') ? '#10b981' : '#f59e0b', fontWeight: 900 }}>•</span>
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           
-          <div className="flex-row" style={{ gap: '0.4rem' }}>
-            <button className="btn btn-secondary" onClick={toggleFullScreen} title="Toggle Full Screen View" style={{ padding: '0.5rem' }}>
-              <Maximize2 size={16} />
+          <div className="flex-row" style={{ gap: '0.35rem', flexWrap: 'nowrap' }}>
+            <button className="btn btn-secondary" onClick={toggleFullScreen} title="Toggle Full Screen View" style={{ padding: '0.45rem', width: 34, height: 34 }}>
+              <Maximize2 size={15} />
             </button>
-            <button className="btn btn-secondary" onClick={handleResetResume} title="Reset Resume Fields" style={{ padding: '0.5rem', color: 'var(--danger)' }}>
-              <RotateCcw size={16} />
+            <button className="btn btn-secondary" onClick={handleResetResume} title="Reset Resume Fields" style={{ padding: '0.45rem', width: 34, height: 34, color: 'var(--danger)' }}>
+              <RotateCcw size={15} />
             </button>
-            <button className="btn btn-secondary" onClick={handleSave} style={{ padding: '0.5rem 0.8rem' }}>
-              <Save size={16} /> Save
+            <button className="btn btn-secondary" onClick={handleSave} style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>
+              <Save size={15} /> Save
             </button>
 
             {/* Export Dropdown */}
             <div style={{ position: 'relative' }}>
-              <button className="btn btn-primary" style={{ padding: '0.5rem 0.9rem' }} onClick={() => setShowExportMenu(!showExportMenu)}>
-                <Download size={16} /> Export
+              <button className="btn btn-primary" style={{ padding: '0.45rem 0.85rem', fontSize: '0.82rem', whiteSpace: 'nowrap' }} onClick={() => setShowExportMenu(!showExportMenu)}>
+                <Download size={15} /> Export
               </button>
 
               {showExportMenu && (
