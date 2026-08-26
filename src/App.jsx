@@ -43,7 +43,8 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login onAuthSuccess={handleAuthSuccess} />} />
-            <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/" />} />
+            <Route path="/dashboard" element={user ? <Dashboard user={user} logout={logout} /> : <Navigate to="/" />} />
+            <Route path="/dashboard-what" element={user ? <Dashboard user={user} logout={logout} /> : <Navigate to="/" />} />
             <Route path="/editor/:id" element={user ? <Editor user={user} /> : <Navigate to="/" />} />
           </Routes>
         </div>
