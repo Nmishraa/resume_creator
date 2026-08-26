@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LivePreview({ data, template }) {
+export default function LivePreview({ data, template, themeColor = 'theme-indigo', fontFamily = 'font-inter' }) {
   const { personal, experience, education, skills } = data;
 
   const getTemplateClass = () => {
@@ -15,7 +15,7 @@ export default function LivePreview({ data, template }) {
 
   if (template === 'executive') {
     return (
-      <div className={`resume-document ${getTemplateClass()}`} id="resume-preview">
+      <div className={`resume-document ${getTemplateClass()} ${themeColor} ${fontFamily}`} id="resume-preview">
         <div className="sidebar">
           <h1>{personal.name || 'Your Name'}</h1>
           {personal.role && <div style={{ fontSize: '1rem', color: '#d4af37', marginBottom: '1.5rem', fontWeight: 700, textTransform: 'uppercase' }}>{personal.role}</div>}
@@ -82,7 +82,7 @@ export default function LivePreview({ data, template }) {
   }
 
   return (
-    <div className={`resume-document ${getTemplateClass()}`} id="resume-preview">
+    <div className={`resume-document ${getTemplateClass()} ${themeColor} ${fontFamily}`} id="resume-preview">
       <header>
         <h1>{personal.name || 'Your Name'}</h1>
         {personal.role && <div style={{ fontSize: '1.2rem', color: 'var(--accent)', marginBottom: '1rem', fontWeight: 500 }}>{personal.role}</div>}

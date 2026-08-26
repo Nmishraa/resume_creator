@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Merriweather:wght@400;700&family=Outfit:wght@400;600;700;800&display=swap');
+
 :root {
   --bg-color: #f8fafc;
   --panel-bg: #ffffff;
@@ -16,6 +18,37 @@
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
 }
+
+/* Theme Accent Classes */
+.theme-indigo { --accent: #4f46e5; --accent-hover: #4338ca; --secondary: #4f46e5; }
+.theme-emerald { --accent: #059669; --accent-hover: #047857; --secondary: #059669; }
+.theme-slate { --accent: #0f172a; --accent-hover: #1e293b; --secondary: #0f172a; }
+.theme-crimson { --accent: #be123c; --accent-hover: #9f1239; --secondary: #be123c; }
+.theme-violet { --accent: #7c3aed; --accent-hover: #6d28d9; --secondary: #7c3aed; }
+
+/* Font Family Utility Classes */
+.font-inter { font-family: 'Inter', -apple-system, sans-serif !important; }
+.font-merriweather { font-family: 'Merriweather', Georgia, serif !important; }
+.font-mono { font-family: 'JetBrains Mono', monospace !important; }
+.font-outfit { font-family: 'Outfit', sans-serif !important; }
+
+/* Live Floating ATS Score Badge */
+.live-ats-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.live-ats-pill.excellent { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+.live-ats-pill.good { background: #e0e7ff; color: #4338ca; border-color: #c7d2fe; }
+.live-ats-pill.needs-work { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
 
 * {
   box-sizing: border-box;
