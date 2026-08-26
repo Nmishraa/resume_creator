@@ -364,5 +364,137 @@ export default function SectionForm({ activeTab, data, onChange }) {
      )
   }
 
+  if (activeTab === 'projects') {
+    const projectsList = data.projects || [];
+    return (
+      <div className="editor-form">
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'projects')}>
+          <SortableContext items={projectsList.map(i => i.id)} strategy={verticalListSortingStrategy}>
+            {projectsList.map(proj => (
+              <SortableItem key={proj.id} id={proj.id}>
+                <div style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', zIndex: 10 }}>
+                  <button className="btn" style={{ background: 'transparent', padding: '0.2rem' }} onClick={() => removeListItem('projects', proj.id)}>
+                    <Trash2 size={16} color="var(--danger)" />
+                  </button>
+                </div>
+                
+                <div className="form-group">
+                  <label className="label">Project Title</label>
+                  <input className="input-field" value={proj.name || ''} onChange={(e) => updateListItem('projects', proj.id, 'name', e.target.value)} placeholder="e.g. E-Commerce Microservices" />
+                </div>
+                <div className="form-group">
+                  <label className="label">Role / Technologies</label>
+                  <input className="input-field" value={proj.technologies || ''} onChange={(e) => updateListItem('projects', proj.id, 'technologies', e.target.value)} placeholder="e.g. React, Node.js, AWS, MongoDB" />
+                </div>
+                <div className="form-group">
+                  <label className="label">Project Link / URL</label>
+                  <input className="input-field" value={proj.link || ''} onChange={(e) => updateListItem('projects', proj.id, 'link', e.target.value)} placeholder="e.g. github.com/username/project" />
+                </div>
+                <div className="form-group">
+                  <label className="label">Key Highlights / Description</label>
+                  <textarea 
+                    className="input-field" 
+                    rows="3" 
+                    value={proj.description || ''} 
+                    onChange={(e) => updateListItem('projects', proj.id, 'description', e.target.value)} 
+                    placeholder="Describe impact, architecture, or key metrics..."
+                  />
+                </div>
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
+        
+        <button 
+          className="btn btn-secondary w-full" 
+          onClick={() => addListItem('projects', { name: '', technologies: '', link: '', description: '' })}
+        >
+          <Plus size={18} /> Add Project
+        </button>
+      </div>
+    );
+  }
+
+  if (activeTab === 'certifications') {
+    const certList = data.certifications || [];
+    return (
+      <div className="editor-form">
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'certifications')}>
+          <SortableContext items={certList.map(i => i.id)} strategy={verticalListSortingStrategy}>
+            {certList.map(cert => (
+              <SortableItem key={cert.id} id={cert.id}>
+                <div style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', zIndex: 10 }}>
+                  <button className="btn" style={{ background: 'transparent', padding: '0.2rem' }} onClick={() => removeListItem('certifications', cert.id)}>
+                    <Trash2 size={16} color="var(--danger)" />
+                  </button>
+                </div>
+                <div className="form-group">
+                  <label className="label">Certification Name</label>
+                  <input className="input-field" value={cert.name || ''} onChange={(e) => updateListItem('certifications', cert.id, 'name', e.target.value)} placeholder="e.g. AWS Certified Solutions Architect" />
+                </div>
+                <div className="flex-row">
+                  <div className="form-group flex-1">
+                    <label className="label">Issuing Organization</label>
+                    <input className="input-field" value={cert.issuer || ''} onChange={(e) => updateListItem('certifications', cert.id, 'issuer', e.target.value)} placeholder="Amazon Web Services" />
+                  </div>
+                  <div className="form-group flex-1">
+                    <label className="label">Year / Date</label>
+                    <input className="input-field" value={cert.year || ''} onChange={(e) => updateListItem('certifications', cert.id, 'year', e.target.value)} placeholder="2024" />
+                  </div>
+                </div>
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
+
+        <button 
+          className="btn btn-secondary w-full" 
+          onClick={() => addListItem('certifications', { name: '', issuer: '', year: '' })}
+        >
+          <Plus size={18} /> Add Certification
+        </button>
+      </div>
+    );
+  }
+
+  if (activeTab === 'languages') {
+    const langList = data.languages || [];
+    return (
+      <div className="editor-form">
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'languages')}>
+          <SortableContext items={langList.map(i => i.id)} strategy={verticalListSortingStrategy}>
+            {langList.map(lang => (
+              <SortableItem key={lang.id} id={lang.id}>
+                <div style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', zIndex: 10 }}>
+                  <button className="btn" style={{ background: 'transparent', padding: '0.2rem' }} onClick={() => removeListItem('languages', lang.id)}>
+                    <Trash2 size={16} color="var(--danger)" />
+                  </button>
+                </div>
+                <div className="flex-row">
+                  <div className="form-group flex-1">
+                    <label className="label">Language Name</label>
+                    <input className="input-field" value={lang.name || ''} onChange={(e) => updateListItem('languages', lang.id, 'name', e.target.value)} placeholder="e.g. English, Spanish, German" />
+                  </div>
+                  <div className="form-group flex-1">
+                    <label className="label">Proficiency</label>
+                    <input className="input-field" value={lang.proficiency || ''} onChange={(e) => updateListItem('languages', lang.id, 'proficiency', e.target.value)} placeholder="Native / Professional" />
+                  </div>
+                </div>
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
+
+        <button 
+          className="btn btn-secondary w-full" 
+          onClick={() => addListItem('languages', { name: '', proficiency: 'Fluent' })}
+        >
+          <Plus size={18} /> Add Language
+        </button>
+      </div>
+    );
+  }
+
   return null;
 }
+

@@ -546,14 +546,15 @@ export default function Editor() {
         </div>
 
         {/* Section Tabs */}
-        <div className="editor-tabs">
-          {['personal', 'experience', 'education', 'skills', 'aimatch'].map(tab => (
+        <div className="editor-tabs" style={{ flexWrap: 'wrap' }}>
+          {['personal', 'experience', 'education', 'skills', 'projects', 'certifications', 'languages', 'aimatch'].map(tab => (
             <button 
               key={tab} 
               className={`tab-btn ${activeTab === tab ? 'active' : ''} ${tab === 'aimatch' ? 'tab-ai' : ''}`}
               onClick={() => setActiveTab(tab)}
+              style={{ fontSize: '0.78rem', padding: '0.4rem 0.6rem' }}
             >
-              {tab === 'aimatch' ? <div className="flex-row" style={{ gap: '0.4rem' }}><Sparkles size={14} /> AI Matcher</div> : tab.charAt(0).toUpperCase() + tab.slice(1)}
+              {tab === 'aimatch' ? <div className="flex-row" style={{ gap: '0.4rem' }}><Sparkles size={13} /> AI Matcher</div> : tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
           ))}
         </div>

@@ -146,6 +146,47 @@ export default function LivePreview({ data, template, themeColor = 'theme-indigo
           </div>
         </section>
       )}
+
+      {data.projects?.length > 0 && (
+        <section>
+          <h2>{template === 'tech' ? '> Projects' : 'Projects'}</h2>
+          {data.projects.map(proj => (
+            <div key={proj.id} className="item">
+              <div className="item-header">
+                <div className="item-title">{proj.name}</div>
+                {proj.technologies && <div className="item-date">{proj.technologies}</div>}
+              </div>
+              {proj.link && <div className="item-subtitle" style={{ fontSize: '0.85rem' }}>{proj.link}</div>}
+              {proj.description && <p style={{ fontSize: '0.9rem', marginTop: '0.4rem' }}>{proj.description}</p>}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {data.certifications?.length > 0 && (
+        <section>
+          <h2>{template === 'tech' ? '> Certifications' : 'Certifications'}</h2>
+          <ul style={{ paddingLeft: '1.2rem' }}>
+            {data.certifications.map(cert => (
+              <li key={cert.id} style={{ fontSize: '0.9rem', marginBottom: '0.3rem' }}>
+                <strong>{cert.name}</strong> — {cert.issuer} ({cert.year})
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {data.languages?.length > 0 && (
+        <section>
+          <h2>{template === 'tech' ? '> Languages' : 'Languages'}</h2>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.9rem' }}>
+            {data.languages.map(lang => (
+              <span key={lang.id}>• <strong>{lang.name}</strong> ({lang.proficiency || 'Fluent'})</span>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
+
