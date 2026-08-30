@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FileText, LogOut, LayoutDashboard, Sparkles, Target, Mail, Briefcase } from 'lucide-react';
+import { FileText, LogOut, LayoutDashboard, Sparkles, Target, Mail, Briefcase, HelpCircle, Share2, DollarSign } from 'lucide-react';
 
 export default function Navbar({ user, logout }) {
   const location = useLocation();
@@ -8,8 +8,8 @@ export default function Navbar({ user, logout }) {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="navbar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.8rem 2rem', background: '#ffffff', borderBottom: '1px solid #e2e8f0', sticky: 'top', zIndex: 50 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+    <nav className="navbar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.8rem 2rem', background: '#ffffff', borderBottom: '1px solid #e2e8f0', sticky: 'top', zIndex: 50, flexWrap: 'wrap', gap: '0.5rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <div className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 800, fontSize: '1.25rem', color: '#0f172a' }}>
             <FileText size={26} color="var(--accent, #4f46e5)" />
@@ -18,105 +18,141 @@ export default function Navbar({ user, logout }) {
         </Link>
 
         {/* Center Nav Links */}
-        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexWrap: 'wrap' }}>
           {user && (
             <Link
               to="/dashboard"
               style={{
                 textDecoration: 'none',
-                padding: '0.45rem 0.8rem',
+                padding: '0.45rem 0.75rem',
                 borderRadius: '8px',
                 color: isActive('/dashboard') ? '#4f46e5' : '#475569',
                 background: isActive('/dashboard') ? '#e0e7ff' : 'transparent',
                 fontWeight: 700,
-                fontSize: '0.85rem',
+                fontSize: '0.83rem',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.3rem',
                 transition: 'all 0.2s ease'
               }}
             >
-              <LayoutDashboard size={15} /> Dashboard
+              <LayoutDashboard size={14} /> Dashboard
             </Link>
           )}
 
           <Link
-            to="/examples"
+            to="/ats-resume-checker"
             style={{
               textDecoration: 'none',
-              padding: '0.45rem 0.8rem',
+              padding: '0.45rem 0.75rem',
               borderRadius: '8px',
-              color: isActive('/examples') ? '#4f46e5' : '#475569',
-              background: isActive('/examples') ? '#e0e7ff' : 'transparent',
+              color: isActive('/ats-resume-checker') ? '#4f46e5' : '#475569',
+              background: isActive('/ats-resume-checker') ? '#e0e7ff' : 'transparent',
               fontWeight: 700,
-              fontSize: '0.85rem',
+              fontSize: '0.83rem',
               display: 'flex',
               alignItems: 'center',
               gap: '0.3rem',
               transition: 'all 0.2s ease'
             }}
           >
-            <Sparkles size={15} /> Examples
-          </Link>
-
-          <Link
-            to="/ats-tips"
-            style={{
-              textDecoration: 'none',
-              padding: '0.45rem 0.8rem',
-              borderRadius: '8px',
-              color: isActive('/ats-tips') ? '#4f46e5' : '#475569',
-              background: isActive('/ats-tips') ? '#e0e7ff' : 'transparent',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.3rem',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            <Target size={15} /> ATS Tips
+            <Target size={14} /> ATS Scanner
           </Link>
 
           <Link
             to="/cover-letters"
             style={{
               textDecoration: 'none',
-              padding: '0.45rem 0.8rem',
+              padding: '0.45rem 0.75rem',
               borderRadius: '8px',
               color: isActive('/cover-letters') ? '#4f46e5' : '#475569',
               background: isActive('/cover-letters') ? '#e0e7ff' : 'transparent',
               fontWeight: 700,
-              fontSize: '0.85rem',
+              fontSize: '0.83rem',
               display: 'flex',
               alignItems: 'center',
               gap: '0.3rem',
               transition: 'all 0.2s ease'
             }}
           >
-            <Mail size={15} /> Cover Letters
+            <Mail size={14} /> Cover Letters
           </Link>
 
-          {user && (
-            <Link
-              to="/applications"
-              style={{
-                textDecoration: 'none',
-                padding: '0.45rem 0.8rem',
-                borderRadius: '8px',
-                color: isActive('/applications') ? '#4f46e5' : '#475569',
-                background: isActive('/applications') ? '#e0e7ff' : 'transparent',
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.3rem',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <Briefcase size={15} /> App Tracker
-            </Link>
-          )}
+          <Link
+            to="/interview-prep"
+            style={{
+              textDecoration: 'none',
+              padding: '0.45rem 0.75rem',
+              borderRadius: '8px',
+              color: isActive('/interview-prep') ? '#4f46e5' : '#475569',
+              background: isActive('/interview-prep') ? '#e0e7ff' : 'transparent',
+              fontWeight: 700,
+              fontSize: '0.83rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.3rem',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <HelpCircle size={14} /> Interview AI
+          </Link>
+
+          <Link
+            to="/linkedin-optimizer"
+            style={{
+              textDecoration: 'none',
+              padding: '0.45rem 0.75rem',
+              borderRadius: '8px',
+              color: isActive('/linkedin-optimizer') ? '#0077b5' : '#475569',
+              background: isActive('/linkedin-optimizer') ? '#e0f2fe' : 'transparent',
+              fontWeight: 700,
+              fontSize: '0.83rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.3rem',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Share2 size={14} /> LinkedIn AI
+          </Link>
+
+          <Link
+            to="/salary-guide"
+            style={{
+              textDecoration: 'none',
+              padding: '0.45rem 0.75rem',
+              borderRadius: '8px',
+              color: isActive('/salary-guide') ? '#16a34a' : '#475569',
+              background: isActive('/salary-guide') ? '#dcfce7' : 'transparent',
+              fontWeight: 700,
+              fontSize: '0.83rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.3rem',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <DollarSign size={14} /> Salary Calc
+          </Link>
+
+          <Link
+            to="/applications"
+            style={{
+              textDecoration: 'none',
+              padding: '0.45rem 0.75rem',
+              borderRadius: '8px',
+              color: isActive('/applications') ? '#4f46e5' : '#475569',
+              background: isActive('/applications') ? '#e0e7ff' : 'transparent',
+              fontWeight: 700,
+              fontSize: '0.83rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.3rem',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Briefcase size={14} /> Job Tracker
+          </Link>
         </div>
       </div>
 

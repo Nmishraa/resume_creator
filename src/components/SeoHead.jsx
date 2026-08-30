@@ -73,6 +73,24 @@ const ROUTE_SEO_MAP = {
     description: 'Track job applications, interview stages, follow-up dates, and salary notes in one intuitive dashboard.',
     keywords: 'job tracker, application tracker, job search kanban, career pipeline manager',
     canonical: 'https://smartresumecraft.netlify.app/applications'
+  },
+  '/interview-prep': {
+    title: 'AI Mock Interview Simulator & STAR Practice | ResumeCraft',
+    description: 'Practice technical and behavioral interview questions with high-scoring STAR framework answer blueprints.',
+    keywords: 'interview prep, STAR method interview, technical interview simulator, mock interview tool',
+    canonical: 'https://smartresumecraft.netlify.app/interview-prep'
+  },
+  '/linkedin-optimizer': {
+    title: 'Free LinkedIn Profile & Headline Optimizer | ResumeCraft',
+    description: 'Convert your resume into an optimized LinkedIn About bio and headline designed to attract recruiter InMail messages.',
+    keywords: 'linkedin profile optimizer, linkedin headline generator, linkedin bio generator, recruiter outreach',
+    canonical: 'https://smartresumecraft.netlify.app/linkedin-optimizer'
+  },
+  '/salary-guide': {
+    title: 'Salary Counter-Offer Calculator & Negotiation Scripts | ResumeCraft',
+    description: 'Calculate target compensation packages and generate recruiter-proven email negotiation scripts.',
+    keywords: 'salary negotiation script, offer counter offer calculator, compensation modeling, career raise',
+    canonical: 'https://smartresumecraft.netlify.app/salary-guide'
   }
 };
 
@@ -82,10 +100,8 @@ export default function SeoHead() {
   useEffect(() => {
     const seoData = ROUTE_SEO_MAP[location.pathname] || ROUTE_SEO_MAP['/'];
 
-    // Update document title
     document.title = seoData.title;
 
-    // Helper to set meta tag
     const updateMetaTag = (selector, contentAttr, value) => {
       let element = document.querySelector(selector);
       if (!element) {
@@ -105,7 +121,6 @@ export default function SeoHead() {
     updateMetaTag('meta[name="twitter:title"]', 'content', seoData.title);
     updateMetaTag('meta[name="twitter:description"]', 'content', seoData.description);
 
-    // Update canonical link tag
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
@@ -114,7 +129,6 @@ export default function SeoHead() {
     }
     canonicalLink.setAttribute('href', seoData.canonical);
 
-    // Dynamic JSON-LD structured data for Google & Bing
     let scriptTag = document.getElementById('route-jsonld-schema');
     if (!scriptTag) {
       scriptTag = document.createElement('script');
@@ -139,7 +153,6 @@ export default function SeoHead() {
 
     scriptTag.text = JSON.stringify(structuredData);
 
-    // Scroll to top on page navigation
     window.scrollTo(0, 0);
   }, [location.pathname]);
 

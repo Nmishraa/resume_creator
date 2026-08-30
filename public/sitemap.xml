@@ -13,16 +13,40 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://smartresumecraft.netlify.app/resume-templates</loc>
+    <loc>https://smartresumecraft.netlify.app/cover-letters</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://smartresumecraft.netlify.app/how-to-write-a-resume</loc>
+    <loc>https://smartresumecraft.netlify.app/interview-prep</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://smartresumecraft.netlify.app/linkedin-optimizer</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://smartresumecraft.netlify.app/salary-guide</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://smartresumecraft.netlify.app/resume-templates</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://smartresumecraft.netlify.app/how-to-write-a-resume</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://smartresumecraft.netlify.app/resume-summary-examples</loc>
@@ -50,12 +74,6 @@
   </url>
   <url>
     <loc>https://smartresumecraft.netlify.app/ats-tips</loc>
-    <lastmod>2026-08-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://smartresumecraft.netlify.app/cover-letters</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>

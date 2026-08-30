@@ -11,6 +11,11 @@ import CoverLetterGuide from './pages/CoverLetterGuide';
 import PublicPortfolio from './pages/PublicPortfolio';
 import ApplicationTracker from './pages/ApplicationTracker';
 
+// Feature Pages
+import InterviewPrepPage from './pages/InterviewPrepPage';
+import LinkedInOptimizerPage from './pages/LinkedInOptimizerPage';
+import SalaryGuidePage from './pages/SalaryGuidePage';
+
 // SEO Public Pages
 import AtsCheckerPage from './pages/seo/AtsCheckerPage';
 import TemplatesPage from './pages/seo/TemplatesPage';
@@ -67,6 +72,11 @@ function App() {
             <Route path="/cover-letters" element={<CoverLetterGuide />} />
             <Route path="/p/:id" element={<PublicPortfolio />} />
             <Route path="/applications" element={<ApplicationTracker />} />
+
+            {/* Career Tools */}
+            <Route path="/interview-prep" element={<InterviewPrepPage />} />
+            <Route path="/linkedin-optimizer" element={<LinkedInOptimizerPage />} />
+            <Route path="/salary-guide" element={<SalaryGuidePage />} />
 
             {/* Public SEO Routes */}
             <Route path="/ats-resume-checker" element={<AtsCheckerPage />} />
