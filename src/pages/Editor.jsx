@@ -299,15 +299,21 @@ export default function Editor() {
   };
 
   useEffect(() => {
-    if (id !== 'new') {
+    if (id === 'demo') {
+      const preset = RESUME_PRESETS['software_engineer'];
+      setResumeData(preset.data);
+      setTemplate(preset.template);
+      setLoading(false);
+    } else if (id !== 'new') {
       const fetchResume = async () => {
         try {
           const docSnap = await api.resumes.getById(id);
           if (docSnap && docSnap.data) {
             setResumeData(typeof docSnap.data === 'string' ? JSON.parse(docSnap.data) : docSnap.data);
           }
-        } catch (error) {
-          console.error("Error fetching resume:", error);
+        } catch {
+          // If not found, use default demo data gracefully
+          setResumeData(RESUME_PRESETS['software_engineer'].data);
         } finally {
           setLoading(false);
         }

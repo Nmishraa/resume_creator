@@ -208,14 +208,53 @@ export default function Home({ user }) {
                   {tpl.desc}
                 </p>
 
-                {/* Miniature Visual Layout Mockup */}
-                <div style={{ background: '#f8fafc', border: '1px border-dashed #cbd5e1', borderRadius: '10px', padding: '0.85rem', fontSize: '0.78rem', color: '#334155', fontFamily: 'monospace', marginBottom: '1.25rem' }}>
-                  <div style={{ height: '6px', width: '40%', background: tpl.color, borderRadius: '3px', marginBottom: '8px' }}></div>
-                  <div style={{ height: '4px', width: '85%', background: '#cbd5e1', borderRadius: '2px', marginBottom: '4px' }}></div>
-                  <div style={{ height: '4px', width: '70%', background: '#e2e8f0', borderRadius: '2px' }}></div>
-                  <p style={{ margin: '8px 0 0 0', fontSize: '0.72rem', color: '#64748b', fontStyle: 'italic', fontFamily: 'sans-serif' }}>
-                    "{tpl.previewText}"
-                  </p>
+                {/* Realistic Miniature Document Thumbnail */}
+                <div 
+                  onClick={() => setActiveSamplePdf(tpl)}
+                  style={{
+                    background: '#ffffff',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: '10px',
+                    padding: '0.85rem',
+                    fontSize: '0.68rem',
+                    color: '#334155',
+                    marginBottom: '1.25rem',
+                    boxShadow: '0 4px 10px rgba(0,0,0,0.04)',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    height: '140px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justify: 'space-between'
+                  }}
+                >
+                  <div>
+                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: '#0f172a', borderBottom: `2px solid ${tpl.color}`, paddingBottom: '3px', marginBottom: '6px' }}>
+                      JORDAN ALEXANDER
+                      <div style={{ fontSize: '0.65rem', fontWeight: 600, color: tpl.color }}>Senior Software Engineer</div>
+                    </div>
+
+                    <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.3px', margin: '4px 0 2px 0' }}>
+                      PROFESSIONAL EXPERIENCE
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.62rem', fontWeight: 700, color: '#1e293b' }}>
+                      <span>TechFlow • Sr. Engineer</span>
+                      <span style={{ color: '#94a3b8' }}>2022–Present</span>
+                    </div>
+                    <div style={{ fontSize: '0.6rem', color: '#64748b', margin: '2px 0' }}>
+                      • Architected real-time stream pipelines processing 2M+ daily events...
+                    </div>
+                    <div style={{ fontSize: '0.6rem', color: '#64748b' }}>
+                      • Optimized PostgreSQL queries reducing page load times by 40%...
+                    </div>
+                  </div>
+
+                  <div style={{ background: 'linear-gradient(to top, rgba(255,255,255,1) 40%, rgba(255,255,255,0) 100%)', position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '8px' }}>
+                    <span style={{ background: tpl.color, color: 'white', fontSize: '0.68rem', fontWeight: 800, padding: '0.25rem 0.65rem', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', gap: '3px' }}>
+                      <Eye size={12} /> Click to Preview Full PDF
+                    </span>
+                  </div>
                 </div>
               </div>
 
