@@ -147,10 +147,10 @@ export default function Login({ onAuthSuccess }) {
           {/* Quick FAQ Box */}
           <div style={{ background: '#ffffff', padding: '1.25rem', borderRadius: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ fontSize: '0.92rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.4rem' }}>
-              ❓ Is ResumeCraft completely free?
+              ❓ Is Resume & CV Craft completely free?
             </h4>
             <p style={{ fontSize: '0.85rem', color: '#475569', margin: 0 }}>
-              Yes! ResumeCraft is 100% free to build, edit, tailor, and download your resume without subscriptions or paywalls.
+              Yes! Resume & CV Craft is 100% free to build, edit, tailor, and download your resume without subscriptions or paywalls.
             </p>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function Login({ onAuthSuccess }) {
         {/* Right Column: Clean Login / Signup Card */}
         <div className="auth-card" style={{ width: '100%', padding: '2.5rem', background: '#ffffff', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.12)', border: '1px solid #e2e8f0' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: 900, color: '#0f172a', marginBottom: '0.4rem', textAlign: 'center' }}>
-            ResumeCraft Workspace
+            Resume & CV Craft Workspace
           </h2>
           <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '1.75rem', textAlign: 'center' }}>
             {isSignUp ? 'Create a free account to get started' : 'Sign in to access your resumes & cover letters'}
@@ -187,41 +187,52 @@ export default function Login({ onAuthSuccess }) {
             <span>or use email</span>
           </div>
 
-          <form onSubmit={handleSubmit} autoComplete="off">
+          <form onSubmit={handleSubmit} autoComplete="on">
             {isSignUp && (
               <div className="form-group">
-                <label className="label">Full Name</label>
+                <label htmlFor="full-name" className="label">Full Name</label>
                 <input 
+                  id="full-name"
+                  name="fullName"
                   type="text" 
                   className="input-field" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Alex Developer"
-                  autoComplete="off"
+                  autoComplete="name"
+                  aria-label="Full Name"
                 />
               </div>
             )}
             <div className="form-group">
-              <label className="label">Email Address</label>
+              <label htmlFor="email-address" className="label">Email Address</label>
               <input 
+                id="email-address"
+                name="email"
                 type="email" 
                 className="input-field" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                autoComplete="off"
+                autoComplete="email"
+                aria-label="Email Address"
+                aria-required="true"
                 required 
               />
             </div>
             <div className="form-group">
-              <label className="label">Password</label>
+              <label htmlFor="account-password" className="label">Password</label>
               <input 
+                id="account-password"
+                name="password"
                 type="password" 
                 className="input-field" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                autoComplete="new-password"
+                autoComplete={isSignUp ? "new-password" : "current-password"}
+                aria-label="Password"
+                aria-required="true"
                 required 
               />
             </div>

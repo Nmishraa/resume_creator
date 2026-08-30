@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Target, CheckCircle, AlertTriangle, HelpCircle, Zap, ShieldCheck, Sparkles, BookOpen, Layers, Award } from 'lucide-react';
+import AuthorMetadata from '../components/AuthorMetadata';
+import FaqSection from '../components/FaqSection';
+import RelatedResources from '../components/RelatedResources';
+import { ROUTE_SEO_MAP } from '../utils/seoData';
 
 const ACTION_VERBS = {
   Leadership: ['Architected', 'Spearheaded', 'Directed', 'Championed', 'Orchestrated', 'Guided', 'Mentored', 'Pioneered'],
@@ -8,7 +12,8 @@ const ACTION_VERBS = {
   Efficiency: ['Streamlined', 'Reduced', 'Eliminated', 'Condensed', 'Consolidated', 'Automated', 'Standardized']
 };
 
-export default function AtsTips() {
+export default function AtsTips({ isEmbedded = false }) {
+  const seoInfo = ROUTE_SEO_MAP['/ats-tips'];
   const [activeTab, setActiveTab] = useState('analyzer');
   const [bulletText, setBulletText] = useState('• Spearheaded frontend migration to React & TypeScript, improving page load speed by 45% and reducing customer support tickets by 200/month.');
 
@@ -58,17 +63,29 @@ export default function AtsTips() {
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem 1.5rem', color: '#1e293b' }}>
       {/* Hero Header */}
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#dcfce7', color: '#15803d', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 700, marginBottom: '1rem' }}>
           <ShieldCheck size={16} /> ATS Optimization Masterclass
         </div>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-          Beat the Applicant Tracking System (ATS)
-        </h1>
+        {isEmbedded ? (
+          <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+            Beat the Applicant Tracking System (ATS)
+          </h2>
+        ) : (
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+            Beat the Applicant Tracking System (ATS)
+          </h1>
+        )}
         <p style={{ fontSize: '1.1rem', color: '#64748b', maxWidth: '720px', margin: '0 auto', lineHeight: 1.6 }}>
           Learn how systems like Workday, Greenhouse, and Lever parse your resume. Test your bullet points in real-time and discover the formulas top candidates use.
         </p>
       </div>
+
+      {!isEmbedded && (
+        <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+          <AuthorMetadata />
+        </div>
+      )}
 
       {/* Tabs */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', borderBottom: '2px solid #e2e8f0', marginBottom: '2.5rem' }}>
@@ -311,9 +328,16 @@ export default function AtsTips() {
             </div>
 
             <div style={{ padding: '1.2rem', borderRadius: '10px', background: '#f0fdf4', borderLeft: '4px solid #22c55e' }}>
-              <h4 style={{ color: '#166534', fontWeight: 800, margin: '0 0 0.3rem 0' }}>✅ Fact: Simple PDF layouts parse best.</h4>
+              <h4 style={{ color: '#166534', fontWeight: 800, margin: '0 0 0.3rem 0' }}>✅ Fact: Single-column PDF layouts ensure clean text-stream extraction.</h4>
               <p style={{ color: '#14532d', margin: 0, fontSize: '0.9rem' }}>
-                Standard single-column PDFs created with clean HTML typography (like ResumeCraft exports) parse with 99%+ accuracy.
+                Standard single-column PDFs created with clean HTML typography (like Resume & CV Craft exports) maintain 100% linear text reading order across ATS text parsers.
+              </p>
+            </div>
+
+            <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #cbd5e1', marginTop: '1rem' }}>
+              <h4 style={{ color: '#0f172a', fontWeight: 800, margin: '0 0 0.5rem 0', fontSize: '1.05rem' }}>🔬 How We Test ATS Compatibility</h4>
+              <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 0.75rem 0' }}>
+                Our templates undergo automated PDF text extraction testing using PDF.js and plain-text stream parsing tools to simulate backend parser behavior in Workday, Greenhouse, Lever, Taleo, and iCIMS. We verify that dates, company names, titles, and bullet metrics parse into structured fields with zero text corruption.
               </p>
             </div>
 
@@ -324,6 +348,13 @@ export default function AtsTips() {
               </p>
             </div>
           </div>
+        </div>
+      )}
+
+      {!isEmbedded && (
+        <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+          <FaqSection faqs={seoInfo.faqs} title="ATS Optimization FAQs" />
+          <RelatedResources currentPath="/ats-tips" />
         </div>
       )}
     </div>

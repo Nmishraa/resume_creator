@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, ArrowRight, Sparkles, AlertTriangle, CheckCircle, RefreshCw, FileText, BarChart3, Zap } from 'lucide-react';
 import { auditRawResumeText } from '../../utils/ai';
 import AtsTips from '../AtsTips';
+import AuthorMetadata from '../../components/AuthorMetadata';
+import FaqSection from '../../components/FaqSection';
+import RelatedResources from '../../components/RelatedResources';
+import { ROUTE_SEO_MAP } from '../../utils/seoData';
 
 const DEMO_RESUME_TEXT = `Alex Vance
 Senior Full Stack Engineer | San Francisco, CA | alex.vance@example.com | (555) 019-2834 | linkedin.com/in/alexvance
@@ -27,6 +31,7 @@ EDUCATION
 Bachelor of Science in Computer Science | University of California, Berkeley (2015 - 2019)`;
 
 export default function AtsCheckerPage() {
+  const seoInfo = ROUTE_SEO_MAP['/ats-resume-checker'];
   const [resumeText, setResumeText] = useState(DEMO_RESUME_TEXT);
   const [auditResult, setAuditResult] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
@@ -50,12 +55,12 @@ export default function AtsCheckerPage() {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2.5rem 1.5rem', color: '#1e293b' }}>
       {/* Hero Header */}
-      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', color: '#ffffff', borderRadius: '24px', padding: '3.5rem 2rem', textAlign: 'center', marginBottom: '3rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', color: '#ffffff', borderRadius: '24px', padding: '3.5rem 2rem', textAlign: 'center', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.1)', color: '#818cf8', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 800, marginBottom: '1.2rem' }}>
           <ShieldCheck size={16} /> Instant Online ATS Resume Compatibility Checker
         </div>
         <h1 style={{ fontSize: '2.8rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.03em' }}>
-          Test Your Resume ATS Score Free
+          {seoInfo.h1}
         </h1>
         <p style={{ fontSize: '1.15rem', color: '#94a3b8', maxWidth: '720px', margin: '0 auto 2rem auto', lineHeight: 1.6 }}>
           Over 75% of resumes are filtered out by Applicant Tracking Systems (ATS) like Workday, Greenhouse, and Lever. Paste your resume text below for instant AI diagnostic scoring and optimization recommendations.
@@ -73,6 +78,10 @@ export default function AtsCheckerPage() {
             </button>
           </Link>
         </div>
+      </div>
+
+      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+        <AuthorMetadata />
       </div>
 
       {/* Interactive Live Scanner Tool */}
@@ -209,7 +218,12 @@ export default function AtsCheckerPage() {
         </div>
       </div>
 
-      <AtsTips />
+      <AtsTips isEmbedded={true} />
+
+      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+        <FaqSection faqs={seoInfo.faqs} title="ATS Resume Checker FAQs" />
+        <RelatedResources currentPath="/ats-resume-checker" />
+      </div>
     </div>
   );
 }

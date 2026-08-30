@@ -233,6 +233,18 @@ const RESUME_PRESETS = {
   }
 };
 
+function calculateCompletionPercentage(data) {
+  let score = 0;
+  if (data?.personal?.name?.trim()) score += 15;
+  if (data?.personal?.email?.trim()) score += 10;
+  if (data?.personal?.location?.trim() || data?.personal?.phone?.trim()) score += 10;
+  if (data?.personal?.summary?.trim()) score += 15;
+  if (data?.experience && data.experience.length > 0) score += 20;
+  if (data?.education && data.education.length > 0) score += 15;
+  if (data?.skills && data.skills.length >= 3) score += 15;
+  return Math.min(score, 100);
+}
+
 export default function Editor() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -241,12 +253,13 @@ export default function Editor() {
   const [themeColor, setThemeColor] = useState('theme-indigo');
   const [fontFamily, setFontFamily] = useState('font-inter');
   const [resumeData, setResumeData] = useState(DEFAULT_RESUME);
-  const [loading, setLoading] = useState(id !== 'new');
+  const [loading, setLoading] = useState(id !== 'new' && id !== 'demo');
   const [showDesignControls, setShowDesignControls] = useState(false);
+  const [showAdvancedTools, setShowAdvancedTools] = useState(false);
   const [showAtsPopover, setShowAtsPopover] = useState(false);
   const [showExportMenu, setShowExportMenu] = useState(false);
   const [showImporter, setShowImporter] = useState(false);
-  const [showWizard, setShowWizard] = useState(false);
+  const [showWizard, setShowWizard] = useState(id === 'demo' || id === 'new');
   const [saveStatus, setSaveStatus] = useState('Saved');
   const [lastSavedTime, setLastSavedTime] = useState(new Date().toLocaleTimeString());
   const [versionHistory, setVersionHistory] = useState([]);
@@ -408,11 +421,32 @@ export default function Editor() {
   }
 
   const atsPillClass = liveAts.score >= 80 ? 'excellent' : liveAts.score >= 60 ? 'good' : 'needs-work';
+  const completionPct = calculateCompletionPercentage(resumeData);
 
   return (
     <div className="editor-layout">
       {/* Left Sidebar (Form Controls) */}
       <div className="editor-sidebar">
+        {/* Editor Header Bar with Title & Completion Indicator */}
+        <div style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0', padding: '0.65rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <FileText size={18} color="#4f46e5" />
+            <span style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f172a' }}>
+              {id === 'demo' ? 'Resume Builder (Demo Workspace)' : (resumeData.personal?.name ? `${resumeData.personal.name}'s Resume` : 'Resume Builder')}
+            </span>
+          </div>
+
+          {/* Completion Progress Indicator */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 800, color: completionPct >= 80 ? '#16a34a' : '#4f46e5' }}>
+              Resume {completionPct}% Complete
+            </span>
+            <div style={{ width: '100px', height: '8px', background: '#e2e8f0', borderRadius: '4px', overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${completionPct}%`, background: completionPct >= 80 ? 'linear-gradient(90deg, #10b981 0%, #059669 100%)' : 'linear-gradient(90deg, #6366f1 0%, #4f46e5 100%)', transition: 'width 0.4s ease' }} />
+            </div>
+          </div>
+        </div>
+
         {/* Toolbar */}
         <div className="editor-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', padding: '0.85rem 1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

@@ -15,7 +15,14 @@ const storage = {
   getResumes: () => JSON.parse(localStorage.getItem('rc_resumes') || '[]'),
   saveResumes: (resumes) => localStorage.setItem('rc_resumes', JSON.stringify(resumes)),
   getCurrentUser: () => JSON.parse(localStorage.getItem('rc_current_user') || 'null'),
-  setCurrentUser: (user) => localStorage.setItem('rc_current_user', JSON.stringify(user))
+  setCurrentUser: (user) => localStorage.setItem('rc_current_user', JSON.stringify(user)),
+  clearAllData: () => {
+    localStorage.removeItem('rc_resumes');
+    localStorage.removeItem('rc_users');
+    localStorage.removeItem('rc_current_user');
+    localStorage.removeItem('rc_job_applications');
+    localStorage.removeItem('token');
+  }
 };
 
 const DEFAULT_DEMO_RESUME = {

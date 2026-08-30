@@ -54,7 +54,7 @@ export default function PublicPortfolio() {
     <div style={{ background: '#f8fafc', minHeight: '100vh', padding: '2rem 1rem' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#475569', fontWeight: 700, fontSize: '0.9rem' }}>
-          <ArrowLeft size={16} /> Back to ResumeCraft
+          <ArrowLeft size={16} /> Back to Resume & CV Craft
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>

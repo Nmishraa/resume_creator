@@ -1,16 +1,16 @@
-# ResumeCraft - Free AI Resume Builder & CV Maker
+# Resume & CV Craft - Free AI Resume Builder & ATS Resume Checker
 
-> ResumeCraft (https://smartresumecraft.netlify.app/) is a free, fast, and modern ATS-friendly online resume creator and CV builder.
+> Resume & CV Craft (https://resume-cv-craft.web.app/) is a free, fast, and modern ATS-friendly online resume creator and CV builder.
 
 ## Product Overview
-ResumeCraft enables job seekers, software engineers, students, and professionals to quickly generate job-winning resumes with real-time editing, ATS compliance, customizable templates, and instant PDF download capabilities.
+Resume & CV Craft enables job seekers, software engineers, students, and professionals to quickly generate job-winning resumes with real-time editing, ATS compliance, customizable templates, and instant PDF download capabilities.
 
 ## Key Features
 - **ATS-Optimized Layouts**: Clean typography and structure easily parseable by Applicant Tracking Systems.
 - **Free & Instant Export**: Download high-quality PDF resumes with one click without hidden subscription fees.
 - **Guest & Account Access**: Start building immediately as a guest or create a free account to save drafts.
-- **Real-Time Live Editor**: Interactive drag-and-drop sections, skill tagging, and experience formatting.
+- **Real-Time Live Editor**: Interactive sections, skill tagging, and experience formatting.
 
 ## Usage & Access
-- Website URL: https://smartresumecraft.netlify.app/
-- Primary Functionality: Resume Creation, CV Generation, Career Document Export
+- Website URL: https://resume-cv-craft.web.app/
+- Primary Functionality: Resume Creation, ATS Checker, CV Generation, Career Document Export

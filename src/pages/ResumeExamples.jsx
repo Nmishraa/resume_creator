@@ -566,7 +566,7 @@ const SAMPLE_RESUMES = [
   }
 ];
 
-export default function ResumeExamples({ user, onAuthSuccess }) {
+export default function ResumeExamples({ user, onAuthSuccess, isEmbedded = false }) {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [previewSample, setPreviewSample] = useState(null);
@@ -618,9 +618,15 @@ export default function ResumeExamples({ user, onAuthSuccess }) {
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#e0e7ff', color: '#4338ca', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 700, marginBottom: '1rem' }}>
           <Sparkles size={16} /> Professionally Crafted Examples
         </div>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-          ATS-Friendly Resume Templates & Examples
-        </h1>
+        {isEmbedded ? (
+          <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+            ATS-Friendly Resume Templates & Examples
+          </h2>
+        ) : (
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+            ATS-Friendly Resume Templates & Examples
+          </h1>
+        )}
         <p style={{ fontSize: '1.1rem', color: '#64748b', maxWidth: '720px', margin: '0 auto', lineHeight: 1.6 }}>
           Explore battle-tested resume templates designed across tech, design, data, finance, healthcare, marketing, and entry-level roles. Click any template to customize and export your PDF instantly.
         </p>

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Mail, Copy, Check, Sparkles, FileText, Download, Send, RefreshCw, Printer } from 'lucide-react';
+import AuthorMetadata from '../components/AuthorMetadata';
+import FaqSection from '../components/FaqSection';
+import RelatedResources from '../components/RelatedResources';
+import { ROUTE_SEO_MAP } from '../utils/seoData';
 
 const COVER_LETTER_TEMPLATES = [
   {
@@ -59,6 +63,7 @@ Marcus Thorne`
 ];
 
 export default function CoverLetterGuide() {
+  const seoInfo = ROUTE_SEO_MAP['/cover-letters'];
   const [activeTab, setActiveTab] = useState('generator');
 
   // Generator Form State
@@ -137,16 +142,20 @@ export default function CoverLetterGuide() {
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem 1.5rem', color: '#1e293b' }}>
       {/* Hero Header */}
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#fce7f3', color: '#be185d', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 700, marginBottom: '1rem' }}>
           <Mail size={16} /> Interactive AI Cover Letter Generator
         </div>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-          Write Job-Winning Cover Letters in Seconds
+          {seoInfo.h1}
         </h1>
         <p style={{ fontSize: '1.1rem', color: '#64748b', maxWidth: '720px', margin: '0 auto', lineHeight: 1.6 }}>
           Generate custom, recruiter-tested cover letters or explore proven templates tailored for software engineering, product management, and career transitions.
         </p>
+      </div>
+
+      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+        <AuthorMetadata />
       </div>
 
       {/* Tabs */}
@@ -430,6 +439,11 @@ export default function CoverLetterGuide() {
           </div>
         </div>
       )}
+
+      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+        <FaqSection faqs={seoInfo.faqs} title="Cover Letter FAQs" />
+        <RelatedResources currentPath="/cover-letters" />
+      </div>
     </div>
   );
 }
