@@ -22,14 +22,6 @@ export default function Footer() {
           <p style={{ fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem' }}>
             Free AI-powered resume builder and ATS checker helping job seekers craft recruiter-approved resumes and land top interviews.
           </p>
-          <a
-            href="https://github.com/Nmishraa/resume_creator"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1', textDecoration: 'none', fontSize: '0.85rem', background: '#1e293b', padding: '0.4rem 0.8rem', borderRadius: '0.375rem' }}
-          >
-            <GithubIcon size={16} /> GitHub Repository <ExternalLink size={12} />
-          </a>
         </div>
 
         {/* AI & Career Tools */}
