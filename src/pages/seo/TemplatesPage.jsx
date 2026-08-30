@@ -20,7 +20,7 @@ export default function TemplatesPage() {
           {seoInfo.h1}
         </h1>
         <p style={{ fontSize: '1.1rem', color: '#64748b', maxWidth: '750px', margin: '0 auto 1.8rem auto', lineHeight: 1.6 }}>
-          Choose from modern, battle-tested templates designed for software engineers, executives, data analysts, nurses, and students. Guaranteed to pass Workday, Greenhouse, and Lever ATS screeners.
+          Choose from modern, battle-tested templates designed for software engineers, executives, data analysts, nurses, and students. Designed for high text readability across Workday, Greenhouse, and Lever ATS screeners.
         </p>
 
         <Link to="/" style={{ textDecoration: 'none' }}>

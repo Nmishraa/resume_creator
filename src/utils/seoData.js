@@ -61,8 +61,8 @@ export const ROUTE_SEO_MAP = {
     h1: 'ATS-Optimized Resume Templates',
     faqs: [
       {
-        q: 'Are these resume templates guaranteed to pass ATS screeners?',
-        a: 'Yes. Every template in our library utilizes single-column or clean two-column hierarchy with standard web fonts (Arial, Inter, Roboto) and selectable text formatting.'
+        q: 'How do these resume templates optimize for ATS screeners?',
+        a: 'Every template in our library utilizes single-column or clean hierarchy with standard web fonts (Arial, Inter, Roboto) and selectable vector text formatting.'
       },
       {
         q: 'Which file format is best for ATS submission: PDF or Word?',
