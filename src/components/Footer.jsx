@@ -20,7 +20,7 @@ export default function Footer() {
             <Sparkles style={{ color: '#6366f1' }} size={22} /> Resume & CV Craft
           </div>
           <p style={{ fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem' }}>
-            Free AI-powered resume builder and ATS checker helping job seekers craft recruiter-approved resumes and land top interviews.
+            Free AI-powered resume builder and ATS checker helping job seekers craft clean, professional resumes and prepare for job applications.
           </p>
         </div>
 

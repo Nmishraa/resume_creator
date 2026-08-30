@@ -41,7 +41,7 @@ export default function AboutPage() {
           <div style={{ padding: '1.5rem', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.75rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
             <CheckCircle2 style={{ color: '#10b981', marginBottom: '0.75rem' }} size={28} />
             <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.5rem' }}>ATS-Compliant Formatting</h3>
-            <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.5 }}>Tested compatibility with Workday, Greenhouse, Lever, Taleo, and iCIMS screeners.</p>
+            <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.5 }}>Designed for clean text parsing with standard applicant tracking systems.</p>
           </div>
 
           <div style={{ padding: '1.5rem', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.75rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>

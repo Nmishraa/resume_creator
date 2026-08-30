@@ -39,7 +39,7 @@ export default function AuthorMetadata({ updatedDate = LAST_UPDATED, author = AU
           <div style={{ fontWeight: 800, color: '#0f172a', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             {author.name}
             <span style={{ color: '#16a34a', display: 'inline-flex', alignItems: 'center', gap: '0.2rem', fontSize: '0.78rem', background: '#dcfce7', padding: '0.15rem 0.5rem', borderRadius: '12px' }}>
-              <ShieldCheck size={13} /> CPRW Verified
+              <ShieldCheck size={13} /> ATS Verified
             </span>
           </div>
           <div style={{ color: '#64748b', fontSize: '0.82rem' }}>{author.role}</div>

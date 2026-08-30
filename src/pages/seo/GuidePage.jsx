@@ -38,7 +38,7 @@ export default function GuidePage() {
         {/* Intro */}
         <section style={{ marginBottom: '2.5rem' }}>
           <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#334155', marginBottom: '1rem' }}>
-            In 2026, many major companies and growing startups rely on Applicant Tracking Systems (ATS) such as Workday, Greenhouse, Lever, and Taleo to automatically filter resumes. Before a hiring manager or internal recruiter ever reads your application, automated parsing algorithms grade your document based on structural hierarchy, font clarity, keyword match density, and measurable accomplishment metrics.
+            In 2026, many major companies and growing startups rely on Applicant Tracking Systems (ATS) to automatically process and organize candidate applications. Before a hiring manager or internal recruiter reviews your application, automated parsing algorithms process your document based on structural hierarchy, font clarity, keyword match density, and measurable accomplishment metrics.
           </p>
           <p style={{ fontSize: '1.05rem', color: '#334155' }}>
             Writing a winning resume is no longer about decorative design templates or abstract skill self-ratings. It requires engineering a clean, highly scannable document that satisfies both computerized screeners and human decision-makers. This comprehensive 2026 guide breaks down every step required to craft an executive-grade resume.

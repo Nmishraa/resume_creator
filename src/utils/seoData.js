@@ -1,9 +1,10 @@
 export const SITE_URL = 'https://resume-cv-craft.web.app';
 export const LAST_UPDATED = 'August 30, 2026';
 export const AUTHOR_INFO = {
-  name: 'Resume & CV Craft Editorial Team',
-  role: 'Certified Professional Resume Writers (CPRW) & Career Strategists',
-  avatar: '/favicon.svg'
+  name: 'Resume & CV Craft Team',
+  role: 'Career & Resume Strategists',
+  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',
+  bio: 'Our team builds free, accessible software to help job seekers optimize their resumes for standard applicant tracking systems.'
 };
 
 export const ROUTE_SEO_MAP = {
@@ -20,7 +21,7 @@ export const ROUTE_SEO_MAP = {
       },
       {
         q: 'How does the AI Resume Builder optimize for ATS?',
-        a: 'Resume & CV Craft uses single-column layouts, clean typography, and keyword matching designed for standard Applicant Tracking Systems like Workday, Greenhouse, and Lever.'
+        a: 'Resume & CV Craft uses single-column layouts, clean typography, and keyword matching designed for standard Applicant Tracking Systems.'
       },
       {
         q: 'Can I export my resume as an ATS-compliant PDF?',
@@ -37,11 +38,11 @@ export const ROUTE_SEO_MAP = {
     faqs: [
       {
         q: 'What is an ATS Resume Checker?',
-        a: 'An ATS Resume Checker parses your resume text using algorithms similar to corporate ATS software (Workday, Greenhouse, Lever) to evaluate formatting, action verb density, measurable metrics, and keyword relevance.'
+        a: 'An ATS Resume Checker parses your resume text using algorithms similar to common corporate ATS software to evaluate formatting, action verb density, measurable metrics, and keyword relevance.'
       },
       {
         q: 'What is a good ATS resume score?',
-        a: 'An ATS score of 75 or higher indicates strong formatting, quantifiable accomplishment metrics, and high keyword match density, making your resume ready for recruiter screening.'
+        a: 'An ATS score of 75 or higher indicates strong formatting, quantifiable accomplishment metrics, and high keyword match density, making your resume ready for candidate screening.'
       },
       {
         q: 'Why do ATS systems reject resumes?',
@@ -55,7 +56,7 @@ export const ROUTE_SEO_MAP = {
   },
   '/resume-templates': {
     title: 'Free ATS Resume Templates (PDF Export) | Resume & CV Craft',
-    description: 'Browse 100% free ATS-optimized resume templates. Tested against Workday, Greenhouse, and Lever.',
+    description: 'Browse 100% free ATS-optimized resume templates designed for clean text parsing.',
     keywords: 'free resume templates, ATS CV templates, modern resume layout, professional CV format',
     canonical: `${SITE_URL}/resume-templates`,
     h1: 'ATS-Optimized Resume Templates',

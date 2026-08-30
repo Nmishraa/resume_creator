@@ -87,7 +87,7 @@ export default function Home({ user }) {
         </div>
 
         <h1 style={{ fontSize: '3.2rem', fontWeight: 900, color: '#0f172a', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '900px', margin: '0 auto 1.25rem' }}>
-          Build Recruiter-Approved Resumes & Beat ATS Algorithms
+          Build ATS-Friendly Resumes & Optimize Key Metrics
         </h1>
 
         <p style={{ fontSize: '1.25rem', color: '#475569', maxWidth: '780px', margin: '0 auto 2.25rem', lineHeight: 1.6 }}>
@@ -125,7 +125,7 @@ export default function Home({ user }) {
             How It Works in 3 Simple Steps
           </h2>
           <p style={{ color: '#64748b', fontSize: '1.05rem', maxWidth: '600px', margin: '0 auto 2.5rem' }}>
-            Go from a blank page to a recruiter-ready ATS resume in under 10 minutes.
+            Go from a blank page to a clean ATS resume in under 10 minutes.
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
@@ -137,7 +137,7 @@ export default function Home({ user }) {
                 Select an ATS Template
               </h3>
               <p style={{ color: '#64748b', fontSize: '0.92rem', lineHeight: 1.6, margin: 0 }}>
-                Choose a single-column layout built with standard web typography engineered for 100% text parser readability.
+                Choose a single-column layout built with standard web typography engineered for high text parser readability.
               </p>
             </div>
 
@@ -161,7 +161,7 @@ export default function Home({ user }) {
                 Download Instant PDF
               </h3>
               <p style={{ color: '#64748b', fontSize: '0.92rem', lineHeight: 1.6, margin: 0 }}>
-                Export a clean, vector text-selectable PDF ready for direct submission to Workday, Greenhouse, and Lever.
+                Export a clean, vector text-selectable PDF ready for direct submission to corporate applicant portals.
               </p>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default function Home({ user }) {
       <section style={{ maxWidth: '1200px', margin: '0 auto 3.5rem', padding: '0 1.5rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.4rem' }}>
-            Recruiter-Approved ATS Templates
+            Professional ATS Templates
           </h2>
           <p style={{ color: '#64748b', fontSize: '1rem' }}>
             Click any template to preview full-size sample data or open the builder.

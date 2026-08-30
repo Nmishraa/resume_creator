@@ -63,7 +63,7 @@ export default function AtsCheckerPage() {
           {seoInfo.h1}
         </h1>
         <p style={{ fontSize: '1.15rem', color: '#94a3b8', maxWidth: '720px', margin: '0 auto 2rem auto', lineHeight: 1.6 }}>
-          Over 75% of resumes are filtered out by Applicant Tracking Systems (ATS) like Workday, Greenhouse, and Lever. Paste your resume text below for instant AI diagnostic scoring and optimization recommendations.
+          Many resumes are filtered out by Applicant Tracking Systems (ATS) due to formatting errors and missing keywords. Paste your resume text below for instant AI diagnostic scoring and optimization recommendations.
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
