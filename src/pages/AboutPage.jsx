@@ -56,7 +56,7 @@ export default function AboutPage() {
         <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.5rem', color: '#1e3a8a' }}>Open Source & Developer Community</h3>
         <p style={{ color: '#1e40af', marginBottom: '1rem' }}>Explore the source code or contribute to the project on GitHub.</p>
         <a
-          href="https://github.com/mishra/resume_creator"
+          href="https://github.com/Nmishraa/resume_creator"
           target="_blank"
           rel="noopener noreferrer"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#1e293b', color: '#ffffff', padding: '0.75rem 1.5rem', borderRadius: '0.5rem', textDecoration: 'none', fontWeight: 600 }}

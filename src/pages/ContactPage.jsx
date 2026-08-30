@@ -90,7 +90,7 @@ export default function ContactPage() {
         <div>
           <GithubIcon size={24} />
           <h3 style={{ fontSize: '1rem', fontWeight: 600, marginTop: '0.5rem' }}>GitHub Community</h3>
-          <a href="https://github.com/mishra/resume_creator" target="_blank" rel="noopener noreferrer" style={{ color: '#4f46e5', fontSize: '0.9rem', textDecoration: 'none' }}>
+          <a href="https://github.com/Nmishraa/resume_creator" target="_blank" rel="noopener noreferrer" style={{ color: '#4f46e5', fontSize: '0.9rem', textDecoration: 'none' }}>
             Report Issues & Feedback
           </a>
         </div>
