@@ -1,7 +1,30 @@
+# Robots.txt for Smart ResumeCraft (https://smartresumecraft.netlify.app/)
 User-agent: *
 Allow: /
 
-# Explicit rules for AI Search Engines & Crawlers
+# Explicit Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI & LLM Search Crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -20,4 +43,5 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
+# Sitemap Location
 Sitemap: https://smartresumecraft.netlify.app/sitemap.xml

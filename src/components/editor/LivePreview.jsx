@@ -18,7 +18,7 @@ export default function LivePreview({ data, template, themeColor = 'theme-indigo
       <div className={`resume-document ${getTemplateClass()} ${themeColor} ${fontFamily}`} id="resume-preview">
         <div className="sidebar">
           <h1>{personal.name || 'Your Name'}</h1>
-          {personal.role && <div style={{ fontSize: '1rem', color: '#d4af37', marginBottom: '1.5rem', fontWeight: 700, textTransform: 'uppercase' }}>{personal.role}</div>}
+          {personal.role && <div style={{ fontSize: '1rem', color: 'var(--accent)', marginBottom: '1.5rem', fontWeight: 700, textTransform: 'uppercase' }}>{personal.role}</div>}
           
           <div className="contact-info">
             {personal.email && <span>{personal.email}</span>}
@@ -29,7 +29,7 @@ export default function LivePreview({ data, template, themeColor = 'theme-indigo
 
           {skills.length > 0 && (
             <section style={{ marginTop: '3rem', padding: 0 }}>
-              <h2 style={{ color: '#d4af37', fontSize: '0.9rem' }}>Skills</h2>
+              <h2 style={{ color: 'var(--accent)', fontSize: '0.9rem' }}>Skills</h2>
               <div className="skills-grid">
                 {skills.map(skill => (
                   <div key={skill.id}>{skill.name}</div>
@@ -74,6 +74,44 @@ export default function LivePreview({ data, template, themeColor = 'theme-indigo
                   <div className="item-date">{edu.year}</div>
                 </div>
               ))}
+            </section>
+          )}
+
+          {data.projects?.length > 0 && (
+            <section>
+              <h2 style={{ color: 'var(--accent)' }}>Key Projects</h2>
+              {data.projects.map(proj => (
+                <div key={proj.id} className="item">
+                  <div className="item-title">{proj.name}</div>
+                  {proj.technologies && <div className="item-date">{proj.technologies}</div>}
+                  {proj.link && <div className="item-subtitle" style={{ fontSize: '0.85rem' }}>{proj.link}</div>}
+                  {proj.description && <p style={{ fontSize: '0.9rem', marginTop: '0.4rem' }}>{proj.description}</p>}
+                </div>
+              ))}
+            </section>
+          )}
+
+          {data.certifications?.length > 0 && (
+            <section>
+              <h2 style={{ color: 'var(--accent)' }}>Certifications</h2>
+              <ul style={{ paddingLeft: '1.2rem' }}>
+                {data.certifications.map(cert => (
+                  <li key={cert.id} style={{ fontSize: '0.9rem', marginBottom: '0.3rem' }}>
+                    <strong>{cert.name}</strong> — {cert.issuer} ({cert.year})
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {data.languages?.length > 0 && (
+            <section style={{ marginTop: '2rem' }}>
+              <h2 style={{ color: 'var(--accent)' }}>Languages</h2>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.9rem' }}>
+                {data.languages.map(lang => (
+                  <span key={lang.id}>• <strong>{lang.name}</strong> ({lang.proficiency || 'Fluent'})</span>
+                ))}
+              </div>
             </section>
           )}
         </div>

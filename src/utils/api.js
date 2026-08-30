@@ -109,10 +109,6 @@ export const api = {
         storage.setCurrentUser(user);
 
         const resumes = storage.getResumes();
-        if (resumes.length === 0) {
-          storage.saveResumes([{ ...DEFAULT_DEMO_RESUME, userId: user.id }]);
-        }
-
         return { user, token };
       }
     },
@@ -178,16 +174,6 @@ export const api = {
         localStorage.setItem('token', token);
         storage.setCurrentUser(user);
 
-        const resumes = storage.getResumes();
-        if (!resumes.some((r) => r.userId === user.id)) {
-          resumes.push({
-            ...DEFAULT_DEMO_RESUME,
-            id: `resume_${guestId}`,
-            userId: user.id
-          });
-          storage.saveResumes(resumes);
-        }
-
         return { user, token };
       }
     },
@@ -211,6 +197,7 @@ export const api = {
     logout: () => {
       localStorage.removeItem('token');
       localStorage.removeItem('rc_current_user');
+      localStorage.removeItem('rc_resumes');
     }
   },
 
@@ -231,12 +218,6 @@ export const api = {
         const userId = user ? user.id : 'demo-user-id';
         let resumes = storage.getResumes();
         let userResumes = resumes.filter((r) => r.userId === userId);
-        if (userResumes.length === 0) {
-          const sample = { ...DEFAULT_DEMO_RESUME, userId };
-          resumes.push(sample);
-          storage.saveResumes(resumes);
-          userResumes = [sample];
-        }
         return userResumes;
       }
     },

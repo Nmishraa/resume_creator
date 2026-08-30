@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Trash2, GripVertical, Sparkles } from 'lucide-react';
-import { suggestSummary, suggestBulletPoint } from '../../utils/ai';
+import { suggestSummary, suggestBulletPoint, polishBulletPoint } from '../../utils/ai';
 import {
   DndContext,
   closestCenter,
@@ -108,7 +108,7 @@ export default function SectionForm({ activeTab, data, onChange }) {
 
   if (activeTab === 'personal') {
     return (
-      <div className="editor-form">
+      <div className="section-form-inner">
         <div className="form-group">
           <label className="label">Full Name</label>
           <input className="input-field" name="name" value={data.personal.name} onChange={handlePersonalChange} placeholder="John Doe" />
@@ -176,7 +176,7 @@ export default function SectionForm({ activeTab, data, onChange }) {
 
   if (activeTab === 'experience') {
     return (
-      <div className="editor-form">
+      <div className="section-form-inner">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'experience')}>
           <SortableContext items={data.experience.map(i => i.id)} strategy={verticalListSortingStrategy}>
             {data.experience.map(exp => (
@@ -206,21 +206,28 @@ export default function SectionForm({ activeTab, data, onChange }) {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="label" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Description (Bullet points, separate by new line)</span>
-                    <button 
-                      className="btn btn-secondary ai-mini-btn" 
-                      onClick={async () => {
-                        setLoadingAI(true);
-                        const suggested = await suggestBulletPoint(exp.role || data.personal.role);
-                        updateListItem('experience', exp.id, 'description', suggested);
-                        setLoadingAI(false);
-                      }}
-                      disabled={loadingAI}
-                    >
-                      <Sparkles size={12} /> Suggest
-                    </button>
-                  </label>
+                  <div className="label" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem' }}>
+                    <span>Description (Bullet points)</span>
+                    <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
+                      {['concise', 'professional', 'technical', 'leadership'].map((t) => (
+                        <button 
+                          key={t}
+                          type="button"
+                          className="btn btn-secondary ai-mini-btn" 
+                          onClick={async () => {
+                            setLoadingAI(true);
+                            const polished = await polishBulletPoint(exp.description, exp.role || data.personal.role, t);
+                            updateListItem('experience', exp.id, 'description', polished);
+                            setLoadingAI(false);
+                          }}
+                          disabled={loadingAI}
+                          title={`Rewrite in ${t} style`}
+                        >
+                          <Sparkles size={11} /> {t.charAt(0).toUpperCase() + t.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                   <textarea 
                     className="input-field" 
                     rows="4" 
@@ -246,7 +253,7 @@ export default function SectionForm({ activeTab, data, onChange }) {
 
   if (activeTab === 'education') {
     return (
-      <div className="editor-form">
+      <div className="section-form-inner">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'education')}>
           <SortableContext items={data.education.map(i => i.id)} strategy={verticalListSortingStrategy}>
              {data.education.map(edu => (
@@ -312,7 +319,7 @@ export default function SectionForm({ activeTab, data, onChange }) {
 
   if (activeTab === 'skills') {
      return (
-      <div className="editor-form">
+      <div className="section-form-inner">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'skills')}>
           <SortableContext items={data.skills.map(i => i.id)} strategy={verticalListSortingStrategy}>
             {data.skills.map(skill => (
@@ -367,7 +374,7 @@ export default function SectionForm({ activeTab, data, onChange }) {
   if (activeTab === 'projects') {
     const projectsList = data.projects || [];
     return (
-      <div className="editor-form">
+      <div className="section-form-inner">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'projects')}>
           <SortableContext items={projectsList.map(i => i.id)} strategy={verticalListSortingStrategy}>
             {projectsList.map(proj => (
@@ -418,7 +425,7 @@ export default function SectionForm({ activeTab, data, onChange }) {
   if (activeTab === 'certifications') {
     const certList = data.certifications || [];
     return (
-      <div className="editor-form">
+      <div className="section-form-inner">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'certifications')}>
           <SortableContext items={certList.map(i => i.id)} strategy={verticalListSortingStrategy}>
             {certList.map(cert => (
@@ -460,7 +467,7 @@ export default function SectionForm({ activeTab, data, onChange }) {
   if (activeTab === 'languages') {
     const langList = data.languages || [];
     return (
-      <div className="editor-form">
+      <div className="section-form-inner">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'languages')}>
           <SortableContext items={langList.map(i => i.id)} strategy={verticalListSortingStrategy}>
             {langList.map(lang => (

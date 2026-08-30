@@ -15,11 +15,22 @@ import {
   FileText, 
   Check, 
   Upload, 
-  X 
+  X,
+  History as HistoryIcon, 
+  FileCode,
+  ChevronDown,
+  ChevronUp,
+  Copy,
+  HelpCircle,
+  Target 
 } from 'lucide-react';
 import SectionForm from '../components/editor/SectionForm';
 import LivePreview from '../components/editor/LivePreview';
 import AIMatch from '../components/editor/AIMatch';
+import ResumeImporter from '../components/editor/ResumeImporter';
+import GuidedWizard from '../components/editor/GuidedWizard';
+import TailorResumeModal from '../components/editor/TailorResumeModal';
+import InterviewPrep from '../components/editor/InterviewPrep';
 import { api } from '../utils/api';
 import { calculateLiveAtsScore } from '../utils/ai';
 
@@ -27,7 +38,10 @@ const DEFAULT_RESUME = {
   personal: { name: '', role: '', email: '', phone: '', location: '', linkedin: '', summary: '' },
   experience: [],
   education: [],
-  skills: []
+  skills: [],
+  projects: [],
+  certifications: [],
+  languages: []
 };
 
 const RESUME_PRESETS = {
@@ -80,6 +94,22 @@ const RESUME_PRESETS = {
         { id: 's3', name: 'Node.js & Express', level: 'Advanced' },
         { id: 's4', name: 'PostgreSQL & MongoDB', level: 'Advanced' },
         { id: 's5', name: 'AWS (S3, EC2, Lambda)', level: 'Intermediate' }
+      ],
+      projects: [
+        {
+          id: 'p1',
+          name: 'AI Resume Analytics Engine',
+          technologies: 'React, Node.js, OpenAI API',
+          link: 'github.com/jordanalexander/resume-ai',
+          description: 'Built an open-source resume analysis tool that scores bullet points and extracts missing ATS keywords.'
+        }
+      ],
+      certifications: [
+        { id: 'c1', name: 'AWS Certified Solutions Architect', issuer: 'Amazon Web Services', year: '2023' }
+      ],
+      languages: [
+        { id: 'l1', name: 'English', proficiency: 'Native' },
+        { id: 'l2', name: 'Spanish', proficiency: 'Professional' }
       ]
     }
   },
@@ -212,11 +242,39 @@ export default function Editor() {
   const [fontFamily, setFontFamily] = useState('font-inter');
   const [resumeData, setResumeData] = useState(DEFAULT_RESUME);
   const [loading, setLoading] = useState(id !== 'new');
+  const [showDesignControls, setShowDesignControls] = useState(false);
   const [showAtsPopover, setShowAtsPopover] = useState(false);
   const [showExportMenu, setShowExportMenu] = useState(false);
+  const [showImporter, setShowImporter] = useState(false);
+  const [showWizard, setShowWizard] = useState(false);
+  const [saveStatus, setSaveStatus] = useState('Saved');
+  const [lastSavedTime, setLastSavedTime] = useState(new Date().toLocaleTimeString());
+  const [versionHistory, setVersionHistory] = useState([]);
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [showTailorModal, setShowTailorModal] = useState(false);
+  const [showInterviewModal, setShowInterviewModal] = useState(false);
 
   // Compute live ATS score dynamically
   const liveAts = calculateLiveAtsScore(resumeData);
+
+  // Debounced Autosave
+  useEffect(() => {
+    if (loading || id === 'new') return;
+    setSaveStatus('Saving...');
+    const timer = setTimeout(async () => {
+      const title = resumeData.personal?.name ? `${resumeData.personal.name}'s Resume` : 'Untitled Resume';
+      try {
+        await api.resumes.update(id, { title, data: resumeData });
+        const timeStr = new Date().toLocaleTimeString();
+        setSaveStatus('Saved');
+        setLastSavedTime(timeStr);
+        setVersionHistory(prev => [{ time: timeStr, data: JSON.parse(JSON.stringify(resumeData)) }, ...prev.slice(0, 8)]);
+      } catch (err) {
+        setSaveStatus('Saved locally');
+      }
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [resumeData, id, loading]);
 
   const handleLoadPreset = (presetKey) => {
     const preset = RESUME_PRESETS[presetKey];
@@ -406,23 +464,72 @@ export default function Editor() {
                 </div>
               )}
             </div>
+            {/* Autosave Status Badge */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: '#f1f5f9', padding: '0.35rem 0.6rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, color: '#475569' }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: saveStatus === 'Saving...' ? '#f59e0b' : '#10b981' }}></span>
+              <span>{saveStatus} ({lastSavedTime})</span>
+            </div>
           </div>
           
-          <div className="flex-row" style={{ gap: '0.35rem', flexWrap: 'nowrap' }}>
-            <button className="btn btn-secondary" onClick={toggleFullScreen} title="Toggle Full Screen View" style={{ padding: '0.45rem', width: 34, height: 34 }}>
+          <div className="flex-row" style={{ gap: '0.4rem', alignItems: 'center' }}>
+            <button className="btn btn-secondary" onClick={() => setShowHistoryModal(true)} title="Version History & Recovery" style={{ padding: '0.45rem', width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <HistoryIcon size={15} color="#0284c7" />
+            </button>
+
+            <button className="btn btn-secondary" onClick={toggleFullScreen} title="Toggle Full Screen View" style={{ padding: '0.45rem', width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Maximize2 size={15} />
             </button>
-            <button className="btn btn-secondary" onClick={handleResetResume} title="Reset Resume Fields" style={{ padding: '0.45rem', width: 34, height: 34, color: 'var(--danger)' }}>
+
+            <button className="btn btn-secondary" onClick={handleResetResume} title="Reset Resume Fields" style={{ padding: '0.45rem', width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--danger)' }}>
               <RotateCcw size={15} />
             </button>
-            <button className="btn btn-secondary" onClick={handleSave} style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>
-              <Save size={15} /> Save
+
+            <button 
+              type="button" 
+              className="btn" 
+              onClick={handleSave} 
+              style={{ 
+                padding: '0.45rem 0.85rem', 
+                fontSize: '0.82rem', 
+                whiteSpace: 'nowrap', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.35rem',
+                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                color: '#ffffff',
+                fontWeight: 800,
+                border: 'none',
+                borderRadius: '8px',
+                boxShadow: '0 3px 8px rgba(5, 150, 105, 0.3)',
+                cursor: 'pointer'
+              }}
+            >
+              <Save size={15} color="#ffffff" /> Save
             </button>
 
             {/* Export Dropdown */}
             <div style={{ position: 'relative' }}>
-              <button className="btn btn-primary" style={{ padding: '0.45rem 0.85rem', fontSize: '0.82rem', whiteSpace: 'nowrap' }} onClick={() => setShowExportMenu(!showExportMenu)}>
-                <Download size={15} /> Export
+              <button 
+                type="button" 
+                className="btn" 
+                style={{ 
+                  padding: '0.45rem 0.95rem', 
+                  fontSize: '0.82rem', 
+                  whiteSpace: 'nowrap', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.35rem', 
+                  fontWeight: 900,
+                  background: 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  boxShadow: '0 3px 10px rgba(79, 70, 229, 0.4)',
+                  cursor: 'pointer'
+                }} 
+                onClick={() => setShowExportMenu(!showExportMenu)}
+              >
+                <Download size={15} color="#ffffff" /> Export PDF ▾
               </button>
 
               {showExportMenu && (
@@ -455,94 +562,187 @@ export default function Editor() {
           </div>
         </div>
 
-        {/* Section Header: Templates, Color Themes, Fonts */}
-        <div className="editor-section-header" style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border-color)', background: '#f8fafc' }}>
-          {/* Templates */}
-          <div style={{ marginBottom: '1.25rem' }}>
-            <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-               <Layout size={15} /> Select Layout
-            </h3>
-            <div className="flex-row" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
-               {['modern', 'minimalist', 'creative', 'executive', 'tech'].map(t => (
-                 <button 
-                   key={t}
-                   className={`btn-template ${template === t ? 'active' : ''}`}
-                   onClick={() => setTemplate(t)}
-                   style={{ padding: '0.4rem 0.6rem', fontSize: '0.78rem' }}
-                 >
-                   {t.charAt(0).toUpperCase() + t.slice(1)}
-                 </button>
-               ))}
-            </div>
-          </div>
+        {/* Quick AI & Feature Assistant Bar */}
+        <div style={{ background: '#f8fafc', padding: '0.65rem 1rem', borderBottom: '1px solid #cbd5e1', display: 'flex', gap: '0.45rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#4f46e5', textTransform: 'uppercase', letterSpacing: '0.5px', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+            <Sparkles size={12} /> AI Assistants:
+          </span>
 
-          {/* Theme Color Switcher */}
-          <div style={{ marginBottom: '1.25rem' }}>
-            <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-               <Palette size={15} /> Theme Color
-            </h3>
-            <div style={{ display: 'flex', gap: '0.6rem' }}>
-              {[
-                { id: 'theme-indigo', color: '#4f46e5', name: 'Indigo' },
-                { id: 'theme-emerald', color: '#059669', name: 'Emerald' },
-                { id: 'theme-slate', color: '#0f172a', name: 'Slate' },
-                { id: 'theme-crimson', color: '#be123c', name: 'Crimson' },
-                { id: 'theme-violet', color: '#7c3aed', name: 'Violet' }
-              ].map(c => (
-                <button
-                  key={c.id}
-                  onClick={() => setThemeColor(c.id)}
-                  title={c.name}
-                  style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: '50%',
-                    backgroundColor: c.color,
-                    border: themeColor === c.id ? '2px solid #0f172a' : '2px solid transparent',
-                    cursor: 'pointer',
-                    boxShadow: themeColor === c.id ? '0 0 0 2px white' : 'none'
-                  }}
-                />
-              ))}
-            </div>
-          </div>
+          <button
+            type="button"
+            onClick={() => setActiveTab('aimatch')}
+            style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #f59e0b', background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)', color: '#78350f', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem', boxShadow: '0 2px 4px rgba(245,158,11,0.2)' }}
+          >
+            <Target size={14} color="#b45309" /> Match Job Posting
+          </button>
 
-          {/* Font Family Selector */}
-          <div style={{ marginBottom: '1rem' }}>
-            <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-               <Type size={15} /> Typography
-            </h3>
-            <div className="flex-row" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
-              {[
-                { id: 'font-inter', label: 'Inter' },
-                { id: 'font-merriweather', label: 'Merriweather' },
-                { id: 'font-mono', label: 'JetBrains Mono' },
-                { id: 'font-outfit', label: 'Outfit' }
-              ].map(f => (
-                <button
-                  key={f.id}
-                  className={`btn-template ${fontFamily === f.id ? 'active' : ''}`}
-                  onClick={() => setFontFamily(f.id)}
-                  style={{ padding: '0.35rem 0.6rem', fontSize: '0.75rem' }}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
-          </div>
+          <button
+            type="button"
+            onClick={() => setShowWizard(true)}
+            style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #c7d2fe', background: '#e0e7ff', color: '#3730a3', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+          >
+            <Sparkles size={13} color="#4f46e5" /> Step-by-Step Wizard
+          </button>
 
-          {/* Role Presets */}
-          <div>
-            <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-               Starter Samples
-            </h3>
-            <div className="flex-row" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
-              <button className="btn-preset" onClick={() => handleLoadPreset('software_engineer')}>Software Engineer</button>
-              <button className="btn-preset" onClick={() => handleLoadPreset('data_analyst')}>Data Analyst</button>
-              <button className="btn-preset" onClick={() => handleLoadPreset('marketing_manager')}>Marketing Lead</button>
-              <button className="btn-preset" onClick={() => handleLoadPreset('executive')}>Executive Leader</button>
+          <button
+            type="button"
+            onClick={() => setShowImporter(true)}
+            style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #cbd5e1', background: '#ffffff', color: '#1e293b', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+          >
+            <Upload size={13} color="#4f46e5" /> Import PDF/DOCX
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setShowTailorModal(true)}
+            style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #cbd5e1', background: '#ffffff', color: '#1e293b', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+          >
+            <Copy size={13} color="#0284c7" /> Tailor Version
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setShowInterviewModal(true)}
+            style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #cbd5e1', background: '#ffffff', color: '#1e293b', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+          >
+            <HelpCircle size={13} color="#d97706" /> Interview Prep
+          </button>
+        </div>
+
+        {/* Collapsible Design & Styling Panel */}
+        <div style={{ background: '#f8fafc', borderBottom: '1px solid #cbd5e1' }}>
+          <button
+            type="button"
+            onClick={() => setShowDesignControls(!showDesignControls)}
+            style={{
+              width: '100%',
+              padding: '0.65rem 1.25rem',
+              display: 'flex',
+              justify: 'space-between',
+              alignItems: 'center',
+              border: 'none',
+              background: '#f1f5f9',
+              color: '#0f172a',
+              fontWeight: 800,
+              fontSize: '0.82rem',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Palette size={15} color="#4f46e5" />
+              <span style={{ color: '#0f172a', fontWeight: 800 }}>Customize Design (Layout, Colors, Fonts, Samples)</span>
             </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: '#4f46e5', color: '#ffffff', padding: '0.35rem 0.75rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 800, boxShadow: '0 2px 6px rgba(79, 70, 229, 0.35)' }}>
+              <span>{showDesignControls ? 'Hide Controls' : 'Show Controls'}</span>
+              {showDesignControls ? <ChevronUp size={15} color="#ffffff" /> : <ChevronDown size={15} color="#ffffff" />}
+            </div>
+          </button>
+
+          {showDesignControls && (
+            <div className="editor-section-header" style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid #e2e8f0' }}>
+              {/* Templates */}
+              <div style={{ marginBottom: '1.25rem' }}>
+                <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                   <Layout size={15} /> Select Layout
+                </h3>
+                <div className="flex-row" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+                   {['modern', 'minimalist', 'creative', 'executive', 'tech'].map(t => (
+                     <button 
+                       key={t}
+                       className={`btn-template ${template === t ? 'active' : ''}`}
+                       onClick={() => setTemplate(t)}
+                       style={{ padding: '0.4rem 0.6rem', fontSize: '0.78rem' }}
+                     >
+                       {t.charAt(0).toUpperCase() + t.slice(1)}
+                     </button>
+                   ))}
+                </div>
+              </div>
+
+              {/* Theme Color Switcher */}
+              <div style={{ marginBottom: '1.25rem' }}>
+                <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                   <Palette size={15} /> Theme Color
+                </h3>
+                <div style={{ display: 'flex', gap: '0.6rem' }}>
+                  {[
+                    { id: 'theme-indigo', color: '#4f46e5', name: 'Indigo' },
+                    { id: 'theme-emerald', color: '#059669', name: 'Emerald' },
+                    { id: 'theme-slate', color: '#0f172a', name: 'Slate' },
+                    { id: 'theme-crimson', color: '#be123c', name: 'Crimson' },
+                    { id: 'theme-violet', color: '#7c3aed', name: 'Violet' }
+                  ].map(c => (
+                    <button
+                      key={c.id}
+                      onClick={() => setThemeColor(c.id)}
+                      title={c.name}
+                      style={{
+                        width: 24,
+                        height: 24,
+                        borderRadius: '50%',
+                        backgroundColor: c.color,
+                        border: themeColor === c.id ? '2px solid #0f172a' : '2px solid transparent',
+                        cursor: 'pointer',
+                        boxShadow: themeColor === c.id ? '0 0 0 2px white' : 'none'
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Font Family Selector */}
+              <div style={{ marginBottom: '1rem' }}>
+                <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                   <Type size={15} /> Typography
+                </h3>
+                <div className="flex-row" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+                  {[
+                    { id: 'font-inter', label: 'Inter' },
+                    { id: 'font-merriweather', label: 'Merriweather' },
+                    { id: 'font-mono', label: 'JetBrains Mono' },
+                    { id: 'font-outfit', label: 'Outfit' }
+                  ].map(f => (
+                    <button
+                      key={f.id}
+                      className={`btn-template ${fontFamily === f.id ? 'active' : ''}`}
+                      onClick={() => setFontFamily(f.id)}
+                      style={{ padding: '0.35rem 0.6rem', fontSize: '0.75rem' }}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Role Presets */}
+              <div>
+                <h3 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#334155', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                   Starter Samples
+                </h3>
+                <div className="flex-row" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+                  <button className="btn-preset" onClick={() => handleLoadPreset('software_engineer')}>Software Engineer</button>
+                  <button className="btn-preset" onClick={() => handleLoadPreset('data_analyst')}>Data Analyst</button>
+                  <button className="btn-preset" onClick={() => handleLoadPreset('marketing_manager')}>Marketing Lead</button>
+                  <button className="btn-preset" onClick={() => handleLoadPreset('executive')}>Executive Leader</button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Section Header: Resume Content & Details */}
+        <div style={{ background: '#ffffff', padding: '0.7rem 1.25rem 0.35rem 1.25rem', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+            <FileText size={15} color="#4f46e5" />
+            <span style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Fill Resume Details
+            </span>
           </div>
+          <span style={{ fontSize: '0.72rem', background: '#e0e7ff', color: '#3730a3', padding: '0.25rem 0.65rem', borderRadius: '12px', fontWeight: 800 }}>
+            Active: {activeTab === 'aimatch' ? 'AI Job Matcher' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+          </span>
         </div>
 
         {/* Section Tabs */}
@@ -587,6 +787,94 @@ export default function Editor() {
            fontFamily={fontFamily} 
          />
       </div>
+
+      {/* Resume Importer Modal */}
+      {showImporter && (
+        <ResumeImporter
+          onImport={(importedData) => setResumeData(importedData)}
+          onClose={() => setShowImporter(false)}
+        />
+      )}
+
+      {/* Version History Restore Modal */}
+      {showHistoryModal && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.65)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: '1.5rem' }}>
+          <div style={{ background: '#ffffff', width: '100%', maxWidth: '520px', borderRadius: '16px', padding: '2rem', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', position: 'relative' }}>
+            <button
+              onClick={() => setShowHistoryModal(false)}
+              style={{ position: 'absolute', top: '1rem', right: '1rem', border: 'none', background: '#f1f5f9', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <X size={18} color="#64748b" />
+            </button>
+
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <HistoryIcon size={20} color="#0284c7" /> Version History & Recovery
+            </h3>
+            <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '1.2rem' }}>
+              Restore any previous version saved during your editing session:
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxHeight: '300px', overflowY: 'auto' }}>
+              {versionHistory.length > 0 ? (
+                versionHistory.map((ver, idx) => (
+                  <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem', borderRadius: '8px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                    <div>
+                      <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#1e293b' }}>Snapshot {idx + 1}</span>
+                      <span style={{ fontSize: '0.78rem', color: '#64748b', marginLeft: '0.5rem' }}>Saved at {ver.time}</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setResumeData(ver.data);
+                        setShowHistoryModal(false);
+                        alert(`Restored snapshot from ${ver.time}!`);
+                      }}
+                      style={{ padding: '0.35rem 0.75rem', borderRadius: '6px', border: 'none', background: '#4f46e5', color: '#ffffff', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}
+                    >
+                      Restore
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p style={{ fontSize: '0.85rem', color: '#94a3b8', textAlign: 'center', padding: '1rem' }}>No previous snapshots stored yet. Edit fields to generate auto-saves.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Guided Resume Wizard Modal */}
+      {showWizard && (
+        <GuidedWizard
+          data={resumeData}
+          onChange={setResumeData}
+          onClose={() => setShowWizard(false)}
+          onComplete={() => setShowWizard(false)}
+        />
+      )}
+
+      {/* Resume Tailor Modal */}
+      {showTailorModal && (
+        <TailorResumeModal
+          resumeData={resumeData}
+          onClose={() => setShowTailorModal(false)}
+        />
+      )}
+
+      {/* Interview Prep Modal */}
+      {showInterviewModal && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.65)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: '1.5rem' }}>
+          <div style={{ background: '#ffffff', width: '100%', maxWidth: '650px', maxHeight: '85vh', overflowY: 'auto', borderRadius: '16px', padding: '2rem', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', position: 'relative' }}>
+            <button
+              onClick={() => setShowInterviewModal(false)}
+              style={{ position: 'absolute', top: '1rem', right: '1rem', border: 'none', background: '#f1f5f9', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <X size={18} color="#64748b" />
+            </button>
+
+            <InterviewPrep resumeData={resumeData} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
