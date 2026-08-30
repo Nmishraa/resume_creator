@@ -230,20 +230,17 @@ export const api = {
     },
 
     getById: async (id) => {
+      if (id === 'demo') return DEFAULT_DEMO_RESUME;
       try {
         const res = await fetch(`${API_BASE}/resumes/${id}`, {
           headers: getHeaders()
         });
         return await handleResponse(res);
       } catch (err) {
-        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
-          throw err;
-        }
-
         // Static deployment fallback
         const resumes = storage.getResumes();
         const resume = resumes.find((r) => r.id === id);
-        if (!resume) throw new Error('Resume not found');
+        if (!resume) return { id, title: 'Demo Resume', data: DEFAULT_DEMO_RESUME.data };
         return resume;
       }
     },
@@ -257,10 +254,6 @@ export const api = {
         });
         return await handleResponse(res);
       } catch (err) {
-        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
-          throw err;
-        }
-
         // Static deployment fallback
         const user = storage.getCurrentUser();
         const userId = user ? user.id : 'demo-user-id';
@@ -288,14 +281,26 @@ export const api = {
         });
         return await handleResponse(res);
       } catch (err) {
-        if (err.message !== 'SERVER_OFFLINE' && !err.message.includes('Unexpected token') && !err.message.includes('Failed to fetch')) {
-          throw err;
-        }
-
         // Static deployment fallback
         const resumes = storage.getResumes();
         const index = resumes.findIndex((r) => r.id === id);
-        if (index === -1) throw new Error('Resume not found');
+        const user = storage.getCurrentUser();
+        const userId = user ? user.id : 'demo-user-id';
+
+        if (index === -1) {
+          const newDoc = {
+            id: id || `resume_${Date.now()}`,
+            userId,
+            title: resumeData.title || 'Untitled Resume',
+            data: resumeData.data || {},
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          };
+          resumes.unshift(newDoc);
+          storage.saveResumes(resumes);
+          return newDoc;
+        }
+
         resumes[index] = {
           ...resumes[index],
           title: resumeData.title || resumes[index].title,
