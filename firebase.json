@@ -1,51 +1,37 @@
 {
-  "hosting": {
-    "site": "resume-cv-craft",
-    "public": "dist",
-    "cleanUrls": true,
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      { "source": "/dashboard", "destination": "/index.html" },
-      { "source": "/editor/**", "destination": "/index.html" },
-      { "source": "/p/**", "destination": "/index.html" },
-      { "source": "/applications", "destination": "/index.html" }
-    ],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "X-Robots-Tag",
-            "value": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-          },
-          {
-            "key": "X-Content-Type-Options",
-            "value": "nosniff"
-          }
-        ]
-      },
-      {
-        "source": "/sitemap.xml",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/xml; charset=UTF-8"
-          }
-        ]
-      },
-      {
-        "source": "/robots.txt",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "text/plain; charset=UTF-8"
-          }
-        ]
-      }
-    ]
+  "hosting": [
+    {
+      "site": "resume-cv-craft",
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "site": "resume-craft-26214",
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
+  "firestore": {
+    "rules": "firestore.rules"
   }
 }

@@ -1,47 +1,5 @@
-# Robots.txt for Resume & CV Craft (https://resume-cv-craft.web.app/)
 User-agent: *
 Allow: /
 
-# Explicit Search Engine Crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-# AI & LLM Search Crawlers
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Bytespider
-Allow: /
-
-# Sitemap Location
+# Sitemaps
 Sitemap: https://resume-cv-craft.web.app/sitemap.xml
