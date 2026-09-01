@@ -2,6 +2,8 @@
 
 > An AI-powered ATS Resume Builder, ATS Score Checker, Cover Letter Tailor, and Job Application Tracker built with **React**, **TypeScript**, **Tailwind CSS**, and **Firebase** (Authentication, Cloud Firestore, and Hosting).
 
+🌐 **Live Application**: [https://resume-cv-craft.web.app](https://resume-cv-craft.web.app)
+
 ---
 
 ## 🌟 Key Features
