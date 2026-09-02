@@ -282,104 +282,61 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* CONVERSION BANNER (PLACED AT TOP) */}
+      {/* UNIFIED HIGH-CONVERTING TOP CTA BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-950 text-white rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-xl border border-slate-800">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-400/30 mx-auto">
-            <Sparkles size={13} />
-            <span>Ready in under 5 minutes • 100% Free</span>
+        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-950 text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-2xl border border-slate-800">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-400/30 mx-auto">
+            <Sparkles size={13} className="text-brand-400" />
+            <span>Ready in under 5 minutes • 100% Free • PDF, DOCX, TXT Upload</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight max-w-2xl mx-auto">
-            Build Your ATS-Friendly Resume Today
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight max-w-3xl mx-auto text-white">
+            Build or Upload Your ATS-Friendly Resume Today
           </h2>
 
-          <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Strengthen your experience bullets with AI, optimize keywords against any job description, and export a clean vector PDF — completely free.
+          <p className="text-xs sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Create from scratch or upload an existing resume to extract your 9 core sections, apply modern ATS templates, rewrite bullets with AI, and export clean vector PDFs.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+          {/* Unified Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
             <Link
               to="/builder"
-              className="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-brand-500/30 active:scale-95 flex items-center gap-2"
+              className="px-7 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-lg shadow-brand-600/30 active:scale-95 flex items-center gap-2"
             >
               <FileText size={16} />
               <span>Build My Resume Free &rarr;</span>
             </Link>
+
+            <button
+              onClick={() => {
+                setUploadInitialStep('upload');
+                setShowUploadModal(true);
+              }}
+              className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/30 flex items-center gap-2 cursor-pointer active:scale-95"
+            >
+              <UploadCloud size={16} />
+              <span>Upload Existing Resume</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setUploadInitialStep('template');
+                setShowUploadModal(true);
+              }}
+              className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs sm:text-sm border border-white/20 transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <Layout size={16} className="text-brand-300" />
+              <span>Choose a Template</span>
+            </button>
+
             <Link
               to="/ats-resume-checker"
-              className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-sm border border-white/20 transition-all flex items-center gap-2"
+              className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs sm:text-sm border border-white/20 transition-all flex items-center gap-2"
             >
               <CheckCircle2 size={16} className="text-emerald-400" />
               <span>Check ATS Score</span>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* UPLOAD RESUME & APPLY TEMPLATE CTA SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl border border-slate-800 space-y-6">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-500/30">
-                <Sparkles size={13} className="text-brand-400" />
-                <span>Instant Resume Conversion</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-snug">
-                Already have a resume? Upload it, choose a template, and create a professionally formatted resume in minutes.
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-300">
-                Supports PDF, DOCX, or TXT formats. Your information is parsed into 9 structured sections, placed into modern ATS templates, and exported as vector PDFs.
-              </p>
-            </div>
-
-            {/* 4 Required Action Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full md:w-auto shrink-0">
-              <button
-                onClick={() => {
-                  setUploadInitialStep('upload');
-                  setShowUploadModal(true);
-                }}
-                className="px-5 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-2xl text-xs transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-              >
-                <UploadCloud size={16} />
-                <span>Upload My Resume</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setUploadInitialStep('template');
-                  setShowUploadModal(true);
-                }}
-                className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-2xl text-xs border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Layout size={16} className="text-brand-300" />
-                <span>Choose a Template</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setUploadInitialStep('preview');
-                  setShowUploadModal(true);
-                }}
-                className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-2xl text-xs border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Eye size={16} className="text-indigo-300" />
-                <span>Preview Resume</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setUploadInitialStep('preview');
-                  setShowUploadModal(true);
-                }}
-                className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-2xl text-xs transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-              >
-                <Download size={16} />
-                <span>Download PDF</span>
-              </button>
-            </div>
           </div>
         </div>
       </section>
