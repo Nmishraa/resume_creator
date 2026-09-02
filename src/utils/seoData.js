@@ -1,7 +1,7 @@
 export const SITE_URL = 'https://resume.gnanamai.com';
 export const LAST_UPDATED = 'August 30, 2026';
 export const AUTHOR_INFO = {
-  name: 'Resume & CV Craft Team',
+  name: 'Resume Craft Team',
   role: 'Career & Resume Strategists',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',
   bio: 'Our team builds free, accessible software to help job seekers optimize their resumes for standard applicant tracking systems.'
@@ -9,23 +9,23 @@ export const AUTHOR_INFO = {
 
 export const ROUTE_SEO_MAP = {
   '/': {
-    title: 'Resume & CV Craft – Free AI Resume Builder and ATS Resume Checker',
-    description: 'Create professional ATS-friendly resumes with Resume & CV Craft. Build, customize and download your resume using free AI-powered tools.',
-    keywords: 'Resume & CV Craft, free resume builder, ATS resume checker, AI resume creator, PDF resume export',
+    title: 'Resume Craft – Free AI Resume Builder and ATS Resume Checker',
+    description: 'Create professional ATS-friendly resumes with Resume Craft. Build, customize and download your resume using free AI-powered tools.',
+    keywords: 'Resume Craft, free resume builder, ATS resume checker, AI resume creator, PDF resume export',
     canonical: `${SITE_URL}/`,
     h1: 'Build ATS-Friendly Resumes & Test ATS Compatibility Scores',
     faqs: [
       {
-        q: 'Is Resume & CV Craft completely free to use?',
-        a: 'Yes, Resume & CV Craft offers 100% free resume creation, AI bullet point analysis, ATS scoring, and PDF exports without hidden paywalls or subscription traps.'
+        q: 'Is Resume Craft completely free to use?',
+        a: 'Yes, Resume Craft offers 100% free resume creation, AI bullet point analysis, ATS scoring, and PDF exports without hidden paywalls or subscription traps.'
       },
       {
         q: 'How does the AI Resume Builder optimize for ATS?',
-        a: 'Resume & CV Craft uses single-column layouts, clean typography, and keyword matching designed for standard Applicant Tracking Systems.'
+        a: 'Resume Craft uses single-column layouts, clean typography, and keyword matching designed for standard Applicant Tracking Systems.'
       },
       {
         q: 'Can I export my resume as an ATS-compliant PDF?',
-        a: 'Yes, all resumes generated on Resume & CV Craft export as clean, selectable-text vector PDFs optimized for ATS text parsers.'
+        a: 'Yes, all resumes generated on Resume Craft export as clean, selectable-text vector PDFs optimized for ATS text parsers.'
       }
     ]
   },
@@ -181,11 +181,11 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/ats-tips': {
-    title: 'Top 10 ATS Optimization Secrets for Job Seekers | Resume & CV Craft',
-    description: 'Learn how Applicant Tracking Systems parse resume text and how to pass resume screeners.',
-    keywords: 'ATS tips, beat ATS systems, resume formatting rules, applicant tracking systems',
+    title: 'Top 10 ATS Optimization Strategies for Job Seekers | Resume Craft',
+    description: 'Learn how Applicant Tracking Systems parse resume text and how to format for candidate screeners.',
+    keywords: 'ATS tips, optimize for ATS systems, resume formatting rules, applicant tracking systems',
     canonical: `${SITE_URL}/ats-tips`,
-    h1: 'Beat the Applicant Tracking System (ATS)',
+    h1: 'Optimize Your Resume for Applicant Tracking Systems (ATS)',
     faqs: [
       {
         q: 'Do ATS parsers penalize multi-column resumes?',
@@ -193,7 +193,7 @@ export const ROUTE_SEO_MAP = {
       },
       {
         q: 'Can ATS detect white text keyword stuffing?',
-        a: 'Yes. Modern parsers extract raw text streams and strip font styling. White text triggers spam flags, leading to automatic rejection.'
+        a: 'Yes. Modern parsers extract raw text streams and strip font styling. White text triggers spam flags, leading to candidate disqualification.'
       },
       {
         q: 'What fonts are safest for ATS compliance?',
@@ -202,7 +202,7 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/cover-letters': {
-    title: 'Free Interactive Cover Letter Generator & Templates | Resume & CV Craft',
+    title: 'Free Interactive Cover Letter Generator & Templates | Resume Craft',
     description: 'Generate customized, tailored cover letters in seconds. Choose from 4 proven formulas and download instant TXT/PDF.',
     keywords: 'cover letter generator, cover letter builder, free cover letter templates, job application letter',
     canonical: `${SITE_URL}/cover-letters`,
@@ -219,7 +219,7 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/interview-prep': {
-    title: 'AI Mock Interview Simulator & STAR Practice | Resume & CV Craft',
+    title: 'AI Mock Interview Simulator & STAR Practice | Resume Craft',
     description: 'Practice technical and behavioral interview questions with high-scoring STAR framework answer blueprints.',
     keywords: 'interview prep, STAR method interview, technical interview simulator, mock interview tool',
     canonical: `${SITE_URL}/interview-prep`,
@@ -236,7 +236,7 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/linkedin-optimizer': {
-    title: 'Free LinkedIn Profile & Headline Optimizer | Resume & CV Craft',
+    title: 'Free LinkedIn Profile & Headline Optimizer | Resume Craft',
     description: 'Convert your resume into an optimized LinkedIn About bio and headline designed to attract recruiter InMail messages.',
     keywords: 'linkedin profile optimizer, linkedin headline generator, linkedin bio generator, recruiter outreach',
     canonical: `${SITE_URL}/linkedin-optimizer`,
@@ -253,63 +253,63 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/about': {
-    title: 'About Resume & CV Craft - Mission & Free Career Tools',
-    description: 'Learn about Resume & CV Craft, our mission to democratize job search tools, and how our free AI resume builder helps thousands of candidates.',
-    keywords: 'about resume and cv craft, AI resume builder mission, career tools',
+    title: 'About Resume Craft - Mission & Free Career Tools',
+    description: 'Learn about Resume Craft, our mission to democratize job search tools, and how our free AI resume builder helps thousands of candidates.',
+    keywords: 'about resume craft, AI resume builder mission, career tools',
     canonical: `${SITE_URL}/about`,
-    h1: 'About Resume & CV Craft'
+    h1: 'About Resume Craft'
   },
   '/privacy': {
-    title: 'Privacy Policy | Resume & CV Craft',
-    description: 'Read the Resume & CV Craft Privacy Policy. Your resume data stays private, secure, and under your control.',
+    title: 'Privacy Policy | Resume Craft',
+    description: 'Read the Resume Craft Privacy Policy. Your resume data stays private, secure, and under your control.',
     keywords: 'privacy policy, resume data privacy, secure resume builder',
     canonical: `${SITE_URL}/privacy`,
     h1: 'Privacy Policy'
   },
   '/contact': {
-    title: 'Contact Us & Support | Resume & CV Craft',
-    description: 'Get in touch with the Resume & CV Craft team for feedback, support, or feature suggestions.',
-    keywords: 'contact resume and cv craft, support, feedback',
+    title: 'Contact Us & Support | Resume Craft',
+    description: 'Get in touch with the Resume Craft team for feedback, support, or feature suggestions.',
+    keywords: 'contact resume craft, support, feedback',
     canonical: `${SITE_URL}/contact`,
     h1: 'Contact Us'
   },
   '/free-ai-engineer-resume-builder': {
-    title: 'Free AI Engineer Resume Builder | Resume & CV Craft',
+    title: 'Free AI Engineer Resume Builder | Resume Craft',
     description: 'Build an optimized AI Engineer resume for free. Designed for PyTorch, LLMs, CUDA, and RAG architectures.',
     keywords: 'free AI engineer resume builder, machine learning CV generator, LLM engineer resume tool',
     canonical: `${SITE_URL}/free-ai-engineer-resume-builder`,
     h1: 'Free AI Engineer Resume Builder'
   },
   '/entry-level-ai-engineer-resume-example': {
-    title: 'Entry-Level AI Engineer Resume Example & Template | Resume & CV Craft',
+    title: 'Entry-Level AI Engineer Resume Example & Template | Resume Craft',
     description: 'Entry-level AI Engineer resume guide for new grads and junior developers. Highlight PyTorch projects, HuggingFace models, and hackathons.',
     keywords: 'entry level AI engineer resume, junior machine learning CV, new grad AI resume template',
     canonical: `${SITE_URL}/entry-level-ai-engineer-resume-example`,
     h1: 'Entry-Level AI Engineer Resume Example'
   },
   '/rag-engineer-resume-example': {
-    title: 'RAG & LLM Engineer Resume Example & Template | Resume & CV Craft',
+    title: 'RAG & LLM Engineer Resume Example & Template | Resume Craft',
     description: 'Proven RAG Engineer resume template. Highlight vector databases, Pinecone, hybrid search, and LangChain embeddings.',
     keywords: 'RAG engineer resume example, LLM developer CV, vector database resume',
     canonical: `${SITE_URL}/rag-engineer-resume-example`,
     h1: 'RAG Engineer Resume Example'
   },
   '/resume-builder-for-fresh-graduates': {
-    title: 'Free Resume Builder for Fresh Graduates | Resume & CV Craft',
+    title: 'Free Resume Builder for Fresh Graduates | Resume Craft',
     description: 'Create an ATS-optimized resume for fresh college graduates with no formal work experience. 100% free vector PDF export.',
     keywords: 'resume builder for fresh graduates, entry level resume creator, college graduate CV builder',
     canonical: `${SITE_URL}/resume-builder-for-fresh-graduates`,
     h1: 'Resume Builder for Fresh Graduates'
   },
   '/ats-resume-checker-without-signup': {
-    title: 'ATS Resume Checker Without Signup or Registration | Resume & CV Craft',
+    title: 'ATS Resume Checker Without Signup or Registration | Resume Craft',
     description: 'Scan your resume against ATS screeners instantly without creating an account or giving your email address.',
     keywords: 'ATS resume checker without signup, no registration ATS scanner, free private resume score',
     canonical: `${SITE_URL}/ats-resume-checker-without-signup`,
     h1: 'ATS Resume Checker Without Signup'
   },
   '/computer-science-graduate-resume-builder': {
-    title: 'Computer Science Graduate Resume Builder | Resume & CV Craft',
+    title: 'Computer Science Graduate Resume Builder | Resume Craft',
     description: 'Engineered for CS majors and bootcamp graduates. Format GitHub repos, algorithms coursework, and full-stack projects for recruiters.',
     keywords: 'computer science graduate resume builder, CS major CV template, software engineering new grad resume',
     canonical: `${SITE_URL}/computer-science-graduate-resume-builder`,

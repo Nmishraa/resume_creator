@@ -11,7 +11,7 @@ export default function SeoHead() {
     const seoData = ROUTE_SEO_MAP[pathname] || ROUTE_SEO_MAP['/'];
 
     if (isPrivate) {
-      document.title = 'Private Workspace | Resume & CV Craft';
+      document.title = 'Private Workspace | Resume Craft';
     } else {
       document.title = seoData.title;
     }
@@ -81,7 +81,7 @@ export default function SeoHead() {
           "url": seoData.canonical,
           "publisher": {
             "@type": "Organization",
-            "name": "Resume & CV Craft",
+            "name": "Resume Craft",
             "url": SITE_URL,
             "logo": `${SITE_URL}/favicon.svg`
           }

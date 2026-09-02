@@ -19,7 +19,7 @@ export default function Navbar({ user, logout }) {
         <Link to="/" onClick={closeMobileMenu} style={{ textDecoration: 'none' }}>
           <div className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 800, fontSize: '1.2rem', color: '#0f172a' }}>
             <FileText size={26} color="var(--accent, #4f46e5)" />
-            <span>Resume & CV Craft</span>
+            <span>Resume Craft</span>
           </div>
         </Link>
 

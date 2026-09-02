@@ -115,14 +115,14 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       {
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: 'Resume & CV Craft',
+        name: 'Resume Craft',
         url: SITE_URL,
         logo: `${SITE_URL}/favicon.svg`
       },
       {
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: 'Resume & CV Craft',
+        name: 'Resume Craft',
         operatingSystem: 'All Web Browsers',
         applicationCategory: 'BusinessApplication',
         offers: {
@@ -130,7 +130,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
           price: '0.00',
           priceCurrency: 'USD'
         },
-        description: 'Free ATS-friendly resume builder and resume score checker powered by AI bullet optimization.'
+        description: 'Free ATS-compatible resume builder and resume score checker powered by AI bullet optimization.'
       },
       {
         '@context': 'https://schema.org',
