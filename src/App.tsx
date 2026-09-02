@@ -25,6 +25,7 @@ import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { HowItWorksPage } from './pages/HowItWorksPage';
+import { FaqPage } from './pages/FaqPage';
 import { AtsResumeBuilderPage } from './pages/seo/AtsResumeBuilderPage';
 import { SoftwareEngineerBuilderPage } from './pages/seo/SoftwareEngineerBuilderPage';
 import { KeywordMatcherPage } from './pages/seo/KeywordMatcherPage';
@@ -79,6 +80,8 @@ export function App() {
         <Route path="linkedin-optimizer" element={<LinkedInOptimizerPage />} />
 
         {/* Trust & Legal */}
+        <Route path="faq" element={<FaqPage />} />
+        <Route path="faqs" element={<Navigate to="/faq" replace />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="privacy" element={<PrivacyPolicyPage />} />

@@ -233,6 +233,13 @@ const PAGES = [
     intro: 'The technical architecture behind our ATS-scannable vector PDFs, real-time keyword matching, and AI bullet optimization.'
   },
   {
+    path: '/faq',
+    title: 'Frequently Asked Questions (FAQ) | Resume Craft',
+    description: 'Find answers to common questions about Resume Craft, ATS resume scoring, AI bullet improvements, vector PDF downloads, and data privacy.',
+    h1: 'Frequently Asked Questions (FAQ)',
+    intro: 'Everything you need to know about ATS scoring, AI bullet enhancements, document imports, and candidate privacy.'
+  },
+  {
     path: '/about',
     title: 'About Resume Craft – Our Mission for Free Career Tools | Resume Craft',
     description: 'Learn about Resume Craft mission to provide free, accessible, and privacy-focused ATS resume building tools for job seekers worldwide.',

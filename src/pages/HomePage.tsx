@@ -676,19 +676,6 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* FREQUENTLY ASKED QUESTIONS SECTION */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600">
-            Clear, honest answers about Resume Craft, ATS scoring, and data privacy.
-          </p>
-        </div>
-        <FaqAccordion items={homeFaqs} hideHeader />
-      </section>
-
       {/* 6. RESUME TEMPLATES SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

@@ -115,6 +115,19 @@ export const Navbar: React.FC = () => {
               <span>Examples</span>
             </Link>
 
+            {/* FAQ Link */}
+            <Link
+              to="/faq"
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
+                location.pathname === '/faq' || location.pathname === '/faqs'
+                  ? 'bg-brand-50 text-brand-700'
+                  : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
+              }`}
+            >
+              <HelpCircle size={14} className="text-indigo-600" />
+              <span>FAQ</span>
+            </Link>
+
             {/* More Dropdown */}
             <div
               className="relative"
@@ -277,6 +290,14 @@ export const Navbar: React.FC = () => {
             >
               <Compass size={16} className="text-blue-600" />
               <span>Resume Examples Hub</span>
+            </Link>
+            <Link
+              to="/faq"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 p-2.5 rounded-xl text-xs font-bold text-slate-800 hover:bg-slate-50"
+            >
+              <HelpCircle size={16} className="text-indigo-600" />
+              <span>Frequently Asked Questions (FAQ)</span>
             </Link>
             <Link
               to="/how-it-works"
