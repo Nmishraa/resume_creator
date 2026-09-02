@@ -282,6 +282,41 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* CONVERSION BANNER (PLACED AT TOP) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-950 text-white rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-xl border border-slate-800">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-400/30 mx-auto">
+            <Sparkles size={13} />
+            <span>Ready in under 5 minutes • 100% Free</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight max-w-2xl mx-auto">
+            Build Your ATS-Friendly Resume Today
+          </h2>
+
+          <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
+            Strengthen your experience bullets with AI, optimize keywords against any job description, and export a clean vector PDF — completely free.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <Link
+              to="/builder"
+              className="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-brand-500/30 active:scale-95 flex items-center gap-2"
+            >
+              <FileText size={16} />
+              <span>Build My Resume Free &rarr;</span>
+            </Link>
+            <Link
+              to="/ats-resume-checker"
+              className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-sm border border-white/20 transition-all flex items-center gap-2"
+            >
+              <CheckCircle2 size={16} className="text-emerald-400" />
+              <span>Check ATS Score</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* UPLOAD RESUME & APPLY TEMPLATE CTA SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl border border-slate-800 space-y-6">
@@ -906,41 +941,6 @@ export const HomePage: React.FC = () => {
               </Link>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* 10. FINAL CONVERSION BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-950 text-white rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-xl border border-slate-800">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-400/30 mx-auto">
-            <Sparkles size={13} />
-            <span>Ready in under 5 minutes • 100% Free</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight max-w-2xl mx-auto">
-            Build Your ATS-Friendly Resume Today
-          </h2>
-
-          <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Strengthen your experience bullets with AI, optimize keywords against any job description, and export a clean vector PDF — completely free.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <Link
-              to="/builder"
-              className="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-brand-500/30 active:scale-95 flex items-center gap-2"
-            >
-              <FileText size={16} />
-              <span>Build My Resume Free &rarr;</span>
-            </Link>
-            <Link
-              to="/ats-resume-checker"
-              className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-sm border border-white/20 transition-all flex items-center gap-2"
-            >
-              <CheckCircle2 size={16} className="text-emerald-400" />
-              <span>Check ATS Score</span>
-            </Link>
-          </div>
         </div>
       </section>
 
