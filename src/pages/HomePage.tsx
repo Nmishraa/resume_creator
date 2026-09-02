@@ -217,9 +217,9 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Hero Visual Product Preview (5 cols) */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md bg-white rounded-2xl shadow-xl border border-slate-200/90 p-5 space-y-4">
+            {/* Right Column: Hero Visual Product Preview & Compact Promo Video (5 cols) */}
+            <div className="lg:col-span-5 relative space-y-4 flex flex-col items-center lg:items-end">
+              <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-200/90 p-5 space-y-4">
                 
                 {/* Live Header Bar */}
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -256,40 +256,27 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Simulated AI Bullet Transformation */}
-                <div className="p-3 bg-brand-50/70 rounded-xl border border-brand-150 space-y-1.5">
-                  <div className="flex items-center justify-between text-[11px] font-bold text-brand-900">
-                    <span className="flex items-center gap-1.5">
-                      <Sparkles size={13} className="text-brand-600" />
-                      <span>Google X-Y-Z Bullet Result</span>
-                    </span>
-                    <span className="text-[10px] text-brand-700 font-semibold bg-white/80 px-1.5 py-0.5 rounded border border-brand-200">
-                      Measurable Impact
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-800 leading-relaxed font-medium">
-                    &ldquo;Accelerated product adoption by 40% across 250k enterprise seats by launching a modular workflow editor using React &amp; TypeScript.&rdquo;
-                  </p>
-                </div>
-
                 {/* Action in Preview */}
                 <div className="flex items-center gap-2 pt-1">
                   <Link
                     to="/builder"
-                    className="flex-1 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
+                    className="flex-1 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
                   >
                     <span>Open in Resume Builder</span>
                     <ArrowRight size={13} />
                   </Link>
                   <Link
                     to="/ats-resume-checker"
-                    className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors"
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors"
                     title="Scan ATS Score"
                   >
                     <Sliders size={15} />
                   </Link>
                 </div>
               </div>
+
+              {/* Compact Video Tour Widget on the Right */}
+              <CompactPromoVideoSection />
             </div>
           </div>
         </div>
@@ -361,9 +348,6 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* COMPACT PROMO VIDEO SECTION */}
-      <CompactPromoVideoSection />
 
       {/* 2. INTERACTIVE PRODUCT SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
