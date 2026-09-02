@@ -47,6 +47,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
     setMetaTag('property', 'og:type', ogType);
     setMetaTag('property', 'og:url', fullCanonical);
     setMetaTag('property', 'og:site_name', 'Resume Craft');
+    setMetaTag('property', 'og:locale', 'en_US');
     setMetaTag('property', 'og:image', ogImage);
 
     // Twitter Card
@@ -117,7 +118,11 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
         '@type': 'Organization',
         name: 'Resume Craft',
         url: SITE_URL,
-        logo: `${SITE_URL}/favicon.svg`
+        logo: `${SITE_URL}/favicon.svg`,
+        areaServed: {
+          '@type': 'Country',
+          name: 'United States'
+        }
       },
       {
         '@context': 'https://schema.org',

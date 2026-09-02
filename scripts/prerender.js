@@ -311,7 +311,11 @@ for (const page of PAGES) {
       '@type': 'Organization',
       name: 'Resume Craft',
       url: SITE_URL,
-      logo: `${SITE_URL}/favicon.svg`
+      logo: `${SITE_URL}/favicon.svg`,
+      areaServed: {
+        '@type': 'Country',
+        name: 'United States'
+      }
     },
     {
       '@context': 'https://schema.org',
@@ -350,6 +354,7 @@ for (const page of PAGES) {
     <meta property="og:type" content="${ogType}" />
     <meta property="og:url" content="${canonicalUrl}" />
     <meta property="og:site_name" content="Resume Craft" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:image" content="${SITE_URL}/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${page.title}" />
