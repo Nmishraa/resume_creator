@@ -144,7 +144,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
     metaDescription: 'ATS-tested Software Engineer resume example with high-impact bullets, React/Node/AWS skill lists, Google X-Y-Z formula, and free vector PDF export.',
     targetKeyword: 'software engineer resume',
     h1: 'Software Engineer Resume Example & ATS Guide',
-    shortIntro: 'A proven, recruiter-approved Software Engineer resume sample highlighting full-stack engineering, cloud microservices, API performance, and automated testing.',
+    shortIntro: 'A proven Software Engineer resume sample highlighting full-stack engineering, cloud microservices, API performance, and automated testing.',
     summaryExample: 'Full-Stack Software Engineer with 4+ years of expertise architecting high-availability distributed systems, responsive React applications, and secure REST/GraphQL APIs. Proven record improving application response times by 40% and deploying mission-critical microservices serving 2M+ active users.',
     skills: [
       { category: 'Frontend', items: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Redux Toolkit', 'HTML5/CSS3'] },

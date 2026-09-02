@@ -2,218 +2,218 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Core Homepage & Primary Landing Pages -->
   <url>
-    <loc>https://resume-cv-craft.web.app/</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/free-resume-builder</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/free-resume-builder</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/ai-resume-builder</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/ai-resume-builder</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/ats-resume-checker</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/ats-resume-checker</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-score-checker</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-score-checker</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-builder-for-students</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-builder-for-students</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-builder-no-experience</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-builder-no-experience</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/job-description-resume-matcher</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/job-description-resume-matcher</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/cover-letter-generator</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/cover-letter-generator</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-templates</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-templates</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/builder</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/builder</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/interview-prep</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/interview-prep</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/linkedin-optimizer</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/linkedin-optimizer</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <!-- Resume Examples Hub & 12 Specialized Sample Pages -->
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/ai-engineer</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/ai-engineer</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/software-engineer</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/software-engineer</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/data-scientist</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/data-scientist</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/data-analyst</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/data-analyst</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/business-analyst</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/business-analyst</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/project-manager</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/project-manager</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/customer-service</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/customer-service</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/teacher</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/teacher</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/nurse</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/nurse</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/college-student</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/college-student</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/internship</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/internship</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/resume-examples/no-experience</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/no-experience</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <!-- Guides Hub & Detail Pages -->
   <url>
-    <loc>https://resume-cv-craft.web.app/guides</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/guides</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/guides/how-to-make-ats-friendly-resume</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/guides/how-to-make-ats-friendly-resume</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/guides/google-xyz-formula-guide</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/guides/google-xyz-formula-guide</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/guides/how-to-improve-resume-score</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/guides/how-to-improve-resume-score</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <!-- Trust, E-E-A-T & Legal Pages -->
   <url>
-    <loc>https://resume-cv-craft.web.app/how-it-works</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/how-it-works</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/about</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/about</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/contact</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/contact</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/privacy</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/privacy</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>
   <url>
-    <loc>https://resume-cv-craft.web.app/terms</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://resume.gnanamai.com/terms</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>

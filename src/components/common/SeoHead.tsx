@@ -15,12 +15,12 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
   description,
   canonicalPath,
   ogType = 'website',
-  ogImage = `${SITE_URL}/favicon.svg`,
+  ogImage = `${SITE_URL}/og-image.png`,
   jsonLd
 }) => {
   const fullCanonical = canonicalPath
     ? (canonicalPath.startsWith('http') ? canonicalPath : `${SITE_URL}${canonicalPath.startsWith('/') ? '' : '/'}${canonicalPath}`)
-    : window.location.href;
+    : (typeof window !== 'undefined' ? window.location.href : SITE_URL);
 
   useEffect(() => {
     // 1. Update Document Title
@@ -74,6 +74,31 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       document.head.appendChild(scriptEl);
     }
 
+    // Generate BreadcrumbList Schema dynamically from path
+    const pathParts = (canonicalPath || '').split('/').filter(Boolean);
+    const breadcrumbItems = [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL
+      }
+    ];
+
+    let currentAcc = SITE_URL;
+    pathParts.forEach((part, idx) => {
+      currentAcc += `/${part}`;
+      const formattedName = part
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: idx + 2,
+        name: formattedName,
+        item: currentAcc
+      });
+    });
+
     const defaultSchemas: Array<Record<string, any>> = [
       {
         '@context': 'https://schema.org',
@@ -89,9 +114,16 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       },
       {
         '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Resume & CV Craft',
+        url: SITE_URL,
+        logo: `${SITE_URL}/favicon.svg`
+      },
+      {
+        '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
         name: 'Resume & CV Craft',
-        operatingSystem: 'All',
+        operatingSystem: 'All Web Browsers',
         applicationCategory: 'BusinessApplication',
         offers: {
           '@type': 'Offer',
@@ -99,6 +131,11 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
           priceCurrency: 'USD'
         },
         description: 'Free ATS-friendly resume builder and resume score checker powered by AI bullet optimization.'
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbItems
       }
     ];
 

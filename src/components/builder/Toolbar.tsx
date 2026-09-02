@@ -25,12 +25,14 @@ import confetti from 'canvas-confetti';
 interface ToolbarProps {
   onOpenAiModal: () => void;
   onOpenImportModal: () => void;
+  onOpenUploadModal?: () => void;
   onOpenAtsDrawer: () => void;
 }
 
 export const Toolbar: React.FC<ToolbarProps> = ({
   onOpenAiModal,
   onOpenImportModal,
+  onOpenUploadModal,
   onOpenAtsDrawer
 }) => {
   const {
@@ -246,14 +248,26 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 
         {/* Right: Import & Export Actions */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          {/* Upload Resume & Apply Template */}
+          {onOpenUploadModal && (
+            <button
+              onClick={onOpenUploadModal}
+              className="flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs transition-colors"
+              title="Upload existing PDF, DOCX, or TXT resume and select template"
+            >
+              <UploadCloud size={14} className="text-white" />
+              <span>Upload Resume</span>
+            </button>
+          )}
+
           {/* Import text / linkedin */}
           <button
             onClick={onOpenImportModal}
             className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-lg transition-colors border border-slate-200"
             title="Import LinkedIn text or JSON"
           >
-            <UploadCloud size={14} className="text-slate-500" />
-            <span className="hidden sm:inline">Import</span>
+            <FileText size={14} className="text-slate-500" />
+            <span className="hidden sm:inline">Paste Text</span>
           </button>
 
           {/* JSON Export */}

@@ -111,8 +111,9 @@ export const EditorForm: React.FC = () => {
           <div className="p-4 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">Full Name</label>
+                <label htmlFor="field-fullName" className="text-xs font-semibold text-slate-600 block mb-1">Full Name</label>
                 <input
+                  id="field-fullName"
                   type="text"
                   value={resume.personalInfo.fullName}
                   onChange={(e) => updatePersonalInfo('fullName', e.target.value)}
@@ -121,8 +122,9 @@ export const EditorForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">Target Job Title</label>
+                <label htmlFor="field-jobTitle" className="text-xs font-semibold text-slate-600 block mb-1">Target Job Title</label>
                 <input
+                  id="field-jobTitle"
                   type="text"
                   value={resume.personalInfo.jobTitle}
                   onChange={(e) => updatePersonalInfo('jobTitle', e.target.value)}
@@ -134,8 +136,9 @@ export const EditorForm: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">Email Address</label>
+                <label htmlFor="field-email" className="text-xs font-semibold text-slate-600 block mb-1">Email Address</label>
                 <input
+                  id="field-email"
                   type="email"
                   value={resume.personalInfo.email}
                   onChange={(e) => updatePersonalInfo('email', e.target.value)}
@@ -144,8 +147,9 @@ export const EditorForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">Phone Number</label>
+                <label htmlFor="field-phone" className="text-xs font-semibold text-slate-600 block mb-1">Phone Number</label>
                 <input
+                  id="field-phone"
                   type="tel"
                   value={resume.personalInfo.phone}
                   onChange={(e) => updatePersonalInfo('phone', e.target.value)}
@@ -154,8 +158,9 @@ export const EditorForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">Location</label>
+                <label htmlFor="field-location" className="text-xs font-semibold text-slate-600 block mb-1">Location</label>
                 <input
+                  id="field-location"
                   type="text"
                   value={resume.personalInfo.location}
                   onChange={(e) => updatePersonalInfo('location', e.target.value)}
@@ -167,8 +172,9 @@ export const EditorForm: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">LinkedIn Profile</label>
+                <label htmlFor="field-linkedin" className="text-xs font-semibold text-slate-600 block mb-1">LinkedIn Profile</label>
                 <input
+                  id="field-linkedin"
                   type="text"
                   value={resume.personalInfo.linkedin}
                   onChange={(e) => updatePersonalInfo('linkedin', e.target.value)}
@@ -177,8 +183,9 @@ export const EditorForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">GitHub / Portfolio</label>
+                <label htmlFor="field-github" className="text-xs font-semibold text-slate-600 block mb-1">GitHub / Portfolio</label>
                 <input
+                  id="field-github"
                   type="text"
                   value={resume.personalInfo.github}
                   onChange={(e) => updatePersonalInfo('github', e.target.value)}
@@ -187,8 +194,9 @@ export const EditorForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold text-slate-600 block mb-1">Personal Website</label>
+                <label htmlFor="field-website" className="text-xs font-semibold text-slate-600 block mb-1">Personal Website</label>
                 <input
+                  id="field-website"
                   type="text"
                   value={resume.personalInfo.website}
                   onChange={(e) => updatePersonalInfo('website', e.target.value)}

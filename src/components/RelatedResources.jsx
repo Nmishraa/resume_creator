@@ -54,7 +54,7 @@ const ALL_RESOURCES = [
   {
     path: '/cover-letters',
     title: 'AI Cover Letter Generator',
-    desc: 'Generate recruiter-approved cover letters tailored to any job posting in seconds.',
+    desc: 'Generate tailored cover letters for any job posting in seconds.',
     icon: Mail,
     color: '#f59e0b',
     badge: 'AI Tool'

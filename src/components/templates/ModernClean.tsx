@@ -19,9 +19,9 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
     <div className={`w-full bg-white text-slate-800 p-8 sm:p-10 ${fontClass} ${size.body}`}>
       {/* Header */}
       <div className="border-b pb-4 mb-4" style={{ borderColor: `${accentColor}30` }}>
-        <h1 className={`${size.name} text-slate-900 leading-tight mb-1`}>
+        <div className={`${size.name} text-slate-900 leading-tight mb-1 font-bold`} role="heading" aria-level={2}>
           {personalInfo.fullName || 'Your Name'}
-        </h1>
+        </div>
         <p className="text-sm font-semibold tracking-wide" style={{ color: accentColor }}>
           {personalInfo.jobTitle || 'Professional Title'}
         </p>

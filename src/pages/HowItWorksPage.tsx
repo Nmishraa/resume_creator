@@ -29,7 +29,7 @@ export const HowItWorksPage: React.FC = () => {
           </div>
           <h2 className="text-lg font-bold text-slate-900">Single-Column Structural Parsing</h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Applicant Tracking Systems parse documents linearly from top to bottom. Multi-column templates often cause the left and right columns to concatenate into a scrambled mess. Resume Craft templates enforce a clean, single-column visual hierarchy with standard metadata blocks so parsers capture your job titles, companies, dates, and skills with 100% accuracy.
+            Applicant Tracking Systems parse documents linearly from top to bottom. Multi-column templates often cause the left and right columns to concatenate into a scrambled mess. Resume Craft templates enforce a clean, single-column visual hierarchy with standard metadata blocks so parsers capture your job titles, companies, dates, and skills with high parsing accuracy.
           </p>
         </div>
 

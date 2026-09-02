@@ -92,8 +92,12 @@ export function initFirebase(customConfig?: FirebaseConfig): { app: FirebaseApp 
   }
 }
 
-// Initialize on module load
-initFirebase();
+// Initialize on module load safely
+try {
+  initFirebase();
+} catch (err) {
+  console.warn('Top-level Firebase init caught:', err);
+}
 
 export async function loginWithGoogle(): Promise<FirebaseUser | null> {
   if (!auth) initFirebase();

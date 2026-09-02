@@ -20,9 +20,39 @@
 }
 
 @layer base {
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #0f172a;
+  }
   * {
     border-color: #e2e8f0;
   }
+}
+
+/* High-Contrast Legibility Rules for Accessible Text */
+.text-slate-400 {
+  color: #475569; /* Upgrade light slate to slate-600 on light backgrounds for 4.5:1 contrast */
+}
+.bg-slate-900 .text-slate-400,
+.bg-slate-950 .text-slate-400,
+.bg-black .text-slate-400,
+.bg-gradient-to-r .text-slate-400,
+.bg-gradient-to-br .text-slate-400 {
+  color: #94a3b8; /* Maintain high contrast on dark backgrounds */
+}
+
+.text-slate-500 {
+  color: #334155; /* Upgrade slate-500 to slate-700 */
+}
+.bg-slate-900 .text-slate-500,
+.bg-slate-950 .text-slate-500,
+.bg-black .text-slate-500 {
+  color: #cbd5e1;
 }
 
 /* Custom Scrollbar */
@@ -78,9 +108,11 @@
     margin: 0;
   }
 
-  .page-break-avoid {
-    break-inside: avoid;
-    page-break-inside: avoid;
+  .page-break-avoid,
+  .resume-section-item,
+  .resume-section-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 }
 

@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
 
   const mainTools = [
     { label: 'Resume Builder', path: '/builder', desc: 'Interactive real-time ATS editor & PDF export', icon: FileText },
-    { label: 'ATS Score Checker', path: '/ats-checker', desc: 'Scan 0–100 score against job descriptions', icon: CheckCircle2 },
+    { label: 'ATS Score Checker', path: '/ats-resume-checker', desc: 'Scan 0–100 score against job descriptions', icon: CheckCircle2 },
     { label: 'AI Bullet Enhancer', path: '/ai-resume-builder', desc: 'Google X-Y-Z formula bullet writer', icon: Sparkles },
     { label: 'Student Resume Builder', path: '/resume-builder-for-students', desc: 'Coursework, projects & beginner tips', icon: GraduationCap },
     { label: 'Cover Letter Generator', path: '/cover-letters', desc: 'AI-tailored cover letters in seconds', icon: Mail },
@@ -73,12 +73,12 @@ export const Navbar: React.FC = () => {
               }`}
             >
               <FileText size={14} className="text-brand-600" />
-              <span>Resume Builder</span>
+              <span>Builder</span>
             </Link>
 
             {/* ATS Checker Link */}
             <Link
-              to="/ats-checker"
+              to="/ats-resume-checker"
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
                 location.pathname.startsWith('/ats')
                   ? 'bg-brand-50 text-brand-700'
@@ -91,7 +91,7 @@ export const Navbar: React.FC = () => {
 
             {/* Templates Link */}
             <Link
-              to="/templates"
+              to="/resume-templates"
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
                 location.pathname === '/templates' || location.pathname === '/resume-templates'
                   ? 'bg-brand-50 text-brand-700'
@@ -112,23 +112,10 @@ export const Navbar: React.FC = () => {
               }`}
             >
               <Compass size={14} className="text-blue-600" />
-              <span>Resume Examples</span>
+              <span>Examples</span>
             </Link>
 
-            {/* How It Works Link */}
-            <Link
-              to="/how-it-works"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
-                location.pathname === '/how-it-works'
-                  ? 'bg-brand-50 text-brand-700'
-                  : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
-              }`}
-            >
-              <BookOpen size={14} className="text-slate-500" />
-              <span>How It Works</span>
-            </Link>
-
-            {/* More Tools Dropdown */}
+            {/* More Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setToolsDropdown(true)}
@@ -138,7 +125,7 @@ export const Navbar: React.FC = () => {
                 className="flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 transition-colors cursor-pointer"
                 aria-expanded={toolsDropdown}
               >
-                <span>More Tools</span>
+                <span>More</span>
                 <ChevronDown size={13} className={`transition-transform duration-150 ${toolsDropdown ? 'rotate-180 text-brand-600' : 'text-slate-400'}`} />
               </button>
 
@@ -268,7 +255,7 @@ export const Navbar: React.FC = () => {
               <span>Resume Builder</span>
             </Link>
             <Link
-              to="/ats-checker"
+              to="/ats-resume-checker"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-3 p-2.5 rounded-xl text-xs font-bold text-slate-800 hover:bg-slate-50"
             >
@@ -276,7 +263,7 @@ export const Navbar: React.FC = () => {
               <span>ATS Score Checker</span>
             </Link>
             <Link
-              to="/templates"
+              to="/resume-templates"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-3 p-2.5 rounded-xl text-xs font-bold text-slate-800 hover:bg-slate-50"
             >

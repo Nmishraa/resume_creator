@@ -17,9 +17,9 @@ export const CompactSidebar: React.FC<{ resume: ResumeData }> = ({ resume }) => 
         {/* Left Column (1/3) */}
         <div className="space-y-4 md:border-r md:pr-5 border-slate-200">
           <div>
-            <h1 className="text-xl font-black tracking-tight text-slate-900 leading-tight uppercase">
+            <div className="text-xl font-black tracking-tight text-slate-900 leading-tight uppercase font-bold" role="heading" aria-level={2}>
               {personalInfo.fullName || 'Candidate'}
-            </h1>
+            </div>
             <p className="text-xs font-bold mt-0.5 tracking-wide" style={{ color: accentColor }}>
               {personalInfo.jobTitle || 'Software Engineer'}
             </p>

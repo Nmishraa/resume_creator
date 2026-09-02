@@ -51,8 +51,8 @@ export const AiResumeBuilderPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
-        title="Free AI Resume Builder – AI Bullet Point & Summary Writer | Resume Craft"
-        description="Craft high-impact resumes with AI-assisted bullet point rewriting, Google X-Y-Z metrics, professional summary generator, and keyword optimization."
+        title="Free AI Resume Builder—No Login Required | Resume Craft"
+        description="Create an ATS-friendly resume with AI and download a vector PDF for free. No login, signup, credit card, watermark, or hidden paywall required."
         canonicalPath="/ai-resume-builder"
       />
 
@@ -62,15 +62,15 @@ export const AiResumeBuilderPage: React.FC = () => {
       <section className="text-center space-y-6 max-w-3xl mx-auto pt-2">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-800 text-xs font-bold">
           <Sparkles size={14} className="text-purple-600" />
-          <span>Google X-Y-Z AI Engine • 100% Free</span>
+          <span>Google X-Y-Z AI Engine • 100% Free • No Sign-Up Required</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-          Free AI Resume Builder – <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-brand-600">Smart Bullet &amp; Summary</span> Writer
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+          Free AI Resume Builder—No Login or Credit Card Required
         </h1>
 
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-          Supercharge your resume achievements with AI-powered bullet point rewriting, Google X-Y-Z formula metrics, role-tailored summaries, and ATS keyword matching.
+          Create an ATS-friendly resume with AI and download a vector PDF for free. No login, signup, credit card, watermark, or hidden paywall required.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -79,7 +79,7 @@ export const AiResumeBuilderPage: React.FC = () => {
             className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2"
           >
             <Sparkles size={18} />
-            <span>Launch AI Resume Builder</span>
+            <span>Build My Resume Free (No Login) &rarr;</span>
           </Link>
           <Link
             to="/ats-checker"
@@ -88,6 +88,45 @@ export const AiResumeBuilderPage: React.FC = () => {
             <CheckCircle2 size={18} className="text-emerald-600" />
             <span>Test ATS Resume Score</span>
           </Link>
+        </div>
+      </section>
+
+      {/* Visible Section: Build & Download Without Registration */}
+      <section className="bg-gradient-to-br from-emerald-50 via-white to-purple-50 rounded-2xl border border-emerald-200/80 p-6 sm:p-8 shadow-xs space-y-4">
+        <div className="flex items-center gap-2 text-emerald-800 text-sm font-bold uppercase tracking-wider">
+          <CheckCircle2 size={16} className="text-emerald-600" />
+          <span>Zero Barriers • Instant Access</span>
+        </div>
+
+        <h2 className="text-2xl sm:text-3xl font-black text-slate-950">
+          Build &amp; Download Your Resume Without Registering
+        </h2>
+
+        <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+          Unlike other resume builders that hide your download behind an account wall or subscription after you finish typing, <strong>Resume Craft lets you build, optimize with AI, and export your vector PDF completely free without creating an account or logging in.</strong>
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 sm:p-5 bg-white rounded-xl border border-emerald-100 space-y-2 shadow-2xs">
+            <span className="text-sm font-bold text-slate-900 block">⚡ Zero Signup Required</span>
+            <p className="text-xs sm:text-sm text-slate-600 leading-normal">
+              Jump straight into the editor. No email verification or password creation needed.
+            </p>
+          </div>
+
+          <div className="p-4 sm:p-5 bg-white rounded-xl border border-emerald-100 space-y-2 shadow-2xs">
+            <span className="text-sm font-bold text-slate-900 block">📄 Free Vector PDF Export</span>
+            <p className="text-xs sm:text-sm text-slate-600 leading-normal">
+              Download clean, ATS-parsable vector PDFs with zero watermarks or hidden fees.
+            </p>
+          </div>
+
+          <div className="p-4 sm:p-5 bg-white rounded-xl border border-emerald-100 space-y-2 shadow-2xs">
+            <span className="text-sm font-bold text-slate-900 block">🔒 100% Private &amp; Local</span>
+            <p className="text-xs sm:text-sm text-slate-600 leading-normal">
+              Your resume data is stored locally in your browser and is never sold to third parties.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -100,8 +139,10 @@ export const AiResumeBuilderPage: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-3">
-            <label className="block text-xs font-bold text-slate-700">Enter a draft bullet point:</label>
+            <label htmlFor="ai-sample-bullet-textarea" className="block text-xs font-bold text-slate-700">Enter a draft bullet point:</label>
             <textarea
+              id="ai-sample-bullet-textarea"
+              aria-label="Enter a draft bullet point"
               value={sampleBullet}
               onChange={(e) => setSampleBullet(e.target.value)}
               className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 h-28"

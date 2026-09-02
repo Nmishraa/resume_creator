@@ -141,7 +141,7 @@ export const AuthModal: React.FC = () => {
                   ? 'Sign In to Resume Craft'
                   : 'Create Free Account'}
               </h3>
-              <p className="text-xs text-slate-300">Sync resumes &amp; applications across devices</p>
+              <p className="text-xs text-slate-300">Sync resumes &amp; applications with neha_data database</p>
             </div>
           </div>
           <button

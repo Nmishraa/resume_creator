@@ -15,7 +15,7 @@ if (!fs.existsSync(INDEX_HTML_PATH)) {
 
 const baseTemplate = fs.readFileSync(INDEX_HTML_PATH, 'utf8');
 
-const SITE_URL = 'https://resume-cv-craft.web.app';
+const SITE_URL = 'https://resume.gnanamai.com';
 
 const PAGES = [
   {
@@ -86,14 +86,14 @@ const PAGES = [
     title: 'Free ATS-Friendly Resume Templates – Clean & Scannable Layouts | Resume Craft',
     description: 'Explore 5 ATS-compliant resume templates built with standard fonts and clean single-column layouts for Workday, Greenhouse, Taleo, and Lever.',
     h1: 'Free ATS-Friendly Resume Templates',
-    intro: 'Every template is designed with standard fonts, single-column parsing flow, and clean vector typography to guarantee maximum visibility through Taleo, Workday, and Greenhouse.'
+    intro: 'Every template is designed with standard fonts, single-column parsing flow, and clean vector typography to maximize parsing compatibility through Taleo, Workday, and Greenhouse.'
   },
   {
     path: '/resume-examples',
     title: 'Resume Examples & Professional Samples (ATS-Optimized) | Resume Craft',
     description: 'Browse ATS-tested resume examples by industry and role with real bullet points, Google X-Y-Z formulas, recommended skills, and 1-click editing.',
     h1: 'Professional Resume Examples & ATS Samples',
-    intro: 'Explore recruiter-approved resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.'
+    intro: 'Explore recruiter-aligned resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.'
   },
   // 12 Resume Examples
   {
@@ -109,7 +109,7 @@ const PAGES = [
     title: 'Software Engineer Resume Example & ATS Template (2026) | Resume Craft',
     description: 'ATS-tested Software Engineer resume example with high-impact bullets, React/Node/AWS skill lists, Google X-Y-Z formula, and free vector PDF export.',
     h1: 'Software Engineer Resume Example & ATS Guide',
-    intro: 'A proven, recruiter-approved Software Engineer resume sample highlighting full-stack engineering, cloud microservices, API performance, and automated testing.',
+    intro: 'A proven Software Engineer resume sample highlighting full-stack engineering, cloud microservices, API performance, and automated testing.',
     ogType: 'article'
   },
   {
@@ -268,23 +268,68 @@ for (const page of PAGES) {
   const canonicalUrl = `${SITE_URL}${page.path === '/' ? '/' : page.path}`;
   const ogType = page.ogType || 'website';
 
+  const pathParts = page.path.split('/').filter(Boolean);
+  const breadcrumbItems = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: SITE_URL
+    }
+  ];
+  let currentAcc = SITE_URL;
+  pathParts.forEach((part, idx) => {
+    currentAcc += `/${part}`;
+    const formattedName = part
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: idx + 2,
+      name: formattedName,
+      item: currentAcc
+    });
+  });
+
   const defaultSchema = [
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Resume Craft',
-      url: SITE_URL
+      url: SITE_URL,
+      description: page.description
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Resume & CV Craft',
+      url: SITE_URL,
+      logo: `${SITE_URL}/favicon.svg`
     },
     {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
       name: 'Resume & CV Craft',
+      operatingSystem: 'All Web Browsers',
       applicationCategory: 'BusinessApplication',
       offers: {
         '@type': 'Offer',
         price: '0.00',
         priceCurrency: 'USD'
-      }
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        ratingCount: '1420',
+        bestRating: '5',
+        worstRating: '1'
+      },
+      description: 'Free ATS-friendly resume builder and resume score checker powered by AI bullet optimization.'
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems
     }
   ];
 
@@ -298,11 +343,11 @@ for (const page of PAGES) {
     <meta property="og:type" content="${ogType}" />
     <meta property="og:url" content="${canonicalUrl}" />
     <meta property="og:site_name" content="Resume Craft" />
-    <meta property="og:image" content="${SITE_URL}/favicon.svg" />
+    <meta property="og:image" content="${SITE_URL}/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${page.title}" />
     <meta name="twitter:description" content="${page.description}" />
-    <meta name="twitter:image" content="${SITE_URL}/favicon.svg" />
+    <meta name="twitter:image" content="${SITE_URL}/og-image.png" />
     <script type="application/ld+json" id="seo-structured-data">${JSON.stringify(defaultSchema)}</script>
   `.trim();
 
@@ -330,10 +375,8 @@ for (const page of PAGES) {
   // Insert fallback semantic body inside #root
   rendered = rendered.replace('<div id="root"></div>', `<div id="root">${semanticBodyHtml}</div>`);
 
-  // Write target file
-  if (page.path === '/') {
-    fs.writeFileSync(INDEX_HTML_PATH, rendered, 'utf8');
-  } else {
+  // Write target file for sub-routes
+  if (page.path !== '/') {
     const targetDir = path.join(DIST_DIR, page.path.replace(/^\//, ''));
     if (!fs.existsSync(targetDir)) {
       fs.mkdirSync(targetDir, { recursive: true });

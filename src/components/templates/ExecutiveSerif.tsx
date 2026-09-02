@@ -12,9 +12,9 @@ export const ExecutiveSerif: React.FC<{ resume: ResumeData }> = ({ resume }) => 
     <div className={`w-full bg-white text-slate-900 p-8 sm:p-10 font-serif ${size.body}`}>
       {/* Centered Classic Header */}
       <div className="text-center pb-4 mb-4 border-b-2 border-slate-900">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 uppercase mb-1">
+        <div className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 uppercase mb-1" role="heading" aria-level={2}>
           {personalInfo.fullName || 'Executive Candidate'}
-        </h1>
+        </div>
         <div className="text-sm italic font-medium text-slate-700 mb-2">
           {personalInfo.jobTitle || 'Senior Technology Executive'}
         </div>

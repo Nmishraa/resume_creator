@@ -17,9 +17,9 @@ export const TechMinimal: React.FC<{ resume: ResumeData }> = ({ resume }) => {
       <div className="pb-3 mb-4 border-b-2" style={{ borderColor: accentColor }}>
         <div className="flex flex-col sm:flex-row justify-between items-baseline gap-2">
           <div>
-            <h1 className={`${size.name} text-slate-950 font-mono tracking-tight uppercase`}>
+            <div className={`${size.name} text-slate-950 font-mono tracking-tight uppercase font-bold`} role="heading" aria-level={2}>
               {personalInfo.fullName || 'Developer Name'}
-            </h1>
+            </div>
             <p className="text-sm font-mono font-medium tracking-wide mt-0.5" style={{ color: accentColor }}>
               &gt; {personalInfo.jobTitle || 'Full Stack Engineer'}
             </p>

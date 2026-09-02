@@ -28,11 +28,19 @@ export const AtsCheckerPage: React.FC = () => {
     recommendations
   } = atsAnalysis;
 
+  const hasResumeContent = Boolean(
+    (resume.personalInfo?.fullName && resume.personalInfo.fullName.trim().length > 0) ||
+    (resume.experience && resume.experience.length > 0) ||
+    (resume.skills && resume.skills.length > 0)
+  );
+  const hasJobDescription = Boolean(targetJobDescription && targetJobDescription.trim().length > 0);
+  const isBothProvided = hasResumeContent && hasJobDescription;
+
   useEffect(() => {
-    if (overallScore >= 80) {
+    if (isBothProvided && overallScore >= 80) {
       confetti({ particleCount: 50, spread: 60 });
     }
-  }, [overallScore]);
+  }, [overallScore, isBothProvided]);
 
   const handleAddMissingKeyword = (kw: string) => {
     if (resume.skills.length > 0) {
@@ -60,7 +68,7 @@ export const AtsCheckerPage: React.FC = () => {
     },
     {
       question: 'How does this free ATS Resume Checker calculate my score?',
-      answer: 'Our algorithm simulates real-world ATS parsing by evaluating 5 core dimensions: keyword alignment with the target job posting, quantifiable metrics density (Google X-Y-Z formula), action verb strength, formatting layout compatibility, and completeness of contact information.'
+      answer: 'Our algorithm evaluates 5 core dimensions: keyword alignment with the target job posting, quantifiable metrics density (Google X-Y-Z formula), action verb strength, formatting layout compatibility, and completeness of contact information.'
     },
     {
       question: 'What is considered a good ATS resume score?',
@@ -86,7 +94,7 @@ export const AtsCheckerPage: React.FC = () => {
       <section className="text-center max-w-3xl mx-auto space-y-3">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
           <Zap size={14} className="text-emerald-600" />
-          <span>Real-Time Hiring Algorithm Simulator • 100% Free</span>
+          <span>Real-Time ATS Formatting & Keyword Diagnostic • 100% Free</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight">
           Free ATS Resume Checker
@@ -118,6 +126,8 @@ export const AtsCheckerPage: React.FC = () => {
             </div>
 
             <textarea
+              id="ats-job-description-textarea"
+              aria-label="Target Job Description Text"
               rows={8}
               value={targetJobDescription}
               onChange={(e) => setTargetJobDescription(e.target.value)}
@@ -161,15 +171,26 @@ export const AtsCheckerPage: React.FC = () => {
               <div>
                 <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Overall ATS Score</div>
                 <div className="flex items-baseline gap-2 mt-1">
-                  <span className={`text-5xl font-black ${overallScore >= 80 ? 'text-emerald-600' : overallScore >= 60 ? 'text-amber-600' : 'text-rose-600'}`}>
-                    {overallScore}
-                  </span>
-                  <span className="text-base font-bold text-slate-400">/ 100</span>
+                  {isBothProvided ? (
+                    <>
+                      <span className={`text-5xl font-black ${overallScore >= 80 ? 'text-emerald-600' : overallScore >= 60 ? 'text-amber-600' : 'text-rose-600'}`}>
+                        {overallScore}
+                      </span>
+                      <span className="text-base font-bold text-slate-400">/ 100</span>
+                    </>
+                  ) : (
+                    <span className="text-2xl font-black text-slate-400 italic">
+                      Not calculated yet
+                    </span>
+                  )}
                 </div>
               </div>
 
-              <div className={`p-3 rounded-xl border text-xs font-bold max-w-xs ${scoreBadgeColor}`}>
-                {overallScore >= 80 ? '🌟 Highly ATS-Optimized. Ready to submit!' : overallScore >= 60 ? '⚡ Good Baseline. Recommended to add missing keywords.' : '⚠️ Below ATS threshold. Enhance metrics & contact fields.'}
+              <div className={`p-3 rounded-xl border text-xs font-bold max-w-xs ${isBothProvided ? scoreBadgeColor : 'text-slate-600 bg-slate-100 border-slate-200'}`}>
+                {isBothProvided
+                  ? (overallScore >= 80 ? '🌟 Highly ATS-Optimized. Ready to submit!' : overallScore >= 60 ? '⚡ Good Baseline. Recommended to add missing keywords.' : '⚠️ Below ATS threshold. Enhance metrics & contact fields.')
+                  : '📌 Paste target job description & load resume draft to calculate match score.'
+                }
               </div>
             </div>
 
@@ -218,7 +239,7 @@ export const AtsCheckerPage: React.FC = () => {
               </div>
             </div>
 
-            {missingKeywords.length > 0 && (
+            {hasJobDescription && missingKeywords.length > 0 && (
               <div className="pt-3 border-t border-slate-100">
                 <div className="text-xs font-bold text-amber-900 flex items-center gap-1.5 mb-2">
                   <AlertTriangle size={15} className="text-amber-600" />
@@ -236,6 +257,15 @@ export const AtsCheckerPage: React.FC = () => {
                       <span className="text-[10px] text-amber-600 font-bold">(Add)</span>
                     </button>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {!hasJobDescription && (
+              <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 leading-relaxed flex items-start gap-2">
+                <span className="text-brand-600 text-sm">💡</span>
+                <div>
+                  <strong className="text-slate-900">Target Keyword Match:</strong> Paste a job posting into the text box on the left to extract specific required skills and identify missing terms.
                 </div>
               </div>
             )}
@@ -277,7 +307,7 @@ export const AtsCheckerPage: React.FC = () => {
             How ATS Systems Evaluate Resumes
           </h2>
           <p className="text-xs sm:text-sm text-slate-600">
-            Learn the exact mechanics behind automated hiring algorithms like Workday, Taleo, and Greenhouse.
+            Learn common formatting patterns used by ATS systems like Workday, Taleo, and Greenhouse.
           </p>
         </div>
 
@@ -298,7 +328,7 @@ export const AtsCheckerPage: React.FC = () => {
             </div>
             <h3 className="font-bold text-slate-900 text-sm">Measurable Impact</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Modern ATS tools reward resumes with quantified results—percentages, dollar figures, latency reductions, and team sizes.
+              Quantified achievements help recruiters quickly understand your impact and make your resume more persuasive—percentages, dollar figures, latency reductions, and team sizes.
             </p>
           </div>
 
@@ -308,7 +338,7 @@ export const AtsCheckerPage: React.FC = () => {
             </div>
             <h3 className="font-bold text-slate-900 text-sm">Vector PDF Formatting</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Clean single-column layouts with selectable vector text ensure zero text corruption during automated parsing.
+              Clean single-column layouts with selectable vector text reduce the risk of text corruption during automated resume parsing.
             </p>
           </div>
         </div>

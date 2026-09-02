@@ -25,6 +25,9 @@ import {
   ChevronRight,
   AlertCircle
 } from 'lucide-react';
+import { CompactPromoVideoSection } from '../components/common/CompactPromoVideoSection';
+import { UploadResumeModal } from '../components/builder/UploadResumeModal';
+import { UploadCloud, Layout, Eye } from 'lucide-react';
 import { RESUME_EXAMPLES } from '../data/resumeExamplesData';
 
 interface BulletDemoItem {
@@ -77,6 +80,10 @@ const BULLET_DEMOS: BulletDemoItem[] = [
 ];
 
 export const HomePage: React.FC = () => {
+  // Upload Resume & Apply Template Modal state
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [uploadInitialStep, setUploadInitialStep] = useState<'upload' | 'template' | 'preview'>('upload');
+
   // Showcase Tab State
   const [activeShowcaseTab, setActiveShowcaseTab] = useState<'builder' | 'ats' | 'bullet' | 'matcher'>('builder');
 
@@ -109,7 +116,7 @@ export const HomePage: React.FC = () => {
     },
     {
       question: 'Do I need to create an account to build or download a resume?',
-      answer: 'No account is required. You can build, optimize, and export your resume immediately using local browser storage or Guest mode. An account is only needed if you choose to sync your resumes across multiple devices via Firebase.'
+      answer: 'No account is required. You can build, optimize, and export your resume immediately using local browser storage or Guest mode. An account is only needed if you choose to sync your resumes across multiple devices.'
     },
     {
       question: 'What is an ATS (Applicant Tracking System)?',
@@ -121,7 +128,7 @@ export const HomePage: React.FC = () => {
     },
     {
       question: 'Can I upload or import an existing resume?',
-      answer: 'Yes! In the Resume Builder, click "Import" to paste your existing resume text, import LinkedIn profile data, or load a JSON backup to instantly pre-populate all sections.'
+      answer: 'Yes! In the Resume Builder, click "Import" to paste your existing resume text, import document text, or load a JSON backup to instantly pre-populate all sections.'
     },
     {
       question: 'Can AI improve my resume bullets?',
@@ -141,12 +148,12 @@ export const HomePage: React.FC = () => {
     },
     {
       question: 'Is my resume data stored or shared?',
-      answer: 'Your resume data is stored locally in your browser by default. If you create a free account, data is stored securely in your private Firestore collection. Your resume data is never sold, shared with recruiters, or used for third-party advertising.'
+      answer: 'Your resume data is stored locally in your browser by default. If you create a free account, your data is stored securely in your private encrypted account database. Your resume data is never sold, shared with recruiters, or used for third-party advertising.'
     }
   ];
 
   return (
-    <div className="space-y-24 pb-20">
+    <div className="space-y-16 pb-16">
       <SeoHead
         title="Free AI Resume Builder & ATS Resume Checker | Resume Craft"
         description="Build an ATS-friendly resume in minutes. Use AI to strengthen bullet points with the Google X-Y-Z formula, match job descriptions, and export vector PDFs for free."
@@ -188,7 +195,7 @@ export const HomePage: React.FC = () => {
                 </Link>
 
                 <Link
-                  to="/ats-checker"
+                  to="/ats-resume-checker"
                   className="w-full sm:w-auto px-7 py-4 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-sm border border-slate-300 shadow-xs hover:border-slate-400 transition-colors flex items-center justify-center gap-2"
                 >
                   <CheckCircle2 size={17} className="text-emerald-600" />
@@ -205,7 +212,7 @@ export const HomePage: React.FC = () => {
                   <Check size={14} className="text-emerald-600 stroke-[3]" /> Selectable vector PDFs
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Check size={14} className="text-emerald-600 stroke-[3]" /> Workday &amp; Greenhouse ready
+                  <Check size={14} className="text-emerald-600 stroke-[3]" /> Designed for ATS compatibility
                 </span>
               </div>
             </div>
@@ -275,20 +282,88 @@ export const HomePage: React.FC = () => {
                     <ArrowRight size={13} />
                   </Link>
                   <Link
-                    to="/ats-checker"
+                    to="/ats-resume-checker"
                     className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors"
                     title="Scan ATS Score"
                   >
                     <Sliders size={15} />
                   </Link>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </section>
+
+      {/* UPLOAD RESUME & APPLY TEMPLATE CTA SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl border border-slate-800 space-y-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-500/30">
+                <Sparkles size={13} className="text-brand-400" />
+                <span>Instant Resume Conversion</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-snug">
+                Already have a resume? Upload it, choose a template, and create a professionally formatted resume in minutes.
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Supports PDF, DOCX, or TXT formats. Your information is parsed into 9 structured sections, placed into modern ATS templates, and exported as vector PDFs.
+              </p>
+            </div>
+
+            {/* 4 Required Action Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full md:w-auto shrink-0">
+              <button
+                onClick={() => {
+                  setUploadInitialStep('upload');
+                  setShowUploadModal(true);
+                }}
+                className="px-5 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-2xl text-xs transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+              >
+                <UploadCloud size={16} />
+                <span>Upload My Resume</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setUploadInitialStep('template');
+                  setShowUploadModal(true);
+                }}
+                className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-2xl text-xs border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Layout size={16} className="text-brand-300" />
+                <span>Choose a Template</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setUploadInitialStep('preview');
+                  setShowUploadModal(true);
+                }}
+                className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-2xl text-xs border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Eye size={16} className="text-indigo-300" />
+                <span>Preview Resume</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setUploadInitialStep('preview');
+                  setShowUploadModal(true);
+                }}
+                className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-2xl text-xs transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+              >
+                <Download size={16} />
+                <span>Download PDF</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPACT PROMO VIDEO SECTION */}
+      <CompactPromoVideoSection />
 
       {/* 2. INTERACTIVE PRODUCT SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -365,7 +440,7 @@ export const HomePage: React.FC = () => {
                   Real-Time Editor with Instant Vector PDF Export
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Type your details or import directly from LinkedIn. The interactive editor auto-formats typography, margins, and headings into single-column ATS layouts.
+                  Type your details or paste existing resume text. The interactive editor auto-formats typography, margins, and headings into single-column ATS layouts.
                 </p>
                 <div className="space-y-2 text-xs text-slate-700 font-medium">
                   <div className="flex items-center gap-2">
@@ -449,7 +524,7 @@ export const HomePage: React.FC = () => {
                 </div>
                 <div className="pt-2">
                   <Link
-                    to="/ats-checker"
+                    to="/ats-resume-checker"
                     className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition-colors"
                   >
                     <span>Check My ATS Score Now</span>
@@ -493,55 +568,58 @@ export const HomePage: React.FC = () => {
           )}
 
           {activeShowcaseTab === 'bullet' && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-in fade-in duration-200">
-              <div className="lg:col-span-5 space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-purple-50 text-purple-800 text-xs font-bold">
-                  <span>Step 3: Improve</span>
+            <div className="space-y-6 animate-in fade-in duration-200">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-950 flex items-center gap-2">
+                    <Sparkles size={18} className="text-purple-600" />
+                    <span>Google X-Y-Z Bullet Point Optimizer</span>
+                  </h3>
+                  <p className="text-xs text-slate-600">Select a career role to test how Google&apos;s formula elevates job duties into quantifiable achievements.</p>
                 </div>
-                <h3 className="text-2xl font-black text-slate-950">
-                  Google X-Y-Z Achievement Generator
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Turn bland responsibility lists into metric-backed accomplishments using Google's formula: <em>&ldquo;Accomplished [X] as measured by [Y], by doing [Z]&rdquo;</em>.
-                </p>
-                <div className="space-y-2 text-xs text-slate-700 font-medium">
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-purple-600" />
-                    <span>Detects missing quantifiable results</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-purple-600" />
-                    <span>Replaces weak verbs with high-power action verbs</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-purple-600" />
-                    <span>Tailors tone for technical and executive positions</span>
-                  </div>
-                </div>
-                <div className="pt-2">
-                  <Link
-                    to="/ai-resume-builder"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold transition-colors"
-                  >
-                    <span>Try AI Bullet Writer</span>
-                    <ArrowRight size={13} />
-                  </Link>
+                {/* Role Selector Tabs */}
+                <div className="flex flex-wrap gap-1.5">
+                  {BULLET_DEMOS.map((item, idx) => (
+                    <button
+                      key={item.role}
+                      onClick={() => handleSelectRole(idx)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                        selectedBulletIndex === idx
+                          ? 'bg-slate-900 text-white shadow-xs'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      {item.role}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              <div className="lg:col-span-7 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200 space-y-3">
-                <div className="p-3 bg-rose-50/70 border border-rose-200 rounded-xl space-y-1">
-                  <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wider">Before (Weak Responsibility)</span>
-                  <p className="text-xs text-slate-700 italic">&ldquo;Worked on social media marketing and sent emails to clients.&rdquo;</p>
+              {/* Before / After Comparison Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-rose-50/70 border border-rose-200 space-y-2">
+                  <div className="flex items-center justify-between text-[11px] font-bold text-rose-800 uppercase">
+                    <span>Before: Passive Job Duty</span>
+                    <span className="text-rose-600">❌ Weak</span>
+                  </div>
+                  <p className="text-xs text-slate-700 italic">&ldquo;{activeBullet.before}&rdquo;</p>
                 </div>
-                <div className="p-3 bg-emerald-50/90 border border-emerald-200 rounded-xl space-y-1">
-                  <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1">
-                    <Sparkles size={11} className="text-emerald-600" />
-                    <span>After (Google X-Y-Z Achievement)</span>
-                  </span>
-                  <p className="text-xs text-slate-900 font-medium">
-                    &ldquo;Increased organic lead generation by 44% across 85k monthly visitors by designing an automated 5-step email nurture sequence.&rdquo;
-                  </p>
+
+                <div className={`p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 space-y-2 transition-all ${isImproving ? 'opacity-40' : 'opacity-100'}`}>
+                  <div className="flex items-center justify-between text-[11px] font-bold text-emerald-800 uppercase">
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 size={12} className="text-emerald-700" />
+                      <span>After: Google X-Y-Z Achievement</span>
+                    </span>
+                    <span className="text-emerald-700">✓ Strong ATS Impact</span>
+                  </div>
+                  {isImproving ? (
+                    <div className="py-2 text-xs text-brand-700 font-semibold flex items-center gap-1.5">
+                      <Sparkles size={12} className="animate-spin" /> Rewriting...
+                    </div>
+                  ) : (
+                    <p className="text-xs text-slate-900 font-medium">&ldquo;{activeBullet.after}&rdquo;</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -614,324 +692,6 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. INTERACTIVE AI BULLET GENERATOR (BEFORE & AFTER) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-purple-700 uppercase tracking-wider bg-purple-50 px-3 py-1 rounded-full border border-purple-100">
-            <Sparkles size={13} />
-            <span>Interactive Before / After Demonstration</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
-            Transform Weak Responsibilities into Quantified Achievements
-          </h2>
-          <p className="text-sm sm:text-base text-slate-600">
-            Select a career role below and test how Google&apos;s X-Y-Z formula elevates your resume bullets.
-          </p>
-        </div>
-
-        {/* Role Presets */}
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          {BULLET_DEMOS.map((item, idx) => (
-            <button
-              key={item.role}
-              onClick={() => handleSelectRole(idx)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                selectedBulletIndex === idx
-                  ? 'bg-slate-900 text-white shadow-sm'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-400 hover:bg-slate-50'
-              }`}
-            >
-              <span>{item.role}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Interactive Transformation Card */}
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden">
-          
-          {/* Card Header Bar */}
-          <div className="p-5 bg-slate-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-brand-400">{activeBullet.category} Experience Example</span>
-              <h3 className="font-bold text-base">{activeBullet.role} Bullet Point</h3>
-            </div>
-            <button
-              onClick={handleImproveBullet}
-              disabled={isImproving}
-              className="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer shrink-0"
-            >
-              <Sparkles size={14} className={isImproving ? 'animate-spin' : ''} />
-              <span>{isImproving ? 'Optimizing with AI...' : 'Re-run AI Optimizer'}</span>
-            </button>
-          </div>
-
-          <div className="p-6 sm:p-8 space-y-6">
-            
-            {/* Before / After Comparison Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
-              {/* BEFORE Card */}
-              <div className="p-5 rounded-2xl bg-rose-50/60 border border-rose-200/80 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-rose-800 bg-rose-100 px-2 py-0.5 rounded">
-                    Before: Passive Job Duty
-                  </span>
-                  <span className="text-[10px] font-semibold text-rose-600">❌ Low ATS Impact</span>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic">
-                  &ldquo;{activeBullet.before}&rdquo;
-                </p>
-                <div className="text-[11px] text-slate-500 pt-2 border-t border-rose-200/50 space-y-1">
-                  <div>⚠️ <strong>Issue:</strong> Lacks quantifiable metrics &amp; power verbs.</div>
-                </div>
-              </div>
-
-              {/* AFTER Card */}
-              <div className={`p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-3 transition-all ${isImproving ? 'opacity-40 scale-[0.99]' : 'opacity-100 scale-100'}`}>
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-900 bg-emerald-100 px-2 py-0.5 rounded flex items-center gap-1">
-                    <CheckCircle2 size={12} className="text-emerald-700" />
-                    <span>After: Google X-Y-Z Formula</span>
-                  </span>
-                  <span className="text-[10px] font-bold text-emerald-700">✓ High Recruiter Score</span>
-                </div>
-
-                {isImproving ? (
-                  <div className="py-4 flex items-center justify-center gap-2 text-xs text-brand-700 font-semibold">
-                    <Sparkles size={14} className="animate-spin" />
-                    <span>Extracting metrics and rewriting...</span>
-                  </div>
-                ) : (
-                  <p className="text-xs sm:text-sm text-slate-900 leading-relaxed font-medium">
-                    &ldquo;{activeBullet.after}&rdquo;
-                  </p>
-                )}
-
-                <div className="text-[11px] text-emerald-900 pt-2 border-t border-emerald-200/60 space-y-1">
-                  <div>🌟 <strong>Impact:</strong> Clearly answers <em>What did you do, how was it measured, and what tools did you use?</em></div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Google X-Y-Z Formula Breakdown Callout */}
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-              <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                <Code2 size={14} className="text-brand-600" />
-                <span>The Google X-Y-Z Formula Breakdown:</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div className="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
-                  <div className="text-[10px] font-bold text-brand-700 uppercase">Accomplished [X]</div>
-                  <p className="text-slate-700 text-[11px] leading-snug">{activeBullet.x}</p>
-                </div>
-                <div className="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
-                  <div className="text-[10px] font-bold text-emerald-700 uppercase">Measured by [Y]</div>
-                  <p className="text-slate-700 text-[11px] leading-snug">{activeBullet.y}</p>
-                </div>
-                <div className="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
-                  <div className="text-[10px] font-bold text-purple-700 uppercase">By doing [Z]</div>
-                  <p className="text-slate-700 text-[11px] leading-snug">{activeBullet.z}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center pt-2">
-              <Link
-                to="/builder"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs transition-colors shadow-sm"
-              >
-                <span>Apply AI Enhancements to My Resume</span>
-                <ArrowRight size={13} />
-              </Link>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 4. ATS CHECKER KILLER FEATURE SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-            <CheckCircle2 size={13} className="text-emerald-600" />
-            <span>Automated Scanner Compatibility</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
-            How ATS Scanners Read Your Resume
-          </h2>
-          <p className="text-sm sm:text-base text-slate-600">
-            Simulate the exact algorithms used by Workday, Taleo, Greenhouse, and Lever before applying.
-          </p>
-        </div>
-
-        {/* ATS Results Visual Breakdown */}
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-200/90 shadow-xl p-6 sm:p-8 space-y-6">
-          
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Simulated Resume Score</span>
-              <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-5xl font-black text-emerald-600">82</span>
-                <span className="text-base font-bold text-slate-400">/ 100</span>
-              </div>
-            </div>
-            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800">
-              ✓ Good Baseline: 91% Keyword Density &amp; Vector Safe
-            </div>
-          </div>
-
-          {/* Color-Coded Categories */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-            
-            {/* Keyword Match (Green) */}
-            <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-1.5">
-              <div className="flex justify-between items-center font-bold">
-                <span className="text-emerald-950">Keyword Match</span>
-                <span className="text-emerald-700 bg-white px-2 py-0.5 rounded font-black">91%</span>
-              </div>
-              <p className="text-[11px] text-emerald-800">Core hard skills and tools match the target job requirements closely.</p>
-            </div>
-
-            {/* Formatting (Green) */}
-            <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-1.5">
-              <div className="flex justify-between items-center font-bold">
-                <span className="text-emerald-950">Formatting</span>
-                <span className="text-emerald-700 bg-white px-2 py-0.5 rounded font-black">Excellent</span>
-              </div>
-              <p className="text-[11px] text-emerald-800">Single-column layout with zero unparsable tables or graphic artifacts.</p>
-            </div>
-
-            {/* Skills Match (Yellow) */}
-            <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-1.5">
-              <div className="flex justify-between items-center font-bold">
-                <span className="text-amber-950">Skills Match</span>
-                <span className="text-amber-800 bg-white px-2 py-0.5 rounded font-black">78%</span>
-              </div>
-              <p className="text-[11px] text-amber-800">Contains primary proficiencies; 5 secondary skills can still be included.</p>
-            </div>
-
-            {/* Experience (Yellow) */}
-            <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-1.5">
-              <div className="flex justify-between items-center font-bold">
-                <span className="text-amber-950">Experience Structure</span>
-                <span className="text-amber-800 bg-white px-2 py-0.5 rounded font-black">Good</span>
-              </div>
-              <p className="text-[11px] text-amber-800">Chronological hierarchy is clear; metrics can be added to older roles.</p>
-            </div>
-
-            {/* Missing Keywords (Orange) */}
-            <div className="p-4 rounded-2xl bg-orange-50/70 border border-orange-200 space-y-1.5">
-              <div className="flex justify-between items-center font-bold">
-                <span className="text-orange-950">Missing Keywords</span>
-                <span className="text-orange-800 bg-white px-2 py-0.5 rounded font-black">5 Missing</span>
-              </div>
-              <p className="text-[11px] text-orange-800">Job posting mentions CI/CD, Kubernetes, and GraphQL not yet in resume.</p>
-            </div>
-
-            {/* Action Verbs (Amber/Red) */}
-            <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-1.5">
-              <div className="flex justify-between items-center font-bold">
-                <span className="text-amber-950">Action Verbs</span>
-                <span className="text-amber-800 bg-white px-2 py-0.5 rounded font-black">Needs Polish</span>
-              </div>
-              <p className="text-[11px] text-amber-800">3 passive phrases detected (&ldquo;responsible for&rdquo;, &ldquo;helped with&rdquo;).</p>
-            </div>
-
-          </div>
-
-          {/* Factual Disclaimer */}
-          <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-500 leading-relaxed flex items-start gap-2">
-            <AlertCircle size={15} className="text-slate-400 shrink-0 mt-0.5" />
-            <span>
-              <strong>Note:</strong> ATS analysis is an automated optimization aid designed to improve keyword density, single-column parsing, and achievement structure. It is not an automated guarantee of employment.
-            </span>
-          </div>
-
-          {/* Direct CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Link
-              to="/ats-checker"
-              className="w-full sm:w-auto px-7 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2"
-            >
-              <span>Scan My Resume ATS Score Free</span>
-              <ArrowRight size={13} />
-            </Link>
-            <Link
-              to="/builder"
-              className="w-full sm:w-auto px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl text-xs transition-colors text-center"
-            >
-              Improve My Resume with AI &rarr;
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 5. 4-STEP WORKFLOW */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-            <span>Simple Workflow</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
-            How Resume Craft Works
-          </h2>
-          <p className="text-sm sm:text-base text-slate-600">
-            A fast, seamless path from a blank draft to a high-converting job application.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          {/* Step 1 */}
-          <div className="p-6 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-3 relative group hover:border-brand-300 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-black text-sm">
-              01
-            </div>
-            <h3 className="font-bold text-slate-950 text-base">1. Build</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Create your resume using a clean, ATS-compliant template. Enter your background or import from LinkedIn in 1 click.
-            </p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="p-6 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-3 relative group hover:border-purple-300 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-black text-sm">
-              02
-            </div>
-            <h3 className="font-bold text-slate-950 text-base">2. Improve</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Use AI to turn weak experience bullets into stronger, achievement-focused Google X-Y-Z statements with clear business impact.
-            </p>
-          </div>
-
-          {/* Step 3 */}
-          <div className="p-6 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-3 relative group hover:border-blue-300 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-sm">
-              03
-            </div>
-            <h3 className="font-bold text-slate-950 text-base">3. Optimize</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Check your resume against ATS requirements and paste target job descriptions to identify and fill keyword gaps.
-            </p>
-          </div>
-
-          {/* Step 4 */}
-          <div className="p-6 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-3 relative group hover:border-emerald-300 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black text-sm">
-              04
-            </div>
-            <h3 className="font-bold text-slate-950 text-base">4. Download</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Export a polished, selectable-text vector PDF rendered directly in your browser, 100% ready for automated submission.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
       {/* 6. RESUME TEMPLATES SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -943,7 +703,7 @@ export const HomePage: React.FC = () => {
               Clean, single-column architectures formatted specifically for automated applicant parsing.
             </p>
           </div>
-          <Link to="/templates" className="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1 shrink-0">
+          <Link to="/resume-templates" className="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1 shrink-0">
             <span>View All Templates Gallery</span>
             <ArrowRight size={13} />
           </Link>
@@ -967,7 +727,7 @@ export const HomePage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-slate-900 text-sm">Modern Clean</h3>
                 <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold">
-                  ✓ 100% ATS Safe
+                  ✓ ATS-Friendly
                 </span>
               </div>
               <p className="text-xs text-slate-500 leading-relaxed">
@@ -1001,7 +761,7 @@ export const HomePage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-slate-900 text-sm">Tech Minimal</h3>
                 <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold">
-                  ✓ 100% ATS Safe
+                  ✓ ATS-Friendly
                 </span>
               </div>
               <p className="text-xs text-slate-500 leading-relaxed">
@@ -1035,7 +795,7 @@ export const HomePage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-slate-900 text-sm">Executive Serif</h3>
                 <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold">
-                  ✓ 100% ATS Safe
+                  ✓ ATS-Friendly
                 </span>
               </div>
               <p className="text-xs text-slate-500 leading-relaxed">
@@ -1131,7 +891,7 @@ export const HomePage: React.FC = () => {
               Role-Specific Resume Examples
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
-              Curated role samples pre-populated with verified skills and metric-backed bullets.
+              Curated role samples pre-populated with industry skills and metric-backed bullets.
             </p>
           </div>
           <Link to="/resume-examples" className="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1 shrink-0">
@@ -1175,7 +935,7 @@ export const HomePage: React.FC = () => {
             Clear, honest answers about Resume Craft, ATS scoring, and data privacy.
           </p>
         </div>
-        <FaqAccordion items={homeFaqs} />
+        <FaqAccordion items={homeFaqs} hideHeader />
       </section>
 
       {/* 10. FINAL CONVERSION BANNER */}
@@ -1203,7 +963,7 @@ export const HomePage: React.FC = () => {
               <span>Build My Resume Free &rarr;</span>
             </Link>
             <Link
-              to="/ats-checker"
+              to="/ats-resume-checker"
               className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-sm border border-white/20 transition-all flex items-center gap-2"
             >
               <CheckCircle2 size={16} className="text-emerald-400" />
@@ -1212,6 +972,13 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Upload Resume & Apply Template Modal */}
+      <UploadResumeModal
+        isOpen={showUploadModal}
+        onClose={() => setShowUploadModal(false)}
+        initialStep={uploadInitialStep}
+      />
     </div>
   );
 };

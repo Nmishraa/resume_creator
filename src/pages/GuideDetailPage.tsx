@@ -28,12 +28,12 @@ export const GuideDetailPage: React.FC = () => {
       name: 'Resume Craft',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://resume-cv-craft.web.app/favicon.svg'
+        url: 'https://resume.gnanamai.com/og-image.png'
       }
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://resume-cv-craft.web.app/guides/${guide.slug}`
+      '@id': `https://resume.gnanamai.com/guides/${guide.slug}`
     }
   };
 

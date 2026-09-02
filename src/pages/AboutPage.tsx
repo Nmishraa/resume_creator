@@ -37,17 +37,17 @@ export const AboutPage: React.FC = () => {
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-center">
             <Lock className="mx-auto text-emerald-600" size={22} />
             <h3 className="font-bold text-slate-900 text-xs">Privacy First</h3>
-            <p className="text-[11px] text-slate-500">Your resume data can be saved offline locally in your browser.</p>
+            <p className="text-xs text-slate-700">Your resume data can be saved offline locally in your browser.</p>
           </div>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-center">
             <Sparkles className="mx-auto text-purple-600" size={22} />
             <h3 className="font-bold text-slate-900 text-xs">AI Assistance</h3>
-            <p className="text-[11px] text-slate-500">Google X-Y-Z formula engines and ATS keyword matchers.</p>
+            <p className="text-xs text-slate-700">Google X-Y-Z formula engines and ATS keyword matchers.</p>
           </div>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-center">
             <ShieldCheck className="mx-auto text-brand-600" size={22} />
-            <h3 className="font-bold text-slate-900 text-xs">ATS Compliant</h3>
-            <p className="text-[11px] text-slate-500">Tested across Workday, Taleo, Greenhouse, and Lever.</p>
+            <h3 className="font-bold text-slate-900 text-xs">ATS Compatibility</h3>
+            <p className="text-xs text-slate-700">Designed for compatibility with widely used applicant-tracking systems.</p>
           </div>
         </div>
       </section>
@@ -55,7 +55,7 @@ export const AboutPage: React.FC = () => {
       <section className="p-6 bg-slate-900 text-white rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h3 className="font-bold text-base">Ready to build your next resume?</h3>
-          <p className="text-xs text-slate-400">Join thousands of job seekers advancing their careers.</p>
+          <p className="text-xs text-slate-400">Join job seekers building stronger, more professional resumes.</p>
         </div>
         <Link to="/builder" className="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 font-bold rounded-xl text-xs transition-colors">
           Build My Resume Free

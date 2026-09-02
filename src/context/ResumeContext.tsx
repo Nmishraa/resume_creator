@@ -9,9 +9,9 @@ import {
   FontSizeType,
   SpacingType
 } from '../types/resume';
-import { initialResumeData, sampleJobApplications, sampleCoverLetter } from '../data/initialData';
+import { initialResumeData, emptyResumeData, sampleJobApplications, sampleCoverLetter } from '../data/initialData';
 import { analyzeAtsScore } from '../services/atsChecker';
-import { saveResumeToFirestore, loadResumesFromFirestore, saveJobApplications, loadJobApplications } from '../services/firebase';
+import { saveResumeApi, fetchUserResumesApi } from '../services/apiAuth';
 import { useAuth } from './AuthContext';
 
 interface ResumeContextType {
@@ -89,7 +89,7 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         return JSON.parse(saved);
       } catch {}
     }
-    return initialResumeData;
+    return emptyResumeData;
   });
 
   const [history, setHistory] = useState<ResumeData[]>([initialResumeData]);
@@ -353,13 +353,13 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
-  // Auto sync to Firestore when user changes or resume updates
+  // Auto sync to Express API (neha_data) backend when user changes or resume updates
   useEffect(() => {
     const syncTimeout = setTimeout(async () => {
       if (user) {
         setIsSaving(true);
         try {
-          await saveResumeToFirestore(user.uid, resume);
+          await saveResumeApi(resume);
           setLastSavedTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
         } catch (e) {
           console.warn('Auto sync warning:', e);
@@ -372,19 +372,15 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     return () => clearTimeout(syncTimeout);
   }, [resume, user]);
 
-  // Load cloud resumes on user login
+  // Load backend resumes on user login
   useEffect(() => {
     if (user) {
-      loadResumesFromFirestore(user.uid).then(list => {
+      fetchUserResumesApi().then(list => {
         if (list && list.length > 0) {
-          setSavedResumes(list);
+          const parsed = list.map(r => typeof r.data === 'object' ? { ...r.data, id: r.id } : r);
+          setSavedResumes(parsed);
         }
-      });
-      loadJobApplications(user.uid).then(apps => {
-        if (apps && apps.length > 0) {
-          setJobApplications(apps);
-        }
-      });
+      }).catch(e => console.warn('Load resumes error:', e));
     }
   }, [user]);
 
@@ -398,21 +394,18 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const nextList = [newApp, ...jobApplications];
     setJobApplications(nextList);
     localStorage.setItem('resume_craft_job_apps', JSON.stringify(nextList));
-    if (user) saveJobApplications(user.uid, nextList);
   };
 
   const updateJobApplication = (id: string, updates: Partial<JobApplication>) => {
     const nextList = jobApplications.map(j => j.id === id ? { ...j, ...updates, updatedAt: new Date().toISOString() } : j);
     setJobApplications(nextList);
     localStorage.setItem('resume_craft_job_apps', JSON.stringify(nextList));
-    if (user) saveJobApplications(user.uid, nextList);
   };
 
   const deleteJobApplication = (id: string) => {
     const nextList = jobApplications.filter(j => j.id !== id);
     setJobApplications(nextList);
     localStorage.setItem('resume_craft_job_apps', JSON.stringify(nextList));
-    if (user) saveJobApplications(user.uid, nextList);
   };
 
   // Cover Letter CRUD

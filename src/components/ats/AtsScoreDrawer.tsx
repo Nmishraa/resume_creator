@@ -37,8 +37,8 @@ export const AtsScoreDrawer: React.FC<AtsScoreDrawerProps> = ({ isOpen, onClose 
               <Zap size={18} />
             </div>
             <div>
-              <h3 className="font-bold text-sm">Real-time ATS Score & Analyzer</h3>
-              <p className="text-[11px] text-slate-400">Greenhouse, Workday, Taleo & Lever scanner</p>
+              <h3 className="font-bold text-sm">ATS Optimization Score &amp; Analyzer</h3>
+              <p className="text-[11px] text-slate-400">Structure &amp; keyword compatibility analyzer</p>
             </div>
           </div>
           <button onClick={onClose} className="p-1 text-slate-400 hover:text-white rounded-lg">
@@ -58,7 +58,21 @@ export const AtsScoreDrawer: React.FC<AtsScoreDrawerProps> = ({ isOpen, onClose 
               <span className="text-sm font-bold text-slate-400">/ 100</span>
             </div>
             <div className="text-xs font-semibold text-slate-600 mt-1">
-              {overallScore >= 80 ? '🎉 Excellent! Top 5% ATS Compatibility' : overallScore >= 60 ? '⚠️ Good, but requires keyword & metric optimization' : '🚨 High Risk of ATS rejection'}
+              {overallScore >= 80 ? '🎉 Excellent! High ATS Format Compatibility' : overallScore >= 60 ? '⚠️ Good, but requires keyword & metric optimization' : '🚨 High Risk of ATS rejection'}
+            </div>
+
+            {/* Formula Explanation Callout */}
+            <div className="mt-3 p-2.5 bg-blue-50/80 border border-blue-200/80 rounded-xl text-[11px] text-blue-900 text-left space-y-1">
+              <div className="font-bold flex items-center gap-1.5 text-blue-950">
+                <Info size={13} className="text-blue-600 shrink-0" />
+                <span>How this score is calculated:</span>
+              </div>
+              <p className="leading-relaxed opacity-90">
+                Formula: Contact Completeness (20%), X-Y-Z Metrics (25%), Action Power Verbs (20%), Keyword Density (25%), and Single-Column Layout (10%).
+              </p>
+              <div className="text-[10px] text-blue-700 italic border-t border-blue-200/60 pt-1 mt-1">
+                * Note: This score is an optimization proxy designed for ATS compatibility, not an employer&apos;s proprietary ATS result.
+              </div>
             </div>
 
             {/* Category Bars */}

@@ -45,7 +45,7 @@ export default function SummaryExamplesPage() {
           {seoInfo.h1}
         </h1>
         <p style={{ fontSize: '1.15rem', color: '#64748b', maxWidth: '750px', margin: '0 auto 1.8rem auto' }}>
-          Copy and customize high-impact, recruiter-approved resume summary statements written for software engineers, product managers, data scientists, and recent graduates.
+          Copy and customize high-impact, recruiter-aligned resume summary statements written for software engineers, product managers, data scientists, and recent graduates.
         </p>
 
         <Link to="/" style={{ textDecoration: 'none' }}>

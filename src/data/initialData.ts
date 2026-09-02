@@ -1,5 +1,37 @@
 import { ResumeData, JobApplication, CoverLetterData } from '../types/resume';
 
+export const emptyResumeData: ResumeData = {
+  id: 'blank-resume-init',
+  title: 'Untitled Resume',
+  updatedAt: new Date().toISOString(),
+  personalInfo: {
+    fullName: '',
+    jobTitle: '',
+    email: '',
+    phone: '',
+    location: '',
+    website: '',
+    linkedin: '',
+    github: ''
+  },
+  summary: '',
+  experience: [],
+  education: [],
+  skills: [],
+  projects: [],
+  certifications: [],
+  customSections: [],
+  formatting: {
+    template: 'modern',
+    fontFamily: 'outfit',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0284c7',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'projects', 'education', 'certifications', 'customSections']
+  }
+};
+
 export const initialResumeData: ResumeData = {
   id: 'default-resume-1',
   title: 'Senior Software Engineer (ATS Optimized)',
@@ -101,7 +133,7 @@ export const initialResumeData: ResumeData = {
       id: 'proj-1',
       title: 'Resume Craft & ATS Matcher',
       subtitle: 'Open-Source AI Career Platform',
-      link: 'https://resume-cv-craft.web.app',
+      link: 'https://resume.gnanamai.com',
       startDate: '2023',
       endDate: '2024',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Vector PDF'],

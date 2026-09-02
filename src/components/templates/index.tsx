@@ -10,7 +10,7 @@ export const TEMPLATE_LIST: Array<{ id: TemplateType; name: string; description:
   {
     id: 'modern',
     name: 'Modern Clean',
-    description: 'Clean single-column layout optimized for 99.8% ATS parsing accuracy across Taleo, Workday & Greenhouse.',
+    description: 'Clean single-column layout optimized for high ATS parsing compatibility across Taleo, Workday & Greenhouse.',
     tag: 'Most Popular'
   },
   {

@@ -53,12 +53,12 @@ export const ResumeExampleDetailPage: React.FC = () => {
       name: 'Resume Craft',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://resume-cv-craft.web.app/favicon.svg'
+        url: 'https://resume.gnanamai.com/og-image.png'
       }
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://resume-cv-craft.web.app/resume-examples/${example.slug}`
+      '@id': `https://resume.gnanamai.com/resume-examples/${example.slug}`
     }
   };
 

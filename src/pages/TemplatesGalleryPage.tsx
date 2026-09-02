@@ -30,13 +30,13 @@ export const TemplatesGalleryPage: React.FC = () => {
       <div className="text-center max-w-3xl mx-auto space-y-2 pt-2">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold border border-brand-200">
           <ShieldCheck size={13} className="text-emerald-600" />
-          <span>100% ATS-Compliant Layouts</span>
+          <span>ATS-Optimized Layouts</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-950">
           Free ATS-Friendly Resume Templates
         </h1>
         <p className="text-xs sm:text-sm text-slate-600">
-          Every template is designed with standard fonts, single-column parsing flow, and clean vector typography to guarantee maximum visibility through Taleo, Workday, and Greenhouse.
+          Every template is designed with standard fonts, single-column parsing flow, and clean vector typography to maximize parsing compatibility through Taleo, Workday, and Greenhouse.
         </p>
       </div>
 

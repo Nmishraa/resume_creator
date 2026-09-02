@@ -82,7 +82,7 @@ export function analyzeAtsScore(resume: ResumeData, jobDescription?: string): At
     recommendations.push({
       type: 'critical',
       title: 'Missing Valid Email Address',
-      description: 'ATS parsers reject applications lacking a standard email format in the contact header.'
+      description: 'A missing email may prevent recruiters from contacting you.'
     });
   }
 
@@ -98,7 +98,7 @@ export function analyzeAtsScore(resume: ResumeData, jobDescription?: string): At
     recommendations.push({
       type: 'improvement',
       title: 'Add LinkedIn Profile URL',
-      description: 'Over 85% of recruiters cross-reference LinkedIn URLs parsed by ATS scanners.'
+      description: 'Adding LinkedIn can help recruiters verify your professional background.'
     });
   }
 
@@ -124,7 +124,7 @@ export function analyzeAtsScore(resume: ResumeData, jobDescription?: string): At
     recommendations.push({
       type: 'critical',
       title: 'No Measurable Impact (Google X-Y-Z Formula)',
-      description: 'Add hard metrics (e.g., "Reduced latency by 45%", "Increased ARR by $1.2M", "Led team of 6") to pass modern hiring algorithms.'
+      description: 'Add hard metrics (e.g., "Reduced latency by 45%", "Increased ARR by $1.2M", "Led team of 6") to strengthen bullet impact and parsing clarity.'
     });
   } else if (quantRatio < 0.5) {
     recommendations.push({
@@ -194,26 +194,27 @@ export function analyzeAtsScore(resume: ResumeData, jobDescription?: string): At
     // Pick top frequency keywords plus tech keywords found in JD
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 20).map(entry => entry[0]);
     targetKeywords = Array.from(new Set([...sorted, ...COMMON_TECH_KEYWORDS.filter(k => jdLower.includes(k))]));
-  } else {
-    // Default standard technical keywords
-    targetKeywords = COMMON_TECH_KEYWORDS;
   }
 
   const matchedKeywords: string[] = [];
   const missingKeywords: string[] = [];
 
-  targetKeywords.forEach(kw => {
-    const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`\\b${escaped}\\b`, 'i');
-    if (regex.test(fullText)) {
-      matchedKeywords.push(kw);
-    } else {
-      missingKeywords.push(kw);
-    }
-  });
+  if (targetKeywords.length > 0) {
+    targetKeywords.forEach(kw => {
+      const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`\\b${escaped}\\b`, 'i');
+      if (regex.test(fullText)) {
+        matchedKeywords.push(kw);
+      } else {
+        missingKeywords.push(kw);
+      }
+    });
+  }
 
   const keywordMatchRatio = targetKeywords.length > 0 ? (matchedKeywords.length / targetKeywords.length) : 0.8;
-  const keywordScore = Math.min(25, Math.round(keywordMatchRatio * 25 + (matchedKeywords.length >= 5 ? 5 : 0)));
+  const keywordScore = targetKeywords.length > 0 
+    ? Math.min(25, Math.round(keywordMatchRatio * 25 + (matchedKeywords.length >= 5 ? 5 : 0)))
+    : 20;
 
   if (jobDescription && missingKeywords.length > 0) {
     recommendations.push({
@@ -225,13 +226,48 @@ export function analyzeAtsScore(resume: ResumeData, jobDescription?: string): At
 
   // 5. Formatting & ATS Layout Readability (0-10 points)
   let formattingScore = 10;
-  if (!resume.summary || resume.summary.length < 30) formattingScore -= 2;
-  if (!resume.skills || resume.skills.length === 0) formattingScore -= 3;
-  if (totalBullets < 4) formattingScore -= 2;
+  if (!resume.summary || resume.summary.length < 30) formattingScore -= 3;
+  if (!resume.skills || resume.skills.length === 0) formattingScore -= 4;
+  if (totalBullets < 4) formattingScore -= 3;
+  formattingScore = Math.max(0, formattingScore);
+
+  // Check if resume is completely empty
+  const hasBasicInfo = Boolean(
+    (resume.personalInfo?.fullName && resume.personalInfo.fullName.trim().length > 0) ||
+    (resume.personalInfo?.email && resume.personalInfo.email.trim().length > 0) ||
+    (resume.summary && resume.summary.trim().length > 0) ||
+    (resume.experience && resume.experience.length > 0) ||
+    (resume.skills && resume.skills.length > 0)
+  );
+
+  if (!hasBasicInfo) {
+    return {
+      overallScore: 0,
+      categoryScores: {
+        completeness: 0,
+        quantifiableResults: 0,
+        actionVerbs: 0,
+        keywords: 0,
+        formatting: 0,
+      },
+      matchedKeywords: [],
+      missingKeywords: missingKeywords.slice(0, 10),
+      actionVerbsFound: [],
+      quantifiableBulletsCount: 0,
+      totalBulletsCount: 0,
+      recommendations: [
+        {
+          type: 'critical',
+          title: 'Empty Resume Draft',
+          description: 'Your resume is currently blank. Add your contact information, work experience, and skills to calculate your ATS score.'
+        }
+      ]
+    };
+  }
 
   // Calculate Overall Normalized Score (0 - 100)
   const totalRaw = completenessScore + quantScore + actionScore + keywordScore + formattingScore;
-  const overallScore = Math.min(100, Math.max(15, Math.round(totalRaw)));
+  const overallScore = Math.min(100, Math.max(0, Math.round(totalRaw)));
 
   return {
     overallScore,

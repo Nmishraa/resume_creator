@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://resume-cv-craft.web.app';
+export const SITE_URL = 'https://resume.gnanamai.com';
 export const LAST_UPDATED = 'August 30, 2026';
 export const AUTHOR_INFO = {
   name: 'Resume & CV Craft Team',
@@ -197,13 +197,13 @@ export const ROUTE_SEO_MAP = {
       },
       {
         q: 'What fonts are safest for ATS compliance?',
-        a: 'Standard system fonts such as Inter, Arial, Helvetica, Calibri, Georgia, and Roboto parse with 100% accuracy across all major ATS platforms.'
+        a: 'Standard system fonts such as Inter, Arial, Helvetica, Calibri, Georgia, and Roboto parse with high accuracy across standard ATS platforms.'
       }
     ]
   },
   '/cover-letters': {
     title: 'Free Interactive Cover Letter Generator & Templates | Resume & CV Craft',
-    description: 'Generate customized, recruiter-approved cover letters in seconds. Choose from 4 proven formulas and download instant TXT/PDF.',
+    description: 'Generate customized, tailored cover letters in seconds. Choose from 4 proven formulas and download instant TXT/PDF.',
     keywords: 'cover letter generator, cover letter builder, free cover letter templates, job application letter',
     canonical: `${SITE_URL}/cover-letters`,
     h1: 'AI Cover Letter Builder & Writing Guide',
@@ -275,7 +275,7 @@ export const ROUTE_SEO_MAP = {
   },
   '/free-ai-engineer-resume-builder': {
     title: 'Free AI Engineer Resume Builder | Resume & CV Craft',
-    description: 'Build a recruiter-approved AI Engineer resume for free. Optimized for PyTorch, LLMs, CUDA, and RAG architectures.',
+    description: 'Build an optimized AI Engineer resume for free. Designed for PyTorch, LLMs, CUDA, and RAG architectures.',
     keywords: 'free AI engineer resume builder, machine learning CV generator, LLM engineer resume tool',
     canonical: `${SITE_URL}/free-ai-engineer-resume-builder`,
     h1: 'Free AI Engineer Resume Builder'

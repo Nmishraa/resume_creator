@@ -8,7 +8,7 @@ export interface SeoRouteInfo {
   changefreq: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly';
 }
 
-export const SITE_URL = 'https://resume-cv-craft.web.app';
+export const SITE_URL = 'https://resume.gnanamai.com';
 
 export const SEO_ROUTES: SeoRouteInfo[] = [
   {
@@ -35,6 +35,33 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     description: 'Craft high-impact resumes with AI-assisted bullet point rewriting, Google X-Y-Z metrics, professional summary generator, and keyword optimization.',
     targetKeyword: 'AI resume builder',
     canonical: `${SITE_URL}/ai-resume-builder`,
+    priority: 0.95,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/ats-resume-builder',
+    title: 'Free ATS Resume Builder – 100% ATS Compliant Layouts | Resume Craft',
+    description: 'Build an ATS-compliant resume engineered to pass Workday, Greenhouse, and Taleo algorithms. Free vector PDF export with zero paywalls.',
+    targetKeyword: 'ATS resume builder',
+    canonical: `${SITE_URL}/ats-resume-builder`,
+    priority: 0.95,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-builder-for-software-engineers',
+    title: 'Free Software Engineer Resume Builder – Technical ATS Templates | Resume Craft',
+    description: 'Create an ATS-optimized software engineering resume. Highlight tech stacks, system architecture metrics, GitHub projects, and export vector PDFs for free.',
+    targetKeyword: 'resume builder for software engineers',
+    canonical: `${SITE_URL}/resume-builder-for-software-engineers`,
+    priority: 0.95,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-keyword-matcher',
+    title: 'Free Resume Keyword Matcher – Compare Resume Against Job Description | Resume Craft',
+    description: 'Scan your resume against any job description to find missing technical skills, keyword frequency, and recruiter requirements in real-time.',
+    targetKeyword: 'resume keyword matcher',
+    canonical: `${SITE_URL}/resume-keyword-matcher`,
     priority: 0.95,
     changefreq: 'weekly'
   },

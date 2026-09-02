@@ -6,10 +6,10 @@
 
 ## 1. Executive Product Overview & Vision
 Smart ResumeCraft is an all-in-one, privacy-first, free AI Resume Builder and Career Success Platform. It allows job seekers to:
-- Build 100% ATS-friendly resumes in real-time with modern customizable templates.
+- Build ATS-friendly resumes in real-time with modern customizable templates.
 - Run interactive live ATS compatibility scans with instant diagnostic feedback (0-100 score).
 - Utilize role-specific AI bullet point enhancers, action verb generators, and tone customizers.
-- Generate customized, recruiter-approved cover letters with multi-tone formulas and instant PDF/TXT export.
+- Generate customized, recruiter-tailored cover letters with multi-tone formulas and instant PDF/TXT export.
 - Track job applications and interviews in an interactive Kanban board and pipeline manager.
 
 ---

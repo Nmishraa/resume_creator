@@ -62,7 +62,7 @@ export default function Footer() {
       </div>
 
       <div style={{ maxWidth: '1200px', margin: '2rem auto 0', padding: '1.5rem 1.5rem 0', borderTop: '1px solid #1e293b', textAlign: 'center', fontSize: '0.85rem', color: '#64748b' }}>
-        © 2026 Resume & CV Craft (resume-cv-craft.web.app). All rights reserved. Free AI Resume Builder & ATS Resume Checker.
+        © 2026 Resume & CV Craft (resume.gnanamai.com). All rights reserved. Free AI Resume Builder & ATS Resume Checker.
       </div>
     </footer>
   );

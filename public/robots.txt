@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://resume-cv-craft.web.app/sitemap.xml
+Sitemap: https://resume.gnanamai.com/sitemap.xml

@@ -80,7 +80,7 @@ export const ResumeExamplesHubPage: React.FC = () => {
         </h1>
 
         <p className="text-xs sm:text-base text-slate-600 leading-relaxed">
-          Explore recruiter-approved resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.
+          Explore professional resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.
         </p>
 
         {/* Search & Filter Bar */}

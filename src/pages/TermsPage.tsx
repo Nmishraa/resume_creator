@@ -22,7 +22,7 @@ export const TermsPage: React.FC = () => {
         <div className="space-y-2">
           <h2 className="text-base font-bold text-slate-900">1. Acceptance of Terms</h2>
           <p>
-            By accessing or using Resume Craft (https://resume-cv-craft.web.app), you agree to be bound by these Terms of Service. If you disagree with any part, you may discontinue use of the platform.
+            By accessing or using Resume Craft (https://resume.gnanamai.com), you agree to be bound by these Terms of Service. If you disagree with any part, you may discontinue use of the platform.
           </p>
         </div>
 

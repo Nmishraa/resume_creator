@@ -10,12 +10,14 @@ interface FaqAccordionProps {
   items: FaqItem[];
   title?: string;
   subtitle?: string;
+  hideHeader?: boolean;
 }
 
 export const FaqAccordion: React.FC<FaqAccordionProps> = ({
   items,
   title = 'Frequently Asked Questions',
-  subtitle = 'Everything you need to know about ATS optimization and resume formatting.'
+  subtitle = 'Everything you need to know about ATS optimization and resume formatting.',
+  hideHeader = false
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -42,14 +44,16 @@ export const FaqAccordion: React.FC<FaqAccordionProps> = ({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="space-y-1">
-        <div className="flex items-center gap-2 text-brand-700 text-xs font-bold uppercase tracking-wider">
-          <HelpCircle size={15} />
-          <span>Helpful FAQ</span>
+      {!hideHeader && (
+        <div className="space-y-1">
+          <div className="flex items-center gap-2 text-brand-700 text-xs font-bold uppercase tracking-wider">
+            <HelpCircle size={15} />
+            <span>Helpful FAQ</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-black text-slate-950">{title}</h2>
+          {subtitle && <p className="text-xs sm:text-sm text-slate-600">{subtitle}</p>}
         </div>
-        <h3 className="text-xl sm:text-2xl font-black text-slate-950">{title}</h3>
-        {subtitle && <p className="text-xs sm:text-sm text-slate-600">{subtitle}</p>}
-      </div>
+      )}
 
       <div className="space-y-3">
         {items.map((item, idx) => {

@@ -39,8 +39,11 @@ export default function SeoHead() {
       updateMetaTag('meta[property="og:title"]', 'content', seoData.title);
       updateMetaTag('meta[property="og:description"]', 'content', seoData.description);
       updateMetaTag('meta[property="og:url"]', 'content', seoData.canonical);
+      updateMetaTag('meta[property="og:image"]', 'content', `${SITE_URL}/og-image.png`);
+      updateMetaTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
       updateMetaTag('meta[name="twitter:title"]', 'content', seoData.title);
       updateMetaTag('meta[name="twitter:description"]', 'content', seoData.description);
+      updateMetaTag('meta[name="twitter:image"]', 'content', `${SITE_URL}/og-image.png`);
     }
 
     // Canonical link

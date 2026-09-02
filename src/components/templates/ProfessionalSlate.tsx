@@ -17,9 +17,9 @@ export const ProfessionalSlate: React.FC<{ resume: ResumeData }> = ({ resume }) 
       <div className="bg-slate-900 text-white -m-8 sm:-m-10 p-6 sm:p-8 mb-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase">
+            <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase" role="heading" aria-level={2}>
               {personalInfo.fullName || 'Candidate Name'}
-            </h1>
+            </div>
             <p className="text-sm font-medium text-slate-300 tracking-wide mt-0.5">
               {personalInfo.jobTitle || 'Senior Software Engineer'}
             </p>

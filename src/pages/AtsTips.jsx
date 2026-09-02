@@ -337,7 +337,7 @@ export default function AtsTips({ isEmbedded = false }) {
             <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #cbd5e1', marginTop: '1rem' }}>
               <h4 style={{ color: '#0f172a', fontWeight: 800, margin: '0 0 0.5rem 0', fontSize: '1.05rem' }}>🔬 How We Test ATS Compatibility</h4>
               <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 0.75rem 0' }}>
-                Our templates undergo automated PDF text extraction testing using PDF.js and plain-text stream parsing tools to simulate backend parser behavior in Workday, Greenhouse, Lever, Taleo, and iCIMS. We verify that dates, company names, titles, and bullet metrics parse into structured fields with zero text corruption.
+                Our templates undergo automated PDF text extraction testing using PDF.js and plain-text stream parsing tools to simulate backend parser behavior in Workday, Greenhouse, Lever, Taleo, and iCIMS. We verify that dates, company names, titles, and bullet metrics parse into structured fields to reduce the risk of text corruption during automated resume parsing.
               </p>
             </div>
 
