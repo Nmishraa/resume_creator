@@ -185,21 +185,32 @@ export const HomePage: React.FC = () => {
               </p>
 
               {/* Primary Actions */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
                 <Link
                   to="/builder"
-                  className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-xl text-sm sm:text-base shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center justify-center gap-2 active:scale-95"
+                  className="w-full sm:w-auto px-7 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-xl text-sm sm:text-base shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center justify-center gap-2 active:scale-95"
                 >
                   <FileText size={18} />
                   <span>Build My Resume &rarr;</span>
                 </Link>
 
+                <button
+                  onClick={() => {
+                    setUploadInitialStep('upload');
+                    setShowUploadModal(true);
+                  }}
+                  className="w-full sm:w-auto px-7 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-sm sm:text-base shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                >
+                  <UploadCloud size={18} />
+                  <span>Upload Existing Resume</span>
+                </button>
+
                 <Link
                   to="/ats-resume-checker"
-                  className="w-full sm:w-auto px-7 py-4 bg-white hover:bg-slate-50 text-slate-900 font-extrabold rounded-xl text-sm sm:text-base border border-slate-300 shadow-xs hover:border-slate-400 transition-colors flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-900 font-extrabold rounded-xl text-sm sm:text-base border border-slate-300 shadow-xs hover:border-slate-400 transition-colors flex items-center justify-center gap-2"
                 >
                   <CheckCircle2 size={18} className="text-emerald-600" />
-                  <span>Check My ATS Score</span>
+                  <span>Check ATS Score</span>
                 </Link>
               </div>
 
@@ -278,65 +289,6 @@ export const HomePage: React.FC = () => {
               {/* Compact Video Tour Widget on the Right */}
               <CompactPromoVideoSection />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* UNIFIED HIGH-CONVERTING TOP CTA BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-950 text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-2xl border border-slate-800">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/20 text-brand-300 text-xs sm:text-sm font-extrabold border border-brand-400/30 mx-auto">
-            <Sparkles size={15} className="text-brand-400" />
-            <span>Ready in under 5 minutes • 100% Free • PDF, DOCX, TXT Upload</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight max-w-4xl mx-auto text-white">
-            Build or Upload Your ATS-Friendly Resume Today
-          </h2>
-
-          <p className="text-sm sm:text-lg text-slate-200 font-medium max-w-3xl mx-auto leading-relaxed">
-            Create from scratch or upload an existing resume to extract your 9 core sections, apply modern ATS templates, rewrite bullets with AI, and export clean vector PDFs.
-          </p>
-
-          {/* Unified Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-3">
-            <Link
-              to="/builder"
-              className="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-xl text-sm sm:text-base transition-all shadow-lg shadow-brand-600/30 active:scale-95 flex items-center gap-2"
-            >
-              <FileText size={18} />
-              <span>Build My Resume Free &rarr;</span>
-            </Link>
-
-            <button
-              onClick={() => {
-                setUploadInitialStep('upload');
-                setShowUploadModal(true);
-              }}
-              className="px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-sm sm:text-base transition-all shadow-lg shadow-emerald-600/30 flex items-center gap-2 cursor-pointer active:scale-95"
-            >
-              <UploadCloud size={18} />
-              <span>Upload Existing Resume</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setUploadInitialStep('template');
-                setShowUploadModal(true);
-              }}
-              className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-xl text-sm sm:text-base border border-white/20 transition-all flex items-center gap-2 cursor-pointer"
-            >
-              <Layout size={18} className="text-brand-300" />
-              <span>Choose a Template</span>
-            </button>
-
-            <Link
-              to="/ats-resume-checker"
-              className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-xl text-sm sm:text-base border border-white/20 transition-all flex items-center gap-2"
-            >
-              <CheckCircle2 size={18} className="text-emerald-400" />
-              <span>Check ATS Score</span>
-            </Link>
           </div>
         </div>
       </section>

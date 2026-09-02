@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Lock, Sparkles, FileText, CheckCircle2, ArrowRight } from 'lucide-react';
-import { RESUME_EXAMPLES } from '../../data/resumeExamplesData';
 
 export const Footer: React.FC = () => {
   return (
@@ -33,111 +32,122 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Product Tools */}
+          {/* Product & Core Tools */}
           <div className="space-y-3.5">
             <h4 className="text-white font-black text-sm uppercase tracking-wider">Product &amp; Tools</h4>
             <ul className="space-y-2.5">
               <li>
-                <Link to="/free-resume-builder" className="text-slate-200 hover:text-white transition-colors font-medium flex items-center gap-1.5">
+                <Link to="/builder" className="text-slate-200 hover:text-white transition-colors font-medium flex items-center gap-1.5">
                   <FileText size={14} className="text-brand-400" />
-                  <span>Free Resume Builder</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/ai-resume-builder" className="text-slate-200 hover:text-white transition-colors font-medium flex items-center gap-1.5">
-                  <Sparkles size={14} className="text-purple-400" />
-                  <span>AI Resume Builder</span>
+                  <span>Resume Builder</span>
                 </Link>
               </li>
               <li>
                 <Link to="/ats-resume-checker" className="text-slate-200 hover:text-white transition-colors font-medium flex items-center gap-1.5">
                   <CheckCircle2 size={14} className="text-emerald-400" />
-                  <span>ATS-Friendly Resume Checker</span>
+                  <span>ATS Resume Checker</span>
                 </Link>
               </li>
               <li>
-                <Link to="/resume-keyword-matcher" className="text-slate-200 hover:text-white transition-colors font-medium">
+                <Link to="/ai-resume-builder" className="text-slate-200 hover:text-white transition-colors font-medium flex items-center gap-1.5">
+                  <Sparkles size={14} className="text-purple-400" />
+                  <span>AI Bullet Writer</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/job-description-resume-matcher" className="text-slate-200 hover:text-white transition-colors font-medium">
                   Job Description Matcher
                 </Link>
               </li>
               <li>
-                <Link to="/resume-templates" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Resume Templates for Jobs
+                <Link to="/cover-letters" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Cover Letter Generator
                 </Link>
               </li>
               <li>
-                <Link to="/cover-letters" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Free CV &amp; Cover Letter Maker
+                <Link to="/resume-templates" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  ATS Resume Templates
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Targeted Keyword Categories */}
+          {/* Specialized Builders */}
           <div className="space-y-3.5">
             <h4 className="text-white font-black text-sm uppercase tracking-wider">
-              Popular Resume Tools
+              Specialized Builders
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <Link to="/ai-resume-builder" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Online Resume Builder Without Signup
-                </Link>
-              </li>
-              <li>
                 <Link to="/resume-builder-for-students" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Resume Builder for Students &amp; Freshers
+                  Student &amp; Fresher Builder
                 </Link>
               </li>
               <li>
                 <Link to="/resume-builder-no-experience" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Entry-Level &amp; No Experience Builder
+                  No Experience Resume Builder
                 </Link>
               </li>
               <li>
                 <Link to="/resume-builder-for-software-engineers" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Software Engineer Resume Builder
+                  Software Engineer Builder
+                </Link>
+              </li>
+              <li>
+                <Link to="/applications" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Job Application Tracker
+                </Link>
+              </li>
+              <li>
+                <Link to="/interview-prep" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Interview Practice &amp; STAR
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Examples & Career Guides */}
+          <div className="space-y-3.5">
+            <h4 className="text-white font-black text-sm uppercase tracking-wider">
+              Examples &amp; Guides
+            </h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link to="/resume-examples/software-engineer" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Software Engineer Example
                 </Link>
               </li>
               <li>
                 <Link to="/resume-examples/ai-engineer" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  AI Engineer Resume Example
+                  AI Engineer Example
                 </Link>
               </li>
               <li>
-                <Link to="/builder" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Resume Builder Free PDF Download
+                <Link to="/resume-examples/data-scientist" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Data Scientist Example
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Resume Examples */}
-          <div className="space-y-3.5">
-            <h4 className="text-white font-black text-sm uppercase tracking-wider">
-              <Link to="/resume-examples" className="hover:text-brand-400 transition-colors">
-                Role Resume Examples
-              </Link>
-            </h4>
-            <ul className="space-y-2.5">
-              {RESUME_EXAMPLES.slice(0, 6).map((ex) => (
-                <li key={ex.slug}>
-                  <Link to={`/resume-examples/${ex.slug}`} className="text-slate-200 hover:text-white transition-colors font-medium">
-                    {ex.roleTitle} Resume
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/guides/google-xyz-formula-guide" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Google X-Y-Z Formula Guide
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/how-to-make-ats-friendly-resume" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  ATS Resume Writing Guide
+                </Link>
+              </li>
               <li>
                 <Link to="/resume-examples" className="text-brand-400 hover:text-brand-300 font-extrabold transition-colors flex items-center gap-1">
-                  <span>View all role examples &rarr;</span>
+                  <span>Explore all examples &rarr;</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Company & Legal */}
+          {/* Company & Support */}
           <div className="space-y-3.5">
-            <h4 className="text-white font-black text-sm uppercase tracking-wider">Company &amp; Legal</h4>
+            <h4 className="text-white font-black text-sm uppercase tracking-wider">Company &amp; Support</h4>
             <ul className="space-y-2.5">
               <li>
                 <Link to="/about" className="text-slate-200 hover:text-white transition-colors font-medium">
@@ -145,13 +155,18 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Contact Support
+                <Link to="/how-it-works" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  How It Works
                 </Link>
               </li>
               <li>
                 <Link to="/faq" className="text-slate-200 hover:text-white transition-colors font-medium">
                   Frequently Asked Questions (FAQ)
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Contact Support
                 </Link>
               </li>
               <li>
@@ -175,9 +190,8 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} Resume Craft. Free AI Resume Builder, ATS Checker &amp; CV Maker.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link to="/free-resume-builder" className="hover:text-white transition-colors">Free Resume Builder</Link>
-            <Link to="/ai-resume-builder" className="hover:text-white transition-colors">AI Resume Builder</Link>
-            <Link to="/ats-resume-checker" className="hover:text-white transition-colors">ATS Resume Checker</Link>
+            <Link to="/builder" className="hover:text-white transition-colors">Resume Builder</Link>
+            <Link to="/ats-resume-checker" className="hover:text-white transition-colors">ATS Checker</Link>
             <Link to="/faq" className="hover:text-white transition-colors">FAQ</Link>
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
           </div>
