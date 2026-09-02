@@ -66,65 +66,65 @@ export const Navbar: React.FC = () => {
             {/* Resume Builder Link */}
             <Link
               to="/builder"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
                 location.pathname === '/builder' || location.pathname === '/resume-builder'
                   ? 'bg-brand-50 text-brand-700'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
               }`}
             >
-              <FileText size={14} className="text-brand-600" />
+              <FileText size={15} className="text-brand-600" />
               <span>Builder</span>
             </Link>
 
             {/* ATS Checker Link */}
             <Link
               to="/ats-resume-checker"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
                 location.pathname.startsWith('/ats')
                   ? 'bg-brand-50 text-brand-700'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
               }`}
             >
-              <CheckCircle2 size={14} className="text-emerald-600" />
+              <CheckCircle2 size={15} className="text-emerald-600" />
               <span>ATS Checker</span>
             </Link>
 
             {/* Templates Link */}
             <Link
               to="/resume-templates"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
                 location.pathname === '/templates' || location.pathname === '/resume-templates'
                   ? 'bg-brand-50 text-brand-700'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
               }`}
             >
-              <Layers size={14} className="text-slate-500" />
+              <Layers size={15} className="text-slate-500" />
               <span>Templates</span>
             </Link>
 
             {/* Resume Examples Link */}
             <Link
               to="/resume-examples"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
                 location.pathname.startsWith('/resume-examples')
                   ? 'bg-brand-50 text-brand-700'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
               }`}
             >
-              <Compass size={14} className="text-blue-600" />
+              <Compass size={15} className="text-blue-600" />
               <span>Examples</span>
             </Link>
 
             {/* FAQ Link */}
             <Link
               to="/faq"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
                 location.pathname === '/faq' || location.pathname === '/faqs'
                   ? 'bg-brand-50 text-brand-700'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
               }`}
             >
-              <HelpCircle size={14} className="text-indigo-600" />
+              <HelpCircle size={15} className="text-indigo-600" />
               <span>FAQ</span>
             </Link>
 
@@ -135,11 +135,11 @@ export const Navbar: React.FC = () => {
               onMouseLeave={() => setToolsDropdown(false)}
             >
               <button
-                className="flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 transition-colors cursor-pointer"
                 aria-expanded={toolsDropdown}
               >
                 <span>More</span>
-                <ChevronDown size={13} className={`transition-transform duration-150 ${toolsDropdown ? 'rotate-180 text-brand-600' : 'text-slate-400'}`} />
+                <ChevronDown size={14} className={`transition-transform duration-150 ${toolsDropdown ? 'rotate-180 text-brand-600' : 'text-slate-400'}`} />
               </button>
 
               {toolsDropdown && (

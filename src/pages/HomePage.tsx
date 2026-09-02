@@ -169,8 +169,8 @@ export const HomePage: React.FC = () => {
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               
               {/* Product Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100/90 border border-brand-200 text-brand-900 text-xs font-bold shadow-2xs">
-                <Sparkles size={14} className="text-brand-600 shrink-0" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100/90 border border-brand-200 text-brand-950 text-xs sm:text-sm font-extrabold shadow-2xs">
+                <Sparkles size={15} className="text-brand-600 shrink-0" />
                 <span>Modern AI Career SaaS • 100% Free • No Paywalls</span>
               </div>
 
@@ -180,7 +180,7 @@ export const HomePage: React.FC = () => {
               </h1>
 
               {/* Supporting Copy */}
-              <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-base sm:text-xl text-slate-700 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                 Create a professional, ATS-friendly resume in minutes. Use AI to improve your experience, match your resume to job descriptions, and download a polished PDF — free.
               </p>
 
@@ -188,31 +188,31 @@ export const HomePage: React.FC = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                 <Link
                   to="/builder"
-                  className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center justify-center gap-2 active:scale-95"
+                  className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-xl text-sm sm:text-base shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center justify-center gap-2 active:scale-95"
                 >
-                  <FileText size={17} />
+                  <FileText size={18} />
                   <span>Build My Resume &rarr;</span>
                 </Link>
 
                 <Link
                   to="/ats-resume-checker"
-                  className="w-full sm:w-auto px-7 py-4 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-sm border border-slate-300 shadow-xs hover:border-slate-400 transition-colors flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-7 py-4 bg-white hover:bg-slate-50 text-slate-900 font-extrabold rounded-xl text-sm sm:text-base border border-slate-300 shadow-xs hover:border-slate-400 transition-colors flex items-center justify-center gap-2"
                 >
-                  <CheckCircle2 size={17} className="text-emerald-600" />
+                  <CheckCircle2 size={18} className="text-emerald-600" />
                   <span>Check My ATS Score</span>
                 </Link>
               </div>
 
               {/* Trust & Transparency Badges */}
-              <div className="pt-6 border-t border-slate-200/90 flex flex-wrap items-center justify-center lg:justify-start gap-y-2.5 gap-x-6 text-xs text-slate-600 font-medium">
+              <div className="pt-6 border-t border-slate-200/90 flex flex-wrap items-center justify-center lg:justify-start gap-y-2.5 gap-x-6 text-xs sm:text-sm text-slate-700 font-semibold">
                 <span className="flex items-center gap-1.5">
-                  <Check size={14} className="text-emerald-600 stroke-[3]" /> No account required
+                  <Check size={16} className="text-emerald-600 stroke-[3]" /> No account required
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Check size={14} className="text-emerald-600 stroke-[3]" /> Selectable vector PDFs
+                  <Check size={16} className="text-emerald-600 stroke-[3]" /> Selectable vector PDFs
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Check size={14} className="text-emerald-600 stroke-[3]" /> Designed for ATS compatibility
+                  <Check size={16} className="text-emerald-600 stroke-[3]" /> Designed for ATS compatibility
                 </span>
               </div>
             </div>
@@ -285,26 +285,26 @@ export const HomePage: React.FC = () => {
       {/* UNIFIED HIGH-CONVERTING TOP CTA BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-950 text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-2xl border border-slate-800">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-400/30 mx-auto">
-            <Sparkles size={13} className="text-brand-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/20 text-brand-300 text-xs sm:text-sm font-extrabold border border-brand-400/30 mx-auto">
+            <Sparkles size={15} className="text-brand-400" />
             <span>Ready in under 5 minutes • 100% Free • PDF, DOCX, TXT Upload</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight max-w-3xl mx-auto text-white">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight max-w-4xl mx-auto text-white">
             Build or Upload Your ATS-Friendly Resume Today
           </h2>
 
-          <p className="text-xs sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-lg text-slate-200 font-medium max-w-3xl mx-auto leading-relaxed">
             Create from scratch or upload an existing resume to extract your 9 core sections, apply modern ATS templates, rewrite bullets with AI, and export clean vector PDFs.
           </p>
 
           {/* Unified Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-3">
             <Link
               to="/builder"
-              className="px-7 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-lg shadow-brand-600/30 active:scale-95 flex items-center gap-2"
+              className="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-xl text-sm sm:text-base transition-all shadow-lg shadow-brand-600/30 active:scale-95 flex items-center gap-2"
             >
-              <FileText size={16} />
+              <FileText size={18} />
               <span>Build My Resume Free &rarr;</span>
             </Link>
 
@@ -313,9 +313,9 @@ export const HomePage: React.FC = () => {
                 setUploadInitialStep('upload');
                 setShowUploadModal(true);
               }}
-              className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/30 flex items-center gap-2 cursor-pointer active:scale-95"
+              className="px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-sm sm:text-base transition-all shadow-lg shadow-emerald-600/30 flex items-center gap-2 cursor-pointer active:scale-95"
             >
-              <UploadCloud size={16} />
+              <UploadCloud size={18} />
               <span>Upload Existing Resume</span>
             </button>
 
@@ -324,17 +324,17 @@ export const HomePage: React.FC = () => {
                 setUploadInitialStep('template');
                 setShowUploadModal(true);
               }}
-              className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs sm:text-sm border border-white/20 transition-all flex items-center gap-2 cursor-pointer"
+              className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-xl text-sm sm:text-base border border-white/20 transition-all flex items-center gap-2 cursor-pointer"
             >
-              <Layout size={16} className="text-brand-300" />
+              <Layout size={18} className="text-brand-300" />
               <span>Choose a Template</span>
             </button>
 
             <Link
               to="/ats-resume-checker"
-              className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs sm:text-sm border border-white/20 transition-all flex items-center gap-2"
+              className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-xl text-sm sm:text-base border border-white/20 transition-all flex items-center gap-2"
             >
-              <CheckCircle2 size={16} className="text-emerald-400" />
+              <CheckCircle2 size={18} className="text-emerald-400" />
               <span>Check ATS Score</span>
             </Link>
           </div>
