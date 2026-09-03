@@ -18,8 +18,13 @@ export const ResumePreview: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (sheetRef.current) {
-        // Measure unconstrained content scroll height
-        const contentHeight = sheetRef.current.scrollHeight;
+        // Target inner template element to measure true unconstrained content height (avoiding outer sheet min-height)
+        const innerContainer =
+          sheetRef.current.querySelector('.page-break-container') as HTMLElement ||
+          sheetRef.current.firstElementChild as HTMLElement ||
+          sheetRef.current;
+
+        const contentHeight = innerContainer.scrollHeight || innerContainer.offsetHeight;
         const result = calculateDensityModeFromHeight(contentHeight, 1010);
         
         if (

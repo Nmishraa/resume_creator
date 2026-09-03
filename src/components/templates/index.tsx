@@ -46,22 +46,23 @@ export interface TemplateProps {
 }
 
 export const ResumeRenderer: React.FC<TemplateProps> = ({ resume, densityMode: overrideMode }) => {
-  let activeMode: DensityMode = overrideMode || 'standard';
+  let activeMode: DensityMode = 'standard';
 
   try {
     const { densityInfo } = useResume();
-    if (!overrideMode && densityInfo?.mode) {
+    if (densityInfo?.mode) {
       activeMode = densityInfo.mode;
     }
   } catch (e) {
-    // Fallback if rendered outside ResumeProvider (e.g. standalone print clone)
+    // Fallback if rendered outside ResumeProvider
   }
 
-  // If user explicitly set formatting spacing, map spacing preset or respect auto mode
-  if (resume.formatting?.spacing && resume.formatting.spacing !== 'auto') {
-    if (resume.formatting.spacing === 'compact') activeMode = 'compact';
-    if (resume.formatting.spacing === 'relaxed') activeMode = 'spacious';
-    if (resume.formatting.spacing === 'normal') activeMode = 'standard';
+  if (overrideMode) {
+    activeMode = overrideMode;
+  } else if (resume.formatting?.spacing === 'compact') {
+    activeMode = 'compact';
+  } else if (resume.formatting?.spacing === 'relaxed') {
+    activeMode = 'spacious';
   }
 
   switch (resume.formatting.template) {
