@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group focus-visible:ring-2 focus-visible:ring-brand-500" aria-label="Resume Craft Home">
+          <Link to="/" className="flex items-center gap-2.5 group" aria-label="Resume Craft Home">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 via-brand-700 to-slate-900 flex items-center justify-center text-white shadow-md shadow-brand-500/20 font-black text-sm tracking-wider group-hover:scale-[1.02] transition-transform">
               RC
             </div>
@@ -54,7 +54,7 @@ export const Navbar: React.FC = () => {
               <div className="font-extrabold text-slate-950 text-base leading-tight tracking-tight flex items-center gap-1.5">
                 Resume Craft
               </div>
-              <span className="text-xs text-slate-600 font-bold tracking-wider block">
+              <span className="text-[10px] text-slate-500 font-semibold tracking-wider block">
                 AI Resume &amp; ATS Suite
               </span>
             </div>

@@ -37,8 +37,8 @@ export const CompactPromoVideoSection: React.FC = () => {
       {/* Header & Title */}
       <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5">
         <div className="space-y-0.5">
-          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30 text-xs font-bold">
-            <Sparkles size={13} />
+          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30 text-[10px] font-bold">
+            <Sparkles size={11} />
             <span>40-Sec Tour</span>
           </div>
           <h3 className="text-sm font-bold text-white tracking-tight">
@@ -48,16 +48,15 @@ export const CompactPromoVideoSection: React.FC = () => {
 
         <Link
           to="/builder"
-          aria-label="Build Resume Now"
           onClick={handleTrackConversion}
-          className="px-3.5 py-2 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg text-xs transition-all shadow flex items-center gap-1.5 shrink-0 focus-visible:ring-2 focus-visible:ring-brand-400"
+          className="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg text-[11px] transition-all shadow flex items-center gap-1 shrink-0"
         >
-          <FileText size={14} />
+          <FileText size={12} />
           <span>Build Resume &rarr;</span>
         </Link>
       </div>
 
-      {/* Video Container (Compact Height with preload none) */}
+      {/* Video Container (Compact Height) */}
       <div className="relative aspect-video rounded-xl overflow-hidden bg-black border border-slate-800 max-h-[190px]">
         {isVisible ? (
           <video
@@ -90,17 +89,16 @@ export const CompactPromoVideoSection: React.FC = () => {
       </div>
 
       {/* Footer Info */}
-      <div className="flex items-center justify-between text-xs text-slate-300 pt-0.5">
+      <div className="flex items-center justify-between text-[10px] text-slate-400 pt-0.5">
         <span className="flex items-center gap-1 text-emerald-400 font-medium">
-          <CheckCircle2 size={13} /> Free Vector PDF Export
+          <CheckCircle2 size={12} /> Free Vector PDF Export
         </span>
         <Link
           to="/builder"
-          aria-label="Open Resume Builder Workspace"
           onClick={handleTrackConversion}
-          className="text-brand-400 hover:text-brand-300 font-semibold underline underline-offset-2 focus-visible:ring-2 focus-visible:ring-brand-400"
+          className="text-brand-400 hover:text-brand-300 font-semibold underline underline-offset-2"
         >
-          Proceed to Builder &rarr;
+          Proceed to Builder
         </Link>
       </div>
 

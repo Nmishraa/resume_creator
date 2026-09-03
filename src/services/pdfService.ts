@@ -1,3 +1,5 @@
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import { ResumeData } from '../types/resume';
 
 /**
@@ -8,8 +10,8 @@ export function exportToVectorPdf(): void {
 }
 
 /**
- * Download direct PDF file using dynamically imported html2canvas and jsPDF with high DPI rendering.
- * Guarantees heavy PDF libraries (jspdf/html2canvas ~600KB) are never requested on initial page load.
+ * Download direct PDF file using html2canvas and jsPDF with high DPI rendering.
+ * Guarantees a direct .pdf file download onto the user's computer without opening print dialogs.
  */
 export async function downloadPdfFromElement(elementId: string, filename: string = 'Resume.pdf'): Promise<void> {
   const safeFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
@@ -60,12 +62,6 @@ export async function downloadPdfFromElement(elementId: string, filename: string
   }
 
   try {
-    // Dynamically load heavy PDF generation libraries on-demand
-    const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
-      import('jspdf'),
-      import('html2canvas')
-    ]);
-
     const canvas = await html2canvas(targetElement, {
       scale: 2, // High DPI resolution (192 DPI equivalent)
       useCORS: true,
@@ -120,7 +116,6 @@ export async function downloadPdfFromElement(elementId: string, filename: string
 
     // Fallback: Create simple text-based PDF via jsPDF if canvas rendering fails
     try {
-      const { default: jsPDF } = await import('jspdf');
       const fallbackPdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
       fallbackPdf.setFontSize(16);
       fallbackPdf.text('Resume Document', 20, 20);
