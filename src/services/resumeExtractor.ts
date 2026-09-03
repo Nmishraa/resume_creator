@@ -57,25 +57,29 @@ export async function extractTextFromFile(file: File): Promise<string> {
       const page = await pdfDoc.getPage(pageNum);
       const textContent = await page.getTextContent();
       let lastY: number | null = null;
+      let lastX: number | null = null;
       let pageText = '';
 
       for (const item of textContent.items as any[]) {
         if (!item.str) continue;
         const currentY = item.transform ? item.transform[5] : null;
+        const currentX = item.transform ? item.transform[4] : null;
 
         // If Y-coordinate shifts noticeably (new line on page) or PDF item indicates EOL
         if (lastY !== null && currentY !== null && Math.abs(lastY - currentY) > 4) {
           pageText += '\n';
         } else if (item.hasEOL) {
           pageText += '\n';
-        } else if (pageText.length > 0 && !pageText.endsWith('\n') && !pageText.endsWith(' ')) {
-          pageText += ' ';
+        } else if (pageText.length > 0 && !pageText.endsWith('\n') && !pageText.endsWith(' ') && !item.str.startsWith(' ')) {
+          // Add space only when horizontal gap is noticeable or previous item didn't touch
+          if (lastX === null || currentX === null || (currentX - lastX > 3)) {
+            pageText += ' ';
+          }
         }
 
         pageText += item.str;
-        if (currentY !== null) {
-          lastY = currentY;
-        }
+        if (currentY !== null) lastY = currentY;
+        if (currentX !== null) lastX = currentX + (item.width || 0);
       }
       fullText += pageText + '\n';
     }
@@ -173,7 +177,14 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
     const isHeaderWord = /^(resume|curriculum vitae|cv|about|summary|experience|skills|education)$/i.test(l);
 
     if (!personalInfo.fullName && !isContactLine && !isHeaderWord && l.length >= 2 && l.length < 50) {
-      const cleanName = l.replace(/[^a-zA-Z\s\.-]/g, '').trim();
+      let cleanName = l.replace(/[^a-zA-Z\s\.-]/g, '').trim();
+      // Collapse spaced out PDF letters like "N EHA M ISHRA" or "N E H A  M I S H R A"
+      cleanName = cleanName
+        .replace(/\b([A-Z])\s+([A-Z]{2,})\b/g, '$1$2')
+        .replace(/\b([A-Z]{2,})\s+([A-Z])\b/g, '$1$2')
+        .replace(/\b([A-Z])\s+([A-Z])\b/g, '$1$2')
+        .replace(/\s+/g, ' ');
+
       if (cleanName.length >= 2 && !/^\d+$/.test(cleanName)) {
         personalInfo.fullName = cleanName;
         continue;
@@ -219,8 +230,9 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
   const customSections: CustomSection[] = [];
 
   const checkSectionHeader = (line: string): typeof currentSection | null => {
+    // Strip numbers, bullets, Roman numerals, or letters with dot (e.g. "1.", "A.", "I.") without stripping words!
     const cleanHeader = line
-      .replace(/^[\d\.\-\*•I|A-Z]+\s*/i, '')
+      .replace(/^(?:[\d\.\-\*•|]+|[A-Za-z]\.|[IVXLCDM]+\.)\s*/i, '')
       .replace(/[:\-–]+$/, '')
       .trim()
       .toLowerCase();
