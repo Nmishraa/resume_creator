@@ -95,6 +95,7 @@ const PAGES = [
     h1: 'Professional Resume Examples & ATS Samples',
     intro: 'Explore recruiter-aligned resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.'
   },
+
   // 12 Resume Examples
   {
     path: '/resume-examples/ai-engineer',
@@ -192,6 +193,7 @@ const PAGES = [
     intro: 'How to build an impressive, ATS-compliant resume when you have zero official job experience. Transform everyday skills into employer-ready assets.',
     ogType: 'article'
   },
+
   // Guides
   {
     path: '/guides',
@@ -224,6 +226,7 @@ const PAGES = [
     intro: 'A low ATS score means your resume is missing critical technical keywords, measurable achievements, or ATS-friendly formatting. Here is how to achieve a 90+ score.',
     ogType: 'article'
   },
+
   // Trust Pages
   {
     path: '/how-it-works',
@@ -363,20 +366,6 @@ for (const page of PAGES) {
     <script type="application/ld+json" id="seo-structured-data">${JSON.stringify(defaultSchema)}</script>
   `.trim();
 
-  const semanticBodyHtml = `
-    <main style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: system-ui, sans-serif;">
-      <header>
-        <h1 style="font-size: 2rem; font-weight: 800; color: #0f172a;">${page.h1}</h1>
-        <p style="font-size: 1rem; color: #475569; line-height: 1.6;">${page.intro}</p>
-      </header>
-      <nav aria-label="Quick Links" style="margin-top: 20px;">
-        <a href="/builder" style="color: #4f46e5; margin-right: 15px; font-weight: bold;">Open Resume Builder</a>
-        <a href="/ats-checker" style="color: #059669; margin-right: 15px; font-weight: bold;">Check ATS Score</a>
-        <a href="/resume-examples" style="color: #2563eb; margin-right: 15px; font-weight: bold;">Resume Examples</a>
-      </nav>
-    </main>
-  `.trim();
-
   let rendered = baseTemplate;
 
   // Replace Title & Description in head
@@ -384,16 +373,31 @@ for (const page of PAGES) {
   rendered = rendered.replace(/<meta\s+name="description"\s+content=".*?"\s*\/?>/i, '');
   rendered = rendered.replace('</head>', `  ${metaHtml}\n  </head>`);
 
-  // Insert fallback semantic body inside #root
-  rendered = rendered.replace('<div id="root"></div>', `<div id="root">${semanticBodyHtml}</div>`);
-
-  // Write target file for sub-routes
+  // For sub-pages, write static target index.html
   if (page.path !== '/') {
+    const semanticBodyHtml = `
+      <main style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: system-ui, sans-serif;">
+        <header>
+          <h1 style="font-size: 2rem; font-weight: 800; color: #0f172a;">${page.h1}</h1>
+          <p style="font-size: 1rem; color: #475569; line-height: 1.6;">${page.intro}</p>
+        </header>
+        <nav aria-label="Quick Links" style="margin-top: 20px;">
+          <a href="/builder" style="color: #4f46e5; margin-right: 15px; font-weight: bold;">Open Resume Builder</a>
+          <a href="/ats-checker" style="color: #059669; margin-right: 15px; font-weight: bold;">Check ATS Score</a>
+          <a href="/resume-examples" style="color: #2563eb; margin-right: 15px; font-weight: bold;">Resume Examples</a>
+        </nav>
+      </main>
+    `.trim();
+
+    const subPageRendered = rendered.replace('<div id="root"></div>', `<div id="root">${semanticBodyHtml}</div>`);
     const targetDir = path.join(DIST_DIR, page.path.replace(/^\//, ''));
     if (!fs.existsSync(targetDir)) {
       fs.mkdirSync(targetDir, { recursive: true });
     }
-    fs.writeFileSync(path.join(targetDir, 'index.html'), rendered, 'utf8');
+    fs.writeFileSync(path.join(targetDir, 'index.html'), subPageRendered, 'utf8');
+  } else {
+    // Keep root index.html clean so SPA mounts identical to local dev server
+    fs.writeFileSync(INDEX_HTML_PATH, rendered, 'utf8');
   }
 }
 
