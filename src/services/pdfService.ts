@@ -16,12 +16,12 @@ export function exportToVectorPdf(): void {
 export async function downloadPdfFromElement(elementId: string = 'resume-preview-sheet', filename: string = 'Resume.pdf'): Promise<void> {
   const safeFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
 
-  // 1. Wait for Google Fonts / web fonts to finish loading (with 1.5s timeout safety)
+  // 1. Wait for Google Fonts / web fonts to finish loading (with 1s timeout safety)
   if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
     try {
       await Promise.race([
         document.fonts.ready,
-        new Promise(r => setTimeout(r, 1500))
+        new Promise(r => setTimeout(r, 1000))
       ]);
     } catch (e) {
       console.warn('Font loading wait warning:', e);
@@ -39,12 +39,33 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
 
   if (!element) {
     console.error('Target element for PDF generation not found:', elementId);
-    window.print();
     return;
   }
 
-  // Helper function to convert target HTML element to high-res canvas and trigger direct browser save
-  const renderCanvasToPdf = async (targetEl: HTMLElement): Promise<boolean> => {
+  // Create temporary off-screen wrapper for un-transformed rendering
+  const tempWrapper = document.createElement('div');
+  tempWrapper.style.position = 'fixed';
+  tempWrapper.style.left = '-9999px';
+  tempWrapper.style.top = '0';
+  tempWrapper.style.width = '794px'; // 210mm at 96 DPI
+  tempWrapper.style.backgroundColor = '#ffffff';
+  tempWrapper.style.zIndex = '-9999';
+  tempWrapper.style.overflow = 'hidden';
+
+  const clone = element.cloneNode(true) as HTMLElement;
+  clone.style.transform = 'none';
+  clone.style.width = '794px';
+  clone.style.minHeight = '1123px';
+  clone.style.margin = '0';
+  clone.style.padding = '0';
+  clone.style.boxSizing = 'border-box';
+  clone.style.backgroundColor = '#ffffff';
+  clone.style.display = 'block';
+
+  tempWrapper.appendChild(clone);
+  document.body.appendChild(tempWrapper);
+
+  const generatePdfFromTarget = async (targetEl: HTMLElement): Promise<void> => {
     const canvas = await html2canvas(targetEl, {
       scale: 2, // High DPI resolution (192 DPI equivalent)
       useCORS: true,
@@ -52,6 +73,7 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
       logging: false,
       backgroundColor: '#ffffff',
       windowWidth: 794,
+      imageTimeout: 3000,
       onclone: (clonedDoc) => {
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach(el => {
@@ -89,41 +111,17 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
 
     // Direct Browser Download onto User's Computer
     pdf.save(safeFilename);
-    return true;
   };
 
-  // Create temporary off-screen wrapper for un-transformed rendering
-  const tempWrapper = document.createElement('div');
-  tempWrapper.style.position = 'fixed';
-  tempWrapper.style.left = '-9999px';
-  tempWrapper.style.top = '0';
-  tempWrapper.style.width = '794px'; // 210mm at 96 DPI
-  tempWrapper.style.backgroundColor = '#ffffff';
-  tempWrapper.style.zIndex = '-9999';
-  tempWrapper.style.overflow = 'hidden';
-
-  const clone = element.cloneNode(true) as HTMLElement;
-  clone.style.transform = 'none';
-  clone.style.width = '794px';
-  clone.style.minHeight = '1123px';
-  clone.style.margin = '0';
-  clone.style.padding = '0';
-  clone.style.boxSizing = 'border-box';
-  clone.style.backgroundColor = '#ffffff';
-
-  tempWrapper.appendChild(clone);
-  document.body.appendChild(tempWrapper);
-
   try {
-    await new Promise(resolve => setTimeout(resolve, 100));
-    await renderCanvasToPdf(clone);
+    await new Promise(resolve => setTimeout(resolve, 80));
+    await generatePdfFromTarget(clone);
   } catch (err) {
     console.warn('Off-screen clone PDF render failed, falling back to direct element capture:', err);
     try {
-      await renderCanvasToPdf(element);
+      await generatePdfFromTarget(element);
     } catch (directErr) {
       console.error('Direct PDF export error:', directErr);
-      window.print();
     }
   } finally {
     if (document.body.contains(tempWrapper)) {
