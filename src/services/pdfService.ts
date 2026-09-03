@@ -24,43 +24,6 @@ function convertOklchColor(colorStr: string): string {
 }
 
 /**
- * Extracts all CSS rules from document.styleSheets and <style> tags,
- * and converts all oklch() / oklab() color functions into standard RGB/Hex strings.
- */
-function getSanitizedGlobalCss(): string {
-  let fullCss = '';
-
-  try {
-    Array.from(document.styleSheets).forEach((sheet) => {
-      try {
-        const rules = sheet.cssRules || sheet.rules;
-        if (rules) {
-          Array.from(rules).forEach((rule) => {
-            fullCss += rule.cssText + '\n';
-          });
-        }
-      } catch (e) {
-        // Ignore CORS restricted sheets if any
-      }
-    });
-  } catch (e) {
-    console.warn('Error reading styleSheets:', e);
-  }
-
-  // Collect text from all <style> tags
-  document.querySelectorAll('style').forEach((styleEl) => {
-    fullCss += (styleEl.textContent || '') + '\n';
-  });
-
-  // Replace all oklch(...) and oklab(...) with browser-converted hex/rgb strings
-  if (fullCss.includes('oklch') || fullCss.includes('oklab')) {
-    fullCss = fullCss.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
-  }
-
-  return fullCss;
-}
-
-/**
  * Trigger native print dialog for vector PDF output
  */
 export function exportToVectorPdf(): void {
@@ -148,19 +111,6 @@ export async function downloadPdfFromElement(
     parentEl.style.webkitTransform = 'none';
   }
 
-  // Extract all document CSS rules and convert oklch/oklab colors to RGB/Hex for html2canvas
-  const sanitizedCss = getSanitizedGlobalCss();
-  const pdfStyleEl = document.createElement('style');
-  pdfStyleEl.id = 'pdf-oklch-sanitizer-style';
-  pdfStyleEl.textContent = sanitizedCss;
-  document.head.appendChild(pdfStyleEl);
-
-  // Temporarily disable external link stylesheets to force html2canvas to use sanitized style tag
-  const externalLinks = Array.from(document.querySelectorAll('link[rel="stylesheet"]')) as HTMLLinkElement[];
-  externalLinks.forEach((link) => {
-    link.disabled = true;
-  });
-
   try {
     // Brief 50ms pause for DOM reflow
     await new Promise((resolve) => setTimeout(resolve, 50));
@@ -174,6 +124,72 @@ export async function downloadPdfFromElement(
       windowWidth: 794,
       imageTimeout: 5000,
       onclone: (clonedDoc: Document) => {
+        // 1. Sanitize all <style> elements inside clonedDoc
+        const styleEls = clonedDoc.querySelectorAll('style');
+        styleEls.forEach((styleEl) => {
+          let cssText = styleEl.textContent || '';
+          if (cssText.includes('oklch') || cssText.includes('oklab')) {
+            cssText = cssText.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
+            styleEl.textContent = cssText;
+          }
+        });
+
+        // 2. Convert all <link rel="stylesheet"> elements in clonedDoc to inline <style> tags with sanitized CSS
+        const linkEls = clonedDoc.querySelectorAll('link[rel="stylesheet"]');
+        linkEls.forEach((link) => {
+          const href = (link as HTMLLinkElement).href;
+          try {
+            const matchingSheet = Array.from(document.styleSheets).find((s) => s.href === href);
+            let cssText = '';
+            if (matchingSheet) {
+              try {
+                const rules = matchingSheet.cssRules || matchingSheet.rules;
+                if (rules) {
+                  cssText = Array.from(rules).map((r) => r.cssText).join('\n');
+                }
+              } catch (e) {
+                // ignore
+              }
+            }
+            if (cssText) {
+              if (cssText.includes('oklch') || cssText.includes('oklab')) {
+                cssText = cssText.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
+              }
+              const inlineStyle = clonedDoc.createElement('style');
+              inlineStyle.textContent = cssText;
+              if (link.parentNode) {
+                link.parentNode.replaceChild(inlineStyle, link);
+              }
+            }
+          } catch (e) {
+            console.warn('Failed to inline stylesheet in clonedDoc:', e);
+          }
+        });
+
+        // 3. Convert element computed colors to RGB/Hex in clonedDoc
+        const sheetEl = clonedDoc.getElementById('resume-preview-sheet') || clonedDoc.querySelector('.print-area');
+        if (sheetEl) {
+          const allNodes = sheetEl.querySelectorAll('*');
+          allNodes.forEach((node) => {
+            const el = node as HTMLElement;
+            try {
+              const comp = window.getComputedStyle(el);
+              if (comp.color && (comp.color.includes('oklch') || comp.color.includes('oklab'))) {
+                el.style.color = convertOklchColor(comp.color);
+              }
+              if (comp.backgroundColor && (comp.backgroundColor.includes('oklch') || comp.backgroundColor.includes('oklab'))) {
+                el.style.backgroundColor = convertOklchColor(comp.backgroundColor);
+              }
+              if (comp.borderColor && (comp.borderColor.includes('oklch') || comp.borderColor.includes('oklab'))) {
+                el.style.borderColor = convertOklchColor(comp.borderColor);
+              }
+            } catch (e) {
+              // Ignore
+            }
+          });
+        }
+
+        // 4. Page break avoidance
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach((el) => {
           (el as HTMLElement).style.breakInside = 'avoid';
@@ -215,12 +231,6 @@ export async function downloadPdfFromElement(
     // Direct Browser Download onto User's Device
     pdf.save(safeFilename);
   } finally {
-    externalLinks.forEach((link) => {
-      link.disabled = false;
-    });
-    if (document.head.contains(pdfStyleEl)) {
-      document.head.removeChild(pdfStyleEl);
-    }
     if (parentEl) {
       parentEl.style.transform = originalTransform;
       parentEl.style.webkitTransform = originalWebkitTransform;
