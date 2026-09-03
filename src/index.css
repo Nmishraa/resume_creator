@@ -34,6 +34,24 @@
   }
 }
 
+/* Accessibility: High-Visibility Focus Outline for Keyboard Navigation */
+:focus-visible {
+  outline: 3px solid #0e8ce8 !important;
+  outline-offset: 2px !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #0e8ce8 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(14, 140, 232, 0.25) !important;
+}
+
 /* High-Contrast Legibility Rules for Accessible Text */
 .text-slate-400 {
   color: #475569; /* Upgrade light slate to slate-600 on light backgrounds for 4.5:1 contrast */

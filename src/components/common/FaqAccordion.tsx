@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ChevronDown, HelpCircle, Search, Sparkles, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { ChevronDown, HelpCircle, Search } from 'lucide-react';
 
 export interface FaqItem {
   question: string;
@@ -7,15 +7,43 @@ export interface FaqItem {
   category?: 'General' | 'ATS & Scoring' | 'AI & Templates' | 'Privacy';
 }
 
+const DEFAULT_HOMEPAGE_FAQS: FaqItem[] = [
+  {
+    question: 'How does Resume Craft guarantee ATS compatibility?',
+    answer: 'Resume Craft generates 100% parseable, single-column HTML structures rendered into clean vector PDFs. We do not use image elements or complex text boxes that confuse applicant tracking systems like Workday, Taleo, Greenhouse, or Lever.',
+    category: 'ATS & Scoring'
+  },
+  {
+    question: 'Is the PDF resume download completely free?',
+    answer: 'Yes! You can build, edit, audit, and download your high-resolution ATS vector PDF resume completely free without forced paywalls or hidden subscriptions.',
+    category: 'General'
+  },
+  {
+    question: 'How does the Google X-Y-Z AI bullet rewrite work?',
+    answer: 'Our AI bullet optimizer analyzes your experience descriptions and converts passive task lists into quantifiable accomplishment statements using Google’s formula: "Accomplished [X], as measured by [Y], by doing [Z]".',
+    category: 'AI & Templates'
+  },
+  {
+    question: 'Is my personal data and resume information private?',
+    answer: 'Your resume data is stored locally in your browser and processed securely. We do not sell your personal data or sell candidate lists to third-party recruiters.',
+    category: 'Privacy'
+  },
+  {
+    question: 'Can I upload an existing resume to audit its ATS score?',
+    answer: 'Yes! You can upload any existing PDF or Word resume. Our parser will extract your experience, skills, and education, calculate your real-time ATS match score, and highlight missing keywords.',
+    category: 'ATS & Scoring'
+  }
+];
+
 interface FaqAccordionProps {
-  items: FaqItem[];
+  items?: FaqItem[];
   title?: string;
   subtitle?: string;
   hideHeader?: boolean;
 }
 
 export const FaqAccordion: React.FC<FaqAccordionProps> = ({
-  items,
+  items = DEFAULT_HOMEPAGE_FAQS,
   title = 'Frequently Asked Questions',
   subtitle = 'Everything you need to know about ATS optimization, AI resume building, and data privacy.',
   hideHeader = false
@@ -167,7 +195,7 @@ export const FaqAccordion: React.FC<FaqAccordionProps> = ({
                 <button
                   type="button"
                   onClick={() => toggle(idx)}
-                  className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-brand-600 transition-colors text-sm sm:text-base cursor-pointer"
+                  className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-brand-600 transition-colors text-sm sm:text-base cursor-pointer focus-visible:ring-2 focus-visible:ring-brand-500"
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-3">
@@ -181,7 +209,7 @@ export const FaqAccordion: React.FC<FaqAccordionProps> = ({
 
                   <div className="flex items-center gap-2 shrink-0">
                     {item.category && (
-                      <span className="hidden md:inline text-[10px] uppercase font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+                      <span className="hidden md:inline text-xs uppercase font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
                         {item.category}
                       </span>
                     )}
