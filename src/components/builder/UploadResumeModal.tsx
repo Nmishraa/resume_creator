@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useResume } from '../../context/ResumeContext';
 import { extractTextFromFile, parseResumeContent, ExtractedResumeResult } from '../../services/resumeExtractor';
 import { downloadPdfFromElement, exportToVectorPdf } from '../../services/pdfService';
@@ -28,7 +29,8 @@ import {
   Globe,
   MapPin,
   Mail,
-  Phone
+  Phone,
+  Edit3
 } from 'lucide-react';
 import { ResumePreview } from './ResumePreview';
 
@@ -43,6 +45,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
   onClose,
   initialStep = 'upload'
 }) => {
+  const navigate = useNavigate();
   const { resume, setResume, updateFormatting } = useResume();
 
   const [step, setStep] = useState<'upload' | 'review' | 'template' | 'preview'>(
@@ -127,42 +130,54 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
     }
   };
 
-  // 3. Apply extracted data to active editor state cleanly
-  const handleApplyToResume = () => {
-    if (!editedData) return;
-
-    const appliedData: ResumeData = {
+  // Build full clean ResumeData object from current edited state
+  const buildCleanResumeData = (): ResumeData => {
+    return {
       ...emptyResumeData,
       id: `resume-${Date.now()}`,
-      title: `${editedData.personalInfo?.fullName || 'Uploaded'} Resume`,
+      title: `${editedData?.personalInfo?.fullName || 'Uploaded'} Resume`,
       updatedAt: new Date().toISOString(),
       personalInfo: {
-        fullName: editedData.personalInfo?.fullName || '',
-        jobTitle: editedData.personalInfo?.jobTitle || '',
-        email: editedData.personalInfo?.email || '',
-        phone: editedData.personalInfo?.phone || '',
-        location: editedData.personalInfo?.location || '',
-        website: editedData.personalInfo?.website || '',
-        linkedin: editedData.personalInfo?.linkedin || '',
-        github: editedData.personalInfo?.github || ''
+        fullName: editedData?.personalInfo?.fullName || '',
+        jobTitle: editedData?.personalInfo?.jobTitle || '',
+        email: editedData?.personalInfo?.email || '',
+        phone: editedData?.personalInfo?.phone || '',
+        location: editedData?.personalInfo?.location || '',
+        website: editedData?.personalInfo?.website || '',
+        linkedin: editedData?.personalInfo?.linkedin || '',
+        github: editedData?.personalInfo?.github || ''
       },
-      summary: editedData.summary || '',
-      experience: editedData.experience || [],
-      education: editedData.education || [],
-      skills: editedData.skills || [],
-      projects: editedData.projects || [],
-      certifications: editedData.certifications || [],
-      customSections: editedData.customSections || [],
+      summary: editedData?.summary || '',
+      experience: editedData?.experience || [],
+      education: editedData?.education || [],
+      skills: editedData?.skills || [],
+      projects: editedData?.projects || [],
+      certifications: editedData?.certifications || [],
+      customSections: editedData?.customSections || [],
       formatting: {
         ...resume.formatting
       }
     };
+  };
 
+  // 3. Apply extracted data to active editor state and move to template selection step
+  const handleApplyToResume = () => {
+    if (!editedData) return;
+    const appliedData = buildCleanResumeData();
     setResume(appliedData);
     setStep('template');
   };
 
-  // 4. Download PDF
+  // 4. Apply extracted data and open directly in main Builder creating workspace
+  const handleApplyAndEditInBuilder = () => {
+    if (!editedData) return;
+    const appliedData = buildCleanResumeData();
+    setResume(appliedData);
+    onClose();
+    navigate('/builder');
+  };
+
+  // 5. Download PDF
   const handleDownloadPdf = async () => {
     try {
       await downloadPdfFromElement('resume-preview-sheet', `${(resume.personalInfo.fullName || 'Resume').replace(/\s+/g, '_')}_Resume.pdf`);
@@ -266,7 +281,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
         {/* Action Button Navigation Header */}
         <div className="bg-slate-50 border-b border-slate-200 px-4 py-3 flex flex-wrap items-center justify-between gap-3">
           <div className="text-xs sm:text-sm font-bold text-slate-800 max-w-xl">
-            Already have a resume? Upload it, review extracted sections, and apply any template in seconds.
+            Already have a resume? Upload it, review extracted sections, and continue editing in the Builder.
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -281,15 +296,25 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
             </button>
 
             {editedData && (
-              <button
-                onClick={() => setStep('review')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
-                  step === 'review' ? 'bg-brand-600 text-white shadow-xs' : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-250'
-                }`}
-              >
-                <FileText size={14} className="text-emerald-600" />
-                <span>Review Extracted Data</span>
-              </button>
+              <>
+                <button
+                  onClick={() => setStep('review')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                    step === 'review' ? 'bg-brand-600 text-white shadow-xs' : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-250'
+                  }`}
+                >
+                  <FileText size={14} className="text-emerald-600" />
+                  <span>Review Extracted Data</span>
+                </button>
+
+                <button
+                  onClick={handleApplyAndEditInBuilder}
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Edit3 size={14} />
+                  <span>Open in Full Builder</span>
+                </button>
+              </>
             )}
 
             <button
@@ -393,7 +418,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                     <CheckCircle2 size={16} className="text-brand-600" />
                     <span>Resume Sections Extracted Successfully</span>
                   </h3>
-                  <p className="text-xs text-slate-600 mt-0.5">Review and tweak all extracted data before selecting a template.</p>
+                  <p className="text-xs text-slate-600 mt-0.5">Review data below or open directly in full Builder creating workspace.</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -915,13 +940,23 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   <span>Delete Uploaded Data</span>
                 </button>
 
-                <button
-                  onClick={handleApplyToResume}
-                  className="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
-                >
-                  <span>Apply &amp; Select Template</span>
-                  <ArrowRight size={14} />
-                </button>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={handleApplyAndEditInBuilder}
+                    className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                  >
+                    <Edit3 size={15} />
+                    <span>Apply &amp; Edit in Full Builder</span>
+                  </button>
+
+                  <button
+                    onClick={handleApplyToResume}
+                    className="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                  >
+                    <span>Choose Template Style</span>
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -1027,7 +1062,15 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
               </div>
 
               {/* Step Navigation */}
-              <div className="flex justify-end gap-3 pt-2">
+              <div className="flex justify-between gap-3 pt-2">
+                <button
+                  onClick={handleApplyAndEditInBuilder}
+                  className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                >
+                  <Edit3 size={15} />
+                  <span>Open in Full Builder Editor</span>
+                </button>
+
                 <button
                   onClick={() => setStep('preview')}
                   className="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
@@ -1047,13 +1090,26 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   Live Preview: Template &ldquo;{resume.formatting.template.toUpperCase()}&rdquo;
                 </span>
 
-                <button
-                  onClick={handleDownloadPdf}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
-                >
-                  <Download size={14} />
-                  <span>Download ATS-Friendly PDF</span>
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      onClose();
+                      navigate('/builder');
+                    }}
+                    className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
+                  >
+                    <Edit3 size={14} />
+                    <span>Open in Full Builder Workspace</span>
+                  </button>
+
+                  <button
+                    onClick={handleDownloadPdf}
+                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
+                  >
+                    <Download size={14} />
+                    <span>Download ATS-Friendly PDF</span>
+                  </button>
+                </div>
               </div>
 
               <div className="border border-slate-200 rounded-2xl overflow-hidden shadow-inner max-h-[550px] overflow-y-auto bg-slate-200 p-4">
