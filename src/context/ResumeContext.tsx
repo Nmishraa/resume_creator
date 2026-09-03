@@ -97,16 +97,21 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const saved = localStorage.getItem('resume_craft_active_resume');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Reset legacy demo data if present
+        if (parsed.personalInfo?.fullName === 'Alexander Wright') {
+          return emptyResumeData;
+        }
+        return parsed;
       } catch {}
     }
     return emptyResumeData;
   });
 
-  const [history, setHistory] = useState<ResumeData[]>([initialResumeData]);
+  const [history, setHistory] = useState<ResumeData[]>([emptyResumeData]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
 
-  const [savedResumes, setSavedResumes] = useState<ResumeData[]>([initialResumeData]);
+  const [savedResumes, setSavedResumes] = useState<ResumeData[]>([]);
   const [targetJobDescription, setTargetJobDescription] = useState<string>('');
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [lastSavedTime, setLastSavedTime] = useState<string | null>(null);
@@ -211,17 +216,15 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const addExperience = () => {
     const newExp = {
       id: `exp-${Date.now()}`,
-      role: 'Software Engineer',
-      company: 'Company Name',
-      location: 'City, State',
-      startDate: '2023',
-      endDate: 'Present',
-      current: true,
-      highlights: [
-        'Architected high-throughput service resulting in 30% latency reduction across 100k daily users.'
-      ]
+      role: '',
+      company: '',
+      location: '',
+      startDate: '',
+      endDate: '',
+      current: false,
+      highlights: ['']
     };
-    updateResume(prev => ({ ...prev, experience: [newExp, ...prev.experience] }));
+    updateResume(prev => ({ ...prev, experience: [...prev.experience, newExp] }));
   };
 
   const updateExperience = (id: string, updates: Partial<ResumeData['experience'][0]>) => {
@@ -242,12 +245,12 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const addEducation = () => {
     const newEdu = {
       id: `edu-${Date.now()}`,
-      degree: 'B.S. in Computer Science',
-      institution: 'University Name',
-      location: 'City, State',
-      startDate: '2019',
-      endDate: '2023',
-      highlights: ['Relevant coursework in Software Engineering and Data Structures']
+      degree: '',
+      institution: '',
+      location: '',
+      startDate: '',
+      endDate: '',
+      highlights: []
     };
     updateResume(prev => ({ ...prev, education: [...prev.education, newEdu] }));
   };
@@ -270,8 +273,8 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const addSkillCategory = () => {
     const newCategory = {
       id: `skill-${Date.now()}`,
-      category: 'New Skill Category',
-      items: ['JavaScript', 'Python', 'Git']
+      category: '',
+      items: []
     };
     updateResume(prev => ({ ...prev, skills: [...prev.skills, newCategory] }));
   };
@@ -294,15 +297,13 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const addProject = () => {
     const newProj = {
       id: `proj-${Date.now()}`,
-      title: 'New Featured Project',
-      subtitle: 'Full-Stack Application',
-      link: 'https://github.com',
-      startDate: '2024',
-      endDate: '2024',
-      technologies: ['React', 'TypeScript', 'Node.js'],
-      highlights: [
-        'Built scalable web application handling 5,000 requests per minute with sub-100ms response time.'
-      ]
+      title: '',
+      subtitle: '',
+      link: '',
+      startDate: '',
+      endDate: '',
+      technologies: [],
+      highlights: []
     };
     updateResume(prev => ({ ...prev, projects: [...prev.projects, newProj] }));
   };

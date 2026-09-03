@@ -550,7 +550,7 @@ export const EditorForm: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => {
-                          const newBullets = [...exp.highlights, 'Architected scalable microservices, reducing API latency by 35% across 100k+ active users.'];
+                          const newBullets = [...exp.highlights, ''];
                           updateExperience(exp.id, { highlights: newBullets });
                         }}
                         className="text-sm text-brand-600 font-bold hover:text-brand-800 flex items-center gap-1 cursor-pointer"
@@ -668,7 +668,7 @@ export const EditorForm: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => {
-                              const newHighlights = [...proj.highlights, 'Built full-stack web application serving 500+ active users.'];
+                              const newHighlights = [...proj.highlights, ''];
                               updateProject(proj.id, { highlights: newHighlights });
                             }}
                             className="text-sm text-brand-600 font-bold flex items-center gap-1 cursor-pointer"

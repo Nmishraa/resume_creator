@@ -227,13 +227,13 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
     if (!editedData) return;
     const newExp: ExperienceItem = {
       id: `exp-${Date.now()}`,
-      role: 'Software Role / Title',
-      company: 'Company Name',
-      location: 'City, State',
-      startDate: '2022',
-      endDate: 'Present',
-      current: true,
-      highlights: ['Key accomplishment or metric...']
+      role: '',
+      company: '',
+      location: '',
+      startDate: '',
+      endDate: '',
+      current: false,
+      highlights: ['']
     };
     setEditedData({
       ...editedData,
@@ -253,11 +253,11 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
     if (!editedData) return;
     const newEdu: EducationItem = {
       id: `edu-${Date.now()}`,
-      degree: 'B.S. in Computer Science',
-      institution: 'University Name',
-      location: 'City, State',
-      startDate: '2018',
-      endDate: '2022',
+      degree: '',
+      institution: '',
+      location: '',
+      startDate: '',
+      endDate: '',
       highlights: []
     };
     setEditedData({
