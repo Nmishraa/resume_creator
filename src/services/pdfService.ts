@@ -17,12 +17,12 @@ export async function downloadPdfFromElement(
   const cleanName = filename.replace(/\.pdf$/i, '').trim();
   const safeFilename = `${cleanName || 'Resume'}.pdf`;
 
-  // 1. Wait for Google Fonts / web fonts to finish loading (with 1s timeout safety)
+  // 1. Wait for Google Fonts / web fonts to finish loading (with max 500ms timeout)
   if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
     try {
       await Promise.race([
         document.fonts.ready,
-        new Promise((resolve) => setTimeout(resolve, 1000))
+        new Promise((resolve) => setTimeout(resolve, 500))
       ]);
     } catch (e) {
       console.warn('Font loading wait warning:', e);
@@ -41,12 +41,10 @@ export async function downloadPdfFromElement(
   }
 
   if (!element) {
-    const errorMsg = `Target element for PDF generation not found (#${elementId}).`;
-    console.error(errorMsg);
-    throw new Error(errorMsg);
+    throw new Error(`Target preview element (#${elementId}) not found in document.`);
   }
 
-  // 3. Lazy-load PDF libraries (jsPDF and html2canvas) on demand to keep initial homepage bundle light
+  // 3. Dynamic import of jsPDF and html2canvas
   const [jsPdfModule, html2CanvasModule] = await Promise.all([
     import('jspdf'),
     import('html2canvas')
@@ -64,24 +62,23 @@ export async function downloadPdfFromElement(
     html2CanvasModule;
 
   if (typeof jsPDF !== 'function') {
-    throw new Error(`Failed to initialize jsPDF constructor. Type received: ${typeof jsPDF}`);
+    throw new Error(`jsPDF library failed to load (received ${typeof jsPDF}).`);
   }
 
   if (typeof html2canvas !== 'function') {
-    throw new Error(`Failed to initialize html2canvas function. Type received: ${typeof html2canvas}`);
+    throw new Error(`html2canvas library failed to load (received ${typeof html2canvas}).`);
   }
 
-  // 4. Create off-screen container for rendering un-transformed DOM clone
-  const tempWrapper = document.createElement('div');
-  tempWrapper.style.position = 'fixed';
-  tempWrapper.style.left = '-9999px';
-  tempWrapper.style.top = '0';
-  tempWrapper.style.width = '794px'; // A4 210mm at 96 DPI
-  tempWrapper.style.backgroundColor = '#ffffff';
-  tempWrapper.style.zIndex = '99999';
-  tempWrapper.style.opacity = '1';
-  tempWrapper.style.visibility = 'visible';
-  tempWrapper.style.overflow = 'hidden';
+  // 4. Create isolated visible container positioned behind viewport for clean rendering
+  const container = document.createElement('div');
+  container.style.position = 'absolute';
+  container.style.left = '0';
+  container.style.top = '0';
+  container.style.width = '794px'; // A4 width at 96 DPI
+  container.style.zIndex = '-99999';
+  container.style.opacity = '1';
+  container.style.pointerEvents = 'none';
+  container.style.backgroundColor = '#ffffff';
 
   const clone = element.cloneNode(true) as HTMLElement;
   clone.style.display = 'block';
@@ -89,34 +86,33 @@ export async function downloadPdfFromElement(
   clone.style.opacity = '1';
   clone.style.transform = 'none';
   clone.style.width = '794px';
-  clone.style.minHeight = '1123px'; // A4 height at 96 DPI
+  clone.style.minHeight = '1123px';
   clone.style.margin = '0';
   clone.style.padding = '0';
   clone.style.boxSizing = 'border-box';
   clone.style.backgroundColor = '#ffffff';
 
-  // Unhide any hidden children inside clone (e.g. if responsive layout hid parent)
+  // Unhide any hidden children inside clone
   const hiddenChildren = clone.querySelectorAll('.hidden');
   hiddenChildren.forEach((child) => {
     (child as HTMLElement).classList.remove('hidden');
     (child as HTMLElement).style.display = 'block';
   });
 
-  tempWrapper.appendChild(clone);
-  document.body.appendChild(tempWrapper);
+  container.appendChild(clone);
+  document.body.appendChild(container);
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 150));
 
-    // Render off-screen clone with html2canvas
     const canvas = await html2canvas(clone, {
       scale: 2, // 192 DPI high resolution
       useCORS: true,
-      allowTaint: false, // Prevents SecurityError on canvas export
+      allowTaint: true,
       logging: false,
       backgroundColor: '#ffffff',
       windowWidth: 794,
-      imageTimeout: 3000,
+      imageTimeout: 5000,
       onclone: (clonedDoc: Document) => {
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach((el) => {
@@ -125,6 +121,10 @@ export async function downloadPdfFromElement(
         });
       }
     });
+
+    if (!canvas || canvas.width === 0 || canvas.height === 0) {
+      throw new Error('html2canvas produced an empty canvas.');
+    }
 
     const imgData = canvas.toDataURL('image/png', 1.0);
     const pdf = new jsPDF({
@@ -152,12 +152,11 @@ export async function downloadPdfFromElement(
       heightLeft -= pageHeight;
     }
 
-    // Direct Browser Download onto User's Computer using jsPDF save
+    // Direct Browser Download
     pdf.save(safeFilename);
-
   } finally {
-    if (document.body.contains(tempWrapper)) {
-      document.body.removeChild(tempWrapper);
+    if (document.body.contains(container)) {
+      document.body.removeChild(container);
     }
   }
 }
