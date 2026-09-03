@@ -439,7 +439,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                     <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                       <div className="h-full bg-brand-600 transition-all duration-300" style={{ width: `${uploadProgress}%` }}></div>
                     </div>
-                    <span className="text-[11px] font-bold text-brand-700">Extracting &amp; parsing all sections ({uploadProgress}%)...</span>
+                    <span className="text-xs font-semibold text-brand-700">Extracting &amp; parsing all sections ({uploadProgress}%)...</span>
                   </div>
                 )}
               </div>
@@ -522,7 +522,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Full Name</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
                       <input
                         type="text"
                         value={editedData.personalInfo?.fullName || ''}
@@ -532,7 +532,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Job Title</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Job Title</label>
                       <input
                         type="text"
                         value={editedData.personalInfo?.jobTitle || ''}
@@ -542,7 +542,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Email Address</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
                       <input
                         type="email"
                         value={editedData.personalInfo?.email || ''}
@@ -552,7 +552,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Phone Number</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Phone Number</label>
                       <input
                         type="text"
                         value={editedData.personalInfo?.phone || ''}
@@ -562,7 +562,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Location</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Location</label>
                       <input
                         type="text"
                         value={editedData.personalInfo?.location || ''}
@@ -572,7 +572,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Website / Portfolio</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Website / Portfolio</label>
                       <input
                         type="text"
                         value={editedData.personalInfo?.website || ''}
@@ -582,7 +582,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">LinkedIn Profile</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">LinkedIn Profile</label>
                       <input
                         type="text"
                         value={editedData.personalInfo?.linkedin || ''}
@@ -592,7 +592,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">GitHub Profile</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">GitHub Profile</label>
                       <input
                         type="text"
                         value={editedData.personalInfo?.github || ''}
@@ -655,7 +655,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Job Role</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Job Role</label>
                           <input
                             type="text"
                             value={exp.role}
@@ -668,7 +668,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Company / Employer</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Company / Employer</label>
                           <input
                             type="text"
                             value={exp.company}
@@ -681,7 +681,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Location</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Location</label>
                           <input
                             type="text"
                             value={exp.location || ''}
@@ -694,7 +694,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Date Range</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Date Range</label>
                           <div className="flex gap-2">
                             <input
                               type="text"
@@ -724,7 +724,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
 
                       {/* Bullet points */}
                       <div className="space-y-1.5 pt-2">
-                        <label className="block text-[11px] font-bold text-slate-700">Key Accomplishments (One per line)</label>
+                        <label className="block text-xs font-semibold text-slate-700">Key Accomplishments (One per line)</label>
                         <textarea
                           rows={3}
                           value={(exp.highlights || []).join('\n')}
@@ -775,7 +775,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Degree / Certification</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Degree / Certification</label>
                           <input
                             type="text"
                             value={edu.degree}
@@ -788,7 +788,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Institution / School</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Institution / School</label>
                           <input
                             type="text"
                             value={edu.institution}
@@ -801,7 +801,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Location</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Location</label>
                           <input
                             type="text"
                             value={edu.location || ''}
@@ -814,7 +814,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Graduation Year</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Graduation Year</label>
                           <input
                             type="text"
                             value={edu.endDate || ''}
@@ -845,7 +845,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   {(editedData.skills || []).map((cat, catIdx) => (
                     <div key={cat.id || catIdx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">Category Title</label>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Category Title</label>
                         <input
                           type="text"
                           value={cat.category}
@@ -859,7 +859,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">Skill Items (Comma Separated)</label>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Skill Items (Comma Separated)</label>
                         <textarea
                           rows={2}
                           value={cat.items.join(', ')}
@@ -890,7 +890,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                     <div key={proj.id || projIdx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Project Title</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Project Title</label>
                           <input
                             type="text"
                             value={proj.title}
@@ -903,7 +903,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">Subtitle / Tech Stack</label>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">Subtitle / Tech Stack</label>
                           <input
                             type="text"
                             value={proj.subtitle || ''}
@@ -934,7 +934,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   {(editedData.certifications || []).map((cert, certIdx) => (
                     <div key={cert.id || certIdx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">Certification Name</label>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Certification Name</label>
                         <input
                           type="text"
                           value={cert.name}
@@ -947,7 +947,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">Issuer</label>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Issuer</label>
                         <input
                           type="text"
                           value={cert.issuer || ''}
@@ -960,7 +960,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">Date</label>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Date</label>
                         <input
                           type="text"
                           value={cert.date || ''}

@@ -219,7 +219,7 @@ export const ImportModal: React.FC<ImportModalProps> = ({ isOpen, onClose }) => 
               >
                 <div>
                   <div className="text-xs font-bold text-slate-900">Senior Full-Stack & AI Engineer</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">6+ YOE, distributed systems, GCP, 99.8% ATS score</div>
+                  <div className="text-xs text-slate-500 mt-0.5">6+ YOE, distributed systems, GCP, 99.8% ATS score</div>
                 </div>
                 <span className="text-xs text-brand-600 font-bold">Load →</span>
               </button>
@@ -230,7 +230,7 @@ export const ImportModal: React.FC<ImportModalProps> = ({ isOpen, onClose }) => 
               >
                 <div>
                   <div className="text-xs font-bold text-slate-900">Fresh CS Graduate / Entry Level</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">Academic coursework, internship experience, GPA, projects</div>
+                  <div className="text-xs text-slate-500 mt-0.5">Academic coursework, internship experience, GPA, projects</div>
                 </div>
                 <span className="text-xs text-brand-600 font-bold">Load →</span>
               </button>
@@ -241,7 +241,7 @@ export const ImportModal: React.FC<ImportModalProps> = ({ isOpen, onClose }) => 
               >
                 <div>
                   <div className="text-xs font-bold text-slate-900">Technical Product Manager (TPM)</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">Product roadmap, KPIs, enterprise revenue, cross-functional leadership</div>
+                  <div className="text-xs text-slate-500 mt-0.5">Product roadmap, KPIs, enterprise revenue, cross-functional leadership</div>
                 </div>
                 <span className="text-xs text-brand-600 font-bold">Load →</span>
               </button>

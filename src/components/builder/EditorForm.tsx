@@ -184,26 +184,26 @@ export const EditorForm: React.FC = () => {
     <div className="flex flex-col min-h-full pb-24">
       
       {/* 1. TOP PROGRESS STEPPER INDICATOR */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-3 sm:p-4 shadow-xs mb-5 space-y-3">
+      <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs mb-5 space-y-3.5">
         {/* Step Title Header & Progress % */}
         <div className="flex items-center justify-between gap-2">
           <div>
-            <span className="text-[10px] font-extrabold uppercase tracking-wider text-brand-600">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-brand-600">
               Step {currentStep} of {STEPS.length}
             </span>
-            <h2 className="text-sm sm:text-base font-extrabold text-slate-900 leading-tight">
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">
               {currentStepObj.name}
             </h2>
           </div>
           <div className="text-right">
-            <span className="text-xs font-mono font-bold text-slate-700">{progressPercent}% Completed</span>
+            <span className="text-xs sm:text-sm font-mono font-bold text-slate-700">{progressPercent}% Completed</span>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+        <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
           <div
-            className="bg-brand-600 h-2 rounded-full transition-all duration-300 ease-out"
+            className="bg-brand-600 h-2.5 rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -211,7 +211,6 @@ export const EditorForm: React.FC = () => {
         {/* Step Buttons Row */}
         <div className="grid grid-cols-7 gap-1 pt-1">
           {STEPS.map((step) => {
-            const Icon = step.icon;
             const isCurrent = step.id === currentStep;
             const isCompleted = step.id < currentStep;
 
@@ -225,24 +224,24 @@ export const EditorForm: React.FC = () => {
                 }}
                 aria-current={isCurrent ? 'step' : undefined}
                 aria-label={`Go to step ${step.id}: ${step.name}`}
-                className={`flex flex-col items-center justify-center py-2 px-1 rounded-xl transition-all cursor-pointer ${
+                className={`flex flex-col items-center justify-center py-2.5 px-1 rounded-xl transition-all cursor-pointer ${
                   isCurrent
-                    ? 'bg-brand-50 border-2 border-brand-600 text-brand-900 shadow-xs'
+                    ? 'bg-brand-50 border-2 border-brand-600 text-brand-950 shadow-xs'
                     : isCompleted
-                    ? 'bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100'
-                    : 'bg-white border border-transparent text-slate-400 hover:text-slate-600 hover:bg-slate-50'
+                    ? 'bg-slate-50 border border-slate-200 text-slate-800 hover:bg-slate-100'
+                    : 'bg-white border border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
                   isCurrent
                     ? 'bg-brand-600 text-white'
                     : isCompleted
                     ? 'bg-emerald-500 text-white'
-                    : 'bg-slate-200 text-slate-600'
+                    : 'bg-slate-200 text-slate-700'
                 }`}>
-                  {isCompleted ? <Check size={12} /> : step.id}
+                  {isCompleted ? <Check size={14} /> : step.id}
                 </div>
-                <span className="text-[10px] font-bold mt-1 truncate max-w-full hidden md:inline">
+                <span className="text-xs font-bold mt-1.5 truncate max-w-full hidden md:inline">
                   {step.shortName}
                 </span>
               </button>
@@ -258,18 +257,18 @@ export const EditorForm: React.FC = () => {
         {currentStep === 1 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             {/* Primary Details Card */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                <User className="text-brand-600 shrink-0" size={18} />
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3.5">
+                <User className="text-brand-600 shrink-0" size={20} />
                 <div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-wide text-slate-800">Primary Contact Details</h3>
-                  <p className="text-[11px] text-slate-500">Essential information that appears at the top of your resume.</p>
+                  <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">Primary Contact Details</h3>
+                  <p className="text-xs text-slate-500">Essential information that appears at the top of your resume.</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="field-fullName" className="text-xs font-bold text-slate-700 block mb-1">
+                  <label htmlFor="field-fullName" className="text-sm font-bold text-slate-700 block mb-1.5">
                     Full Name <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -282,17 +281,17 @@ export const EditorForm: React.FC = () => {
                       if (e.target.value.trim()) setNameError(false);
                     }}
                     placeholder="e.g. Alexander Wright"
-                    className={`w-full text-xs p-2.5 bg-slate-50/60 border rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all ${
+                    className={`w-full text-sm p-3 bg-slate-50/60 border rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all ${
                       nameError ? 'border-rose-500 ring-2 ring-rose-500/20 bg-rose-50/30' : 'border-slate-200'
                     }`}
                   />
                   {nameError && (
-                    <span className="text-[11px] font-semibold text-rose-600 mt-1 block">Please enter your full name to continue.</span>
+                    <span className="text-xs font-semibold text-rose-600 mt-1 block">Please enter your full name to continue.</span>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="field-jobTitle" className="text-xs font-bold text-slate-700 block mb-1">
+                  <label htmlFor="field-jobTitle" className="text-sm font-bold text-slate-700 block mb-1.5">
                     Target Job Title
                   </label>
                   <input
@@ -301,45 +300,45 @@ export const EditorForm: React.FC = () => {
                     value={resume.personalInfo.jobTitle}
                     onChange={(e) => updatePersonalInfo('jobTitle', e.target.value)}
                     placeholder="e.g. Senior Full-Stack Engineer"
-                    className="w-full text-xs p-2.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label htmlFor="field-email" className="text-xs font-bold text-slate-700 block mb-1">Email Address</label>
+                  <label htmlFor="field-email" className="text-sm font-bold text-slate-700 block mb-1.5">Email Address</label>
                   <input
                     id="field-email"
                     type="email"
                     value={resume.personalInfo.email}
                     onChange={(e) => updatePersonalInfo('email', e.target.value)}
                     placeholder="alex@example.com"
-                    className="w-full text-xs p-2.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="field-phone" className="text-xs font-bold text-slate-700 block mb-1">Phone Number</label>
+                  <label htmlFor="field-phone" className="text-sm font-bold text-slate-700 block mb-1.5">Phone Number</label>
                   <input
                     id="field-phone"
                     type="tel"
                     value={resume.personalInfo.phone}
                     onChange={(e) => updatePersonalInfo('phone', e.target.value)}
                     placeholder="+1 (555) 000-0000"
-                    className="w-full text-xs p-2.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="field-location" className="text-xs font-bold text-slate-700 block mb-1">Location</label>
+                  <label htmlFor="field-location" className="text-sm font-bold text-slate-700 block mb-1.5">Location</label>
                   <input
                     id="field-location"
                     type="text"
                     value={resume.personalInfo.location}
                     onChange={(e) => updatePersonalInfo('location', e.target.value)}
                     placeholder="San Francisco, CA"
-                    className="w-full text-xs p-2.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
               </div>
@@ -350,48 +349,48 @@ export const EditorForm: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowMorePersonal(!showMorePersonal)}
-                className="w-full flex items-center justify-between p-4 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
+                className="w-full flex items-center justify-between p-4.5 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
               >
-                <span className="text-xs font-bold text-slate-700 flex items-center gap-2">
-                  <SlidersHorizontal size={14} className="text-brand-600" />
+                <span className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                  <SlidersHorizontal size={16} className="text-brand-600" />
                   More options (Social & Portfolio links)
                 </span>
-                {showMorePersonal ? <ChevronUp size={16} className="text-slate-400" /> : <ChevronDown size={16} className="text-slate-400" />}
+                {showMorePersonal ? <ChevronUp size={18} className="text-slate-400" /> : <ChevronDown size={18} className="text-slate-400" />}
               </button>
 
               {showMorePersonal && (
-                <div className="p-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-3.5 animate-in fade-in duration-150">
+                <div className="p-5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-4 animate-in fade-in duration-150">
                   <div>
-                    <label htmlFor="field-linkedin" className="text-xs font-bold text-slate-700 block mb-1">LinkedIn URL</label>
+                    <label htmlFor="field-linkedin" className="text-sm font-bold text-slate-700 block mb-1.5">LinkedIn URL</label>
                     <input
                       id="field-linkedin"
                       type="text"
                       value={resume.personalInfo.linkedin}
                       onChange={(e) => updatePersonalInfo('linkedin', e.target.value)}
                       placeholder="linkedin.com/in/username"
-                      className="w-full text-xs p-2.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                      className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                     />
                   </div>
                   <div>
-                    <label htmlFor="field-github" className="text-xs font-bold text-slate-700 block mb-1">GitHub Profile</label>
+                    <label htmlFor="field-github" className="text-sm font-bold text-slate-700 block mb-1.5">GitHub Profile</label>
                     <input
                       id="field-github"
                       type="text"
                       value={resume.personalInfo.github}
                       onChange={(e) => updatePersonalInfo('github', e.target.value)}
                       placeholder="github.com/username"
-                      className="w-full text-xs p-2.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                      className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                     />
                   </div>
                   <div>
-                    <label htmlFor="field-website" className="text-xs font-bold text-slate-700 block mb-1">Personal Website</label>
+                    <label htmlFor="field-website" className="text-sm font-bold text-slate-700 block mb-1.5">Personal Website</label>
                     <input
                       id="field-website"
                       type="text"
                       value={resume.personalInfo.website}
                       onChange={(e) => updatePersonalInfo('website', e.target.value)}
                       placeholder="portfolio.dev"
-                      className="w-full text-xs p-2.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                      className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                     />
                   </div>
                 </div>
@@ -403,22 +402,22 @@ export const EditorForm: React.FC = () => {
         {/* STEP 2: PROFESSIONAL SUMMARY */}
         {currentStep === 2 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-3">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
-                <div className="flex items-center gap-2">
-                  <FileText className="text-brand-600 shrink-0" size={18} />
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 flex-wrap gap-2">
+                <div className="flex items-center gap-2.5">
+                  <FileText className="text-brand-600 shrink-0" size={20} />
                   <div>
-                    <h3 className="text-xs font-extrabold uppercase tracking-wide text-slate-800">Professional Summary</h3>
-                    <p className="text-[11px] text-slate-500">2-4 sentences showcasing your domain expertise &amp; key accomplishments.</p>
+                    <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">Professional Summary</h3>
+                    <p className="text-xs text-slate-500">2-4 sentences showcasing your domain expertise &amp; key accomplishments.</p>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleAiGenerateSummary}
-                  className="flex items-center gap-1.5 text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-xl transition-colors border border-purple-200 cursor-pointer shadow-2xs"
+                  className="flex items-center gap-1.5 text-sm font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 px-3.5 py-2 rounded-xl transition-colors border border-purple-200 cursor-pointer shadow-2xs"
                 >
-                  <Sparkles size={13} className="text-purple-600" />
+                  <Sparkles size={15} className="text-purple-600" />
                   <span>AI Generate Summary</span>
                 </button>
               </div>
@@ -428,11 +427,11 @@ export const EditorForm: React.FC = () => {
                 value={resume.summary}
                 onChange={(e) => updateSummary(e.target.value)}
                 placeholder="Results-driven Senior Software Engineer with 5+ years of experience engineering high-throughput distributed backend services and responsive frontends..."
-                className="w-full text-xs p-3.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 leading-relaxed"
+                className="w-full text-sm p-3.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 leading-relaxed"
               />
 
-              <div className="bg-blue-50/70 p-3 rounded-xl border border-blue-100 text-xs text-blue-900 flex items-start gap-2">
-                <Info size={15} className="text-blue-600 shrink-0 mt-0.5" />
+              <div className="bg-blue-50/70 p-3.5 rounded-xl border border-blue-100 text-sm text-blue-900 flex items-start gap-2.5">
+                <Info size={16} className="text-blue-600 shrink-0 mt-0.5" />
                 <span><strong>Pro Tip:</strong> Focus on quantitative metrics (e.g. "Increased platform throughput by 40%"). Keep sentences active and concise.</span>
               </div>
             </div>
@@ -442,127 +441,127 @@ export const EditorForm: React.FC = () => {
         {/* STEP 3: WORK EXPERIENCE */}
         {currentStep === 3 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <div className="flex items-center gap-2">
-                  <Briefcase className="text-brand-600 shrink-0" size={18} />
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
+                <div className="flex items-center gap-2.5">
+                  <Briefcase className="text-brand-600 shrink-0" size={20} />
                   <div>
-                    <h3 className="text-xs font-extrabold uppercase tracking-wide text-slate-800">
+                    <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">
                       Work Experience ({resume.experience.length})
                     </h3>
-                    <p className="text-[11px] text-slate-500">List work history in reverse chronological order.</p>
+                    <p className="text-xs text-slate-500">List work history in reverse chronological order.</p>
                   </div>
                 </div>
               </div>
 
               {/* Google X-Y-Z Rule Banner */}
-              <div className="bg-emerald-50/70 p-3 rounded-xl border border-emerald-200 text-xs text-emerald-950 flex items-center gap-2">
-                <Sparkles size={15} className="text-emerald-600 shrink-0" />
+              <div className="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-200 text-sm text-emerald-950 flex items-center gap-2.5">
+                <Sparkles size={16} className="text-emerald-600 shrink-0" />
                 <span><strong>Google X-Y-Z Rule:</strong> "Accomplished [X], as measured by [Y], by doing [Z]". Use the AI polish icon on bullets!</span>
               </div>
 
               {/* Roles List */}
               {resume.experience.map((exp, expIdx) => (
-                <div key={exp.id} className="p-4 bg-slate-50/70 border border-slate-200 rounded-2xl space-y-3 shadow-2xs">
+                <div key={exp.id} className="p-4 sm:p-5 bg-slate-50/70 border border-slate-200 rounded-2xl space-y-3.5 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-extrabold text-slate-800">Position #{expIdx + 1}</span>
+                    <span className="text-sm font-extrabold text-slate-800">Position #{expIdx + 1}</span>
                     <button
                       type="button"
                       onClick={() => removeExperience(exp.id)}
-                      className="text-rose-500 hover:text-rose-700 p-1 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                      className="text-rose-500 hover:text-rose-700 p-1.5 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
                       title="Remove experience"
                     >
-                      <Trash2 size={15} />
+                      <Trash2 size={16} />
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Job Title</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">Job Title</label>
                       <input
                         type="text"
                         value={exp.role}
                         onChange={(e) => updateExperience(exp.id, { role: e.target.value })}
                         placeholder="Senior Software Engineer"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Company / Organization</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">Company / Organization</label>
                       <input
                         type="text"
                         value={exp.company}
                         onChange={(e) => updateExperience(exp.id, { company: e.target.value })}
                         placeholder="Google / Stripe"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Start Date</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">Start Date</label>
                       <input
                         type="text"
                         value={exp.startDate}
                         onChange={(e) => updateExperience(exp.id, { startDate: e.target.value })}
                         placeholder="2022-03"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">End Date</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">End Date</label>
                       <input
                         type="text"
                         disabled={exp.current}
                         value={exp.current ? 'Present' : exp.endDate}
                         onChange={(e) => updateExperience(exp.id, { endDate: e.target.value })}
                         placeholder="2024-06"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500 disabled:bg-slate-100 disabled:text-slate-400"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500 disabled:bg-slate-100 disabled:text-slate-400"
                       />
                     </div>
-                    <div className="flex items-center pt-5">
-                      <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 cursor-pointer">
+                    <div className="flex items-center pt-6">
+                      <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 cursor-pointer">
                         <input
                           type="checkbox"
                           checked={exp.current}
                           onChange={(e) => updateExperience(exp.id, { current: e.target.checked })}
-                          className="rounded text-brand-600 focus:ring-brand-500"
+                          className="rounded text-brand-600 focus:ring-brand-500 w-4 h-4"
                         />
                         <span>Current Role</span>
                       </label>
                     </div>
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Location</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">Location</label>
                       <input
                         type="text"
                         value={exp.location}
                         onChange={(e) => updateExperience(exp.id, { location: e.target.value })}
                         placeholder="San Francisco, CA"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
                       />
                     </div>
                   </div>
 
                   {/* Bullet Points */}
                   <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <label className="text-[11px] font-extrabold text-slate-700 uppercase tracking-wide">Key Accomplishments</label>
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wide">Key Accomplishments</label>
                       <button
                         type="button"
                         onClick={() => {
                           const newBullets = [...exp.highlights, 'Architected scalable microservices, reducing API latency by 35% across 100k+ active users.'];
                           updateExperience(exp.id, { highlights: newBullets });
                         }}
-                        className="text-xs text-brand-600 font-bold hover:text-brand-800 flex items-center gap-1 cursor-pointer"
+                        className="text-sm text-brand-600 font-bold hover:text-brand-800 flex items-center gap-1 cursor-pointer"
                       >
-                        <Plus size={13} /> Add Bullet Point
+                        <Plus size={15} /> Add Bullet Point
                       </button>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                       {exp.highlights.map((bullet, bIdx) => (
-                        <div key={bIdx} className="flex items-start gap-1.5">
+                        <div key={bIdx} className="flex items-start gap-2">
                           <textarea
                             rows={2}
                             value={bullet}
@@ -571,15 +570,15 @@ export const EditorForm: React.FC = () => {
                               updated[bIdx] = e.target.value;
                               updateExperience(exp.id, { highlights: updated });
                             }}
-                            className="flex-1 text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500 leading-snug"
+                            className="flex-1 text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500 leading-snug"
                           />
                           <button
                             type="button"
                             onClick={() => handleAiPolishBullet(exp.id, bIdx, bullet)}
-                            className="p-2 text-purple-600 hover:bg-purple-50 rounded-xl border border-purple-200 bg-white transition-colors cursor-pointer shrink-0"
+                            className="p-2.5 text-purple-600 hover:bg-purple-50 rounded-xl border border-purple-200 bg-white transition-colors cursor-pointer shrink-0"
                             title="AI Polish with Google X-Y-Z Formula"
                           >
-                            <Sparkles size={14} className={enhancingBulletKey === `${exp.id}-${bIdx}` ? 'animate-spin' : ''} />
+                            <Sparkles size={16} className={enhancingBulletKey === `${exp.id}-${bIdx}` ? 'animate-spin' : ''} />
                           </button>
                           <button
                             type="button"
@@ -587,10 +586,10 @@ export const EditorForm: React.FC = () => {
                               const updated = exp.highlights.filter((_, idx) => idx !== bIdx);
                               updateExperience(exp.id, { highlights: updated });
                             }}
-                            className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl border border-slate-200 bg-white transition-colors cursor-pointer shrink-0"
+                            className="p-2.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl border border-slate-200 bg-white transition-colors cursor-pointer shrink-0"
                             title="Delete bullet"
                           >
-                            <Trash2 size={14} />
+                            <Trash2 size={16} />
                           </button>
                         </div>
                       ))}
@@ -602,9 +601,9 @@ export const EditorForm: React.FC = () => {
               <button
                 type="button"
                 onClick={addExperience}
-                className="w-full py-3 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-2xl text-xs font-extrabold flex items-center justify-center gap-2 transition-colors border border-dashed border-slate-300 cursor-pointer"
+                className="w-full py-3.5 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-2xl text-sm font-extrabold flex items-center justify-center gap-2 transition-colors border border-dashed border-slate-300 cursor-pointer"
               >
-                <Plus size={16} /> Add Work Experience
+                <Plus size={18} /> Add Work Experience
               </button>
             </div>
 
@@ -613,44 +612,44 @@ export const EditorForm: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowMoreExperience(!showMoreExperience)}
-                className="w-full flex items-center justify-between p-4 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
+                className="w-full flex items-center justify-between p-4.5 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
               >
-                <span className="text-xs font-bold text-slate-700 flex items-center gap-2">
-                  <FolderGit2 size={15} className="text-brand-600" />
+                <span className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                  <FolderGit2 size={16} className="text-brand-600" />
                   More options (Key Projects &amp; Portfolio Highlights) ({resume.projects.length})
                 </span>
-                {showMoreExperience ? <ChevronUp size={16} className="text-slate-400" /> : <ChevronDown size={16} className="text-slate-400" />}
+                {showMoreExperience ? <ChevronUp size={18} className="text-slate-400" /> : <ChevronDown size={18} className="text-slate-400" />}
               </button>
 
               {showMoreExperience && (
-                <div className="p-4 border-t border-slate-100 space-y-4 animate-in fade-in duration-150">
+                <div className="p-5 border-t border-slate-100 space-y-4 animate-in fade-in duration-150">
                   {resume.projects.map((proj, pIdx) => (
-                    <div key={proj.id} className="p-3.5 bg-slate-50/70 border border-slate-200 rounded-xl space-y-3">
+                    <div key={proj.id} className="p-4 bg-slate-50/70 border border-slate-200 rounded-xl space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-800">Project #{pIdx + 1}</span>
+                        <span className="text-sm font-bold text-slate-800">Project #{pIdx + 1}</span>
                         <button
                           type="button"
                           onClick={() => removeProject(proj.id)}
                           className="text-rose-500 hover:text-rose-700 p-1 cursor-pointer"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={15} />
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <input
                           type="text"
                           value={proj.title}
                           onChange={(e) => updateProject(proj.id, { title: e.target.value })}
                           placeholder="Project Name (e.g. AI Resume Builder)"
-                          className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                          className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                         />
                         <input
                           type="text"
                           value={proj.link || ''}
                           onChange={(e) => updateProject(proj.id, { link: e.target.value })}
                           placeholder="Project URL (e.g. github.com/user/project)"
-                          className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                          className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                         />
                       </div>
 
@@ -659,26 +658,26 @@ export const EditorForm: React.FC = () => {
                         value={proj.technologies?.join(', ') || ''}
                         onChange={(e) => updateProject(proj.id, { technologies: e.target.value.split(',').map(t => t.trim()).filter(Boolean) })}
                         placeholder="Technologies (e.g. React, TypeScript, Node.js)"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                       />
 
                       {/* Project Bullet Highlights */}
                       <div>
-                        <div className="flex justify-between items-center mb-1">
-                          <label className="text-[11px] font-bold text-slate-700 uppercase">Impact Highlights</label>
+                        <div className="flex justify-between items-center mb-1.5">
+                          <label className="text-xs font-bold text-slate-700 uppercase">Impact Highlights</label>
                           <button
                             type="button"
                             onClick={() => {
                               const newHighlights = [...proj.highlights, 'Built full-stack web application serving 500+ active users.'];
                               updateProject(proj.id, { highlights: newHighlights });
                             }}
-                            className="text-xs text-brand-600 font-bold flex items-center gap-1 cursor-pointer"
+                            className="text-sm text-brand-600 font-bold flex items-center gap-1 cursor-pointer"
                           >
-                            <Plus size={12} /> Add Point
+                            <Plus size={14} /> Add Point
                           </button>
                         </div>
                         {proj.highlights.map((bullet, bIdx) => (
-                          <div key={bIdx} className="flex items-center gap-1.5 mt-1.5">
+                          <div key={bIdx} className="flex items-center gap-2 mt-2">
                             <input
                               type="text"
                               value={bullet}
@@ -687,15 +686,15 @@ export const EditorForm: React.FC = () => {
                                 updated[bIdx] = e.target.value;
                                 updateProject(proj.id, { highlights: updated });
                               }}
-                              className="flex-1 text-xs p-2 bg-white border border-slate-200 rounded-lg outline-none"
+                              className="flex-1 text-sm p-2.5 bg-white border border-slate-200 rounded-lg outline-none"
                             />
                             <button
                               type="button"
                               onClick={() => handleAiPolishProjectBullet(proj.id, bIdx, bullet)}
-                              className="p-1.5 text-purple-600 hover:bg-purple-50 rounded-lg border border-purple-200 bg-white cursor-pointer"
+                              className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg border border-purple-200 bg-white cursor-pointer"
                               title="AI Polish"
                             >
-                              <Sparkles size={13} className={enhancingBulletKey === `proj-${proj.id}-${bIdx}` ? 'animate-spin' : ''} />
+                              <Sparkles size={15} className={enhancingBulletKey === `proj-${proj.id}-${bIdx}` ? 'animate-spin' : ''} />
                             </button>
                             <button
                               type="button"
@@ -703,9 +702,9 @@ export const EditorForm: React.FC = () => {
                                 const updated = proj.highlights.filter((_, idx) => idx !== bIdx);
                                 updateProject(proj.id, { highlights: updated });
                               }}
-                              className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg border border-slate-200 bg-white cursor-pointer"
+                              className="p-2 text-slate-400 hover:text-rose-600 rounded-lg border border-slate-200 bg-white cursor-pointer"
                             >
-                              <Trash2 size={13} />
+                              <Trash2 size={15} />
                             </button>
                           </div>
                         ))}
@@ -716,9 +715,9 @@ export const EditorForm: React.FC = () => {
                   <button
                     type="button"
                     onClick={addProject}
-                    className="w-full py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 border border-dashed border-slate-300 cursor-pointer"
+                    className="w-full py-3 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-xl text-sm font-extrabold flex items-center justify-center gap-1.5 border border-dashed border-slate-300 cursor-pointer"
                   >
-                    <Plus size={15} /> Add Key Project
+                    <Plus size={16} /> Add Key Project
                   </button>
                 </div>
               )}
@@ -729,82 +728,82 @@ export const EditorForm: React.FC = () => {
         {/* STEP 4: EDUCATION */}
         {currentStep === 4 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                <GraduationCap className="text-brand-600 shrink-0" size={18} />
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3.5">
+                <GraduationCap className="text-brand-600 shrink-0" size={20} />
                 <div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-wide text-slate-800">
+                  <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">
                     Education ({resume.education.length})
                   </h3>
-                  <p className="text-[11px] text-slate-500">Degrees, universities, and academic accomplishments.</p>
+                  <p className="text-xs text-slate-500">Degrees, universities, and academic accomplishments.</p>
                 </div>
               </div>
 
               {resume.education.map((edu) => (
-                <div key={edu.id} className="p-4 bg-slate-50/70 border border-slate-200 rounded-2xl space-y-3 shadow-2xs">
+                <div key={edu.id} className="p-4 sm:p-5 bg-slate-50/70 border border-slate-200 rounded-2xl space-y-3.5 shadow-2xs">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs font-extrabold text-slate-800">{edu.degree || 'Degree'}</span>
+                    <span className="text-sm font-extrabold text-slate-800">{edu.degree || 'Degree'}</span>
                     <button
                       type="button"
                       onClick={() => removeEducation(edu.id)}
-                      className="text-rose-500 hover:text-rose-700 p-1 cursor-pointer"
+                      className="text-rose-500 hover:text-rose-700 p-1.5 cursor-pointer"
                     >
-                      <Trash2 size={14} />
+                      <Trash2 size={15} />
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Degree / Program</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">Degree / Program</label>
                       <input
                         type="text"
                         value={edu.degree}
                         onChange={(e) => updateEducation(edu.id, { degree: e.target.value })}
                         placeholder="B.S. in Computer Science"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">University / Institution</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">University / Institution</label>
                       <input
                         type="text"
                         value={edu.institution}
                         onChange={(e) => updateEducation(edu.id, { institution: e.target.value })}
                         placeholder="University of California, Berkeley"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-3.5">
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Start Year</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">Start Year</label>
                       <input
                         type="text"
                         value={edu.startDate}
                         onChange={(e) => updateEducation(edu.id, { startDate: e.target.value })}
                         placeholder="2018"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Graduation Year</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">Graduation Year</label>
                       <input
                         type="text"
                         value={edu.endDate}
                         onChange={(e) => updateEducation(edu.id, { endDate: e.target.value })}
                         placeholder="2022"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-bold text-slate-700 block mb-1">GPA (Optional)</label>
+                      <label className="text-sm font-bold text-slate-700 block mb-1">GPA (Optional)</label>
                       <input
                         type="text"
                         value={edu.gpa || ''}
                         onChange={(e) => updateEducation(edu.id, { gpa: e.target.value })}
                         placeholder="3.8 / 4.0"
-                        className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none"
+                        className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none"
                       />
                     </div>
                   </div>
@@ -814,9 +813,9 @@ export const EditorForm: React.FC = () => {
               <button
                 type="button"
                 onClick={addEducation}
-                className="w-full py-3 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-2xl text-xs font-extrabold flex items-center justify-center gap-2 border border-dashed border-slate-300 cursor-pointer"
+                className="w-full py-3.5 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-2xl text-sm font-extrabold flex items-center justify-center gap-2 border border-dashed border-slate-300 cursor-pointer"
               >
-                <Plus size={16} /> Add Education
+                <Plus size={18} /> Add Education
               </button>
             </div>
 
@@ -825,39 +824,39 @@ export const EditorForm: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowMoreEducation(!showMoreEducation)}
-                className="w-full flex items-center justify-between p-4 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
+                className="w-full flex items-center justify-between p-4.5 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
               >
-                <span className="text-xs font-bold text-slate-700 flex items-center gap-2">
-                  <Award size={15} className="text-brand-600" />
+                <span className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                  <Award size={16} className="text-brand-600" />
                   More options (Certifications &amp; Licenses) ({resume.certifications.length})
                 </span>
-                {showMoreEducation ? <ChevronUp size={16} className="text-slate-400" /> : <ChevronDown size={16} className="text-slate-400" />}
+                {showMoreEducation ? <ChevronUp size={18} className="text-slate-400" /> : <ChevronDown size={18} className="text-slate-400" />}
               </button>
 
               {showMoreEducation && (
-                <div className="p-4 border-t border-slate-100 space-y-3 animate-in fade-in duration-150">
+                <div className="p-5 border-t border-slate-100 space-y-3.5 animate-in fade-in duration-150">
                   {resume.certifications.map((cert) => (
-                    <div key={cert.id} className="p-3 bg-slate-50/70 border border-slate-200 rounded-xl space-y-2">
+                    <div key={cert.id} className="p-3.5 bg-slate-50/70 border border-slate-200 rounded-xl space-y-2.5">
                       <div className="flex justify-between items-center">
-                        <span className="text-xs font-bold text-slate-800">{cert.name || 'Certification'}</span>
+                        <span className="text-sm font-bold text-slate-800">{cert.name || 'Certification'}</span>
                         <button type="button" onClick={() => removeCertification(cert.id)} className="text-rose-500 hover:text-rose-700 p-1 cursor-pointer">
-                          <Trash2 size={13} />
+                          <Trash2 size={15} />
                         </button>
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <input
                           type="text"
                           value={cert.name}
                           onChange={(e) => updateCertification(cert.id, { name: e.target.value })}
                           placeholder="AWS Certified Solutions Architect"
-                          className="w-full text-xs p-2 bg-white border border-slate-200 rounded-lg outline-none"
+                          className="w-full text-sm p-2.5 bg-white border border-slate-200 rounded-lg outline-none"
                         />
                         <input
                           type="text"
                           value={cert.issuer}
                           onChange={(e) => updateCertification(cert.id, { issuer: e.target.value })}
                           placeholder="Amazon Web Services"
-                          className="w-full text-xs p-2 bg-white border border-slate-200 rounded-lg outline-none"
+                          className="w-full text-sm p-2.5 bg-white border border-slate-200 rounded-lg outline-none"
                         />
                       </div>
                     </div>
@@ -866,9 +865,9 @@ export const EditorForm: React.FC = () => {
                   <button
                     type="button"
                     onClick={addCertification}
-                    className="w-full py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 border border-dashed border-slate-300 cursor-pointer"
+                    className="w-full py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-xl text-sm font-extrabold flex items-center justify-center gap-1.5 border border-dashed border-slate-300 cursor-pointer"
                   >
-                    <Plus size={15} /> Add Certification
+                    <Plus size={16} /> Add Certification
                   </button>
                 </div>
               )}
@@ -879,39 +878,39 @@ export const EditorForm: React.FC = () => {
         {/* STEP 5: SKILLS */}
         {currentStep === 5 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                <Wrench className="text-brand-600 shrink-0" size={18} />
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3.5">
+                <Wrench className="text-brand-600 shrink-0" size={20} />
                 <div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-wide text-slate-800">
+                  <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">
                     Technical &amp; Core Skills ({resume.skills.length} Categories)
                   </h3>
-                  <p className="text-[11px] text-slate-500">Group your skills into clear categories (e.g. Languages, Frameworks, Cloud).</p>
+                  <p className="text-xs text-slate-500">Group your skills into clear categories (e.g. Languages, Frameworks, Cloud).</p>
                 </div>
               </div>
 
               {resume.skills.map((skillCat) => (
-                <div key={skillCat.id} className="p-4 bg-slate-50/70 border border-slate-200 rounded-2xl space-y-3 shadow-2xs">
-                  <div className="flex items-center justify-between gap-2">
+                <div key={skillCat.id} className="p-4 sm:p-5 bg-slate-50/70 border border-slate-200 rounded-2xl space-y-3.5 shadow-2xs">
+                  <div className="flex items-center justify-between gap-3">
                     <input
                       type="text"
                       value={skillCat.category}
                       onChange={(e) => updateSkillCategory(skillCat.id, e.target.value, skillCat.items)}
                       placeholder="e.g. Languages & Frameworks"
-                      className="font-bold text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none flex-1 focus:border-brand-500"
+                      className="font-bold text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none flex-1 focus:border-brand-500"
                     />
                     <button
                       type="button"
                       onClick={() => removeSkillCategory(skillCat.id)}
-                      className="text-rose-500 hover:text-rose-700 p-1.5 hover:bg-rose-50 rounded-lg cursor-pointer"
+                      className="text-rose-500 hover:text-rose-700 p-2 hover:bg-rose-50 rounded-lg cursor-pointer"
                       title="Remove category"
                     >
-                      <Trash2 size={15} />
+                      <Trash2 size={16} />
                     </button>
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                    <label className="text-sm font-bold text-slate-700 block mb-1.5">
                       Skills (comma-separated):
                     </label>
                     <input
@@ -922,7 +921,7 @@ export const EditorForm: React.FC = () => {
                         updateSkillCategory(skillCat.id, skillCat.category, items);
                       }}
                       placeholder="React, TypeScript, Next.js, Node.js, Tailwind CSS"
-                      className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
+                      className="w-full text-sm p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-brand-500"
                     />
                   </div>
                 </div>
@@ -931,9 +930,9 @@ export const EditorForm: React.FC = () => {
               <button
                 type="button"
                 onClick={addSkillCategory}
-                className="w-full py-3 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-2xl text-xs font-extrabold flex items-center justify-center gap-2 border border-dashed border-slate-300 cursor-pointer"
+                className="w-full py-3.5 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-2xl text-sm font-extrabold flex items-center justify-center gap-2 border border-dashed border-slate-300 cursor-pointer"
               >
-                <Plus size={16} /> Add Skill Category
+                <Plus size={18} /> Add Skill Category
               </button>
             </div>
           </div>
@@ -943,16 +942,16 @@ export const EditorForm: React.FC = () => {
         {currentStep === 6 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             {/* Template Selection */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                <Palette className="text-brand-600 shrink-0" size={18} />
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3.5">
+                <Palette className="text-brand-600 shrink-0" size={20} />
                 <div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-wide text-slate-800">Select Template</h3>
-                  <p className="text-[11px] text-slate-500">Pick an ATS-compliant template layout.</p>
+                  <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">Select Template</h3>
+                  <p className="text-xs text-slate-500">Pick an ATS-compliant template layout.</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                 {TEMPLATE_LIST.map((tpl) => {
                   const isSelected = resume.formatting.template === tpl.id;
                   return (
@@ -960,20 +959,20 @@ export const EditorForm: React.FC = () => {
                       key={tpl.id}
                       type="button"
                       onClick={() => updateFormatting({ template: tpl.id })}
-                      className={`p-3.5 rounded-2xl text-left border transition-all cursor-pointer flex flex-col justify-between ${
+                      className={`p-4 rounded-2xl text-left border transition-all cursor-pointer flex flex-col justify-between ${
                         isSelected
                           ? 'bg-brand-50/80 border-2 border-brand-600 shadow-sm ring-2 ring-brand-500/20'
                           : 'bg-white border-slate-200 hover:bg-slate-50'
                       }`}
                     >
                       <div>
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-extrabold text-xs text-slate-900">{tpl.name}</span>
-                          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">{tpl.tag}</span>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="font-extrabold text-sm text-slate-900">{tpl.name}</span>
+                          <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">{tpl.tag}</span>
                         </div>
-                        <p className="text-[11px] text-slate-500 leading-snug">{tpl.description}</p>
+                        <p className="text-xs text-slate-500 leading-snug">{tpl.description}</p>
                       </div>
-                      <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold">
+                      <div className="mt-3.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold">
                         <span className={isSelected ? 'text-brand-700' : 'text-slate-400'}>
                           {isSelected ? '✓ Selected' : 'Choose'}
                         </span>
@@ -985,30 +984,30 @@ export const EditorForm: React.FC = () => {
             </div>
 
             {/* Color Palette & Font Picker */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
               <div>
-                <label className="text-xs font-extrabold uppercase tracking-wide text-slate-800 block mb-2">Accent Color</label>
-                <div className="flex items-center gap-3 flex-wrap">
+                <label className="text-xs font-extrabold uppercase tracking-wide text-slate-800 block mb-2.5">Accent Color</label>
+                <div className="flex items-center gap-3.5 flex-wrap">
                   {colors.map((c) => (
                     <button
                       key={c.hex}
                       type="button"
                       onClick={() => updateFormatting({ accentColor: c.hex })}
                       style={{ backgroundColor: c.hex }}
-                      className={`w-8 h-8 rounded-full border-2 transition-transform cursor-pointer flex items-center justify-center ${
+                      className={`w-9 h-9 rounded-full border-2 transition-transform cursor-pointer flex items-center justify-center ${
                         resume.formatting.accentColor === c.hex ? 'scale-110 border-slate-900 shadow-md ring-2 ring-slate-400' : 'border-transparent hover:scale-105'
                       }`}
                       title={c.label}
                     >
-                      {resume.formatting.accentColor === c.hex && <Check size={14} className="text-white" />}
+                      {resume.formatting.accentColor === c.hex && <Check size={16} className="text-white" />}
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-slate-100">
-                <label className="text-xs font-extrabold uppercase tracking-wide text-slate-800 block mb-2">Typography</label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="pt-3 border-t border-slate-100">
+                <label className="text-xs font-extrabold uppercase tracking-wide text-slate-800 block mb-2.5">Typography</label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {[
                     { id: 'outfit', label: 'Outfit (Modern)' },
                     { id: 'inter', label: 'Inter (Clean)' },
@@ -1019,7 +1018,7 @@ export const EditorForm: React.FC = () => {
                       key={f.id}
                       type="button"
                       onClick={() => updateFormatting({ fontFamily: f.id as any })}
-                      className={`p-2.5 text-xs rounded-xl border text-center font-bold transition-all cursor-pointer ${
+                      className={`p-3 text-xs sm:text-sm rounded-xl border text-center font-bold transition-all cursor-pointer ${
                         resume.formatting.fontFamily === f.id
                           ? 'bg-brand-50 border-brand-600 text-brand-900 shadow-xs'
                           : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-700'
@@ -1037,23 +1036,23 @@ export const EditorForm: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowMoreDesign(!showMoreDesign)}
-                className="w-full flex items-center justify-between p-4 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
+                className="w-full flex items-center justify-between p-4.5 bg-slate-50/50 hover:bg-slate-100/60 transition-colors text-left cursor-pointer"
               >
-                <span className="text-xs font-bold text-slate-700 flex items-center gap-2">
-                  <SlidersHorizontal size={15} className="text-brand-600" />
+                <span className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                  <SlidersHorizontal size={16} className="text-brand-600" />
                   More design options (Font Size &amp; Spacing)
                 </span>
-                {showMoreDesign ? <ChevronUp size={16} className="text-slate-400" /> : <ChevronDown size={16} className="text-slate-400" />}
+                {showMoreDesign ? <ChevronUp size={18} className="text-slate-400" /> : <ChevronDown size={18} className="text-slate-400" />}
               </button>
 
               {showMoreDesign && (
-                <div className="p-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in duration-150">
+                <div className="p-5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in duration-150">
                   <div>
-                    <label className="text-xs font-bold text-slate-700 block mb-1">Font Size Scale</label>
+                    <label className="text-sm font-bold text-slate-700 block mb-1.5">Font Size Scale</label>
                     <select
                       value={resume.formatting.fontSize}
                       onChange={(e) => updateFormatting({ fontSize: e.target.value as any })}
-                      className="w-full text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer"
+                      className="w-full text-sm p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer"
                     >
                       <option value="sm">Small (Compact, 1 Page)</option>
                       <option value="base">Medium (Standard ATS)</option>
@@ -1061,11 +1060,11 @@ export const EditorForm: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-slate-700 block mb-1">Line Spacing</label>
+                    <label className="text-sm font-bold text-slate-700 block mb-1.5">Line Spacing</label>
                     <select
                       value={resume.formatting.spacing}
                       onChange={(e) => updateFormatting({ spacing: e.target.value as any })}
-                      className="w-full text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer"
+                      className="w-full text-sm p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer"
                     >
                       <option value="compact">Compact Spacing</option>
                       <option value="normal">Normal Spacing</option>
@@ -1082,16 +1081,16 @@ export const EditorForm: React.FC = () => {
         {currentStep === 7 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             {/* ATS Score Overview Card */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4 text-center sm:text-left">
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-4 text-center sm:text-left">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-100 pb-4">
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600">Resume Ready</span>
-                  <h3 className="text-base font-extrabold text-slate-900">Final Quality &amp; Export Check</h3>
-                  <p className="text-xs text-slate-500">Your resume has been compiled and styled using ATS best practices.</p>
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-600">Resume Ready</span>
+                  <h3 className="text-lg font-extrabold text-slate-900">Final Quality &amp; Export Check</h3>
+                  <p className="text-xs sm:text-sm text-slate-500">Your resume has been compiled and styled using ATS best practices.</p>
                 </div>
 
-                <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-extrabold text-sm">
-                  <CheckCircle2 size={20} className="text-emerald-600" />
+                <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-extrabold text-sm sm:text-base">
+                  <CheckCircle2 size={22} className="text-emerald-600" />
                   <span>ATS Score: {atsAnalysis.overallScore}/100</span>
                 </div>
               </div>
@@ -1101,36 +1100,36 @@ export const EditorForm: React.FC = () => {
                 type="button"
                 onClick={handleDownloadPdf}
                 disabled={isExporting}
-                className="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl text-sm font-extrabold flex items-center justify-center gap-2 shadow-md transition-all transform hover:scale-[1.01] cursor-pointer disabled:opacity-60"
+                className="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl text-base font-extrabold flex items-center justify-center gap-2 shadow-md transition-all transform hover:scale-[1.01] cursor-pointer disabled:opacity-60"
               >
-                <Download size={18} className={isExporting ? 'animate-bounce' : ''} />
+                <Download size={20} className={isExporting ? 'animate-bounce' : ''} />
                 <span>{isExporting ? 'Generating High-Res Vector PDF...' : 'Download PDF Resume'}</span>
               </button>
 
-              <p className="text-[11px] text-center text-slate-500">
+              <p className="text-xs text-center text-slate-500">
                 Directly generates an ATS-ready vector .pdf file without opening print dialogs.
               </p>
             </div>
 
             {/* Secondary Export Options */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-3">
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3.5">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-600">Alternative Formats &amp; Print Options</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <button
                   type="button"
                   onClick={exportToVectorPdf}
-                  className="p-3 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-slate-200 transition-colors cursor-pointer"
+                  className="p-3.5 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl text-sm font-bold flex items-center justify-center gap-2 border border-slate-200 transition-colors cursor-pointer"
                 >
-                  <Printer size={15} className="text-brand-600" />
+                  <Printer size={16} className="text-brand-600" />
                   <span>Print Vector PDF</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => exportResumeToJson(resume)}
-                  className="p-3 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-slate-200 transition-colors cursor-pointer"
+                  className="p-3.5 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl text-sm font-bold flex items-center justify-center gap-2 border border-slate-200 transition-colors cursor-pointer"
                 >
-                  <FileJson size={15} className="text-purple-600" />
+                  <FileJson size={16} className="text-purple-600" />
                   <span>Backup Resume JSON</span>
                 </button>
               </div>
@@ -1141,14 +1140,14 @@ export const EditorForm: React.FC = () => {
       </div>
 
       {/* 3. STICKY BOTTOM NAVIGATION BAR (BACK & CONTINUE) */}
-      <div className="sticky bottom-0 z-20 mt-6 bg-white/95 backdrop-blur-sm border-t border-slate-200 p-3 sm:p-4 rounded-2xl shadow-xl flex items-center justify-between gap-3">
+      <div className="sticky bottom-0 z-20 mt-6 bg-white/95 backdrop-blur-sm border-t border-slate-200 p-3.5 sm:p-4 rounded-2xl shadow-xl flex items-center justify-between gap-3">
         <button
           type="button"
           onClick={handlePrevStep}
           disabled={currentStep === 1}
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-extrabold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-250 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-extrabold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-250 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
         >
-          <ChevronLeft size={16} />
+          <ChevronLeft size={18} />
           <span>Back</span>
         </button>
 
@@ -1156,19 +1155,19 @@ export const EditorForm: React.FC = () => {
           <button
             type="button"
             onClick={handleNextStep}
-            className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-xs font-extrabold text-white bg-brand-600 hover:bg-brand-700 shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-extrabold text-white bg-brand-600 hover:bg-brand-700 shadow-sm transition-all cursor-pointer"
           >
             <span>Continue</span>
-            <ChevronRight size={16} />
+            <ChevronRight size={18} />
           </button>
         ) : (
           <button
             type="button"
             onClick={handleDownloadPdf}
             disabled={isExporting}
-            className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-xs font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm transition-all cursor-pointer disabled:opacity-60"
+            className="flex items-center gap-2 px-7 py-3 rounded-xl text-sm sm:text-base font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm transition-all cursor-pointer disabled:opacity-60"
           >
-            <Download size={16} />
+            <Download size={18} />
             <span>{isExporting ? 'Generating PDF...' : 'Download PDF'}</span>
           </button>
         )}
