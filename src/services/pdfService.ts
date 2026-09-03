@@ -1,6 +1,56 @@
 import { ResumeData } from '../types/resume';
 
 /**
+ * Converts oklch(...) or oklab(...) color string to browser-parsed RGB/Hex format
+ * to prevent html2canvas color parsing exceptions.
+ */
+function convertOklchColor(colorStr: string): string {
+  if (!colorStr || (!colorStr.includes('oklch') && !colorStr.includes('oklab'))) {
+    return colorStr;
+  }
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return colorStr;
+    ctx.fillStyle = '#000000';
+    ctx.fillStyle = colorStr;
+    const resolved = ctx.fillStyle;
+    return resolved && resolved !== '#000000' ? resolved : colorStr;
+  } catch (e) {
+    return colorStr;
+  }
+}
+
+/**
+ * Sanitizes all oklch() / oklab() occurrences in cloned DOM stylesheets and element inline styles
+ * to prevent html2canvas color parsing errors.
+ */
+function sanitizeOklchColorsInDocument(doc: Document): void {
+  // 1. Sanitize all <style> elements
+  const styleElements = doc.querySelectorAll('style');
+  styleElements.forEach((styleEl) => {
+    let cssText = styleEl.textContent || '';
+    if (cssText.includes('oklch') || cssText.includes('oklab')) {
+      cssText = cssText.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
+      styleEl.textContent = cssText;
+    }
+  });
+
+  // 2. Sanitize all inline styles and element computed colors
+  const allElements = doc.querySelectorAll('*');
+  allElements.forEach((el) => {
+    const htmlEl = el as HTMLElement;
+    const styleAttr = htmlEl.getAttribute('style');
+    if (styleAttr && (styleAttr.includes('oklch') || styleAttr.includes('oklab'))) {
+      const sanitizedAttr = styleAttr.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
+      htmlEl.setAttribute('style', sanitizedAttr);
+    }
+  });
+}
+
+/**
  * Trigger native print dialog for vector PDF output
  */
 export function exportToVectorPdf(): void {
@@ -101,6 +151,9 @@ export async function downloadPdfFromElement(
       windowWidth: 794,
       imageTimeout: 5000,
       onclone: (clonedDoc: Document) => {
+        // Sanitize any oklch / oklab colors to standard rgb/hex for html2canvas compatibility
+        sanitizeOklchColorsInDocument(clonedDoc);
+
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach((el) => {
           (el as HTMLElement).style.breakInside = 'avoid';
