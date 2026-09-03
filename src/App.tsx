@@ -80,6 +80,11 @@ export function App() {
           <Route path="interview-prep" element={<InterviewPrepPage />} />
           <Route path="linkedin-optimizer" element={<LinkedInOptimizerPage />} />
 
+          {/* Legacy Auth & Login Aliases Redirect */}
+          <Route path="login" element={<Navigate to="/" replace />} />
+          <Route path="signin" element={<Navigate to="/" replace />} />
+          <Route path="signup" element={<Navigate to="/" replace />} />
+
           {/* Trust & Legal */}
           <Route path="faq" element={<FaqPage />} />
           <Route path="faqs" element={<Navigate to="/faq" replace />} />
