@@ -58,7 +58,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
         {/* Summary */}
         {summary && (
           <div>
-            <div className="flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
+            <div className="resume-section-title flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
                 style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
@@ -69,7 +69,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
             </div>
             <ul
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
-              className="list-disc list-outside ml-4 text-slate-700 border-l-0 pl-1"
+              className="resume-entry summary-entry list-disc list-outside ml-4 text-slate-700 border-l-0 pl-1"
             >
               {getSummaryBullets(summary).map((bullet, idx) => (
                 <li key={idx} className="pl-1 leading-snug">{bullet}</li>
@@ -81,7 +81,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
         {/* Experience */}
         {experience && experience.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 mb-2.5" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
+            <div className="resume-section-title flex items-center gap-2 mb-2.5" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
                 style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
@@ -95,7 +95,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
               className="pl-3.5 border-l border-slate-200"
             >
               {experience.map((exp) => (
-                <div key={exp.id} className="page-break-avoid resume-section-item">
+                <div key={exp.id} className="experience-entry resume-entry page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap">
                     <div>
                       <span className="font-bold text-slate-900 text-sm">{exp.role}</span>
@@ -124,7 +124,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
         {/* Skills */}
         {skills && skills.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
+            <div className="resume-section-title flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
                 style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
@@ -135,7 +135,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
             </div>
             <div className="pl-3.5 border-l border-slate-200 space-y-1.5 text-xs">
               {skills.map((s) => (
-                <div key={s.id} className="flex gap-2 page-break-avoid">
+                <div key={s.id} className="skill-group resume-entry flex gap-2 page-break-avoid">
                   <span className="font-bold text-slate-900 min-w-[110px]">{s.category}:</span>
                   <span className="text-slate-700">{s.items.join(', ')}</span>
                 </div>
@@ -147,7 +147,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
         {/* Education */}
         {education && education.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
+            <div className="resume-section-title flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
                 style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
@@ -161,7 +161,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
               className="pl-3.5 border-l border-slate-200"
             >
               {education.map((edu) => (
-                <div key={edu.id} className="page-break-avoid resume-section-item">
+                <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline">
                     <span className="font-bold text-slate-900">{edu.degree}</span>
                     <span className="text-xs text-slate-500 font-mono">{edu.startDate} - {edu.endDate}</span>

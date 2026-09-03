@@ -4,6 +4,8 @@ import { ResumeRenderer } from '../templates';
 import { calculateDensityModeFromHeight } from '../templates/templateStyles';
 import { ZoomIn, ZoomOut, RotateCcw, Eye, EyeOff, Sliders, Layers } from 'lucide-react';
 
+import { applyBlockAwarePagination } from '../../services/paginationEngine';
+
 export const ResumePreview: React.FC = () => {
   const { resume, densityInfo, setDensityInfo } = useResume();
   const [zoomLevel, setZoomLevel] = useState<number>(1.0);
@@ -14,18 +16,22 @@ export const ResumePreview: React.FC = () => {
   const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.1, 0.6));
   const handleResetZoom = () => setZoomLevel(1.0);
 
-  // Measure content height and calculate adaptive density mode (debounced 200ms)
+  // Measure content height and run block-aware pagination engine
   useEffect(() => {
     const timer = setTimeout(() => {
       if (sheetRef.current) {
-        // Target inner template element to measure true unconstrained content height (avoiding outer sheet min-height)
+        // Target inner template container
         const innerContainer =
-          sheetRef.current.querySelector('.page-break-container') as HTMLElement ||
-          sheetRef.current.firstElementChild as HTMLElement ||
+          (sheetRef.current.querySelector('.page-break-container') as HTMLElement) ||
+          (sheetRef.current.firstElementChild as HTMLElement) ||
           sheetRef.current;
+
+        // Apply block-aware pagination to push overflowing entries to next page
+        const computedPageCount = applyBlockAwarePagination(innerContainer);
 
         const contentHeight = innerContainer.scrollHeight || innerContainer.offsetHeight;
         const result = calculateDensityModeFromHeight(contentHeight, 1010);
+        result.pageCount = Math.max(result.pageCount, computedPageCount);
         
         if (
           !densityInfo ||
@@ -36,7 +42,7 @@ export const ResumePreview: React.FC = () => {
           setDensityInfo(result);
         }
       }
-    }, 200);
+    }, 150);
 
     return () => clearTimeout(timer);
   }, [resume, setDensityInfo]);

@@ -100,13 +100,13 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
                     breakAfter: 'avoid',
                     pageBreakAfter: 'avoid'
                   }}
-                  className="font-bold uppercase tracking-wider mb-2"
+                  className="resume-section-title font-bold uppercase tracking-wider mb-2"
                 >
                   Skills
                 </h2>
                 <div className="space-y-2">
                   {skills.map((s) => (
-                    <div key={s.id} className="text-xs page-break-avoid">
+                    <div key={s.id} className="skill-group resume-entry text-xs page-break-avoid">
                       <div className="font-semibold text-slate-800 text-[11px] mb-0.5">{s.category}</div>
                       <div className="flex flex-wrap gap-1">
                         {s.items.map((item, idx) => (
@@ -131,13 +131,13 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
                     breakAfter: 'avoid',
                     pageBreakAfter: 'avoid'
                   }}
-                  className="font-bold uppercase tracking-wider mb-2"
+                  className="resume-section-title font-bold uppercase tracking-wider mb-2"
                 >
                   Education
                 </h2>
                 <div className="space-y-2 text-xs">
                   {education.map(edu => (
-                    <div key={edu.id} className="page-break-avoid">
+                    <div key={edu.id} className="education-entry resume-entry page-break-avoid">
                       <div className="font-bold text-slate-900">{edu.degree}</div>
                       <div className="text-slate-600 text-[11px]">{edu.institution}</div>
                       <div className="text-slate-400 text-[10px]">{edu.startDate} - {edu.endDate}</div>
@@ -157,13 +157,13 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
                     breakAfter: 'avoid',
                     pageBreakAfter: 'avoid'
                   }}
-                  className="font-bold uppercase tracking-wider mb-2"
+                  className="resume-section-title font-bold uppercase tracking-wider mb-2"
                 >
                   Certifications
                 </h2>
                 <div className="space-y-1 text-[11px]">
                   {certifications.map(c => (
-                    <div key={c.id} className="text-slate-700 page-break-avoid">
+                    <div key={c.id} className="certification-entry resume-entry text-slate-700 page-break-avoid">
                       <span className="font-semibold">{c.name}</span>
                       <span className="text-slate-500 block text-[10px]">{c.issuer}</span>
                     </div>
@@ -190,13 +190,13 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
                   breakAfter: 'avoid',
                   pageBreakAfter: 'avoid'
                 }}
-                className="font-bold uppercase tracking-wider pb-1 border-b mb-1.5"
+                className="resume-section-title font-bold uppercase tracking-wider pb-1 border-b mb-1.5"
               >
                 Profile
               </h2>
               <ul
                 style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
-                className="list-disc list-outside ml-4 text-slate-700 text-left"
+                className="resume-entry summary-entry list-disc list-outside ml-4 text-slate-700 text-left"
               >
                 {getSummaryBullets(summary).map((bullet, idx) => (
                   <li key={idx} className="pl-0.5">{bullet}</li>
@@ -216,26 +216,24 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
                   breakAfter: 'avoid',
                   pageBreakAfter: 'avoid'
                 }}
-                className="font-bold uppercase tracking-wider pb-1 border-b mb-2"
+                className="resume-section-title font-bold uppercase tracking-wider pb-1 border-b mb-2"
               >
                 Experience
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
                 {experience.map((exp) => (
-                  <div key={exp.id} className="page-break-avoid resume-section-item">
+                  <div key={exp.id} className="experience-entry resume-entry page-break-avoid">
                     <div className="flex justify-between items-baseline flex-wrap">
-                      <div>
-                        <span className="font-bold text-slate-900 text-sm">{exp.role}</span>
-                        <span className="text-slate-600 text-xs"> — {exp.company}</span>
-                      </div>
-                      <span className="text-[11px] text-slate-500 font-medium">
-                        {exp.startDate} – {exp.current ? 'Present' : exp.endDate}
+                      <span className="font-bold text-slate-900">{exp.role}</span>
+                      <span className="text-slate-500 text-xs font-mono">
+                        {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
                       </span>
                     </div>
+                    <div className="text-xs font-semibold text-slate-600 mb-1">{exp.company} {exp.location && `• ${exp.location}`}</div>
                     {exp.highlights && (
                       <ul
                         style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
-                        className="mt-1 list-disc list-outside ml-4 text-slate-700"
+                        className="list-disc list-outside ml-4 text-slate-700"
                       >
                         {exp.highlights.map((h, i) => (
                           <li key={i} className="pl-0.5">{h}</li>

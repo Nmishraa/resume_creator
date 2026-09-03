@@ -1,4 +1,5 @@
 import { ResumeData } from '../types/resume';
+import { applyBlockAwarePagination } from './paginationEngine';
 
 /**
  * Trigger native print dialog for vector PDF output
@@ -273,6 +274,9 @@ export async function downloadPdfFromElement(
 
   renderWrapper.appendChild(clone);
   document.body.appendChild(renderWrapper);
+
+  // Apply block-aware pagination to clone node to guarantee zero text clipping across page boundaries
+  applyBlockAwarePagination(clone);
 
   try {
     // Wait for images inside clone to finish loading

@@ -93,13 +93,13 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+              className="resume-section-title font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
             >
               Professional Summary
             </h2>
             <ul
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
-              className="list-disc list-outside ml-4 text-slate-700"
+              className="resume-entry summary-entry list-disc list-outside ml-4 text-slate-700"
             >
               {getSummaryBullets(summary).map((bullet, idx) => (
                 <li key={idx} className="pl-1 leading-snug">{bullet}</li>
@@ -119,13 +119,13 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold uppercase tracking-wider mb-2.5 pb-1 border-b flex items-center gap-2"
+              className="resume-section-title font-bold uppercase tracking-wider mb-2.5 pb-1 border-b flex items-center gap-2"
             >
               Work Experience
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {experience.map((exp) => (
-                <div key={exp.id} className="page-break-avoid resume-section-item">
+                <div key={exp.id} className="experience-entry resume-entry page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap gap-x-2">
                     <div className="flex items-center gap-2">
                       <span className={`${size.itemTitle} text-slate-900`}>{exp.role}</span>
@@ -163,13 +163,13 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+              className="resume-section-title font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
             >
               Core Skills &amp; Technologies
             </h2>
             <div className="space-y-1.5 text-slate-700">
               {skills.map((cat) => (
-                <div key={cat.id} className="flex flex-wrap items-baseline gap-1 text-xs page-break-avoid">
+                <div key={cat.id} className="skill-group resume-entry flex flex-wrap items-baseline gap-1 text-xs page-break-avoid">
                   <span className="font-bold text-slate-900 min-w-[120px]">{cat.category}:</span>
                   <span className="text-slate-700">{cat.items.join(' • ')}</span>
                 </div>
@@ -189,13 +189,13 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold uppercase tracking-wider mb-2.5 pb-1 border-b flex items-center gap-2"
+              className="resume-section-title font-bold uppercase tracking-wider mb-2.5 pb-1 border-b flex items-center gap-2"
             >
               Key Projects
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {projects.map((proj) => (
-                <div key={proj.id} className="page-break-avoid resume-section-item">
+                <div key={proj.id} className="project-entry resume-entry page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap gap-x-2">
                     <div className="flex items-center gap-2">
                       <span className={`${size.itemTitle} text-slate-900`}>{proj.title}</span>
@@ -242,13 +242,13 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+              className="resume-section-title font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
             >
               Education
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
-                <div key={edu.id} className="page-break-avoid resume-section-item">
+                <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap gap-x-2">
                     <div className="flex items-center gap-2">
                       <span className={`${size.itemTitle} text-slate-900`}>{edu.degree}</span>
@@ -259,14 +259,14 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                       {edu.startDate} - {edu.endDate} {edu.location && `• ${edu.location}`}
                     </div>
                   </div>
-                  {edu.gpa && <div className="text-xs text-slate-600 mt-0.5">GPA: {edu.gpa}</div>}
+                  {edu.gpa && <div className="text-xs text-slate-500 font-semibold mt-0.5">GPA: {edu.gpa}</div>}
                   {edu.highlights && edu.highlights.length > 0 && (
                     <ul
                       style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
-                      className="mt-1 list-disc list-outside ml-4 text-slate-600"
+                      className="mt-1 list-disc list-outside ml-4 text-slate-700"
                     >
                       {edu.highlights.map((h, i) => (
-                        <li key={i} className="pl-1 text-xs">{h}</li>
+                        <li key={i} className="pl-1 leading-snug">{h}</li>
                       ))}
                     </ul>
                   )}
@@ -287,15 +287,18 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+              className="resume-section-title font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
             >
-              Certifications &amp; Credentials
+              Certifications &amp; Licensures
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            <div className="space-y-1 text-slate-700">
               {certifications.map((cert) => (
-                <div key={cert.id} className="flex justify-between items-center bg-slate-50/70 p-1.5 rounded border border-slate-100 page-break-avoid">
-                  <span className="font-semibold text-slate-800">{cert.name}</span>
-                  <span className="text-slate-500 text-[11px]">{cert.issuer} ({cert.date})</span>
+                <div key={cert.id} className="certification-entry resume-entry flex justify-between items-baseline text-xs page-break-avoid">
+                  <div>
+                    <span className="font-bold text-slate-900">{cert.name}</span>
+                    {cert.issuer && <span className="text-slate-500"> — {cert.issuer}</span>}
+                  </div>
+                  {cert.date && <span className={size.meta}>{cert.date}</span>}
                 </div>
               ))}
             </div>

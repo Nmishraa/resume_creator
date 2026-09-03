@@ -75,13 +75,13 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
             >
               Professional Summary
             </h2>
             <ul
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
-              className="list-disc list-outside ml-4 text-slate-800 font-serif"
+              className="resume-entry summary-entry list-disc list-outside ml-4 text-slate-800 font-serif"
             >
               {getSummaryBullets(summary).map((bullet, idx) => (
                 <li key={idx} className="pl-1 leading-snug">{bullet}</li>
@@ -99,13 +99,13 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold font-serif text-slate-950 mb-2 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-slate-950 mb-2 uppercase tracking-wide border-b border-slate-200 pb-0.5"
             >
               Work Experience
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {experience.map((exp) => (
-                <div key={exp.id} className="page-break-avoid resume-section-item font-serif">
+                <div key={exp.id} className="experience-entry resume-entry page-break-avoid resume-section-item font-serif">
                   <div className="flex justify-between items-baseline flex-wrap">
                     <div className="font-bold text-slate-950">
                       {exp.role} <span className="font-normal italic">at {exp.company}</span>
@@ -139,7 +139,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
             >
               Skills
             </h2>
@@ -147,7 +147,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
               {skills.map((s) => {
                 const itemsToRender = s.items && s.items.length > 0 ? s.items : [s.category];
                 return itemsToRender.map((item, idx) => (
-                  <div key={`${s.id}-${idx}`} className="flex items-center gap-2 page-break-avoid">
+                  <div key={`${s.id}-${idx}`} className="skill-group resume-entry flex items-center gap-2 page-break-avoid">
                     <span className="text-slate-950 font-bold">•</span>
                     <span>{item.trim().replace(/\.?$/, '.')}</span>
                   </div>
@@ -166,13 +166,13 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
             >
               Education
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
-                <div key={edu.id} className="page-break-avoid resume-section-item font-serif">
+                <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item font-serif">
                   <div className="flex justify-between items-baseline">
                     <div className="font-bold text-slate-950">
                       {edu.degree}
@@ -199,14 +199,18 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
             >
               Certifications
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-serif">
-              {certifications.map((c) => (
-                <div key={c.id} className="page-break-avoid text-slate-800">
-                  <span className="font-bold">{c.name}</span> — <span className="italic">{c.issuer}</span> ({c.date})
+            <div className="space-y-1 text-xs font-serif text-slate-800">
+              {certifications.map((cert) => (
+                <div key={cert.id} className="certification-entry resume-entry flex justify-between items-baseline page-break-avoid">
+                  <div>
+                    <span className="font-bold">{cert.name}</span>
+                    {cert.issuer && <span> — {cert.issuer}</span>}
+                  </div>
+                  {cert.date && <span className="text-slate-600 font-sans">{cert.date}</span>}
                 </div>
               ))}
             </div>

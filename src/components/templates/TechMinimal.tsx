@@ -59,14 +59,14 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
           <div>
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
-              className="font-mono font-bold uppercase tracking-wider text-slate-500 mb-1 flex items-center gap-2"
+              className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-1 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
               01 // SUMMARY
             </div>
             <ul
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
-              className="list-disc list-outside ml-4 text-slate-700 font-sans"
+              className="resume-entry summary-entry list-disc list-outside ml-4 text-slate-700 font-sans"
             >
               {getSummaryBullets(summary).map((bullet, idx) => (
                 <li key={idx} className="pl-1 leading-snug">{bullet}</li>
@@ -80,14 +80,14 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
           <div>
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
-              className="font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
+              className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
               02 // TECHNICAL SKILLS
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
               {skills.map((s) => (
-                <div key={s.id} className="bg-slate-50 p-2 rounded border border-slate-200 page-break-avoid">
+                <div key={s.id} className="skill-group resume-entry bg-slate-50 p-2 rounded border border-slate-200 page-break-avoid">
                   <div className="font-mono font-semibold text-slate-900 mb-1">{s.category}</div>
                   <div className="flex flex-wrap gap-1">
                     {s.items.map((item, idx) => (
@@ -107,14 +107,14 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
           <div>
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
-              className="font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
+              className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
               03 // EXPERIENCE
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {experience.map((exp) => (
-                <div key={exp.id} className="page-break-avoid resume-section-item">
+                <div key={exp.id} className="experience-entry resume-entry page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap font-mono">
                     <div>
                       <span className="font-bold text-slate-900 text-sm">{exp.role}</span>
@@ -145,14 +145,14 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
           <div>
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
-              className="font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
+              className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
               04 // EDUCATION
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
-                <div key={edu.id} className="page-break-avoid resume-section-item font-mono text-xs">
+                <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item font-mono text-xs">
                   <div className="flex justify-between items-baseline">
                     <span className="font-bold text-slate-900">{edu.degree}</span>
                     <span className="text-slate-500">{edu.startDate} - {edu.endDate}</span>

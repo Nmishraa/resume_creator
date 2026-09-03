@@ -71,6 +71,24 @@
   background: #94a3b8;
 }
 
+/* Print-Safe Pagination Rules for Resume Entries & Page Containers */
+.resume-entry,
+.education-entry,
+.experience-entry,
+.project-entry,
+.certification-entry,
+.skill-group,
+.page-break-avoid,
+.resume-section-item {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+.resume-section-title {
+  break-after: avoid !important;
+  page-break-after: avoid !important;
+}
+
 /* Print Styles for ATS Vector & High-Fidelity PDF Export */
 @media print {
   body {
@@ -105,18 +123,20 @@
     print-color-adjust: exact !important;
   }
 
+  .resume-page {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    padding: 15mm !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    margin: 0 auto !important;
+  }
+
   @page {
     size: A4 portrait;
     margin: 0;
-  }
-
-  .page-break-avoid,
-  .resume-section-item,
-  .resume-section-block,
-  h1, h2, h3, h4,
-  section {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
   }
 }
 
