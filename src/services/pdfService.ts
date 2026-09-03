@@ -1,68 +1,6 @@
 import { ResumeData } from '../types/resume';
 
 /**
- * Converts oklch(...) or oklab(...) color string to browser-parsed RGB/Hex format.
- */
-export function convertOklchColor(colorStr: string): string {
-  if (!colorStr || (!colorStr.includes('oklch') && !colorStr.includes('oklab'))) {
-    return colorStr;
-  }
-  try {
-    const canvas = document.createElement('canvas');
-    canvas.width = 1;
-    canvas.height = 1;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return colorStr;
-    ctx.fillStyle = '#000000';
-    ctx.fillStyle = colorStr;
-    const resolved = ctx.fillStyle;
-    return resolved && resolved !== '#000000' ? resolved : colorStr;
-  } catch (e) {
-    return colorStr;
-  }
-}
-
-/**
- * Recursively converts all computed oklch() / oklab() colors on an element
- * and its descendants into supported RGB / Hex format.
- */
-export function sanitizeElementColors(element: HTMLElement): void {
-  const propertiesToSanitize = [
-    'color',
-    'backgroundColor',
-    'borderColor',
-    'outlineColor',
-    'textDecorationColor',
-    'boxShadow',
-    'fill',
-    'stroke'
-  ];
-
-  const sanitizeSingleNode = (el: HTMLElement) => {
-    try {
-      const win = el.ownerDocument?.defaultView || window;
-      const computed = win.getComputedStyle(el);
-      if (!computed) return;
-
-      propertiesToSanitize.forEach((prop) => {
-        const val = (computed as any)[prop] || computed.getPropertyValue(prop);
-        if (typeof val === 'string' && (val.includes('oklch') || val.includes('oklab'))) {
-          const sanitizedVal = convertOklchColor(val);
-          const cssPropName = prop.replace(/([A-Z])/g, '-$1').toLowerCase();
-          el.style.setProperty(cssPropName, sanitizedVal, 'important');
-        }
-      });
-    } catch (e) {
-      // Ignore non-HTML nodes or restricted elements
-    }
-  };
-
-  sanitizeSingleNode(element);
-  const descendants = element.querySelectorAll('*');
-  descendants.forEach((node) => sanitizeSingleNode(node as HTMLElement));
-}
-
-/**
  * Trigger native print dialog for vector PDF output
  */
 export function exportToVectorPdf(): void {
@@ -83,6 +21,51 @@ function resolveModuleExport(mod: any): any {
 }
 
 /**
+ * Helper to extract computed RGB colors and convert any oklch/CSS variables to explicit inline RGB styles.
+ * This guarantees html2canvas will never encounter unsupported oklch color functions or un-evaluated CSS custom properties.
+ */
+function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): void {
+  const origElements = [origNode, ...Array.from(origNode.querySelectorAll<HTMLElement>('*'))];
+  const cloneElements = [cloneNode, ...Array.from(cloneNode.querySelectorAll<HTMLElement>('*'))];
+
+  const colorProps: Array<keyof CSSStyleDeclaration> = [
+    'color',
+    'backgroundColor',
+    'borderColor',
+    'outlineColor',
+    'textDecorationColor',
+    'boxShadow',
+    'fill',
+    'stroke'
+  ];
+
+  for (let i = 0; i < origElements.length; i++) {
+    const origEl = origElements[i];
+    const cloneEl = cloneElements[i];
+    if (!origEl || !cloneEl) continue;
+
+    try {
+      const computed = window.getComputedStyle(origEl);
+      for (const prop of colorProps) {
+        const val = computed[prop as any];
+        if (typeof val === 'string' && val && !val.includes('oklch')) {
+          (cloneEl.style as any)[prop] = val;
+        }
+      }
+
+      // Sanitize inline style attribute if lingering oklch function exists
+      const inlineStyle = cloneEl.getAttribute('style') || '';
+      if (inlineStyle.includes('oklch')) {
+        const cleanedStyle = inlineStyle.replace(/oklch\([^)]+\)/gi, 'rgb(0, 0, 0)');
+        cloneEl.setAttribute('style', cleanedStyle);
+      }
+    } catch (e) {
+      // Ignore style computation errors on detached nodes
+    }
+  }
+}
+
+/**
  * Lazy-loads html2canvas-pro and jsPDF on demand and downloads high-fidelity A4 PDF file directly.
  */
 export async function downloadPdfFromElement(
@@ -97,7 +80,7 @@ export async function downloadPdfFromElement(
     try {
       await Promise.race([
         document.fonts.ready,
-        new Promise((resolve) => setTimeout(resolve, 1000))
+        new Promise((resolve) => setTimeout(resolve, 1500))
       ]);
     } catch (e) {
       console.warn('Font loading wait warning:', e);
@@ -136,54 +119,76 @@ export async function downloadPdfFromElement(
     throw new Error(`html2canvas-pro library failed to load (received ${typeof html2canvas}).`);
   }
 
-  // 4. Temporarily reset transform scaling on target element's parent container for 1:1 crisp 794px capture
-  const parentEl = element.parentElement;
-  const originalTransform = parentEl ? parentEl.style.transform : '';
-  const originalWebkitTransform = parentEl ? parentEl.style.webkitTransform : '';
+  // 4. Create an in-flow off-screen container at top:0, left:0, z-index:-9999 to guarantee valid non-zero layout
+  const renderWrapper = document.createElement('div');
+  renderWrapper.id = 'pdf-export-wrapper';
+  renderWrapper.style.position = 'absolute';
+  renderWrapper.style.top = '0';
+  renderWrapper.style.left = '0';
+  renderWrapper.style.width = '794px';
+  renderWrapper.style.zIndex = '-9999';
+  renderWrapper.style.opacity = '1';
+  renderWrapper.style.pointerEvents = 'none';
+  renderWrapper.style.backgroundColor = '#ffffff';
+  renderWrapper.style.overflow = 'visible';
 
-  const originalDisplay = element.style.display;
-  const originalVisibility = element.style.visibility;
+  const clone = element.cloneNode(true) as HTMLElement;
+  clone.style.display = 'block';
+  clone.style.visibility = 'visible';
+  clone.style.opacity = '1';
+  clone.style.transform = 'none';
+  clone.style.width = '794px';
+  clone.style.margin = '0';
+  clone.style.padding = '0';
+  clone.style.boxSizing = 'border-box';
+  clone.style.backgroundColor = '#ffffff';
 
-  // Unhide element if responsive mobile tab hid the preview container
-  if (element.offsetWidth === 0 || element.offsetHeight === 0) {
-    element.style.display = 'block';
-    element.style.visibility = 'visible';
-  }
+  // Copy computed RGB styles to eliminate oklch functions and CSS variable dependencies
+  sanitizeElementColors(element, clone);
 
-  if (parentEl) {
-    parentEl.style.transform = 'none';
-    parentEl.style.webkitTransform = 'none';
-  }
+  // Unhide any hidden sub-elements inside clone if applicable
+  const hiddenChildren = clone.querySelectorAll('.hidden');
+  hiddenChildren.forEach((child) => {
+    (child as HTMLElement).classList.remove('hidden');
+    (child as HTMLElement).style.display = 'block';
+  });
+
+  renderWrapper.appendChild(clone);
+  document.body.appendChild(renderWrapper);
 
   try {
-    // Brief 50ms pause for DOM reflow
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    // Wait for images inside clone to finish loading
+    const images = Array.from(clone.querySelectorAll('img'));
+    await Promise.all(
+      images.map((img) => {
+        if (img.complete) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+          setTimeout(resolve, 2000);
+        });
+      })
+    );
 
-    const canvas = await html2canvas(element, {
+    // Brief layout stabilization delay
+    await new Promise((resolve) => setTimeout(resolve, 150));
+
+    const targetHeight = Math.max(clone.scrollHeight, clone.offsetHeight, 1123);
+
+    const canvas = await html2canvas(clone, {
       scale: 2, // 192 DPI high resolution
       useCORS: true,
       allowTaint: true,
       logging: false,
       backgroundColor: '#ffffff',
+      x: 0,
+      y: 0,
+      width: 794,
+      height: targetHeight,
       windowWidth: 794,
+      windowHeight: targetHeight,
       imageTimeout: 5000,
       onclone: (clonedDoc: Document) => {
-        // Sanitize any remaining oklch / oklab colors in cloned DOM and stylesheets
-        const clonedSheet = clonedDoc.getElementById('resume-preview-sheet') || clonedDoc.querySelector('.print-area');
-        if (clonedSheet) {
-          sanitizeElementColors(clonedSheet as HTMLElement);
-        }
-
-        // Sanitize all <style> elements inside clonedDoc
-        const styleEls = clonedDoc.querySelectorAll('style');
-        styleEls.forEach((styleEl) => {
-          let cssText = styleEl.textContent || '';
-          if (cssText.includes('oklch') || cssText.includes('oklab')) {
-            cssText = cssText.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
-            styleEl.textContent = cssText;
-          }
-        });
-
         // Page break avoidance
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach((el) => {
@@ -194,7 +199,7 @@ export async function downloadPdfFromElement(
     });
 
     if (!canvas || canvas.width === 0 || canvas.height === 0) {
-      throw new Error('html2canvas captured an empty canvas (0 dimensions).');
+      throw new Error('PDF export canvas captured 0 dimensions. Please ensure resume preview is visible.');
     }
 
     const imgData = canvas.toDataURL('image/png', 1.0);
@@ -205,33 +210,32 @@ export async function downloadPdfFromElement(
       compress: true
     });
 
-    const imgWidth = 210; // A4 width in mm
-    const pageHeight = 297; // A4 height in mm
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
+    const pdfPageWidth = 210; // A4 width in mm
+    const pdfPageHeight = 297; // A4 height in mm
+    const imgWidth = pdfPageWidth;
+    const imgHeight = (canvas.height * pdfPageWidth) / canvas.width;
+
     let position = 0;
+    let heightLeft = imgHeight;
 
     // First Page
     pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
-    heightLeft -= pageHeight;
+    heightLeft -= pdfPageHeight;
 
     // Subsequent Pages for multi-page resumes
-    while (heightLeft >= 5) {
-      position = heightLeft - imgHeight;
+    while (heightLeft > 2) {
+      position -= pdfPageHeight;
       pdf.addPage();
       pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
-      heightLeft -= pageHeight;
+      heightLeft -= pdfPageHeight;
     }
 
     // Direct Browser Download onto User's Device
     pdf.save(safeFilename);
   } finally {
-    if (parentEl) {
-      parentEl.style.transform = originalTransform;
-      parentEl.style.webkitTransform = originalWebkitTransform;
+    if (document.body.contains(renderWrapper)) {
+      document.body.removeChild(renderWrapper);
     }
-    element.style.display = originalDisplay;
-    element.style.visibility = originalVisibility;
   }
 }
 
