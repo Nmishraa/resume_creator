@@ -7,12 +7,19 @@ import {
   TemplateType,
   FontFamilyType,
   FontSizeType,
-  SpacingType
+  SpacingType,
+  DensityMode
 } from '../types/resume';
 import { initialResumeData, emptyResumeData, sampleJobApplications, sampleCoverLetter } from '../data/initialData';
 import { analyzeAtsScore } from '../services/atsChecker';
 import { saveResumeApi, fetchUserResumesApi } from '../services/apiAuth';
 import { useAuth } from './AuthContext';
+
+export interface AdaptiveDensityInfo {
+  mode: DensityMode;
+  fillPercentage: number;
+  pageCount: number;
+}
 
 interface ResumeContextType {
   resume: ResumeData;
@@ -21,6 +28,10 @@ interface ResumeContextType {
   updatePersonalInfo: (field: string, value: string) => void;
   updateSummary: (summary: string) => void;
   updateFormatting: (formattingUpdates: Partial<ResumeData['formatting']>) => void;
+  
+  // Adaptive Density State
+  densityInfo: AdaptiveDensityInfo;
+  setDensityInfo: (info: AdaptiveDensityInfo) => void;
   
   // Section CRUD
   addExperience: () => void;
@@ -116,6 +127,13 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       try { return JSON.parse(saved); } catch {}
     }
     return sampleCoverLetter;
+  });
+
+  // Adaptive Layout Density State
+  const [densityInfo, setDensityInfo] = useState<AdaptiveDensityInfo>({
+    mode: 'standard',
+    fillPercentage: 75,
+    pageCount: 1
   });
 
   // Gemini API Key
@@ -426,6 +444,8 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         updatePersonalInfo,
         updateSummary,
         updateFormatting,
+        densityInfo,
+        setDensityInfo,
         addExperience,
         updateExperience,
         removeExperience,

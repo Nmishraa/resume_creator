@@ -154,6 +154,30 @@ function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): v
       // Ignore style computation errors on detached nodes
     }
   }
+
+  // Copy CSS Custom Properties (--resume-*) onto clone root node
+  try {
+    const customPropNames = [
+      '--resume-body-size',
+      '--resume-line-height',
+      '--resume-section-gap',
+      '--resume-item-gap',
+      '--resume-bullet-gap',
+      '--resume-page-padding',
+      '--resume-column-gap',
+      '--resume-name-size',
+      '--resume-section-title-size'
+    ];
+    const origSheet = origNode.querySelector('.page-break-container') || origNode;
+    const cloneSheet = cloneNode.querySelector('.page-break-container') || cloneNode;
+    const computedSheet = window.getComputedStyle(origSheet as HTMLElement);
+    for (const propName of customPropNames) {
+      const val = (origSheet as HTMLElement).style.getPropertyValue(propName) || computedSheet.getPropertyValue(propName);
+      if (val) {
+        (cloneSheet as HTMLElement).style.setProperty(propName, val);
+      }
+    }
+  } catch (e) {}
 }
 
 /**

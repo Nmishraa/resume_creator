@@ -25,7 +25,7 @@ export const emptyResumeData: ResumeData = {
     template: 'modern',
     fontFamily: 'outfit',
     fontSize: 'base',
-    spacing: 'normal',
+    spacing: 'auto',
     accentColor: '#0284c7',
     showIcons: true,
     sectionOrder: ['summary', 'experience', 'skills', 'projects', 'education', 'certifications', 'customSections']
@@ -176,7 +176,7 @@ export const initialResumeData: ResumeData = {
     template: 'modern',
     fontFamily: 'outfit',
     fontSize: 'base',
-    spacing: 'normal',
+    spacing: 'auto',
     accentColor: '#0284c7', // Brand Cyan/Blue
     showIcons: true,
     sectionOrder: ['summary', 'experience', 'skills', 'projects', 'education', 'certifications', 'customSections']

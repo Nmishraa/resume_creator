@@ -1,5 +1,6 @@
 import React from 'react';
-import { ResumeData, TemplateType } from '../../types/resume';
+import { ResumeData, TemplateType, DensityMode } from '../../types/resume';
+import { useResume } from '../../context/ResumeContext';
 import { ModernClean } from './ModernClean';
 import { TechMinimal } from './TechMinimal';
 import { ExecutiveSerif } from './ExecutiveSerif';
@@ -39,18 +40,41 @@ export const TEMPLATE_LIST: Array<{ id: TemplateType; name: string; description:
   }
 ];
 
-export const ResumeRenderer: React.FC<{ resume: ResumeData }> = ({ resume }) => {
+export interface TemplateProps {
+  resume: ResumeData;
+  densityMode?: DensityMode;
+}
+
+export const ResumeRenderer: React.FC<TemplateProps> = ({ resume, densityMode: overrideMode }) => {
+  let activeMode: DensityMode = overrideMode || 'standard';
+
+  try {
+    const { densityInfo } = useResume();
+    if (!overrideMode && densityInfo?.mode) {
+      activeMode = densityInfo.mode;
+    }
+  } catch (e) {
+    // Fallback if rendered outside ResumeProvider (e.g. standalone print clone)
+  }
+
+  // If user explicitly set formatting spacing, map spacing preset or respect auto mode
+  if (resume.formatting?.spacing && resume.formatting.spacing !== 'auto') {
+    if (resume.formatting.spacing === 'compact') activeMode = 'compact';
+    if (resume.formatting.spacing === 'relaxed') activeMode = 'spacious';
+    if (resume.formatting.spacing === 'normal') activeMode = 'standard';
+  }
+
   switch (resume.formatting.template) {
     case 'tech':
-      return <TechMinimal resume={resume} />;
+      return <TechMinimal resume={resume} densityMode={activeMode} />;
     case 'executive':
-      return <ExecutiveSerif resume={resume} />;
+      return <ExecutiveSerif resume={resume} densityMode={activeMode} />;
     case 'slate':
-      return <ProfessionalSlate resume={resume} />;
+      return <ProfessionalSlate resume={resume} densityMode={activeMode} />;
     case 'compact':
-      return <CompactSidebar resume={resume} />;
+      return <CompactSidebar resume={resume} densityMode={activeMode} />;
     case 'modern':
     default:
-      return <ModernClean resume={resume} />;
+      return <ModernClean resume={resume} densityMode={activeMode} />;
   }
 };

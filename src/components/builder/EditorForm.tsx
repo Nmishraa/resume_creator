@@ -1060,15 +1060,16 @@ export const EditorForm: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-bold text-slate-700 block mb-1.5">Line Spacing</label>
+                    <label className="text-sm font-bold text-slate-700 block mb-1.5">Layout Density / Spacing</label>
                     <select
-                      value={resume.formatting.spacing}
+                      value={resume.formatting.spacing || 'auto'}
                       onChange={(e) => updateFormatting({ spacing: e.target.value as any })}
-                      className="w-full text-sm p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer"
+                      className="w-full text-sm p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer font-semibold text-slate-800"
                     >
-                      <option value="compact">Compact Spacing</option>
-                      <option value="normal">Normal Spacing</option>
-                      <option value="relaxed">Relaxed Spacing</option>
+                      <option value="auto">⚡ Auto Adaptive Density (Recommended)</option>
+                      <option value="compact">Compact Mode (Long Resume)</option>
+                      <option value="normal">Standard Mode (Normal Resume)</option>
+                      <option value="relaxed">Spacious Mode (Short Resume)</option>
                     </select>
                   </div>
                 </div>

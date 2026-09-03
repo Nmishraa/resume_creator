@@ -1,23 +1,41 @@
 import React from 'react';
-import { ResumeData } from '../../types/resume';
-import { getFontFamilyClass, getFontSizeClass, getSpacingClass } from './templateStyles';
+import { ResumeData, DensityMode } from '../../types/resume';
+import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles } from './templateStyles';
 import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/BrandIcons';
 
-export const ProfessionalSlate: React.FC<{ resume: ResumeData }> = ({ resume }) => {
+interface TemplateProps {
+  resume: ResumeData;
+  densityMode?: DensityMode;
+}
+
+export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode = 'standard' }) => {
   const { personalInfo, summary, experience, education, skills, projects, certifications, formatting } = resume;
   const fontClass = getFontFamilyClass(formatting.fontFamily);
   const size = getFontSizeClass(formatting.fontSize);
-  const spacing = getSpacingClass(formatting.spacing);
   const accentColor = formatting.accentColor || '#334155';
+  const densityStyles = getAdaptiveDensityStyles(densityMode);
 
   return (
-    <div className={`w-full max-w-[794px] box-border bg-white text-slate-800 px-8 sm:px-10 py-8 sm:py-10 ${fontClass} ${size.body}`}>
+    <div
+      className={`w-full max-w-[794px] box-border bg-white text-slate-800 ${fontClass} page-break-container`}
+      style={{
+        ...densityStyles,
+        padding: 'var(--resume-page-padding, 15mm 13mm)',
+        fontSize: 'var(--resume-body-size, 13.2px)',
+        lineHeight: 'var(--resume-line-height, 1.45)'
+      }}
+    >
       {/* Banner Top Header */}
-      <div className="bg-slate-900 text-white -mx-8 -mt-8 sm:-mx-10 sm:-mt-10 p-6 sm:p-8 mb-6 box-border">
+      <div className="bg-slate-900 text-white -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 p-5 sm:p-6 mb-5 box-border rounded-t-sm">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
-            <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase" role="heading" aria-level={2}>
+            <div
+              style={{ fontSize: 'var(--resume-name-size, 25px)' }}
+              className="font-extrabold tracking-tight text-white uppercase"
+              role="heading"
+              aria-level={2}
+            >
               {personalInfo.fullName || 'Candidate Name'}
             </div>
             <p className="text-sm font-medium text-slate-300 tracking-wide mt-0.5">
@@ -36,13 +54,18 @@ export const ProfessionalSlate: React.FC<{ resume: ResumeData }> = ({ resume }) 
         </div>
       </div>
 
-      <div className={`mt-6 ${spacing.sectionGap}`}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
         {/* Summary */}
         {summary && (
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-900">Summary</h2>
+              <h2
+                style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
+                className="font-bold uppercase tracking-wider text-slate-900"
+              >
+                Summary
+              </h2>
             </div>
             <p className="text-slate-700 leading-relaxed pl-3.5 border-l border-slate-200">{summary}</p>
           </div>
@@ -51,26 +74,37 @@ export const ProfessionalSlate: React.FC<{ resume: ResumeData }> = ({ resume }) 
         {/* Experience */}
         {experience && experience.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 mb-2.5">
+            <div className="flex items-center gap-2 mb-2.5" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-900">Experience</h2>
+              <h2
+                style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
+                className="font-bold uppercase tracking-wider text-slate-900"
+              >
+                Experience
+              </h2>
             </div>
-            <div className={`pl-3.5 border-l border-slate-200 ${spacing.itemGap}`}>
+            <div
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}
+              className="pl-3.5 border-l border-slate-200"
+            >
               {experience.map((exp) => (
-                <div key={exp.id} className="page-break-avoid">
+                <div key={exp.id} className="page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap">
                     <div>
                       <span className="font-bold text-slate-900 text-sm">{exp.role}</span>
-                      <span className="text-slate-600 text-xs"> — {exp.company}</span>
+                      <span className="text-slate-600 text-xs font-semibold"> • {exp.company}</span>
                     </div>
-                    <span className="text-xs text-slate-500 font-medium">
-                      {exp.startDate} – {exp.current ? 'Present' : exp.endDate} {exp.location && `| ${exp.location}`}
+                    <span className="text-xs text-slate-500 font-mono">
+                      {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
                     </span>
                   </div>
                   {exp.highlights && (
-                    <ul className={`mt-1 list-disc list-outside ml-4 text-slate-700 ${spacing.bulletGap}`}>
+                    <ul
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                      className="mt-1 list-disc list-outside ml-4 text-slate-700"
+                    >
                       {exp.highlights.map((h, i) => (
-                        <li key={i} className="pl-0.5">{h}</li>
+                        <li key={i}>{h}</li>
                       ))}
                     </ul>
                   )}
@@ -83,83 +117,54 @@ export const ProfessionalSlate: React.FC<{ resume: ResumeData }> = ({ resume }) 
         {/* Skills */}
         {skills && skills.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-900">Technical Skills</h2>
+              <h2
+                style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
+                className="font-bold uppercase tracking-wider text-slate-900"
+              >
+                Skills
+              </h2>
             </div>
             <div className="pl-3.5 border-l border-slate-200 space-y-1.5 text-xs">
               {skills.map((s) => (
-                <div key={s.id} className="flex flex-wrap items-baseline gap-1">
-                  <span className="font-bold text-slate-900 min-w-[130px]">{s.category}:</span>
-                  <span className="text-slate-700">{s.items.join(' • ')}</span>
+                <div key={s.id} className="flex gap-2 page-break-avoid">
+                  <span className="font-bold text-slate-900 min-w-[110px]">{s.category}:</span>
+                  <span className="text-slate-700">{s.items.join(', ')}</span>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Projects */}
-        {projects && projects.length > 0 && (
+        {/* Education */}
+        {education && education.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-900">Key Projects</h2>
+              <h2
+                style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
+                className="font-bold uppercase tracking-wider text-slate-900"
+              >
+                Education
+              </h2>
             </div>
-            <div className={`pl-3.5 border-l border-slate-200 ${spacing.itemGap}`}>
-              {projects.map((proj) => (
-                <div key={proj.id} className="page-break-avoid text-xs">
-                  <div className="flex justify-between items-baseline font-medium text-slate-900">
-                    <span className="font-bold text-sm">{proj.title}</span>
-                    <span className="text-slate-500">{proj.startDate}</span>
+            <div
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}
+              className="pl-3.5 border-l border-slate-200"
+            >
+              {education.map((edu) => (
+                <div key={edu.id} className="page-break-avoid resume-section-item">
+                  <div className="flex justify-between items-baseline">
+                    <span className="font-bold text-slate-900">{edu.degree}</span>
+                    <span className="text-xs text-slate-500 font-mono">{edu.startDate} - {edu.endDate}</span>
                   </div>
-                  {proj.highlights && (
-                    <ul className={`mt-1 list-disc list-outside ml-4 text-slate-700 ${spacing.bulletGap}`}>
-                      {proj.highlights.map((h, i) => (
-                        <li key={i}>{h}</li>
-                      ))}
-                    </ul>
-                  )}
+                  <div className="text-xs text-slate-600">{edu.institution} {edu.location && `• ${edu.location}`}</div>
                 </div>
               ))}
             </div>
           </div>
         )}
-
-        {/* Education & Certs */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-          {education && (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-900">Education</h2>
-              </div>
-              <div className="pl-3.5 border-l border-slate-200 text-xs space-y-1">
-                {education.map(edu => (
-                  <div key={edu.id}>
-                    <div className="font-bold text-slate-900">{edu.degree}</div>
-                    <div className="text-slate-600">{edu.institution} ({edu.startDate}-{edu.endDate})</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {certifications && (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-900">Certifications</h2>
-              </div>
-              <div className="pl-3.5 border-l border-slate-200 text-xs space-y-1">
-                {certifications.map(c => (
-                  <div key={c.id} className="text-slate-800">
-                    <span className="font-semibold">{c.name}</span> — {c.issuer}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

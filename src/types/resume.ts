@@ -1,7 +1,8 @@
 export type TemplateType = 'modern' | 'tech' | 'executive' | 'slate' | 'compact';
 export type FontFamilyType = 'outfit' | 'inter' | 'serif' | 'mono';
 export type FontSizeType = 'sm' | 'base' | 'lg';
-export type SpacingType = 'compact' | 'normal' | 'relaxed';
+export type SpacingType = 'compact' | 'normal' | 'relaxed' | 'auto';
+export type DensityMode = 'spacious' | 'standard' | 'compact';
 
 export interface PersonalInfo {
   fullName: string;

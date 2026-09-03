@@ -1,25 +1,39 @@
 import React from 'react';
-import { ResumeData } from '../../types/resume';
-import { getFontFamilyClass, getFontSizeClass, getSpacingClass } from './templateStyles';
+import { ResumeData, DensityMode } from '../../types/resume';
+import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles } from './templateStyles';
 import { Mail, Phone, MapPin, Globe, ExternalLink } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/BrandIcons';
 
 interface TemplateProps {
   resume: ResumeData;
+  densityMode?: DensityMode;
 }
 
-export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
+export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'standard' }) => {
   const { personalInfo, summary, experience, education, skills, projects, certifications, formatting } = resume;
   const fontClass = getFontFamilyClass(formatting.fontFamily);
   const size = getFontSizeClass(formatting.fontSize);
-  const spacing = getSpacingClass(formatting.spacing);
   const accentColor = formatting.accentColor || '#0284c7';
+  const densityStyles = getAdaptiveDensityStyles(densityMode);
 
   return (
-    <div className={`w-full max-w-[794px] box-border bg-white text-slate-800 px-8 sm:px-10 py-8 sm:py-10 ${fontClass} ${size.body}`}>
+    <div
+      className={`w-full max-w-[794px] box-border bg-white text-slate-800 ${fontClass} page-break-container`}
+      style={{
+        ...densityStyles,
+        padding: 'var(--resume-page-padding, 15mm 13mm)',
+        fontSize: 'var(--resume-body-size, 13.2px)',
+        lineHeight: 'var(--resume-line-height, 1.45)'
+      }}
+    >
       {/* Header */}
-      <div className="border-b pb-4 mb-4" style={{ borderColor: `${accentColor}30` }}>
-        <div className={`${size.name} text-slate-900 leading-tight mb-1 font-bold`} role="heading" aria-level={2}>
+      <div className="border-b pb-3 mb-4" style={{ borderColor: `${accentColor}30` }}>
+        <div
+          style={{ fontSize: 'var(--resume-name-size, 25px)' }}
+          className="text-slate-900 leading-tight mb-1 font-bold tracking-tight"
+          role="heading"
+          aria-level={2}
+        >
           {personalInfo.fullName || 'Your Name'}
         </div>
         <p className="text-sm font-semibold tracking-wide" style={{ color: accentColor }}>
@@ -27,7 +41,7 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
         </p>
 
         {/* Contact info row */}
-        <div className="flex flex-wrap gap-y-1.5 gap-x-4 mt-2.5 text-xs text-slate-600">
+        <div className="flex flex-wrap gap-y-1.5 gap-x-4 mt-2 text-xs text-slate-600">
           {personalInfo.email && (
             <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1 hover:text-slate-900 transition-colors">
               {formatting.showIcons && <Mail size={12} className="text-slate-400" />}
@@ -67,11 +81,20 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
         </div>
       </div>
 
-      <div className={spacing.sectionGap}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
         {/* Summary */}
         {summary && (
           <div>
-            <h2 className={`${size.sectionTitle} flex items-center gap-2 mb-2 pb-1 border-b`} style={{ color: accentColor, borderColor: `${accentColor}25` }}>
+            <h2
+              style={{
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}25`,
+                breakAfter: 'avoid',
+                pageBreakAfter: 'avoid'
+              }}
+              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+            >
               Professional Summary
             </h2>
             <p className="text-slate-700 leading-relaxed text-left">
@@ -83,12 +106,21 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
         {/* Experience */}
         {experience && experience.length > 0 && (
           <div>
-            <h2 className={`${size.sectionTitle} flex items-center gap-2 mb-2.5 pb-1 border-b`} style={{ color: accentColor, borderColor: `${accentColor}25` }}>
+            <h2
+              style={{
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}25`,
+                breakAfter: 'avoid',
+                pageBreakAfter: 'avoid'
+              }}
+              className="font-bold uppercase tracking-wider mb-2.5 pb-1 border-b flex items-center gap-2"
+            >
               Work Experience
             </h2>
-            <div className={spacing.itemGap}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {experience.map((exp) => (
-                <div key={exp.id} className="page-break-avoid">
+                <div key={exp.id} className="page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap gap-x-2">
                     <div className="flex items-center gap-2">
                       <span className={`${size.itemTitle} text-slate-900`}>{exp.role}</span>
@@ -100,7 +132,10 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
                     </div>
                   </div>
                   {exp.highlights && exp.highlights.length > 0 && (
-                    <ul className={`mt-1.5 list-disc list-outside ml-4 text-slate-700 ${spacing.bulletGap}`}>
+                    <ul
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                      className="mt-1.5 list-disc list-outside ml-4 text-slate-700"
+                    >
                       {exp.highlights.map((h, i) => (
                         <li key={i} className="pl-1 leading-snug">{h}</li>
                       ))}
@@ -115,12 +150,21 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
         {/* Skills */}
         {skills && skills.length > 0 && (
           <div>
-            <h2 className={`${size.sectionTitle} flex items-center gap-2 mb-2 pb-1 border-b`} style={{ color: accentColor, borderColor: `${accentColor}25` }}>
-              Core Skills & Technologies
+            <h2
+              style={{
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}25`,
+                breakAfter: 'avoid',
+                pageBreakAfter: 'avoid'
+              }}
+              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+            >
+              Core Skills &amp; Technologies
             </h2>
             <div className="space-y-1.5 text-slate-700">
               {skills.map((cat) => (
-                <div key={cat.id} className="flex flex-wrap items-baseline gap-1 text-xs">
+                <div key={cat.id} className="flex flex-wrap items-baseline gap-1 text-xs page-break-avoid">
                   <span className="font-bold text-slate-900 min-w-[120px]">{cat.category}:</span>
                   <span className="text-slate-700">{cat.items.join(' • ')}</span>
                 </div>
@@ -132,12 +176,21 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
         {/* Projects */}
         {projects && projects.length > 0 && (
           <div>
-            <h2 className={`${size.sectionTitle} flex items-center gap-2 mb-2.5 pb-1 border-b`} style={{ color: accentColor, borderColor: `${accentColor}25` }}>
+            <h2
+              style={{
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}25`,
+                breakAfter: 'avoid',
+                pageBreakAfter: 'avoid'
+              }}
+              className="font-bold uppercase tracking-wider mb-2.5 pb-1 border-b flex items-center gap-2"
+            >
               Key Projects
             </h2>
-            <div className={spacing.itemGap}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {projects.map((proj) => (
-                <div key={proj.id} className="page-break-avoid">
+                <div key={proj.id} className="page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap gap-x-2">
                     <div className="flex items-center gap-2">
                       <span className={`${size.itemTitle} text-slate-900`}>{proj.title}</span>
@@ -158,7 +211,10 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
                     </div>
                   )}
                   {proj.highlights && proj.highlights.length > 0 && (
-                    <ul className={`mt-1 list-disc list-outside ml-4 text-slate-700 ${spacing.bulletGap}`}>
+                    <ul
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                      className="mt-1 list-disc list-outside ml-4 text-slate-700"
+                    >
                       {proj.highlights.map((h, i) => (
                         <li key={i} className="pl-1 leading-snug">{h}</li>
                       ))}
@@ -173,12 +229,21 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
         {/* Education */}
         {education && education.length > 0 && (
           <div>
-            <h2 className={`${size.sectionTitle} flex items-center gap-2 mb-2 pb-1 border-b`} style={{ color: accentColor, borderColor: `${accentColor}25` }}>
+            <h2
+              style={{
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}25`,
+                breakAfter: 'avoid',
+                pageBreakAfter: 'avoid'
+              }}
+              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+            >
               Education
             </h2>
-            <div className={spacing.itemGap}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
-                <div key={edu.id} className="page-break-avoid">
+                <div key={edu.id} className="page-break-avoid resume-section-item">
                   <div className="flex justify-between items-baseline flex-wrap gap-x-2">
                     <div className="flex items-center gap-2">
                       <span className={`${size.itemTitle} text-slate-900`}>{edu.degree}</span>
@@ -191,7 +256,10 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
                   </div>
                   {edu.gpa && <div className="text-xs text-slate-600 mt-0.5">GPA: {edu.gpa}</div>}
                   {edu.highlights && edu.highlights.length > 0 && (
-                    <ul className={`mt-1 list-disc list-outside ml-4 text-slate-600 ${spacing.bulletGap}`}>
+                    <ul
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                      className="mt-1 list-disc list-outside ml-4 text-slate-600"
+                    >
                       {edu.highlights.map((h, i) => (
                         <li key={i} className="pl-1 text-xs">{h}</li>
                       ))}
@@ -206,12 +274,21 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
         {/* Certifications */}
         {certifications && certifications.length > 0 && (
           <div>
-            <h2 className={`${size.sectionTitle} flex items-center gap-2 mb-2 pb-1 border-b`} style={{ color: accentColor, borderColor: `${accentColor}25` }}>
-              Certifications & Credentials
+            <h2
+              style={{
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}25`,
+                breakAfter: 'avoid',
+                pageBreakAfter: 'avoid'
+              }}
+              className="font-bold uppercase tracking-wider mb-2 pb-1 border-b flex items-center gap-2"
+            >
+              Certifications &amp; Credentials
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
               {certifications.map((cert) => (
-                <div key={cert.id} className="flex justify-between items-center bg-slate-50/70 p-1.5 rounded border border-slate-100">
+                <div key={cert.id} className="flex justify-between items-center bg-slate-50/70 p-1.5 rounded border border-slate-100 page-break-avoid">
                   <span className="font-semibold text-slate-800">{cert.name}</span>
                   <span className="text-slate-500 text-[11px]">{cert.issuer} ({cert.date})</span>
                 </div>
