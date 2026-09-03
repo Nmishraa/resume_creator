@@ -71,7 +71,7 @@
   background: #94a3b8;
 }
 
-/* Print Styles for ATS Vector PDF Export */
+/* Print Styles for ATS Vector & High-Fidelity PDF Export */
 @media print {
   body {
     background: white !important;
@@ -101,6 +101,8 @@
     box-shadow: none !important;
     border: none !important;
     background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   @page {
@@ -110,7 +112,9 @@
 
   .page-break-avoid,
   .resume-section-item,
-  .resume-section-block {
+  .resume-section-block,
+  h1, h2, h3, h4,
+  section {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }

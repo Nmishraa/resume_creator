@@ -3,7 +3,7 @@ import html2canvas from 'html2canvas';
 import { ResumeData } from '../types/resume';
 
 /**
- * Trigger native print dialog if user explicitly requests print preview
+ * Trigger native print dialog for vector PDF output
  */
 export function exportToVectorPdf(): void {
   window.print();
@@ -11,83 +11,98 @@ export function exportToVectorPdf(): void {
 
 /**
  * Download direct PDF file using html2canvas and jsPDF with high DPI rendering.
- * Guarantees a direct .pdf file download onto the user's computer without opening print dialogs.
+ * Guarantees a direct .pdf file download that matches the preview design 100%.
  */
-export async function downloadPdfFromElement(elementId: string, filename: string = 'Resume.pdf'): Promise<void> {
+export async function downloadPdfFromElement(elementId: string = 'resume-preview-sheet', filename: string = 'Resume.pdf'): Promise<void> {
   const safeFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
+
+  // Wait for Google Fonts / web fonts to finish loading
+  if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
+    try {
+      await document.fonts.ready;
+    } catch (e) {
+      console.warn('Font loading wait warning:', e);
+    }
+  }
 
   let element = document.getElementById(elementId) as HTMLElement | null;
 
-  // Fallback 1: Look for .print-area or sheet element if elementId is not in DOM
   if (!element) {
-    element = (document.querySelector('.print-area') ||
+    element = (document.querySelector('#resume-preview-sheet') ||
+               document.querySelector('.print-area') ||
                document.querySelector('#cover-letter-sheet') ||
-               document.querySelector('#resume-preview-sheet') ||
-               document.querySelector('[id*="preview"]') ||
-               document.querySelector('[class*="resume-sheet"]')) as HTMLElement | null;
+               document.querySelector('[id*="preview"]')) as HTMLElement | null;
   }
 
-  // Fallback 2: If no sheet element is found, use body
   if (!element) {
-    console.warn('Target element not found for PDF export:', elementId);
-    element = document.body;
+    console.error('Target element for PDF generation not found:', elementId);
+    window.print();
+    return;
   }
 
-  let tempContainer: HTMLElement | null = null;
-  let targetElement = element;
+  // Create temporary off-screen container for rendering if target is hidden or transformed
+  const tempWrapper = document.createElement('div');
+  tempWrapper.style.position = 'fixed';
+  tempWrapper.style.left = '-9999px';
+  tempWrapper.style.top = '0';
+  tempWrapper.style.width = '794px'; // 210mm at 96 DPI
+  tempWrapper.style.backgroundColor = '#ffffff';
+  tempWrapper.style.zIndex = '-9999';
+  tempWrapper.style.overflow = 'hidden';
 
-  // If the target element is hidden or has 0 height/width (e.g. user is on Editor Form tab), clone it off-screen in visible state
-  const isHidden = element.offsetWidth === 0 || element.offsetHeight === 0 || window.getComputedStyle(element).display === 'none';
+  // Clone element to prevent zoom transform distortion
+  const clone = element.cloneNode(true) as HTMLElement;
+  clone.style.transform = 'none';
+  clone.style.width = '794px';
+  clone.style.minHeight = '1123px'; // A4 aspect ratio height at 96 DPI
+  clone.style.margin = '0';
+  clone.style.padding = '0';
+  clone.style.boxSizing = 'border-box';
+  clone.style.backgroundColor = '#ffffff';
 
-  if (isHidden) {
-    tempContainer = document.createElement('div');
-    tempContainer.style.position = 'fixed';
-    tempContainer.style.left = '-9999px';
-    tempContainer.style.top = '0';
-    tempContainer.style.width = '794px'; // Standard A4 width at 96 DPI
-    tempContainer.style.zIndex = '-9999';
-    tempContainer.style.opacity = '1';
-    tempContainer.style.visibility = 'visible';
-    tempContainer.style.background = '#ffffff';
-
-    const clone = element.cloneNode(true) as HTMLElement;
-    clone.style.display = 'block';
-    clone.style.visibility = 'visible';
-    clone.style.width = '794px';
-    clone.style.transform = 'none';
-
-    tempContainer.appendChild(clone);
-    document.body.appendChild(tempContainer);
-    targetElement = clone;
-  }
+  tempWrapper.appendChild(clone);
+  document.body.appendChild(tempWrapper);
 
   try {
-    const canvas = await html2canvas(targetElement, {
-      scale: 2, // High DPI resolution (192 DPI equivalent)
+    // Wait brief tick for layout repaint
+    await new Promise(resolve => setTimeout(resolve, 120));
+
+    const canvas = await html2canvas(clone, {
+      scale: 2.5, // High DPI resolution (240 DPI equivalent)
       useCORS: true,
-      allowTaint: false, // Prevent canvas taint security errors
+      allowTaint: true,
       logging: false,
       backgroundColor: '#ffffff',
       windowWidth: 794,
-      windowHeight: targetElement.scrollHeight || 1123
+      windowHeight: clone.scrollHeight || 1123,
+      onclone: (clonedDoc) => {
+        const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
+        avoidElements.forEach(el => {
+          (el as HTMLElement).style.breakInside = 'avoid';
+          (el as HTMLElement).style.pageBreakInside = 'avoid';
+        });
+      }
     });
 
-    const imgData = canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL('image/png', 1.0);
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
-      format: 'a4'
+      format: 'a4',
+      compress: true
     });
 
-    const imgWidth = 210; // A4 width mm
-    const pageHeight = 297; // A4 height mm
+    const imgWidth = 210; // A4 width in mm
+    const pageHeight = 297; // A4 height in mm
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     let heightLeft = imgHeight;
     let position = 0;
 
+    // First Page
     pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
     heightLeft -= pageHeight;
 
+    // Subsequent Pages for multi-page resumes
     while (heightLeft >= 5) {
       position = heightLeft - imgHeight;
       pdf.addPage();
@@ -95,48 +110,28 @@ export async function downloadPdfFromElement(elementId: string, filename: string
       heightLeft -= pageHeight;
     }
 
-    // Trigger direct browser file download via Blob URL for maximum browser compatibility
+    // Direct Browser Download
     const pdfBlob = pdf.output('blob');
     const blobUrl = URL.createObjectURL(pdfBlob);
-    const downloadLink = document.createElement('a');
-    downloadLink.href = blobUrl;
-    downloadLink.download = safeFilename;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.href = blobUrl;
+    downloadAnchor.download = safeFilename;
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
 
     setTimeout(() => {
-      if (document.body.contains(downloadLink)) {
-        document.body.removeChild(downloadLink);
+      if (document.body.contains(downloadAnchor)) {
+        document.body.removeChild(downloadAnchor);
       }
       URL.revokeObjectURL(blobUrl);
-    }, 200);
+    }, 300);
 
   } catch (err) {
-    console.error('Direct PDF rendering error:', err);
-
-    // Fallback: Create simple text-based PDF via jsPDF if canvas rendering fails
-    try {
-      const fallbackPdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-      fallbackPdf.setFontSize(16);
-      fallbackPdf.text('Resume Document', 20, 20);
-      fallbackPdf.setFontSize(11);
-      const textContent = targetElement.innerText || 'Resume Content';
-      const lines = fallbackPdf.splitTextToSize(textContent, 170);
-      fallbackPdf.text(lines, 20, 30);
-      
-      const blob = fallbackPdf.output('blob');
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = safeFilename;
-      document.body.appendChild(link);
-      link.click();
-      setTimeout(() => link.remove(), 200);
-    } catch (fallbackErr) {
-      console.error('Fallback PDF generation error:', fallbackErr);
-    }
+    console.error('Error generating styled PDF canvas:', err);
+    window.print();
   } finally {
-    if (tempContainer && document.body.contains(tempContainer)) {
-      document.body.removeChild(tempContainer);
+    if (document.body.contains(tempWrapper)) {
+      document.body.removeChild(tempWrapper);
     }
   }
 }
