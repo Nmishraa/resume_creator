@@ -28,15 +28,80 @@ function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): v
   const origElements = [origNode, ...Array.from(origNode.querySelectorAll<HTMLElement>('*'))];
   const cloneElements = [cloneNode, ...Array.from(cloneNode.querySelectorAll<HTMLElement>('*'))];
 
-  const colorProps: Array<keyof CSSStyleDeclaration> = [
+  const visualProps: Array<keyof CSSStyleDeclaration> = [
+    // Flex & Grid Layout
+    'display',
+    'flexDirection',
+    'flexWrap',
+    'alignItems',
+    'justifyContent',
+    'alignContent',
+    'gap',
+    'columnGap',
+    'rowGap',
+    'flex',
+    'flexGrow',
+    'flexShrink',
+    'flexBasis',
+    'gridTemplateColumns',
+    'gridTemplateRows',
+    'gridColumn',
+
+    // Typography & Text Scale
     'color',
+    'fontFamily',
+    'fontSize',
+    'fontWeight',
+    'fontStyle',
+    'lineHeight',
+    'letterSpacing',
+    'textAlign',
+    'textTransform',
+    'textDecoration',
+    'whiteSpace',
+    'wordBreak',
+    'overflowWrap',
+
+    // Box Model & Spacing
+    'boxSizing',
+    'width',
+    'height',
+    'minWidth',
+    'minHeight',
+    'maxWidth',
+    'marginTop',
+    'marginRight',
+    'marginBottom',
+    'marginLeft',
+    'paddingTop',
+    'paddingRight',
+    'paddingBottom',
+    'paddingLeft',
+
+    // Colors & Borders
     'backgroundColor',
     'borderColor',
+    'borderWidth',
+    'borderStyle',
+    'borderRadius',
+    'borderTopColor',
+    'borderRightColor',
+    'borderBottomColor',
+    'borderLeftColor',
+    'borderTopWidth',
+    'borderRightWidth',
+    'borderBottomWidth',
+    'borderLeftWidth',
+    'borderTopStyle',
+    'borderRightStyle',
+    'borderBottomStyle',
+    'borderLeftStyle',
     'outlineColor',
-    'textDecorationColor',
     'boxShadow',
     'fill',
-    'stroke'
+    'stroke',
+    'opacity',
+    'visibility'
   ];
 
   for (let i = 0; i < origElements.length; i++) {
@@ -45,13 +110,22 @@ function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): v
     if (!origEl || !cloneEl) continue;
 
     try {
-      // Protect SVG elements (icons, paths, shapes) from HTML-specific style overrides
       const isSvgNode = origEl instanceof SVGElement || !!origEl.closest('svg');
 
       if (!isSvgNode) {
-        // Enforce border-box box-sizing and max-width ONLY on HTML layout elements
         cloneEl.style.boxSizing = 'border-box';
         cloneEl.style.maxWidth = '100%';
+
+        const computed = window.getComputedStyle(origEl);
+        for (const prop of visualProps) {
+          // Avoid overwriting specific width/height on root container clone if explicitly managed
+          if ((prop === 'width' || prop === 'maxWidth') && cloneEl === cloneNode) continue;
+
+          const val = computed[prop as any];
+          if (typeof val === 'string' && val && !val.includes('oklch')) {
+            (cloneEl.style as any)[prop] = val;
+          }
+        }
       } else {
         // Ensure root SVG icons have valid XML namespace for html2canvas SVG serialization
         if (cloneEl.tagName.toLowerCase() === 'svg') {
@@ -59,13 +133,14 @@ function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): v
             cloneEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
           }
         }
-      }
 
-      const computed = window.getComputedStyle(origEl);
-      for (const prop of colorProps) {
-        const val = computed[prop as any];
-        if (typeof val === 'string' && val && !val.includes('oklch')) {
-          (cloneEl.style as any)[prop] = val;
+        const computed = window.getComputedStyle(origEl);
+        const svgProps: Array<keyof CSSStyleDeclaration> = ['color', 'fill', 'stroke', 'opacity', 'visibility', 'display'];
+        for (const prop of svgProps) {
+          const val = computed[prop as any];
+          if (typeof val === 'string' && val && !val.includes('oklch')) {
+            (cloneEl.style as any)[prop] = val;
+          }
         }
       }
 
