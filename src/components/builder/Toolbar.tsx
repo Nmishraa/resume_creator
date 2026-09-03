@@ -75,12 +75,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         origin: { y: 0.8 }
       });
     } catch (error: any) {
-      console.warn("Direct canvas PDF export failed, invoking vector print PDF fallback:", error);
-      try {
-        exportToVectorPdf();
-      } catch (fallbackError) {
-        alert(`PDF export failed: ${error?.message || String(error)}`);
-      }
+      console.error("PDF download failed:", error);
+      alert(`PDF download failed: ${error?.message || String(error)}`);
     } finally {
       setIsExporting(false);
     }

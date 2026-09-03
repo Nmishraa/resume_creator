@@ -200,7 +200,8 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
     try {
       await downloadPdfFromElement('resume-preview-sheet', `${(resume.personalInfo.fullName || 'Resume').replace(/\s+/g, '_')}_Resume.pdf`);
     } catch (e: any) {
-      exportToVectorPdf();
+      console.error("PDF download failed:", e);
+      alert(`PDF download failed: ${e?.message || String(e)}`);
     }
   };
 

@@ -69,43 +69,30 @@ export async function downloadPdfFromElement(
     throw new Error(`html2canvas library failed to load (received ${typeof html2canvas}).`);
   }
 
-  // 4. Create isolated visible container positioned behind viewport for clean rendering
-  const container = document.createElement('div');
-  container.style.position = 'absolute';
-  container.style.left = '0';
-  container.style.top = '0';
-  container.style.width = '794px'; // A4 width at 96 DPI
-  container.style.zIndex = '-99999';
-  container.style.opacity = '1';
-  container.style.pointerEvents = 'none';
-  container.style.backgroundColor = '#ffffff';
+  // 4. Temporarily reset transform scaling on target element's parent container for 1:1 crisp 794px capture
+  const parentEl = element.parentElement;
+  const originalTransform = parentEl ? parentEl.style.transform : '';
+  const originalWebkitTransform = parentEl ? parentEl.style.webkitTransform : '';
 
-  const clone = element.cloneNode(true) as HTMLElement;
-  clone.style.display = 'block';
-  clone.style.visibility = 'visible';
-  clone.style.opacity = '1';
-  clone.style.transform = 'none';
-  clone.style.width = '794px';
-  clone.style.minHeight = '1123px';
-  clone.style.margin = '0';
-  clone.style.padding = '0';
-  clone.style.boxSizing = 'border-box';
-  clone.style.backgroundColor = '#ffffff';
+  const originalDisplay = element.style.display;
+  const originalVisibility = element.style.visibility;
 
-  // Unhide any hidden children inside clone
-  const hiddenChildren = clone.querySelectorAll('.hidden');
-  hiddenChildren.forEach((child) => {
-    (child as HTMLElement).classList.remove('hidden');
-    (child as HTMLElement).style.display = 'block';
-  });
+  // Unhide element if responsive mobile tab hid the preview container
+  if (element.offsetWidth === 0 || element.offsetHeight === 0) {
+    element.style.display = 'block';
+    element.style.visibility = 'visible';
+  }
 
-  container.appendChild(clone);
-  document.body.appendChild(container);
+  if (parentEl) {
+    parentEl.style.transform = 'none';
+    parentEl.style.webkitTransform = 'none';
+  }
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 150));
+    // Brief 50ms pause for DOM reflow
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
-    const canvas = await html2canvas(clone, {
+    const canvas = await html2canvas(element, {
       scale: 2, // 192 DPI high resolution
       useCORS: true,
       allowTaint: true,
@@ -123,7 +110,7 @@ export async function downloadPdfFromElement(
     });
 
     if (!canvas || canvas.width === 0 || canvas.height === 0) {
-      throw new Error('html2canvas produced an empty canvas.');
+      throw new Error('html2canvas captured an empty canvas (0 dimensions).');
     }
 
     const imgData = canvas.toDataURL('image/png', 1.0);
@@ -152,12 +139,15 @@ export async function downloadPdfFromElement(
       heightLeft -= pageHeight;
     }
 
-    // Direct Browser Download
+    // Direct Browser Download onto User's Device
     pdf.save(safeFilename);
   } finally {
-    if (document.body.contains(container)) {
-      document.body.removeChild(container);
+    if (parentEl) {
+      parentEl.style.transform = originalTransform;
+      parentEl.style.webkitTransform = originalWebkitTransform;
     }
+    element.style.display = originalDisplay;
+    element.style.visibility = originalVisibility;
   }
 }
 
