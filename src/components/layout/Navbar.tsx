@@ -29,10 +29,8 @@ export const Navbar: React.FC = () => {
   const [userDropdown, setUserDropdown] = useState(false);
   const [toolsDropdown, setToolsDropdown] = useState(false);
 
-  const mainTools = [
-    { label: 'Resume Builder', path: '/builder', desc: 'Interactive real-time ATS editor & PDF export', icon: FileText },
-    { label: 'ATS Score Checker', path: '/ats-resume-checker', desc: 'Scan 0–100 score against job descriptions', icon: CheckCircle2 },
-    { label: 'AI Bullet Enhancer', path: '/ai-resume-builder', desc: 'Google X-Y-Z formula bullet writer', icon: Sparkles },
+  const additionalTools = [
+    { label: 'AI Bullet Writer', path: '/ai-resume-builder', desc: 'Google X-Y-Z formula bullet writer', icon: Sparkles },
     { label: 'Student Resume Builder', path: '/resume-builder-for-students', desc: 'Coursework, projects & beginner tips', icon: GraduationCap },
     { label: 'Cover Letter Generator', path: '/cover-letters', desc: 'AI-tailored cover letters in seconds', icon: Mail },
     { label: 'Job Application Tracker', path: '/applications', desc: 'Visual Kanban pipeline & status tracking', icon: Briefcase },
@@ -138,13 +136,13 @@ export const Navbar: React.FC = () => {
                 className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 transition-colors cursor-pointer"
                 aria-expanded={toolsDropdown}
               >
-                <span>More</span>
+                <span>More Tools</span>
                 <ChevronDown size={14} className={`transition-transform duration-150 ${toolsDropdown ? 'rotate-180 text-brand-600' : 'text-slate-400'}`} />
               </button>
 
               {toolsDropdown && (
                 <div className="absolute left-0 mt-0.5 w-80 bg-white border border-slate-200 rounded-2xl shadow-xl p-2.5 z-50 animate-in fade-in grid grid-cols-1 gap-1">
-                  {mainTools.map((tool) => {
+                  {additionalTools.map((tool) => {
                     const Icon = tool.icon;
                     return (
                       <Link
@@ -311,7 +309,7 @@ export const Navbar: React.FC = () => {
 
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-2 pt-2">Additional Tools</div>
           <div className="grid grid-cols-1 gap-1">
-            {mainTools.slice(2).map((tool) => {
+            {additionalTools.map((tool) => {
               const Icon = tool.icon;
               return (
                 <Link

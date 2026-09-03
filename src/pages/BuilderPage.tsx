@@ -17,7 +17,7 @@ export const BuilderPage: React.FC = () => {
   const [showMobilePreviewModal, setShowMobilePreviewModal] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-4rem)] bg-slate-100">
+    <div className="flex flex-col min-h-screen bg-slate-100">
       <SeoHead
         title="Free Step-by-Step Resume Builder – ATS Resume Editor | Resume Craft"
         description="Build ATS-friendly resumes online with a clean guided workflow, live preview, AI bullet enhancers, and vector PDF exports."

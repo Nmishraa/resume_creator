@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useResume } from '../../context/ResumeContext';
 import { exportToVectorPdf, downloadPdfFromElement, exportResumeToJson } from '../../services/pdfService';
 import { initialResumeData } from '../../data/initialData';
@@ -139,8 +140,15 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         {/* Left: Brand / Title & ATS Score */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-slate-900 text-base tracking-tight hidden sm:inline">Resume Craft</span>
-            <span className="text-sm font-semibold text-slate-400 hidden sm:inline">|</span>
+            <Link to="/" className="flex items-center gap-2 group" title="Return to Homepage">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-600 to-slate-900 flex items-center justify-center text-white font-black text-xs">
+                RC
+              </div>
+              <span className="font-extrabold text-slate-950 text-sm sm:text-base tracking-tight hover:text-brand-600 transition-colors hidden sm:inline">
+                Resume Craft
+              </span>
+            </Link>
+            <span className="text-sm font-semibold text-slate-300 hidden sm:inline">|</span>
             <input
               type="text"
               value={resume.title || 'Untitled Resume'}
