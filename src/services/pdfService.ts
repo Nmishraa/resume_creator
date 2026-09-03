@@ -24,30 +24,40 @@ function convertOklchColor(colorStr: string): string {
 }
 
 /**
- * Sanitizes all oklch() / oklab() occurrences in cloned DOM stylesheets and element inline styles
- * to prevent html2canvas color parsing errors.
+ * Extracts all CSS rules from document.styleSheets and <style> tags,
+ * and converts all oklch() / oklab() color functions into standard RGB/Hex strings.
  */
-function sanitizeOklchColorsInDocument(doc: Document): void {
-  // 1. Sanitize all <style> elements
-  const styleElements = doc.querySelectorAll('style');
-  styleElements.forEach((styleEl) => {
-    let cssText = styleEl.textContent || '';
-    if (cssText.includes('oklch') || cssText.includes('oklab')) {
-      cssText = cssText.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
-      styleEl.textContent = cssText;
-    }
+function getSanitizedGlobalCss(): string {
+  let fullCss = '';
+
+  try {
+    Array.from(document.styleSheets).forEach((sheet) => {
+      try {
+        const rules = sheet.cssRules || sheet.rules;
+        if (rules) {
+          Array.from(rules).forEach((rule) => {
+            fullCss += rule.cssText + '\n';
+          });
+        }
+      } catch (e) {
+        // Ignore CORS restricted sheets if any
+      }
+    });
+  } catch (e) {
+    console.warn('Error reading styleSheets:', e);
+  }
+
+  // Collect text from all <style> tags
+  document.querySelectorAll('style').forEach((styleEl) => {
+    fullCss += (styleEl.textContent || '') + '\n';
   });
 
-  // 2. Sanitize all inline styles and element computed colors
-  const allElements = doc.querySelectorAll('*');
-  allElements.forEach((el) => {
-    const htmlEl = el as HTMLElement;
-    const styleAttr = htmlEl.getAttribute('style');
-    if (styleAttr && (styleAttr.includes('oklch') || styleAttr.includes('oklab'))) {
-      const sanitizedAttr = styleAttr.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
-      htmlEl.setAttribute('style', sanitizedAttr);
-    }
-  });
+  // Replace all oklch(...) and oklab(...) with browser-converted hex/rgb strings
+  if (fullCss.includes('oklch') || fullCss.includes('oklab')) {
+    fullCss = fullCss.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
+  }
+
+  return fullCss;
 }
 
 /**
@@ -138,6 +148,19 @@ export async function downloadPdfFromElement(
     parentEl.style.webkitTransform = 'none';
   }
 
+  // Extract all document CSS rules and convert oklch/oklab colors to RGB/Hex for html2canvas
+  const sanitizedCss = getSanitizedGlobalCss();
+  const pdfStyleEl = document.createElement('style');
+  pdfStyleEl.id = 'pdf-oklch-sanitizer-style';
+  pdfStyleEl.textContent = sanitizedCss;
+  document.head.appendChild(pdfStyleEl);
+
+  // Temporarily disable external link stylesheets to force html2canvas to use sanitized style tag
+  const externalLinks = Array.from(document.querySelectorAll('link[rel="stylesheet"]')) as HTMLLinkElement[];
+  externalLinks.forEach((link) => {
+    link.disabled = true;
+  });
+
   try {
     // Brief 50ms pause for DOM reflow
     await new Promise((resolve) => setTimeout(resolve, 50));
@@ -151,9 +174,6 @@ export async function downloadPdfFromElement(
       windowWidth: 794,
       imageTimeout: 5000,
       onclone: (clonedDoc: Document) => {
-        // Sanitize any oklch / oklab colors to standard rgb/hex for html2canvas compatibility
-        sanitizeOklchColorsInDocument(clonedDoc);
-
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach((el) => {
           (el as HTMLElement).style.breakInside = 'avoid';
@@ -195,6 +215,12 @@ export async function downloadPdfFromElement(
     // Direct Browser Download onto User's Device
     pdf.save(safeFilename);
   } finally {
+    externalLinks.forEach((link) => {
+      link.disabled = false;
+    });
+    if (document.head.contains(pdfStyleEl)) {
+      document.head.removeChild(pdfStyleEl);
+    }
     if (parentEl) {
       parentEl.style.transform = originalTransform;
       parentEl.style.webkitTransform = originalWebkitTransform;
