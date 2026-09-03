@@ -45,9 +45,21 @@ function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): v
     if (!origEl || !cloneEl) continue;
 
     try {
-      // Enforce border-box box-sizing and max-width on cloned elements to prevent right-edge clipping
-      cloneEl.style.boxSizing = 'border-box';
-      cloneEl.style.maxWidth = '100%';
+      // Protect SVG elements (icons, paths, shapes) from HTML-specific style overrides
+      const isSvgNode = origEl instanceof SVGElement || !!origEl.closest('svg');
+
+      if (!isSvgNode) {
+        // Enforce border-box box-sizing and max-width ONLY on HTML layout elements
+        cloneEl.style.boxSizing = 'border-box';
+        cloneEl.style.maxWidth = '100%';
+      } else {
+        // Ensure root SVG icons have valid XML namespace for html2canvas SVG serialization
+        if (cloneEl.tagName.toLowerCase() === 'svg') {
+          if (!cloneEl.getAttribute('xmlns')) {
+            cloneEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+          }
+        }
+      }
 
       const computed = window.getComputedStyle(origEl);
       for (const prop of colorProps) {
@@ -218,22 +230,35 @@ export async function downloadPdfFromElement(
 
     const pdfPageWidth = 210; // A4 width in mm
     const pdfPageHeight = 297; // A4 height in mm
-    const imgWidth = pdfPageWidth;
-    const imgHeight = (canvas.height * pdfPageWidth) / canvas.width;
+    const marginMm = 6; // 6mm top & bottom margin padding for clean A4 framing
+    const printableHeight = pdfPageHeight - (marginMm * 2); // 285mm
 
-    let position = 0;
-    let heightLeft = imgHeight;
+    const contentAspectRatio = canvas.height / canvas.width;
+    const rawImgHeight = pdfPageWidth * contentAspectRatio;
 
-    // First Page
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
-    heightLeft -= pdfPageHeight;
+    if (rawImgHeight <= 315) {
+      // Single Page Resume: fit content within A4 single page height cleanly with 6mm margins
+      const scaleFactor = rawImgHeight > printableHeight ? (printableHeight / rawImgHeight) : 1;
+      const finalWidth = pdfPageWidth * scaleFactor;
+      const finalHeight = rawImgHeight * scaleFactor;
+      const xOffset = (pdfPageWidth - finalWidth) / 2;
+      const yOffset = marginMm;
 
-    // Subsequent Pages for multi-page resumes
-    while (heightLeft > 2) {
-      position -= pdfPageHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
+      pdf.addImage(imgData, 'PNG', xOffset, yOffset, finalWidth, finalHeight, undefined, 'FAST');
+    } else {
+      // Multi-Page Resume: split content across A4 pages with proper position shifts
+      let position = 0;
+      let heightLeft = rawImgHeight;
+
+      pdf.addImage(imgData, 'PNG', 0, position, pdfPageWidth, rawImgHeight, undefined, 'FAST');
       heightLeft -= pdfPageHeight;
+
+      while (heightLeft > 5) {
+        position -= pdfPageHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, pdfPageWidth, rawImgHeight, undefined, 'FAST');
+        heightLeft -= pdfPageHeight;
+      }
     }
 
     // Direct Browser Download onto User's Device
