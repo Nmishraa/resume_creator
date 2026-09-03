@@ -6,13 +6,22 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import App from './App';
 import './index.css';
 
-// Unregister legacy service workers to prevent cached JS bundles
-if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then((registrations) => {
-    for (const registration of registrations) {
-      registration.unregister();
-    }
-  });
+// Unregister legacy service workers and clear cache storage to ensure clean fresh JS bundles
+if (typeof window !== 'undefined') {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (const registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+  if ('caches' in window) {
+    caches.keys().then((names) => {
+      for (const name of names) {
+        caches.delete(name);
+      }
+    });
+  }
 }
 
 const rootElement = document.getElementById('root');
