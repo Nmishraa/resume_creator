@@ -31,8 +31,8 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
         className="grid grid-cols-1 md:grid-cols-3 items-stretch"
       >
         {/* Left Sidebar Column (1/3) */}
-        <div className="space-y-4 md:border-r md:pr-5 border-slate-200 h-full flex flex-col justify-between">
-          <div className="space-y-4">
+        <div className="md:border-r md:pr-5 border-slate-200 h-full flex flex-col justify-between">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
             <div>
               <div
                 style={{ fontSize: 'var(--resume-name-size, 25px)' }}
@@ -48,7 +48,10 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
             </div>
 
             {/* Contact */}
-            <div className="space-y-1.5 text-xs text-slate-600 border-t pt-3 border-slate-100">
+            <div
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-contact-gap, 6px)' }}
+              className="text-xs text-slate-600 border-t pt-3 border-slate-100"
+            >
               {personalInfo.email && (
                 <div className="flex items-center gap-1.5 break-all">
                   <Mail size={12} className="shrink-0 text-slate-400" />

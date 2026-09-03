@@ -39,12 +39,14 @@ export const ResumePreview: React.FC = () => {
   // Mode Display Helpers
   const modeBadgeColor = {
     spacious: 'bg-indigo-500/20 text-indigo-300 border-indigo-400/30',
+    balanced: 'bg-teal-500/20 text-teal-300 border-teal-400/30',
     standard: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/30',
     compact: 'bg-amber-500/20 text-amber-300 border-amber-400/30'
   }[densityInfo?.mode || 'standard'];
 
   const modeLabel = {
-    spacious: 'Spacious Mode',
+    spacious: 'Spacious (Short Resume Auto-Expanded)',
+    balanced: 'Balanced Mode',
     standard: 'Standard Mode',
     compact: 'Compact Mode'
   }[densityInfo?.mode || 'standard'];

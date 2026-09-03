@@ -68,62 +68,79 @@ export function getSpacingClass(spacing: ResumeData['formatting']['spacing']): {
 }
 
 /**
- * Returns dynamic CSS Variables for Adaptive Density Mode.
- * Safe limits enforced:
- * - Body font size: 12px - 15px
- * - Line height: 1.3 - 1.55
- * - Section spacing: 12px - 24px
- * - Bullet spacing: 4px - 10px
- * - Page margins: 12mm - 18mm
- * - Column gaps: 20px - 32px
+ * Returns dynamic CSS Variables for Adaptive Layout Density Modes.
+ * Enforces strict safe bounds:
+ * - Body text: max 15px
+ * - Headings: max 21px
+ * - Line height: max 1.6
+ * - Section gaps: max 28px
+ * - Page margins: between 12mm and 18mm
  */
 export function getAdaptiveDensityStyles(mode: DensityMode = 'standard'): CSSProperties {
   switch (mode) {
     case 'spacious':
       return {
-        '--resume-body-size': '14.5px',
-        '--resume-line-height': '1.55',
-        '--resume-section-gap': '24px',
-        '--resume-item-gap': '14px',
-        '--resume-bullet-gap': '9px',
+        '--resume-body-size': '15px',
+        '--resume-line-height': '1.6',
+        '--resume-section-gap': '28px',
+        '--resume-item-gap': '16px',
+        '--resume-bullet-gap': '10px',
         '--resume-page-padding': '18mm 16mm',
         '--resume-column-gap': '32px',
-        '--resume-name-size': '28px',
-        '--resume-section-title-size': '15px'
+        '--resume-name-size': '30px',
+        '--resume-section-title-size': '20px',
+        '--resume-contact-gap': '10px'
+      } as CSSProperties;
+    case 'balanced':
+      return {
+        '--resume-body-size': '14px',
+        '--resume-line-height': '1.5',
+        '--resume-section-gap': '22px',
+        '--resume-item-gap': '12px',
+        '--resume-bullet-gap': '7px',
+        '--resume-page-padding': '15mm 14mm',
+        '--resume-column-gap': '26px',
+        '--resume-name-size': '27px',
+        '--resume-section-title-size': '17.5px',
+        '--resume-contact-gap': '8px'
       } as CSSProperties;
     case 'compact':
       return {
         '--resume-body-size': '12px',
-        '--resume-line-height': '1.32',
+        '--resume-line-height': '1.3',
         '--resume-section-gap': '12px',
         '--resume-item-gap': '7px',
-        '--resume-bullet-gap': '4px',
+        '--resume-bullet-gap': '3.5px',
         '--resume-page-padding': '12mm 10mm',
         '--resume-column-gap': '20px',
         '--resume-name-size': '22px',
-        '--resume-section-title-size': '13px'
+        '--resume-section-title-size': '13.5px',
+        '--resume-contact-gap': '5px'
       } as CSSProperties;
     case 'standard':
     default:
       return {
-        '--resume-body-size': '13.2px',
-        '--resume-line-height': '1.45',
-        '--resume-section-gap': '18px',
-        '--resume-item-gap': '10px',
-        '--resume-bullet-gap': '6px',
-        '--resume-page-padding': '15mm 13mm',
-        '--resume-column-gap': '24px',
-        '--resume-name-size': '25px',
-        '--resume-section-title-size': '14px'
+        '--resume-body-size': '13px',
+        '--resume-line-height': '1.4',
+        '--resume-section-gap': '16px',
+        '--resume-item-gap': '9px',
+        '--resume-bullet-gap': '5px',
+        '--resume-page-padding': '13mm 12mm',
+        '--resume-column-gap': '22px',
+        '--resume-name-size': '24px',
+        '--resume-section-title-size': '15px',
+        '--resume-contact-gap': '6px'
       } as CSSProperties;
   }
 }
 
 /**
- * Calculates adaptive density mode based on unconstrained content height vs A4 printable height.
- * - < 65% height: spacious mode
- * - 65% - 90% height: standard mode
- * - 90% - 100%+ height: compact mode
+ * Calculates adaptive density mode based on content height vs A4 printable height.
+ * Rules:
+ * - Below 60% page usage: Spacious mode (enlarge content to fill 85-95% of A4 page)
+ * - 60% - 85% page usage: Balanced mode
+ * - 85% - 100% page usage: Standard mode
+ * - Over 100%: Compact mode (with multi-page break formatting)
  */
 export function calculateDensityModeFromHeight(contentHeightPx: number, printablePageHeightPx: number = 1010): {
   mode: DensityMode;
@@ -134,9 +151,11 @@ export function calculateDensityModeFromHeight(contentHeightPx: number, printabl
   const fillPercentage = Math.round((safeHeight / printablePageHeightPx) * 100);
 
   let mode: DensityMode = 'standard';
-  if (fillPercentage < 65) {
+  if (fillPercentage < 60) {
     mode = 'spacious';
-  } else if (fillPercentage <= 90) {
+  } else if (fillPercentage <= 85) {
+    mode = 'balanced';
+  } else if (fillPercentage <= 100) {
     mode = 'standard';
   } else {
     mode = 'compact';

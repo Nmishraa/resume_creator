@@ -41,7 +41,7 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
         </p>
 
         {/* Contact info row */}
-        <div className="flex flex-wrap gap-y-1.5 gap-x-4 mt-2 text-xs text-slate-600">
+        <div style={{ gap: 'var(--resume-contact-gap, 10px)' }} className="flex flex-wrap gap-y-1.5 mt-2 text-xs text-slate-600">
           {personalInfo.email && (
             <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1 hover:text-slate-900 transition-colors">
               {formatting.showIcons && <Mail size={12} className="text-slate-400" />}

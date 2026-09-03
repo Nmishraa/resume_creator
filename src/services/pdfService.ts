@@ -166,7 +166,8 @@ function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): v
       '--resume-page-padding',
       '--resume-column-gap',
       '--resume-name-size',
-      '--resume-section-title-size'
+      '--resume-section-title-size',
+      '--resume-contact-gap'
     ];
     const origSheet = origNode.querySelector('.page-break-container') || origNode;
     const cloneSheet = cloneNode.querySelector('.page-break-container') || cloneNode;
