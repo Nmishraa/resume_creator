@@ -68,6 +68,38 @@ export function getSpacingClass(spacing: ResumeData['formatting']['spacing']): {
 }
 
 /**
+ * Splits professional summary text into bullet points for clean, modern ATS formatting.
+ * Handles multiline text, bullet symbols (•, -, *), and multi-sentence paragraphs cleanly.
+ */
+export function getSummaryBullets(summary: string): string[] {
+  if (!summary || !summary.trim()) return [];
+
+  const text = summary.trim();
+
+  // If text contains explicit newlines or bullet symbols
+  if (text.includes('\n') || text.includes('•')) {
+    const rawLines = text
+      .split(/[•\n]+/)
+      .map(line => line.replace(/^[\s•\-\*\d\.\)]+/, '').trim())
+      .filter(Boolean);
+
+    if (rawLines.length > 0) return rawLines;
+  }
+
+  // If text is a paragraph of multiple sentences, split by sentence endings
+  const sentences = text
+    .split(/(?<=[.!?])\s+/)
+    .map(s => s.trim())
+    .filter(s => s.length > 5);
+
+  if (sentences.length > 1) {
+    return sentences;
+  }
+
+  return [text];
+}
+
+/**
  * Returns dynamic CSS Variables for Adaptive Layout Density Modes.
  * Enforces strict safe bounds:
  * - Body text: max 15px

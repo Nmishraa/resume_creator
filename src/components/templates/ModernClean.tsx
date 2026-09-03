@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData, DensityMode } from '../../types/resume';
-import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles } from './templateStyles';
+import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles, getSummaryBullets } from './templateStyles';
 import { Mail, Phone, MapPin, Globe, ExternalLink } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/BrandIcons';
 
@@ -97,9 +97,14 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
             >
               Professional Summary
             </h2>
-            <p className="text-slate-700 leading-relaxed text-left">
-              {summary}
-            </p>
+            <ul
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+              className="list-disc list-outside ml-4 text-slate-700"
+            >
+              {getSummaryBullets(summary).map((bullet, idx) => (
+                <li key={idx} className="pl-1 leading-snug">{bullet}</li>
+              ))}
+            </ul>
           </div>
         )}
 

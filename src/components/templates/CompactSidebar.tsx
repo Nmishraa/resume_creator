@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData, DensityMode } from '../../types/resume';
-import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles } from './templateStyles';
+import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles, getSummaryBullets } from './templateStyles';
 import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/BrandIcons';
 
@@ -194,7 +194,14 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
               >
                 Profile
               </h2>
-              <p className="text-slate-700 leading-relaxed text-left">{summary}</p>
+              <ul
+                style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                className="list-disc list-outside ml-4 text-slate-700 text-left"
+              >
+                {getSummaryBullets(summary).map((bullet, idx) => (
+                  <li key={idx} className="pl-0.5">{bullet}</li>
+                ))}
+              </ul>
             </div>
           )}
 

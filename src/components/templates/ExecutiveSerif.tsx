@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData, DensityMode } from '../../types/resume';
-import { getFontSizeClass, getAdaptiveDensityStyles } from './templateStyles';
+import { getFontSizeClass, getAdaptiveDensityStyles, getSummaryBullets } from './templateStyles';
 
 interface TemplateProps {
   resume: ResumeData;
@@ -79,9 +79,14 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
             >
               Professional Summary
             </h2>
-            <p className="text-slate-800 leading-relaxed font-serif">
-              {summary}
-            </p>
+            <ul
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+              className="list-disc list-outside ml-4 text-slate-800 font-serif"
+            >
+              {getSummaryBullets(summary).map((bullet, idx) => (
+                <li key={idx} className="pl-1 leading-snug">{bullet}</li>
+              ))}
+            </ul>
           </div>
         )}
 

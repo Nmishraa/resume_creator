@@ -408,7 +408,7 @@ export const EditorForm: React.FC = () => {
                   <FileText className="text-brand-600 shrink-0" size={20} />
                   <div>
                     <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">Professional Summary</h3>
-                    <p className="text-xs text-slate-500">2-4 sentences showcasing your domain expertise &amp; key accomplishments.</p>
+                    <p className="text-xs text-slate-500">2-4 bullet points showcasing your domain expertise &amp; key accomplishments.</p>
                   </div>
                 </div>
 
@@ -426,13 +426,13 @@ export const EditorForm: React.FC = () => {
                 rows={6}
                 value={resume.summary}
                 onChange={(e) => updateSummary(e.target.value)}
-                placeholder="Results-driven Senior Software Engineer with 5+ years of experience engineering high-throughput distributed backend services and responsive frontends..."
-                className="w-full text-sm p-3.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 leading-relaxed"
+                placeholder="• Results-driven Senior Software Engineer with 6+ years experience architecting high-throughput distributed systems.&#10;• Proven track record reducing API response latency by 45% across 1M+ active users.&#10;• Expert in React, TypeScript, Node.js, and AWS cloud microservices."
+                className="w-full text-sm p-3.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 leading-relaxed font-sans"
               />
 
               <div className="bg-blue-50/70 p-3.5 rounded-xl border border-blue-100 text-sm text-blue-900 flex items-start gap-2.5">
                 <Info size={16} className="text-blue-600 shrink-0 mt-0.5" />
-                <span><strong>Pro Tip:</strong> Focus on quantitative metrics (e.g. "Increased platform throughput by 40%"). Keep sentences active and concise.</span>
+                <span><strong>Pro Tip:</strong> Enter each highlight on a new line or use bullet points (•). The system automatically formats your summary into clean, ATS-compliant bullet points.</span>
               </div>
             </div>
           </div>

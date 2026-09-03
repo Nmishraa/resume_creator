@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData, DensityMode } from '../../types/resume';
-import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles } from './templateStyles';
+import { getFontFamilyClass, getFontSizeClass, getAdaptiveDensityStyles, getSummaryBullets } from './templateStyles';
 import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/BrandIcons';
 
@@ -67,7 +67,14 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
                 Summary
               </h2>
             </div>
-            <p className="text-slate-700 leading-relaxed pl-3.5 border-l border-slate-200">{summary}</p>
+            <ul
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+              className="list-disc list-outside ml-4 text-slate-700 border-l-0 pl-1"
+            >
+              {getSummaryBullets(summary).map((bullet, idx) => (
+                <li key={idx} className="pl-1 leading-snug">{bullet}</li>
+              ))}
+            </ul>
           </div>
         )}
 
