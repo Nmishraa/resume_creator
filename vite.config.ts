@@ -1,9 +1,17 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      }
+    }
+  },
   build: {
     rollupOptions: {
       output: {
@@ -14,7 +22,13 @@ export default defineConfig({
           if (id.includes('node_modules/jspdf') || id.includes('node_modules/html2canvas')) {
             return 'vendor-pdf';
           }
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
+          if (
+            id.includes('node_modules/react') ||
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/react-router') ||
+            id.includes('node_modules/react-router-dom') ||
+            id.includes('node_modules/@remix-run')
+          ) {
             return 'vendor-react-core';
           }
           if (id.includes('node_modules/lucide-react')) {
@@ -23,6 +37,6 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 800
+    chunkSizeWarningLimit: 1000
   }
-})
+});
