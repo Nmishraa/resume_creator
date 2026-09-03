@@ -12,9 +12,9 @@ export const ProfessionalSlate: React.FC<{ resume: ResumeData }> = ({ resume }) 
   const accentColor = formatting.accentColor || '#334155';
 
   return (
-    <div className={`w-full bg-white text-slate-800 p-8 sm:p-10 ${fontClass} ${size.body}`}>
+    <div className={`w-full max-w-[794px] box-border bg-white text-slate-800 px-8 sm:px-10 py-8 sm:py-10 ${fontClass} ${size.body}`}>
       {/* Banner Top Header */}
-      <div className="bg-slate-900 text-white -m-8 sm:-m-10 p-6 sm:p-8 mb-6">
+      <div className="bg-slate-900 text-white -mx-8 -mt-8 sm:-mx-10 sm:-mt-10 p-6 sm:p-8 mb-6 box-border">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
             <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase" role="heading" aria-level={2}>

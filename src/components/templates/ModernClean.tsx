@@ -16,7 +16,7 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
   const accentColor = formatting.accentColor || '#0284c7';
 
   return (
-    <div className={`w-full bg-white text-slate-800 p-8 sm:p-10 ${fontClass} ${size.body}`}>
+    <div className={`w-full max-w-[794px] box-border bg-white text-slate-800 px-8 sm:px-10 py-8 sm:py-10 ${fontClass} ${size.body}`}>
       {/* Header */}
       <div className="border-b pb-4 mb-4" style={{ borderColor: `${accentColor}30` }}>
         <div className={`${size.name} text-slate-900 leading-tight mb-1 font-bold`} role="heading" aria-level={2}>
@@ -74,7 +74,7 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume }) => {
             <h2 className={`${size.sectionTitle} flex items-center gap-2 mb-2 pb-1 border-b`} style={{ color: accentColor, borderColor: `${accentColor}25` }}>
               Professional Summary
             </h2>
-            <p className="text-slate-700 leading-relaxed text-justify">
+            <p className="text-slate-700 leading-relaxed text-left">
               {summary}
             </p>
           </div>

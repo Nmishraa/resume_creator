@@ -45,6 +45,10 @@ function sanitizeElementColors(origNode: HTMLElement, cloneNode: HTMLElement): v
     if (!origEl || !cloneEl) continue;
 
     try {
+      // Enforce border-box box-sizing and max-width on cloned elements to prevent right-edge clipping
+      cloneEl.style.boxSizing = 'border-box';
+      cloneEl.style.maxWidth = '100%';
+
       const computed = window.getComputedStyle(origEl);
       for (const prop of colorProps) {
         const val = computed[prop as any];
@@ -138,10 +142,12 @@ export async function downloadPdfFromElement(
   clone.style.opacity = '1';
   clone.style.transform = 'none';
   clone.style.width = '794px';
+  clone.style.maxWidth = '794px';
   clone.style.margin = '0';
   clone.style.padding = '0';
   clone.style.boxSizing = 'border-box';
   clone.style.backgroundColor = '#ffffff';
+  clone.style.overflow = 'hidden';
 
   // Copy computed RGB styles to eliminate oklch functions and CSS variable dependencies
   sanitizeElementColors(element, clone);

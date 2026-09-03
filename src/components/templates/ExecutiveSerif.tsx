@@ -8,7 +8,7 @@ export const ExecutiveSerif: React.FC<{ resume: ResumeData }> = ({ resume }) => 
   const spacing = getSpacingClass(formatting.spacing);
 
   return (
-    <div className={`w-full bg-white text-slate-900 p-8 sm:p-12 font-serif ${size.body}`}>
+    <div className={`w-full max-w-[794px] box-border bg-white text-slate-900 px-8 sm:px-10 py-8 sm:py-10 font-serif ${size.body}`}>
       {/* Centered Classic Executive Header */}
       <div className="text-center pb-2 mb-6">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-wide text-slate-950 uppercase mb-2 font-serif" role="heading" aria-level={1}>
@@ -54,7 +54,7 @@ export const ExecutiveSerif: React.FC<{ resume: ResumeData }> = ({ resume }) => 
             <h2 className="text-xl font-bold font-serif text-slate-950 mb-2">
               Professional Summary
             </h2>
-            <p className="text-slate-800 leading-relaxed font-serif text-justify text-sm sm:text-base">
+            <p className="text-slate-800 leading-relaxed font-serif text-sm sm:text-base">
               {summary}
             </p>
           </div>

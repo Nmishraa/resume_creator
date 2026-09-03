@@ -12,7 +12,7 @@ export const TechMinimal: React.FC<{ resume: ResumeData }> = ({ resume }) => {
   const accentColor = formatting.accentColor || '#0f766e';
 
   return (
-    <div className={`w-full bg-white text-slate-800 p-8 sm:p-10 ${fontClass} ${size.body}`}>
+    <div className={`w-full max-w-[794px] box-border bg-white text-slate-800 px-8 sm:px-10 py-8 sm:py-10 ${fontClass} ${size.body}`}>
       {/* Header */}
       <div className="pb-3 mb-4 border-b-2" style={{ borderColor: accentColor }}>
         <div className="flex flex-col sm:flex-row justify-between items-baseline gap-2">

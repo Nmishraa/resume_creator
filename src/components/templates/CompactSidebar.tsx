@@ -12,7 +12,7 @@ export const CompactSidebar: React.FC<{ resume: ResumeData }> = ({ resume }) => 
   const accentColor = formatting.accentColor || '#1e40af';
 
   return (
-    <div className={`w-full bg-white text-slate-800 p-6 sm:p-8 ${fontClass} ${size.body}`}>
+    <div className={`w-full max-w-[794px] box-border bg-white text-slate-800 px-6 py-6 sm:px-8 sm:py-8 ${fontClass} ${size.body}`}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Column (1/3) */}
         <div className="space-y-4 md:border-r md:pr-5 border-slate-200">
@@ -132,7 +132,7 @@ export const CompactSidebar: React.FC<{ resume: ResumeData }> = ({ resume }) => 
               <h2 className="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1.5" style={{ color: accentColor, borderColor: `${accentColor}30` }}>
                 Profile
               </h2>
-              <p className="text-slate-700 leading-relaxed text-justify">{summary}</p>
+              <p className="text-slate-700 leading-relaxed text-left">{summary}</p>
             </div>
           )}
 
