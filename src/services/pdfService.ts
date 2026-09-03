@@ -13,28 +13,29 @@ export function exportToVectorPdf(): void {
  * Download direct PDF using html2canvas and jsPDF with high DPI rendering
  */
 export async function downloadPdfFromElement(elementId: string, filename: string = 'Resume.pdf'): Promise<void> {
-  const element = document.getElementById(elementId);
+  let element = document.getElementById(elementId) as HTMLElement | null;
+
+  // Fallback 1: Look for .print-area or sheet element if elementId is not in DOM
   if (!element) {
-    throw new Error(`Element #${elementId} not found`);
+    element = (document.querySelector('.print-area') || document.querySelector('#cover-letter-sheet')) as HTMLElement | null;
   }
 
-  // Create temporary container clone to avoid viewport constraints
-  const clone = element.cloneNode(true) as HTMLElement;
-  clone.style.width = '794px'; // Standard A4 width in px at 96 DPI
-  clone.style.maxWidth = '794px';
-  clone.style.minHeight = '1123px'; // A4 height
-  clone.style.position = 'absolute';
-  clone.style.top = '-9999px';
-  clone.style.left = '-9999px';
-  clone.style.background = '#ffffff';
-  document.body.appendChild(clone);
+  // Fallback 2: Trigger print dialog if no DOM sheet is rendered
+  if (!element) {
+    window.print();
+    return;
+  }
 
   try {
-    const canvas = await html2canvas(clone, {
-      scale: 2, // High resolution (192 DPI equivalent)
+    // Render element directly using html2canvas with CORS and high DPI resolution
+    const canvas = await html2canvas(element, {
+      scale: 2, // High DPI resolution (192 DPI equivalent)
       useCORS: true,
+      allowTaint: true,
       logging: false,
-      backgroundColor: '#ffffff'
+      backgroundColor: '#ffffff',
+      windowWidth: element.scrollWidth || 794,
+      windowHeight: element.scrollHeight || 1123
     });
 
     const imgData = canvas.toDataURL('image/png');
@@ -53,7 +54,7 @@ export async function downloadPdfFromElement(elementId: string, filename: string
     pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
     heightLeft -= pageHeight;
 
-    while (heightLeft >= 10) {
+    while (heightLeft >= 5) {
       position = heightLeft - imgHeight;
       pdf.addPage();
       pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
@@ -61,8 +62,9 @@ export async function downloadPdfFromElement(elementId: string, filename: string
     }
 
     pdf.save(filename.endsWith('.pdf') ? filename : `${filename}.pdf`);
-  } finally {
-    document.body.removeChild(clone);
+  } catch (err) {
+    console.error('Direct PDF export error, falling back to vector print dialog:', err);
+    window.print();
   }
 }
 
