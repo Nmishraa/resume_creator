@@ -18,6 +18,7 @@ import {
   Download,
   Trash2,
   ArrowRight,
+  ArrowLeft,
   Check,
   Plus,
   Briefcase,
@@ -62,6 +63,23 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!isOpen) return null;
+
+  // Back button handler
+  const handleGoBack = () => {
+    if (step === 'review') {
+      setStep('upload');
+    } else if (step === 'template') {
+      if (editedData) {
+        setStep('review');
+      } else {
+        setStep('upload');
+      }
+    } else if (step === 'preview') {
+      setStep('template');
+    } else if (step === 'upload') {
+      onClose();
+    }
+  };
 
   // 1. File Upload Handler
   const handleFileSelect = async (file: File) => {
@@ -261,11 +279,20 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/70 backdrop-blur-md animate-in fade-in">
       <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-5xl max-h-[92vh] flex flex-col overflow-hidden">
         
-        {/* Header */}
+        {/* Header with Back Button */}
         <div className="p-4 sm:p-5 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center font-bold shadow-md">
-              <Sparkles size={20} className="text-white" />
+            <button
+              onClick={handleGoBack}
+              className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Go back to previous step"
+            >
+              <ArrowLeft size={16} />
+              <span>Back</span>
+            </button>
+
+            <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center font-bold shadow-md">
+              <Sparkles size={18} className="text-white" />
             </div>
             <div>
               <h2 className="font-extrabold text-base sm:text-lg">Upload Resume &amp; Apply Template</h2>
@@ -278,10 +305,22 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
           </button>
         </div>
 
-        {/* Action Button Navigation Header */}
+        {/* Action Button & Step Navigation Header */}
         <div className="bg-slate-50 border-b border-slate-200 px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-          <div className="text-xs sm:text-sm font-bold text-slate-800 max-w-xl">
-            Already have a resume? Upload it, review extracted sections, and continue editing in the Builder.
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleGoBack}
+              className="px-3 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer"
+            >
+              <ArrowLeft size={14} />
+              <span>Back</span>
+            </button>
+            <span className="text-xs sm:text-sm font-bold text-slate-800">
+              {step === 'upload' && '1. Upload Resume File'}
+              {step === 'review' && '2. Review & Edit Extracted Data'}
+              {step === 'template' && '3. Choose ATS Template'}
+              {step === 'preview' && '4. Live Preview & Download'}
+            </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -292,7 +331,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
               }`}
             >
               <UploadCloud size={14} />
-              <span>Upload My Resume</span>
+              <span>1. Upload</span>
             </button>
 
             {editedData && (
@@ -304,7 +343,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   }`}
                 >
                   <FileText size={14} className="text-emerald-600" />
-                  <span>Review Extracted Data</span>
+                  <span>2. Review Data</span>
                 </button>
 
                 <button
@@ -324,7 +363,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
               }`}
             >
               <Layout size={14} className="text-brand-600" />
-              <span>Choose a Template</span>
+              <span>3. Template</span>
             </button>
 
             <button
@@ -334,7 +373,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
               }`}
             >
               <Eye size={14} className="text-indigo-600" />
-              <span>Preview Resume</span>
+              <span>4. Preview</span>
             </button>
 
             <button
@@ -932,13 +971,23 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
 
               {/* Action Toolbar */}
               <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
-                <button
-                  onClick={handleDeleteUploadedData}
-                  className="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl text-xs font-bold border border-rose-200 transition-colors flex items-center gap-1.5 cursor-pointer"
-                >
-                  <Trash2 size={14} />
-                  <span>Delete Uploaded Data</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleGoBack}
+                    className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <ArrowLeft size={14} />
+                    <span>Back to Upload</span>
+                  </button>
+
+                  <button
+                    onClick={handleDeleteUploadedData}
+                    className="px-3.5 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl text-xs font-bold border border-rose-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Trash2 size={14} />
+                    <span>Reset</span>
+                  </button>
+                </div>
 
                 <div className="flex flex-wrap items-center gap-2">
                   <button
@@ -1062,22 +1111,32 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
               </div>
 
               {/* Step Navigation */}
-              <div className="flex justify-between gap-3 pt-2">
+              <div className="flex justify-between items-center gap-3 pt-2">
                 <button
-                  onClick={handleApplyAndEditInBuilder}
-                  className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                  onClick={handleGoBack}
+                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Edit3 size={15} />
-                  <span>Open in Full Builder Editor</span>
+                  <ArrowLeft size={14} />
+                  <span>Back to Review Data</span>
                 </button>
 
-                <button
-                  onClick={() => setStep('preview')}
-                  className="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
-                >
-                  <span>Go to Live Preview</span>
-                  <Eye size={14} />
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleApplyAndEditInBuilder}
+                    className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                  >
+                    <Edit3 size={15} />
+                    <span>Open in Full Builder Editor</span>
+                  </button>
+
+                  <button
+                    onClick={() => setStep('preview')}
+                    className="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                  >
+                    <span>Go to Live Preview</span>
+                    <Eye size={14} />
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -1086,9 +1145,19 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
           {step === 'preview' && (
             <div className="space-y-4">
               <div className="flex items-center justify-between bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                <span className="text-xs font-bold text-slate-700">
-                  Live Preview: Template &ldquo;{resume.formatting.template.toUpperCase()}&rdquo;
-                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleGoBack}
+                    className="px-3 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer"
+                  >
+                    <ArrowLeft size={14} />
+                    <span>Back to Templates</span>
+                  </button>
+
+                  <span className="text-xs font-bold text-slate-700">
+                    Live Preview: Template &ldquo;{resume.formatting.template.toUpperCase()}&rdquo;
+                  </span>
+                </div>
 
                 <div className="flex gap-2">
                   <button
