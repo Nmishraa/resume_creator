@@ -40,16 +40,20 @@ export function sanitizeElementColors(element: HTMLElement): void {
 
   const sanitizeSingleNode = (el: HTMLElement) => {
     try {
-      const computed = window.getComputedStyle(el);
+      const win = el.ownerDocument?.defaultView || window;
+      const computed = win.getComputedStyle(el);
+      if (!computed) return;
+
       propertiesToSanitize.forEach((prop) => {
-        const val = computed.getPropertyValue(prop) || (el.style as any)[prop];
-        if (val && (val.includes('oklch') || val.includes('oklab'))) {
+        const val = (computed as any)[prop] || computed.getPropertyValue(prop);
+        if (typeof val === 'string' && (val.includes('oklch') || val.includes('oklab'))) {
           const sanitizedVal = convertOklchColor(val);
-          el.style.setProperty(prop, sanitizedVal, 'important');
+          const cssPropName = prop.replace(/([A-Z])/g, '-$1').toLowerCase();
+          el.style.setProperty(cssPropName, sanitizedVal, 'important');
         }
       });
     } catch (e) {
-      // Ignore non-HTML nodes
+      // Ignore non-HTML nodes or restricted elements
     }
   };
 
@@ -63,6 +67,19 @@ export function sanitizeElementColors(element: HTMLElement): void {
  */
 export function exportToVectorPdf(): void {
   window.print();
+}
+
+/**
+ * Helper to safely extract default export constructor or function from module wrappers
+ */
+function resolveModuleExport(mod: any): any {
+  if (typeof mod === 'function') return mod;
+  if (typeof mod?.default === 'function') return mod.default;
+  if (typeof mod?.jsPDF === 'function') return mod.jsPDF;
+  if (typeof mod?.default?.jsPDF === 'function') return mod.default.jsPDF;
+  if (typeof mod?.html2canvas === 'function') return mod.html2canvas;
+  if (typeof mod?.default?.default === 'function') return mod.default.default;
+  return mod;
 }
 
 /**
@@ -108,16 +125,8 @@ export async function downloadPdfFromElement(
     import('html2canvas-pro')
   ]);
 
-  const jsPDF =
-    (jsPdfModule as any).jsPDF ||
-    (jsPdfModule as any).default?.jsPDF ||
-    (jsPdfModule as any).default ||
-    jsPdfModule;
-
-  const html2canvas =
-    (html2CanvasModule as any).default?.default ||
-    (html2CanvasModule as any).default ||
-    html2CanvasModule;
+  const jsPDF = resolveModuleExport(jsPdfModule);
+  const html2canvas = resolveModuleExport(html2CanvasModule);
 
   if (typeof jsPDF !== 'function') {
     throw new Error(`jsPDF library failed to load (received ${typeof jsPDF}).`);
