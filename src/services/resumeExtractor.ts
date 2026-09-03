@@ -166,15 +166,15 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
   }
 
   // Name & Job Title extraction from top lines
-  const topLines = lines.slice(0, 8);
+  const topLines = lines.slice(0, 10);
   for (let idx = 0; idx < topLines.length; idx++) {
     const l = topLines[idx];
-    const isContactLine = l.includes('@') || l.toLowerCase().includes('linkedin') || l.toLowerCase().includes('github') || l.toLowerCase().includes('http');
+    const isContactLine = l.includes('@') || l.toLowerCase().includes('linkedin') || l.toLowerCase().includes('github') || l.toLowerCase().includes('http') || /^\+?\d[\d\s\(\)\.-]{7,}$/.test(l);
     const isHeaderWord = /^(resume|curriculum vitae|cv|about|summary|experience|skills|education)$/i.test(l);
 
-    if (!personalInfo.fullName && !isContactLine && !isHeaderWord && l.length > 2 && l.length < 50) {
+    if (!personalInfo.fullName && !isContactLine && !isHeaderWord && l.length >= 2 && l.length < 50) {
       const cleanName = l.replace(/[^a-zA-Z\s\.-]/g, '').trim();
-      if (cleanName.split(/\s+/).length >= 2) {
+      if (cleanName.length >= 2 && !/^\d+$/.test(cleanName)) {
         personalInfo.fullName = cleanName;
         continue;
       }
@@ -185,6 +185,12 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
         personalInfo.jobTitle = l;
       }
     }
+  }
+
+  // Fallback for Name if topLines check missed
+  if (!personalInfo.fullName && lines.length > 0) {
+    const firstClean = lines[0].replace(/[^a-zA-Z\s\.-]/g, '').trim();
+    if (firstClean.length >= 2) personalInfo.fullName = firstClean;
   }
 
   if (!personalInfo.fullName) unextractedFields.push('Full Name');
@@ -213,29 +219,28 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
   const customSections: CustomSection[] = [];
 
   const checkSectionHeader = (line: string): typeof currentSection | null => {
-    // Strip leading numbers, bullets, colons, spaces
     const cleanHeader = line
       .replace(/^[\d\.\-\*•I|A-Z]+\s*/i, '')
       .replace(/[:\-–]+$/, '')
       .trim()
       .toLowerCase();
 
-    if (/^(about|summary|professional summary|executive summary|profile|objective|career objective|about me)$/i.test(cleanHeader)) {
+    if (/^(about|summary|professional summary|executive summary|profile|objective|career objective|about me|summary of qualifications)$/i.test(cleanHeader)) {
       return 'summary';
     }
-    if (/^(work experience|professional experience|employment history|work history|experience|career history|positions held|relevant experience)$/i.test(cleanHeader)) {
+    if (/^(work experience|professional experience|employment history|work history|experience|career history|positions held|relevant experience|employment|professional background|work background|history)$/i.test(cleanHeader)) {
       return 'experience';
     }
-    if (/^(education|academic background|qualifications|academic history|education & training)$/i.test(cleanHeader)) {
+    if (/^(education|academic background|qualifications|academic history|education & training|degrees|education background)$/i.test(cleanHeader)) {
       return 'education';
     }
-    if (/^(skills|technical skills|technologies|core competencies|areas of expertise|key skills|skills & abilities|technical proficiencies)$/i.test(cleanHeader)) {
+    if (/^(skills|technical skills|technologies|core competencies|areas of expertise|key skills|skills & abilities|technical proficiencies|skills & expertise|technical background|tools)$/i.test(cleanHeader)) {
       return 'skills';
     }
-    if (/^(projects|key projects|featured projects|personal projects|academic projects)$/i.test(cleanHeader)) {
+    if (/^(projects|key projects|featured projects|personal projects|academic projects|selected projects)$/i.test(cleanHeader)) {
       return 'projects';
     }
-    if (/^(certifications|licenses|credentials|certifications & licenses|certificates|courses)$/i.test(cleanHeader)) {
+    if (/^(certifications|licenses|credentials|certifications & licenses|certificates|courses|certifications & training)$/i.test(cleanHeader)) {
       return 'certifications';
     }
     if (/^(languages|language skills|spoken languages)$/i.test(cleanHeader)) {
@@ -256,10 +261,14 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
       continue;
     }
 
-    if (currentSection === 'summary') {
+    if (currentSection === 'none') {
+      // Before first header, treat narrative paragraphs as summary
+      if (line.length > 40 && !line.includes('@') && !line.toLowerCase().includes('http')) {
+        summaryText += (summaryText ? ' ' : '') + line;
+      }
+    } else if (currentSection === 'summary') {
       summaryText += (summaryText ? ' ' : '') + line;
     } else if (currentSection === 'skills') {
-      // Check if line contains inline category format e.g. "Languages: JS, Python, Go"
       const colonIdx = line.indexOf(':');
       if (colonIdx > 0 && colonIdx < 30) {
         const catName = line.substring(0, colonIdx).replace(/^[•\-\*]\s*/, '').trim();
@@ -288,7 +297,6 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
       if (isBullet && experience.length > 0) {
         experience[experience.length - 1].highlights.push(cleanLine);
       } else if (dateMatch || line.length < 80) {
-        // Parse date details if found in line
         let startDate = '';
         let endDate = '';
         let current = false;
@@ -303,14 +311,13 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
           }
         }
 
-        // Check company / role parts
         let role = cleanLine.replace(DATE_RANGE_REGEX, '').trim();
         let company = 'Company / Organization';
         let location = '';
 
         if (role.includes('|')) {
           const segments = role.split('|').map(s => s.trim());
-          role = segments[0] || 'Software Engineer';
+          role = segments[0] || 'Position Title';
           company = segments[1] || company;
           if (segments[2]) location = segments[2];
         } else if (role.includes(' at ')) {
