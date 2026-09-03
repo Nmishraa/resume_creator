@@ -11,15 +11,18 @@ export function exportToVectorPdf(): void {
 
 /**
  * Download direct PDF file using html2canvas and jsPDF with high DPI rendering.
- * Guarantees a direct .pdf file download that matches the preview design 100%.
+ * Guarantees a direct .pdf file download onto the user's computer without opening print dialogs.
  */
 export async function downloadPdfFromElement(elementId: string = 'resume-preview-sheet', filename: string = 'Resume.pdf'): Promise<void> {
   const safeFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
 
-  // Wait for Google Fonts / web fonts to finish loading
+  // 1. Wait for Google Fonts / web fonts to finish loading (with 1.5s timeout safety)
   if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
     try {
-      await document.fonts.ready;
+      await Promise.race([
+        document.fonts.ready,
+        new Promise(r => setTimeout(r, 1500))
+      ]);
     } catch (e) {
       console.warn('Font loading wait warning:', e);
     }
@@ -40,41 +43,15 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
     return;
   }
 
-  // Create temporary off-screen container for rendering if target is hidden or transformed
-  const tempWrapper = document.createElement('div');
-  tempWrapper.style.position = 'fixed';
-  tempWrapper.style.left = '-9999px';
-  tempWrapper.style.top = '0';
-  tempWrapper.style.width = '794px'; // 210mm at 96 DPI
-  tempWrapper.style.backgroundColor = '#ffffff';
-  tempWrapper.style.zIndex = '-9999';
-  tempWrapper.style.overflow = 'hidden';
-
-  // Clone element to prevent zoom transform distortion
-  const clone = element.cloneNode(true) as HTMLElement;
-  clone.style.transform = 'none';
-  clone.style.width = '794px';
-  clone.style.minHeight = '1123px'; // A4 aspect ratio height at 96 DPI
-  clone.style.margin = '0';
-  clone.style.padding = '0';
-  clone.style.boxSizing = 'border-box';
-  clone.style.backgroundColor = '#ffffff';
-
-  tempWrapper.appendChild(clone);
-  document.body.appendChild(tempWrapper);
-
-  try {
-    // Wait brief tick for layout repaint
-    await new Promise(resolve => setTimeout(resolve, 120));
-
-    const canvas = await html2canvas(clone, {
-      scale: 2.5, // High DPI resolution (240 DPI equivalent)
+  // Helper function to convert target HTML element to high-res canvas and trigger direct browser save
+  const renderCanvasToPdf = async (targetEl: HTMLElement): Promise<boolean> => {
+    const canvas = await html2canvas(targetEl, {
+      scale: 2, // High DPI resolution (192 DPI equivalent)
       useCORS: true,
-      allowTaint: true,
+      allowTaint: false, // Must be false to prevent browser SecurityError during toDataURL export
       logging: false,
       backgroundColor: '#ffffff',
       windowWidth: 794,
-      windowHeight: clone.scrollHeight || 1123,
       onclone: (clonedDoc) => {
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach(el => {
@@ -84,7 +61,7 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
       }
     });
 
-    const imgData = canvas.toDataURL('image/png', 1.0);
+    const imgData = canvas.toDataURL('image/jpeg', 0.98);
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -99,36 +76,55 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
     let position = 0;
 
     // First Page
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
+    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
     heightLeft -= pageHeight;
 
     // Subsequent Pages for multi-page resumes
     while (heightLeft >= 5) {
       position = heightLeft - imgHeight;
       pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
+      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
       heightLeft -= pageHeight;
     }
 
-    // Direct Browser Download
-    const pdfBlob = pdf.output('blob');
-    const blobUrl = URL.createObjectURL(pdfBlob);
-    const downloadAnchor = document.createElement('a');
-    downloadAnchor.href = blobUrl;
-    downloadAnchor.download = safeFilename;
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
+    // Direct Browser Download onto User's Computer
+    pdf.save(safeFilename);
+    return true;
+  };
 
-    setTimeout(() => {
-      if (document.body.contains(downloadAnchor)) {
-        document.body.removeChild(downloadAnchor);
-      }
-      URL.revokeObjectURL(blobUrl);
-    }, 300);
+  // Create temporary off-screen wrapper for un-transformed rendering
+  const tempWrapper = document.createElement('div');
+  tempWrapper.style.position = 'fixed';
+  tempWrapper.style.left = '-9999px';
+  tempWrapper.style.top = '0';
+  tempWrapper.style.width = '794px'; // 210mm at 96 DPI
+  tempWrapper.style.backgroundColor = '#ffffff';
+  tempWrapper.style.zIndex = '-9999';
+  tempWrapper.style.overflow = 'hidden';
 
+  const clone = element.cloneNode(true) as HTMLElement;
+  clone.style.transform = 'none';
+  clone.style.width = '794px';
+  clone.style.minHeight = '1123px';
+  clone.style.margin = '0';
+  clone.style.padding = '0';
+  clone.style.boxSizing = 'border-box';
+  clone.style.backgroundColor = '#ffffff';
+
+  tempWrapper.appendChild(clone);
+  document.body.appendChild(tempWrapper);
+
+  try {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    await renderCanvasToPdf(clone);
   } catch (err) {
-    console.error('Error generating styled PDF canvas:', err);
-    window.print();
+    console.warn('Off-screen clone PDF render failed, falling back to direct element capture:', err);
+    try {
+      await renderCanvasToPdf(element);
+    } catch (directErr) {
+      console.error('Direct PDF export error:', directErr);
+      window.print();
+    }
   } finally {
     if (document.body.contains(tempWrapper)) {
       document.body.removeChild(tempWrapper);
@@ -143,8 +139,7 @@ export function exportResumeToJson(resume: ResumeData): void {
   const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(resume, null, 2));
   const downloadAnchor = document.createElement('a');
   downloadAnchor.setAttribute('href', dataStr);
-  const safeName = (resume.personalInfo.fullName || 'resume').replace(/\s+/g, '_').toLowerCase();
-  downloadAnchor.setAttribute('download', `${safeName}_resume_craft.json`);
+  downloadAnchor.setAttribute('download', `${(resume.personalInfo.fullName || 'Resume').replace(/\s+/g, '_')}_data.json`);
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   downloadAnchor.remove();
