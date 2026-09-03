@@ -7,16 +7,22 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import App from './App';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ErrorBoundary>
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+
+  root.render(
+    <React.StrictMode>
       <BrowserRouter>
-        <AuthProvider>
-          <ResumeProvider>
-            <App />
-          </ResumeProvider>
-        </AuthProvider>
+        <ErrorBoundary>
+          <AuthProvider>
+            <ResumeProvider>
+              <App />
+            </ResumeProvider>
+          </AuthProvider>
+        </ErrorBoundary>
       </BrowserRouter>
-    </ErrorBoundary>
-  </React.StrictMode>
-);
+    </React.StrictMode>
+  );
+}
