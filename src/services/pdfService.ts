@@ -16,12 +16,12 @@ export function exportToVectorPdf(): void {
 export async function downloadPdfFromElement(elementId: string = 'resume-preview-sheet', filename: string = 'Resume.pdf'): Promise<void> {
   const safeFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
 
-  // 1. Wait for Google Fonts / web fonts to finish loading (with 1s timeout safety)
+  // 1. Wait briefly for Google Fonts / web fonts to finish loading (with 800ms timeout safety)
   if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
     try {
       await Promise.race([
         document.fonts.ready,
-        new Promise(r => setTimeout(r, 1000))
+        new Promise(r => setTimeout(r, 800))
       ]);
     } catch (e) {
       console.warn('Font loading wait warning:', e);
@@ -42,17 +42,22 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
     return;
   }
 
-  // Create temporary off-screen wrapper for un-transformed rendering
+  // Create temporary off-screen wrapper for un-transformed, visible rendering
   const tempWrapper = document.createElement('div');
   tempWrapper.style.position = 'fixed';
   tempWrapper.style.left = '-9999px';
   tempWrapper.style.top = '0';
   tempWrapper.style.width = '794px'; // 210mm at 96 DPI
   tempWrapper.style.backgroundColor = '#ffffff';
-  tempWrapper.style.zIndex = '-9999';
+  tempWrapper.style.zIndex = '99999';
+  tempWrapper.style.opacity = '1';
+  tempWrapper.style.visibility = 'visible';
   tempWrapper.style.overflow = 'hidden';
 
   const clone = element.cloneNode(true) as HTMLElement;
+  clone.style.display = 'block';
+  clone.style.visibility = 'visible';
+  clone.style.opacity = '1';
   clone.style.transform = 'none';
   clone.style.width = '794px';
   clone.style.minHeight = '1123px';
@@ -60,7 +65,13 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
   clone.style.padding = '0';
   clone.style.boxSizing = 'border-box';
   clone.style.backgroundColor = '#ffffff';
-  clone.style.display = 'block';
+
+  // Unhide any hidden children in clone (e.g. if mobileTab or editor view caused parent to be hidden)
+  const hiddenChildren = clone.querySelectorAll('.hidden');
+  hiddenChildren.forEach(child => {
+    (child as HTMLElement).classList.remove('hidden');
+    (child as HTMLElement).style.display = 'block';
+  });
 
   tempWrapper.appendChild(clone);
   document.body.appendChild(tempWrapper);
@@ -83,7 +94,7 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
       }
     });
 
-    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+    const imgData = canvas.toDataURL('image/png', 1.0);
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -98,23 +109,37 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
     let position = 0;
 
     // First Page
-    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
     heightLeft -= pageHeight;
 
     // Subsequent Pages for multi-page resumes
     while (heightLeft >= 5) {
       position = heightLeft - imgHeight;
       pdf.addPage();
-      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
       heightLeft -= pageHeight;
     }
 
-    // Direct Browser Download onto User's Computer
-    pdf.save(safeFilename);
+    // Direct Browser File Download onto User's Computer
+    const pdfBlob = pdf.output('blob');
+    const blobUrl = URL.createObjectURL(pdfBlob);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.href = blobUrl;
+    downloadAnchor.download = safeFilename;
+    downloadAnchor.style.display = 'none';
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+
+    setTimeout(() => {
+      if (document.body.contains(downloadAnchor)) {
+        document.body.removeChild(downloadAnchor);
+      }
+      URL.revokeObjectURL(blobUrl);
+    }, 500);
   };
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 80));
+    await new Promise(resolve => setTimeout(resolve, 100));
     await generatePdfFromTarget(clone);
   } catch (err) {
     console.warn('Off-screen clone PDF render failed, falling back to direct element capture:', err);
