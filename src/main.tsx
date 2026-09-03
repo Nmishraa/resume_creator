@@ -13,16 +13,14 @@ if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
 
   root.render(
-    <React.StrictMode>
-      <BrowserRouter>
-        <ErrorBoundary>
-          <AuthProvider>
-            <ResumeProvider>
-              <App />
-            </ResumeProvider>
-          </AuthProvider>
-        </ErrorBoundary>
-      </BrowserRouter>
-    </React.StrictMode>
+    <BrowserRouter>
+      <ErrorBoundary>
+        <AuthProvider>
+          <ResumeProvider>
+            <App />
+          </ResumeProvider>
+        </AuthProvider>
+      </ErrorBoundary>
+    </BrowserRouter>
   );
 }
