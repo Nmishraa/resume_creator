@@ -345,18 +345,17 @@ export default function Editor() {
     }
   };
 
-  const handleExportPDF = () => {
+  const handleExportPDF = async () => {
     setShowExportMenu(false);
-    const element = document.getElementById('resume-preview');
-    const opt = {
-      margin:       0,
-      filename:     `${resumeData.personal?.name ? resumeData.personal.name.replace(/\s+/g, '_') : 'Resume'}_${Date.now()}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf().set(opt).from(element).save();
+    try {
+      const nameSlug = (resumeData.personal?.name || 'Resume').trim().replace(/\s+/g, '_');
+      const filename = `${nameSlug}_Resume.pdf`;
+      const { downloadPdfFromElement } = await import('../services/pdfService');
+      await downloadPdfFromElement('resume-preview', filename);
+    } catch (err) {
+      console.error('PDF export error:', err);
+      alert(`PDF export failed: ${err.message || String(err)}`);
+    }
   };
 
   const handleExportTXT = () => {

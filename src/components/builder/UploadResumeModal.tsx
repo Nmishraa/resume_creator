@@ -60,6 +60,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
   const [extractedResult, setExtractedResult] = useState<ExtractedResumeResult | null>(null);
   const [editedData, setEditedData] = useState<Partial<ResumeData> | null>(null);
 
+  const [isExporting, setIsExporting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!isOpen) return null;
@@ -197,11 +198,16 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
 
   // 5. Download PDF
   const handleDownloadPdf = async () => {
+    if (isExporting) return;
+    setIsExporting(true);
     try {
-      await downloadPdfFromElement('resume-preview-sheet', `${(resume.personalInfo.fullName || 'Resume').replace(/\s+/g, '_')}_Resume.pdf`);
+      const nameSlug = (resume.personalInfo.fullName || 'Resume').trim().replace(/\s+/g, '_');
+      await downloadPdfFromElement('resume-preview-sheet', `${nameSlug}_Resume.pdf`);
     } catch (e: any) {
       console.error("PDF download failed:", e);
       alert(`PDF download failed: ${e?.message || String(e)}`);
+    } finally {
+      setIsExporting(false);
     }
   };
 
@@ -379,10 +385,11 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
 
             <button
               onClick={handleDownloadPdf}
-              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-black text-white transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
+              disabled={isExporting}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-black text-white transition-all flex items-center gap-1.5 shadow-xs cursor-pointer disabled:opacity-60"
             >
-              <Download size={14} className="text-emerald-400" />
-              <span>Download PDF</span>
+              <Download size={14} className={isExporting ? 'animate-bounce text-emerald-400' : 'text-emerald-400'} />
+              <span>{isExporting ? 'Generating PDF...' : 'Download PDF'}</span>
             </button>
           </div>
         </div>
@@ -1174,10 +1181,11 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
 
                   <button
                     onClick={handleDownloadPdf}
-                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
+                    disabled={isExporting}
+                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer disabled:opacity-60"
                   >
-                    <Download size={14} />
-                    <span>Download ATS-Friendly PDF</span>
+                    <Download size={14} className={isExporting ? 'animate-bounce' : ''} />
+                    <span>{isExporting ? 'Generating PDF...' : 'Download ATS-Friendly PDF'}</span>
                   </button>
                 </div>
               </div>
