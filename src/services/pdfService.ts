@@ -1,5 +1,3 @@
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { ResumeData } from '../types/resume';
 
 /**
@@ -10,44 +8,56 @@ export function exportToVectorPdf(): void {
 }
 
 /**
- * Download direct PDF file using html2canvas and jsPDF with high DPI rendering.
- * Guarantees a direct .pdf file download onto the user's computer without opening print dialogs.
+ * Lazy-loads html2canvas and jsPDF on demand and downloads high-fidelity A4 PDF file directly.
  */
-export async function downloadPdfFromElement(elementId: string = 'resume-preview-sheet', filename: string = 'Resume.pdf'): Promise<void> {
-  const safeFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
+export async function downloadPdfFromElement(
+  elementId: string = 'resume-preview-sheet',
+  filename: string = 'Resume.pdf'
+): Promise<void> {
+  const cleanName = filename.replace(/\.pdf$/i, '').trim();
+  const safeFilename = `${cleanName || 'Resume'}.pdf`;
 
-  // 1. Wait briefly for Google Fonts / web fonts to finish loading (with 800ms timeout safety)
+  // 1. Wait for Google Fonts / web fonts to finish loading (with 1s timeout safety)
   if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
     try {
       await Promise.race([
         document.fonts.ready,
-        new Promise(r => setTimeout(r, 800))
+        new Promise((resolve) => setTimeout(resolve, 1000))
       ]);
     } catch (e) {
       console.warn('Font loading wait warning:', e);
     }
   }
 
+  // 2. Locate resume preview element
   let element = document.getElementById(elementId) as HTMLElement | null;
 
   if (!element) {
-    element = (document.querySelector('#resume-preview-sheet') ||
+    element = (document.getElementById('resume-preview-sheet') ||
+               document.getElementById('resume-preview') ||
                document.querySelector('.print-area') ||
                document.querySelector('#cover-letter-sheet') ||
                document.querySelector('[id*="preview"]')) as HTMLElement | null;
   }
 
   if (!element) {
-    console.error('Target element for PDF generation not found:', elementId);
-    return;
+    const errorMsg = `Target element for PDF generation not found (#${elementId}).`;
+    console.error(errorMsg);
+    throw new Error(errorMsg);
   }
 
-  // Create temporary off-screen wrapper for un-transformed, visible rendering
+  // 3. Lazy-load PDF libraries (jsPDF and html2canvas) on demand to keep initial homepage bundle light
+  const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
+    import('jspdf'),
+    import('html2canvas')
+  ]);
+
+  // 4. Create off-screen container for rendering un-transformed DOM clone
   const tempWrapper = document.createElement('div');
   tempWrapper.style.position = 'fixed';
   tempWrapper.style.left = '-9999px';
   tempWrapper.style.top = '0';
-  tempWrapper.style.width = '794px'; // 210mm at 96 DPI
+  tempWrapper.style.width = '794px'; // A4 210mm at 96 DPI
   tempWrapper.style.backgroundColor = '#ffffff';
   tempWrapper.style.zIndex = '99999';
   tempWrapper.style.opacity = '1';
@@ -60,15 +70,15 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
   clone.style.opacity = '1';
   clone.style.transform = 'none';
   clone.style.width = '794px';
-  clone.style.minHeight = '1123px';
+  clone.style.minHeight = '1123px'; // A4 height at 96 DPI
   clone.style.margin = '0';
   clone.style.padding = '0';
   clone.style.boxSizing = 'border-box';
   clone.style.backgroundColor = '#ffffff';
 
-  // Unhide any hidden children in clone (e.g. if mobileTab or editor view caused parent to be hidden)
+  // Unhide any hidden children inside clone (e.g. if responsive layout hid parent)
   const hiddenChildren = clone.querySelectorAll('.hidden');
-  hiddenChildren.forEach(child => {
+  hiddenChildren.forEach((child) => {
     (child as HTMLElement).classList.remove('hidden');
     (child as HTMLElement).style.display = 'block';
   });
@@ -76,18 +86,21 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
   tempWrapper.appendChild(clone);
   document.body.appendChild(tempWrapper);
 
-  const generatePdfFromTarget = async (targetEl: HTMLElement): Promise<void> => {
-    const canvas = await html2canvas(targetEl, {
-      scale: 2, // High DPI resolution (192 DPI equivalent)
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    // Render off-screen clone with html2canvas
+    const canvas = await html2canvas(clone, {
+      scale: 2, // 192 DPI high resolution
       useCORS: true,
-      allowTaint: false, // Must be false to prevent browser SecurityError during toDataURL export
+      allowTaint: false, // Prevents SecurityError on canvas export
       logging: false,
       backgroundColor: '#ffffff',
       windowWidth: 794,
       imageTimeout: 3000,
       onclone: (clonedDoc) => {
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
-        avoidElements.forEach(el => {
+        avoidElements.forEach((el) => {
           (el as HTMLElement).style.breakInside = 'avoid';
           (el as HTMLElement).style.pageBreakInside = 'avoid';
         });
@@ -120,7 +133,7 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
       heightLeft -= pageHeight;
     }
 
-    // Direct Browser File Download onto User's Computer
+    // Direct Browser Download onto User's Computer
     const pdfBlob = pdf.output('blob');
     const blobUrl = URL.createObjectURL(pdfBlob);
     const downloadAnchor = document.createElement('a');
@@ -136,18 +149,7 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
       }
       URL.revokeObjectURL(blobUrl);
     }, 500);
-  };
 
-  try {
-    await new Promise(resolve => setTimeout(resolve, 100));
-    await generatePdfFromTarget(clone);
-  } catch (err) {
-    console.warn('Off-screen clone PDF render failed, falling back to direct element capture:', err);
-    try {
-      await generatePdfFromTarget(element);
-    } catch (directErr) {
-      console.error('Direct PDF export error:', directErr);
-    }
   } finally {
     if (document.body.contains(tempWrapper)) {
       document.body.removeChild(tempWrapper);
@@ -159,10 +161,11 @@ export async function downloadPdfFromElement(elementId: string = 'resume-preview
  * Export resume data as downloadable JSON
  */
 export function exportResumeToJson(resume: ResumeData): void {
+  const nameSlug = (resume.personalInfo.fullName || 'Resume').trim().replace(/[^a-zA-Z0-9]/g, '_');
   const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(resume, null, 2));
   const downloadAnchor = document.createElement('a');
   downloadAnchor.setAttribute('href', dataStr);
-  downloadAnchor.setAttribute('download', `${(resume.personalInfo.fullName || 'Resume').replace(/\s+/g, '_')}_data.json`);
+  downloadAnchor.setAttribute('download', `${nameSlug}_data.json`);
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   downloadAnchor.remove();

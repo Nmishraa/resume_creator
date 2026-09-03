@@ -59,16 +59,24 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   ];
 
   const handleDownloadPdf = async () => {
+    if (isExporting) return;
     setIsExporting(true);
     try {
-      await downloadPdfFromElement('resume-preview-sheet', `${(resume.personalInfo.fullName || 'Resume').replace(/\s+/g, '_')}_Resume.pdf`);
+      const nameSlug = resume.personalInfo.fullName
+        ? resume.personalInfo.fullName.trim().replace(/[^a-zA-Z0-9]/g, '-')
+        : 'Resume';
+      const filename = `${nameSlug}-Resume.pdf`;
+
+      await downloadPdfFromElement('resume-preview-sheet', filename);
+
       confetti({
         particleCount: 80,
         spread: 60,
         origin: { y: 0.8 }
       });
-    } catch (e) {
-      console.error('PDF Download Error:', e);
+    } catch (error) {
+      console.error("PDF download failed:", error);
+      alert("PDF download failed. Please try again.");
     } finally {
       setIsExporting(false);
     }
@@ -261,8 +269,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             disabled={isExporting}
             className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-extrabold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-sm transition-colors cursor-pointer disabled:opacity-60"
           >
-            <Download size={15} />
-            <span>{isExporting ? 'Exporting...' : 'Download PDF'}</span>
+            <Download size={15} className={isExporting ? 'animate-bounce' : ''} />
+            <span>{isExporting ? 'Generating PDF...' : 'Download PDF'}</span>
           </button>
 
           {/* Compact "More Actions" Dropdown */}
