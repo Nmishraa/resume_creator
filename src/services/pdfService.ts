@@ -47,10 +47,29 @@ export async function downloadPdfFromElement(
   }
 
   // 3. Lazy-load PDF libraries (jsPDF and html2canvas) on demand to keep initial homepage bundle light
-  const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
+  const [jsPdfModule, html2CanvasModule] = await Promise.all([
     import('jspdf'),
     import('html2canvas')
   ]);
+
+  const jsPDF =
+    (jsPdfModule as any).jsPDF ||
+    (jsPdfModule as any).default?.jsPDF ||
+    (jsPdfModule as any).default ||
+    jsPdfModule;
+
+  const html2canvas =
+    (html2CanvasModule as any).default?.default ||
+    (html2CanvasModule as any).default ||
+    html2CanvasModule;
+
+  if (typeof jsPDF !== 'function') {
+    throw new Error(`Failed to initialize jsPDF constructor. Type received: ${typeof jsPDF}`);
+  }
+
+  if (typeof html2canvas !== 'function') {
+    throw new Error(`Failed to initialize html2canvas function. Type received: ${typeof html2canvas}`);
+  }
 
   // 4. Create off-screen container for rendering un-transformed DOM clone
   const tempWrapper = document.createElement('div');
@@ -98,7 +117,7 @@ export async function downloadPdfFromElement(
       backgroundColor: '#ffffff',
       windowWidth: 794,
       imageTimeout: 3000,
-      onclone: (clonedDoc) => {
+      onclone: (clonedDoc: Document) => {
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach((el) => {
           (el as HTMLElement).style.breakInside = 'avoid';
@@ -133,22 +152,8 @@ export async function downloadPdfFromElement(
       heightLeft -= pageHeight;
     }
 
-    // Direct Browser Download onto User's Computer
-    const pdfBlob = pdf.output('blob');
-    const blobUrl = URL.createObjectURL(pdfBlob);
-    const downloadAnchor = document.createElement('a');
-    downloadAnchor.href = blobUrl;
-    downloadAnchor.download = safeFilename;
-    downloadAnchor.style.display = 'none';
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
-
-    setTimeout(() => {
-      if (document.body.contains(downloadAnchor)) {
-        document.body.removeChild(downloadAnchor);
-      }
-      URL.revokeObjectURL(blobUrl);
-    }, 500);
+    // Direct Browser Download onto User's Computer using jsPDF save
+    pdf.save(safeFilename);
 
   } finally {
     if (document.body.contains(tempWrapper)) {
