@@ -68,8 +68,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         origin: { y: 0.8 }
       });
     } catch (e) {
-      console.error(e);
-      exportToVectorPdf();
+      console.error('PDF Download Error:', e);
     } finally {
       setIsExporting(false);
     }
