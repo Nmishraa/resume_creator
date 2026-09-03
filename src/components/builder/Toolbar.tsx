@@ -49,6 +49,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   const [showMoreMenu, setShowMoreMenu] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
+  const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
+
   const colors = [
     { label: 'Cyan Blue', hex: '#0284c7' },
     { label: 'Teal Emerald', hex: '#0d9488' },
@@ -74,9 +76,12 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         spread: 60,
         origin: { y: 0.8 }
       });
+      setToast({ message: 'PDF downloaded successfully!', type: 'success' });
+      setTimeout(() => setToast(null), 4000);
     } catch (error: any) {
       console.error("PDF download failed:", error);
-      alert(`PDF download failed: ${error?.message || String(error)}`);
+      setToast({ message: `PDF export error: ${error?.message || String(error)}`, type: 'error' });
+      setTimeout(() => setToast(null), 6000);
     } finally {
       setIsExporting(false);
     }
@@ -87,6 +92,16 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 
   return (
     <header className="no-print bg-white border-b border-slate-200 sticky top-0 z-30 px-3 sm:px-6 py-2.5 shadow-sm">
+      {/* Toast Notification Banner */}
+      {toast && (
+        <div className={`fixed top-4 right-4 z-50 px-4 py-3 rounded-xl shadow-2xl border text-xs font-bold flex items-center gap-2 animate-in fade-in slide-in-from-top-2 ${
+          toast.type === 'error' ? 'bg-rose-950 text-rose-100 border-rose-800' : 'bg-emerald-950 text-emerald-100 border-emerald-800'
+        }`}>
+          <span>{toast.message}</span>
+          <button onClick={() => setToast(null)} className="ml-2 text-slate-400 hover:text-white cursor-pointer">&times;</button>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
         
         {/* Left: Template & Design controls */}

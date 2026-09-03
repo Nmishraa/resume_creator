@@ -1,10 +1,9 @@
 import { ResumeData } from '../types/resume';
 
 /**
- * Converts oklch(...) or oklab(...) color string to browser-parsed RGB/Hex format
- * to prevent html2canvas color parsing exceptions.
+ * Converts oklch(...) or oklab(...) color string to browser-parsed RGB/Hex format.
  */
-function convertOklchColor(colorStr: string): string {
+export function convertOklchColor(colorStr: string): string {
   if (!colorStr || (!colorStr.includes('oklch') && !colorStr.includes('oklab'))) {
     return colorStr;
   }
@@ -24,6 +23,42 @@ function convertOklchColor(colorStr: string): string {
 }
 
 /**
+ * Recursively converts all computed oklch() / oklab() colors on an element
+ * and its descendants into supported RGB / Hex format.
+ */
+export function sanitizeElementColors(element: HTMLElement): void {
+  const propertiesToSanitize = [
+    'color',
+    'backgroundColor',
+    'borderColor',
+    'outlineColor',
+    'textDecorationColor',
+    'boxShadow',
+    'fill',
+    'stroke'
+  ];
+
+  const sanitizeSingleNode = (el: HTMLElement) => {
+    try {
+      const computed = window.getComputedStyle(el);
+      propertiesToSanitize.forEach((prop) => {
+        const val = computed.getPropertyValue(prop) || (el.style as any)[prop];
+        if (val && (val.includes('oklch') || val.includes('oklab'))) {
+          const sanitizedVal = convertOklchColor(val);
+          el.style.setProperty(prop, sanitizedVal, 'important');
+        }
+      });
+    } catch (e) {
+      // Ignore non-HTML nodes
+    }
+  };
+
+  sanitizeSingleNode(element);
+  const descendants = element.querySelectorAll('*');
+  descendants.forEach((node) => sanitizeSingleNode(node as HTMLElement));
+}
+
+/**
  * Trigger native print dialog for vector PDF output
  */
 export function exportToVectorPdf(): void {
@@ -31,7 +66,7 @@ export function exportToVectorPdf(): void {
 }
 
 /**
- * Lazy-loads html2canvas and jsPDF on demand and downloads high-fidelity A4 PDF file directly.
+ * Lazy-loads html2canvas-pro and jsPDF on demand and downloads high-fidelity A4 PDF file directly.
  */
 export async function downloadPdfFromElement(
   elementId: string = 'resume-preview-sheet',
@@ -40,12 +75,12 @@ export async function downloadPdfFromElement(
   const cleanName = filename.replace(/\.pdf$/i, '').trim();
   const safeFilename = `${cleanName || 'Resume'}.pdf`;
 
-  // 1. Wait for Google Fonts / web fonts to finish loading (with max 500ms timeout)
+  // 1. Wait for web fonts to finish loading
   if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
     try {
       await Promise.race([
         document.fonts.ready,
-        new Promise((resolve) => setTimeout(resolve, 500))
+        new Promise((resolve) => setTimeout(resolve, 1000))
       ]);
     } catch (e) {
       console.warn('Font loading wait warning:', e);
@@ -67,10 +102,10 @@ export async function downloadPdfFromElement(
     throw new Error(`Target preview element (#${elementId}) not found in document.`);
   }
 
-  // 3. Dynamic import of jsPDF and html2canvas
+  // 3. Dynamic import of jsPDF and html2canvas-pro (supports modern CSS color functions natively)
   const [jsPdfModule, html2CanvasModule] = await Promise.all([
     import('jspdf'),
-    import('html2canvas')
+    import('html2canvas-pro')
   ]);
 
   const jsPDF =
@@ -89,7 +124,7 @@ export async function downloadPdfFromElement(
   }
 
   if (typeof html2canvas !== 'function') {
-    throw new Error(`html2canvas library failed to load (received ${typeof html2canvas}).`);
+    throw new Error(`html2canvas-pro library failed to load (received ${typeof html2canvas}).`);
   }
 
   // 4. Temporarily reset transform scaling on target element's parent container for 1:1 crisp 794px capture
@@ -124,7 +159,13 @@ export async function downloadPdfFromElement(
       windowWidth: 794,
       imageTimeout: 5000,
       onclone: (clonedDoc: Document) => {
-        // 1. Sanitize all <style> elements inside clonedDoc
+        // Sanitize any remaining oklch / oklab colors in cloned DOM and stylesheets
+        const clonedSheet = clonedDoc.getElementById('resume-preview-sheet') || clonedDoc.querySelector('.print-area');
+        if (clonedSheet) {
+          sanitizeElementColors(clonedSheet as HTMLElement);
+        }
+
+        // Sanitize all <style> elements inside clonedDoc
         const styleEls = clonedDoc.querySelectorAll('style');
         styleEls.forEach((styleEl) => {
           let cssText = styleEl.textContent || '';
@@ -134,62 +175,7 @@ export async function downloadPdfFromElement(
           }
         });
 
-        // 2. Convert all <link rel="stylesheet"> elements in clonedDoc to inline <style> tags with sanitized CSS
-        const linkEls = clonedDoc.querySelectorAll('link[rel="stylesheet"]');
-        linkEls.forEach((link) => {
-          const href = (link as HTMLLinkElement).href;
-          try {
-            const matchingSheet = Array.from(document.styleSheets).find((s) => s.href === href);
-            let cssText = '';
-            if (matchingSheet) {
-              try {
-                const rules = matchingSheet.cssRules || matchingSheet.rules;
-                if (rules) {
-                  cssText = Array.from(rules).map((r) => r.cssText).join('\n');
-                }
-              } catch (e) {
-                // ignore
-              }
-            }
-            if (cssText) {
-              if (cssText.includes('oklch') || cssText.includes('oklab')) {
-                cssText = cssText.replace(/oklch\([^)]+\)|oklab\([^)]+\)/gi, (match) => convertOklchColor(match));
-              }
-              const inlineStyle = clonedDoc.createElement('style');
-              inlineStyle.textContent = cssText;
-              if (link.parentNode) {
-                link.parentNode.replaceChild(inlineStyle, link);
-              }
-            }
-          } catch (e) {
-            console.warn('Failed to inline stylesheet in clonedDoc:', e);
-          }
-        });
-
-        // 3. Convert element computed colors to RGB/Hex in clonedDoc
-        const sheetEl = clonedDoc.getElementById('resume-preview-sheet') || clonedDoc.querySelector('.print-area');
-        if (sheetEl) {
-          const allNodes = sheetEl.querySelectorAll('*');
-          allNodes.forEach((node) => {
-            const el = node as HTMLElement;
-            try {
-              const comp = window.getComputedStyle(el);
-              if (comp.color && (comp.color.includes('oklch') || comp.color.includes('oklab'))) {
-                el.style.color = convertOklchColor(comp.color);
-              }
-              if (comp.backgroundColor && (comp.backgroundColor.includes('oklch') || comp.backgroundColor.includes('oklab'))) {
-                el.style.backgroundColor = convertOklchColor(comp.backgroundColor);
-              }
-              if (comp.borderColor && (comp.borderColor.includes('oklch') || comp.borderColor.includes('oklab'))) {
-                el.style.borderColor = convertOklchColor(comp.borderColor);
-              }
-            } catch (e) {
-              // Ignore
-            }
-          });
-        }
-
-        // 4. Page break avoidance
+        // Page break avoidance
         const avoidElements = clonedDoc.querySelectorAll('.page-break-avoid, .resume-section-item');
         avoidElements.forEach((el) => {
           (el as HTMLElement).style.breakInside = 'avoid';
