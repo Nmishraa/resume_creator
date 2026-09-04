@@ -46,6 +46,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
   const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState<MatchingJob[]>([]);
   const [extractedSkills, setExtractedSkills] = useState<string[]>([]);
+  const [noSkillsIdentified, setNoSkillsIdentified] = useState(false);
   const [targetRole, setTargetRole] = useState('');
   const [candidateLocation, setCandidateLocation] = useState('');
   const [externalPortals, setExternalPortals] = useState<ExternalSearchPortal[]>([]);
@@ -68,6 +69,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
       setTargetRole(result.targetRole);
       setCandidateLocation(result.candidateLocation);
       setExtractedSkills(result.extractedSkills);
+      setNoSkillsIdentified(Boolean(result.noSkillsIdentified));
       setExternalPortals(result.externalPortals);
 
       if (!roleQuery && result.targetRole) {
@@ -173,11 +175,21 @@ export const FindMatchingJobsView: React.FC<Props> = ({
         </div>
       )}
 
+      {/* Unidentified Skills Warning Banner */}
+      {noSkillsIdentified && (
+        <div className="bg-amber-50 text-amber-950 border border-amber-300 rounded-xl p-4 flex items-center gap-3 shadow-xs">
+          <AlertCircle size={20} className="text-amber-600 shrink-0" />
+          <span className="text-xs sm:text-sm font-extrabold">
+            We could not identify skills from your resume. Review the extracted information or upload another file.
+          </span>
+        </div>
+      )}
+
       {/* Search & Filter Controls Bar */}
       <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-4">
-        <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3">
+        <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
           {/* Target Role Input */}
-          <div className="sm:col-span-6 space-y-1">
+          <div className="sm:col-span-5 md:col-span-5 space-y-1">
             <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
               Job Title / Keyword Query
             </label>
@@ -194,7 +206,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
           </div>
 
           {/* Location Input */}
-          <div className="sm:col-span-4 space-y-1">
+          <div className="sm:col-span-4 md:col-span-4 space-y-1">
             <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
               Preferred Location
             </label>
@@ -211,11 +223,11 @@ export const FindMatchingJobsView: React.FC<Props> = ({
           </div>
 
           {/* Filter Submit Button */}
-          <div className="sm:col-span-2 flex items-end">
+          <div className="sm:col-span-3 md:col-span-3 flex items-end">
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 px-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-sm rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70 min-h-[42px]"
+              className="w-full py-2.5 px-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-sm rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70 min-h-[42px] shrink-0"
             >
               <Search size={16} />
               <span>Search</span>
@@ -352,9 +364,15 @@ export const FindMatchingJobsView: React.FC<Props> = ({
 
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-slate-900 text-white">
-                          #{idx + 1} Top Match
-                        </span>
+                        {job.isTopMatch ? (
+                          <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-slate-900 text-white">
+                            #{idx + 1} Top Match
+                          </span>
+                        ) : (
+                          <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800">
+                            #{idx + 1} Match
+                          </span>
+                        )}
                         <span className="text-xs font-bold text-slate-500 flex items-center gap-1">
                           <Building2 size={13} /> {job.company}
                         </span>
@@ -403,7 +421,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                       <span>{job.matchPercentage}% Match</span>
                     </div>
                     <span className="text-[11px] font-bold text-slate-500">
-                      Based on resume skills
+                      {job.isZeroSkillsMatch ? 'Title and Location Match' : 'Based on resume skills'}
                     </span>
                   </div>
                 </div>
@@ -427,16 +445,22 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                       <CheckCircle2 size={13} className="text-emerald-600" />
                       Matched Resume Skills ({job.matchedSkills.length}):
                     </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {job.matchedSkills.map((sk) => (
-                        <span
-                          key={sk}
-                          className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-bold flex items-center gap-1"
-                        >
-                          ✓ {sk}
-                        </span>
-                      ))}
-                    </div>
+                    {job.matchedSkills.length > 0 ? (
+                      <div className="flex flex-wrap gap-1.5">
+                        {job.matchedSkills.map((sk) => (
+                          <span
+                            key={sk}
+                            className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-bold flex items-center gap-1"
+                          >
+                            ✓ {sk}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="text-xs text-slate-500 font-semibold italic block pt-0.5">
+                        No resume skills matched this job.
+                      </span>
+                    )}
                   </div>
 
                   {/* Missing Skills */}

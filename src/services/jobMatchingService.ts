@@ -18,6 +18,15 @@ export interface MatchingJob {
   matchedSkills: string[];
   missingSkills: string[];
   source: string;
+  isZeroSkillsMatch: boolean;
+  isTopMatch: boolean;
+  scoreBreakdown?: {
+    skillsScore: number;
+    titleScore: number;
+    expScore: number;
+    eduScore: number;
+    locScore: number;
+  };
 }
 
 export interface JobSearchFilters {
@@ -36,15 +45,35 @@ export interface ExternalSearchPortal {
   color: string;
 }
 
+export interface ExtractedResumeProfile {
+  targetRole: string;
+  candidateLocation: string;
+  skills: string[];
+  experienceRoles: string[];
+  education: string[];
+  certifications: string[];
+  noSkillsIdentified: boolean;
+}
+
 /**
- * Extracts candidate skills as a clean flat array of unique formatted skill strings from resumeData.
- * Operates entirely client-side preserving privacy.
+ * Extracts comprehensive candidate profile from resumeData
  */
-export function extractSkillsFromResume(resumeData: any): string[] {
-  if (!resumeData) return [];
+export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
+  if (!resumeData) {
+    return {
+      targetRole: 'Software Engineer',
+      candidateLocation: 'Remote',
+      skills: [],
+      experienceRoles: [],
+      education: [],
+      certifications: [],
+      noSkillsIdentified: true
+    };
+  }
+
   const skillsSet = new Set<string>();
 
-  // Extract from structured skills array
+  // 1. Structured Skills Array
   if (Array.isArray(resumeData.skills)) {
     resumeData.skills.forEach((s: any) => {
       if (typeof s === 'string' && s.trim()) {
@@ -59,39 +88,67 @@ export function extractSkillsFromResume(resumeData: any): string[] {
     });
   }
 
-  // Extract from text sections (Summary, Experience, Education)
+  // 2. Experience Roles & Bullet Points
+  const experienceRoles: string[] = [];
+  if (Array.isArray(resumeData.experience)) {
+    resumeData.experience.forEach((e: any) => {
+      if (e?.role && typeof e.role === 'string') experienceRoles.push(e.role.trim());
+      if (e?.title && typeof e.title === 'string') experienceRoles.push(e.title.trim());
+    });
+  }
+
+  // 3. Education Degrees & Fields of Study
+  const education: string[] = [];
+  if (Array.isArray(resumeData.education)) {
+    resumeData.education.forEach((ed: any) => {
+      const edStr = `${ed?.degree || ''} ${ed?.fieldOfStudy || ed?.major || ''} ${ed?.school || ''}`.trim();
+      if (edStr) education.push(edStr);
+    });
+  }
+
+  // 4. Certifications
+  const certifications: string[] = [];
+  if (Array.isArray(resumeData.certifications)) {
+    resumeData.certifications.forEach((c: any) => {
+      if (typeof c === 'string' && c.trim()) certifications.push(c.trim());
+      else if (c?.name && typeof c.name === 'string') certifications.push(c.name.trim());
+    });
+  }
+
+  // 5. Scan text blob for broad domain skills & multi-word terminology
   const textBlob = [
     resumeData.summary || '',
     resumeData.personalInfo?.jobTitle || '',
     resumeData.targetRole || '',
+    ...experienceRoles,
     ...(Array.isArray(resumeData.experience)
-      ? resumeData.experience.map((e: any) => `${e.role || ''} ${e.company || ''} ${e.description || e.highlights?.join(' ') || ''}`)
+      ? resumeData.experience.map((e: any) => `${e.description || ''} ${e.highlights?.join(' ') || ''}`)
       : []),
-    ...(Array.isArray(resumeData.education)
-      ? resumeData.education.map((ed: any) => `${ed.degree || ''} ${ed.fieldOfStudy || ''} ${ed.school || ''}`)
-      : [])
+    ...education,
+    ...certifications
   ].join(' ');
 
-  // Domain skill dictionary spanning Tech, Healthcare/Nursing, Education, Finance, Marketing, Operations
+  // Comprehensive Domain Skill Dictionary
   const dictionaryKeywords = [
-    // Tech
-    'React', 'Node.js', 'TypeScript', 'JavaScript', 'Python', 'Java', 'C++', 'Golang', 'SQL',
-    'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'REST API', 'Git',
-    'Agile', 'Scrum', 'Figma', 'UI/UX', 'CI/CD', 'Linux', 'Microservices', 'System Design',
+    // Teaching & STEM / Computer Science Teaching
+    'Computer Science', 'STEM', 'Mandarin', 'Mathematics', 'Math', 'Physics', 'Chemistry',
+    'Biology', 'Coding', 'Robotics', 'Web Development', 'Algorithms', 'Data Structures',
+    'Curriculum Development', 'Classroom Management', 'Lesson Planning', 'Student Assessment',
+    'Differentiated Instruction', 'Special Education', 'Early Childhood Education', 'K-12',
+    'Literacy Instruction', 'Pedagogy', 'Educational Technology', 'Tutoring', 'English Literature',
+    'Language Arts', 'Social Studies', 'History',
     // Healthcare & Nursing
     'Patient Care', 'BLS', 'CPR', 'EHR', 'EMR', 'Triage', 'ICU', 'Acute Care', 'Vital Signs',
     'Phlebotomy', 'SBAR', 'HIPAA', 'Infection Control', 'Clinical Assessment', 'Patient Assessment',
     'Psychiatric Care', 'Medication Administration', 'Pediatric Care', 'Nursing', 'RN',
-    // Education & Teaching
-    'Curriculum Development', 'Classroom Management', 'Lesson Planning', 'Student Assessment',
-    'Special Education', 'Differentiated Instruction', 'Early Childhood Education', 'Literacy Instruction',
-    'Mandarin', 'STEM', 'K-12', 'Tutoring', 'Pedagogy',
-    // Finance & Business
+    // Software Engineering & Tech
+    'React', 'Node.js', 'TypeScript', 'JavaScript', 'Python', 'Java', 'C++', 'Golang', 'SQL',
+    'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'REST API', 'Git',
+    'Agile', 'Scrum', 'Figma', 'UI/UX', 'CI/CD', 'Linux', 'Microservices', 'System Design',
+    // Finance, Marketing & Management
     'GAAP', 'Financial Analysis', 'Financial Modeling', 'Accounting', 'Bookkeeping', 'QuickBooks',
-    'Excel', 'Auditing', 'Tax Preparation', 'Budgeting', 'Revenue Recognition',
-    // Marketing & Operations
-    'SEO', 'PPC', 'Content Marketing', 'Google Analytics', 'HubSpot', 'Salesforce', 'CRM',
-    'Project Management', 'Jira', 'Stakeholder Management', 'Supply Chain', 'Customer Support'
+    'SEO', 'PPC', 'Content Marketing', 'Google Analytics', 'HubSpot', 'Salesforce',
+    'Project Management', 'Jira', 'Stakeholder Management'
   ];
 
   dictionaryKeywords.forEach(kw => {
@@ -101,39 +158,41 @@ export function extractSkillsFromResume(resumeData: any): string[] {
     }
   });
 
-  return Array.from(skillsSet);
-}
+  const skills = Array.from(skillsSet);
 
-/**
- * Extracts candidate target role from resumeData
- */
-export function extractTargetRole(resumeData: any): string {
-  if (!resumeData) return 'Software Engineer';
-
-  const role =
-    resumeData.personalInfo?.jobTitle ||
-    resumeData.targetRole ||
-    resumeData.personal?.role ||
-    (Array.isArray(resumeData.experience) && resumeData.experience[0]?.role) ||
+  // Extract target role
+  const targetRole =
+    (resumeData.personalInfo?.jobTitle && typeof resumeData.personalInfo.jobTitle === 'string' && resumeData.personalInfo.jobTitle.trim()) ||
+    (resumeData.targetRole && typeof resumeData.targetRole === 'string' && resumeData.targetRole.trim()) ||
+    (experienceRoles[0] && typeof experienceRoles[0] === 'string' && experienceRoles[0].trim()) ||
     'Software Engineer';
 
-  const clean = role.trim();
-  if (!clean || /university|college|school|degree|bachelor|master/i.test(clean)) {
-    return 'Software Engineer';
-  }
-  return clean;
+  // Extract location
+  const candidateLocation =
+    (resumeData.personalInfo?.location && typeof resumeData.personalInfo.location === 'string' && resumeData.personalInfo.location.trim()) ||
+    'Remote';
+
+  return {
+    targetRole,
+    candidateLocation,
+    skills,
+    experienceRoles,
+    education,
+    certifications,
+    noSkillsIdentified: skills.length === 0
+  };
 }
 
-/**
- * Extracts candidate location from resumeData
- */
+export function extractSkillsFromResume(resumeData: any): string[] {
+  return extractResumeProfile(resumeData).skills;
+}
+
+export function extractTargetRole(resumeData: any): string {
+  return extractResumeProfile(resumeData).targetRole;
+}
+
 export function extractCandidateLocation(resumeData: any): string {
-  if (!resumeData) return 'Remote';
-  return (
-    resumeData.personalInfo?.location ||
-    resumeData.personal?.location ||
-    'Remote'
-  ).trim();
+  return extractResumeProfile(resumeData).candidateLocation;
 }
 
 /**
@@ -194,47 +253,97 @@ function stripHtml(htmlStr: string): string {
 }
 
 /**
- * Evaluates role relevance to ensure unrelated jobs (e.g. software engineer for nurse) are filtered out.
+ * Evaluates broad role relevance to filter out completely unrelated occupations (e.g. Software Engineer for Nurse/Teacher).
  */
 function isRoleRelevant(targetRole: string, jobTitle: string, jobExcerpt: string): boolean {
   const roleNorm = targetRole.toLowerCase().trim();
   const jobNorm = (jobTitle + ' ' + jobExcerpt).toLowerCase();
 
-  // Keyword domain maps for popular professions
   if (roleNorm.includes('nurse') || roleNorm.includes('nursing') || roleNorm.includes('rn')) {
     return /nurse|nursing|rn|clinical|healthcare|patient care|medical|hospital|psychiatric/i.test(jobNorm);
   }
 
-  if (roleNorm.includes('teacher') || roleNorm.includes('teaching') || roleNorm.includes('tutor') || roleNorm.includes('educator')) {
-    return /teacher|teaching|education|tutor|instructor|academic|curriculum|school|faculty|prek|elementary/i.test(jobNorm);
+  if (roleNorm.includes('teacher') || roleNorm.includes('teaching') || roleNorm.includes('tutor') || roleNorm.includes('educator') || roleNorm.includes('instructor')) {
+    return /teacher|teaching|education|tutor|instructor|academic|curriculum|school|faculty|prek|elementary|math|science|stem|coding|language arts/i.test(jobNorm);
   }
 
   if (roleNorm.includes('engineer') || roleNorm.includes('developer') || roleNorm.includes('software') || roleNorm.includes('programmer')) {
-    return /engineer|developer|software|frontend|backend|fullstack|full stack|programmer|devops|data|ai|ml|tech|tech lead|architect|coder|system/i.test(jobNorm);
+    return /engineer|developer|software|frontend|backend|fullstack|full stack|programmer|devops|data|ai|ml|tech|architect|coder|system/i.test(jobNorm);
   }
 
-  if (roleNorm.includes('accountant') || roleNorm.includes('accounting') || roleNorm.includes('auditor') || roleNorm.includes('finance')) {
+  if (roleNorm.includes('accountant') || roleNorm.includes('accounting') || roleNorm.includes('finance')) {
     return /accountant|accounting|finance|financial|audit|tax|bookkeeper|cpa|ledger/i.test(jobNorm);
   }
 
-  if (roleNorm.includes('marketing') || roleNorm.includes('seo') || roleNorm.includes('growth')) {
-    return /marketing|seo|growth|content|digital|campaign|brand|media|pr|advertising/i.test(jobNorm);
-  }
-
-  // General role matching: split targetRole into non-generic keywords
-  const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'with', 'senior', 'junior', 'lead', 'staff', 'principal', 'head', 'vp', 'director']);
+  // General keyword check
+  const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'with', 'senior', 'junior', 'lead', 'staff']);
   const roleKeywords = roleNorm.split(/[\s,/\-\\_]+/).filter(w => w.length > 2 && !stopwords.has(w));
-
   if (roleKeywords.length === 0) return true;
-
-  // At least one core role keyword must appear in job title or snippet
   return roleKeywords.some(kw => jobNorm.includes(kw));
 }
 
 /**
+ * Sub-Field Prioritization Evaluator:
+ * Compares specific sub-field requirements (e.g., Computer Science Teacher vs Language Arts Teacher).
+ * Returns Title Match score (0 to 25 points).
+ */
+function evaluateTitleRelevance(targetRole: string, jobTitle: string, candidateSkills: string[]): number {
+  const roleNorm = targetRole.toLowerCase().trim();
+  const titleNorm = jobTitle.toLowerCase().trim();
+
+  // Exact title match
+  if (titleNorm === roleNorm) return 25;
+
+  // Check sub-field specifics (e.g. Computer Science / STEM vs Language Arts)
+  const isCandidateCS = /computer science|cs|stem|coding|programming|software|tech/i.test(roleNorm) ||
+                        candidateSkills.some(s => /computer science|stem|coding|python|java|web development/i.test(s));
+
+  const isCandidateLangArts = /language arts|english|literature|reading|writing/i.test(roleNorm) ||
+                              candidateSkills.some(s => /language arts|english|literature/i.test(s));
+
+  const isJobCS = /computer science|cs|stem|coding|robotics|tech teacher|math content/i.test(titleNorm);
+  const isJobLangArts = /language arts|english|literature|reading teacher/i.test(titleNorm);
+
+  if (isCandidateCS && isJobCS) {
+    return 24; // Prioritize CS teaching jobs for CS Teachers
+  }
+
+  if (isCandidateCS && isJobLangArts && !isCandidateLangArts) {
+    return 10; // Penalize Language Arts Teacher for CS Teacher candidates
+  }
+
+  if (isCandidateLangArts && isJobLangArts) {
+    return 24; // Prioritize Language Arts jobs for Language Arts Teachers
+  }
+
+  if (isCandidateLangArts && isJobCS && !isCandidateCS) {
+    return 10; // Penalize CS jobs for Language Arts candidates
+  }
+
+  // General title keyword overlap
+  if (titleNorm.includes(roleNorm) || roleNorm.includes(titleNorm)) {
+    return 20;
+  }
+
+  const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'senior', 'junior', 'lead', 'staff', 'pt', 'ft']);
+  const roleTokens = roleNorm.split(/[\s,/\-\\_]+/).filter(t => t.length > 2 && !stopwords.has(t));
+  const matchedTokens = roleTokens.filter(t => titleNorm.includes(t));
+
+  if (roleTokens.length > 0) {
+    return Math.round((matchedTokens.length / roleTokens.length) * 18);
+  }
+
+  return 8;
+}
+
+/**
  * Fetches genuine live job listings from active job APIs (Jobicy, Remotive, Arbeitnow).
- * No fake/hard-coded job fallbacks are used.
- * Calculates compatibility match scores based on candidate skills, role, experience, education, and location.
+ * Applies exact 5-part weighted scoring formula:
+ *   1. Skills Match: 40%
+ *   2. Job-Title Relevance: 25%
+ *   3. Experience Match: 15%
+ *   4. Education Match: 10%
+ *   5. Location/Work-Mode Match: 10%
  */
 export async function fetchMatchingJobs(
   resumeData: any,
@@ -244,12 +353,16 @@ export async function fetchMatchingJobs(
   targetRole: string;
   candidateLocation: string;
   extractedSkills: string[];
+  extractedEducation: string[];
+  extractedCertifications: string[];
+  noSkillsIdentified: boolean;
   totalCount: number;
   externalPortals: ExternalSearchPortal[];
 }> {
-  const targetRole = filters.roleQuery?.trim() || extractTargetRole(resumeData);
-  const candidateLocation = filters.locationQuery?.trim() || extractCandidateLocation(resumeData);
-  const extractedSkills = extractSkillsFromResume(resumeData);
+  const profile = extractResumeProfile(resumeData);
+  const targetRole = filters.roleQuery?.trim() || profile.targetRole;
+  const candidateLocation = filters.locationQuery?.trim() || profile.candidateLocation;
+  const extractedSkills = profile.skills;
 
   const rawLiveJobs: Array<{
     id: string;
@@ -267,12 +380,12 @@ export async function fetchMatchingJobs(
     source: string;
   }> = [];
 
-  // Query live APIs in parallel with strict 4.5s timeouts
+  // Query Jobicy, Remotive & Arbeitnow live APIs in parallel
   const searchPromises = [
     // 1. Jobicy API
     (async () => {
       try {
-        const resp = await fetch(`https://jobicy.com/api/v2/remote-jobs?count=25&tag=${encodeURIComponent(targetRole)}`, {
+        const resp = await fetch(`https://jobicy.com/api/v2/remote-jobs?count=30&tag=${encodeURIComponent(targetRole)}`, {
           signal: AbortSignal.timeout(4500)
         });
         if (resp.ok) {
@@ -293,7 +406,7 @@ export async function fetchMatchingJobs(
                   jobType: (Array.isArray(j.jobType) ? j.jobType[0] : 'Full-time') as any,
                   experienceLevel: (j.jobLevel || 'Mid Level') as any,
                   applicationUrl: j.url.trim(),
-                  descriptionSnippet: snippet.substring(0, 260) + (snippet.length > 260 ? '...' : ''),
+                  descriptionSnippet: snippet.substring(0, 280) + (snippet.length > 280 ? '...' : ''),
                   source: 'Jobicy Live API'
                 });
               }
@@ -301,7 +414,7 @@ export async function fetchMatchingJobs(
           }
         }
       } catch {
-        // Silently handle API timeout/offline
+        // Silently handle API timeout
       }
     })(),
 
@@ -329,7 +442,7 @@ export async function fetchMatchingJobs(
                   jobType: (j.job_type ? (j.job_type.includes('full') ? 'Full-time' : j.job_type.includes('part') ? 'Part-time' : 'Contract') : 'Full-time') as any,
                   experienceLevel: 'Mid Level',
                   applicationUrl: j.url.trim(),
-                  descriptionSnippet: snippet.substring(0, 260) + (snippet.length > 260 ? '...' : ''),
+                  descriptionSnippet: snippet.substring(0, 280) + (snippet.length > 280 ? '...' : ''),
                   source: 'Remotive Live Jobs'
                 });
               }
@@ -337,50 +450,14 @@ export async function fetchMatchingJobs(
           }
         }
       } catch {
-        // Silently handle API timeout/offline
-      }
-    })(),
-
-    // 3. Arbeitnow API
-    (async () => {
-      try {
-        const resp = await fetch(`https://www.arbeitnow.com/api/job-board-api`, {
-          signal: AbortSignal.timeout(4500)
-        });
-        if (resp.ok) {
-          const data = await resp.json();
-          if (Array.isArray(data?.data)) {
-            data.data.forEach((j: any, i: number) => {
-              if (j && j.title && j.url) {
-                const snippet = stripHtml(j.description || '');
-                rawLiveJobs.push({
-                  id: `arbeitnow_${i}_${Math.random().toString(36).substring(2, 7)}`,
-                  title: j.title.trim(),
-                  company: (j.company_name || 'Verified Employer').trim(),
-                  companyLogo: undefined,
-                  location: (j.location || 'Remote').trim(),
-                  isRemote: Boolean(j.remote || j.location?.toLowerCase().includes('remote')),
-                  salary: undefined,
-                  postedDate: j.created_at ? new Date(j.created_at * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Recently posted',
-                  jobType: (Array.isArray(j.job_types) ? j.job_types[0] : 'Full-time') as any,
-                  experienceLevel: 'Mid Level',
-                  applicationUrl: j.url.trim(),
-                  descriptionSnippet: snippet.substring(0, 260) + (snippet.length > 260 ? '...' : ''),
-                  source: 'Arbeitnow Jobs'
-                });
-              }
-            });
-          }
-        }
-      } catch {
-        // Silently handle API timeout/offline
+        // Silently handle API timeout
       }
     })()
   ];
 
   await Promise.allSettled(searchPromises);
 
-  // Deduplicate raw live jobs by applicationUrl or normalized title+company
+  // Deduplicate raw live jobs by applicationUrl
   const seenUrls = new Set<string>();
   const uniqueJobs = rawLiveJobs.filter(j => {
     const key = (j.applicationUrl || `${j.title}_${j.company}`).toLowerCase();
@@ -389,14 +466,14 @@ export async function fetchMatchingJobs(
     return true;
   });
 
-  // Filter out unrelated jobs (e.g. software engineer jobs for a nurse resume)
+  // Filter out completely unrelated occupations
   const relevantJobs = uniqueJobs.filter(j => isRoleRelevant(targetRole, j.title, j.descriptionSnippet));
 
-  // Score and enrich each relevant job against candidate resume
+  // Score each job using the exact 5-part weighted scoring formula
   const scoredJobs: MatchingJob[] = relevantJobs.map((job) => {
     const fullJobText = (job.title + ' ' + job.descriptionSnippet).toLowerCase();
 
-    // 1. Skill Overlap Calculation
+    // 1. SKILLS MATCH (40% MAX = 40 PTS)
     const matchedSkills: string[] = [];
     extractedSkills.forEach((skill) => {
       const skLower = skill.toLowerCase();
@@ -405,88 +482,76 @@ export async function fetchMatchingJobs(
       }
     });
 
-    // Extract potential missing requirements from job snippet
-    const domainTechTerms = [
-      'TypeScript', 'React', 'Node.js', 'Python', 'AWS', 'SQL', 'Docker', 'Kubernetes', 'GraphQL',
-      'BLS', 'CPR', 'EHR', 'EMR', 'ICU', 'Triage', 'SBAR', 'GAAP', 'SEO', 'Jira', 'Agile'
+    let skillsScore = 0;
+    if (extractedSkills.length > 0) {
+      const ratio = matchedSkills.length / Math.max(1, Math.min(5, extractedSkills.length));
+      skillsScore = Math.min(40, Math.round(ratio * 40));
+    }
+
+    // Key missing skills
+    const domainTerms = [
+      'Computer Science', 'Python', 'Java', 'STEM', 'Mandarin', 'React', 'Node.js',
+      'BLS', 'CPR', 'EHR', 'EMR', 'Triage', 'GAAP', 'SEO', 'Jira', 'Agile'
     ];
     const missingSkills: string[] = [];
-    domainTechTerms.forEach((term) => {
+    domainTerms.forEach((term) => {
       if (fullJobText.includes(term.toLowerCase()) && !extractedSkills.some(s => s.toLowerCase() === term.toLowerCase())) {
         missingSkills.push(term);
       }
     });
 
-    // 2. Role Title Similarity Score (0 to 45 pts)
-    let roleScore = 0;
-    const roleNorm = targetRole.toLowerCase().trim();
-    const titleNorm = job.title.toLowerCase().trim();
+    // 2. JOB-TITLE RELEVANCE (25% MAX = 25 PTS)
+    const titleScore = evaluateTitleRelevance(targetRole, job.title, extractedSkills);
 
-    if (titleNorm === roleNorm) {
-      roleScore = 45;
-    } else if (titleNorm.includes(roleNorm) || roleNorm.includes(titleNorm)) {
-      roleScore = 38;
-    } else {
-      const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'senior', 'junior', 'lead', 'staff', 'pt', 'ft']);
-      const roleTokens = roleNorm.split(/[\s,/\-\\_]+/).filter(t => t.length > 2 && !stopwords.has(t));
-      const matchedTokens = roleTokens.filter(t => titleNorm.includes(t));
-      if (roleTokens.length > 0) {
-        roleScore = Math.round((matchedTokens.length / roleTokens.length) * 35);
-      } else {
-        roleScore = 18;
-      }
-    }
+    // 3. EXPERIENCE MATCH (15% MAX = 15 PTS)
+    let expScore = 8;
+    const hasMatchingPastRole = profile.experienceRoles.some(r => job.title.toLowerCase().includes(r.toLowerCase()));
+    if (hasMatchingPastRole) expScore = 15;
+    else if (job.experienceLevel === 'All Levels' || job.experienceLevel === 'Mid Level') expScore = 12;
 
-    // 3. Skill Overlap Ratio Score (0 to 35 pts)
-    let skillScore = 0;
-    if (extractedSkills.length > 0) {
-      const skillRatio = matchedSkills.length / Math.max(1, extractedSkills.length);
-      skillScore = Math.round(skillRatio * 35);
-    } else {
-      skillScore = 8;
-    }
+    // 4. EDUCATION MATCH (10% MAX = 10 PTS)
+    let eduScore = 5;
+    const hasMatchingEducation = profile.education.some(ed => {
+      const edLower = ed.toLowerCase();
+      return (edLower.includes('computer science') && fullJobText.includes('computer science')) ||
+             (edLower.includes('education') && fullJobText.includes('education')) ||
+             (edLower.includes('nursing') && fullJobText.includes('nursing'));
+    });
+    if (hasMatchingEducation) eduScore = 10;
+    else if (profile.education.length > 0) eduScore = 7;
 
-    // 4. Location / Remote Score (0 to 12 pts)
-    let locationScore = 5;
+    // 5. LOCATION / WORK-MODE MATCH (10% MAX = 10 PTS)
+    let locScore = 5;
     if (candidateLocation && candidateLocation.toLowerCase() !== 'remote' && job.location.toLowerCase().includes(candidateLocation.toLowerCase())) {
-      locationScore = 12;
+      locScore = 10;
     } else if (job.isRemote) {
-      locationScore = 10;
+      locScore = 10;
     }
 
-    // 5. Seniority / Experience Alignment (0 to 8 pts)
-    let expScore = 5;
-    if (job.experienceLevel === 'All Levels' || job.experienceLevel === 'Mid Level') {
-      expScore = 8;
+    // Calculate Total 5-Part Weighted Score
+    let totalScore = skillsScore + titleScore + expScore + eduScore + locScore;
+
+    const isZeroSkillsMatch = matchedSkills.length === 0;
+
+    // ZERO SKILL MATCH RULE:
+    // If zero skills match, score is capped at Title + Experience + Education + Location (max 55%)
+    if (isZeroSkillsMatch) {
+      totalScore = Math.min(55, titleScore + expScore + eduScore + locScore);
     }
 
-    let calculatedScore = roleScore + skillScore + locationScore + expScore;
+    const matchPercentage = Math.min(98, Math.max(15, totalScore));
+    const isTopMatch = matchPercentage >= 70 && !isZeroSkillsMatch;
 
-    // DYNAMIC ZERO-SKILL DIVERSIFICATION:
-    // If zero resume skills explicitly match the snippet text, scale naturally based on title & location alignment
-    // (e.g. 28% to 52%) instead of flattening all scores to a single static 38%.
-    if (matchedSkills.length === 0) {
-      if (roleScore >= 35) {
-        // High title alignment: scale between 38% and 52% based on title exactness & location
-        calculatedScore = Math.min(52, Math.max(38, roleScore + locationScore + (titleNorm === roleNorm ? 4 : 0)));
-      } else {
-        // Moderate title alignment: scale between 22% and 36%
-        calculatedScore = Math.min(36, Math.max(22, roleScore + locationScore));
-      }
-    }
-
-    const matchPercentage = Math.min(98, Math.max(15, calculatedScore));
-
-    // Build honest human-readable match reason
+    // Build human-readable match reason
     let matchReason = '';
-    if (matchedSkills.length > 0) {
-      matchReason = `${matchPercentage}% Match: Strong title alignment with ${targetRole} and matches ${matchedSkills.length} of your candidate skills (${matchedSkills.slice(0, 3).join(', ')}).`;
+    if (!isZeroSkillsMatch) {
+      matchReason = `${matchPercentage}% Match: Strong title alignment with ${targetRole} and covers ${matchedSkills.length} of your resume skills (${matchedSkills.slice(0, 3).join(', ')}).`;
     } else {
-      matchReason = `${matchPercentage}% Title Match: Fits your target title (${targetRole}), evaluated by title relevance and location preference.`;
+      matchReason = `${matchPercentage}% Title and Location Match: Fits your target title (${targetRole}) and location preferences. No explicit resume skills matched the brief excerpt.`;
     }
 
     if (job.isRemote) {
-      matchReason += ' Features full remote flexibility.';
+      matchReason += ' Includes remote work flexibility.';
     }
 
     return {
@@ -494,11 +559,20 @@ export async function fetchMatchingJobs(
       matchPercentage,
       matchReason,
       matchedSkills: Array.from(new Set(matchedSkills)),
-      missingSkills: Array.from(new Set(missingSkills)).slice(0, 4)
+      missingSkills: Array.from(new Set(missingSkills)).slice(0, 4),
+      isZeroSkillsMatch,
+      isTopMatch,
+      scoreBreakdown: {
+        skillsScore,
+        titleScore,
+        expScore,
+        eduScore,
+        locScore
+      }
     };
   });
 
-  // Apply user filters
+  // Apply filters
   let filtered = scoredJobs;
 
   if (filters.workType === 'remote') {
@@ -521,6 +595,9 @@ export async function fetchMatchingJobs(
     targetRole,
     candidateLocation,
     extractedSkills,
+    extractedEducation: profile.education,
+    extractedCertifications: profile.certifications,
+    noSkillsIdentified: profile.noSkillsIdentified,
     totalCount: filtered.length,
     externalPortals
   };
