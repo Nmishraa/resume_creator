@@ -403,6 +403,20 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   <Edit3 size={14} />
                   <span>Open in Full Builder</span>
                 </button>
+
+                <button
+                  onClick={() => {
+                    if (!editedData) return;
+                    const appliedData = buildCleanResumeData();
+                    setResume(appliedData);
+                    onClose();
+                    navigate('/job-description-resume-matcher');
+                  }}
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-brand-600 hover:bg-brand-700 text-white shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Sparkles size={14} />
+                  <span>Find Matching Jobs</span>
+                </button>
               </>
             )}
 
