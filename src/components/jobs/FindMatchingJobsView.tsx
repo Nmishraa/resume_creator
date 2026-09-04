@@ -336,16 +336,20 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                 ? 'bg-emerald-500 text-white'
                 : job.matchPercentage >= 70
                 ? 'bg-brand-600 text-white'
-                : 'bg-amber-500 text-white';
+                : job.matchPercentage >= 30
+                ? 'bg-amber-500 text-white'
+                : 'bg-slate-700 text-white';
+
+            const showZeroSkillBadge = job.isZeroSkillsMatch || noSkillsIdentified;
 
             return (
               <div
                 key={job.id}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all p-6 space-y-4 relative overflow-hidden group"
+                className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all p-6 space-y-4 relative overflow-hidden group max-w-full min-w-0"
               >
                 {/* Top Header: Rank, Title, Company, Match % */}
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                  <div className="flex items-start gap-3.5 flex-1">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 min-w-0">
+                  <div className="flex items-start gap-3.5 flex-1 min-w-0">
                     <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-xl font-bold shrink-0 shadow-2xs overflow-hidden">
                       {job.companyLogo && (job.companyLogo.startsWith('http') || job.companyLogo.startsWith('data:')) ? (
                         <img
@@ -362,9 +366,13 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                       )}
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-1 min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        {job.isTopMatch ? (
+                        {showZeroSkillBadge ? (
+                          <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800">
+                            #{idx + 1} Listing
+                          </span>
+                        ) : job.isTopMatch ? (
                           <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-slate-900 text-white">
                             #{idx + 1} Top Match
                           </span>
@@ -383,15 +391,15 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                         )}
                       </div>
 
-                      <h3 className="text-xl font-extrabold text-slate-950 group-hover:text-brand-600 transition-colors leading-snug">
+                      <h3 className="text-xl font-extrabold text-slate-950 group-hover:text-brand-600 transition-colors leading-snug break-words">
                         {job.title}
                       </h3>
 
                       {/* Job Metadata Pills */}
                       <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-slate-600 pt-1">
-                        <span className="flex items-center gap-1 text-slate-700">
-                          <MapPin size={14} className="text-slate-400" />
-                          {job.location}
+                        <span className="flex items-center gap-1 text-slate-700 font-bold">
+                          <MapPin size={14} className="text-slate-400 shrink-0" />
+                          <span>{job.location}</span>
                         </span>
                         {job.salary && (
                           <span className="flex items-center gap-1 text-emerald-700 font-extrabold bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md">
@@ -413,7 +421,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                   </div>
 
                   {/* Circular/Pill Match Score Badge */}
-                  <div className="flex sm:flex-col items-center justify-between sm:items-end gap-1 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+                  <div className="flex sm:flex-col items-center justify-between sm:items-end gap-1 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 min-w-0">
                     <div
                       className={`px-3.5 py-1.5 rounded-xl font-black text-sm shadow-2xs flex items-center gap-1.5 ${matchScoreColor}`}
                     >
@@ -421,7 +429,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                       <span>{job.matchPercentage}% Match</span>
                     </div>
                     <span className="text-[11px] font-bold text-slate-500">
-                      {job.isZeroSkillsMatch ? 'Title and Location Match' : 'Based on resume skills'}
+                      {job.isZeroSkillsMatch || noSkillsIdentified ? 'Keyword and Location Match' : 'Based on resume skills'}
                     </span>
                   </div>
                 </div>

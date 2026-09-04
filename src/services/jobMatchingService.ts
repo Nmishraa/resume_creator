@@ -130,6 +130,10 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
 
   // Comprehensive Domain Skill Dictionary
   const dictionaryKeywords = [
+    // QA & Quality Assurance / Testing
+    'Quality Assurance', 'QA', 'Manual Testing', 'Automated Testing', 'Test Cases',
+    'Regression Testing', 'API Testing', 'Selenium', 'Cypress', 'Playwright',
+    'Postman', 'Jira', 'Agile', 'Bug Tracking', 'SDLC', 'STLC', 'Test Automation',
     // Teaching & STEM / Computer Science Teaching
     'Computer Science', 'STEM', 'Mandarin', 'Mathematics', 'Math', 'Physics', 'Chemistry',
     'Biology', 'Coding', 'Robotics', 'Web Development', 'Algorithms', 'Data Structures',
@@ -144,11 +148,11 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     // Software Engineering & Tech
     'React', 'Node.js', 'TypeScript', 'JavaScript', 'Python', 'Java', 'C++', 'Golang', 'SQL',
     'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'REST API', 'Git',
-    'Agile', 'Scrum', 'Figma', 'UI/UX', 'CI/CD', 'Linux', 'Microservices', 'System Design',
+    'Scrum', 'Figma', 'UI/UX', 'CI/CD', 'Linux', 'Microservices', 'System Design',
     // Finance, Marketing & Management
     'GAAP', 'Financial Analysis', 'Financial Modeling', 'Accounting', 'Bookkeeping', 'QuickBooks',
     'SEO', 'PPC', 'Content Marketing', 'Google Analytics', 'HubSpot', 'Salesforce',
-    'Project Management', 'Jira', 'Stakeholder Management'
+    'Project Management', 'Stakeholder Management'
   ];
 
   dictionaryKeywords.forEach(kw => {
@@ -566,9 +570,39 @@ export async function fetchMatchingJobs(
     if (hasMatchingEducation) eduScore = 10;
     else if (profile.education.length > 0) eduScore = 7;
 
-    // 5. LOCATION / WORK-MODE MATCH (10% MAX = 10 PTS)
+    // 5. LOCATION / WORK-MODE MATCH (10% MAX = 10 PTS) & GEOGRAPHIC ELIGIBILITY
     let locScore = 5;
-    if (candidateLocation && candidateLocation.toLowerCase() !== 'remote' && job.location.toLowerCase().includes(candidateLocation.toLowerCase())) {
+    let formattedLocation = job.location;
+
+    const jobLocLower = job.location.toLowerCase();
+    const candLocLower = (candidateLocation || 'remote').toLowerCase();
+
+    const isEuropeRestrictedJob = /\b(europe|eu|uk|united kingdom|germany|france|netherlands|spain|italy|sweden|poland|emea)\b/i.test(job.location);
+    const isUsRestrictedJob = /\b(us only|usa only|united states only|americas only)\b/i.test(job.location);
+
+    const isCandidateInEurope = /\b(europe|eu|uk|united kingdom|london|berlin|paris|amsterdam|spain|italy|germany|france|netherlands)\b/i.test(candLocLower);
+    const isCandidateInUs = /\b(us|usa|united states|san francisco|new york|ca|tx|fl|ny|wa|chicago|boston|austin)\b/i.test(candLocLower) || candLocLower === 'remote';
+
+    if (isEuropeRestrictedJob) {
+      if (!formattedLocation.includes('Europe only') && !formattedLocation.includes('UK only')) {
+        formattedLocation = 'Remote — Europe only';
+      }
+      if (!isCandidateInEurope) {
+        // User outside Europe -> Europe-only remote job is NOT a full location match
+        locScore = 0;
+      } else {
+        locScore = 10;
+      }
+    } else if (isUsRestrictedJob) {
+      if (!formattedLocation.includes('US only')) {
+        formattedLocation = 'Remote — US only';
+      }
+      if (!isCandidateInUs) {
+        locScore = 0;
+      } else {
+        locScore = 10;
+      }
+    } else if (candLocLower && candLocLower !== 'remote' && jobLocLower.includes(candLocLower)) {
       locScore = 10;
     } else if (job.isRemote) {
       locScore = 10;
@@ -578,14 +612,33 @@ export async function fetchMatchingJobs(
     let totalScore = skillsScore + titleScore + expScore + eduScore + locScore;
 
     const isZeroSkillsMatch = matchedSkills.length === 0;
+    const isLocationMatch = locScore >= 8;
 
-    // ZERO SKILL MATCH RULE:
-    // If zero skills match, score is capped at Title + Experience + Education + Location (max 55%)
+    // ENFORCE STRICT SCORE LIMITS:
+    // - Zero matched resume skills: maximum 25%
+    // - Title-only match (no location match): maximum 20%
+    // - Wrong occupation category / weak title match: maximum 15%
+    // - Title and location only: maximum 25%
+    // - A score above 25% requires at least one genuine resume-skill match
+    // - A score above 50% requires multiple relevant skill matches or supporting experience
     if (isZeroSkillsMatch) {
-      totalScore = Math.min(55, titleScore + expScore + eduScore + locScore);
+      if (titleScore < 15) {
+        totalScore = Math.min(15, totalScore);
+      } else if (!isLocationMatch) {
+        totalScore = Math.min(20, totalScore);
+      } else {
+        totalScore = Math.min(25, totalScore);
+      }
+    } else if (matchedSkills.length === 1 && !hasMatchingPastRole) {
+      totalScore = Math.min(50, totalScore);
     }
 
-    const matchPercentage = Math.min(98, Math.max(15, totalScore));
+    // Absolute Cap Guarantee for Zero Skill Match (max 25%)
+    if (isZeroSkillsMatch) {
+      totalScore = Math.min(25, totalScore);
+    }
+
+    const matchPercentage = Math.min(98, Math.max(10, totalScore));
     const isTopMatch = matchPercentage >= 70 && !isZeroSkillsMatch;
 
     // Build human-readable match reason
@@ -593,7 +646,7 @@ export async function fetchMatchingJobs(
     if (!isZeroSkillsMatch) {
       matchReason = `${matchPercentage}% Match: Strong title alignment with ${targetRole} and covers ${matchedSkills.length} of your resume skills (${matchedSkills.slice(0, 3).join(', ')}).`;
     } else {
-      matchReason = `${matchPercentage}% Title and Location Match: Fits your target title (${targetRole}) and location preferences. No explicit resume skills matched the brief excerpt.`;
+      matchReason = `${matchPercentage}% Keyword and Location Match: Fits your target title (${targetRole}) and location preferences. No explicit resume skills matched the brief excerpt.`;
     }
 
     if (job.isRemote) {
@@ -602,6 +655,7 @@ export async function fetchMatchingJobs(
 
     return {
       ...job,
+      location: formattedLocation,
       matchPercentage,
       matchReason,
       matchedSkills: Array.from(new Set(matchedSkills)),
