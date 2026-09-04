@@ -253,33 +253,79 @@ function stripHtml(htmlStr: string): string {
 }
 
 /**
- * Evaluates broad role relevance to filter out completely unrelated occupations (e.g. Software Engineer for Nurse/Teacher).
+ * Validates whether a job title is relevant to the candidate's target role or query.
+ * IMPORTANT: This check ONLY inspects job.title and recognized occupation categories.
+ * It NEVER inspects company descriptions, marketing text, benefits, or general job description text.
  */
-function isRoleRelevant(targetRole: string, jobTitle: string, jobExcerpt: string): boolean {
-  const roleNorm = targetRole.toLowerCase().trim();
-  const jobNorm = (jobTitle + ' ' + jobExcerpt).toLowerCase();
+export function isRoleRelevant(targetRole: string, jobTitle: string): boolean {
+  if (!targetRole || !jobTitle) return false;
 
-  if (roleNorm.includes('nurse') || roleNorm.includes('nursing') || roleNorm.includes('rn')) {
-    return /nurse|nursing|rn|clinical|healthcare|patient care|medical|hospital|psychiatric/i.test(jobNorm);
+  const queryNorm = targetRole.toLowerCase().trim();
+  const titleNorm = jobTitle.toLowerCase().trim();
+
+  // Clean title for matching (remove punctuation)
+  const cleanTitle = titleNorm.replace(/[^a-z0-9\s]/g, ' ');
+  const cleanQuery = queryNorm.replace(/[^a-z0-9\s]/g, ' ');
+
+  // 1. Direct normalized title substring check
+  const normalizedJobTitleMatchesQuery =
+    cleanTitle.includes(cleanQuery) || cleanQuery.includes(cleanTitle);
+
+  // 2. Recognized Job Occupation Category Matching Logic
+
+  // A) PLUMBING OCCUPATIONS
+  const isPlumbingQuery = /\b(plumber|plumbing|pipefitter|pipe fitter|drain technician)\b/i.test(queryNorm);
+  if (isPlumbingQuery) {
+    const recognizedJobOccupationMatchesQuery = /\b(plumber|plumbing|pipefitter|pipe fitter|drain technician)\b/i.test(titleNorm);
+    return recognizedJobOccupationMatchesQuery;
   }
 
-  if (roleNorm.includes('teacher') || roleNorm.includes('teaching') || roleNorm.includes('tutor') || roleNorm.includes('educator') || roleNorm.includes('instructor')) {
-    return /teacher|teaching|education|tutor|instructor|academic|curriculum|school|faculty|prek|elementary|math|science|stem|coding|language arts/i.test(jobNorm);
+  // B) SCHOOL PRINCIPAL & EDUCATION LEADERSHIP
+  // (Must exclude corporate/tech seniority titles like "Principal Product Manager", "Principal Software Engineer")
+  const isSchoolPrincipalQuery = /\b(school principal|principal|headmaster|headmistress)\b/i.test(queryNorm);
+  const isCorporatePrincipalTitle = /\bprincipal\b/i.test(titleNorm) &&
+    /\b(product|engineering|engineer|software|developer|architect|consultant|designer|analyst|strategist|program manager|project manager|data|security|cloud|solutions|sales|marketing|account|finance|investment|legal|hr)\b/i.test(titleNorm);
+
+  if (isSchoolPrincipalQuery) {
+    if (isCorporatePrincipalTitle) return false;
+    const recognizedJobOccupationMatchesQuery = /\b(school principal|assistant principal|vice principal|elementary principal|high school principal|middle school principal|headmaster|headmistress|principal of)\b/i.test(titleNorm) ||
+      (queryNorm === 'principal' && /\bprincipal\b/i.test(titleNorm) && /\b(school|academy|education|district|high school|elementary|middle school|k-12)\b/i.test(titleNorm));
+    return recognizedJobOccupationMatchesQuery;
   }
 
-  if (roleNorm.includes('engineer') || roleNorm.includes('developer') || roleNorm.includes('software') || roleNorm.includes('programmer')) {
-    return /engineer|developer|software|frontend|backend|fullstack|full stack|programmer|devops|data|ai|ml|tech|architect|coder|system/i.test(jobNorm);
+  // C) TEACHING & EDUCATION OCCUPATIONS
+  const isTeacherQuery = /\b(teacher|teaching|educator|instructor|tutor|professor|faculty|lecturer)\b/i.test(queryNorm);
+  if (isTeacherQuery) {
+    const recognizedJobOccupationMatchesQuery = /\b(teacher|teaching|educator|instructor|tutor|professor|faculty|lecturer|prek|elementary|k-12)\b/i.test(titleNorm);
+    return recognizedJobOccupationMatchesQuery;
   }
 
-  if (roleNorm.includes('accountant') || roleNorm.includes('accounting') || roleNorm.includes('finance')) {
-    return /accountant|accounting|finance|financial|audit|tax|bookkeeper|cpa|ledger/i.test(jobNorm);
+  // D) NURSING & HEALTHCARE OCCUPATIONS
+  const isNurseQuery = /\b(nurse|nursing|rn|lpn|np|nurse practitioner)\b/i.test(queryNorm);
+  if (isNurseQuery) {
+    const recognizedJobOccupationMatchesQuery = /\b(nurse|nursing|registered nurse|rn|lpn|np|nurse practitioner|clinical nurse|triage nurse|charge nurse|staff nurse)\b/i.test(titleNorm);
+    return recognizedJobOccupationMatchesQuery;
   }
 
-  // General keyword check
-  const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'with', 'senior', 'junior', 'lead', 'staff']);
-  const roleKeywords = roleNorm.split(/[\s,/\-\\_]+/).filter(w => w.length > 2 && !stopwords.has(w));
-  if (roleKeywords.length === 0) return true;
-  return roleKeywords.some(kw => jobNorm.includes(kw));
+  // E) SOFTWARE ENGINEERING / TECH OCCUPATIONS
+  const isSoftwareEngineerQuery = /\b(software engineer|software developer|developer|frontend|backend|fullstack|full stack|web developer|programmer|devops|software architect)\b/i.test(queryNorm);
+  if (isSoftwareEngineerQuery) {
+    const isNonTechTitle = /\b(plumber|plumbing|nurse|nursing|teacher|teaching|doctor|lawyer|accountant)\b/i.test(titleNorm);
+    if (isNonTechTitle) return false;
+
+    const recognizedJobOccupationMatchesQuery = /\b(software engineer|software developer|developer|frontend|backend|fullstack|full stack|web developer|programmer|devops|software architect|code|coder|system engineer|data engineer|cloud engineer)\b/i.test(titleNorm);
+    return recognizedJobOccupationMatchesQuery;
+  }
+
+  // F) GENERAL OCCUPATIONS FALLBACK LOGIC:
+  const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'with', 'senior', 'junior', 'lead', 'staff', 'principal', 'head', 'vp', 'director', 'manager', 'associate', 'assistant', 'intern']);
+  const queryTokens = cleanQuery.split(/\s+/).filter(w => w.length > 2 && !stopwords.has(w));
+
+  if (queryTokens.length === 0) return true;
+
+  const recognizedJobOccupationMatchesQuery = queryTokens.some(token => cleanTitle.includes(token));
+
+  return normalizedJobTitleMatchesQuery || recognizedJobOccupationMatchesQuery;
 }
 
 /**
@@ -466,8 +512,8 @@ export async function fetchMatchingJobs(
     return true;
   });
 
-  // Filter out completely unrelated occupations
-  const relevantJobs = uniqueJobs.filter(j => isRoleRelevant(targetRole, j.title, j.descriptionSnippet));
+  // Filter out completely unrelated occupations (evaluating strictly job title and recognized occupation categories)
+  const relevantJobs = uniqueJobs.filter(j => isRoleRelevant(targetRole, j.title));
 
   // Score each job using the exact 5-part weighted scoring formula
   const scoredJobs: MatchingJob[] = relevantJobs.map((job) => {

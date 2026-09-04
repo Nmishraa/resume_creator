@@ -544,7 +544,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
 
           <div className="space-y-2 max-w-lg mx-auto">
             <h3 className="text-xl font-extrabold text-slate-900">
-              No direct API listings found for "{roleQuery || targetRole || 'your search'}"
+              No relevant live jobs were found for this role. Try another title or location.
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed font-medium">
               We couldn't fetch live API jobs matching your exact keywords right now. You can launch instant, verified searches on top job boards pre-filled with your target role and location below:
