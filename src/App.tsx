@@ -1,103 +1,117 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
-
 import { HomePage } from './pages/HomePage';
-import { FreeResumeBuilderPage } from './pages/FreeResumeBuilderPage';
-import { AiResumeBuilderPage } from './pages/AiResumeBuilderPage';
-import { AtsCheckerPage } from './pages/AtsCheckerPage';
-import { ResumeScoreCheckerPage } from './pages/ResumeScoreCheckerPage';
-import { StudentResumeBuilderPage } from './pages/StudentResumeBuilderPage';
-import { NoExperienceResumeBuilderPage } from './pages/NoExperienceResumeBuilderPage';
-import { JobMatcherPage } from './pages/JobMatcherPage';
-import { CoverLetterPage } from './pages/CoverLetterPage';
-import { TemplatesGalleryPage } from './pages/TemplatesGalleryPage';
-import { ResumeExamplesHubPage } from './pages/ResumeExamplesHubPage';
-import { ResumeExampleDetailPage } from './pages/ResumeExampleDetailPage';
-import { GuidesHubPage } from './pages/GuidesHubPage';
-import { GuideDetailPage } from './pages/GuideDetailPage';
-import { BuilderPage } from './pages/BuilderPage';
-import { JobTrackerPage } from './pages/JobTrackerPage';
-import { InterviewPrepPage } from './pages/InterviewPrepPage';
-import { LinkedInOptimizerPage } from './pages/LinkedInOptimizerPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
-import { TermsPage } from './pages/TermsPage';
-import { HowItWorksPage } from './pages/HowItWorksPage';
-import { FaqPage } from './pages/FaqPage';
-import { AtsResumeBuilderPage } from './pages/seo/AtsResumeBuilderPage';
-import { SoftwareEngineerBuilderPage } from './pages/seo/SoftwareEngineerBuilderPage';
-import { KeywordMatcherPage } from './pages/seo/KeywordMatcherPage';
+
+// Lazy-load route chunks to minimize initial bundle size and optimize Lighthouse performance
+const BuilderPage = lazy(() => import('./pages/BuilderPage').then(m => ({ default: m.BuilderPage })));
+const FreeResumeBuilderPage = lazy(() => import('./pages/FreeResumeBuilderPage').then(m => ({ default: m.FreeResumeBuilderPage })));
+const AiResumeBuilderPage = lazy(() => import('./pages/AiResumeBuilderPage').then(m => ({ default: m.AiResumeBuilderPage })));
+const AtsCheckerPage = lazy(() => import('./pages/AtsCheckerPage').then(m => ({ default: m.AtsCheckerPage })));
+const ResumeScoreCheckerPage = lazy(() => import('./pages/ResumeScoreCheckerPage').then(m => ({ default: m.ResumeScoreCheckerPage })));
+const StudentResumeBuilderPage = lazy(() => import('./pages/StudentResumeBuilderPage').then(m => ({ default: m.StudentResumeBuilderPage })));
+const NoExperienceResumeBuilderPage = lazy(() => import('./pages/NoExperienceResumeBuilderPage').then(m => ({ default: m.NoExperienceResumeBuilderPage })));
+const JobMatcherPage = lazy(() => import('./pages/JobMatcherPage').then(m => ({ default: m.JobMatcherPage })));
+const CoverLetterPage = lazy(() => import('./pages/CoverLetterPage').then(m => ({ default: m.CoverLetterPage })));
+const TemplatesGalleryPage = lazy(() => import('./pages/TemplatesGalleryPage').then(m => ({ default: m.TemplatesGalleryPage })));
+const ResumeExamplesHubPage = lazy(() => import('./pages/ResumeExamplesHubPage').then(m => ({ default: m.ResumeExamplesHubPage })));
+const ResumeExampleDetailPage = lazy(() => import('./pages/ResumeExampleDetailPage').then(m => ({ default: m.ResumeExampleDetailPage })));
+const GuidesHubPage = lazy(() => import('./pages/GuidesHubPage').then(m => ({ default: m.GuidesHubPage })));
+const GuideDetailPage = lazy(() => import('./pages/GuideDetailPage').then(m => ({ default: m.GuideDetailPage })));
+const JobTrackerPage = lazy(() => import('./pages/JobTrackerPage').then(m => ({ default: m.JobTrackerPage })));
+const InterviewPrepPage = lazy(() => import('./pages/InterviewPrepPage').then(m => ({ default: m.InterviewPrepPage })));
+const InterviewQuestionsPage = lazy(() => import('./pages/InterviewQuestionsPage').then(m => ({ default: m.InterviewQuestionsPage })));
+const LinkedInOptimizerPage = lazy(() => import('./pages/LinkedInOptimizerPage').then(m => ({ default: m.LinkedInOptimizerPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
+const TermsPage = lazy(() => import('./pages/TermsPage').then(m => ({ default: m.TermsPage })));
+const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage').then(m => ({ default: m.HowItWorksPage })));
+const FaqPage = lazy(() => import('./pages/FaqPage').then(m => ({ default: m.FaqPage })));
+const AtsResumeBuilderPage = lazy(() => import('./pages/seo/AtsResumeBuilderPage').then(m => ({ default: m.AtsResumeBuilderPage })));
+const SoftwareEngineerBuilderPage = lazy(() => import('./pages/seo/SoftwareEngineerBuilderPage').then(m => ({ default: m.SoftwareEngineerBuilderPage })));
+const KeywordMatcherPage = lazy(() => import('./pages/seo/KeywordMatcherPage').then(m => ({ default: m.KeywordMatcherPage })));
+
+const RouteLoadingFallback = () => (
+  <div className="min-h-[60vh] flex items-center justify-center p-8">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-10 h-10 border-4 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
+      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Loading Resume Craft...</span>
+    </div>
+  </div>
+);
 
 export function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AppLayout />}>
-          {/* Main Index */}
-          <Route index element={<HomePage />} />
-          
-          {/* Dedicated Google-Targeted SEO Landing Pages */}
-          <Route path="free-resume-builder" element={<FreeResumeBuilderPage />} />
-          <Route path="free-ai-resume-builder" element={<Navigate to="/free-resume-builder" replace />} />
-          <Route path="ai-resume-builder" element={<AiResumeBuilderPage />} />
-          <Route path="ats-resume-builder" element={<AtsResumeBuilderPage />} />
-          <Route path="ats-resume-checker" element={<AtsCheckerPage />} />
-          <Route path="ats-checker" element={<Navigate to="/ats-resume-checker" replace />} />
-          <Route path="ats-methodology" element={<Navigate to="/ats-resume-checker" replace />} />
-          <Route path="ats-resume-checker-without-signup" element={<Navigate to="/ats-resume-checker" replace />} />
-          <Route path="resume-score-checker" element={<ResumeScoreCheckerPage />} />
-          <Route path="resume-builder-for-students" element={<StudentResumeBuilderPage />} />
-          <Route path="student-resume-example" element={<Navigate to="/resume-builder-for-students" replace />} />
-          <Route path="resume-builder-no-experience" element={<NoExperienceResumeBuilderPage />} />
-          <Route path="resume-builder-for-software-engineers" element={<SoftwareEngineerBuilderPage />} />
-          <Route path="job-description-resume-matcher" element={<JobMatcherPage />} />
-          <Route path="resume-keyword-matcher" element={<KeywordMatcherPage />} />
-          
-          {/* Cover Letter & Templates */}
-          <Route path="cover-letters" element={<CoverLetterPage />} />
-          <Route path="cover-letter-generator" element={<Navigate to="/cover-letters" replace />} />
-          <Route path="templates" element={<Navigate to="/resume-templates" replace />} />
-          <Route path="resume-templates" element={<TemplatesGalleryPage />} />
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<AppLayout />}>
+            {/* Main Index */}
+            <Route index element={<HomePage />} />
+            
+            {/* Dedicated Google-Targeted SEO Landing Pages */}
+            <Route path="free-resume-builder" element={<FreeResumeBuilderPage />} />
+            <Route path="free-ai-resume-builder" element={<Navigate to="/free-resume-builder" replace />} />
+            <Route path="ai-resume-builder" element={<AiResumeBuilderPage />} />
+            <Route path="ats-resume-builder" element={<AtsResumeBuilderPage />} />
+            <Route path="ats-resume-checker" element={<AtsCheckerPage />} />
+            <Route path="ats-checker" element={<Navigate to="/ats-resume-checker" replace />} />
+            <Route path="ats-methodology" element={<Navigate to="/ats-resume-checker" replace />} />
+            <Route path="ats-resume-checker-without-signup" element={<Navigate to="/ats-resume-checker" replace />} />
+            <Route path="resume-score-checker" element={<ResumeScoreCheckerPage />} />
+            <Route path="resume-builder-for-students" element={<StudentResumeBuilderPage />} />
+            <Route path="student-resume-example" element={<Navigate to="/resume-builder-for-students" replace />} />
+            <Route path="resume-builder-no-experience" element={<NoExperienceResumeBuilderPage />} />
+            <Route path="resume-builder-for-software-engineers" element={<SoftwareEngineerBuilderPage />} />
+            <Route path="job-description-resume-matcher" element={<JobMatcherPage />} />
+            <Route path="resume-keyword-matcher" element={<KeywordMatcherPage />} />
+            
+            {/* Cover Letter & Templates */}
+            <Route path="cover-letters" element={<CoverLetterPage />} />
+            <Route path="cover-letter-generator" element={<Navigate to="/cover-letters" replace />} />
+            <Route path="templates" element={<Navigate to="/resume-templates" replace />} />
+            <Route path="resume-templates" element={<TemplatesGalleryPage />} />
 
-          {/* Resume Examples Hub & Dynamic Detail */}
-          <Route path="resume-examples" element={<ResumeExamplesHubPage />} />
-          <Route path="examples" element={<Navigate to="/resume-examples" replace />} />
-          <Route path="resume-examples/:role" element={<ResumeExampleDetailPage />} />
+            {/* Resume Examples Hub & Dynamic Detail */}
+            <Route path="resume-examples" element={<ResumeExamplesHubPage />} />
+            <Route path="examples" element={<Navigate to="/resume-examples" replace />} />
+            <Route path="resume-examples/:role" element={<ResumeExampleDetailPage />} />
 
-          {/* Career & ATS Guides */}
-          <Route path="guides" element={<GuidesHubPage />} />
-          <Route path="guides/:slug" element={<GuideDetailPage />} />
+            {/* Career & ATS Guides */}
+            <Route path="guides" element={<GuidesHubPage />} />
+            <Route path="guides/:slug" element={<GuideDetailPage />} />
 
-          {/* Core Tools & Editor Aliases */}
-          <Route path="builder" element={<BuilderPage />} />
-          <Route path="editor/demo" element={<BuilderPage />} />
-          <Route path="editor/:id" element={<BuilderPage />} />
-          <Route path="editor/new" element={<BuilderPage />} />
-          <Route path="resume-builder" element={<BuilderPage />} />
-          <Route path="applications" element={<JobTrackerPage />} />
-          <Route path="interview-prep" element={<InterviewPrepPage />} />
-          <Route path="linkedin-optimizer" element={<LinkedInOptimizerPage />} />
+            {/* Core Tools & Editor Aliases */}
+            <Route path="builder" element={<BuilderPage />} />
+            <Route path="editor/demo" element={<BuilderPage />} />
+            <Route path="editor/:id" element={<BuilderPage />} />
+            <Route path="editor/new" element={<BuilderPage />} />
+            <Route path="resume-builder" element={<BuilderPage />} />
+            <Route path="applications" element={<JobTrackerPage />} />
+            <Route path="interview-questions" element={<InterviewQuestionsPage />} />
+            <Route path="interview-prep" element={<InterviewQuestionsPage />} />
+            <Route path="linkedin-optimizer" element={<LinkedInOptimizerPage />} />
 
-          {/* Legacy Auth & Login Aliases Redirect */}
-          <Route path="login" element={<Navigate to="/" replace />} />
-          <Route path="signin" element={<Navigate to="/" replace />} />
-          <Route path="signup" element={<Navigate to="/" replace />} />
+            {/* Legacy Auth & Login Aliases Redirect */}
+            <Route path="login" element={<Navigate to="/" replace />} />
+            <Route path="signin" element={<Navigate to="/" replace />} />
+            <Route path="signup" element={<Navigate to="/" replace />} />
 
-          {/* Trust & Legal */}
-          <Route path="faq" element={<FaqPage />} />
-          <Route path="faqs" element={<Navigate to="/faq" replace />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="privacy" element={<PrivacyPolicyPage />} />
-          <Route path="terms" element={<TermsPage />} />
-          <Route path="how-it-works" element={<HowItWorksPage />} />
+            {/* Trust & Legal */}
+            <Route path="faq" element={<FaqPage />} />
+            <Route path="faqs" element={<Navigate to="/faq" replace />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="privacy" element={<PrivacyPolicyPage />} />
+            <Route path="terms" element={<TermsPage />} />
+            <Route path="how-it-works" element={<HowItWorksPage />} />
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

@@ -63,14 +63,14 @@ export const FreeResumeBuilderPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link
               to="/builder"
-              className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2 min-h-[44px]"
             >
               <FileText size={18} />
               <span>Create My Resume Free</span>
             </Link>
             <Link
               to="/ats-checker"
-              className="w-full sm:w-auto px-7 py-4 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-sm border border-slate-300 shadow-xs transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-7 py-4 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-sm border border-slate-300 shadow-xs transition-all flex items-center justify-center gap-2 min-h-[44px]"
             >
               <CheckCircle2 size={18} className="text-emerald-600" />
               <span>Check Resume Score</span>

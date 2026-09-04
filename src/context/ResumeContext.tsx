@@ -14,6 +14,7 @@ import { initialResumeData, emptyResumeData, sampleJobApplications, sampleCoverL
 import { analyzeAtsScore } from '../services/atsChecker';
 import { saveResumeApi, fetchUserResumesApi } from '../services/apiAuth';
 import { useAuth } from './AuthContext';
+import { trackResumeCreated } from '../services/analytics';
 
 export interface AdaptiveDensityInfo {
   mode: DensityMode;
@@ -69,6 +70,7 @@ interface ResumeContextType {
   savedResumes: ResumeData[];
   loadResumeById: (id: string) => void;
   createNewResume: () => void;
+  loadSampleResume: () => void;
   isSaving: boolean;
   lastSavedTime: string | null;
 
@@ -99,7 +101,12 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       try {
         const parsed = JSON.parse(saved);
         // Reset legacy demo data if present
-        if (parsed.personalInfo?.fullName === 'Alexander Wright') {
+        if (
+          parsed.personalInfo?.fullName === 'Alexander Wright' ||
+          parsed.id === 'default-resume-1' ||
+          parsed.personalInfo?.email === 'alexander.wright@example.com'
+        ) {
+          localStorage.removeItem('resume_craft_active_resume');
           return emptyResumeData;
         }
         return parsed;
@@ -116,22 +123,54 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [lastSavedTime, setLastSavedTime] = useState<string | null>(null);
 
-  // Job Tracker State
+  // Job Tracker State (Default empty for new users)
   const [jobApplications, setJobApplications] = useState<JobApplication[]>(() => {
     const saved = localStorage.getItem('resume_craft_job_apps');
     if (saved) {
-      try { return JSON.parse(saved); } catch {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.some(j => j.company === 'Stripe' && j.role === 'Senior Staff Frontend Engineer')) {
+          localStorage.removeItem('resume_craft_job_apps');
+          return [];
+        }
+        return parsed;
+      } catch {}
     }
-    return sampleJobApplications;
+    return [];
   });
 
-  // Cover Letter State
+  // Cover Letter State (Default empty for new users)
+  const emptyCoverLetter: CoverLetterData = {
+    id: 'cl-init',
+    title: 'Untitled Cover Letter',
+    recipientName: '',
+    recipientTitle: '',
+    companyName: '',
+    companyAddress: '',
+    jobTitle: '',
+    date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+    senderName: '',
+    senderEmail: '',
+    senderPhone: '',
+    senderLocation: '',
+    letterBody: '',
+    tone: 'professional',
+    updatedAt: new Date().toISOString(),
+  };
+
   const [coverLetter, setCoverLetter] = useState<CoverLetterData>(() => {
     const saved = localStorage.getItem('resume_craft_cover_letter');
     if (saved) {
-      try { return JSON.parse(saved); } catch {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.senderName === 'Alexander Wright' || parsed.id === 'cl-1') {
+          localStorage.removeItem('resume_craft_cover_letter');
+          return emptyCoverLetter;
+        }
+        return parsed;
+      } catch {}
     }
-    return sampleCoverLetter;
+    return emptyCoverLetter;
   });
 
   // Adaptive Layout Density State
@@ -326,9 +365,9 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const addCertification = () => {
     const newCert = {
       id: `cert-${Date.now()}`,
-      name: 'Professional Certification',
-      issuer: 'Issuing Organization',
-      date: '2024',
+      name: '',
+      issuer: '',
+      date: '',
       link: ''
     };
     updateResume(prev => ({ ...prev, certifications: [...prev.certifications, newCert] }));
@@ -348,18 +387,32 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }));
   };
 
-  // Create new blank or template resume
+  // Create new blank resume (Default empty state)
   const createNewResume = () => {
     const blank: ResumeData = {
-      ...initialResumeData,
+      ...emptyResumeData,
       id: `resume-${Date.now()}`,
-      title: 'Untitled ATS Resume',
+      title: 'Untitled Resume',
       updatedAt: new Date().toISOString()
     };
     setResumeState(blank);
     setHistory([blank]);
     setHistoryIndex(0);
     localStorage.setItem('resume_craft_active_resume', JSON.stringify(blank));
+    trackResumeCreated(blank.formatting?.template || 'blank');
+  };
+
+  const loadSampleResume = () => {
+    const sample: ResumeData = {
+      ...initialResumeData,
+      id: `sample-resume-${Date.now()}`,
+      updatedAt: new Date().toISOString()
+    };
+    setResumeState(sample);
+    setHistory([sample]);
+    setHistoryIndex(0);
+    localStorage.setItem('resume_craft_active_resume', JSON.stringify(sample));
+    trackResumeCreated(sample.formatting?.template || 'sample');
   };
 
   const loadResumeById = (id: string) => {
@@ -472,6 +525,7 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         savedResumes,
         loadResumeById,
         createNewResume,
+        loadSampleResume,
         isSaving,
         lastSavedTime,
         jobApplications,

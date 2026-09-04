@@ -1,10 +1,12 @@
 import { ResumeData } from '../types/resume';
 import { applyBlockAwarePagination } from './paginationEngine';
+import { trackResumeDownloaded } from './analytics';
 
 /**
  * Trigger native print dialog for vector PDF output
  */
 export function exportToVectorPdf(): void {
+  trackResumeDownloaded('vector_pdf');
   window.print();
 }
 
@@ -367,6 +369,7 @@ export async function downloadPdfFromElement(
 
     // Direct Browser Download onto User's Device
     pdf.save(safeFilename);
+    trackResumeDownloaded('pdf');
   } finally {
     if (document.body.contains(renderWrapper)) {
       document.body.removeChild(renderWrapper);

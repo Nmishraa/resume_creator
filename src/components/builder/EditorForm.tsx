@@ -30,13 +30,12 @@ import {
 import confetti from 'canvas-confetti';
 
 const STEPS = [
-  { id: 1, name: 'Personal Details', shortName: 'Personal', icon: User, desc: 'Contact info & job title' },
-  { id: 2, name: 'Professional Summary', shortName: 'Summary', icon: FileText, desc: 'Career summary' },
-  { id: 3, name: 'Work Experience', shortName: 'Experience', icon: Briefcase, desc: 'Employment & projects' },
-  { id: 4, name: 'Education', shortName: 'Education', icon: GraduationCap, desc: 'Degrees & certifications' },
-  { id: 5, name: 'Skills', shortName: 'Skills', icon: Wrench, desc: 'Technical skills & tools' },
-  { id: 6, name: 'Template & Design', shortName: 'Design', icon: Palette, desc: 'Layout, fonts & colors' },
-  { id: 7, name: 'Preview & Download', shortName: 'Download', icon: Download, desc: 'Final check & PDF export' }
+  { id: 1, name: 'Personal Details', shortName: 'Personal', icon: User, desc: 'Contact info & summary' },
+  { id: 2, name: 'Work Experience', shortName: 'Experience', icon: Briefcase, desc: 'Jobs & key projects' },
+  { id: 3, name: 'Education', shortName: 'Education', icon: GraduationCap, desc: 'Degrees & certifications' },
+  { id: 4, name: 'Skills', shortName: 'Skills', icon: Wrench, desc: 'Technical & core skills' },
+  { id: 5, name: 'Template & Design', shortName: 'Design', icon: Palette, desc: 'Layout, fonts & colors' },
+  { id: 6, name: 'Preview & Download', shortName: 'Download', icon: Download, desc: 'Final check & PDF export' }
 ];
 
 export const EditorForm: React.FC = () => {
@@ -67,7 +66,7 @@ export const EditorForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(() => {
     try {
       const saved = localStorage.getItem('resume_builder_step');
-      return saved ? Math.min(Math.max(parseInt(saved, 10), 1), 7) : 1;
+      return saved ? Math.min(Math.max(parseInt(saved, 10), 1), 6) : 1;
     } catch {
       return 1;
     }
@@ -106,7 +105,7 @@ export const EditorForm: React.FC = () => {
       return;
     }
     setNameError(false);
-    if (currentStep < 7) {
+    if (currentStep < 6) {
       setCurrentStep(prev => prev + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -184,11 +183,11 @@ export const EditorForm: React.FC = () => {
     <div className="flex flex-col min-h-full pb-24">
       
       {/* 1. TOP PROGRESS STEPPER INDICATOR */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs mb-5 space-y-3.5">
+      <div className="bg-white rounded-2xl border border-slate-200 p-3 sm:p-3.5 shadow-xs mb-3.5 space-y-2.5">
         {/* Step Title Header & Progress % */}
         <div className="flex items-center justify-between gap-2">
           <div>
-            <span className="text-xs font-extrabold uppercase tracking-wider text-brand-600">
+            <span className="text-sm font-extrabold uppercase tracking-wider text-brand-600">
               Step {currentStep} of {STEPS.length}
             </span>
             <h2 className="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">
@@ -196,20 +195,20 @@ export const EditorForm: React.FC = () => {
             </h2>
           </div>
           <div className="text-right">
-            <span className="text-xs sm:text-sm font-mono font-bold text-slate-700">{progressPercent}% Completed</span>
+            <span className="text-sm font-mono font-bold text-slate-700">{progressPercent}% Completed</span>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+        <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
           <div
-            className="bg-brand-600 h-2.5 rounded-full transition-all duration-300 ease-out"
+            className="bg-brand-600 h-2 rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
 
         {/* Step Buttons Row */}
-        <div className="grid grid-cols-7 gap-1 pt-1">
+        <div className="grid grid-cols-6 gap-1 pt-0.5">
           {STEPS.map((step) => {
             const isCurrent = step.id === currentStep;
             const isCompleted = step.id < currentStep;
@@ -224,7 +223,7 @@ export const EditorForm: React.FC = () => {
                 }}
                 aria-current={isCurrent ? 'step' : undefined}
                 aria-label={`Go to step ${step.id}: ${step.name}`}
-                className={`flex flex-col items-center justify-center py-2.5 px-1 rounded-xl transition-all cursor-pointer ${
+                className={`flex flex-col items-center justify-center py-1.5 px-1 min-h-[44px] rounded-xl transition-all cursor-pointer ${
                   isCurrent
                     ? 'bg-brand-50 border-2 border-brand-600 text-brand-950 shadow-xs'
                     : isCompleted
@@ -232,16 +231,16 @@ export const EditorForm: React.FC = () => {
                     : 'bg-white border border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+                <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black ${
                   isCurrent
                     ? 'bg-brand-600 text-white'
                     : isCompleted
                     ? 'bg-emerald-500 text-white'
                     : 'bg-slate-200 text-slate-700'
                 }`}>
-                  {isCompleted ? <Check size={14} /> : step.id}
+                  {isCompleted ? <Check size={13} /> : step.id}
                 </div>
-                <span className="text-xs font-bold mt-1.5 truncate max-w-full hidden md:inline">
+                <span className="text-xs sm:text-sm font-bold mt-1 truncate max-w-full hidden md:inline">
                   {step.shortName}
                 </span>
               </button>
@@ -253,7 +252,7 @@ export const EditorForm: React.FC = () => {
       {/* 2. CURRENT STEP FORM CONTENT */}
       <div className="flex-1 space-y-4">
 
-        {/* STEP 1: PERSONAL DETAILS */}
+        {/* STEP 1: PERSONAL DETAILS & SUMMARY */}
         {currentStep === 1 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             {/* Primary Details Card */}
@@ -281,7 +280,7 @@ export const EditorForm: React.FC = () => {
                       if (e.target.value.trim()) setNameError(false);
                     }}
                     placeholder="e.g. Alexander Wright"
-                    className={`w-full text-sm p-3 bg-slate-50/60 border rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all ${
+                    className={`w-full text-base sm:text-sm p-3 bg-slate-50/60 border rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all ${
                       nameError ? 'border-rose-500 ring-2 ring-rose-500/20 bg-rose-50/30' : 'border-slate-200'
                     }`}
                   />
@@ -300,7 +299,7 @@ export const EditorForm: React.FC = () => {
                     value={resume.personalInfo.jobTitle}
                     onChange={(e) => updatePersonalInfo('jobTitle', e.target.value)}
                     placeholder="e.g. Senior Full-Stack Engineer"
-                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-base sm:text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
               </div>
@@ -314,7 +313,7 @@ export const EditorForm: React.FC = () => {
                     value={resume.personalInfo.email}
                     onChange={(e) => updatePersonalInfo('email', e.target.value)}
                     placeholder="alex@example.com"
-                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-base sm:text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
 
@@ -326,7 +325,7 @@ export const EditorForm: React.FC = () => {
                     value={resume.personalInfo.phone}
                     onChange={(e) => updatePersonalInfo('phone', e.target.value)}
                     placeholder="+1 (555) 000-0000"
-                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-base sm:text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
 
@@ -338,9 +337,44 @@ export const EditorForm: React.FC = () => {
                     value={resume.personalInfo.location}
                     onChange={(e) => updatePersonalInfo('location', e.target.value)}
                     placeholder="San Francisco, CA"
-                    className="w-full text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    className="w-full text-base sm:text-sm p-3 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                   />
                 </div>
+              </div>
+            </div>
+
+            {/* Professional Summary Section inside Step 1 */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 flex-wrap gap-2">
+                <div className="flex items-center gap-2.5">
+                  <FileText className="text-brand-600 shrink-0" size={20} />
+                  <div>
+                    <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">Professional Summary</h3>
+                    <p className="text-xs text-slate-500">2-4 bullet points showcasing your domain expertise &amp; key accomplishments.</p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleAiGenerateSummary}
+                  className="flex items-center gap-1.5 text-sm font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 px-3.5 py-2 rounded-xl transition-colors border border-purple-200 cursor-pointer shadow-2xs"
+                >
+                  <Sparkles size={15} className="text-purple-600" />
+                  <span>AI Generate Summary</span>
+                </button>
+              </div>
+
+              <textarea
+                rows={5}
+                value={resume.summary}
+                onChange={(e) => updateSummary(e.target.value)}
+                placeholder="• Results-driven Senior Software Engineer with 6+ years experience architecting high-throughput distributed systems.&#10;• Proven track record reducing API response latency by 45% across 1M+ active users.&#10;• Expert in React, TypeScript, Node.js, and AWS cloud microservices."
+                className="w-full text-base sm:text-sm p-3.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 leading-relaxed font-sans"
+              />
+
+              <div className="bg-blue-50/70 p-3.5 rounded-xl border border-blue-100 text-sm text-blue-900 flex items-start gap-2.5">
+                <Info size={16} className="text-blue-600 shrink-0 mt-0.5" />
+                <span><strong>Pro Tip:</strong> Enter each highlight on a new line or use bullet points (•). The system automatically formats your summary into clean, ATS-compliant bullet points.</span>
               </div>
             </div>
 
@@ -399,47 +433,8 @@ export const EditorForm: React.FC = () => {
           </div>
         )}
 
-        {/* STEP 2: PROFESSIONAL SUMMARY */}
+        {/* STEP 2: WORK EXPERIENCE */}
         {currentStep === 2 && (
-          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 flex-wrap gap-2">
-                <div className="flex items-center gap-2.5">
-                  <FileText className="text-brand-600 shrink-0" size={20} />
-                  <div>
-                    <h3 className="text-sm font-extrabold uppercase tracking-wide text-slate-800">Professional Summary</h3>
-                    <p className="text-xs text-slate-500">2-4 bullet points showcasing your domain expertise &amp; key accomplishments.</p>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleAiGenerateSummary}
-                  className="flex items-center gap-1.5 text-sm font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 px-3.5 py-2 rounded-xl transition-colors border border-purple-200 cursor-pointer shadow-2xs"
-                >
-                  <Sparkles size={15} className="text-purple-600" />
-                  <span>AI Generate Summary</span>
-                </button>
-              </div>
-
-              <textarea
-                rows={6}
-                value={resume.summary}
-                onChange={(e) => updateSummary(e.target.value)}
-                placeholder="• Results-driven Senior Software Engineer with 6+ years experience architecting high-throughput distributed systems.&#10;• Proven track record reducing API response latency by 45% across 1M+ active users.&#10;• Expert in React, TypeScript, Node.js, and AWS cloud microservices."
-                className="w-full text-sm p-3.5 bg-slate-50/60 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 leading-relaxed font-sans"
-              />
-
-              <div className="bg-blue-50/70 p-3.5 rounded-xl border border-blue-100 text-sm text-blue-900 flex items-start gap-2.5">
-                <Info size={16} className="text-blue-600 shrink-0 mt-0.5" />
-                <span><strong>Pro Tip:</strong> Enter each highlight on a new line or use bullet points (•). The system automatically formats your summary into clean, ATS-compliant bullet points.</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* STEP 3: WORK EXPERIENCE */}
-        {currentStep === 3 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
@@ -725,8 +720,8 @@ export const EditorForm: React.FC = () => {
           </div>
         )}
 
-        {/* STEP 4: EDUCATION */}
-        {currentStep === 4 && (
+        {/* STEP 3: EDUCATION */}
+        {currentStep === 3 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
               <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3.5">
@@ -875,8 +870,8 @@ export const EditorForm: React.FC = () => {
           </div>
         )}
 
-        {/* STEP 5: SKILLS */}
-        {currentStep === 5 && (
+        {/* STEP 4: SKILLS */}
+        {currentStep === 4 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
               <div className="flex items-center gap-2.5 border-b border-slate-100 pb-3.5">
@@ -938,8 +933,8 @@ export const EditorForm: React.FC = () => {
           </div>
         )}
 
-        {/* STEP 6: TEMPLATE & DESIGN */}
-        {currentStep === 6 && (
+        {/* STEP 5: TEMPLATE & DESIGN */}
+        {currentStep === 5 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             {/* Template Selection */}
             <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
@@ -1009,8 +1004,8 @@ export const EditorForm: React.FC = () => {
                 <label className="text-xs font-extrabold uppercase tracking-wide text-slate-800 block mb-2.5">Typography</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {[
-                    { id: 'outfit', label: 'Outfit (Modern)' },
                     { id: 'inter', label: 'Inter (Clean)' },
+                    { id: 'outfit', label: 'Outfit (Modern)' },
                     { id: 'serif', label: 'Merriweather (Serif)' },
                     { id: 'mono', label: 'JetBrains (Tech)' }
                   ].map((f) => (
@@ -1078,8 +1073,8 @@ export const EditorForm: React.FC = () => {
           </div>
         )}
 
-        {/* STEP 7: PREVIEW & DOWNLOAD */}
-        {currentStep === 7 && (
+        {/* STEP 6: PREVIEW & DOWNLOAD */}
+        {currentStep === 6 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
             {/* ATS Score Overview Card */}
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-4 text-center sm:text-left">
@@ -1092,7 +1087,11 @@ export const EditorForm: React.FC = () => {
 
                 <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-extrabold text-sm sm:text-base">
                   <CheckCircle2 size={22} className="text-emerald-600" />
-                  <span>ATS Score: {atsAnalysis.overallScore}/100</span>
+                  <span>
+                    {(resume.personalInfo?.fullName?.trim() || resume.experience.length > 0)
+                      ? `ATS Score: ${atsAnalysis.overallScore}/100`
+                      : 'Calculate ATS Score'}
+                  </span>
                 </div>
               </div>
 
@@ -1152,7 +1151,7 @@ export const EditorForm: React.FC = () => {
           <span>Back</span>
         </button>
 
-        {currentStep < 7 ? (
+        {currentStep < 6 ? (
           <button
             type="button"
             onClick={handleNextStep}

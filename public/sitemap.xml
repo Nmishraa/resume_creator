@@ -69,9 +69,15 @@
   </url>
   <url>
     <loc>https://resume.gnanamai.com/interview-prep</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/interview-questions</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/linkedin-optimizer</loc>

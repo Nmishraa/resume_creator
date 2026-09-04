@@ -99,8 +99,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/interview-prep" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Interview Practice &amp; STAR
+                <Link to="/interview-questions" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Interview Questions
                 </Link>
               </li>
             </ul>

@@ -218,6 +218,23 @@ export const ROUTE_SEO_MAP = {
       }
     ]
   },
+  '/interview-questions': {
+    title: 'Prepare for Your Target Job Interview | Resume Craft',
+    description: 'Generate 10 role-specific interview questions with sample answers, STAR framework tips, and interactive answer practice for any job role.',
+    keywords: 'interview questions, job interview preparation, STAR method interview questions, role specific interview questions',
+    canonical: `${SITE_URL}/interview-questions`,
+    h1: 'Prepare for Your Target Job Interview',
+    faqs: [
+      {
+        q: 'What type of interview questions are generated?',
+        a: 'Every 10-question set includes 3 general fundamental questions, 4 role-specific or technical questions, 2 behavioral questions, and 1 scenario-based problem-solving question.'
+      },
+      {
+        q: 'How does the interactive practice answer feature work?',
+        a: 'Each question includes a Practice Answer box with STAR framework guidance (Situation, Task, Action, Result) allowing you to draft and refine your response.'
+      }
+    ]
+  },
   '/interview-prep': {
     title: 'AI Mock Interview Simulator & STAR Practice | Resume Craft',
     description: 'Practice technical and behavioral interview questions with high-scoring STAR framework answer blueprints.',

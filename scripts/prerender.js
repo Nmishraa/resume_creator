@@ -75,6 +75,13 @@ const PAGES = [
     intro: 'Match your resume against any job description to discover missing technical skills, keyword frequency, and recruiter requirements in real-time.'
   },
   {
+    path: '/interview-questions',
+    title: 'Prepare for Your Target Job Interview | Resume Craft',
+    description: 'Generate 10 role-specific interview questions with sample answers, STAR framework tips, and interactive answer practice for any job role.',
+    h1: 'Prepare for Your Target Job Interview',
+    intro: 'Generate 10 tailored interview questions specifically designed for your target position—covering general fundamentals, technical expertise, behavioral scenarios, and crisis problem-solving.'
+  },
+  {
     path: '/cover-letter-generator',
     title: 'Free AI Cover Letter Generator – Tailored in Seconds | Resume Craft',
     description: 'Generate customized, role-tailored cover letters from your resume experience and target job title. Download as PDF or copy instantly.',

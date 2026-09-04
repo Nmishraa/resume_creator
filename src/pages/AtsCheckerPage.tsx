@@ -12,10 +12,12 @@ import {
   TrendingUp,
   FileText
 } from 'lucide-react';
+import { trackAtsCheckCompleted } from '../services/analytics';
 import confetti from 'canvas-confetti';
 
 export const AtsCheckerPage: React.FC = () => {
-  const { resume, atsAnalysis, targetJobDescription, setTargetJobDescription, updateResume } = useResume();
+  const { resume, atsAnalysis, targetJobDescription, setTargetJobDescription, updateResume, loadSampleResume } = useResume();
+  const [showUploadModal, setShowUploadModal] = React.useState(false);
 
   const {
     overallScore,
@@ -30,6 +32,7 @@ export const AtsCheckerPage: React.FC = () => {
 
   const hasResumeContent = Boolean(
     (resume.personalInfo?.fullName && resume.personalInfo.fullName.trim().length > 0) ||
+    (resume.summary && resume.summary.trim().length > 0) ||
     (resume.experience && resume.experience.length > 0) ||
     (resume.skills && resume.skills.length > 0)
   );
@@ -37,10 +40,13 @@ export const AtsCheckerPage: React.FC = () => {
   const isBothProvided = hasResumeContent && hasJobDescription;
 
   useEffect(() => {
+    if (hasResumeContent) {
+      trackAtsCheckCompleted(overallScore);
+    }
     if (isBothProvided && overallScore >= 80) {
       confetti({ particleCount: 50, spread: 60 });
     }
-  }, [overallScore, isBothProvided]);
+  }, [overallScore, isBothProvided, hasResumeContent]);
 
   const handleAddMissingKeyword = (kw: string) => {
     if (resume.skills.length > 0) {
@@ -139,25 +145,34 @@ export const AtsCheckerPage: React.FC = () => {
               💡 <strong>Instant Sync:</strong> Match score updates automatically as you paste or type the job description.
             </div>
 
-            <div className="pt-2 border-t border-slate-100">
+            <div className="pt-2 border-t border-slate-100 flex gap-2">
               <Link
                 to="/builder"
-                className="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+                className="flex-1 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm"
               >
                 <FileText size={15} />
-                <span>Open Active Resume in Builder &rarr;</span>
+                <span>Open Builder &rarr;</span>
               </Link>
+              {!hasResumeContent && (
+                <button
+                  onClick={loadSampleResume}
+                  className="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold border border-slate-200 transition-colors"
+                  title="Load sample resume for demonstration"
+                >
+                  Load Sample
+                </button>
+              )}
             </div>
           </div>
 
           {/* Active Resume Summary Widget */}
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs space-y-2 text-xs">
             <div className="font-bold text-slate-900 flex items-center justify-between">
-              <span>Current Resume: {resume.personalInfo.fullName || 'Active Draft'}</span>
+              <span>Current Resume: {resume.personalInfo.fullName || 'Untitled Draft'}</span>
               <span className="text-[10px] text-slate-400 font-normal">{resume.experience.length} roles loaded</span>
             </div>
             <div className="text-slate-600 text-[11px]">
-              Target Role: <strong className="text-slate-800">{resume.personalInfo.jobTitle || 'Software Engineer'}</strong>
+              Target Role: <strong className="text-slate-800">{resume.personalInfo.jobTitle || 'Not specified'}</strong>
             </div>
           </div>
         </div>
@@ -165,136 +180,154 @@ export const AtsCheckerPage: React.FC = () => {
         {/* Right Column: Score Breakdown & Recommendations (7 cols) */}
         <div className="lg:col-span-7 space-y-5">
           
-          {/* Main Score Hero Card */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-              <div>
-                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Overall ATS Score</div>
-                <div className="flex items-baseline gap-2 mt-1">
-                  {isBothProvided ? (
-                    <>
+          {!hasResumeContent ? (
+            /* Clean Empty State Card when resume is empty */
+            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center space-y-4">
+              <div className="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto shadow-xs">
+                <FileText size={28} />
+              </div>
+              <div className="space-y-1.5 max-w-md mx-auto">
+                <h3 className="text-xl font-extrabold text-slate-950">
+                  Upload your resume to calculate your ATS score
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Enter your details in the builder or upload an existing file to analyze formatting, keyword density, and Google X-Y-Z metrics.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+                <Link
+                  to="/builder"
+                  className="px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold transition-colors shadow-xs flex items-center gap-1.5 min-h-[44px]"
+                >
+                  <FileText size={18} />
+                  <span>Enter Details in Builder</span>
+                </Link>
+                <button
+                  onClick={loadSampleResume}
+                  className="px-5 py-3 bg-white hover:bg-slate-50 text-slate-800 rounded-xl text-sm font-bold transition-colors border border-slate-300 shadow-xs cursor-pointer min-h-[44px]"
+                >
+                  <span>Load Sample Resume</span>
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Real ATS Results when resume content is provided */
+            <>
+              {/* Main Score Hero Card */}
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                  <div>
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Overall ATS Score</div>
+                    <div className="flex items-baseline gap-2 mt-1">
                       <span className={`text-5xl font-black ${overallScore >= 80 ? 'text-emerald-600' : overallScore >= 60 ? 'text-amber-600' : 'text-rose-600'}`}>
                         {overallScore}
                       </span>
                       <span className="text-base font-bold text-slate-400">/ 100</span>
-                    </>
-                  ) : (
-                    <span className="text-2xl font-black text-slate-400 italic">
-                      Not calculated yet
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className={`p-3 rounded-xl border text-xs font-bold max-w-xs ${isBothProvided ? scoreBadgeColor : 'text-slate-600 bg-slate-100 border-slate-200'}`}>
-                {isBothProvided
-                  ? (overallScore >= 80 ? '🌟 Highly ATS-Optimized. Ready to submit!' : overallScore >= 60 ? '⚡ Good Baseline. Recommended to add missing keywords.' : '⚠️ Below ATS threshold. Enhance metrics & contact fields.')
-                  : '📌 Paste target job description & load resume draft to calculate match score.'
-                }
-              </div>
-            </div>
-
-            {/* Breakdown Category Meters */}
-            <div className="space-y-3 pt-1">
-              {[
-                { label: 'Keyword Matching', score: categoryScores.keywords, detail: `${matchedKeywords.length} matched keywords` },
-                { label: 'Google X-Y-Z Metrics', score: categoryScores.quantifiableResults, detail: `${quantifiableBulletsCount} of ${totalBulletsCount} bullets quantified` },
-                { label: 'Action Verbs Power', score: categoryScores.actionVerbs, detail: `${actionVerbsFound.length} power verbs` },
-                { label: 'Formatting & Layout', score: categoryScores.formatting, detail: 'Single-column vector standard' },
-                { label: 'Contact & Completeness', score: categoryScores.completeness, detail: 'Email, phone, location & socials' },
-              ].map((cat, i) => (
-                <div key={i} className="space-y-1">
-                  <div className="flex justify-between text-xs font-semibold text-slate-700">
-                    <span>{cat.label}</span>
-                    <span className="text-slate-500 font-normal">{cat.detail} — <strong>{cat.score}%</strong></span>
+                    </div>
                   </div>
-                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-500 ${cat.score >= 75 ? 'bg-emerald-500' : cat.score >= 50 ? 'bg-amber-500' : 'bg-rose-500'}`}
-                      style={{ width: `${cat.score}%` }}
-                    />
+
+                  <div className={`p-3 rounded-xl border text-xs font-bold max-w-xs ${scoreBadgeColor}`}>
+                    {hasJobDescription
+                      ? (overallScore >= 80 ? '🌟 Highly ATS-Optimized. Ready to submit!' : overallScore >= 60 ? '⚡ Good Baseline. Recommended to add missing keywords.' : '⚠️ Below ATS threshold. Enhance metrics & contact fields.')
+                      : '📌 Add target job description on the left for role keyword match score.'
+                    }
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Keywords Match & Add Section */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-            <div>
-              <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5 mb-2">
-                <CheckCircle2 size={15} className="text-emerald-600" />
-                <span>Found Keywords in Resume ({matchedKeywords.length})</span>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {matchedKeywords.length > 0 ? (
-                  matchedKeywords.map((kw, i) => (
-                    <span key={i} className="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-md font-medium">
-                      ✓ {kw}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-xs text-slate-400 italic">No job description keywords matched yet. Paste a job description on the left.</span>
-                )}
-              </div>
-            </div>
-
-            {hasJobDescription && missingKeywords.length > 0 && (
-              <div className="pt-3 border-t border-slate-100">
-                <div className="text-xs font-bold text-amber-900 flex items-center gap-1.5 mb-2">
-                  <AlertTriangle size={15} className="text-amber-600" />
-                  <span>Missing Keywords from Target Job Description ({missingKeywords.length})</span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {missingKeywords.map((kw, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleAddMissingKeyword(kw)}
-                      className="text-xs bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 px-2.5 py-0.5 rounded-md font-medium flex items-center gap-1 transition-colors"
-                      title="Click to add to your resume skills"
-                    >
-                      <span>+ {kw}</span>
-                      <span className="text-[10px] text-amber-600 font-bold">(Add)</span>
-                    </button>
+                {/* Breakdown Category Meters */}
+                <div className="space-y-3 pt-1">
+                  {[
+                    { label: 'Keyword Matching', score: categoryScores.keywords, detail: `${matchedKeywords.length} matched keywords` },
+                    { label: 'Google X-Y-Z Metrics', score: categoryScores.quantifiableResults, detail: `${quantifiableBulletsCount} of ${totalBulletsCount} bullets quantified` },
+                    { label: 'Action Verbs Power', score: categoryScores.actionVerbs, detail: `${actionVerbsFound.length} power verbs` },
+                    { label: 'Formatting & Layout', score: categoryScores.formatting, detail: 'Single-column vector standard' },
+                    { label: 'Contact & Completeness', score: categoryScores.completeness, detail: 'Email, phone, location & socials' },
+                  ].map((cat, i) => (
+                    <div key={i} className="space-y-1">
+                      <div className="flex justify-between text-xs font-semibold text-slate-700">
+                        <span>{cat.label}</span>
+                        <span className="text-slate-500 font-normal">{cat.detail} — <strong>{cat.score}%</strong></span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${cat.score >= 75 ? 'bg-emerald-500' : cat.score >= 50 ? 'bg-amber-500' : 'bg-rose-500'}`}
+                          style={{ width: `${cat.score}%` }}
+                        />
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
-            )}
 
-            {!hasJobDescription && (
-              <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 leading-relaxed flex items-start gap-2">
-                <span className="text-brand-600 text-sm">💡</span>
+              {/* Keywords Match & Add Section */}
+              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                 <div>
-                  <strong className="text-slate-900">Target Keyword Match:</strong> Paste a job posting into the text box on the left to extract specific required skills and identify missing terms.
+                  <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5 mb-2">
+                    <CheckCircle2 size={15} className="text-emerald-600" />
+                    <span>Found Keywords in Resume ({matchedKeywords.length})</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {matchedKeywords.length > 0 ? (
+                      matchedKeywords.map((kw, i) => (
+                        <span key={i} className="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-md font-medium">
+                          ✓ {kw}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-xs text-slate-400 italic">No job description keywords matched yet. Paste a job description on the left.</span>
+                    )}
+                  </div>
+                </div>
+
+                {hasJobDescription && missingKeywords.length > 0 && (
+                  <div className="pt-3 border-t border-slate-100">
+                    <div className="text-xs font-bold text-amber-900 flex items-center gap-1.5 mb-2">
+                      <AlertTriangle size={15} className="text-amber-600" />
+                      <span>Missing Keywords from Target Job Description ({missingKeywords.length})</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {missingKeywords.map((kw, i) => (
+                        <button
+                          key={i}
+                          onClick={() => handleAddMissingKeyword(kw)}
+                          className="text-xs bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 px-2.5 py-0.5 rounded-md font-medium flex items-center gap-1 transition-colors"
+                          title="Click to add to your resume skills"
+                        >
+                          <span>+ {kw}</span>
+                          <span className="text-[10px] text-amber-600 font-bold">(Add)</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Actionable Recommendations */}
+              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                  <TrendingUp size={16} className="text-purple-600" />
+                  <span>Step-by-Step ATS Optimization Roadmap</span>
+                </div>
+
+                <div className="space-y-2.5">
+                  {recommendations.map((rec, i) => (
+                    <div
+                      key={i}
+                      className={`p-3 rounded-xl border text-xs ${rec.type === 'critical' ? 'bg-rose-50/70 border-rose-200 text-rose-950' : rec.type === 'improvement' ? 'bg-amber-50/70 border-amber-200 text-amber-950' : 'bg-emerald-50/70 border-emerald-200 text-emerald-950'}`}
+                    >
+                      <div className="font-bold mb-0.5">
+                        {rec.type === 'critical' && '🚨 Critical: '}
+                        {rec.type === 'improvement' && '💡 Recommendation: '}
+                        {rec.type === 'positive' && '✅ Strength: '}
+                        {rec.title}
+                      </div>
+                      <p className="text-[11px] leading-relaxed opacity-90">{rec.description}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
-
-          {/* Actionable Recommendations */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-            <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-              <TrendingUp size={16} className="text-purple-600" />
-              <span>Step-by-Step ATS Optimization Roadmap</span>
-            </div>
-
-            <div className="space-y-2.5">
-              {recommendations.map((rec, i) => (
-                <div
-                  key={i}
-                  className={`p-3 rounded-xl border text-xs ${rec.type === 'critical' ? 'bg-rose-50/70 border-rose-200 text-rose-950' : rec.type === 'improvement' ? 'bg-amber-50/70 border-amber-200 text-amber-950' : 'bg-emerald-50/70 border-emerald-200 text-emerald-950'}`}
-                >
-                  <div className="font-bold mb-0.5">
-                    {rec.type === 'critical' && '🚨 Critical: '}
-                    {rec.type === 'improvement' && '💡 Recommendation: '}
-                    {rec.type === 'positive' && '✅ Strength: '}
-                    {rec.title}
-                  </div>
-                  <p className="text-[11px] leading-relaxed opacity-90">{rec.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+            </>
+          )}
 
         </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, ArrowRight, Sparkles, AlertTriangle, CheckCircle, RefreshCw, FileText, BarChart3, Zap } from 'lucide-react';
 import { auditRawResumeText } from '../../utils/ai';
+import { trackAtsCheckCompleted } from '../../services/analytics';
 import AtsTips from '../AtsTips';
 import AuthorMetadata from '../../components/AuthorMetadata';
 import FaqSection from '../../components/FaqSection';
@@ -32,7 +33,7 @@ Bachelor of Science in Computer Science | University of California, Berkeley (20
 
 export default function AtsCheckerPage() {
   const seoInfo = ROUTE_SEO_MAP['/ats-resume-checker'];
-  const [resumeText, setResumeText] = useState(DEMO_RESUME_TEXT);
+  const [resumeText, setResumeText] = useState('');
   const [auditResult, setAuditResult] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
 
@@ -43,6 +44,7 @@ export default function AtsCheckerPage() {
       const res = auditRawResumeText(resumeText);
       setAuditResult(res);
       setIsScanning(false);
+      trackAtsCheckCompleted(res.score);
     }, 450);
   };
 
@@ -131,8 +133,8 @@ export default function AtsCheckerPage() {
               <div>
                 {/* Score Header */}
                 <div style={{ textAlign: 'center', marginBottom: '1.8rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '1.5rem' }}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.5px' }}>
-                    Overall ATS Readiness Score
+                  <span style={{ fontSize: '0.88rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.5px' }}>
+                    (Example result) Overall ATS Readiness Score
                   </span>
                   <div style={{ fontSize: '3.6rem', fontWeight: 900, color: getScoreColor(auditResult.score), margin: '0.2rem 0' }}>
                     {auditResult.score}<span style={{ fontSize: '1.5rem', color: '#94a3b8' }}>/100</span>

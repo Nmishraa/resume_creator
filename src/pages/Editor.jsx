@@ -312,8 +312,8 @@ export default function Editor() {
             setResumeData(typeof docSnap.data === 'string' ? JSON.parse(docSnap.data) : docSnap.data);
           }
         } catch {
-          // If not found, use default demo data gracefully
-          setResumeData(RESUME_PRESETS['software_engineer'].data);
+          // If not found, fallback to blank default resume
+          setResumeData(DEFAULT_RESUME);
         } finally {
           setLoading(false);
         }

@@ -14,7 +14,7 @@
   --color-brand-900: #0c406e;
   --color-brand-950: #082848;
 
-  --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Merriweather', 'Playfair Display', Georgia, serif;
   --font-mono: '"JetBrains Mono"', monospace;
 }
@@ -25,12 +25,24 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: #0f172a;
+    font-family: var(--font-sans);
+  }
+  label {
+    font-size: 0.875rem;
   }
   * {
     border-color: #e2e8f0;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #0270c6 !important;
+    outline-offset: 2px !important;
   }
 }
 

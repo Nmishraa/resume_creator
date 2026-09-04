@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useResume } from '../../context/ResumeContext';
 import { ResumeRenderer } from '../templates';
 import { calculateDensityModeFromHeight } from '../templates/templateStyles';
-import { ZoomIn, ZoomOut, RotateCcw, Eye, EyeOff, Sliders, Layers } from 'lucide-react';
+import { ZoomIn, ZoomOut, RotateCcw, Eye, EyeOff, Sliders, Layers, Maximize2, FileText } from 'lucide-react';
 
 import { applyBlockAwarePagination } from '../../services/paginationEngine';
 
@@ -11,10 +11,38 @@ export const ResumePreview: React.FC = () => {
   const [zoomLevel, setZoomLevel] = useState<number>(1.0);
   const [showControls, setShowControls] = useState<boolean>(true);
   const sheetRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const hasResumeContent = Boolean(
+    resume.personalInfo.fullName?.trim() ||
+    resume.personalInfo.email?.trim() ||
+    resume.personalInfo.jobTitle?.trim() ||
+    (resume.experience && resume.experience.length > 0) ||
+    (resume.education && resume.education.length > 0) ||
+    (resume.skills && resume.skills.length > 0) ||
+    resume.summary?.trim()
+  );
 
   const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.1, 1.4));
-  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.1, 0.6));
+  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.1, 0.5));
   const handleResetZoom = () => setZoomLevel(1.0);
+
+  const handleFitToScreen = () => {
+    if (containerRef.current) {
+      const containerWidth = containerRef.current.clientWidth || window.innerWidth;
+      const targetWidth = 794 + 24; // A4 width + padding
+      const calculatedScale = Math.min(Math.max((containerWidth / targetWidth), 0.38), 1.1);
+      setZoomLevel(Math.round(calculatedScale * 100) / 100);
+    }
+  };
+
+  // Auto-fit to mobile screen width on mount and window resize
+  useEffect(() => {
+    handleFitToScreen();
+    const handleResize = () => handleFitToScreen();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Measure content height and run block-aware pagination engine
   useEffect(() => {
@@ -65,7 +93,7 @@ export const ResumePreview: React.FC = () => {
   const totalPages = densityInfo?.pageCount || 1;
 
   return (
-    <div className="relative flex flex-col items-center h-full pt-2">
+    <div ref={containerRef} className="relative flex flex-col items-center h-full pt-2 w-full">
       {/* Zoom and Adaptive Density Control Bar */}
       {showControls ? (
         <div className="no-print relative z-10 flex flex-wrap items-center justify-between gap-2 w-full max-w-[794px] bg-slate-900 text-white border border-slate-800 px-4 py-2.5 rounded-xl shadow-md mb-4 transition-all">
@@ -95,7 +123,7 @@ export const ResumePreview: React.FC = () => {
           </div>
 
           {/* Right controls: Zoom + Hide Toggle */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             {/* Zoom Controls */}
             <div className="flex items-center gap-1 bg-slate-800 p-1 rounded-lg border border-slate-700">
               <button
@@ -116,8 +144,16 @@ export const ResumePreview: React.FC = () => {
                 <ZoomIn size={14} />
               </button>
               <button
+                onClick={handleFitToScreen}
+                className="px-2 py-1 text-xs font-bold text-slate-300 hover:text-white bg-slate-700/80 hover:bg-slate-700 rounded transition-colors border-l border-slate-700 ml-1 cursor-pointer flex items-center gap-1"
+                title="Fit to Screen Width"
+              >
+                <Maximize2 size={12} />
+                <span className="hidden xl:inline">Fit</span>
+              </button>
+              <button
                 onClick={handleResetZoom}
-                className="p-1 text-slate-300 hover:text-white rounded hover:bg-slate-700 transition-colors border-l border-slate-700 pl-2 ml-1 cursor-pointer"
+                className="p-1 text-slate-300 hover:text-white rounded hover:bg-slate-700 transition-colors border-l border-slate-700 pl-2 cursor-pointer"
                 title="Reset Zoom (100%)"
               >
                 <RotateCcw size={13} />
@@ -166,6 +202,21 @@ export const ResumePreview: React.FC = () => {
             className="w-[794px] min-h-[1123px] bg-white text-black relative box-border"
           >
             <ResumeRenderer resume={resume} />
+
+            {/* Empty Resume Preview Message Overlay */}
+            {!hasResumeContent && (
+              <div className="no-print absolute inset-0 z-30 bg-slate-50/90 backdrop-blur-xs flex flex-col items-center justify-center p-8 text-center rounded-sm">
+                <div className="w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4 shadow-sm border border-brand-200">
+                  <FileText size={32} />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-2 max-w-md">
+                  Your resume preview will appear here as you enter your details.
+                </h3>
+                <p className="text-sm sm:text-base text-slate-600 max-w-md leading-relaxed">
+                  Start typing your contact information, professional summary, or work history on the left to see your live ATS-optimized resume.
+                </p>
+              </div>
+            )}
 
             {/* Visual Page Break Line Overlays for Multi-Page Resumes */}
             {totalPages > 1 && Array.from({ length: totalPages - 1 }).map((_, pageIdx) => {
