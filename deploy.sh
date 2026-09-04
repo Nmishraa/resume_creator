@@ -21,7 +21,7 @@ npm ci --prefer-offline --no-audit || npm install
 
 # 3. Generate Prisma client for neha_data database
 echo "🗄️ Generating Prisma Client for neha_data PostgreSQL database..."
-npx prisma generate
+npx --yes prisma@5.22.0 generate
 
 # 4. Build production frontend (32 static SSG routes)
 echo "⚡ Building frontend static production bundle..."
