@@ -86,6 +86,8 @@ export function App() {
             <Route path="resume-builder-no-experience" element={<NoExperienceResumeBuilderPage />} />
             <Route path="resume-builder-for-software-engineers" element={<SoftwareEngineerBuilderPage />} />
             <Route path="job-description-resume-matcher" element={<JobMatcherPage />} />
+            <Route path="find-matching-jobs" element={<JobMatcherPage />} />
+            <Route path="matching-jobs" element={<Navigate to="/find-matching-jobs" replace />} />
             <Route path="resume-keyword-matcher" element={<KeywordMatcherPage />} />
             
             {/* Cover Letter & Templates */}

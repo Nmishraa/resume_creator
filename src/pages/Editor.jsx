@@ -22,7 +22,8 @@ import {
   ChevronUp,
   Copy,
   HelpCircle,
-  Target 
+  Target,
+  Briefcase
 } from 'lucide-react';
 import SectionForm from '../components/editor/SectionForm';
 import LivePreview from '../components/editor/LivePreview';
@@ -31,6 +32,7 @@ import ResumeImporter from '../components/editor/ResumeImporter';
 import GuidedWizard from '../components/editor/GuidedWizard';
 import TailorResumeModal from '../components/editor/TailorResumeModal';
 import InterviewPrep from '../components/editor/InterviewPrep';
+import { FindMatchingJobsView } from '../components/jobs/FindMatchingJobsView';
 import { api } from '../utils/api';
 import { calculateLiveAtsScore } from '../utils/ai';
 
@@ -609,6 +611,14 @@ export default function Editor() {
 
           <button
             type="button"
+            onClick={() => setActiveTab('jobmatch')}
+            style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #10b981', background: 'linear-gradient(135deg, #dcfce7 0%, #a7f3d0 100%)', color: '#065f46', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem', boxShadow: '0 2px 4px rgba(16,185,129,0.2)' }}
+          >
+            <Briefcase size={14} color="#047857" /> Find Matching Jobs
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('aimatch')}
             style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #f59e0b', background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)', color: '#78350f', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem', boxShadow: '0 2px 4px rgba(245,158,11,0.2)' }}
           >
@@ -780,27 +790,32 @@ export default function Editor() {
             </span>
           </div>
           <span style={{ fontSize: '0.72rem', background: '#e0e7ff', color: '#3730a3', padding: '0.25rem 0.65rem', borderRadius: '12px', fontWeight: 800 }}>
-            Active: {activeTab === 'aimatch' ? 'AI Job Matcher' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+            Active: {activeTab === 'jobmatch' ? 'Find Matching Jobs' : activeTab === 'aimatch' ? 'AI Job Matcher' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
           </span>
         </div>
 
         {/* Section Tabs */}
         <div className="editor-tabs" style={{ flexWrap: 'wrap' }}>
-          {['personal', 'experience', 'education', 'skills', 'projects', 'certifications', 'languages', 'aimatch'].map(tab => (
+          {['personal', 'experience', 'education', 'skills', 'projects', 'certifications', 'languages', 'jobmatch', 'aimatch'].map(tab => (
             <button 
               key={tab} 
-              className={`tab-btn ${activeTab === tab ? 'active' : ''} ${tab === 'aimatch' ? 'tab-ai' : ''}`}
+              className={`tab-btn ${activeTab === tab ? 'active' : ''} ${tab === 'aimatch' || tab === 'jobmatch' ? 'tab-ai' : ''}`}
               onClick={() => setActiveTab(tab)}
               style={{ fontSize: '0.78rem', padding: '0.4rem 0.6rem' }}
             >
-              {tab === 'aimatch' ? <div className="flex-row" style={{ gap: '0.4rem' }}><Sparkles size={13} /> AI Matcher</div> : tab.charAt(0).toUpperCase() + tab.slice(1)}
+              {tab === 'jobmatch' ? <div className="flex-row" style={{ gap: '0.4rem' }}><Briefcase size={13} /> Find Jobs</div> : tab === 'aimatch' ? <div className="flex-row" style={{ gap: '0.4rem' }}><Sparkles size={13} /> AI Matcher</div> : tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
           ))}
         </div>
 
         {/* Section Form */}
         <div className="editor-form">
-          {activeTab === 'aimatch' ? (
+          {activeTab === 'jobmatch' ? (
+            <FindMatchingJobsView
+              resumeData={resumeData}
+              onOpenTailorModal={() => setShowTailorModal(true)}
+            />
+          ) : activeTab === 'aimatch' ? (
             <AIMatch 
               resumeData={resumeData} 
               onUpdate={setResumeData} 

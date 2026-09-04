@@ -20,6 +20,7 @@ import {
   Compass,
   ArrowRight,
   Shield,
+  Target,
   User as UserIcon
 } from 'lucide-react';
 
@@ -38,12 +39,12 @@ export const Navbar: React.FC = () => {
   ];
 
   const additionalTools = [
+    { label: 'Find Matching Jobs', path: '/job-description-resume-matcher', desc: 'Ranked job search matching your resume', icon: Target },
     { label: 'Interview Questions', path: '/interview-questions', desc: '10-Q role-specific mock questions & STAR prep', icon: HelpCircle },
     { label: 'AI Bullet Writer', path: '/ai-resume-builder', desc: 'Google X-Y-Z formula bullet writer', icon: Sparkles },
     { label: 'Student Resume Builder', path: '/resume-builder-for-students', desc: 'Coursework, projects & beginner tips', icon: GraduationCap },
     { label: 'Cover Letter Generator', path: '/cover-letters', desc: 'AI-tailored cover letters in seconds', icon: Mail },
-    { label: 'Job Application Tracker', path: '/applications', desc: 'Visual Kanban pipeline & status tracking', icon: Briefcase },
-    { label: 'Job Description Matcher', path: '/job-description-resume-matcher', desc: 'Keyword match & skill gap analyzer', icon: FileCheck2 }
+    { label: 'Job Application Tracker', path: '/applications', desc: 'Visual Kanban pipeline & status tracking', icon: Briefcase }
   ];
 
   const isResourcesActive = location.pathname.startsWith('/resume-examples') ||
