@@ -435,12 +435,16 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                 </div>
 
                 {/* Match Insight Callout Box */}
-                <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
-                  <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-900 uppercase tracking-wider">
-                    <Sparkles size={14} className="text-brand-600" />
-                    <span>Why This Job Matches Your Resume:</span>
+                <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2 min-w-0">
+                  <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-900 uppercase tracking-wider min-w-0 flex-wrap">
+                    <Sparkles size={14} className="text-brand-600 shrink-0" />
+                    <span>
+                      {job.matchedSkills.length > 0 && !noSkillsIdentified
+                        ? 'WHY THIS JOB MATCHES YOUR RESUME:'
+                        : 'WHY THIS LISTING MATCHES YOUR SEARCH:'}
+                    </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed [overflow-wrap:anywhere] break-words">
                     {job.matchReason}
                   </p>
                 </div>

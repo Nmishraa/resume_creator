@@ -56,6 +56,64 @@ export interface ExtractedResumeProfile {
 }
 
 /**
+ * Normalizes equivalent skill terms so candidate skills and job description skills match synonyms.
+ */
+export function normalizeSkill(skill: string): string {
+  if (!skill) return '';
+  const s = skill.trim();
+
+  const synonymMap: Record<string, string> = {
+    'classroom instruction': 'Teaching',
+    'instruction': 'Teaching',
+    'teaching': 'Teaching',
+    'curriculum design': 'Curriculum Development',
+    'curriculum planning': 'Curriculum Development',
+    'curriculum development': 'Curriculum Development',
+    'student evaluation': 'Student Assessment',
+    'student assessment': 'Student Assessment',
+    'grading': 'Student Assessment',
+    'edtech': 'Educational Technology',
+    'educational technology': 'Educational Technology',
+    'qa': 'Quality Assurance',
+    'quality assurance': 'Quality Assurance',
+    'software development': 'Software Engineering',
+    'software engineering': 'Software Engineering',
+    'manual qa': 'Manual Testing',
+    'automation testing': 'Automated Testing',
+    'test automation': 'Automated Testing'
+  };
+
+  const lower = s.toLowerCase();
+  return synonymMap[lower] || s;
+}
+
+/**
+ * Returns all normalized variants/synonyms of a skill for matching against job description text.
+ */
+export function getSkillMatchVariants(skill: string): string[] {
+  const norm = normalizeSkill(skill);
+  const variants = new Set<string>([skill.toLowerCase(), norm.toLowerCase()]);
+
+  const synonyms: Record<string, string[]> = {
+    'teaching': ['teaching', 'classroom instruction', 'instruction', 'pedagogy', 'educator', 'classroom teaching', 'subject-specific instruction'],
+    'curriculum development': ['curriculum development', 'curriculum design', 'curriculum planning', 'curriculum'],
+    'student assessment': ['student assessment', 'student evaluation', 'grading', 'assessments', 'student testing'],
+    'educational technology': ['educational technology', 'edtech', 'instructional technology'],
+    'quality assurance': ['quality assurance', 'qa', 'software qa'],
+    'software engineering': ['software engineering', 'software development', 'software dev'],
+    'manual testing': ['manual testing', 'manual qa'],
+    'automated testing': ['automated testing', 'automation testing', 'test automation']
+  };
+
+  const normLower = norm.toLowerCase();
+  if (synonyms[normLower]) {
+    synonyms[normLower].forEach(syn => variants.add(syn));
+  }
+
+  return Array.from(variants);
+}
+
+/**
  * Extracts comprehensive candidate profile from resumeData
  */
 export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
@@ -134,12 +192,14 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     'Quality Assurance', 'QA', 'Manual Testing', 'Automated Testing', 'Test Cases',
     'Regression Testing', 'API Testing', 'Selenium', 'Cypress', 'Playwright',
     'Postman', 'Jira', 'Agile', 'Bug Tracking', 'SDLC', 'STLC', 'Test Automation',
-    // Teaching & STEM / Computer Science Teaching
-    'Computer Science', 'STEM', 'Mandarin', 'Mathematics', 'Math', 'Physics', 'Chemistry',
-    'Biology', 'Coding', 'Robotics', 'Web Development', 'Algorithms', 'Data Structures',
-    'Curriculum Development', 'Classroom Management', 'Lesson Planning', 'Student Assessment',
+    // Teaching & STEM / Education
+    'Teaching', 'Lesson Planning', 'Classroom Management', 'Curriculum Development',
+    'Student Assessment', 'Computer Science', 'Educational Technology', 'Communication',
+    'Mentoring', 'Subject-specific instruction', 'STEM', 'Mandarin', 'Mathematics', 'Math',
+    'Physics', 'Chemistry', 'Biology', 'Coding', 'Robotics', 'Web Development', 'Algorithms',
+    'Data Structures', 'Classroom instruction', 'Curriculum design', 'Student evaluation', 'EdTech',
     'Differentiated Instruction', 'Special Education', 'Early Childhood Education', 'K-12',
-    'Literacy Instruction', 'Pedagogy', 'Educational Technology', 'Tutoring', 'English Literature',
+    'Literacy Instruction', 'Pedagogy', 'Tutoring', 'English Literature',
     'Language Arts', 'Social Studies', 'History',
     // Healthcare & Nursing
     'Patient Care', 'BLS', 'CPR', 'EHR', 'EMR', 'Triage', 'ICU', 'Acute Care', 'Vital Signs',
@@ -148,7 +208,7 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     // Software Engineering & Tech
     'React', 'Node.js', 'TypeScript', 'JavaScript', 'Python', 'Java', 'C++', 'Golang', 'SQL',
     'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'REST API', 'Git',
-    'Scrum', 'Figma', 'UI/UX', 'CI/CD', 'Linux', 'Microservices', 'System Design',
+    'Scrum', 'Figma', 'UI/UX', 'CI/CD', 'Linux', 'Microservices', 'System Design', 'Software Development',
     // Finance, Marketing & Management
     'GAAP', 'Financial Analysis', 'Financial Modeling', 'Accounting', 'Bookkeeping', 'QuickBooks',
     'SEO', 'PPC', 'Content Marketing', 'Google Analytics', 'HubSpot', 'Salesforce',
@@ -526,8 +586,9 @@ export async function fetchMatchingJobs(
     // 1. SKILLS MATCH (40% MAX = 40 PTS)
     const matchedSkills: string[] = [];
     extractedSkills.forEach((skill) => {
-      const skLower = skill.toLowerCase();
-      if (fullJobText.includes(skLower)) {
+      const variants = getSkillMatchVariants(skill);
+      const isMatched = variants.some(v => fullJobText.includes(v));
+      if (isMatched) {
         matchedSkills.push(skill);
       }
     });
