@@ -334,8 +334,20 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                 {/* Top Header: Rank, Title, Company, Match % */}
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                   <div className="flex items-start gap-3.5 flex-1">
-                    <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-xl font-bold shrink-0 shadow-2xs">
-                      {job.companyLogo || '💼'}
+                    <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-xl font-bold shrink-0 shadow-2xs overflow-hidden">
+                      {job.companyLogo && (job.companyLogo.startsWith('http') || job.companyLogo.startsWith('data:')) ? (
+                        <img
+                          src={job.companyLogo}
+                          alt={job.company}
+                          className="w-full h-full object-contain p-1 rounded-xl"
+                          onError={(e) => {
+                            const parent = (e.target as HTMLElement).parentElement;
+                            if (parent) parent.innerHTML = '💼';
+                          }}
+                        />
+                      ) : (
+                        <span>{job.companyLogo || '💼'}</span>
+                      )}
                     </div>
 
                     <div className="space-y-1">
