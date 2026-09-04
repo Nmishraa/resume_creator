@@ -47,6 +47,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
   const [jobs, setJobs] = useState<MatchingJob[]>([]);
   const [extractedSkills, setExtractedSkills] = useState<string[]>([]);
   const [noSkillsIdentified, setNoSkillsIdentified] = useState(false);
+  const [needsClarification, setNeedsClarification] = useState(false);
   const [targetRole, setTargetRole] = useState('');
   const [candidateLocation, setCandidateLocation] = useState('');
   const [externalPortals, setExternalPortals] = useState<ExternalSearchPortal[]>([]);
@@ -62,7 +63,8 @@ export const FindMatchingJobsView: React.FC<Props> = ({
         locationQuery: customFilters?.locationQuery ?? locationQuery,
         workType: customFilters?.workType ?? workType,
         experienceLevel: customFilters?.experienceLevel ?? experienceLevel,
-        minSalary: customFilters?.minSalary ?? minSalary
+        minSalary: customFilters?.minSalary ?? minSalary,
+        clarifiedCategory: customFilters?.clarifiedCategory
       });
 
       setJobs(result.jobs);
@@ -70,6 +72,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
       setCandidateLocation(result.candidateLocation);
       setExtractedSkills(result.extractedSkills);
       setNoSkillsIdentified(Boolean(result.noSkillsIdentified));
+      setNeedsClarification(Boolean(result.needsClarification));
       setExternalPortals(result.externalPortals);
 
       if (!roleQuery && result.targetRole) {
@@ -185,15 +188,47 @@ export const FindMatchingJobsView: React.FC<Props> = ({
         </div>
       )}
 
+      {/* Clarification Selector UI for Ambiguous Queries */}
+      {needsClarification && (
+        <div className="bg-indigo-50/90 border border-indigo-200 rounded-2xl p-4 sm:p-5 space-y-3 shadow-2xs animate-in fade-in">
+          <div className="flex items-center gap-2">
+            <Sparkles size={16} className="text-indigo-600 shrink-0" />
+            <span className="text-xs sm:text-sm font-extrabold text-indigo-950">
+              Which type of principal role are you looking for?
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: 'School Principal', category: 'Education' },
+              { label: 'Principal Engineer', category: 'Technology' },
+              { label: 'Principal Product Manager', category: 'Product Management' },
+              { label: 'Principal Consultant', category: 'General' }
+            ].map((opt) => (
+              <button
+                key={opt.label}
+                type="button"
+                onClick={() => {
+                  setRoleQuery(opt.label);
+                  loadJobs({ roleQuery: opt.label, clarifiedCategory: opt.category as any });
+                }}
+                className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-indigo-100/70 border border-indigo-200 text-indigo-950 text-xs font-extrabold transition-all shadow-2xs cursor-pointer active:scale-95"
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Search & Filter Controls Bar */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-4">
+      <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-4 min-w-0">
         <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
           {/* Target Role Input */}
-          <div className="sm:col-span-5 md:col-span-5 space-y-1">
+          <div className="sm:col-span-5 md:col-span-5 space-y-1 min-w-0">
             <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
               Job Title / Keyword Query
             </label>
-            <div className="relative">
+            <div className="relative min-w-0">
               <Search size={16} className="absolute left-3.5 top-3.5 text-slate-400" />
               <input
                 type="text"
@@ -206,11 +241,11 @@ export const FindMatchingJobsView: React.FC<Props> = ({
           </div>
 
           {/* Location Input */}
-          <div className="sm:col-span-4 md:col-span-4 space-y-1">
+          <div className="sm:col-span-4 md:col-span-4 space-y-1 min-w-0">
             <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
               Preferred Location
             </label>
-            <div className="relative">
+            <div className="relative min-w-0">
               <MapPin size={16} className="absolute left-3.5 top-3.5 text-slate-400" />
               <input
                 type="text"
@@ -223,7 +258,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
           </div>
 
           {/* Filter Submit Button */}
-          <div className="sm:col-span-3 md:col-span-3 flex items-end">
+          <div className="sm:col-span-3 md:col-span-3 flex items-end min-w-0">
             <button
               type="submit"
               disabled={loading}
@@ -236,14 +271,14 @@ export const FindMatchingJobsView: React.FC<Props> = ({
         </form>
 
         {/* Secondary Filter Pills */}
-        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex flex-wrap items-center gap-2">
+        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs min-w-0">
+          <div className="flex flex-wrap items-center gap-2 min-w-0">
             <span className="font-extrabold text-slate-500 uppercase tracking-wider text-[11px] flex items-center gap-1">
               <Filter size={13} /> Filters:
             </span>
 
             {/* Remote / Onsite Pills */}
-            <div className="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-50">
+            <div className="inline-flex flex-wrap rounded-lg border border-slate-200 p-0.5 bg-slate-50">
               {[
                 { id: 'all', label: 'All Jobs' },
                 { id: 'remote', label: 'Remote Only' },
@@ -283,8 +318,8 @@ export const FindMatchingJobsView: React.FC<Props> = ({
             </select>
           </div>
 
-          <div className="text-slate-500 font-bold">
-            Showing <span className="text-slate-950 font-black">{jobs.length}</span> Verified Matches
+          <div className="text-slate-500 font-bold shrink-0">
+            Showing <span className="text-slate-950 font-black">{jobs.length}</span> Live Listings
           </div>
         </div>
       </div>
@@ -421,7 +456,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
                       <span>{job.matchPercentage}% Match</span>
                     </div>
                     <span className="text-[11px] font-bold text-slate-500">
-                      {job.isZeroSkillsMatch ? 'Title and Location Match' : 'Based on resume skills'}
+                      {job.matchType || (job.isZeroSkillsMatch ? 'Keyword and Location Match' : 'Resume Match')}
                     </span>
                   </div>
                 </div>

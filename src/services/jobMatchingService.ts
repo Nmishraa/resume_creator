@@ -1,5 +1,15 @@
 import { ResumeData } from '../types/resume';
 
+export type OccupationCategory =
+  | 'Education'
+  | 'Technology'
+  | 'Healthcare'
+  | 'Finance'
+  | 'Product Management'
+  | 'Marketing'
+  | 'Administration'
+  | 'General';
+
 export interface MatchingJob {
   id: string;
   title: string;
@@ -20,8 +30,11 @@ export interface MatchingJob {
   source: string;
   isZeroSkillsMatch: boolean;
   isTopMatch: boolean;
+  matchType: 'Resume Match' | 'Keyword and Location Match';
+  occupationCategory: OccupationCategory;
   scoreBreakdown?: {
     skillsScore: number;
+    categoryScore: number;
     titleScore: number;
     expScore: number;
     eduScore: number;
@@ -36,6 +49,7 @@ export interface JobSearchFilters {
   experienceLevel?: string;
   minSalary?: number;
   postedWithinDays?: number;
+  clarifiedCategory?: OccupationCategory;
 }
 
 export interface ExternalSearchPortal {
@@ -52,14 +66,76 @@ export interface ExtractedResumeProfile {
   experienceRoles: string[];
   education: string[];
   certifications: string[];
+  occupationCategory: OccupationCategory;
+  hasResumePayload: boolean;
   noSkillsIdentified: boolean;
 }
 
 /**
- * Extracts comprehensive candidate profile from resumeData
+ * Categorizes a candidate's resume or target role into an Occupation Category
+ */
+export function detectOccupationCategory(
+  targetRole: string,
+  skills: string[],
+  textBlob: string
+): OccupationCategory {
+  const normText = `${targetRole} ${skills.join(' ')} ${textBlob}`.toLowerCase();
+
+  // 1. Education
+  if (/teacher|teaching|principal|school|k-12|curriculum|pedagogy|tutor|professor|faculty|academic director|education/i.test(targetRole) ||
+      (/curriculum|lesson plan|classroom management|k-12|literacy|student assessment/i.test(normText) && !/product manager|software|engineer/i.test(targetRole))) {
+    return 'Education';
+  }
+
+  // 2. Product Management
+  if (/product manager|product owner|head of product|vp of product|director of product|group product manager|technical product manager/i.test(targetRole) ||
+      /product strategy|product roadmap|user stories|product backlog/i.test(normText)) {
+    return 'Product Management';
+  }
+
+  // 3. Healthcare
+  if (/nurse|nursing|rn|clinical|healthcare|doctor|physician|patient care|triage|hospital|medical|phlebotomy/i.test(normText)) {
+    return 'Healthcare';
+  }
+
+  // 4. Technology
+  if (/software|developer|engineer|fullstack|frontend|backend|devops|data scientist|machine learning|system architect|coder|programmer|it manager/i.test(normText)) {
+    return 'Technology';
+  }
+
+  // 5. Finance
+  if (/accountant|accounting|finance|financial analyst|cpa|auditor|tax|bookkeeper|investment/i.test(normText)) {
+    return 'Finance';
+  }
+
+  // 6. Marketing
+  if (/marketing|seo|growth|content manager|copywriter|advertising|digital marketing|pr/i.test(normText)) {
+    return 'Marketing';
+  }
+
+  // 7. Administration
+  if (/administrative|office manager|executive assistant|receptionist|clerk|admin assistant/i.test(normText)) {
+    return 'Administration';
+  }
+
+  return 'General';
+}
+
+/**
+ * Extracts candidate profile from resumeData
  */
 export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
-  if (!resumeData) {
+  const hasPayload = Boolean(
+    resumeData &&
+    (resumeData.summary ||
+     resumeData.personalInfo?.jobTitle ||
+     resumeData.targetRole ||
+     (Array.isArray(resumeData.skills) && resumeData.skills.length > 0) ||
+     (Array.isArray(resumeData.experience) && resumeData.experience.length > 0) ||
+     (Array.isArray(resumeData.education) && resumeData.education.length > 0))
+  );
+
+  if (!resumeData || !hasPayload) {
     return {
       targetRole: 'Software Engineer',
       candidateLocation: 'Remote',
@@ -67,20 +143,19 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
       experienceRoles: [],
       education: [],
       certifications: [],
-      noSkillsIdentified: true
+      occupationCategory: 'General',
+      hasResumePayload: false,
+      noSkillsIdentified: false
     };
   }
 
   const skillsSet = new Set<string>();
 
-  // 1. Structured Skills Array
   if (Array.isArray(resumeData.skills)) {
     resumeData.skills.forEach((s: any) => {
-      if (typeof s === 'string' && s.trim()) {
-        skillsSet.add(s.trim());
-      } else if (s && typeof s.name === 'string' && s.name.trim()) {
-        skillsSet.add(s.name.trim());
-      } else if (s && Array.isArray(s.items)) {
+      if (typeof s === 'string' && s.trim()) skillsSet.add(s.trim());
+      else if (s && typeof s.name === 'string' && s.name.trim()) skillsSet.add(s.name.trim());
+      else if (s && Array.isArray(s.items)) {
         s.items.forEach((item: string) => {
           if (typeof item === 'string' && item.trim()) skillsSet.add(item.trim());
         });
@@ -88,7 +163,6 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     });
   }
 
-  // 2. Experience Roles & Bullet Points
   const experienceRoles: string[] = [];
   if (Array.isArray(resumeData.experience)) {
     resumeData.experience.forEach((e: any) => {
@@ -97,7 +171,6 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     });
   }
 
-  // 3. Education Degrees & Fields of Study
   const education: string[] = [];
   if (Array.isArray(resumeData.education)) {
     resumeData.education.forEach((ed: any) => {
@@ -106,7 +179,6 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     });
   }
 
-  // 4. Certifications
   const certifications: string[] = [];
   if (Array.isArray(resumeData.certifications)) {
     resumeData.certifications.forEach((c: any) => {
@@ -115,7 +187,6 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     });
   }
 
-  // 5. Scan text blob for broad domain skills & multi-word terminology
   const textBlob = [
     resumeData.summary || '',
     resumeData.personalInfo?.jobTitle || '',
@@ -128,24 +199,19 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     ...certifications
   ].join(' ');
 
-  // Comprehensive Domain Skill Dictionary
   const dictionaryKeywords = [
-    // Teaching & STEM / Computer Science Teaching
     'Computer Science', 'STEM', 'Mandarin', 'Mathematics', 'Math', 'Physics', 'Chemistry',
     'Biology', 'Coding', 'Robotics', 'Web Development', 'Algorithms', 'Data Structures',
     'Curriculum Development', 'Classroom Management', 'Lesson Planning', 'Student Assessment',
     'Differentiated Instruction', 'Special Education', 'Early Childhood Education', 'K-12',
     'Literacy Instruction', 'Pedagogy', 'Educational Technology', 'Tutoring', 'English Literature',
     'Language Arts', 'Social Studies', 'History',
-    // Healthcare & Nursing
     'Patient Care', 'BLS', 'CPR', 'EHR', 'EMR', 'Triage', 'ICU', 'Acute Care', 'Vital Signs',
     'Phlebotomy', 'SBAR', 'HIPAA', 'Infection Control', 'Clinical Assessment', 'Patient Assessment',
     'Psychiatric Care', 'Medication Administration', 'Pediatric Care', 'Nursing', 'RN',
-    // Software Engineering & Tech
     'React', 'Node.js', 'TypeScript', 'JavaScript', 'Python', 'Java', 'C++', 'Golang', 'SQL',
     'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'REST API', 'Git',
     'Agile', 'Scrum', 'Figma', 'UI/UX', 'CI/CD', 'Linux', 'Microservices', 'System Design',
-    // Finance, Marketing & Management
     'GAAP', 'Financial Analysis', 'Financial Modeling', 'Accounting', 'Bookkeeping', 'QuickBooks',
     'SEO', 'PPC', 'Content Marketing', 'Google Analytics', 'HubSpot', 'Salesforce',
     'Project Management', 'Jira', 'Stakeholder Management'
@@ -160,17 +226,17 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
 
   const skills = Array.from(skillsSet);
 
-  // Extract target role
   const targetRole =
     (resumeData.personalInfo?.jobTitle && typeof resumeData.personalInfo.jobTitle === 'string' && resumeData.personalInfo.jobTitle.trim()) ||
     (resumeData.targetRole && typeof resumeData.targetRole === 'string' && resumeData.targetRole.trim()) ||
     (experienceRoles[0] && typeof experienceRoles[0] === 'string' && experienceRoles[0].trim()) ||
     'Software Engineer';
 
-  // Extract location
   const candidateLocation =
     (resumeData.personalInfo?.location && typeof resumeData.personalInfo.location === 'string' && resumeData.personalInfo.location.trim()) ||
     'Remote';
+
+  const occupationCategory = detectOccupationCategory(targetRole, skills, textBlob);
 
   return {
     targetRole,
@@ -179,6 +245,8 @@ export function extractResumeProfile(resumeData: any): ExtractedResumeProfile {
     experienceRoles,
     education,
     certifications,
+    occupationCategory,
+    hasResumePayload: true,
     noSkillsIdentified: skills.length === 0
   };
 }
@@ -196,7 +264,71 @@ export function extractCandidateLocation(resumeData: any): string {
 }
 
 /**
- * Generates verified external job search links with pre-filled search queries
+ * Disambiguates queries like "principal" based on Candidate Occupation Category
+ */
+export function resolveAmbiguousQuery(
+  rawQuery: string,
+  category: OccupationCategory
+): { searchRole: string; needsClarification: boolean } {
+  const norm = rawQuery.toLowerCase().trim();
+
+  if (norm === 'principal' || norm === 'principal role') {
+    if (category === 'Education') {
+      return { searchRole: 'School Principal', needsClarification: false };
+    }
+    if (category === 'Product Management') {
+      return { searchRole: 'Principal Product Manager', needsClarification: false };
+    }
+    if (category === 'Technology') {
+      return { searchRole: 'Principal Engineer', needsClarification: false };
+    }
+    // Ambiguous query without usable context
+    return { searchRole: 'School Principal', needsClarification: true };
+  }
+
+  return { searchRole: rawQuery, needsClarification: false };
+}
+
+/**
+ * Categorizes a Job Listing into an Occupation Category
+ */
+export function detectJobCategory(jobTitle: string, jobSnippet: string): OccupationCategory {
+  const norm = `${jobTitle} ${jobSnippet}`.toLowerCase();
+
+  if (/school principal|assistant principal|academic principal|academic director|headmaster|headmistress|teacher|curriculum|k-12|education|school/i.test(jobTitle) ||
+      (/principal/i.test(jobTitle) && /school|academic|student|curriculum|education/i.test(norm) && !/product|engineer|software/i.test(jobTitle))) {
+    return 'Education';
+  }
+
+  if (/principal product manager|product manager|product owner|head of product/i.test(jobTitle)) {
+    return 'Product Management';
+  }
+
+  if (/principal engineer|principal software|software engineer|developer|tech lead|solution architect|fullstack|frontend|backend/i.test(jobTitle)) {
+    return 'Technology';
+  }
+
+  if (/nurse|nursing|rn|clinical|healthcare|doctor|physician|patient care/i.test(norm)) {
+    return 'Healthcare';
+  }
+
+  if (/accountant|accounting|finance|financial analyst|cpa|auditor/i.test(norm)) {
+    return 'Finance';
+  }
+
+  if (/marketing|seo|growth|content manager|advertising/i.test(norm)) {
+    return 'Marketing';
+  }
+
+  if (/administrative|office manager|executive assistant|clerk/i.test(norm)) {
+    return 'Administration';
+  }
+
+  return 'General';
+}
+
+/**
+ * Generates verified external job search links
  */
 export function getVerifiedSearchPortals(role: string, location: string): ExternalSearchPortal[] {
   const encRole = encodeURIComponent(role || 'Software Engineer');
@@ -236,9 +368,6 @@ export function getVerifiedSearchPortals(role: string, location: string): Extern
   ];
 }
 
-/**
- * Strip HTML tags from raw job descriptions safely
- */
 function stripHtml(htmlStr: string): string {
   if (!htmlStr) return '';
   return htmlStr
@@ -253,97 +382,14 @@ function stripHtml(htmlStr: string): string {
 }
 
 /**
- * Evaluates broad role relevance to filter out completely unrelated occupations (e.g. Software Engineer for Nurse/Teacher).
- */
-function isRoleRelevant(targetRole: string, jobTitle: string, jobExcerpt: string): boolean {
-  const roleNorm = targetRole.toLowerCase().trim();
-  const jobNorm = (jobTitle + ' ' + jobExcerpt).toLowerCase();
-
-  if (roleNorm.includes('nurse') || roleNorm.includes('nursing') || roleNorm.includes('rn')) {
-    return /nurse|nursing|rn|clinical|healthcare|patient care|medical|hospital|psychiatric/i.test(jobNorm);
-  }
-
-  if (roleNorm.includes('teacher') || roleNorm.includes('teaching') || roleNorm.includes('tutor') || roleNorm.includes('educator') || roleNorm.includes('instructor')) {
-    return /teacher|teaching|education|tutor|instructor|academic|curriculum|school|faculty|prek|elementary|math|science|stem|coding|language arts/i.test(jobNorm);
-  }
-
-  if (roleNorm.includes('engineer') || roleNorm.includes('developer') || roleNorm.includes('software') || roleNorm.includes('programmer')) {
-    return /engineer|developer|software|frontend|backend|fullstack|full stack|programmer|devops|data|ai|ml|tech|architect|coder|system/i.test(jobNorm);
-  }
-
-  if (roleNorm.includes('accountant') || roleNorm.includes('accounting') || roleNorm.includes('finance')) {
-    return /accountant|accounting|finance|financial|audit|tax|bookkeeper|cpa|ledger/i.test(jobNorm);
-  }
-
-  // General keyword check
-  const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'with', 'senior', 'junior', 'lead', 'staff']);
-  const roleKeywords = roleNorm.split(/[\s,/\-\\_]+/).filter(w => w.length > 2 && !stopwords.has(w));
-  if (roleKeywords.length === 0) return true;
-  return roleKeywords.some(kw => jobNorm.includes(kw));
-}
-
-/**
- * Sub-Field Prioritization Evaluator:
- * Compares specific sub-field requirements (e.g., Computer Science Teacher vs Language Arts Teacher).
- * Returns Title Match score (0 to 25 points).
- */
-function evaluateTitleRelevance(targetRole: string, jobTitle: string, candidateSkills: string[]): number {
-  const roleNorm = targetRole.toLowerCase().trim();
-  const titleNorm = jobTitle.toLowerCase().trim();
-
-  // Exact title match
-  if (titleNorm === roleNorm) return 25;
-
-  // Check sub-field specifics (e.g. Computer Science / STEM vs Language Arts)
-  const isCandidateCS = /computer science|cs|stem|coding|programming|software|tech/i.test(roleNorm) ||
-                        candidateSkills.some(s => /computer science|stem|coding|python|java|web development/i.test(s));
-
-  const isCandidateLangArts = /language arts|english|literature|reading|writing/i.test(roleNorm) ||
-                              candidateSkills.some(s => /language arts|english|literature/i.test(s));
-
-  const isJobCS = /computer science|cs|stem|coding|robotics|tech teacher|math content/i.test(titleNorm);
-  const isJobLangArts = /language arts|english|literature|reading teacher/i.test(titleNorm);
-
-  if (isCandidateCS && isJobCS) {
-    return 24; // Prioritize CS teaching jobs for CS Teachers
-  }
-
-  if (isCandidateCS && isJobLangArts && !isCandidateLangArts) {
-    return 10; // Penalize Language Arts Teacher for CS Teacher candidates
-  }
-
-  if (isCandidateLangArts && isJobLangArts) {
-    return 24; // Prioritize Language Arts jobs for Language Arts Teachers
-  }
-
-  if (isCandidateLangArts && isJobCS && !isCandidateCS) {
-    return 10; // Penalize CS jobs for Language Arts candidates
-  }
-
-  // General title keyword overlap
-  if (titleNorm.includes(roleNorm) || roleNorm.includes(titleNorm)) {
-    return 20;
-  }
-
-  const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'senior', 'junior', 'lead', 'staff', 'pt', 'ft']);
-  const roleTokens = roleNorm.split(/[\s,/\-\\_]+/).filter(t => t.length > 2 && !stopwords.has(t));
-  const matchedTokens = roleTokens.filter(t => titleNorm.includes(t));
-
-  if (roleTokens.length > 0) {
-    return Math.round((matchedTokens.length / roleTokens.length) * 18);
-  }
-
-  return 8;
-}
-
-/**
- * Fetches genuine live job listings from active job APIs (Jobicy, Remotive, Arbeitnow).
- * Applies exact 5-part weighted scoring formula:
- *   1. Skills Match: 40%
- *   2. Job-Title Relevance: 25%
- *   3. Experience Match: 15%
- *   4. Education Match: 10%
- *   5. Location/Work-Mode Match: 10%
+ * Fetches genuine live job listings from active job APIs (Jobicy, Remotive).
+ * Calculates exact 6-part weighted score & enforces strict score caps:
+ *   1. Resume Skills: 40%
+ *   2. Occupation Category: 25%
+ *   3. Specific Job Title: 15%
+ *   4. Experience: 10%
+ *   5. Education: 5%
+ *   6. Location/Work Mode: 5%
  */
 export async function fetchMatchingJobs(
   resumeData: any,
@@ -355,14 +401,22 @@ export async function fetchMatchingJobs(
   extractedSkills: string[];
   extractedEducation: string[];
   extractedCertifications: string[];
+  occupationCategory: OccupationCategory;
+  needsClarification: boolean;
   noSkillsIdentified: boolean;
   totalCount: number;
   externalPortals: ExternalSearchPortal[];
 }> {
   const profile = extractResumeProfile(resumeData);
-  const targetRole = filters.roleQuery?.trim() || profile.targetRole;
+  const userQuery = filters.roleQuery?.trim();
   const candidateLocation = filters.locationQuery?.trim() || profile.candidateLocation;
   const extractedSkills = profile.skills;
+
+  let effectiveCategory = filters.clarifiedCategory || profile.occupationCategory;
+
+  // Resolve ambiguous queries like "principal"
+  const rawTargetRole = userQuery || profile.targetRole;
+  const { searchRole, needsClarification } = resolveAmbiguousQuery(rawTargetRole, effectiveCategory);
 
   const rawLiveJobs: Array<{
     id: string;
@@ -380,12 +434,11 @@ export async function fetchMatchingJobs(
     source: string;
   }> = [];
 
-  // Query Jobicy, Remotive & Arbeitnow live APIs in parallel
+  // Query Jobicy & Remotive APIs in parallel
   const searchPromises = [
-    // 1. Jobicy API
     (async () => {
       try {
-        const resp = await fetch(`https://jobicy.com/api/v2/remote-jobs?count=30&tag=${encodeURIComponent(targetRole)}`, {
+        const resp = await fetch(`https://jobicy.com/api/v2/remote-jobs?count=30&tag=${encodeURIComponent(searchRole)}`, {
           signal: AbortSignal.timeout(4500)
         });
         if (resp.ok) {
@@ -418,10 +471,9 @@ export async function fetchMatchingJobs(
       }
     })(),
 
-    // 2. Remotive API
     (async () => {
       try {
-        const resp = await fetch(`https://remotive.com/api/remote-jobs?search=${encodeURIComponent(targetRole)}`, {
+        const resp = await fetch(`https://remotive.com/api/remote-jobs?search=${encodeURIComponent(searchRole)}`, {
           signal: AbortSignal.timeout(4500)
         });
         if (resp.ok) {
@@ -457,7 +509,7 @@ export async function fetchMatchingJobs(
 
   await Promise.allSettled(searchPromises);
 
-  // Deduplicate raw live jobs by applicationUrl
+  // Deduplicate by applicationUrl
   const seenUrls = new Set<string>();
   const uniqueJobs = rawLiveJobs.filter(j => {
     const key = (j.applicationUrl || `${j.title}_${j.company}`).toLowerCase();
@@ -466,14 +518,12 @@ export async function fetchMatchingJobs(
     return true;
   });
 
-  // Filter out completely unrelated occupations
-  const relevantJobs = uniqueJobs.filter(j => isRoleRelevant(targetRole, j.title, j.descriptionSnippet));
-
-  // Score each job using the exact 5-part weighted scoring formula
-  const scoredJobs: MatchingJob[] = relevantJobs.map((job) => {
+  // Score each job using the exact 6-part weighted formula
+  const scoredJobs: MatchingJob[] = uniqueJobs.map((job) => {
     const fullJobText = (job.title + ' ' + job.descriptionSnippet).toLowerCase();
+    const jobCategory = detectJobCategory(job.title, job.descriptionSnippet);
 
-    // 1. SKILLS MATCH (40% MAX = 40 PTS)
+    // 1. RESUME SKILLS MATCH (40% MAX = 40 PTS)
     const matchedSkills: string[] = [];
     extractedSkills.forEach((skill) => {
       const skLower = skill.toLowerCase();
@@ -488,7 +538,6 @@ export async function fetchMatchingJobs(
       skillsScore = Math.min(40, Math.round(ratio * 40));
     }
 
-    // Key missing skills
     const domainTerms = [
       'Computer Science', 'Python', 'Java', 'STEM', 'Mandarin', 'React', 'Node.js',
       'BLS', 'CPR', 'EHR', 'EMR', 'Triage', 'GAAP', 'SEO', 'Jira', 'Agile'
@@ -500,59 +549,101 @@ export async function fetchMatchingJobs(
       }
     });
 
-    // 2. JOB-TITLE RELEVANCE (25% MAX = 25 PTS)
-    const titleScore = evaluateTitleRelevance(targetRole, job.title, extractedSkills);
+    // 2. OCCUPATION CATEGORY MATCH (25% MAX = 25 PTS)
+    let categoryScore = 0;
+    const isCategoryMismatch = effectiveCategory !== 'General' && jobCategory !== 'General' && jobCategory !== effectiveCategory;
 
-    // 3. EXPERIENCE MATCH (15% MAX = 15 PTS)
-    let expScore = 8;
+    if (jobCategory === effectiveCategory) {
+      categoryScore = 25;
+    } else if (!isCategoryMismatch) {
+      categoryScore = 12;
+    } else {
+      categoryScore = 0;
+    }
+
+    // 3. SPECIFIC JOB-TITLE RELEVANCE (15% MAX = 15 PTS)
+    let titleScore = 0;
+    const roleNorm = searchRole.toLowerCase().trim();
+    const titleNorm = job.title.toLowerCase().trim();
+
+    if (titleNorm === roleNorm) {
+      titleScore = 15;
+    } else if (titleNorm.includes(roleNorm) || roleNorm.includes(titleNorm)) {
+      titleScore = 12;
+    } else {
+      const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'senior', 'junior', 'lead', 'staff']);
+      const roleTokens = roleNorm.split(/[\s,/\-\\_]+/).filter(t => t.length > 2 && !stopwords.has(t));
+      const matchedTokens = roleTokens.filter(t => titleNorm.includes(t));
+      if (roleTokens.length > 0) {
+        titleScore = Math.round((matchedTokens.length / roleTokens.length) * 10);
+      } else {
+        titleScore = 4;
+      }
+    }
+
+    // 4. EXPERIENCE MATCH (10% MAX = 10 PTS)
+    let expScore = 5;
     const hasMatchingPastRole = profile.experienceRoles.some(r => job.title.toLowerCase().includes(r.toLowerCase()));
-    if (hasMatchingPastRole) expScore = 15;
-    else if (job.experienceLevel === 'All Levels' || job.experienceLevel === 'Mid Level') expScore = 12;
+    if (hasMatchingPastRole) expScore = 10;
+    else if (job.experienceLevel === 'All Levels' || job.experienceLevel === 'Mid Level') expScore = 8;
 
-    // 4. EDUCATION MATCH (10% MAX = 10 PTS)
-    let eduScore = 5;
+    // 5. EDUCATION MATCH (5% MAX = 5 PTS)
+    let eduScore = 2;
     const hasMatchingEducation = profile.education.some(ed => {
       const edLower = ed.toLowerCase();
       return (edLower.includes('computer science') && fullJobText.includes('computer science')) ||
              (edLower.includes('education') && fullJobText.includes('education')) ||
              (edLower.includes('nursing') && fullJobText.includes('nursing'));
     });
-    if (hasMatchingEducation) eduScore = 10;
-    else if (profile.education.length > 0) eduScore = 7;
+    if (hasMatchingEducation) eduScore = 5;
+    else if (profile.education.length > 0) eduScore = 3;
 
-    // 5. LOCATION / WORK-MODE MATCH (10% MAX = 10 PTS)
-    let locScore = 5;
+    // 6. LOCATION / WORK-MODE MATCH (5% MAX = 5 PTS)
+    let locScore = 2;
     if (candidateLocation && candidateLocation.toLowerCase() !== 'remote' && job.location.toLowerCase().includes(candidateLocation.toLowerCase())) {
-      locScore = 10;
+      locScore = 5;
     } else if (job.isRemote) {
-      locScore = 10;
+      locScore = 5;
     }
 
-    // Calculate Total 5-Part Weighted Score
-    let totalScore = skillsScore + titleScore + expScore + eduScore + locScore;
+    // Total 6-part weighted score
+    let calculatedScore = skillsScore + categoryScore + titleScore + expScore + eduScore + locScore;
 
     const isZeroSkillsMatch = matchedSkills.length === 0;
 
-    // ZERO SKILL MATCH RULE:
-    // If zero skills match, score is capped at Title + Experience + Education + Location (max 55%)
-    if (isZeroSkillsMatch) {
-      totalScore = Math.min(55, titleScore + expScore + eduScore + locScore);
+    // STRICT SCORE CAPS:
+    // 1. Mismatched occupation category: MAX 15% (e.g. Principal Product Manager for Teacher)
+    if (isCategoryMismatch) {
+      calculatedScore = Math.min(15, calculatedScore);
+    }
+    // 2. Zero matched skills: MAX 25%
+    else if (isZeroSkillsMatch) {
+      calculatedScore = Math.min(25, calculatedScore);
+    }
+    // 3. Title-only match: MAX 20%
+    else if (skillsScore === 0 && expScore <= 5 && eduScore <= 2) {
+      calculatedScore = Math.min(20, calculatedScore);
     }
 
-    const matchPercentage = Math.min(98, Math.max(15, totalScore));
-    const isTopMatch = matchPercentage >= 70 && !isZeroSkillsMatch;
+    const matchPercentage = Math.min(98, Math.max(10, calculatedScore));
+    const isTopMatch = matchPercentage >= 70 && !isZeroSkillsMatch && !isCategoryMismatch;
+
+    const matchType: 'Resume Match' | 'Keyword and Location Match' =
+      profile.hasResumePayload && !isZeroSkillsMatch && !isCategoryMismatch
+        ? 'Resume Match'
+        : 'Keyword and Location Match';
 
     // Build human-readable match reason
     let matchReason = '';
-    if (!isZeroSkillsMatch) {
-      matchReason = `${matchPercentage}% Match: Strong title alignment with ${targetRole} and covers ${matchedSkills.length} of your resume skills (${matchedSkills.slice(0, 3).join(', ')}).`;
+    if (matchType === 'Resume Match') {
+      matchReason = `${matchPercentage}% Resume Match: Aligns with your target role (${searchRole}) in ${effectiveCategory} and matches ${matchedSkills.length} key resume skills (${matchedSkills.slice(0, 3).join(', ')}).`;
+    } else if (isCategoryMismatch) {
+      matchReason = `${matchPercentage}% Category Mismatch: This job is in ${jobCategory}, which differs from your resume's field (${effectiveCategory}).`;
     } else {
-      matchReason = `${matchPercentage}% Title and Location Match: Fits your target title (${targetRole}) and location preferences. No explicit resume skills matched the brief excerpt.`;
+      matchReason = `${matchPercentage}% Keyword and Location Match: Fits query "${searchRole}" and location preferences. No explicit resume skills matched the snippet.`;
     }
 
-    if (job.isRemote) {
-      matchReason += ' Includes remote work flexibility.';
-    }
+    if (job.isRemote) matchReason += ' Includes remote flexibility.';
 
     return {
       ...job,
@@ -562,8 +653,11 @@ export async function fetchMatchingJobs(
       missingSkills: Array.from(new Set(missingSkills)).slice(0, 4),
       isZeroSkillsMatch,
       isTopMatch,
+      matchType,
+      occupationCategory: jobCategory,
       scoreBreakdown: {
         skillsScore,
+        categoryScore,
         titleScore,
         expScore,
         eduScore,
@@ -588,15 +682,17 @@ export async function fetchMatchingJobs(
   // Sort by match percentage (highest first)
   filtered.sort((a, b) => b.matchPercentage - a.matchPercentage);
 
-  const externalPortals = getVerifiedSearchPortals(targetRole, candidateLocation);
+  const externalPortals = getVerifiedSearchPortals(searchRole, candidateLocation);
 
   return {
     jobs: filtered,
-    targetRole,
+    targetRole: searchRole,
     candidateLocation,
     extractedSkills,
     extractedEducation: profile.education,
     extractedCertifications: profile.certifications,
+    occupationCategory: effectiveCategory,
+    needsClarification: Boolean(needsClarification && (!profile.hasResumePayload || profile.skills.length === 0)),
     noSkillsIdentified: profile.noSkillsIdentified,
     totalCount: filtered.length,
     externalPortals
