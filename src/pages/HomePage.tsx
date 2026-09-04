@@ -50,29 +50,7 @@ export const HomePage: React.FC = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: 'Sarah Chen',
-      role: 'Senior Software Engineer',
-      company: 'Landed role at Stripe',
-      content: 'The ATS checker highlighted missing keywords in my summary immediately. Exported a vector PDF and got 4 callback interviews in one week.',
-      rating: 5
-    },
-    {
-      name: 'Marcus Vance',
-      role: 'Product Marketing Manager',
-      company: 'Landed role at Salesforce',
-      content: 'No credit card traps, no watermarks, just clean templates that actually look professional. Downloaded my resume in under 10 minutes.',
-      rating: 5
-    },
-    {
-      name: 'Elena Rostova',
-      role: 'Data Analyst',
-      company: 'Landed role at Spotify',
-      content: 'The AI bullet point enhancer helped convert my passive duties into quantifiable Google X-Y-Z metrics. Highest recommendation.',
-      rating: 5
-    }
-  ];
+
 
   return (
     <div className="space-y-16 pb-16 bg-slate-50/50">
@@ -332,37 +310,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. TESTIMONIALS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-xs space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-extrabold text-amber-600 uppercase tracking-wider bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
-              User Reviews
-            </span>
-            <h2 className="text-3xl font-black text-slate-950 tracking-tight">
-              Trusted by Job Seekers Everywhere
-            </h2>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, idx) => (
-              <div key={idx} className="p-5 bg-slate-50/70 border border-slate-200 rounded-2xl space-y-3">
-                <div className="flex items-center gap-1 text-amber-500">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star key={i} size={16} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed">&ldquo;{t.content}&rdquo;</p>
-                <div className="pt-2 border-t border-slate-200/80">
-                  <div className="font-extrabold text-xs text-slate-900">{t.name}</div>
-                  <div className="text-[11px] text-slate-500">{t.role}</div>
-                  <div className="text-[11px] font-bold text-emerald-700">{t.company}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 6. PRIVACY & FAQS */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
