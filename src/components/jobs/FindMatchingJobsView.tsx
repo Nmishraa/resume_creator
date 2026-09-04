@@ -501,25 +501,56 @@ export const FindMatchingJobsView: React.FC<Props> = ({
           })}
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-8 text-center space-y-3">
-          <AlertCircle size={32} className="text-amber-500 mx-auto" />
-          <h3 className="text-lg font-extrabold text-slate-900">
-            No matching job listings found for your current filter settings
-          </h3>
-          <p className="text-sm text-slate-600 max-w-md mx-auto">
-            Try adjusting your search query or switching from "On-Site" to "Remote Only" to discover open opportunities.
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              setWorkType('all');
-              setExperienceLevel('All');
-              loadJobs({ workType: 'all', experienceLevel: 'All' });
-            }}
-            className="px-4 py-2 bg-brand-600 text-white font-extrabold text-xs rounded-xl transition-colors cursor-pointer"
-          >
-            Reset Search Filters
-          </button>
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-8 sm:p-10 text-center space-y-6 shadow-sm">
+          <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto text-amber-600">
+            <AlertCircle size={28} />
+          </div>
+
+          <div className="space-y-2 max-w-lg mx-auto">
+            <h3 className="text-xl font-extrabold text-slate-900">
+              No direct API listings found for "{roleQuery || targetRole || 'your search'}"
+            </h3>
+            <p className="text-sm text-slate-600 leading-relaxed font-medium">
+              We couldn't fetch live API jobs matching your exact keywords right now. You can launch instant, verified searches on top job boards pre-filled with your target role and location below:
+            </p>
+          </div>
+
+          {/* Direct Search Launch Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto pt-2">
+            {externalPortals.map((portal) => (
+              <a
+                key={portal.name}
+                href={portal.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 rounded-xl bg-slate-50 hover:bg-brand-50/60 border border-slate-200 hover:border-brand-300 text-slate-900 transition-all text-left group flex flex-col justify-between space-y-3 cursor-pointer shadow-2xs"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm group-hover:text-brand-700">{portal.name}</span>
+                  <ExternalLink size={14} style={{ color: portal.color }} />
+                </div>
+                <span className="text-[11px] font-semibold text-slate-500">
+                  Search live {targetRole || 'jobs'} on {portal.name} →
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                setRoleQuery('');
+                setLocationQuery('');
+                setWorkType('all');
+                setExperienceLevel('All');
+                loadJobs({ roleQuery: '', locationQuery: '', workType: 'all', experienceLevel: 'All' });
+              }}
+              className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs rounded-xl transition-all shadow-sm cursor-pointer"
+            >
+              Reset Search Filters
+            </button>
+          </div>
         </div>
       )}
     </div>
