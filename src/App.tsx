@@ -3,34 +3,55 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
 import { HomePage } from './pages/HomePage';
 
+// Resilient lazy loader wrapper that auto-reloads page once on deployment asset hash updates
+function lazyWithRetry<T extends React.ComponentType<any>>(
+  componentImport: () => Promise<{ default: T }>
+): React.LazyExoticComponent<T> {
+  return lazy(async () => {
+    const pageHasBeenReloaded = sessionStorage.getItem('chunk_reload_retry');
+    try {
+      const component = await componentImport();
+      sessionStorage.removeItem('chunk_reload_retry');
+      return component;
+    } catch (error) {
+      if (!pageHasBeenReloaded) {
+        sessionStorage.setItem('chunk_reload_retry', 'true');
+        window.location.reload();
+        return new Promise(() => {});
+      }
+      throw error;
+    }
+  });
+}
+
 // Lazy-load route chunks to minimize initial bundle size and optimize Lighthouse performance
-const BuilderPage = lazy(() => import('./pages/BuilderPage').then(m => ({ default: m.BuilderPage })));
-const FreeResumeBuilderPage = lazy(() => import('./pages/FreeResumeBuilderPage').then(m => ({ default: m.FreeResumeBuilderPage })));
-const AiResumeBuilderPage = lazy(() => import('./pages/AiResumeBuilderPage').then(m => ({ default: m.AiResumeBuilderPage })));
-const AtsCheckerPage = lazy(() => import('./pages/AtsCheckerPage').then(m => ({ default: m.AtsCheckerPage })));
-const ResumeScoreCheckerPage = lazy(() => import('./pages/ResumeScoreCheckerPage').then(m => ({ default: m.ResumeScoreCheckerPage })));
-const StudentResumeBuilderPage = lazy(() => import('./pages/StudentResumeBuilderPage').then(m => ({ default: m.StudentResumeBuilderPage })));
-const NoExperienceResumeBuilderPage = lazy(() => import('./pages/NoExperienceResumeBuilderPage').then(m => ({ default: m.NoExperienceResumeBuilderPage })));
-const JobMatcherPage = lazy(() => import('./pages/JobMatcherPage').then(m => ({ default: m.JobMatcherPage })));
-const CoverLetterPage = lazy(() => import('./pages/CoverLetterPage').then(m => ({ default: m.CoverLetterPage })));
-const TemplatesGalleryPage = lazy(() => import('./pages/TemplatesGalleryPage').then(m => ({ default: m.TemplatesGalleryPage })));
-const ResumeExamplesHubPage = lazy(() => import('./pages/ResumeExamplesHubPage').then(m => ({ default: m.ResumeExamplesHubPage })));
-const ResumeExampleDetailPage = lazy(() => import('./pages/ResumeExampleDetailPage').then(m => ({ default: m.ResumeExampleDetailPage })));
-const GuidesHubPage = lazy(() => import('./pages/GuidesHubPage').then(m => ({ default: m.GuidesHubPage })));
-const GuideDetailPage = lazy(() => import('./pages/GuideDetailPage').then(m => ({ default: m.GuideDetailPage })));
-const JobTrackerPage = lazy(() => import('./pages/JobTrackerPage').then(m => ({ default: m.JobTrackerPage })));
-const InterviewPrepPage = lazy(() => import('./pages/InterviewPrepPage').then(m => ({ default: m.InterviewPrepPage })));
-const InterviewQuestionsPage = lazy(() => import('./pages/InterviewQuestionsPage').then(m => ({ default: m.InterviewQuestionsPage })));
-const LinkedInOptimizerPage = lazy(() => import('./pages/LinkedInOptimizerPage').then(m => ({ default: m.LinkedInOptimizerPage })));
-const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
-const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
-const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
-const TermsPage = lazy(() => import('./pages/TermsPage').then(m => ({ default: m.TermsPage })));
-const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage').then(m => ({ default: m.HowItWorksPage })));
-const FaqPage = lazy(() => import('./pages/FaqPage').then(m => ({ default: m.FaqPage })));
-const AtsResumeBuilderPage = lazy(() => import('./pages/seo/AtsResumeBuilderPage').then(m => ({ default: m.AtsResumeBuilderPage })));
-const SoftwareEngineerBuilderPage = lazy(() => import('./pages/seo/SoftwareEngineerBuilderPage').then(m => ({ default: m.SoftwareEngineerBuilderPage })));
-const KeywordMatcherPage = lazy(() => import('./pages/seo/KeywordMatcherPage').then(m => ({ default: m.KeywordMatcherPage })));
+const BuilderPage = lazyWithRetry(() => import('./pages/BuilderPage').then(m => ({ default: m.BuilderPage })));
+const FreeResumeBuilderPage = lazyWithRetry(() => import('./pages/FreeResumeBuilderPage').then(m => ({ default: m.FreeResumeBuilderPage })));
+const AiResumeBuilderPage = lazyWithRetry(() => import('./pages/AiResumeBuilderPage').then(m => ({ default: m.AiResumeBuilderPage })));
+const AtsCheckerPage = lazyWithRetry(() => import('./pages/AtsCheckerPage').then(m => ({ default: m.AtsCheckerPage })));
+const ResumeScoreCheckerPage = lazyWithRetry(() => import('./pages/ResumeScoreCheckerPage').then(m => ({ default: m.ResumeScoreCheckerPage })));
+const StudentResumeBuilderPage = lazyWithRetry(() => import('./pages/StudentResumeBuilderPage').then(m => ({ default: m.StudentResumeBuilderPage })));
+const NoExperienceResumeBuilderPage = lazyWithRetry(() => import('./pages/NoExperienceResumeBuilderPage').then(m => ({ default: m.NoExperienceResumeBuilderPage })));
+const JobMatcherPage = lazyWithRetry(() => import('./pages/JobMatcherPage').then(m => ({ default: m.JobMatcherPage })));
+const CoverLetterPage = lazyWithRetry(() => import('./pages/CoverLetterPage').then(m => ({ default: m.CoverLetterPage })));
+const TemplatesGalleryPage = lazyWithRetry(() => import('./pages/TemplatesGalleryPage').then(m => ({ default: m.TemplatesGalleryPage })));
+const ResumeExamplesHubPage = lazyWithRetry(() => import('./pages/ResumeExamplesHubPage').then(m => ({ default: m.ResumeExamplesHubPage })));
+const ResumeExampleDetailPage = lazyWithRetry(() => import('./pages/ResumeExampleDetailPage').then(m => ({ default: m.ResumeExampleDetailPage })));
+const GuidesHubPage = lazyWithRetry(() => import('./pages/GuidesHubPage').then(m => ({ default: m.GuidesHubPage })));
+const GuideDetailPage = lazyWithRetry(() => import('./pages/GuideDetailPage').then(m => ({ default: m.GuideDetailPage })));
+const JobTrackerPage = lazyWithRetry(() => import('./pages/JobTrackerPage').then(m => ({ default: m.JobTrackerPage })));
+const InterviewPrepPage = lazyWithRetry(() => import('./pages/InterviewPrepPage').then(m => ({ default: m.InterviewPrepPage })));
+const InterviewQuestionsPage = lazyWithRetry(() => import('./pages/InterviewQuestionsPage').then(m => ({ default: m.InterviewQuestionsPage })));
+const LinkedInOptimizerPage = lazyWithRetry(() => import('./pages/LinkedInOptimizerPage').then(m => ({ default: m.LinkedInOptimizerPage })));
+const AboutPage = lazyWithRetry(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ContactPage = lazyWithRetry(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const PrivacyPolicyPage = lazyWithRetry(() => import('./pages/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
+const TermsPage = lazyWithRetry(() => import('./pages/TermsPage').then(m => ({ default: m.TermsPage })));
+const HowItWorksPage = lazyWithRetry(() => import('./pages/HowItWorksPage').then(m => ({ default: m.HowItWorksPage })));
+const FaqPage = lazyWithRetry(() => import('./pages/FaqPage').then(m => ({ default: m.FaqPage })));
+const AtsResumeBuilderPage = lazyWithRetry(() => import('./pages/seo/AtsResumeBuilderPage').then(m => ({ default: m.AtsResumeBuilderPage })));
+const SoftwareEngineerBuilderPage = lazyWithRetry(() => import('./pages/seo/SoftwareEngineerBuilderPage').then(m => ({ default: m.SoftwareEngineerBuilderPage })));
+const KeywordMatcherPage = lazyWithRetry(() => import('./pages/seo/KeywordMatcherPage').then(m => ({ default: m.KeywordMatcherPage })));
 
 const RouteLoadingFallback = () => (
   <div className="min-h-[60vh] flex items-center justify-center p-8">
