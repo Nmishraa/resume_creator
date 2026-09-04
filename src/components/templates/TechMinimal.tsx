@@ -201,15 +201,12 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
                 <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item font-mono text-xs">
-                  <div className="flex justify-between items-baseline">
-                    <span className="font-bold text-slate-900">{edu.degree}</span>
-                    {(edu.startDate || edu.endDate) && (
-                      <span className="text-slate-500">{edu.startDate}{edu.endDate ? ` - ${edu.endDate}` : ''}</span>
-                    )}
+                  <div className="font-bold text-slate-900">
+                    {edu.degree}{edu.degree && edu.institution ? ' — ' : ''}{edu.institution}
                   </div>
-                  {edu.institution && (
-                    <div className="text-slate-600">{edu.institution} {edu.location && `• ${edu.location}`}</div>
-                  )}
+                  <div className="text-slate-500">
+                    {[edu.location, edu.endDate || edu.startDate].filter(Boolean).join(' | ')}
+                  </div>
                 </div>
               ))}
             </div>

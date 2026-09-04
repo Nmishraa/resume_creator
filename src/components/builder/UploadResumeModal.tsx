@@ -282,6 +282,49 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
     { id: 'compact', name: 'Compact Density', desc: 'Maximizes page efficiency for dense multi-year work histories.' }
   ];
 
+  // Helper section re-assignment / move functions
+  const moveExperienceToProject = (expIdx: number) => {
+    if (!editedData) return;
+    const exp = editedData.experience?.[expIdx];
+    if (!exp) return;
+    const newProj: ProjectItem = {
+      id: `proj-${Date.now()}`,
+      title: exp.role || exp.company || 'Project',
+      subtitle: exp.company || '',
+      startDate: exp.startDate,
+      endDate: exp.endDate,
+      highlights: exp.highlights
+    };
+    const updatedExp = (editedData.experience || []).filter((_, idx) => idx !== expIdx);
+    setEditedData({
+      ...editedData,
+      experience: updatedExp,
+      projects: [...(editedData.projects || []), newProj]
+    });
+  };
+
+  const moveProjectToExperience = (projIdx: number) => {
+    if (!editedData) return;
+    const proj = editedData.projects?.[projIdx];
+    if (!proj) return;
+    const newExp: ExperienceItem = {
+      id: `exp-${Date.now()}`,
+      role: proj.title || 'Role',
+      company: proj.subtitle || 'Organization',
+      location: '',
+      startDate: proj.startDate || '',
+      endDate: proj.endDate || '',
+      current: false,
+      highlights: proj.highlights
+    };
+    const updatedProj = (editedData.projects || []).filter((_, idx) => idx !== projIdx);
+    setEditedData({
+      ...editedData,
+      projects: updatedProj,
+      experience: [...(editedData.experience || []), newExp]
+    });
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/70 backdrop-blur-md animate-in fade-in">
       <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-5xl max-h-[92vh] flex flex-col overflow-hidden">
@@ -454,18 +497,33 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
             </div>
           )}
 
-          {/* STEP 2: FULL 9-SECTION REVIEW & EDIT INTERFACE */}
+          {/* STEP 2: FULL REVIEW & EDIT INTERFACE */}
           {step === 'review' && editedData && (
             <div className="space-y-6">
+
+              {/* Extraction Warning Banner */}
+              {extractedResult?.fieldWarnings && extractedResult.fieldWarnings.length > 0 && (
+                <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold flex items-start gap-2.5">
+                  <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-amber-950">Field Review Warnings ({extractedResult.fieldWarnings.length} flagged fields):</strong>
+                    <ul className="mt-1 list-disc list-inside space-y-0.5 text-amber-800 text-[11px]">
+                      {extractedResult.fieldWarnings.map((w, idx) => (
+                        <li key={idx}>{w.message}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
               
               {/* Extraction Summary Badges Header */}
               <div className="p-4 rounded-2xl bg-brand-50/60 border border-brand-200 flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-wider text-brand-900 flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-brand-600" />
-                    <span>Resume Sections Extracted Successfully</span>
+                    <span>Resume Sections Extracted &amp; Normalized</span>
                   </h3>
-                  <p className="text-xs text-slate-600 mt-0.5">Review data below or open directly in full Builder creating workspace.</p>
+                  <p className="text-xs text-slate-600 mt-0.5">Review data below, reassign uncertain fields, or open directly in full Builder workspace.</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">

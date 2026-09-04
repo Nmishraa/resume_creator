@@ -249,15 +249,13 @@ export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'st
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
                 <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item">
-                  <div className="flex justify-between items-baseline flex-wrap gap-x-2">
-                    <div className="flex items-center gap-2">
-                      <span className={`${size.itemTitle} text-slate-900`}>{edu.degree}</span>
-                      <span className="text-slate-400">|</span>
-                      <span className="text-slate-700 font-medium text-xs sm:text-sm">{edu.institution}</span>
-                    </div>
-                    <div className={size.meta}>
-                      {edu.startDate} - {edu.endDate} {edu.location && `• ${edu.location}`}
-                    </div>
+                  <div className="font-bold text-slate-900 flex flex-wrap items-center gap-1.5">
+                    <span>{edu.degree}</span>
+                    {edu.degree && edu.institution && <span className="text-slate-400 font-normal">—</span>}
+                    <span className="text-slate-700 font-medium text-xs sm:text-sm">{edu.institution}</span>
+                  </div>
+                  <div className={`${size.meta} text-slate-500 mt-0.5`}>
+                    {[edu.location, edu.endDate || edu.startDate].filter(Boolean).join(' | ')}
                   </div>
                   {edu.gpa && <div className="text-xs text-slate-500 font-semibold mt-0.5">GPA: {edu.gpa}</div>}
                   {edu.highlights && edu.highlights.length > 0 && (

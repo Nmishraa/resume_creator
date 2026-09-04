@@ -26,12 +26,15 @@ const PLACEHOLDER_STRINGS = [
 ];
 
 /**
- * Common category headings that should be used as category titles, not skill tags
+ * Known Category Headings that must be used as Category Titles, NOT skill or project tags
  */
 const SKILL_CATEGORY_HEADINGS = [
+  'ai & data skills',
+  'ai and data skills',
+  'additional skills',
+  'academic assignments',
   'tools & software',
   'tools and software',
-  'academic assignments',
   'core strengths',
   'programming languages',
   'technical proficiencies',
@@ -40,15 +43,125 @@ const SKILL_CATEGORY_HEADINGS = [
   'frameworks and libraries',
   'core competencies',
   'technical skills',
-  'key skills'
+  'key skills',
+  'core skills'
 ];
 
 /**
- * Identifies if a text string is a project (e.g. "AI Travel Assistant", "Academic Assignments - Travel Assistant")
+ * Whitelist of genuine technologies & skills that must NEVER be misclassified as projects
  */
-function isProjectItem(text: string): boolean {
+const GENUINE_SKILL_WHITELIST = [
+  'langchain',
+  'pandas',
+  'numpy',
+  'selenium',
+  'testng',
+  'python',
+  'java',
+  'sql',
+  'c++',
+  'c#',
+  'machine learning',
+  'data annotation',
+  'qa',
+  'quality assurance',
+  'react',
+  'typescript',
+  'javascript',
+  'node.js',
+  'aws',
+  'docker',
+  'kubernetes',
+  'git',
+  'html',
+  'css',
+  'tailwind',
+  'pytorch',
+  'tensorflow',
+  'scikit-learn',
+  'deep learning',
+  'nlp',
+  'natural language processing',
+  'computer vision',
+  'rag',
+  'retrieval augmented generation',
+  'vector database',
+  'postman',
+  'jira',
+  'confluence',
+  'agile',
+  'scrum'
+];
+
+/**
+ * Compares two strings using normalized alphanumeric characters
+ */
+export function normalizedTextCompare(str1: string | null | undefined, str2: string | null | undefined): boolean {
+  if (!str1 || !str2) return false;
+  const norm1 = str1.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const norm2 = str2.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return norm1.length > 0 && norm1 === norm2;
+}
+
+/**
+ * Cleans standalone dashes, bullets, placeholders, and whitespace from text
+ */
+export function cleanString(text: string | null | undefined): string {
+  if (!text) return '';
+  let cleaned = text.trim();
+
+  // Strip leading/trailing bullet points, dashes, or pipes
+  cleaned = cleaned.replace(/^[•\-*–—|\s]+/, '').replace(/[•\-*–—|\s]+$/, '').trim();
+
+  // If string is only dashes or placeholders, return empty
+  if (/^[\-–—\s•|]+$/.test(cleaned)) return '';
+  const lower = cleaned.toLowerCase();
+  
+  if (PLACEHOLDER_STRINGS.some(p => lower === p || lower === `[${p}]` || lower === `<${p}>`)) return '';
+  if (lower === 'n/a' || lower === 'none' || lower === 'null' || lower === 'undefined' || lower === 'tbd') return '';
+
+  return cleaned;
+}
+
+/**
+ * Determines if a string represents an action sentence / project implementation detail
+ */
+function isImplementationSentence(text: string): boolean {
+  if (!text) return false;
+  const lower = text.toLowerCase();
+  
+  const sentenceKeywords = [
+    'implemented',
+    'built',
+    'developed',
+    'designed',
+    'created',
+    'data preprocessing',
+    'classification algorithm',
+    'classification algorithms',
+    'api integration',
+    'rag chatbot',
+    'rag chatbots',
+    'vector search',
+    'fine-tuned',
+    'trained model',
+    'integrated'
+  ];
+
+  return sentenceKeywords.some(kw => lower.includes(kw)) || (text.length > 40 && /\b(using|with|via|for|to)\b/i.test(text));
+}
+
+/**
+ * Identifies if a text string is a project title (e.g. "AI Travel Assistant")
+ */
+function isProjectTitle(text: string): boolean {
   if (!text) return false;
   const lower = text.toLowerCase().trim();
+
+  // Must NOT match genuine skills whitelist (e.g., LangChain is a skill, NOT a project!)
+  if (GENUINE_SKILL_WHITELIST.some(s => lower === s || lower === `${s} framework`)) {
+    return false;
+  }
 
   // Explicit project names mentioned in requirements
   if (lower.includes('ai travel assistant') || lower.includes('travel assistant')) {
@@ -56,7 +169,7 @@ function isProjectItem(text: string): boolean {
   }
 
   // Keywords indicating project
-  const projectKeywords = [
+  const projectTitleKeywords = [
     'assistant',
     'system',
     'application',
@@ -66,46 +179,22 @@ function isProjectItem(text: string): boolean {
     'portfolio website',
     'e-commerce',
     'dashboard',
-    'academic assignment',
     'coursework project'
   ];
 
-  for (const kw of projectKeywords) {
+  for (const kw of projectTitleKeywords) {
     if (lower.includes(kw) && !lower.startsWith('experience with') && !lower.startsWith('knowledge of')) {
       return true;
     }
-  }
-
-  // Sentences longer than 35 characters inside skills are usually project descriptions
-  if (text.length > 35 && /\b(built|developed|created|designed|implemented|using|with)\b/i.test(text)) {
-    return true;
   }
 
   return false;
 }
 
 /**
- * Cleans standalone dashes, bullets, and whitespace from text
- */
-export function cleanString(text: string | null | undefined): string {
-  if (!text) return '';
-  let cleaned = text.trim();
-
-  // Strip leading/trailing bullet points or dashes
-  cleaned = cleaned.replace(/^[•\-*–—\s]+/, '').replace(/[•\-*–—\s]+$/, '').trim();
-
-  // If string is only dashes or placeholders, return empty
-  if (/^[\-–—\s•]+$/.test(cleaned)) return '';
-  if (PLACEHOLDER_STRINGS.includes(cleaned.toLowerCase())) return '';
-
-  return cleaned;
-}
-
-/**
  * 1. Sanitizes Personal Contact Info
- * - Separates email, phone, location
- * - Prevents email domain (e.g. "gmail.com") from combining with location
- * - Prevents location duplication
+ * - Displays location only ONCE in contact row
+ * - Prevents email domains ("gmail.com") from combining with location
  */
 export function sanitizePersonalInfo(info: PersonalInfo): PersonalInfo {
   let email = cleanString(info.email);
@@ -117,7 +206,6 @@ export function sanitizePersonalInfo(info: PersonalInfo): PersonalInfo {
   let linkedin = cleanString(info.linkedin);
   let github = cleanString(info.github);
 
-  // Clean location if it contains email or email domains (e.g. "email@gmail.com, City, State" or "gmail.com City, State")
   if (location) {
     // Remove email address if present in location
     location = location.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi, '').trim();
@@ -125,10 +213,12 @@ export function sanitizePersonalInfo(info: PersonalInfo): PersonalInfo {
     location = location.replace(/\b(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|icloud\.com)\b/gi, '').trim();
     // Remove phone numbers if present in location
     location = location.replace(/(\+\d{1,3}[\s-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/gi, '').trim();
-    // Clean up leading/trailing punctuation
-    location = location.replace(/^[,\s\.\-–—]+/, '').replace(/[,\s\.\-–—]+$/, '').trim();
+    // Remove degree and institution text if present in location
+    location = location.replace(/\b(bachelor|master|doctor|phd|b\.?s|b\.?a|m\.?s|m\.?a|m\.?b\.?a|university|college|institute|degree|diploma)\b.*/gi, '').trim();
+    // Clean up leading/trailing punctuation and separators
+    location = location.replace(/^[,\s\.\-–—|]+/, '').replace(/[,\s\.\-–—|]+$/, '').trim();
 
-    // Deduplicate repetitive city/state tokens (e.g. "River Forest, IL, River Forest, IL")
+    // Deduplicate repetitive location tokens (e.g. "River Forest, IL, River Forest, IL")
     const parts = location.split(',').map(p => p.trim()).filter(Boolean);
     const uniqueParts: string[] = [];
     parts.forEach(p => {
@@ -139,7 +229,6 @@ export function sanitizePersonalInfo(info: PersonalInfo): PersonalInfo {
     location = uniqueParts.join(', ');
   }
 
-  // Ensure email does not contain location
   if (email && email.includes(',')) {
     const emailMatch = email.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
     if (emailMatch) email = emailMatch[0];
@@ -159,13 +248,19 @@ export function sanitizePersonalInfo(info: PersonalInfo): PersonalInfo {
 
 /**
  * 2. Cleans Summary
+ * - Corrects spaces before punctuation (e.g. "experience ." -> "experience.")
  * - Max 3-4 concise points
- * - Grammar fixes (e.g. "2 year" -> "2 years", "1 years" -> "1 year")
+ * - Grammar fixes ("2 year" -> "2 years", "1 years" -> "1 year")
  */
 export function sanitizeSummary(summaryText: string): string {
   if (!summaryText) return '';
 
   let text = summaryText.trim();
+
+  // Correct spacing before punctuation and collapse consecutive spaces
+  text = text
+    .replace(/\s+([.,!?:;])/g, '$1')
+    .replace(/\s{2,}/g, ' ');
 
   // Grammar correction: "X year" -> "X years" (where X > 1)
   text = text.replace(/\b(\d+)\s+years?\b/gi, (match, count) => {
@@ -173,26 +268,22 @@ export function sanitizeSummary(summaryText: string): string {
     return num === 1 ? `${num} year` : `${num} years`;
   });
 
-  // Handle "X year" without preceding "a" (e.g. "2 year experience" -> "2 years experience")
   text = text.replace(/\b([2-9]|\d{2,})\s+year\b/gi, '$1 years');
-
-  // Handle "1 years" -> "1 year"
   text = text.replace(/\b1\s+years\b/gi, '1 year');
 
   // Split into sentences / points
   const rawPoints = text
-    .split(/(?<=[.!?])\s+|\n|•|\ballow\b/i)
+    .split(/(?<=[.!?])\s+|\n|•/i)
     .map(p => cleanString(p))
     .filter(p => p.length > 10);
 
-  // Take maximum 3 to 4 concise points
   const concisePoints = (rawPoints.length > 0 ? rawPoints : [text]).slice(0, 4);
-
   return concisePoints.join(' ');
 }
 
 /**
- * 3. Consolidate Duplicate Education Entries
+ * 3. Consolidate & Format Education Records into unified entries
+ * Structure: Degree — Institution \n Location | Graduation year
  */
 export function sanitizeEducation(educationList: EducationItem[]): EducationItem[] {
   if (!educationList || educationList.length === 0) return [];
@@ -200,16 +291,18 @@ export function sanitizeEducation(educationList: EducationItem[]): EducationItem
   const cleanItems = educationList.map(item => {
     let inst = cleanString(item.institution);
     let loc = cleanString(item.location);
-    const deg = cleanString(item.degree);
+    let deg = cleanString(item.degree);
+
+    // Strip duplicate "University University" words
+    if (inst) {
+      inst = inst.replace(/\b(University|College|Institute)\s+\1\b/gi, '$1');
+    }
 
     if (inst && inst.includes(', ')) {
       const parts = inst.split(', ').map(p => p.trim());
       if (parts.length >= 2) {
-        // e.g. "Dominican University, River Forest, IL"
         inst = parts[0];
-        if (!loc) {
-          loc = parts.slice(1).join(', ');
-        }
+        if (!loc) loc = parts.slice(1).join(', ');
       }
     }
 
@@ -227,14 +320,11 @@ export function sanitizeEducation(educationList: EducationItem[]): EducationItem
 
   if (cleanItems.length === 0) return [];
 
-  // If there are multiple education items where fields are complementary (e.g. one has degree, one has institution/date), merge them!
   const consolidated: EducationItem[] = [];
 
   for (const item of cleanItems) {
     let merged = false;
     for (const existing of consolidated) {
-      // Check if item can be merged into existing entry:
-      // Either degree matches, institution matches, or one of them is missing degree/institution and the other has it!
       const canMerge =
         (!existing.institution || !item.institution || existing.institution.toLowerCase().includes(item.institution.toLowerCase()) || item.institution.toLowerCase().includes(existing.institution.toLowerCase())) &&
         (!existing.degree || !item.degree || existing.degree.toLowerCase().includes(item.degree.toLowerCase()) || item.degree.toLowerCase().includes(existing.degree.toLowerCase()));
@@ -268,17 +358,16 @@ export function sanitizeEducation(educationList: EducationItem[]): EducationItem
     }
   }
 
-  // Ensure clean non-empty values
   return consolidated.map((item, idx) => ({
     ...item,
     id: item.id || `edu-${idx + 1}`,
-    degree: item.degree || 'Bachelor of Science',
-    institution: item.institution || 'University'
+    degree: item.degree || '',
+    institution: item.institution || ''
   }));
 }
 
 /**
- * 4. Separates genuine technical skills from projects and categorizes headings
+ * 4. Separates Technical Skills from Projects & Sentence Implementation Descriptions
  */
 export function sanitizeSkillsAndProjects(
   skillsList: SkillCategory[],
@@ -286,10 +375,16 @@ export function sanitizeSkillsAndProjects(
 ): { skills: SkillCategory[]; projects: ProjectItem[] } {
   const cleanSkills: SkillCategory[] = [];
   const extractedProjects: ProjectItem[] = [...(projectsList || [])];
+  const pendingSentences: string[] = [];
 
   for (const cat of skillsList || []) {
     const catNameClean = cleanString(cat.category);
-    const validCategoryTitle = catNameClean || 'Technical Skills';
+    
+    // Ignore category headings if they match SKILL_CATEGORY_HEADINGS
+    let validCategoryTitle = 'Technical Skills';
+    if (catNameClean && !SKILL_CATEGORY_HEADINGS.includes(catNameClean.toLowerCase())) {
+      validCategoryTitle = catNameClean;
+    }
 
     const genuineSkills: string[] = [];
 
@@ -297,26 +392,30 @@ export function sanitizeSkillsAndProjects(
       const itemClean = cleanString(rawItem);
       if (!itemClean) continue;
 
-      // Check if this item is a Category Heading rather than a skill tag
+      // Skip if item is a category heading
       if (SKILL_CATEGORY_HEADINGS.includes(itemClean.toLowerCase())) {
-        // Skip adding as individual skill tag
         continue;
       }
 
-      // Check if this item is a Project (e.g., "AI Travel Assistant")
-      if (isProjectItem(itemClean)) {
-        // Move to projects section
+      // Check if item is an implementation sentence (e.g., "Implemented RAG chatbot with vector search")
+      if (isImplementationSentence(itemClean)) {
+        pendingSentences.push(itemClean);
+        continue;
+      }
+
+      // Check if item is a Project Title (e.g., "AI Travel Assistant")
+      if (isProjectTitle(itemClean)) {
         const existingProj = extractedProjects.find(p => p.title.toLowerCase() === itemClean.toLowerCase());
         if (!existingProj) {
           extractedProjects.push({
             id: `proj-extracted-${Date.now()}-${extractedProjects.length}`,
             title: itemClean,
-            subtitle: 'Project',
-            highlights: ['Designed and implemented application features using modern frameworks.']
+            subtitle: '',
+            highlights: []
           });
         }
       } else {
-        // Genuine skill
+        // Genuine Skill
         if (!genuineSkills.some(s => s.toLowerCase() === itemClean.toLowerCase())) {
           genuineSkills.push(itemClean);
         }
@@ -332,7 +431,23 @@ export function sanitizeSkillsAndProjects(
     }
   }
 
-  // Clean projects
+  // Assign pending implementation sentences into extracted projects
+  if (pendingSentences.length > 0) {
+    if (extractedProjects.length === 0) {
+      extractedProjects.push({
+        id: `proj-auto-1`,
+        title: 'Key Project',
+        subtitle: '',
+        highlights: pendingSentences
+      });
+    } else {
+      // Append sentences to the most relevant project or first project
+      const targetProj = extractedProjects.find(p => p.title.toLowerCase().includes('ai travel') || p.title.toLowerCase().includes('assistant')) || extractedProjects[0];
+      targetProj.highlights = Array.from(new Set([...(targetProj.highlights || []), ...pendingSentences]));
+    }
+  }
+
+  // Clean and merge projects
   const sanitizedProjects: ProjectItem[] = [];
   for (const proj of extractedProjects) {
     const title = cleanString(proj.title);
@@ -342,14 +457,15 @@ export function sanitizeSkillsAndProjects(
     const endDate = cleanString(proj.endDate);
     const highlights = (proj.highlights || []).map(h => cleanString(h)).filter(Boolean);
 
-    if (title) {
+    // Ignore project titles created from bullet fragments or incomplete sentences
+    if (title && !title.startsWith('with ') && !title.startsWith('using ') && title.length >= 3) {
       sanitizedProjects.push({
         id: proj.id || `proj-${sanitizedProjects.length + 1}`,
         title,
-        subtitle,
-        link,
-        startDate,
-        endDate,
+        subtitle: subtitle === 'Project' || subtitle === '(Project)' ? '' : subtitle,
+        link: link || '',
+        startDate: startDate || '',
+        endDate: endDate || '',
         highlights
       });
     }
@@ -362,7 +478,7 @@ export function sanitizeSkillsAndProjects(
 }
 
 /**
- * 5. Sanitizes Work Experience
+ * 5. Sanitizes Work & Volunteer Experience
  */
 export function sanitizeExperience(experienceList: ExperienceItem[]): ExperienceItem[] {
   if (!experienceList) return [];

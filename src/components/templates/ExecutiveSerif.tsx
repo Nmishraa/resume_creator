@@ -173,16 +173,11 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
                 <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item font-serif">
-                  <div className="flex justify-between items-baseline">
-                    <div className="font-bold text-slate-950">
-                      {edu.degree}
-                    </div>
-                    <div className="text-xs text-slate-600 font-sans">
-                      {edu.startDate} – {edu.endDate}
-                    </div>
+                  <div className="font-bold text-slate-950">
+                    {edu.degree}{edu.degree && edu.institution ? ' — ' : ''}{edu.institution}
                   </div>
-                  <div className="italic text-slate-800 text-xs">
-                    {[edu.institution, edu.location].filter(Boolean).join(', ')}
+                  <div className="text-xs text-slate-600 font-sans">
+                    {[edu.location, edu.endDate || edu.startDate].filter(Boolean).join(' | ')}
                   </div>
                 </div>
               ))}

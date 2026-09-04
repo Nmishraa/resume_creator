@@ -138,9 +138,12 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
                 <div className="space-y-2 text-xs">
                   {education.map(edu => (
                     <div key={edu.id} className="education-entry resume-entry page-break-avoid">
-                      <div className="font-bold text-slate-900">{edu.degree}</div>
-                      <div className="text-slate-600 text-[11px]">{edu.institution}</div>
-                      <div className="text-slate-400 text-[10px]">{edu.startDate} - {edu.endDate}</div>
+                      <div className="font-bold text-slate-900">
+                        {edu.degree}{edu.degree && edu.institution ? ' — ' : ''}{edu.institution}
+                      </div>
+                      <div className="text-slate-500 text-[11px]">
+                        {[edu.location, edu.endDate || edu.startDate].filter(Boolean).join(' | ')}
+                      </div>
                     </div>
                   ))}
                 </div>

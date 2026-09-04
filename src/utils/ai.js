@@ -253,71 +253,60 @@ export const matchJobDescription = (resumeData, jdText) => {
   };
 };
 
+import { parseResumeContent } from '../services/resumeExtractor';
+
 export const parseResumeText = (rawText) => {
   if (!rawText) return null;
 
-  const lines = rawText.split('\n').map(l => l.trim()).filter(Boolean);
+  const result = parseResumeContent(rawText);
+  const d = result.data || {};
 
-  // Extract Email
-  const emailMatch = rawText.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
-  const email = emailMatch ? emailMatch[0] : '';
-
-  // Extract Phone
-  const phoneMatch = rawText.match(/(\+\d{1,3}[\s-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/);
-  const phone = phoneMatch ? phoneMatch[0] : '';
-
-  // Extract LinkedIn
-  const linkedinMatch = rawText.match(/(linkedin\.com\/in\/[a-zA-Z0-9_-]+)/i);
-  const linkedin = linkedinMatch ? linkedinMatch[0] : '';
-
-  // Extract Name (usually first line)
-  const name = lines[0] ? lines[0].replace(/[^a-zA-Z\s]/g, '').trim() : '';
-
-  // Extract Skills
-  const skills = [];
-  const skillKeywords = ['react', 'javascript', 'typescript', 'node.js', 'python', 'java', 'sql', 'html', 'css', 'git', 'aws', 'docker', 'agile', 'scrum', 'project management'];
-  skillKeywords.forEach(sk => {
-    if (rawText.toLowerCase().includes(sk)) {
-      skills.push({ id: `imported_sk_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`, name: sk.charAt(0).toUpperCase() + sk.slice(1), level: 'Advanced' });
-    }
-  });
+  const skillsList = (d.skills || []).flatMap((cat, catIdx) =>
+    (cat.items || []).map((item, itemIdx) => ({
+      id: `imported_sk_${catIdx}_${itemIdx}`,
+      name: item,
+      level: 'Advanced'
+    }))
+  );
 
   return {
     personal: {
-      name,
-      role: 'Software Professional',
-      email,
-      phone,
-      location: 'City, Country',
-      linkedin,
-      summary: lines.slice(1, 4).join(' ') || 'Experienced professional with a strong track record of project execution.'
+      name: d.personalInfo?.fullName || '',
+      role: d.personalInfo?.jobTitle || '',
+      email: d.personalInfo?.email || '',
+      phone: d.personalInfo?.phone || '',
+      location: d.personalInfo?.location || '',
+      linkedin: d.personalInfo?.linkedin || '',
+      github: d.personalInfo?.github || '',
+      website: d.personalInfo?.website || '',
+      summary: d.summary || ''
     },
-    experience: [
-      {
-        id: `imported_exp_${Date.now()}`,
-        company: 'Previous Company',
-        role: 'Role Title',
-        location: 'Location',
-        startDate: '2021-01',
-        endDate: 'Present',
-        description: lines.slice(4, 8).join('\n• ') || '• Delivered core project features and collaborated with cross-functional teams.'
-      }
-    ],
-    education: [
-      {
-        id: `imported_edu_${Date.now()}`,
-        school: 'University',
-        degree: 'Bachelor of Science',
-        location: 'Location',
-        startDate: '2016-09',
-        endDate: '2020-05',
-        description: 'Graduated with honors.'
-      }
-    ],
-    skills: skills.length > 0 ? skills : [
-      { id: 's1', name: 'JavaScript', level: 'Advanced' },
-      { id: 's2', name: 'Problem Solving', level: 'Expert' }
-    ]
+    experience: (d.experience || []).map((exp, i) => ({
+      id: exp.id || `imported_exp_${i}`,
+      company: exp.company || '',
+      role: exp.role || '',
+      location: exp.location || '',
+      startDate: exp.startDate || '',
+      endDate: exp.endDate || '',
+      description: (exp.highlights || []).join('\n')
+    })),
+    education: (d.education || []).map((edu, i) => ({
+      id: edu.id || `imported_edu_${i}`,
+      school: edu.institution || '',
+      degree: edu.degree || '',
+      location: edu.location || '',
+      startDate: edu.startDate || '',
+      endDate: edu.endDate || ''
+    })),
+    skills: skillsList,
+    projects: (d.projects || []).map((proj, i) => ({
+      id: proj.id || `imported_proj_${i}`,
+      title: proj.title || '',
+      subtitle: proj.subtitle || '',
+      link: proj.link || '',
+      description: (proj.highlights || []).join('\n')
+    })),
+    certifications: d.certifications || [],
   };
 };
 

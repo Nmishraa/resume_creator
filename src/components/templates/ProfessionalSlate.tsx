@@ -162,11 +162,12 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
             >
               {education.map((edu) => (
                 <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item">
-                  <div className="flex justify-between items-baseline">
-                    <span className="font-bold text-slate-900">{edu.degree}</span>
-                    <span className="text-xs text-slate-500 font-mono">{edu.startDate} - {edu.endDate}</span>
+                  <div className="font-bold text-slate-900">
+                    {edu.degree}{edu.degree && edu.institution ? ' — ' : ''}{edu.institution}
                   </div>
-                  <div className="text-xs text-slate-600">{edu.institution} {edu.location && `• ${edu.location}`}</div>
+                  <div className="text-xs text-slate-600 font-mono">
+                    {[edu.location, edu.endDate || edu.startDate].filter(Boolean).join(' | ')}
+                  </div>
                 </div>
               ))}
             </div>

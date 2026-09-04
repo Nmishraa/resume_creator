@@ -112,17 +112,28 @@ export default function ResumeImporter({ onImport, onClose }) {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
-              <div>
-                <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155' }}>Name</label>
-                <input
-                  type="text"
-                  value={parsedResult.personal.name}
-                  onChange={(e) => setParsedResult({ ...parsedResult, personal: { ...parsedResult.personal, name: e.target.value } })}
-                  style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid #cbd5e1' }}
-                />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem' }}>
+                <div>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155' }}>Name</label>
+                  <input
+                    type="text"
+                    value={parsedResult.personal.name}
+                    onChange={(e) => setParsedResult({ ...parsedResult, personal: { ...parsedResult.personal, name: e.target.value } })}
+                    style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid #cbd5e1' }}
+                  />
+                </div>
+                <div>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155' }}>Target Role / Headline</label>
+                  <input
+                    type="text"
+                    value={parsedResult.personal.role}
+                    onChange={(e) => setParsedResult({ ...parsedResult, personal: { ...parsedResult.personal, role: e.target.value } })}
+                    style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid #cbd5e1' }}
+                  />
+                </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.8rem' }}>
                 <div>
                   <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155' }}>Email</label>
                   <input
@@ -141,6 +152,15 @@ export default function ResumeImporter({ onImport, onClose }) {
                     style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid #cbd5e1' }}
                   />
                 </div>
+                <div>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155' }}>Location</label>
+                  <input
+                    type="text"
+                    value={parsedResult.personal.location}
+                    onChange={(e) => setParsedResult({ ...parsedResult, personal: { ...parsedResult.personal, location: e.target.value } })}
+                    style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid #cbd5e1' }}
+                  />
+                </div>
               </div>
 
               <div>
@@ -152,6 +172,89 @@ export default function ResumeImporter({ onImport, onClose }) {
                   style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontFamily: 'inherit' }}
                 />
               </div>
+
+              {/* Grouped Work Experience Review */}
+              {parsedResult.experience && parsedResult.experience.length > 0 && (
+                <div style={{ marginTop: '0.5rem', background: '#f8fafc', padding: '1rem', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1e293b', marginBottom: '0.5rem', display: 'block' }}>
+                    Extracted Work Experience ({parsedResult.experience.length} grouped positions)
+                  </label>
+                  {parsedResult.experience.map((exp, idx) => (
+                    <div key={exp.id || idx} style={{ marginBottom: '1rem', paddingBottom: '0.8rem', borderBottom: idx < parsedResult.experience.length - 1 ? '1px dashed #cbd5e1' : 'none' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                        <input
+                          type="text"
+                          placeholder="Job Title / Role"
+                          value={exp.role}
+                          onChange={(e) => {
+                            const updated = [...parsedResult.experience];
+                            updated[idx].role = e.target.value;
+                            setParsedResult({ ...parsedResult, experience: updated });
+                          }}
+                          style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.85rem', fontWeight: 700 }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Company / Employer"
+                          value={exp.company}
+                          onChange={(e) => {
+                            const updated = [...parsedResult.experience];
+                            updated[idx].company = e.target.value;
+                            setParsedResult({ ...parsedResult, experience: updated });
+                          }}
+                          style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.85rem' }}
+                        />
+                      </div>
+                      <textarea
+                        rows={2}
+                        placeholder="Bullet Descriptions / Responsibilities"
+                        value={exp.description}
+                        onChange={(e) => {
+                          const updated = [...parsedResult.experience];
+                          updated[idx].description = e.target.value;
+                          setParsedResult({ ...parsedResult, experience: updated });
+                        }}
+                        style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.8rem', fontFamily: 'inherit' }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Grouped Education Review */}
+              {parsedResult.education && parsedResult.education.length > 0 && (
+                <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1e293b', marginBottom: '0.5rem', display: 'block' }}>
+                    Extracted Education ({parsedResult.education.length} records)
+                  </label>
+                  {parsedResult.education.map((edu, idx) => (
+                    <div key={edu.id || idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                      <input
+                        type="text"
+                        placeholder="Degree"
+                        value={edu.degree}
+                        onChange={(e) => {
+                          const updated = [...parsedResult.education];
+                          updated[idx].degree = e.target.value;
+                          setParsedResult({ ...parsedResult, education: updated });
+                        }}
+                        style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.85rem', fontWeight: 700 }}
+                      />
+                      <input
+                        type="text"
+                        placeholder="School / University"
+                        value={edu.school}
+                        onChange={(e) => {
+                          const updated = [...parsedResult.education];
+                          updated[idx].school = e.target.value;
+                          setParsedResult({ ...parsedResult, education: updated });
+                        }}
+                        style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.85rem' }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'flex-end' }}>
