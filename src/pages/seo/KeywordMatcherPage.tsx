@@ -92,8 +92,7 @@ export const KeywordMatcherPage: React.FC = () => {
 
       {/* FAQ */}
       <section className="max-w-4xl mx-auto px-4 space-y-6">
-        <h2 className="text-2xl font-bold text-slate-900 text-center">Resume Keyword Matcher FAQs</h2>
-        <FaqAccordion items={faqs} />
+        <FaqAccordion items={faqs} title="Resume Keyword Matcher FAQs" />
       </section>
     </div>
   );

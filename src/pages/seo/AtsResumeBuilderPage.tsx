@@ -92,7 +92,6 @@ export const AtsResumeBuilderPage: React.FC = () => {
 
       {/* FAQ */}
       <section className="max-w-4xl mx-auto px-4 space-y-6">
-        <h2 className="text-2xl font-bold text-slate-900 text-center">Frequently Asked Questions</h2>
         <FaqAccordion items={faqs} />
       </section>
     </div>

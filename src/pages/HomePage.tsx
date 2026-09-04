@@ -366,11 +366,6 @@ export const HomePage: React.FC = () => {
 
       {/* 6. PRIVACY & FAQS */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <div className="text-center space-y-2">
-          <h2 className="text-3xl font-black text-slate-950 tracking-tight">
-            Frequently Asked Questions
-          </h2>
-        </div>
         <FaqAccordion items={homeFaqs} />
       </section>
 
