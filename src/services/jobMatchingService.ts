@@ -419,56 +419,70 @@ export async function fetchMatchingJobs(
 
     // 2. Role Title Similarity Score (0 to 45 pts)
     let roleScore = 0;
-    const roleNorm = targetRole.toLowerCase();
-    const titleNorm = job.title.toLowerCase();
+    const roleNorm = targetRole.toLowerCase().trim();
+    const titleNorm = job.title.toLowerCase().trim();
 
-    if (titleNorm.includes(roleNorm) || roleNorm.includes(titleNorm)) {
+    if (titleNorm === roleNorm) {
       roleScore = 45;
+    } else if (titleNorm.includes(roleNorm) || roleNorm.includes(titleNorm)) {
+      roleScore = 38;
     } else {
-      const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'senior', 'junior', 'lead', 'staff']);
-      const roleTokens = roleNorm.split(/\s+/).filter(t => t.length > 2 && !stopwords.has(t));
+      const stopwords = new Set(['a', 'an', 'the', 'in', 'of', 'and', 'or', 'for', 'senior', 'junior', 'lead', 'staff', 'pt', 'ft']);
+      const roleTokens = roleNorm.split(/[\s,/\-\\_]+/).filter(t => t.length > 2 && !stopwords.has(t));
       const matchedTokens = roleTokens.filter(t => titleNorm.includes(t));
       if (roleTokens.length > 0) {
-        roleScore = Math.round((matchedTokens.length / roleTokens.length) * 40);
+        roleScore = Math.round((matchedTokens.length / roleTokens.length) * 35);
       } else {
-        roleScore = 20;
+        roleScore = 18;
       }
     }
 
-    // 3. Skill Overlap Ratio Score (0 to 45 pts)
+    // 3. Skill Overlap Ratio Score (0 to 35 pts)
     let skillScore = 0;
     if (extractedSkills.length > 0) {
       const skillRatio = matchedSkills.length / Math.max(1, extractedSkills.length);
-      skillScore = Math.min(45, Math.round(skillRatio * 45));
+      skillScore = Math.round(skillRatio * 35);
     } else {
-      skillScore = 15;
+      skillScore = 8;
     }
 
-    // 4. Location / Remote Score (0 to 10 pts)
+    // 4. Location / Remote Score (0 to 12 pts)
     let locationScore = 5;
-    if (job.isRemote || (candidateLocation && job.location.toLowerCase().includes(candidateLocation.toLowerCase()))) {
+    if (candidateLocation && candidateLocation.toLowerCase() !== 'remote' && job.location.toLowerCase().includes(candidateLocation.toLowerCase())) {
+      locationScore = 12;
+    } else if (job.isRemote) {
       locationScore = 10;
     }
 
-    let calculatedScore = roleScore + skillScore + locationScore;
+    // 5. Seniority / Experience Alignment (0 to 8 pts)
+    let expScore = 5;
+    if (job.experienceLevel === 'All Levels' || job.experienceLevel === 'Mid Level') {
+      expScore = 8;
+    }
 
-    // CRITICAL GUARD: Prevent high scores when zero skills match
+    let calculatedScore = roleScore + skillScore + locationScore + expScore;
+
+    // DYNAMIC ZERO-SKILL DIVERSIFICATION:
+    // If zero resume skills explicitly match the snippet text, scale naturally based on title & location alignment
+    // (e.g. 28% to 52%) instead of flattening all scores to a single static 38%.
     if (matchedSkills.length === 0) {
       if (roleScore >= 35) {
-        calculatedScore = Math.min(38, calculatedScore); // Cap at max 38% if role matches but 0 skills match
+        // High title alignment: scale between 38% and 52% based on title exactness & location
+        calculatedScore = Math.min(52, Math.max(38, roleScore + locationScore + (titleNorm === roleNorm ? 4 : 0)));
       } else {
-        calculatedScore = Math.min(22, calculatedScore); // Cap at max 22% if role & skills have no match
+        // Moderate title alignment: scale between 22% and 36%
+        calculatedScore = Math.min(36, Math.max(22, roleScore + locationScore));
       }
     }
 
-    const matchPercentage = Math.min(98, Math.max(12, calculatedScore));
+    const matchPercentage = Math.min(98, Math.max(15, calculatedScore));
 
-    // 5. Build honest human-readable match reason
+    // Build honest human-readable match reason
     let matchReason = '';
     if (matchedSkills.length > 0) {
       matchReason = `${matchPercentage}% Match: Strong title alignment with ${targetRole} and matches ${matchedSkills.length} of your candidate skills (${matchedSkills.slice(0, 3).join(', ')}).`;
     } else {
-      matchReason = `${matchPercentage}% Title Match: Fits your target title (${targetRole}), but does not explicitly list your specific resume skills in the excerpt.`;
+      matchReason = `${matchPercentage}% Title Match: Fits your target title (${targetRole}), evaluated by title relevance and location preference.`;
     }
 
     if (job.isRemote) {
