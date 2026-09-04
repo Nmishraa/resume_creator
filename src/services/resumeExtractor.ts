@@ -1,5 +1,6 @@
 import * as mammoth from 'mammoth';
 import * as pdfjsLib from 'pdfjs-dist';
+import { sanitizeResumeData } from './resumeSanitizer';
 import {
   ResumeData,
   PersonalInfo,
@@ -505,7 +506,7 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
     });
   }
 
-  const extractedResumeData: Partial<ResumeData> = {
+  const extractedResumeData: Partial<ResumeData> = sanitizeResumeData({
     personalInfo,
     summary: summaryText,
     experience,
@@ -514,7 +515,7 @@ export function parseResumeContent(rawText: string): ExtractedResumeResult {
     projects,
     certifications,
     customSections
-  };
+  });
 
   return {
     data: extractedResumeData,

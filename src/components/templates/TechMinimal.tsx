@@ -16,6 +16,12 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
   const accentColor = formatting.accentColor || '#0f766e';
   const densityStyles = getAdaptiveDensityStyles(densityMode);
 
+  let sectionCounter = 1;
+  const getSectionNum = () => {
+    const num = sectionCounter++;
+    return num < 10 ? `0${num}` : `${num}`;
+  };
+
   return (
     <div
       className={`w-full max-w-[794px] box-border bg-white text-slate-800 ${fontClass} page-break-container`}
@@ -62,7 +68,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-1 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
-              01 // SUMMARY
+              {getSectionNum()} // SUMMARY
             </div>
             <ul
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
@@ -83,7 +89,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
-              02 // TECHNICAL SKILLS
+              {getSectionNum()} // TECHNICAL SKILLS
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
               {skills.map((s) => (
@@ -110,7 +116,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
-              03 // EXPERIENCE
+              {getSectionNum()} // EXPERIENCE
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {experience.map((exp) => (
@@ -118,11 +124,13 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                   <div className="flex justify-between items-baseline flex-wrap font-mono">
                     <div>
                       <span className="font-bold text-slate-900 text-sm">{exp.role}</span>
-                      <span className="text-slate-500 text-xs"> @ {exp.company}</span>
+                      {exp.company && <span className="text-slate-500 text-xs"> @ {exp.company}</span>}
                     </div>
-                    <span className="text-xs text-slate-500">
-                      {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
-                    </span>
+                    {(exp.startDate || exp.endDate) && (
+                      <span className="text-xs text-slate-500">
+                        {exp.startDate}{exp.endDate ? ` - ${exp.current ? 'Present' : exp.endDate}` : ''}
+                      </span>
+                    )}
                   </div>
                   {exp.highlights && (
                     <ul
@@ -130,6 +138,46 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                       className="mt-1.5 list-disc list-outside ml-4 text-slate-700 font-sans"
                     >
                       {exp.highlights.map((h, i) => (
+                        <li key={i}>{h}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Projects */}
+        {projects && projects.length > 0 && (
+          <div>
+            <div
+              style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
+              className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
+            >
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
+              {getSectionNum()} // PROJECTS
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
+              {projects.map((proj) => (
+                <div key={proj.id} className="project-entry resume-entry page-break-avoid resume-section-item">
+                  <div className="flex justify-between items-baseline flex-wrap font-mono">
+                    <div>
+                      <span className="font-bold text-slate-900 text-sm">{proj.title}</span>
+                      {proj.subtitle && <span className="text-slate-500 text-xs"> ({proj.subtitle})</span>}
+                    </div>
+                    {proj.startDate && (
+                      <span className="text-xs text-slate-500">
+                        {proj.startDate}{proj.endDate ? ` - ${proj.endDate}` : ''}
+                      </span>
+                    )}
+                  </div>
+                  {proj.highlights && (
+                    <ul
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                      className="mt-1.5 list-disc list-outside ml-4 text-slate-700 font-sans"
+                    >
+                      {proj.highlights.map((h, i) => (
                         <li key={i}>{h}</li>
                       ))}
                     </ul>
@@ -148,16 +196,20 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
-              04 // EDUCATION
+              {getSectionNum()} // EDUCATION
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
                 <div key={edu.id} className="education-entry resume-entry page-break-avoid resume-section-item font-mono text-xs">
                   <div className="flex justify-between items-baseline">
                     <span className="font-bold text-slate-900">{edu.degree}</span>
-                    <span className="text-slate-500">{edu.startDate} - {edu.endDate}</span>
+                    {(edu.startDate || edu.endDate) && (
+                      <span className="text-slate-500">{edu.startDate}{edu.endDate ? ` - ${edu.endDate}` : ''}</span>
+                    )}
                   </div>
-                  <div className="text-slate-600">{edu.institution} {edu.location && `• ${edu.location}`}</div>
+                  {edu.institution && (
+                    <div className="text-slate-600">{edu.institution} {edu.location && `• ${edu.location}`}</div>
+                  )}
                 </div>
               ))}
             </div>
@@ -167,3 +219,4 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
     </div>
   );
 };
+
