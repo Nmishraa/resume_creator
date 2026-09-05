@@ -68,7 +68,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
         {/* Professional Summary */}
         {summary && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <h2
               style={{
                 fontSize: 'var(--resume-section-title-size, 15px)',
@@ -92,7 +92,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
 
         {/* Experience */}
         {experience && experience.length > 0 && (
-          <div>
+          <div className="resume-section">
             <h2
               style={{
                 fontSize: 'var(--resume-section-title-size, 15px)',
@@ -132,7 +132,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
 
         {/* Projects */}
         {projects && projects.length > 0 && (
-          <div>
+          <div className="resume-section">
             <h2
               style={{
                 fontSize: 'var(--resume-section-title-size, 15px)',
@@ -174,7 +174,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
 
         {/* Skills */}
         {skills && skills.length > 0 && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <h2
               style={{
                 fontSize: 'var(--resume-section-title-size, 15px)',
@@ -201,7 +201,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
 
         {/* Education */}
         {education && education.length > 0 && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <h2
               style={{
                 fontSize: 'var(--resume-section-title-size, 15px)',
@@ -229,7 +229,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
 
         {/* Certifications */}
         {certifications && certifications.length > 0 && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <h2
               style={{
                 fontSize: 'var(--resume-section-title-size, 15px)',

@@ -15,7 +15,7 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
   // 1. Reset any previously applied pagination margins/spacers
   const allManagedElements = Array.from(
     containerEl.querySelectorAll<HTMLElement>(
-      '.resume-section-title, .resume-entry, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .page-break-avoid, .resume-section-item'
+      '.resume-section, .resume-section-title, .education-entry, .experience-entry, .project-entry, .certification-entry, .page-break-avoid, .resume-section-item'
     )
   );
 
@@ -30,12 +30,21 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
   const containerTop = containerRect.top;
   let maxPageFound = 1;
 
-  // 2. Iterate through all section titles & entry blocks
+  // 2. Iterate through section containers & entry blocks
   const blocks = Array.from(
     containerEl.querySelectorAll<HTMLElement>(
-      '.resume-section-title, .resume-entry, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .page-break-avoid, .resume-section-item'
+      '.resume-section, .education-entry, .experience-entry, .project-entry, .certification-entry, .page-break-avoid, .resume-section-item'
     )
-  );
+  ).filter(el => {
+    const parent = el.parentElement;
+    if (!parent) return true;
+    const parentDisplay = window.getComputedStyle(parent).display;
+    // Skip child items inside grid or flex containers unless it's a section wrapper
+    if (!el.classList.contains('resume-section') && (parentDisplay.includes('grid') || (parentDisplay.includes('flex') && !parent.classList.contains('page-break-container') && parent.tagName.toLowerCase() !== 'div'))) {
+      return false;
+    }
+    return true;
+  });
 
   for (let i = 0; i < blocks.length; i++) {
     const el = blocks[i];

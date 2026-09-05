@@ -225,11 +225,11 @@ export const ResumePreview: React.FC = () => {
                 <div
                   key={pageIdx}
                   style={{ top: `${topOffsetPx}px` }}
-                  className="no-print absolute left-0 right-0 z-20 pointer-events-none flex items-center justify-center"
+                  className="no-print absolute left-0 right-0 z-20 pointer-events-none flex items-center justify-end px-4 -translate-y-1/2"
                 >
-                  <div className="w-full border-b-2 border-dashed border-red-400/80 relative">
-                    <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md border border-white">
-                      ✂️ A4 Page Break (Page {pageIdx + 1} / {totalPages})
+                  <div className="w-full border-t border-dashed border-slate-300 relative flex items-center justify-end">
+                    <span className="bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold px-2.5 py-0.5 rounded shadow-2xs select-none">
+                      Page {pageIdx + 2}
                     </span>
                   </div>
                 </div>

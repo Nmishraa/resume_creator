@@ -151,7 +151,15 @@ export const StudentResumeBuilderPage: React.FC = () => {
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-xl border border-slate-200 space-y-4 font-sans text-xs text-slate-700">
+        <div 
+          onClick={() => {
+            if (studentExample?.presetData) {
+              navigate('/resume-preview', { state: { resumeData: studentExample.presetData } });
+            }
+          }}
+          className="bg-white p-6 rounded-xl border border-slate-200 space-y-4 font-sans text-xs text-slate-700 cursor-pointer hover:border-brand-300 hover:shadow-md transition-all"
+          title="Click to view full-page resume preview"
+        >
           <div className="border-b border-slate-200 pb-3">
             <h4 className="font-black text-slate-900 text-base">{studentExample.presetData.personalInfo?.fullName}</h4>
             <p className="text-slate-500">{studentExample.presetData.personalInfo?.jobTitle} • {studentExample.presetData.personalInfo?.location}</p>

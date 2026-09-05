@@ -57,7 +57,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
         {/* Summary */}
         {summary && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <div className="resume-section-title flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
@@ -80,7 +80,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
 
         {/* Experience */}
         {experience && experience.length > 0 && (
-          <div>
+          <div className="resume-section">
             <div className="resume-section-title flex items-center gap-2 mb-2.5" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
@@ -123,7 +123,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
 
         {/* Projects */}
         {projects && projects.length > 0 && (
-          <div>
+          <div className="resume-section">
             <div className="resume-section-title flex items-center gap-2 mb-2.5" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
@@ -168,7 +168,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
 
         {/* Skills */}
         {skills && skills.length > 0 && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <div className="resume-section-title flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2
@@ -191,7 +191,7 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
 
         {/* Education */}
         {education && education.length > 0 && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <div className="resume-section-title flex items-center gap-2 mb-2" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
               <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
               <h2

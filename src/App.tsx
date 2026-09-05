@@ -53,6 +53,7 @@ const FaqPage = lazyWithRetry(() => import('./pages/FaqPage').then(m => ({ defau
 const AtsResumeBuilderPage = lazyWithRetry(() => import('./pages/seo/AtsResumeBuilderPage').then(m => ({ default: m.AtsResumeBuilderPage })));
 const SoftwareEngineerBuilderPage = lazyWithRetry(() => import('./pages/seo/SoftwareEngineerBuilderPage').then(m => ({ default: m.SoftwareEngineerBuilderPage })));
 const KeywordMatcherPage = lazyWithRetry(() => import('./pages/seo/KeywordMatcherPage').then(m => ({ default: m.KeywordMatcherPage })));
+const FullPagePreviewPage = lazyWithRetry(() => import('./pages/FullPagePreviewPage').then(m => ({ default: m.FullPagePreviewPage })));
 
 const RouteLoadingFallback = () => (
   <div className="min-h-[60vh] flex items-center justify-center p-8">
@@ -106,6 +107,7 @@ export function App() {
             <Route path="resume-examples" element={<ResumeExamplesHubPage />} />
             <Route path="examples" element={<Navigate to="/resume-examples" replace />} />
             <Route path="resume-examples/:role" element={<ResumeExampleDetailPage />} />
+            <Route path="resume-preview" element={<FullPagePreviewPage />} />
 
             {/* Career & ATS Guides */}
             <Route path="guides" element={<GuidesHubPage />} />

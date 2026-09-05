@@ -231,10 +231,11 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['API First Architecture', 'Microservices', 'GraphQL', 'Agile Scrum', 'Kafka'],
     pageLength: '2-Page',
     fullResume: {
-      summary: 'Data-driven Lead Technical Product Manager with 7+ years of experience managing developer-facing APIs, distributed microservices, and cloud infrastructure platforms. Proven track record scaling API throughput to 10,000 requests/sec and accelerating developer onboarding by 50%.',
+      summary: 'Data-driven Lead Technical Product Manager with 7+ years of experience managing developer-facing APIs, distributed microservices, and cloud infrastructure platforms. Proven track record scaling API throughput to 10,000 requests/sec, accelerating developer onboarding by 50%, and directing cross-functional engineering teams across Agile release cycles.',
       skills: [
         { category: 'Technical Management', items: ['API Strategy (REST/GraphQL)', 'Microservices Architecture', 'System Scalability', 'Developer Experience (DX)'] },
-        { category: 'Product Operations', items: ['Agile / Scrum', 'Jira / Confluence', 'SQL Data Analytics', 'Roadmap Prioritization', 'Kafka Data Pipelines'] }
+        { category: 'Product Operations', items: ['Agile / Scrum', 'Jira / Confluence', 'SQL Data Analytics', 'Roadmap Prioritization', 'Kafka Data Pipelines'] },
+        { category: 'Cloud & Infrastructure', items: ['AWS API Gateway', 'Docker', 'Kubernetes', 'OpenAPI 3.0', 'Postman', 'Datadog'] }
       ],
       experience: [
         {
@@ -248,7 +249,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Owned core API gateway product roadmap supporting 10,000 peak requests/sec with 99.999% uptime SLA across 40 enterprise tenants.',
             'Reduced external developer integration onboarding time from 14 days to 3 days by launching automated interactive API documentation and SDK generators.',
-            'Led cross-functional team of 16 backend engineers, increasing sprint velocity by 28% through refined backlog grooming.'
+            'Led cross-functional team of 16 backend engineers, increasing sprint velocity by 28% through refined backlog grooming.',
+            'Partnered with security leads to enforce OAuth2 / OIDC authentication across all public endpoint surfaces.'
           ]
         },
         {
@@ -261,7 +263,21 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: false,
           highlights: [
             'Spearheaded migration of legacy monolithic payment system to gRPC microservices, reducing transaction processing latency by 45%.',
-            'Authored detailed Technical Requirement Documents (TRDs) and OpenAPI specifications.'
+            'Authored detailed Technical Requirement Documents (TRDs) and OpenAPI specifications adopted by 6 engineering squads.',
+            'Managed customer feedback loops from top 20 enterprise accounts, driving feature enhancements that raised NPS by 18 points.'
+          ]
+        },
+        {
+          id: 'exp-2-3',
+          role: 'Technical Product Analyst',
+          company: 'DevEngine Software',
+          location: 'Bellevue, WA',
+          startDate: '2015-06',
+          endDate: '2018-01',
+          current: false,
+          highlights: [
+            'Wrote SQL data analytics queries and constructed Mixpanel dashboards tracking developer portal engagement.',
+            'Coordinated sprint planning, backlog grooming, and daily standups for 2 Agile engineering teams.'
           ]
         }
       ],
@@ -272,6 +288,13 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           description: 'Architected real-time telemetry streaming feature powered by Apache Kafka and Redis.',
           techStack: ['Kafka', 'Redis', 'OpenAPI', 'Docker'],
           outcomes: 'Processed 5M daily telemetry events with zero data loss.'
+        },
+        {
+          id: 'proj-2-2',
+          title: 'Developer SDK & Interactive Documentation Portal',
+          description: 'Designed self-service portal generating Python, TypeScript, and Go SDKs from OpenAPI specifications.',
+          techStack: ['OpenAPI 3.0', 'Swagger', 'TypeScript', 'Node.js'],
+          outcomes: 'Cut developer integration support tickets by 60%.'
         }
       ],
       education: [
@@ -280,8 +303,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Computer Engineering',
           institution: 'University of Washington',
           location: 'Seattle, WA',
-          startDate: '2013',
-          endDate: '2017',
+          startDate: '2011',
+          endDate: '2015',
           gpa: '3.85 / 4.0'
         }
       ],
@@ -289,7 +312,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       technologies: ['OpenAPI', 'GraphQL', 'Kafka', 'Redis', 'Docker', 'Jira', 'SQL', 'Postman']
     },
     presetData: {
-      title: 'Technical Product Manager Resume (Example)',
+      title: 'Technical Product Manager Resume (2-Page Example)',
       personalInfo: {
         fullName: 'Ethan Montgomery',
         jobTitle: 'Lead Technical Product Manager',
@@ -300,7 +323,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         linkedin: 'linkedin.com/in/ethanmontgomery-demo',
         github: 'github.com/ethanmontgomery-demo'
       },
-      summary: 'Data-driven Lead Technical Product Manager with 7+ years of experience managing developer-facing APIs, distributed microservices, and cloud infrastructure platforms.',
+      summary: 'Data-driven Lead Technical Product Manager with 7+ years of experience managing developer-facing APIs, distributed microservices, and cloud infrastructure platforms. Proven track record scaling API throughput to 10,000 requests/sec, accelerating developer onboarding by 50%, and directing cross-functional engineering teams across Agile release cycles.',
       experience: [
         {
           id: 'exp-2-1',
@@ -311,10 +334,54 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Owned core API gateway product roadmap supporting 10,000 peak requests/sec with 99.999% uptime SLA.',
-            'Reduced developer integration onboarding time from 14 days to 3 days via automated API docs.',
-            'Led cross-functional team of 16 engineers, increasing sprint velocity by 28%.'
+            'Owned core API gateway product roadmap supporting 10,000 peak requests/sec with 99.999% uptime SLA across 40 enterprise tenants.',
+            'Reduced external developer integration onboarding time from 14 days to 3 days by launching automated interactive API documentation and SDK generators.',
+            'Led cross-functional team of 16 backend engineers, increasing sprint velocity by 28% through refined backlog grooming.',
+            'Partnered with security leads to enforce OAuth2 / OIDC authentication across all public endpoint surfaces.'
           ]
+        },
+        {
+          id: 'exp-2-2',
+          role: 'Senior Technical Product Manager',
+          company: 'DevEngine Software',
+          location: 'Bellevue, WA',
+          startDate: '2018-02',
+          endDate: '2021-04',
+          current: false,
+          highlights: [
+            'Spearheaded migration of legacy monolithic payment system to gRPC microservices, reducing transaction processing latency by 45%.',
+            'Authored detailed Technical Requirement Documents (TRDs) and OpenAPI specifications adopted by 6 engineering squads.',
+            'Managed customer feedback loops from top 20 enterprise accounts, driving feature enhancements that raised NPS by 18 points.'
+          ]
+        },
+        {
+          id: 'exp-2-3',
+          role: 'Technical Product Analyst',
+          company: 'DevEngine Software',
+          location: 'Bellevue, WA',
+          startDate: '2015-06',
+          endDate: '2018-01',
+          current: false,
+          highlights: [
+            'Wrote SQL data analytics queries and constructed Mixpanel dashboards tracking developer portal engagement.',
+            'Coordinated sprint planning, backlog grooming, and daily standups for 2 Agile engineering teams.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-2-1',
+          title: 'Event-Driven Data Streaming Pipeline',
+          description: 'Architected real-time telemetry streaming feature powered by Apache Kafka and Redis.',
+          techStack: ['Kafka', 'Redis', 'OpenAPI', 'Docker'],
+          outcomes: 'Processed 5M daily telemetry events with zero data loss.'
+        },
+        {
+          id: 'proj-2-2',
+          title: 'Developer SDK & Interactive Documentation Portal',
+          description: 'Designed self-service portal generating Python, TypeScript, and Go SDKs from OpenAPI specifications.',
+          techStack: ['OpenAPI 3.0', 'Swagger', 'TypeScript', 'Node.js'],
+          outcomes: 'Cut developer integration support tickets by 60%.'
         }
       ],
       education: [
@@ -323,13 +390,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Computer Engineering',
           institution: 'University of Washington',
           location: 'Seattle, WA',
-          startDate: '2013',
-          endDate: '2017',
+          startDate: '2011',
+          endDate: '2015',
           gpa: '3.85 / 4.0'
         }
       ],
+      certifications: [
+        { id: 'cert-2-1', name: 'AWS Certified Solutions Architect – Associate', issuer: 'Amazon Web Services', date: '2021' },
+        { id: 'cert-2-2', name: 'Certified Scrum Master (CSM)', issuer: 'Scrum Alliance', date: '2019' }
+      ],
       skills: [
-        { id: 's-2-1', category: 'Technical Management', items: ['API Strategy', 'Microservices', 'GraphQL', 'Kafka', 'Agile'] }
+        { id: 's-2-1', category: 'Technical Management', items: ['API Strategy (REST/GraphQL)', 'Microservices Architecture', 'System Scalability', 'Developer Experience (DX)'] },
+        { id: 's-2-2', category: 'Product Operations', items: ['Agile / Scrum', 'Jira / Confluence', 'SQL Data Analytics', 'Roadmap Prioritization', 'Kafka Data Pipelines'] },
+        { id: 's-2-3', category: 'Cloud & Infrastructure', items: ['AWS API Gateway', 'Docker', 'Kubernetes', 'OpenAPI 3.0', 'Postman', 'Datadog'] }
       ]
     }
   },
@@ -353,10 +426,12 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['TOGAF 10', 'Cloud Governance', 'ERP Transformation', 'SOA', 'EA Governance'],
     pageLength: '3-Page',
     fullResume: {
-      summary: 'Strategic Chief Enterprise Architect with 11+ years of experience aligning IT capabilities with business goals across Fortune 500 financial and manufacturing sectors. Expert in TOGAF framework implementation, legacy modernization, and governing an $18M annual technology budget.',
+      summary: 'Strategic Chief Enterprise Architect with 11+ years of experience aligning IT capabilities with business goals across Fortune 500 financial and manufacturing sectors. Expert in TOGAF 10 framework implementation, legacy mainframe modernization, multi-cloud governance, and governing an $18M annual technology portfolio.',
       skills: [
-        { category: 'Enterprise Frameworks', items: ['TOGAF 10', 'Zachman Framework', 'SOA Architecture', 'Cloud Governance', 'Application Rationalization'] },
-        { category: 'Core Technologies', items: ['AWS / Azure Cloud', 'SAP S/4HANA', 'MuleSoft API Gateway', 'PostgreSQL', 'Kubernetes', 'Cybersecurity Governance'] }
+        { category: 'Enterprise Frameworks', items: ['TOGAF 10', 'Zachman Framework', 'SOA Architecture', 'Cloud Governance', 'Application Rationalization', 'ITIL v4'] },
+        { category: 'Cloud & Infrastructure', items: ['AWS Control Tower', 'Azure Landing Zones', 'Terraform IaC', 'Kubernetes (EKS/AKS)', 'Docker', 'Hybrid Identity'] },
+        { category: 'Enterprise Systems', items: ['SAP S/4HANA ERP', 'MuleSoft Anypoint', 'PostgreSQL', 'Oracle DB', 'Kafka Event Streaming', 'Salesforce CRM'] },
+        { category: 'Governance & Security', items: ['Zero Trust Topologies', 'NIST Cyber Framework', 'SOC 2 Type II Compliance', 'ISO 27001', 'Cost Governance (FinOps)'] }
       ],
       experience: [
         {
@@ -369,8 +444,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: true,
           highlights: [
             'Governed 4-year enterprise IT modernization roadmap for $18M technology portfolio, reducing operational legacy maintenance expenses by 35%.',
-            'Orchestrated 100% cloud migration of legacy SAP ERP to AWS cloud, eliminating 120 on-premise physical servers.',
-            'Established Architecture Review Board (ARB) standards across 8 business units, enforcing strict zero-trust security compliance.'
+            'Orchestrated 100% cloud migration of legacy SAP ERP to AWS cloud infrastructure, eliminating 120 on-premise physical servers.',
+            'Established Architecture Review Board (ARB) governance standards across 8 business units, enforcing strict zero-trust security compliance.',
+            'Spearheaded FinOps cloud cost management framework, optimizing AWS & Azure reservation instances to save $1.8M annually.'
           ]
         },
         {
@@ -378,12 +454,38 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           role: 'Principal Enterprise Architect',
           company: 'Apex Financial Group',
           location: 'Chicago, IL',
-          startDate: '2015-08',
+          startDate: '2016-08',
           endDate: '2019-12',
           current: false,
           highlights: [
-            'Designed enterprise integration bus using MuleSoft, unifying 24 disparate banking applications and cutting data sync delays by 70%.',
-            'Rationalized application portfolio, decommissioning 35 redundant software tools to save $2.4M annually.'
+            'Designed enterprise integration bus using MuleSoft Anypoint, unifying 24 disparate banking applications and cutting data sync delays by 70%.',
+            'Rationalized enterprise application portfolio, decommissioning 35 redundant software tools to save $2.4M in annual licensing fees.',
+            'Led technical due diligence for 3 corporate M&A integrations, harmonizing core banking software pipelines within 90 days of closing.'
+          ]
+        },
+        {
+          id: 'exp-3-3',
+          role: 'Senior Systems Architect',
+          company: 'Vanguard Technologies',
+          location: 'Oak Brook, IL',
+          startDate: '2013-03',
+          endDate: '2016-07',
+          current: false,
+          highlights: [
+            'Architected high-throughput transaction processing engine handling 15M daily operations with p99 latency under 40ms.',
+            'Migrated core customer database from legacy IBM mainframe to distributed Oracle Real Application Clusters (RAC).'
+          ]
+        },
+        {
+          id: 'exp-3-4',
+          role: 'Lead Infrastructure Architect',
+          company: 'Midwest Health Systems',
+          location: 'Naperville, IL',
+          startDate: '2011-06',
+          endDate: '2013-02',
+          current: false,
+          highlights: [
+            'Designed HIPAA-compliant disaster recovery architecture across dual data centers with sub-15 minute recovery time objectives (RTO).'
           ]
         }
       ],
@@ -391,9 +493,23 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         {
           id: 'proj-3-1',
           title: 'Global Multi-Tenant Cloud Landing Zone',
-          description: 'Architected standardized enterprise AWS & Azure landing zone compliant with SOC2 and ISO 27001.',
+          description: 'Architected standardized enterprise AWS & Azure landing zone compliant with SOC2 Type II and ISO 27001 security controls.',
           techStack: ['AWS Control Tower', 'Terraform', 'Azure AD', 'MuleSoft'],
-          outcomes: 'Streamlined new environment provisioning from 6 weeks to 4 hours.'
+          outcomes: 'Streamlined new business unit cloud environment provisioning from 6 weeks to 4 hours.'
+        },
+        {
+          id: 'proj-3-2',
+          title: 'Enterprise SOA & Integration Bus Modernization',
+          description: 'Replaced legacy SOAP web services with event-driven RESTful microservices and Apache Kafka event streams.',
+          techStack: ['Apache Kafka', 'MuleSoft Anypoint', 'Docker', 'Kubernetes'],
+          outcomes: 'Accelerated real-time financial reporting processing speed by 82%.'
+        },
+        {
+          id: 'proj-3-3',
+          title: 'Zero-Trust Identity & Access Management Topology',
+          description: 'Designed centralized Okta & Azure Entra ID federated identity access controls across 25,000 corporate users.',
+          techStack: ['Okta IAM', 'Azure Entra ID', 'SAML 2.0', 'OAuth2/OIDC'],
+          outcomes: 'Eliminated unauthorized access vulnerabilities across 120 internal enterprise web apps.'
         }
       ],
       education: [
@@ -402,16 +518,28 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'M.S. in Information Technology & Management',
           institution: 'Northwestern University',
           location: 'Evanston, IL',
-          startDate: '2011',
-          endDate: '2013',
-          gpa: '3.90 / 4.0'
+          startDate: '2009',
+          endDate: '2011',
+          gpa: '3.92 / 4.0'
+        },
+        {
+          id: 'edu-3-2',
+          degree: 'B.S. in Computer Science',
+          institution: 'University of Illinois Urbana-Champaign',
+          location: 'Urbana, IL',
+          startDate: '2005',
+          endDate: '2009'
         }
       ],
-      certifications: ['TOGAF 10 Certified Enterprise Architect', 'AWS Certified Solutions Architect – Professional'],
-      technologies: ['TOGAF', 'MuleSoft', 'AWS', 'Azure', 'SAP S/4HANA', 'Terraform', 'Kubernetes', 'ArchiMate']
+      certifications: [
+        'TOGAF 10 Certified Enterprise Architect',
+        'AWS Certified Solutions Architect – Professional',
+        'Certified Information Systems Security Professional (CISSP)'
+      ],
+      technologies: ['TOGAF', 'MuleSoft', 'AWS', 'Azure', 'SAP S/4HANA', 'Terraform', 'Kubernetes', 'Kafka', 'ArchiMate']
     },
     presetData: {
-      title: 'Enterprise Architect Resume (Example)',
+      title: 'Enterprise Architect Resume (3-Page Example)',
       personalInfo: {
         fullName: 'Marcus Sterling',
         jobTitle: 'Chief Enterprise Architect',
@@ -420,9 +548,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         location: 'Chicago, IL',
         website: 'marcussterling.demo',
         linkedin: 'linkedin.com/in/marcussterling-demo',
-        github: ''
+        github: 'github.com/marcussterling-arch'
       },
-      summary: 'Strategic Chief Enterprise Architect with 11+ years of experience aligning IT capabilities with business goals across Fortune 500 sectors.',
+      summary: 'Strategic Chief Enterprise Architect with 11+ years of experience aligning IT capabilities with business goals across Fortune 500 financial and manufacturing sectors. Expert in TOGAF 10 framework implementation, legacy mainframe modernization, multi-cloud governance, and governing an $18M annual technology portfolio.',
       experience: [
         {
           id: 'exp-3-1',
@@ -433,10 +561,73 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Governed IT modernization roadmap for $18M portfolio, reducing legacy maintenance expenses by 35%.',
-            'Orchestrated 100% cloud migration of SAP ERP to AWS, eliminating 120 physical servers.',
-            'Established Architecture Review Board (ARB) standards across 8 business units.'
+            'Governed 4-year enterprise IT modernization roadmap for $18M technology portfolio, reducing operational legacy maintenance expenses by 35%.',
+            'Orchestrated 100% cloud migration of legacy SAP ERP to AWS cloud infrastructure, eliminating 120 on-premise physical servers.',
+            'Established Architecture Review Board (ARB) governance standards across 8 business units, enforcing strict zero-trust security compliance.',
+            'Spearheaded FinOps cloud cost management framework, optimizing AWS & Azure reservation instances to save $1.8M annually.'
           ]
+        },
+        {
+          id: 'exp-3-2',
+          role: 'Principal Enterprise Architect',
+          company: 'Apex Financial Group',
+          location: 'Chicago, IL',
+          startDate: '2016-08',
+          endDate: '2019-12',
+          current: false,
+          highlights: [
+            'Designed enterprise integration bus using MuleSoft Anypoint, unifying 24 disparate banking applications and cutting data sync delays by 70%.',
+            'Rationalized enterprise application portfolio, decommissioning 35 redundant software tools to save $2.4M in annual licensing fees.',
+            'Led technical due diligence for 3 corporate M&A integrations, harmonizing core banking software pipelines within 90 days of closing.'
+          ]
+        },
+        {
+          id: 'exp-3-3',
+          role: 'Senior Systems Architect',
+          company: 'Vanguard Technologies',
+          location: 'Oak Brook, IL',
+          startDate: '2013-03',
+          endDate: '2016-07',
+          current: false,
+          highlights: [
+            'Architected high-throughput transaction processing engine handling 15M daily operations with p99 latency under 40ms.',
+            'Migrated core customer database from legacy IBM mainframe to distributed Oracle Real Application Clusters (RAC).'
+          ]
+        },
+        {
+          id: 'exp-3-4',
+          role: 'Lead Infrastructure Architect',
+          company: 'Midwest Health Systems',
+          location: 'Naperville, IL',
+          startDate: '2011-06',
+          endDate: '2013-02',
+          current: false,
+          highlights: [
+            'Designed HIPAA-compliant disaster recovery architecture across dual data centers with sub-15 minute recovery time objectives (RTO).'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-3-1',
+          title: 'Global Multi-Tenant Cloud Landing Zone',
+          description: 'Architected standardized enterprise AWS & Azure landing zone compliant with SOC2 Type II and ISO 27001 security controls.',
+          techStack: ['AWS Control Tower', 'Terraform', 'Azure AD', 'MuleSoft'],
+          outcomes: 'Streamlined new business unit cloud environment provisioning from 6 weeks to 4 hours.'
+        },
+        {
+          id: 'proj-3-2',
+          title: 'Enterprise SOA & Integration Bus Modernization',
+          description: 'Replaced legacy SOAP web services with event-driven RESTful microservices and Apache Kafka event streams.',
+          techStack: ['Apache Kafka', 'MuleSoft Anypoint', 'Docker', 'Kubernetes'],
+          outcomes: 'Accelerated real-time financial reporting processing speed by 82%.'
+        },
+        {
+          id: 'proj-3-3',
+          title: 'Zero-Trust Identity & Access Management Topology',
+          description: 'Designed centralized Okta & Azure Entra ID federated identity access controls across 25,000 corporate users.',
+          techStack: ['Okta IAM', 'Azure Entra ID', 'SAML 2.0', 'OAuth2/OIDC'],
+          outcomes: 'Eliminated unauthorized access vulnerabilities across 120 internal enterprise web apps.'
         }
       ],
       education: [
@@ -445,13 +636,29 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'M.S. in Information Technology & Management',
           institution: 'Northwestern University',
           location: 'Evanston, IL',
-          startDate: '2011',
-          endDate: '2013',
-          gpa: '3.90 / 4.0'
+          startDate: '2009',
+          endDate: '2011',
+          gpa: '3.92 / 4.0'
+        },
+        {
+          id: 'edu-3-2',
+          degree: 'B.S. in Computer Science',
+          institution: 'University of Illinois Urbana-Champaign',
+          location: 'Urbana, IL',
+          startDate: '2005',
+          endDate: '2009'
         }
       ],
+      certifications: [
+        { id: 'cert-3-1', name: 'TOGAF 10 Certified Enterprise Architect', issuer: 'The Open Group', date: '2018' },
+        { id: 'cert-3-2', name: 'AWS Certified Solutions Architect – Professional', issuer: 'Amazon Web Services', date: '2020' },
+        { id: 'cert-3-3', name: 'Certified Information Systems Security Professional (CISSP)', issuer: '(ISC)²', date: '2017' }
+      ],
       skills: [
-        { id: 's-3-1', category: 'Enterprise Architecture', items: ['TOGAF 10', 'Cloud Governance', 'SAP ERP', 'AWS', 'MuleSoft'] }
+        { id: 's-3-1', category: 'Enterprise Frameworks', items: ['TOGAF 10', 'Zachman Framework', 'SOA Architecture', 'Cloud Governance', 'Application Rationalization', 'ITIL v4'] },
+        { id: 's-3-2', category: 'Cloud & Infrastructure', items: ['AWS Control Tower', 'Azure Landing Zones', 'Terraform IaC', 'Kubernetes (EKS/AKS)', 'Docker', 'Hybrid Identity'] },
+        { id: 's-3-3', category: 'Enterprise Systems', items: ['SAP S/4HANA ERP', 'MuleSoft Anypoint', 'PostgreSQL', 'Oracle DB', 'Kafka Event Streaming', 'Salesforce CRM'] },
+        { id: 's-3-4', category: 'Governance & Security', items: ['Zero Trust Topologies', 'NIST Cyber Framework', 'SOC 2 Type II Compliance', 'ISO 27001', 'Cost Governance (FinOps)'] }
       ]
     }
   },
@@ -478,7 +685,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       summary: 'Accomplished Principal Cloud Solutions Architect with 8+ years of experience designing scalable cloud-native applications, serverless microservices, and automated DevOps deployment pipelines. Proven track record reducing cloud infrastructure spend by 25% while maintaining 99.99% system availability SLAs.',
       skills: [
         { category: 'Cloud & Infrastructure', items: ['AWS (Lambda, ECS, EKS, DynamoDB, S3)', 'Serverless Architecture', 'Terraform', 'Docker', 'Kubernetes'] },
-        { category: 'Architecture & Design', items: ['Domain-Driven Design (DDD)', 'Disaster Recovery (RTO/RPO)', 'Event-Driven Systems', 'Security Hardening', 'Node.js/Python'] }
+        { category: 'Architecture & Design', items: ['Domain-Driven Design (DDD)', 'Disaster Recovery (RTO/RPO)', 'Event-Driven Systems', 'Security Hardening', 'Node.js/Python'] },
+        { category: 'Database & DevOps', items: ['PostgreSQL', 'DynamoDB', 'Redis', 'CI/CD Pipelines', 'GitHub Actions', 'Datadog'] }
       ],
       experience: [
         {
@@ -492,7 +700,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Designed high-availability serverless architecture using AWS Lambda and DynamoDB, handling 20M daily transactions with 99.99% SLA.',
             'Optimized multi-tenant database provisioning and auto-scaling rules, lowering monthly cloud infrastructure expenses by 25%.',
-            'Spearheaded 12 successful enterprise client migrations from legacy data centers to AWS cloud.'
+            'Spearheaded 12 successful enterprise client migrations from legacy data centers to AWS cloud with zero business interruption.',
+            'Architected cross-region automated backup and replication strategy satisfying RTO < 15min and RPO < 1min requirements.'
           ]
         },
         {
@@ -505,7 +714,21 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: false,
           highlights: [
             'Built automated Infrastructure-as-Code (IaC) deployment templates using Terraform, cutting client environment setup time from 2 weeks to 3 hours.',
-            'Implemented automated cross-region disaster recovery replication, meeting strict RTO < 15 minutes requirement.'
+            'Implemented automated cross-region disaster recovery replication, meeting strict security and compliance standards.',
+            'Directed technical design reviews and architectural governance for 8 product engineering squads.'
+          ]
+        },
+        {
+          id: 'exp-4-3',
+          role: 'Cloud Systems Engineer',
+          company: 'Austin Cloud Systems',
+          location: 'Austin, TX',
+          startDate: '2015-06',
+          endDate: '2017-08',
+          current: false,
+          highlights: [
+            'Managed AWS EC2 Linux container fleets, configuring Nginx load balancing and CloudWatch automated alert notifications.',
+            'Migrated customer relational databases from on-premise MySQL servers to managed AWS RDS instances.'
           ]
         }
       ],
@@ -516,6 +739,13 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           description: 'Architected PCI-DSS compliant event-driven payment processing engine.',
           techStack: ['AWS Lambda', 'SQS', 'DynamoDB', 'Terraform'],
           outcomes: 'Processed $1.2B in transactions with zero security incidents.'
+        },
+        {
+          id: 'proj-4-2',
+          title: 'Multi-Region Disaster Recovery Automation',
+          description: 'Constructed automated failover mechanism switching DNS routing via AWS Route 53 during regional outages.',
+          techStack: ['AWS Route 53', 'Terraform', 'Lambda', 'Python'],
+          outcomes: 'Achieved sub-5 minute failover across dual cloud regions.'
         }
       ],
       education: [
@@ -524,8 +754,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Computer Science',
           institution: 'University of Texas at Austin',
           location: 'Austin, TX',
-          startDate: '2013',
-          endDate: '2017',
+          startDate: '2011',
+          endDate: '2015',
           gpa: '3.88 / 4.0'
         }
       ],
@@ -533,7 +763,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       technologies: ['AWS Lambda', 'Terraform', 'DynamoDB', 'ECS', 'Docker', 'Python', 'Node.js', 'PostgreSQL']
     },
     presetData: {
-      title: 'Solutions Architect Resume (Example)',
+      title: 'Solutions Architect Resume (2-Page Example)',
       personalInfo: {
         fullName: 'David Chen',
         jobTitle: 'Principal Cloud Solutions Architect',
@@ -544,7 +774,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         linkedin: 'linkedin.com/in/davidchen-demo',
         github: 'github.com/davidchen-demo'
       },
-      summary: 'Accomplished Principal Cloud Solutions Architect with 8+ years of experience designing scalable cloud-native applications and serverless microservices.',
+      summary: 'Accomplished Principal Cloud Solutions Architect with 8+ years of experience designing scalable cloud-native applications, serverless microservices, and automated DevOps deployment pipelines. Proven track record reducing cloud infrastructure spend by 25% while maintaining 99.99% system availability SLAs.',
       experience: [
         {
           id: 'exp-4-1',
@@ -555,10 +785,54 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Designed high-availability serverless architecture using AWS Lambda, handling 20M daily transactions with 99.99% SLA.',
-            'Lowered monthly cloud infrastructure expenses by 25% through auto-scaling optimization.',
-            'Spearheaded 12 enterprise client migrations from legacy data centers to AWS cloud.'
+            'Designed high-availability serverless architecture using AWS Lambda and DynamoDB, handling 20M daily transactions with 99.99% SLA.',
+            'Optimized multi-tenant database provisioning and auto-scaling rules, lowering monthly cloud infrastructure expenses by 25%.',
+            'Spearheaded 12 successful enterprise client migrations from legacy data centers to AWS cloud with zero business interruption.',
+            'Architected cross-region automated backup and replication strategy satisfying RTO < 15min and RPO < 1min requirements.'
           ]
+        },
+        {
+          id: 'exp-4-2',
+          role: 'Senior Infrastructure Solutions Engineer',
+          company: 'Pinnacle Software Systems',
+          location: 'Austin, TX',
+          startDate: '2017-09',
+          endDate: '2021-03',
+          current: false,
+          highlights: [
+            'Built automated Infrastructure-as-Code (IaC) deployment templates using Terraform, cutting client environment setup time from 2 weeks to 3 hours.',
+            'Implemented automated cross-region disaster recovery replication, meeting strict security and compliance standards.',
+            'Directed technical design reviews and architectural governance for 8 product engineering squads.'
+          ]
+        },
+        {
+          id: 'exp-4-3',
+          role: 'Cloud Systems Engineer',
+          company: 'Austin Cloud Systems',
+          location: 'Austin, TX',
+          startDate: '2015-06',
+          endDate: '2017-08',
+          current: false,
+          highlights: [
+            'Managed AWS EC2 Linux container fleets, configuring Nginx load balancing and CloudWatch automated alert notifications.',
+            'Migrated customer relational databases from on-premise MySQL servers to managed AWS RDS instances.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-4-1',
+          title: 'Global Fintech Payment Processing Gateway',
+          description: 'Architected PCI-DSS compliant event-driven payment processing engine.',
+          techStack: ['AWS Lambda', 'SQS', 'DynamoDB', 'Terraform'],
+          outcomes: 'Processed $1.2B in transactions with zero security incidents.'
+        },
+        {
+          id: 'proj-4-2',
+          title: 'Multi-Region Disaster Recovery Automation',
+          description: 'Constructed automated failover mechanism switching DNS routing via AWS Route 53 during regional outages.',
+          techStack: ['AWS Route 53', 'Terraform', 'Lambda', 'Python'],
+          outcomes: 'Achieved sub-5 minute failover across dual cloud regions.'
         }
       ],
       education: [
@@ -567,13 +841,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Computer Science',
           institution: 'University of Texas at Austin',
           location: 'Austin, TX',
-          startDate: '2013',
-          endDate: '2017',
+          startDate: '2011',
+          endDate: '2015',
           gpa: '3.88 / 4.0'
         }
       ],
+      certifications: [
+        { id: 'cert-4-1', name: 'AWS Certified Solutions Architect – Professional', issuer: 'Amazon Web Services', date: '2021' },
+        { id: 'cert-4-2', name: 'HashiCorp Certified Terraform Associate', issuer: 'HashiCorp', date: '2020' }
+      ],
       skills: [
-        { id: 's-4-1', category: 'Cloud Architecture', items: ['AWS Lambda', 'Serverless', 'Terraform', 'DynamoDB', 'Microservices'] }
+        { id: 's-4-1', category: 'Cloud & Infrastructure', items: ['AWS (Lambda, ECS, EKS, DynamoDB, S3)', 'Serverless Architecture', 'Terraform', 'Docker', 'Kubernetes'] },
+        { id: 's-4-2', category: 'Architecture & Design', items: ['Domain-Driven Design (DDD)', 'Disaster Recovery (RTO/RPO)', 'Event-Driven Systems', 'Security Hardening', 'Node.js/Python'] },
+        { id: 's-4-3', category: 'Database & DevOps', items: ['PostgreSQL', 'DynamoDB', 'Redis', 'CI/CD Pipelines', 'GitHub Actions', 'Datadog'] }
       ]
     }
   },
@@ -719,10 +999,11 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['RAG Architecture', 'Vector Databases', 'Milvus', 'Hybrid Search', 'LangChain'],
     pageLength: '2-Page',
     fullResume: {
-      summary: 'Specialized Principal RAG Architect with 6+ years of experience engineering high-accuracy Retrieval-Augmented Generation systems, vector embedding pipelines, and semantic knowledge graphs. Proven track record reducing LLM hallucination rates by 72% and achieving sub-50ms vector query latency.',
+      summary: 'Specialized Principal RAG Architect with 7+ years of experience engineering high-accuracy Retrieval-Augmented Generation systems, vector embedding pipelines, and semantic knowledge graphs. Proven track record reducing LLM hallucination rates by 72%, achieving sub-50ms vector query latency, and processing 800,000+ monthly enterprise search requests.',
       skills: [
-        { category: 'Vector & Search Stack', items: ['Pinecone', 'Milvus', 'Qdrant', 'Elasticsearch Vector Search', 'Cohere Rerank', 'LlamaIndex'] },
-        { category: 'AI Engineering', items: ['Python', 'PyTorch', 'LangChain', 'FastAPI', 'Docker', 'Kubernetes', 'OpenAI/Hugging Face Embeddings'] }
+        { category: 'Vector & Search Stack', items: ['Pinecone', 'Milvus', 'Qdrant', 'Elasticsearch Vector Search', 'Cohere Rerank', 'LlamaIndex', 'FAISS'] },
+        { category: 'AI & ML Frameworks', items: ['Python', 'PyTorch', 'LangChain', 'FastAPI', 'Hugging Face Embeddings', 'OpenAI API', 'GraphRAG'] },
+        { category: 'Engineering & Cloud', items: ['AWS (EKS, Lambda, S3)', 'Docker', 'Kubernetes', 'PostgreSQL (pgvector)', 'Redis Semantic Caching', 'GitOps'] }
       ],
       experience: [
         {
@@ -734,9 +1015,10 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Architected enterprise RAG retrieval pipeline handling 800k monthly queries with Milvus and Cohere Rerank, reducing model hallucination rate by 72%.',
-            'Implemented hybrid BM25 + dense vector semantic search, elevating context recall score from 64% to 92.8%.',
-            'Optimized vector index partitioning and GPU memory caching, cutting search retrieval latency to under 50ms.'
+            'Architected enterprise RAG retrieval pipeline handling 800,000+ monthly queries with Milvus and Cohere Rerank, reducing model hallucination rate by 72%.',
+            'Implemented hybrid BM25 dense vector semantic search with custom metadata filtering, elevating context recall accuracy from 64% to 92.8%.',
+            'Optimized vector index partitioning and GPU memory caching, cutting p95 search retrieval latency to under 45ms.',
+            'Engineered automated RAG evaluation framework measuring Faithfulness, Answer Relevance, and Context Precision across 10,000 test cases.'
           ]
         },
         {
@@ -748,8 +1030,21 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: '2022-03',
           current: false,
           highlights: [
-            'Engineered automated document chunking and metadata enrichment pipelines processing 100k daily PDF contracts.',
-            'Deployed containerized FastAPI microservices on AWS EKS serving low-latency embeddings.'
+            'Engineered automated document chunking and metadata enrichment pipelines processing 100,000 daily PDF legal contracts.',
+            'Deployed containerized FastAPI microservices on AWS EKS serving low-latency sentence transformer embeddings for enterprise clients.',
+            'Trained custom domain-specific embedding models using contrastive learning, boosting semantic similarity retrieval accuracy by 24%.'
+          ]
+        },
+        {
+          id: 'exp-6-3',
+          role: 'Data Science Associate',
+          company: 'Boston Analytics Group',
+          location: 'Boston, MA',
+          startDate: '2016-09',
+          endDate: '2018-07',
+          current: false,
+          highlights: [
+            'Developed natural language processing (NLP) sentiment classifiers and text extraction tools for unstructured financial report data.'
           ]
         }
       ],
@@ -757,27 +1052,45 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         {
           id: 'proj-6-1',
           title: 'Financial Knowledge Graph RAG Agent',
-          description: 'Built graph-augmented RAG agent connecting Neo4j graph database with vector indexing.',
-          techStack: ['Neo4j', 'Pinecone', 'LlamaIndex', 'Python'],
-          outcomes: 'Provided financial analysts with 98% accurate audit citation sources.'
+          description: 'Built graph-augmented RAG agent connecting Neo4j graph database with Milvus vector indexing for complex multi-hop reasoning.',
+          techStack: ['Neo4j', 'Milvus', 'LlamaIndex', 'Python', 'FastAPI'],
+          outcomes: 'Provided financial analysts with 98% verifiable audit citation sources.'
+        },
+        {
+          id: 'proj-6-2',
+          title: 'Enterprise Vector Index & Semantic Caching Pipeline',
+          description: 'Designed Redis semantic caching layer for frequent LLM prompt embeddings, saving repetitive API token costs.',
+          techStack: ['Redis', 'Pinecone', 'LangChain', 'Python'],
+          outcomes: 'Reduced LLM API expenses by $16,500/month.'
         }
       ],
       education: [
         {
           id: 'edu-6-1',
           degree: 'M.S. in Computer Science (Information Retrieval)',
-          institution: 'MIT',
+          institution: 'Massachusetts Institute of Technology (MIT)',
           location: 'Cambridge, MA',
           startDate: '2016',
           endDate: '2018',
           gpa: '3.95 / 4.0'
+        },
+        {
+          id: 'edu-6-2',
+          degree: 'B.S. in Computer Engineering',
+          institution: 'Northeastern University',
+          location: 'Boston, MA',
+          startDate: '2012',
+          endDate: '2016'
         }
       ],
-      certifications: ['Pinecone Certified Vector Database Specialist', 'AWS Certified Machine Learning – Specialty'],
-      technologies: ['Milvus', 'Pinecone', 'LangChain', 'LlamaIndex', 'Python', 'FastAPI', 'Docker', 'Neo4j']
+      certifications: [
+        'Pinecone Certified Vector Database Specialist',
+        'AWS Certified Machine Learning – Specialty'
+      ],
+      technologies: ['Milvus', 'Pinecone', 'LangChain', 'LlamaIndex', 'Python', 'FastAPI', 'Docker', 'Neo4j', 'Redis']
     },
     presetData: {
-      title: 'RAG Architect Resume (Example)',
+      title: 'RAG Architect Resume (2-Page Example)',
       personalInfo: {
         fullName: 'Julian Rodriguez',
         jobTitle: 'Principal RAG Architect',
@@ -786,9 +1099,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         location: 'Boston, MA',
         website: 'julianrodriguez.demo',
         linkedin: 'linkedin.com/in/julianrodriguez-demo',
-        github: 'github.com/julianrodriguez-demo'
+        github: 'github.com/julianrodriguez-ai'
       },
-      summary: 'Specialized Principal RAG Architect with 6+ years of experience engineering high-accuracy Retrieval-Augmented Generation systems, vector embedding pipelines, and semantic knowledge graphs.',
+      summary: 'Specialized Principal RAG Architect with 7+ years of experience engineering high-accuracy Retrieval-Augmented Generation systems, vector embedding pipelines, and semantic knowledge graphs. Proven track record reducing LLM hallucination rates by 72%, achieving sub-50ms vector query latency, and processing 800,000+ monthly enterprise search requests.',
       experience: [
         {
           id: 'exp-6-1',
@@ -799,30 +1112,85 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Architected enterprise RAG retrieval pipeline handling 800k monthly queries, reducing model hallucination rate by 72%.',
-            'Implemented hybrid search, elevating context recall score from 64% to 92.8%.',
-            'Optimized vector index partitioning, cutting search retrieval latency to under 50ms.'
+            'Architected enterprise RAG retrieval pipeline handling 800,000+ monthly queries with Milvus and Cohere Rerank, reducing model hallucination rate by 72%.',
+            'Implemented hybrid BM25 dense vector semantic search with custom metadata filtering, elevating context recall accuracy from 64% to 92.8%.',
+            'Optimized vector index partitioning and GPU memory caching, cutting p95 search retrieval latency to under 45ms.',
+            'Engineered automated RAG evaluation framework measuring Faithfulness, Answer Relevance, and Context Precision across 10,000 test cases.'
           ]
+        },
+        {
+          id: 'exp-6-2',
+          role: 'Senior Machine Learning Engineer',
+          company: 'Kinesis Data Labs',
+          location: 'Cambridge, MA',
+          startDate: '2018-08',
+          endDate: '2022-03',
+          current: false,
+          highlights: [
+            'Engineered automated document chunking and metadata enrichment pipelines processing 100,000 daily PDF legal contracts.',
+            'Deployed containerized FastAPI microservices on AWS EKS serving low-latency sentence transformer embeddings for enterprise clients.',
+            'Trained custom domain-specific embedding models using contrastive learning, boosting semantic similarity retrieval accuracy by 24%.'
+          ]
+        },
+        {
+          id: 'exp-6-3',
+          role: 'Data Science Associate',
+          company: 'Boston Analytics Group',
+          location: 'Boston, MA',
+          startDate: '2016-09',
+          endDate: '2018-07',
+          current: false,
+          highlights: [
+            'Developed natural language processing (NLP) sentiment classifiers and text extraction tools for unstructured financial report data.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-6-1',
+          title: 'Financial Knowledge Graph RAG Agent',
+          description: 'Built graph-augmented RAG agent connecting Neo4j graph database with Milvus vector indexing for complex multi-hop reasoning.',
+          techStack: ['Neo4j', 'Milvus', 'LlamaIndex', 'Python', 'FastAPI'],
+          outcomes: 'Provided financial analysts with 98% verifiable audit citation sources.'
+        },
+        {
+          id: 'proj-6-2',
+          title: 'Enterprise Vector Index & Semantic Caching Pipeline',
+          description: 'Designed Redis semantic caching layer for frequent LLM prompt embeddings, saving repetitive API token costs.',
+          techStack: ['Redis', 'Pinecone', 'LangChain', 'Python'],
+          outcomes: 'Reduced LLM API expenses by $16,500/month.'
         }
       ],
       education: [
         {
           id: 'edu-6-1',
-          degree: 'M.S. in Computer Science',
-          institution: 'MIT',
+          degree: 'M.S. in Computer Science (Information Retrieval)',
+          institution: 'Massachusetts Institute of Technology (MIT)',
           location: 'Cambridge, MA',
           startDate: '2016',
           endDate: '2018',
           gpa: '3.95 / 4.0'
+        },
+        {
+          id: 'edu-6-2',
+          degree: 'B.S. in Computer Engineering',
+          institution: 'Northeastern University',
+          location: 'Boston, MA',
+          startDate: '2012',
+          endDate: '2016'
         }
       ],
+      certifications: [
+        { id: 'cert-6-1', name: 'Pinecone Certified Vector Database Specialist', issuer: 'Pinecone', date: '2023' },
+        { id: 'cert-6-2', name: 'AWS Certified Machine Learning – Specialty', issuer: 'Amazon Web Services', date: '2021' }
+      ],
       skills: [
-        { id: 's-6-1', category: 'RAG Architecture', items: ['RAG Pipelines', 'Vector DBs (Milvus/Pinecone)', 'Cohere Rerank', 'LangChain', 'Python'] }
+        { id: 's-6-1', category: 'Vector & Search Stack', items: ['Pinecone', 'Milvus', 'Qdrant', 'Elasticsearch Vector Search', 'Cohere Rerank', 'LlamaIndex', 'FAISS'] },
+        { id: 's-6-2', category: 'AI & ML Frameworks', items: ['Python', 'PyTorch', 'LangChain', 'FastAPI', 'Hugging Face Embeddings', 'OpenAI API', 'GraphRAG'] },
+        { id: 's-6-3', category: 'Engineering & Cloud', items: ['AWS (EKS, Lambda, S3)', 'Docker', 'Kubernetes', 'PostgreSQL (pgvector)', 'Redis Semantic Caching', 'GitOps'] }
       ]
     }
   },
-
-  // 7. LLM Orchestration Engineer
   {
     id: 'ex-7-llm-orchestration',
     slug: 'llm-orchestration-engineer',
@@ -841,10 +1209,12 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['vLLM', 'TensorRT-LLM', 'Semantic Caching', 'Python', 'Kubernetes'],
     pageLength: '3-Page',
     fullResume: {
-      summary: 'Performance-focused Senior LLM Systems Engineer with 4+ years of experience optimizing open-source LLM inference engines, semantic caching layers, and multi-model router gateways. Proven track record increasing GPU inference throughput by 3.5x and reducing API token spend by 45%.',
+      summary: 'Performance-focused Senior LLM Systems Engineer with 6+ years of experience optimizing open-source LLM inference engines, semantic caching layers, and multi-model router gateways across high-density GPU clusters. Proven track record increasing token generation throughput by 3.5x, cutting API compute costs by 45%, and serving 15M daily LLM requests with p95 latency under 180ms.',
       skills: [
-        { category: 'LLM Infrastructure', items: ['vLLM', 'TensorRT-LLM', 'Triton Inference Server', 'Model Quantization (AWQ/GPTQ)', 'GPU Cluster Scaling'] },
-        { category: 'Systems Engineering', items: ['Python', 'C++', 'FastAPI', 'Redis Semantic Cache', 'Docker', 'Kubernetes', 'Prometheus Metrics'] }
+        { category: 'LLM & Inference Stack', items: ['vLLM', 'TensorRT-LLM', 'Triton Inference Server', 'AWQ / GPTQ Model Quantization', 'GPU Cluster Autoscaling', 'vLLM PagedAttention'] },
+        { category: 'Systems & Cloud', items: ['Python', 'C++', 'FastAPI', 'Redis Semantic Cache', 'Docker', 'Kubernetes (EKS)', 'Ray Compute', 'Ray Serve'] },
+        { category: 'Observability & Metrics', items: ['Prometheus', 'Grafana', 'Datadog', 'OpenTelemetry', 'Token Metrics Monitoring', 'BLEU / ROUGE Benchmarks'] },
+        { category: 'Hardware Acceleration', items: ['NVIDIA H100 / A100 Clusters', 'CUDA', 'Tensor Core Optimization', 'NCCL Multi-GPU Distributed Pipeline'] }
       ],
       experience: [
         {
@@ -856,9 +1226,10 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Deployed high-throughput vLLM inference clusters serving LLaMA 3 70B models, achieving 3.5x higher token generation throughput than baseline.',
-            'Architected semantic Redis caching layer storing frequent prompt embeddings, reducing API token costs by 45% and dropping p95 latency to 180ms.',
-            'Engineered dynamic model routing gateway diverting simple queries to lightweight 8B models while reserving 70B models for complex reasoning.'
+            'Deployed high-throughput vLLM inference clusters serving LLaMA 3 70B models on 64 NVIDIA H100 GPUs, achieving 3.5x higher token generation throughput than baseline vLLM setup.',
+            'Architected semantic Redis caching layer storing frequent prompt embeddings, reducing API token costs by 45% and dropping p95 latency to 180ms across 15M daily queries.',
+            'Engineered dynamic multi-LLM router gateway diverting simple intent queries to lightweight 8B models while routing complex reasoning prompts to fine-tuned 70B models.',
+            'Implemented automated GPU memory pressure monitoring using Prometheus and Ray Serve, preventing out-of-memory (OOM) cluster crashes during peak traffic spikes.'
           ]
         },
         {
@@ -870,8 +1241,34 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: '2022-07',
           current: false,
           highlights: [
-            'Built REST microservices in FastAPI handling 2,000 requests/second with 99.98% availability.',
-            'Automated Kubernetes cluster auto-scaling rules based on GPU memory pressure.'
+            'Built high-concurrency REST microservices in FastAPI handling 2,500 requests/second with 99.98% availability.',
+            'Automated Kubernetes cluster auto-scaling rules based on CPU and memory utilization thresholds.',
+            'Constructed automated ETL data pipelines in Python for multi-gigabyte log ingestion into Elasticsearch.'
+          ]
+        },
+        {
+          id: 'exp-7-3',
+          role: 'Cloud Systems Developer',
+          company: 'Apex Cloud Systems',
+          location: 'Denver, CO',
+          startDate: '2018-06',
+          endDate: '2019-12',
+          current: false,
+          highlights: [
+            'Refactored legacy monolithic Python applications into containerized microservices deployed on AWS Elastic Container Service (ECS).',
+            'Implemented Redis distributed locking mechanisms to resolve race conditions in high-volume queue workers.'
+          ]
+        },
+        {
+          id: 'exp-7-4',
+          role: 'Junior Software Engineer',
+          company: 'Mile High Software',
+          location: 'Fort Collins, CO',
+          startDate: '2017-06',
+          endDate: '2018-05',
+          current: false,
+          highlights: [
+            'Developed backend REST API endpoints in Python/Django and maintained unit test coverage across core payment modules.'
           ]
         }
       ],
@@ -879,27 +1276,53 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         {
           id: 'proj-7-1',
           title: 'Distributed Quantized LLM Cluster',
-          description: 'Configured AWQ 4-bit quantization pipeline on NVIDIA H100 GPUs.',
-          techStack: ['vLLM', 'AWQ', 'Kubernetes', 'Grafana'],
+          description: 'Configured AWQ 4-bit quantization pipeline on NVIDIA H100 GPUs for LLaMA 3 models, preserving 99.2% FP16 output benchmark accuracy.',
+          techStack: ['vLLM', 'AWQ', 'Kubernetes', 'Grafana', 'NVIDIA H100'],
           outcomes: 'Doubled concurrent user capacity on existing GPU hardware.'
+        },
+        {
+          id: 'proj-7-2',
+          title: 'Multi-Model Intelligent Router Gateway',
+          description: 'Created low-latency Python/FastAPI proxy gateway evaluating prompt intent and routing to optimal model tiers.',
+          techStack: ['Python', 'FastAPI', 'Redis', 'Ray Serve'],
+          outcomes: 'Reduced monthly GPU infrastructure spend by $38,000.'
+        },
+        {
+          id: 'proj-7-3',
+          title: 'High-Density GPU Memory Caching Pipeline',
+          description: 'Optimized vLLM PagedAttention block size and KV cache allocation across multi-node Ray cluster.',
+          techStack: ['vLLM', 'PagedAttention', 'Ray', 'CUDA'],
+          outcomes: 'Accelerated batch generation speed by 140%.'
         }
       ],
       education: [
         {
           id: 'edu-7-1',
+          degree: 'M.S. in Computer Science',
+          institution: 'University of Colorado Boulder',
+          location: 'Boulder, CO',
+          startDate: '2017',
+          endDate: '2019',
+          gpa: '3.91 / 4.0'
+        },
+        {
+          id: 'edu-7-2',
           degree: 'B.S. in Computer Science & Systems Engineering',
           institution: 'Colorado State University',
           location: 'Fort Collins, CO',
-          startDate: '2016',
-          endDate: '2020',
-          gpa: '3.82 / 4.0'
+          startDate: '2013',
+          endDate: '2017'
         }
       ],
-      certifications: ['NVIDIA Certified Associate – Generative AI & LLMs', 'Certified Kubernetes Administrator (CKA)'],
-      technologies: ['vLLM', 'TensorRT-LLM', 'Python', 'FastAPI', 'Redis', 'Kubernetes', 'Docker', 'Prometheus']
+      certifications: [
+        'NVIDIA Certified Associate – Generative AI & LLMs',
+        'Certified Kubernetes Administrator (CKA)',
+        'AWS Certified Developer – Associate'
+      ],
+      technologies: ['vLLM', 'TensorRT-LLM', 'Python', 'C++', 'FastAPI', 'Redis', 'Kubernetes', 'Docker', 'Prometheus', 'Ray']
     },
     presetData: {
-      title: 'LLM Orchestration Engineer Resume (Example)',
+      title: 'LLM Orchestration Engineer Resume (3-Page Example)',
       personalInfo: {
         fullName: 'Rachel Adams',
         jobTitle: 'Senior LLM Systems Engineer',
@@ -908,9 +1331,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         location: 'Denver, CO',
         website: 'racheladams.demo',
         linkedin: 'linkedin.com/in/racheladams-demo',
-        github: 'github.com/racheladams-demo'
+        github: 'github.com/racheladams-llm'
       },
-      summary: 'Performance-focused Senior LLM Systems Engineer with 4+ years of experience optimizing open-source LLM inference engines, semantic caching layers, and multi-model router gateways.',
+      summary: 'Performance-focused Senior LLM Systems Engineer with 6+ years of experience optimizing open-source LLM inference engines, semantic caching layers, and multi-model router gateways across high-density GPU clusters. Proven track record increasing token generation throughput by 3.5x, cutting API compute costs by 45%, and serving 15M daily LLM requests with p95 latency under 180ms.',
       experience: [
         {
           id: 'exp-7-1',
@@ -921,25 +1344,104 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Deployed high-throughput vLLM inference clusters, achieving 3.5x higher token generation throughput.',
-            'Architected semantic Redis caching layer, reducing API token costs by 45% with 180ms p95 latency.',
-            'Engineered dynamic model routing gateway diverting simple queries to lightweight models.'
+            'Deployed high-throughput vLLM inference clusters serving LLaMA 3 70B models on 64 NVIDIA H100 GPUs, achieving 3.5x higher token generation throughput than baseline vLLM setup.',
+            'Architected semantic Redis caching layer storing frequent prompt embeddings, reducing API token costs by 45% and dropping p95 latency to 180ms across 15M daily queries.',
+            'Engineered dynamic multi-LLM router gateway diverting simple intent queries to lightweight 8B models while routing complex reasoning prompts to fine-tuned 70B models.',
+            'Implemented automated GPU memory pressure monitoring using Prometheus and Ray Serve, preventing out-of-memory (OOM) cluster crashes during peak traffic spikes.'
           ]
+        },
+        {
+          id: 'exp-7-2',
+          role: 'Backend Infrastructure Engineer',
+          company: 'SynthOps Labs',
+          location: 'Boulder, CO',
+          startDate: '2020-01',
+          endDate: '2022-07',
+          current: false,
+          highlights: [
+            'Built high-concurrency REST microservices in FastAPI handling 2,500 requests/second with 99.98% availability.',
+            'Automated Kubernetes cluster auto-scaling rules based on CPU and memory utilization thresholds.',
+            'Constructed automated ETL data pipelines in Python for multi-gigabyte log ingestion into Elasticsearch.'
+          ]
+        },
+        {
+          id: 'exp-7-3',
+          role: 'Cloud Systems Developer',
+          company: 'Apex Cloud Systems',
+          location: 'Denver, CO',
+          startDate: '2018-06',
+          endDate: '2019-12',
+          current: false,
+          highlights: [
+            'Refactored legacy monolithic Python applications into containerized microservices deployed on AWS Elastic Container Service (ECS).',
+            'Implemented Redis distributed locking mechanisms to resolve race conditions in high-volume queue workers.'
+          ]
+        },
+        {
+          id: 'exp-7-4',
+          role: 'Junior Software Engineer',
+          company: 'Mile High Software',
+          location: 'Fort Collins, CO',
+          startDate: '2017-06',
+          endDate: '2018-05',
+          current: false,
+          highlights: [
+            'Developed backend REST API endpoints in Python/Django and maintained unit test coverage across core payment modules.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-7-1',
+          title: 'Distributed Quantized LLM Cluster',
+          description: 'Configured AWQ 4-bit quantization pipeline on NVIDIA H100 GPUs for LLaMA 3 models, preserving 99.2% FP16 output benchmark accuracy.',
+          techStack: ['vLLM', 'AWQ', 'Kubernetes', 'Grafana', 'NVIDIA H100'],
+          outcomes: 'Doubled concurrent user capacity on existing GPU hardware.'
+        },
+        {
+          id: 'proj-7-2',
+          title: 'Multi-Model Intelligent Router Gateway',
+          description: 'Created low-latency Python/FastAPI proxy gateway evaluating prompt intent and routing to optimal model tiers.',
+          techStack: ['Python', 'FastAPI', 'Redis', 'Ray Serve'],
+          outcomes: 'Reduced monthly GPU infrastructure spend by $38,000.'
+        },
+        {
+          id: 'proj-7-3',
+          title: 'High-Density GPU Memory Caching Pipeline',
+          description: 'Optimized vLLM PagedAttention block size and KV cache allocation across multi-node Ray cluster.',
+          techStack: ['vLLM', 'PagedAttention', 'Ray', 'CUDA'],
+          outcomes: 'Accelerated batch generation speed by 140%.'
         }
       ],
       education: [
         {
           id: 'edu-7-1',
-          degree: 'B.S. in Computer Science',
+          degree: 'M.S. in Computer Science',
+          institution: 'University of Colorado Boulder',
+          location: 'Boulder, CO',
+          startDate: '2017',
+          endDate: '2019',
+          gpa: '3.91 / 4.0'
+        },
+        {
+          id: 'edu-7-2',
+          degree: 'B.S. in Computer Science & Systems Engineering',
           institution: 'Colorado State University',
           location: 'Fort Collins, CO',
-          startDate: '2016',
-          endDate: '2020',
-          gpa: '3.82 / 4.0'
+          startDate: '2013',
+          endDate: '2017'
         }
       ],
+      certifications: [
+        { id: 'cert-7-1', name: 'NVIDIA Certified Associate – Generative AI & LLMs', issuer: 'NVIDIA', date: '2023' },
+        { id: 'cert-7-2', name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '2021' },
+        { id: 'cert-7-3', name: 'AWS Certified Developer – Associate', issuer: 'Amazon Web Services', date: '2019' }
+      ],
       skills: [
-        { id: 's-7-1', category: 'LLM Systems', items: ['vLLM', 'TensorRT-LLM', 'Semantic Cache', 'FastAPI', 'Kubernetes'] }
+        { id: 's-7-1', category: 'LLM & Inference Stack', items: ['vLLM', 'TensorRT-LLM', 'Triton Inference Server', 'AWQ / GPTQ Model Quantization', 'GPU Cluster Autoscaling', 'vLLM PagedAttention'] },
+        { id: 's-7-2', category: 'Systems & Cloud', items: ['Python', 'C++', 'FastAPI', 'Redis Semantic Cache', 'Docker', 'Kubernetes (EKS)', 'Ray Compute', 'Ray Serve'] },
+        { id: 's-7-3', category: 'Observability & Metrics', items: ['Prometheus', 'Grafana', 'Datadog', 'OpenTelemetry', 'Token Metrics Monitoring', 'BLEU / ROUGE Benchmarks'] },
+        { id: 's-7-4', category: 'Hardware Acceleration', items: ['NVIDIA H100 / A100 Clusters', 'CUDA', 'Tensor Core Optimization', 'NCCL Multi-GPU Distributed Pipeline'] }
       ]
     }
   },
@@ -1085,10 +1587,11 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['EU AI Act', 'NIST AI RMF', 'Algorithmic Bias Audit', 'Model Lineage', 'ISO 42001'],
     pageLength: '2-Page',
     fullResume: {
-      summary: 'Authoritative Senior AI Governance & Ethics Manager with 7+ years of experience auditing enterprise AI models, implementing NIST AI Risk Management Frameworks (RMF), and enforcing EU AI Act compliance. Proven track record conducting 45+ enterprise AI risk audits and reducing model algorithmic bias by 80%.',
+      summary: 'Authoritative Senior AI Governance & Ethics Manager with 7+ years of experience auditing enterprise AI models, implementing NIST AI Risk Management Frameworks (RMF), and enforcing EU AI Act compliance. Proven track record conducting 45+ enterprise AI risk audits, establishing automated model cards, and reducing algorithmic demographic bias by 80%.',
       skills: [
         { category: 'Governance & Frameworks', items: ['EU AI Act Compliance', 'NIST AI RMF', 'ISO/IEC 42001 Standard', 'Algorithmic Impact Assessments', 'Model Card Documentation'] },
-        { category: 'Ethics & Risk Audit', items: ['Fairness & Bias Audit (Fairlearn)', 'Model Lineage & Provenance', 'Data Privacy (GDPR/CCPA)', 'AI Risk Matrices', 'Python'] }
+        { category: 'Ethics & Risk Audit', items: ['Fairness & Bias Audit (Fairlearn)', 'Model Lineage & Provenance', 'Data Privacy (GDPR/CCPA)', 'AI Risk Matrices', 'Python'] },
+        { category: 'Policy & Governance Ops', items: ['Responsible AI Guidelines', 'Human-in-the-Loop Policies', 'Audit Reporting', 'Jira Service Desk', 'Confluence'] }
       ],
       experience: [
         {
@@ -1102,7 +1605,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Led cross-functional AI Risk Committee conducting 45+ model audits, achieving 100% compliance alignment with EU AI Act High-Risk AI requirements.',
             'Implemented Fairlearn demographic parity auditing tools across credit scoring ML models, reducing demographic bias rate by 80%.',
-            'Authored enterprise Responsible AI Policy governing data privacy, model cards, and human-in-the-loop oversight across 1,200 employees.'
+            'Authored enterprise Responsible AI Policy governing data privacy, model cards, and human-in-the-loop oversight across 1,200 employees.',
+            'Established automated risk classification matrix for high-risk generative AI tools prior to internal production deployment.'
           ]
         },
         {
@@ -1114,8 +1618,22 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: '2021-05',
           current: false,
           highlights: [
-            'Managed GDPR & CCPA privacy impact assessments for automated customer decision engines.',
-            'Established central model registry tracking data lineage and training dataset provenance.'
+            'Managed GDPR & CCPA privacy impact assessments for automated customer decision engines across 15 enterprise clients.',
+            'Established central model registry tracking training dataset provenance, data lineage, and model card metadata.',
+            'Conducted quarterly ethical AI training workshops for 300+ data science and engineering personnel.'
+          ]
+        },
+        {
+          id: 'exp-9-3',
+          role: 'AI Risk & Compliance Analyst',
+          company: 'Capital Tech Audit',
+          location: 'Arlington, VA',
+          startDate: '2015-06',
+          endDate: '2017-02',
+          current: false,
+          highlights: [
+            'Audited financial risk scoring algorithms for regulatory compliance with FTC and CFPB automated decision guidelines.',
+            'Wrote automated Python scripts extracting model training parameters and feature importances for auditor review.'
           ]
         }
       ],
@@ -1126,6 +1644,13 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           description: 'Designed internal portal allowing product teams to submit AI models for automated NIST RMF scoring.',
           techStack: ['NIST AI RMF', 'Fairlearn', 'Python', 'Jira Service Desk'],
           outcomes: 'Accelerated AI safety compliance review time by 60%.'
+        },
+        {
+          id: 'proj-9-2',
+          title: 'Enterprise Model Card Generation Framework',
+          description: 'Created standardized automated documentation tool logging training hyper-parameters, data sources, and evaluation metrics.',
+          techStack: ['Python', 'Model Cards', 'Confluence', 'Git'],
+          outcomes: 'Achieved 100% audit traceability across 80+ production ML models.'
         }
       ],
       education: [
@@ -1137,13 +1662,24 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           startDate: '2015',
           endDate: '2017',
           gpa: '3.91 / 4.0'
+        },
+        {
+          id: 'edu-9-2',
+          degree: 'B.A. in Political Science & Philosophy',
+          institution: 'George Washington University',
+          location: 'Washington, DC',
+          startDate: '2011',
+          endDate: '2015'
         }
       ],
-      certifications: ['Certified Information Privacy Professional (CIPP/E)', 'ISO 42001 Lead Implementer'],
+      certifications: [
+        'Certified Information Privacy Professional (CIPP/E)',
+        'ISO 42001 Lead Implementer'
+      ],
       technologies: ['Fairlearn', 'NIST AI RMF', 'EU AI Act', 'Python', 'Model Cards', 'Jira', 'Confluence']
     },
     presetData: {
-      title: 'AI Governance Specialist Resume (Example)',
+      title: 'AI Governance Specialist Resume (2-Page Example)',
       personalInfo: {
         fullName: 'Claire Dupont',
         jobTitle: 'Senior AI Governance & Ethics Manager',
@@ -1152,9 +1688,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         location: 'Washington, DC',
         website: 'clairedupont.demo',
         linkedin: 'linkedin.com/in/clairedupont-demo',
-        github: ''
+        github: 'github.com/clairedupont-gov'
       },
-      summary: 'Authoritative Senior AI Governance & Ethics Manager with 7+ years of experience auditing enterprise AI models, implementing NIST AI Risk Management Frameworks (RMF), and enforcing EU AI Act compliance.',
+      summary: 'Authoritative Senior AI Governance & Ethics Manager with 7+ years of experience auditing enterprise AI models, implementing NIST AI Risk Management Frameworks (RMF), and enforcing EU AI Act compliance. Proven track record conducting 45+ enterprise AI risk audits, establishing automated model cards, and reducing algorithmic demographic bias by 80%.',
       experience: [
         {
           id: 'exp-9-1',
@@ -1165,10 +1701,54 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Led AI Risk Committee conducting 45+ model audits, achieving 100% compliance with EU AI Act.',
-            'Implemented Fairlearn auditing tools, reducing demographic bias rate by 80%.',
-            'Authored enterprise Responsible AI Policy governing data privacy and human-in-the-loop oversight.'
+            'Led cross-functional AI Risk Committee conducting 45+ model audits, achieving 100% compliance alignment with EU AI Act High-Risk AI requirements.',
+            'Implemented Fairlearn demographic parity auditing tools across credit scoring ML models, reducing demographic bias rate by 80%.',
+            'Authored enterprise Responsible AI Policy governing data privacy, model cards, and human-in-the-loop oversight across 1,200 employees.',
+            'Established automated risk classification matrix for high-risk generative AI tools prior to internal production deployment.'
           ]
+        },
+        {
+          id: 'exp-9-2',
+          role: 'Data Privacy & Ethics Lead',
+          company: 'Compliance Trust Global',
+          location: 'Washington, DC',
+          startDate: '2017-03',
+          endDate: '2021-05',
+          current: false,
+          highlights: [
+            'Managed GDPR & CCPA privacy impact assessments for automated customer decision engines across 15 enterprise clients.',
+            'Established central model registry tracking training dataset provenance, data lineage, and model card metadata.',
+            'Conducted quarterly ethical AI training workshops for 300+ data science and engineering personnel.'
+          ]
+        },
+        {
+          id: 'exp-9-3',
+          role: 'AI Risk & Compliance Analyst',
+          company: 'Capital Tech Audit',
+          location: 'Arlington, VA',
+          startDate: '2015-06',
+          endDate: '2017-02',
+          current: false,
+          highlights: [
+            'Audited financial risk scoring algorithms for regulatory compliance with FTC and CFPB automated decision guidelines.',
+            'Wrote automated Python scripts extracting model training parameters and feature importances for auditor review.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-9-1',
+          title: 'Automated AI Risk Assessment Portal',
+          description: 'Designed internal portal allowing product teams to submit AI models for automated NIST RMF scoring.',
+          techStack: ['NIST AI RMF', 'Fairlearn', 'Python', 'Jira Service Desk'],
+          outcomes: 'Accelerated AI safety compliance review time by 60%.'
+        },
+        {
+          id: 'proj-9-2',
+          title: 'Enterprise Model Card Generation Framework',
+          description: 'Created standardized automated documentation tool logging training hyper-parameters, data sources, and evaluation metrics.',
+          techStack: ['Python', 'Model Cards', 'Confluence', 'Git'],
+          outcomes: 'Achieved 100% audit traceability across 80+ production ML models.'
         }
       ],
       education: [
@@ -1180,10 +1760,24 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           startDate: '2015',
           endDate: '2017',
           gpa: '3.91 / 4.0'
+        },
+        {
+          id: 'edu-9-2',
+          degree: 'B.A. in Political Science & Philosophy',
+          institution: 'George Washington University',
+          location: 'Washington, DC',
+          startDate: '2011',
+          endDate: '2015'
         }
       ],
+      certifications: [
+        { id: 'cert-9-1', name: 'Certified Information Privacy Professional (CIPP/E)', issuer: 'IAPP', date: '2020' },
+        { id: 'cert-9-2', name: 'ISO 42001 Lead Implementer', issuer: 'PECB', date: '2023' }
+      ],
       skills: [
-        { id: 's-9-1', category: 'AI Governance', items: ['EU AI Act', 'NIST AI RMF', 'Bias Audit', 'Model Cards', 'ISO 42001'] }
+        { id: 's-9-1', category: 'Governance & Frameworks', items: ['EU AI Act Compliance', 'NIST AI RMF', 'ISO/IEC 42001 Standard', 'Algorithmic Impact Assessments', 'Model Card Documentation'] },
+        { id: 's-9-2', category: 'Ethics & Risk Audit', items: ['Fairness & Bias Audit (Fairlearn)', 'Model Lineage & Provenance', 'Data Privacy (GDPR/CCPA)', 'AI Risk Matrices', 'Python'] },
+        { id: 's-9-3', category: 'Policy & Governance Ops', items: ['Responsible AI Guidelines', 'Human-in-the-Loop Policies', 'Audit Reporting', 'Jira Service Desk', 'Confluence'] }
       ]
     }
   },
@@ -1207,10 +1801,12 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['Cloud Migration', 'Mainframe Refactoring', 'Containerization', 'AWS', 'Strangler Fig Pattern'],
     pageLength: '3-Page',
     fullResume: {
-      summary: 'Seasoned Principal Cloud Modernization Architect with 9+ years of experience refactoring legacy mainframe applications, monolithic codebases, and database architectures into cloud-native AWS microservices. Proven track record decommissioning legacy infrastructure to save $6M annually while achieving zero downtime.',
+      summary: 'Seasoned Principal Cloud Modernization Architect with 9+ years of experience refactoring legacy mainframe applications, monolithic codebases, and database architectures into cloud-native AWS microservices. Proven track record decommissioning legacy physical hardware to save $6M annually, managing multi-year enterprise transformation roadmaps, and achieving zero downtime migrations across 15M+ customer records.',
       skills: [
-        { category: 'Modernization Patterns', items: ['Strangler Fig Migration Pattern', 'Monolith-to-Microservices Refactoring', 'Database Replatforming', 'Domain-Driven Design (DDD)'] },
-        { category: 'Cloud Stack', items: ['AWS (EKS, Aurora, ECS, Lambda)', 'Docker', 'Kubernetes', 'Terraform', 'Kafka', 'Java / Spring Boot', 'Python'] }
+        { category: 'Modernization Patterns', items: ['Strangler Fig Migration Pattern', 'Monolith-to-Microservices Refactoring', 'Database Replatforming', 'Domain-Driven Design (DDD)', 'Mainframe COBOL Refactoring'] },
+        { category: 'Cloud Stack & Orchestration', items: ['AWS (EKS, Aurora, ECS, Lambda, VPC)', 'Docker Containerization', 'Kubernetes Cluster Management', 'Terraform IaC', 'Helm Charts'] },
+        { category: 'Integration & Data', items: ['Apache Kafka Event Streams', 'Debezium Change Data Capture (CDC)', 'Java / Spring Boot', 'Python', 'PostgreSQL', 'Oracle RAC'] },
+        { category: 'Governance & DevOps', items: ['Architecture Review Board (ARB)', 'FinOps Cloud Cost Governance', 'Zero-Downtime Blue/Green Deployments', 'GitOps Pipelines', 'Datadog'] }
       ],
       experience: [
         {
@@ -1223,8 +1819,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: true,
           highlights: [
             'Architected Strangler Fig migration strategy refactoring 25-year-old COBOL mainframe monolith into 40 Dockerized Spring Boot microservices on AWS EKS.',
-            'Decommissioned physical mainframe hardware, saving $6M in annual licensing and maintenance overhead.',
-            'Executed blue-green database migration for 15M customer records with zero application downtime.'
+            'Decommissioned physical IBM mainframe hardware, saving $6M in annual licensing, mainframe hardware leases, and maintenance overhead.',
+            'Executed blue-green database migration for 15M customer records from legacy DB2 to AWS Aurora PostgreSQL with zero application downtime.',
+            'Established enterprise cloud migration framework adopted across 14 product squads, lowering average service migration duration from 6 months to 6 weeks.'
           ]
         },
         {
@@ -1236,8 +1833,34 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: '2020-03',
           current: false,
           highlights: [
-            'Migrated 80 legacy Oracle databases to AWS Aurora PostgreSQL, reducing licensing costs by 50%.',
-            'Standardized Terraform infrastructure templates across 12 product engineering teams.'
+            'Migrated 80 legacy Oracle databases to AWS Aurora PostgreSQL, reducing annual database software licensing expenses by 50%.',
+            'Standardized Terraform infrastructure templates and container security scanning pipelines across 12 product engineering teams.',
+            'Designed multi-tenant AWS landing zones adhering to SOC 2 Type II and ISO 27001 regulatory security controls.'
+          ]
+        },
+        {
+          id: 'exp-10-3',
+          role: 'Lead Enterprise Migration Engineer',
+          company: 'Bay Area Cloud Solutions',
+          location: 'Palo Alto, CA',
+          startDate: '2013-05',
+          endDate: '2015-12',
+          current: false,
+          highlights: [
+            'Re-architected monolithic e-commerce engine into event-driven microservices processing $800M in annual transactions.',
+            'Automated server provisioning workflows using Ansible and Terraform, cutting environment spin-up time from 3 weeks to 30 minutes.'
+          ]
+        },
+        {
+          id: 'exp-10-4',
+          role: 'Senior Java Systems Developer',
+          company: 'Silicon Infrastructure Corp',
+          location: 'San Jose, CA',
+          startDate: '2010-06',
+          endDate: '2013-04',
+          current: false,
+          highlights: [
+            'Developed high-concurrency backend Java/J2EE application modules and maintained unit test coverage across core database operations.'
           ]
         }
       ],
@@ -1245,27 +1868,53 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         {
           id: 'proj-10-1',
           title: 'Real-Time Event Migration Bridge',
-          description: 'Designed Apache Kafka CDC (Change Data Capture) pipeline replicating legacy DB changes to cloud.',
+          description: 'Designed Apache Kafka CDC (Change Data Capture) pipeline replicating legacy DB changes to cloud databases.',
           techStack: ['Debezium', 'Kafka', 'AWS Aurora', 'Docker'],
           outcomes: 'Enabled real-time bi-directional data sync during 18-month migration phase.'
+        },
+        {
+          id: 'proj-10-2',
+          title: 'Mainframe COBOL to Microservices De-coupling Engine',
+          description: 'Constructed automated code parsing tool analyzing legacy COBOL logic dependencies and generating REST API contracts.',
+          techStack: ['Java', 'Spring Boot', 'OpenAPI', 'AWS EKS'],
+          outcomes: 'Accelerated microservices extraction timeline by 45%.'
+        },
+        {
+          id: 'proj-10-3',
+          title: 'Enterprise Multi-Region AWS Landing Zone',
+          description: 'Architected automated multi-region IaC setup with automated security compliance auditing.',
+          techStack: ['Terraform', 'AWS Control Tower', 'SecurityHub', 'GuardDuty'],
+          outcomes: 'Secured 120+ cloud accounts with zero compliance audit findings.'
         }
       ],
       education: [
         {
           id: 'edu-10-1',
+          degree: 'M.S. in Software Engineering',
+          institution: 'Carnegie Mellon University',
+          location: 'Mountain View, CA',
+          startDate: '2008',
+          endDate: '2010',
+          gpa: '3.94 / 4.0'
+        },
+        {
+          id: 'edu-10-2',
           degree: 'B.S. in Computer Science & Information Systems',
           institution: 'San Jose State University',
           location: 'San Jose, CA',
-          startDate: '2011',
-          endDate: '2015',
-          gpa: '3.84 / 4.0'
+          startDate: '2004',
+          endDate: '2008'
         }
       ],
-      certifications: ['AWS Certified Solutions Architect – Professional', 'AWS Certified Migration Evaluator'],
-      technologies: ['AWS EKS', 'AWS Aurora', 'Docker', 'Kubernetes', 'Terraform', 'Kafka', 'Java', 'Spring Boot']
+      certifications: [
+        'AWS Certified Solutions Architect – Professional',
+        'AWS Certified Migration Evaluator',
+        'Certified Kubernetes Administrator (CKA)'
+      ],
+      technologies: ['AWS EKS', 'AWS Aurora', 'Docker', 'Kubernetes', 'Terraform', 'Kafka', 'Java', 'Spring Boot', 'Debezium']
     },
     presetData: {
-      title: 'Cloud Modernization Architect Resume (Example)',
+      title: 'Cloud Modernization Architect Resume (3-Page Example)',
       personalInfo: {
         fullName: 'Harrison Forde',
         jobTitle: 'Principal Cloud Modernization Architect',
@@ -1276,7 +1925,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         linkedin: 'linkedin.com/in/harrisonforde-demo',
         github: 'github.com/harrisonforde-demo'
       },
-      summary: 'Seasoned Principal Cloud Modernization Architect with 9+ years of experience refactoring legacy mainframe applications, monolithic codebases, and database architectures.',
+      summary: 'Seasoned Principal Cloud Modernization Architect with 9+ years of experience refactoring legacy mainframe applications, monolithic codebases, and database architectures into cloud-native AWS microservices. Proven track record decommissioning legacy physical hardware to save $6M annually, managing multi-year enterprise transformation roadmaps, and achieving zero downtime migrations across 15M+ customer records.',
       experience: [
         {
           id: 'exp-10-1',
@@ -1287,25 +1936,104 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Architected Strangler Fig migration strategy refactoring mainframe monolith into 40 Spring Boot microservices on AWS EKS.',
-            'Decommissioned physical mainframe hardware, saving $6M in annual licensing overhead.',
-            'Executed database migration for 15M customer records with zero application downtime.'
+            'Architected Strangler Fig migration strategy refactoring 25-year-old COBOL mainframe monolith into 40 Dockerized Spring Boot microservices on AWS EKS.',
+            'Decommissioned physical IBM mainframe hardware, saving $6M in annual licensing, mainframe hardware leases, and maintenance overhead.',
+            'Executed blue-green database migration for 15M customer records from legacy DB2 to AWS Aurora PostgreSQL with zero application downtime.',
+            'Established enterprise cloud migration framework adopted across 14 product squads, lowering average service migration duration from 6 months to 6 weeks.'
           ]
+        },
+        {
+          id: 'exp-10-2',
+          role: 'Senior Cloud Architect',
+          company: 'Mainframe2Cloud Systems',
+          location: 'San Francisco, CA',
+          startDate: '2016-01',
+          endDate: '2020-03',
+          current: false,
+          highlights: [
+            'Migrated 80 legacy Oracle databases to AWS Aurora PostgreSQL, reducing annual database software licensing expenses by 50%.',
+            'Standardized Terraform infrastructure templates and container security scanning pipelines across 12 product engineering teams.',
+            'Designed multi-tenant AWS landing zones adhering to SOC 2 Type II and ISO 27001 regulatory security controls.'
+          ]
+        },
+        {
+          id: 'exp-10-3',
+          role: 'Lead Enterprise Migration Engineer',
+          company: 'Bay Area Cloud Solutions',
+          location: 'Palo Alto, CA',
+          startDate: '2013-05',
+          endDate: '2015-12',
+          current: false,
+          highlights: [
+            'Re-architected monolithic e-commerce engine into event-driven microservices processing $800M in annual transactions.',
+            'Automated server provisioning workflows using Ansible and Terraform, cutting environment spin-up time from 3 weeks to 30 minutes.'
+          ]
+        },
+        {
+          id: 'exp-10-4',
+          role: 'Senior Java Systems Developer',
+          company: 'Silicon Infrastructure Corp',
+          location: 'San Jose, CA',
+          startDate: '2010-06',
+          endDate: '2013-04',
+          current: false,
+          highlights: [
+            'Developed high-concurrency backend Java/J2EE application modules and maintained unit test coverage across core database operations.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-10-1',
+          title: 'Real-Time Event Migration Bridge',
+          description: 'Designed Apache Kafka CDC (Change Data Capture) pipeline replicating legacy DB changes to cloud databases.',
+          techStack: ['Debezium', 'Kafka', 'AWS Aurora', 'Docker'],
+          outcomes: 'Enabled real-time bi-directional data sync during 18-month migration phase.'
+        },
+        {
+          id: 'proj-10-2',
+          title: 'Mainframe COBOL to Microservices De-coupling Engine',
+          description: 'Constructed automated code parsing tool analyzing legacy COBOL logic dependencies and generating REST API contracts.',
+          techStack: ['Java', 'Spring Boot', 'OpenAPI', 'AWS EKS'],
+          outcomes: 'Accelerated microservices extraction timeline by 45%.'
+        },
+        {
+          id: 'proj-10-3',
+          title: 'Enterprise Multi-Region AWS Landing Zone',
+          description: 'Architected automated multi-region IaC setup with automated security compliance auditing.',
+          techStack: ['Terraform', 'AWS Control Tower', 'SecurityHub', 'GuardDuty'],
+          outcomes: 'Secured 120+ cloud accounts with zero compliance audit findings.'
         }
       ],
       education: [
         {
           id: 'edu-10-1',
-          degree: 'B.S. in Computer Science',
+          degree: 'M.S. in Software Engineering',
+          institution: 'Carnegie Mellon University',
+          location: 'Mountain View, CA',
+          startDate: '2008',
+          endDate: '2010',
+          gpa: '3.94 / 4.0'
+        },
+        {
+          id: 'edu-10-2',
+          degree: 'B.S. in Computer Science & Information Systems',
           institution: 'San Jose State University',
           location: 'San Jose, CA',
-          startDate: '2011',
-          endDate: '2015',
-          gpa: '3.84 / 4.0'
+          startDate: '2004',
+          endDate: '2008'
         }
       ],
+      certifications: [
+        { id: 'cert-10-1', name: 'AWS Certified Solutions Architect – Professional', issuer: 'Amazon Web Services', date: '2020' },
+        { id: 'cert-10-2', name: 'AWS Certified Migration Evaluator', issuer: 'Amazon Web Services', date: '2021' },
+        { id: 'cert-10-3', name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '2019' }
+      ],
       skills: [
-        { id: 's-10-1', category: 'Modernization', items: ['Cloud Migration', 'Microservices', 'AWS EKS', 'Strangler Pattern', 'Terraform'] }
+        { id: 's-10-1', category: 'Modernization Patterns', items: ['Strangler Fig Migration Pattern', 'Monolith-to-Microservices Refactoring', 'Database Replatforming', 'Domain-Driven Design (DDD)', 'Mainframe COBOL Refactoring'] },
+        { id: 's-10-2', category: 'Cloud Stack & Orchestration', items: ['AWS (EKS, Aurora, ECS, Lambda, VPC)', 'Docker Containerization', 'Kubernetes Cluster Management', 'Terraform IaC', 'Helm Charts'] },
+        { id: 's-10-3', category: 'Integration & Data', items: ['Apache Kafka Event Streams', 'Debezium Change Data Capture (CDC)', 'Java / Spring Boot', 'Python', 'PostgreSQL', 'Oracle RAC'] },
+        { id: 's-10-4', category: 'Governance & DevOps', items: ['Architecture Review Board (ARB)', 'FinOps Cloud Cost Governance', 'Zero-Downtime Blue/Green Deployments', 'GitOps Pipelines', 'Datadog'] }
       ]
     }
   },
@@ -1332,7 +2060,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       summary: 'Expert Senior Multi-Cloud Architect with 8+ years of experience designing high-resilience infrastructure across AWS and Microsoft Azure platforms. Specialized in hybrid cloud identity federation, cross-cloud disaster recovery, and cost governance across 150+ enterprise cloud subscriptions.',
       skills: [
         { category: 'Cloud Infrastructure', items: ['AWS (EC2, S3, IAM, Transit Gateway)', 'Azure (VNets, ExpressRoute, Entra ID, AKS)', 'Terraform Enterprise', 'Disaster Recovery (RTO < 5m)'] },
-        { category: 'Networking & Security', items: ['Hybrid Identity (Azure AD / AWS IAM Identity Center)', 'Cost Optimization (FinOps)', 'Kubernetes', 'Python', 'Bash'] }
+        { category: 'Networking & Security', items: ['Hybrid Identity (Azure AD / AWS IAM Identity Center)', 'Cost Optimization (FinOps)', 'Kubernetes', 'Python', 'Bash'] },
+        { category: 'DevOps & Monitoring', items: ['GitHub Actions', 'Datadog', 'HashiCorp Consul', 'Docker', 'Linux Systems'] }
       ],
       experience: [
         {
@@ -1346,7 +2075,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Architected cross-cloud disaster recovery failover between AWS us-east-1 and Azure East US, achieving RTO < 5 minutes for tier-1 workloads.',
             'Implemented FinOps cloud cost management framework across 150+ AWS accounts and Azure subscriptions, reducing monthly spending by 30%.',
-            'Federated hybrid identity using Azure Entra ID and AWS IAM Identity Center, streamlining SSO access for 8,500 employees.'
+            'Federated hybrid identity using Azure Entra ID and AWS IAM Identity Center, streamlining SSO access for 8,500 employees.',
+            'Standardized multi-cloud landing zone provisioning using automated Terraform Cloud pipelines.'
           ]
         },
         {
@@ -1359,7 +2089,21 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: false,
           highlights: [
             'Configured Azure ExpressRoute and AWS Direct Connect hybrid network tunnels connected to corporate data centers.',
-            'Automated multi-cloud resource provisioning using Terraform and CI/CD pipelines.'
+            'Automated multi-cloud resource provisioning using Terraform and CI/CD pipelines.',
+            'Designed Kubernetes cluster deployment templates on AWS EKS and Azure AKS.'
+          ]
+        },
+        {
+          id: 'exp-11-3',
+          role: 'Cloud Systems Administrator',
+          company: 'Lone Star Infrastructure',
+          location: 'Dallas, TX',
+          startDate: '2015-06',
+          endDate: '2017-05',
+          current: false,
+          highlights: [
+            'Managed AWS EC2 server fleet and Azure Virtual Machines, enforcing patch management and security compliance.',
+            'Wrote BASH scripts automating daily database backups to S3 buckets.'
           ]
         }
       ],
@@ -1370,6 +2114,13 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           description: 'Deployed AWS EKS and Azure AKS clusters managed centrally via HashiCorp Consul.',
           techStack: ['AWS EKS', 'Azure AKS', 'Terraform', 'Consul'],
           outcomes: 'Unified deployment workflow across hybrid cloud environments.'
+        },
+        {
+          id: 'proj-11-2',
+          title: 'Automated Hybrid Cloud Identity Sync',
+          description: 'Configured SAML/OIDC identity synchronization between Azure Entra ID and AWS IAM.',
+          techStack: ['Azure Entra ID', 'AWS IAM', 'SAML 2.0', 'Python'],
+          outcomes: 'Eliminated duplicate credential management for 8,500 users.'
         }
       ],
       education: [
@@ -1378,8 +2129,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Electrical & Computer Engineering',
           institution: 'Texas A&M University',
           location: 'College Station, TX',
-          startDate: '2013',
-          endDate: '2017',
+          startDate: '2011',
+          endDate: '2015',
           gpa: '3.86 / 4.0'
         }
       ],
@@ -1387,7 +2138,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       technologies: ['AWS', 'Azure', 'Terraform', 'Kubernetes', 'Azure Entra ID', 'Python', 'FinOps', 'Consul']
     },
     presetData: {
-      title: 'AWS and Azure Architect Resume (Example)',
+      title: 'AWS and Azure Architect Resume (2-Page Example)',
       personalInfo: {
         fullName: 'Vikram Patel',
         jobTitle: 'Senior Multi-Cloud Architect',
@@ -1398,7 +2149,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         linkedin: 'linkedin.com/in/vikrampatel-demo',
         github: 'github.com/vikrampatel-demo'
       },
-      summary: 'Expert Senior Multi-Cloud Architect with 8+ years of experience designing high-resilience infrastructure across AWS and Microsoft Azure platforms.',
+      summary: 'Expert Senior Multi-Cloud Architect with 8+ years of experience designing high-resilience infrastructure across AWS and Microsoft Azure platforms. Specialized in hybrid cloud identity federation, cross-cloud disaster recovery, and cost governance across 150+ enterprise cloud subscriptions.',
       experience: [
         {
           id: 'exp-11-1',
@@ -1409,10 +2160,54 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Architected cross-cloud disaster recovery failover between AWS and Azure, achieving RTO < 5 minutes.',
-            'Implemented FinOps cloud cost management framework across 150+ subscriptions, reducing spend by 30%.',
-            'Federated hybrid identity using Azure Entra ID and AWS IAM Identity Center.'
+            'Architected cross-cloud disaster recovery failover between AWS us-east-1 and Azure East US, achieving RTO < 5 minutes for tier-1 workloads.',
+            'Implemented FinOps cloud cost management framework across 150+ AWS accounts and Azure subscriptions, reducing monthly spending by 30%.',
+            'Federated hybrid identity using Azure Entra ID and AWS IAM Identity Center, streamlining SSO access for 8,500 employees.',
+            'Standardized multi-cloud landing zone provisioning using automated Terraform Cloud pipelines.'
           ]
+        },
+        {
+          id: 'exp-11-2',
+          role: 'Cloud Infrastructure Engineer',
+          company: 'Enterprise Cloud Infrastructure',
+          location: 'Dallas, TX',
+          startDate: '2017-06',
+          endDate: '2021-01',
+          current: false,
+          highlights: [
+            'Configured Azure ExpressRoute and AWS Direct Connect hybrid network tunnels connected to corporate data centers.',
+            'Automated multi-cloud resource provisioning using Terraform and CI/CD pipelines.',
+            'Designed Kubernetes cluster deployment templates on AWS EKS and Azure AKS.'
+          ]
+        },
+        {
+          id: 'exp-11-3',
+          role: 'Cloud Systems Administrator',
+          company: 'Lone Star Infrastructure',
+          location: 'Dallas, TX',
+          startDate: '2015-06',
+          endDate: '2017-05',
+          current: false,
+          highlights: [
+            'Managed AWS EC2 server fleet and Azure Virtual Machines, enforcing patch management and security compliance.',
+            'Wrote BASH scripts automating daily database backups to S3 buckets.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-11-1',
+          title: 'Unified Multi-Cloud Kubernetes Cluster Governance',
+          description: 'Deployed AWS EKS and Azure AKS clusters managed centrally via HashiCorp Consul.',
+          techStack: ['AWS EKS', 'Azure AKS', 'Terraform', 'Consul'],
+          outcomes: 'Unified deployment workflow across hybrid cloud environments.'
+        },
+        {
+          id: 'proj-11-2',
+          title: 'Automated Hybrid Cloud Identity Sync',
+          description: 'Configured SAML/OIDC identity synchronization between Azure Entra ID and AWS IAM.',
+          techStack: ['Azure Entra ID', 'AWS IAM', 'SAML 2.0', 'Python'],
+          outcomes: 'Eliminated duplicate credential management for 8,500 users.'
         }
       ],
       education: [
@@ -1421,13 +2216,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Electrical & Computer Engineering',
           institution: 'Texas A&M University',
           location: 'College Station, TX',
-          startDate: '2013',
-          endDate: '2017',
+          startDate: '2011',
+          endDate: '2015',
           gpa: '3.86 / 4.0'
         }
       ],
+      certifications: [
+        { id: 'cert-11-1', name: 'AWS Certified Solutions Architect – Professional', issuer: 'Amazon Web Services', date: '2021' },
+        { id: 'cert-11-2', name: 'Microsoft Certified: Azure Solutions Architect Expert', issuer: 'Microsoft', date: '2020' }
+      ],
       skills: [
-        { id: 's-11-1', category: 'Multi-Cloud', items: ['AWS', 'Azure', 'Terraform', 'FinOps', 'Disaster Recovery'] }
+        { id: 's-11-1', category: 'Cloud Infrastructure', items: ['AWS (EC2, S3, IAM, Transit Gateway)', 'Azure (VNets, ExpressRoute, Entra ID, AKS)', 'Terraform Enterprise', 'Disaster Recovery (RTO < 5m)'] },
+        { id: 's-11-2', category: 'Networking & Security', items: ['Hybrid Identity (Azure AD / AWS IAM Identity Center)', 'Cost Optimization (FinOps)', 'Kubernetes', 'Python', 'Bash'] },
+        { id: 's-11-3', category: 'DevOps & Monitoring', items: ['GitHub Actions', 'Datadog', 'HashiCorp Consul', 'Docker', 'Linux Systems'] }
       ]
     }
   },
@@ -1451,10 +2252,11 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['Kubernetes (EKS)', 'Terraform', 'ArgoCD GitOps', 'Helm', 'Prometheus'],
     pageLength: '2-Page',
     fullResume: {
-      summary: 'Hands-on Senior DevOps & Platform Engineer with 5+ years of experience automating Kubernetes cluster management, Infrastructure-as-Code (Terraform), and GitOps continuous delivery pipelines. Proven track record achieving 100% IaC coverage and increasing release deployment frequency to 50+ per day.',
+      summary: 'Hands-on Senior DevOps & Platform Engineer with 6+ years of experience automating Kubernetes cluster management, Infrastructure-as-Code (Terraform), and GitOps continuous delivery pipelines. Proven track record achieving 100% IaC coverage, increasing release deployment frequency to 50+ per day, and maintaining 99.99% infrastructure uptime.',
       skills: [
-        { category: 'Container & IaC Stack', items: ['Kubernetes (EKS, GKE, K3s)', 'Terraform Enterprise', 'ArgoCD / Flux GitOps', 'Helm Charts', 'Docker'] },
-        { category: 'CI/CD & Observability', items: ['GitHub Actions', 'Prometheus & Grafana', 'Datadog', 'Python', 'Go', 'Bash Scripting'] }
+        { category: 'Container & Orchestration', items: ['Kubernetes (EKS, GKE, K3s)', 'Helm 3 Charts', 'Docker Containerization', 'Istio Service Mesh', 'Cilium CNI'] },
+        { category: 'IaC & Cloud Infrastructure', items: ['Terraform Enterprise', 'AWS CloudFormation', 'Terragrunt', 'AWS (EC2, S3, RDS, IAM)', 'HashiCorp Vault'] },
+        { category: 'CI/CD & Observability', items: ['ArgoCD / Flux GitOps', 'GitHub Actions', 'GitLab CI', 'Prometheus & Grafana', 'Datadog', 'Python', 'Go', 'Bash'] }
       ],
       experience: [
         {
@@ -1468,7 +2270,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Provisioned multi-region AWS EKS Kubernetes clusters using modularized Terraform, supporting 50+ microservices with 100% IaC coverage.',
             'Implemented ArgoCD GitOps deployment pipeline, enabling developers to ship 50+ production releases daily with zero manual intervention.',
-            'Configured Prometheus & Grafana alerting rules, reducing Mean Time to Recovery (MTTR) by 60% during incident responses.'
+            'Configured Prometheus & Grafana alerting rules, reducing Mean Time to Recovery (MTTR) by 60% during critical incident responses.',
+            'Integrated HashiCorp Vault with Kubernetes secrets operator, enforcing dynamic secret rotation across 12 cluster namespaces.'
           ]
         },
         {
@@ -1480,18 +2283,39 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: '2021-07',
           current: false,
           highlights: [
-            'Migrated manual AWS console configurations into version-controlled HCL Terraform scripts.',
-            'Authored custom Helm charts for standardized microservice deployment templates.'
+            'Migrated 80+ legacy AWS EC2 instances into auto-scaling Kubernetes workloads, cutting cloud compute expenses by $14,000/month.',
+            'Authored custom Helm charts and reusable Terraform modules adopted by 14 internal engineering squads across the enterprise.',
+            'Automated zero-downtime database schema migration workflows using GitHub Actions and Liquibase.'
+          ]
+        },
+        {
+          id: 'exp-12-3',
+          role: 'Systems Administrator & Cloud Specialist',
+          company: 'Apex Hosting Solutions',
+          location: 'Provo, UT',
+          startDate: '2017-06',
+          endDate: '2019-01',
+          current: false,
+          highlights: [
+            'Managed Linux server fleets (Ubuntu/CentOS) and configured Nginx reverse proxies with SSL/TLS certificate auto-renewal via Certbot.',
+            'Maintained BASH deployment automation scripts and monitored network throughput using Nagios and Zabbix.'
           ]
         }
       ],
       projects: [
         {
           id: 'proj-12-1',
-          title: 'Automated Kubernetes Cluster Autoscaler',
-          description: 'Configured Karpenter auto-scaling on EKS clusters to optimize node utilization.',
-          techStack: ['Karpenter', 'AWS EKS', 'Terraform', 'Prometheus'],
-          outcomes: 'Reduced idle compute costs by 35% across 200 node instances.'
+          title: 'GitOps Multi-Region EKS Automation',
+          description: 'Designed automated GitOps continuous deployment pipeline leveraging ArgoCD and Terraform Cloud for dual-region failover.',
+          techStack: ['AWS EKS', 'ArgoCD', 'Terraform', 'Helm', 'Prometheus'],
+          outcomes: 'Reduced release deployment cycle time from 3 hours to 8 minutes.'
+        },
+        {
+          id: 'proj-12-2',
+          title: 'Infrastructure-as-Code Terraform Module Library',
+          description: 'Created standardized corporate Terraform module repository for AWS VPCs, EKS clusters, and RDS PostgreSQL databases.',
+          techStack: ['Terraform', 'Terragrunt', 'AWS', 'GitHub Actions'],
+          outcomes: 'Accelerated cloud environment setup for new microservices by 85%.'
         }
       ],
       education: [
@@ -1500,16 +2324,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Computer Science',
           institution: 'University of Utah',
           location: 'Salt Lake City, UT',
-          startDate: '2015',
-          endDate: '2019',
-          gpa: '3.80 / 4.0'
+          startDate: '2013',
+          endDate: '2017',
+          gpa: '3.82 / 4.0'
         }
       ],
-      certifications: ['Certified Kubernetes Administrator (CKA)', 'HashiCorp Certified Terraform Associate'],
-      technologies: ['Kubernetes', 'Terraform', 'AWS EKS', 'ArgoCD', 'Helm', 'Docker', 'Prometheus', 'Python']
+      certifications: [
+        'Certified Kubernetes Administrator (CKA)',
+        'HashiCorp Certified: Terraform Associate'
+      ],
+      technologies: ['Kubernetes', 'Terraform', 'Helm', 'ArgoCD', 'Prometheus', 'AWS EKS', 'Docker', 'Python', 'Go']
     },
     presetData: {
-      title: 'Kubernetes and Terraform Engineer Resume (Example)',
+      title: 'Kubernetes & Terraform Engineer Resume (2-Page Example)',
       personalInfo: {
         fullName: 'Lucas Vance',
         jobTitle: 'Senior DevOps & Platform Engineer',
@@ -1520,7 +2347,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         linkedin: 'linkedin.com/in/lucasvance-demo',
         github: 'github.com/lucasvance-demo'
       },
-      summary: 'Hands-on Senior DevOps & Platform Engineer with 5+ years of experience automating Kubernetes cluster management, Infrastructure-as-Code (Terraform), and GitOps pipelines.',
+      summary: 'Hands-on Senior DevOps & Platform Engineer with 6+ years of experience automating Kubernetes cluster management, Infrastructure-as-Code (Terraform), and GitOps continuous delivery pipelines.',
       experience: [
         {
           id: 'exp-12-1',
@@ -1531,10 +2358,52 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Provisioned multi-region AWS EKS Kubernetes clusters using modularized Terraform with 100% IaC coverage.',
-            'Implemented ArgoCD GitOps pipeline, enabling 50+ production releases daily.',
-            'Configured Prometheus & Grafana alerting rules, reducing MTTR by 60%.'
+            'Provisioned multi-region AWS EKS Kubernetes clusters using modularized Terraform, supporting 50+ microservices.',
+            'Implemented ArgoCD GitOps deployment pipeline, enabling developers to ship 50+ production releases daily.',
+            'Configured Prometheus & Grafana alerting, reducing MTTR by 60%.'
           ]
+        },
+        {
+          id: 'exp-12-2',
+          role: 'Site Reliability Engineer (SRE)',
+          company: 'ScaleStack Ops',
+          location: 'Salt Lake City, UT',
+          startDate: '2019-02',
+          endDate: '2021-07',
+          current: false,
+          highlights: [
+            'Migrated 80+ legacy AWS EC2 instances into auto-scaling Kubernetes workloads, cutting compute expenses.',
+            'Authored custom Helm charts and reusable Terraform modules adopted by 14 engineering squads.'
+          ]
+        },
+        {
+          id: 'exp-12-3',
+          role: 'Systems Administrator',
+          company: 'Apex Hosting Solutions',
+          location: 'Provo, UT',
+          startDate: '2017-06',
+          endDate: '2019-01',
+          current: false,
+          highlights: [
+            'Managed Linux server fleets and configured Nginx reverse proxies with auto-renewal SSL.',
+            'Maintained BASH deployment automation scripts and network monitoring via Nagios.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-12-1',
+          title: 'GitOps Multi-Region EKS Automation',
+          description: 'Automated CD pipeline leveraging ArgoCD and Terraform Cloud.',
+          techStack: ['AWS EKS', 'ArgoCD', 'Terraform', 'Helm'],
+          outcomes: 'Reduced release cycle time from 3 hours to 8 minutes.'
+        },
+        {
+          id: 'proj-12-2',
+          title: 'IaC Terraform Module Library',
+          description: 'Standardized corporate Terraform module repository for AWS resources.',
+          techStack: ['Terraform', 'Terragrunt', 'GitHub Actions'],
+          outcomes: 'Accelerated cloud setup for new services by 85%.'
         }
       ],
       education: [
@@ -1543,13 +2412,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Computer Science',
           institution: 'University of Utah',
           location: 'Salt Lake City, UT',
-          startDate: '2015',
-          endDate: '2019',
-          gpa: '3.80 / 4.0'
+          startDate: '2013',
+          endDate: '2017',
+          gpa: '3.82 / 4.0'
         }
       ],
+      certifications: [
+        { id: 'cert-12-1', name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '2021' },
+        { id: 'cert-12-2', name: 'HashiCorp Certified: Terraform Associate', issuer: 'HashiCorp', date: '2020' }
+      ],
       skills: [
-        { id: 's-12-1', category: 'DevOps & Platform', items: ['Kubernetes', 'Terraform', 'ArgoCD', 'Helm', 'Prometheus'] }
+        { id: 's-12-1', category: 'Orchestration', items: ['Kubernetes', 'Helm', 'Docker', 'ArgoCD'] },
+        { id: 's-12-2', category: 'Infrastructure', items: ['Terraform', 'Terragrunt', 'AWS', 'Vault'] },
+        { id: 's-12-3', category: 'Observability', items: ['Prometheus', 'Grafana', 'Datadog', 'Python'] }
       ]
     }
   },
@@ -1698,7 +2573,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       summary: 'Accomplished Lead Healthcare Automation Specialist with 6+ years of experience integrating Epic EHR systems, HL7/FHIR data interoperability protocols, and UiPath RPA bots. Proven track record eliminating 3 hours of daily clinical documentation overhead for physicians and achieving 100% HIPAA compliance.',
       skills: [
         { category: 'Healthcare Systems', items: ['Epic EHR Integration', 'HL7 v2 / FHIR Standards', 'Cerner Millennium', 'Clinical Decision Support (CDS)', 'HIPAA Compliance'] },
-        { category: 'Automation Technologies', items: ['UiPath Healthcare RPA', 'Python Healthcare Scripts', 'RESTful FHIR APIs', 'SQL', 'Process Mining'] }
+        { category: 'Automation Technologies', items: ['UiPath Healthcare RPA', 'Python Healthcare Scripts', 'RESTful FHIR APIs', 'SQL', 'Process Mining'] },
+        { category: 'Data Interoperability', items: ['Mirth Connect Engine', 'JSON/XML Transformation', 'PostgreSQL', 'Docker', 'Git'] }
       ],
       experience: [
         {
@@ -1712,7 +2588,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Designed and deployed automated FHIR API data sync between Epic EHR and lab results systems, saving clinicians 3 hours of daily manual charting.',
             'Implemented UiPath RPA bots handling automated prior authorization requests, cutting insurance approval wait times from 5 days to 2 hours.',
-            'Maintained 100% HIPAA and HITECH compliance across all automated patient data processing pipelines.'
+            'Maintained 100% HIPAA and HITECH compliance across all automated patient data processing pipelines.',
+            'Engineered automated clinical alert escalation workflows notifying attending physicians of critical lab value spikes.'
           ]
         },
         {
@@ -1725,7 +2602,21 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: false,
           highlights: [
             'Configured HL7 interface engines (Mirth Connect) transmitting 50,000 daily HL7 messages between hospital radiology and billing systems.',
-            'Trained 200+ healthcare staff on automated patient check-in kiosks.'
+            'Trained 200+ healthcare staff on automated patient check-in kiosks.',
+            'Reduced duplicate patient record creation by 40% using fuzzy logic patient identity matching algorithms.'
+          ]
+        },
+        {
+          id: 'exp-14-3',
+          role: 'Healthcare Data Analyst',
+          company: 'Pittsburgh Clinical Systems',
+          location: 'Pittsburgh, PA',
+          startDate: '2016-06',
+          endDate: '2018-04',
+          current: false,
+          highlights: [
+            'Wrote SQL data queries extracting clinical outcome metrics for hospital quality management reporting.',
+            'Maintained medical terminology mapping tables across ICD-10, CPT, and LOINC codes.'
           ]
         }
       ],
@@ -1736,6 +2627,13 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           description: 'Built FHIR-compliant mobile intake workflow populating Epic EHR charts in real-time.',
           techStack: ['HL7 FHIR API', 'Python', 'UiPath', 'Epic SmartForms'],
           outcomes: 'Elevated patient satisfaction score to 98%.'
+        },
+        {
+          id: 'proj-14-2',
+          title: 'EHR Prior Authorization RPA Automation Bot',
+          description: 'Constructed UiPath bot extracting patient chart data and submitting portal claims.',
+          techStack: ['UiPath RPA', 'Epic EHR', 'Python', 'SQL'],
+          outcomes: 'Accelerated prior authorization turnaround speed by 95%.'
         }
       ],
       education: [
@@ -1744,16 +2642,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'M.S. in Health Informatics',
           institution: 'University of Pittsburgh',
           location: 'Pittsburgh, PA',
-          startDate: '2016',
-          endDate: '2018',
+          startDate: '2014',
+          endDate: '2016',
           gpa: '3.93 / 4.0'
         }
       ],
-      certifications: ['Epic Certified Interface Engineer', 'Certified Health Informatics Professional (CPHIMS)'],
+      certifications: [
+        'Epic Certified Interface Engineer',
+        'Certified Health Informatics Professional (CPHIMS)'
+      ],
       technologies: ['Epic EHR', 'HL7 / FHIR', 'UiPath', 'Python', 'Mirth Connect', 'SQL', 'Cerner']
     },
     presetData: {
-      title: 'Healthcare Automation Specialist Resume (Example)',
+      title: 'Healthcare Automation Specialist Resume (2-Page Example)',
       personalInfo: {
         fullName: 'Dr. Samantha Reed',
         jobTitle: 'Lead Healthcare Automation Specialist',
@@ -1762,9 +2663,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         location: 'Pittsburgh, PA',
         website: 'samanthareed.demo',
         linkedin: 'linkedin.com/in/samanthareed-demo',
-        github: ''
+        github: 'github.com/samanthareed-health'
       },
-      summary: 'Accomplished Lead Healthcare Automation Specialist with 6+ years of experience integrating Epic EHR systems, HL7/FHIR data interoperability protocols, and UiPath RPA bots.',
+      summary: 'Accomplished Lead Healthcare Automation Specialist with 6+ years of experience integrating Epic EHR systems, HL7/FHIR data interoperability protocols, and UiPath RPA bots. Proven track record eliminating 3 hours of daily clinical documentation overhead for physicians and achieving 100% HIPAA compliance.',
       experience: [
         {
           id: 'exp-14-1',
@@ -1775,10 +2676,54 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Designed automated FHIR API data sync between Epic EHR and labs, saving clinicians 3 hours daily charting.',
-            'Implemented UiPath RPA bots for prior authorization, cutting insurance approval times from 5 days to 2 hours.',
-            'Maintained 100% HIPAA compliance across all patient data processing pipelines.'
+            'Designed and deployed automated FHIR API data sync between Epic EHR and lab results systems, saving clinicians 3 hours of daily manual charting.',
+            'Implemented UiPath RPA bots handling automated prior authorization requests, cutting insurance approval wait times from 5 days to 2 hours.',
+            'Maintained 100% HIPAA and HITECH compliance across all automated patient data processing pipelines.',
+            'Engineered automated clinical alert escalation workflows notifying attending physicians of critical lab value spikes.'
           ]
+        },
+        {
+          id: 'exp-14-2',
+          role: 'Clinical IT Integration Engineer',
+          company: 'Clinical Workflow Systems',
+          location: 'Pittsburgh, PA',
+          startDate: '2018-05',
+          endDate: '2021-06',
+          current: false,
+          highlights: [
+            'Configured HL7 interface engines (Mirth Connect) transmitting 50,000 daily HL7 messages between hospital radiology and billing systems.',
+            'Trained 200+ healthcare staff on automated patient check-in kiosks.',
+            'Reduced duplicate patient record creation by 40% using fuzzy logic patient identity matching algorithms.'
+          ]
+        },
+        {
+          id: 'exp-14-3',
+          role: 'Healthcare Data Analyst',
+          company: 'Pittsburgh Clinical Systems',
+          location: 'Pittsburgh, PA',
+          startDate: '2016-06',
+          endDate: '2018-04',
+          current: false,
+          highlights: [
+            'Wrote SQL data queries extracting clinical outcome metrics for hospital quality management reporting.',
+            'Maintained medical terminology mapping tables across ICD-10, CPT, and LOINC codes.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-14-1',
+          title: 'Automated Telehealth Patient Intake Pipeline',
+          description: 'Built FHIR-compliant mobile intake workflow populating Epic EHR charts in real-time.',
+          techStack: ['HL7 FHIR API', 'Python', 'UiPath', 'Epic SmartForms'],
+          outcomes: 'Elevated patient satisfaction score to 98%.'
+        },
+        {
+          id: 'proj-14-2',
+          title: 'EHR Prior Authorization RPA Automation Bot',
+          description: 'Constructed UiPath bot extracting patient chart data and submitting portal claims.',
+          techStack: ['UiPath RPA', 'Epic EHR', 'Python', 'SQL'],
+          outcomes: 'Accelerated prior authorization turnaround speed by 95%.'
         }
       ],
       education: [
@@ -1787,13 +2732,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'M.S. in Health Informatics',
           institution: 'University of Pittsburgh',
           location: 'Pittsburgh, PA',
-          startDate: '2016',
-          endDate: '2018',
+          startDate: '2014',
+          endDate: '2016',
           gpa: '3.93 / 4.0'
         }
       ],
+      certifications: [
+        { id: 'cert-14-1', name: 'Epic Certified Interface Engineer', issuer: 'Epic Systems', date: '2019' },
+        { id: 'cert-14-2', name: 'Certified Health Informatics Professional (CPHIMS)', issuer: 'HIMSS', date: '2021' }
+      ],
       skills: [
-        { id: 's-14-1', category: 'Health Tech', items: ['Epic EHR', 'HL7 FHIR', 'UiPath RPA', 'HIPAA', 'Python'] }
+        { id: 's-14-1', category: 'Healthcare Systems', items: ['Epic EHR Integration', 'HL7 v2 / FHIR Standards', 'Cerner Millennium', 'Clinical Decision Support (CDS)', 'HIPAA Compliance'] },
+        { id: 's-14-2', category: 'Automation Technologies', items: ['UiPath Healthcare RPA', 'Python Healthcare Scripts', 'RESTful FHIR APIs', 'SQL', 'Process Mining'] },
+        { id: 's-14-3', category: 'Data Interoperability', items: ['Mirth Connect Engine', 'JSON/XML Transformation', 'PostgreSQL', 'Docker', 'Git'] }
       ]
     }
   },
@@ -1939,10 +2890,12 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['Collibra', 'Alation', 'Metadata Management', 'GDPR / CCPA', 'SQL'],
     pageLength: '3-Page',
     fullResume: {
-      summary: 'Data Lineage & Quality Lead with 6+ years of experience deploying enterprise data catalogs (Collibra, Alation), establishing master data management (MDM) policies, and ensuring 100% compliance with GDPR/CCPA regulations across multi-terabyte financial databases.',
+      summary: 'Data Lineage & Quality Lead with 8+ years of experience deploying enterprise data catalogs (Collibra, Alation), establishing master data management (MDM) policies, and ensuring 100% compliance with GDPR/CCPA regulations across multi-terabyte financial databases. Proven track record auditing 450+ data assets, cutting bad data incidents by 75%, and training 500+ corporate data stewards.',
       skills: [
         { category: 'Data Governance Tools', items: ['Collibra Data Governance', 'Alation Data Catalog', 'Informatica MDM', 'Apache Atlas', 'Data Quality Frameworks'] },
-        { category: 'Compliance & Analytics', items: ['GDPR / CCPA Data Lineage', 'PII Masking & Anonymization', 'Advanced SQL', 'Snowflake', 'BigQuery'] }
+        { category: 'Compliance & Privacy', items: ['GDPR / CCPA Data Lineage', 'PII Masking & Anonymization', 'Data Retention Frameworks', 'SOC 2 Data Controls'] },
+        { category: 'Analytics & Warehousing', items: ['Advanced SQL', 'Snowflake', 'Google BigQuery', 'dbt Data Modeling', 'Apache Spark', 'Python'] },
+        { category: 'Governance Operations', items: ['Master Data Management (MDM)', 'Business Glossary Standardization', 'Metadata Lineage Automation', 'Jira Service Desk'] }
       ],
       experience: [
         {
@@ -1956,12 +2909,13 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Deployed Collibra Data Catalog across 450 enterprise data assets, expanding metadata lineage coverage from 35% to 95%.',
             'Implemented automated PII scanning and masking policies in Snowflake, achieving 100% pass rate during external GDPR and CCPA audits.',
-            'Established Data Quality Index dashboard tracking missing values and schema drifts, cutting bad data incidents by 75%.'
+            'Established Data Quality Index dashboard tracking missing values and schema drifts, cutting bad data incidents by 75%.',
+            'Directed team of 6 data stewards enforcing data classification policies across sales, marketing, and finance databases.'
           ]
         },
         {
           id: 'exp-16-2',
-          role: 'Data Steward Specialist',
+          role: 'Lead Data Steward Specialist',
           company: 'Financial Data Security',
           location: 'Charlotte, NC',
           startDate: '2018-01',
@@ -1969,7 +2923,33 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: false,
           highlights: [
             'Authored enterprise business glossary defining 1,500+ standardized metrics across banking divisions.',
-            'Audited database access controls to eliminate unnecessary PII table privileges.'
+            'Audited database access controls to eliminate unnecessary PII table privileges across 120 database users.',
+            'Integrated Alation catalog with dbt metadata models to track automated column-level data lineage.'
+          ]
+        },
+        {
+          id: 'exp-16-3',
+          role: 'Senior Data Analyst & Quality Auditor',
+          company: 'Charlotte Banking Corp',
+          location: 'Charlotte, NC',
+          startDate: '2015-06',
+          endDate: '2017-12',
+          current: false,
+          highlights: [
+            'Built automated data profiling scripts in SQL and Python detecting duplicate record anomalies in customer master databases.',
+            'Collaborated with risk management team to enforce data retention schedules for financial transaction archives.'
+          ]
+        },
+        {
+          id: 'exp-16-4',
+          role: 'Database Specialist',
+          company: 'Mid-Atlantic Systems',
+          location: 'Raleigh, NC',
+          startDate: '2013-06',
+          endDate: '2015-05',
+          current: false,
+          highlights: [
+            'Maintained relational database schemas in Oracle and SQL Server, configuring user access roles and table indexes.'
           ]
         }
       ],
@@ -1980,24 +2960,50 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           description: 'Configured automated SQL query parser capturing table dependencies into Apache Atlas.',
           techStack: ['Apache Atlas', 'SQL', 'Snowflake', 'Python'],
           outcomes: 'Automated data lineage tracking for 2,000 daily ETL pipelines.'
+        },
+        {
+          id: 'proj-16-2',
+          title: 'Enterprise PII Dynamic Masking Architecture',
+          description: 'Implemented automated column-level security policies masking customer SSN and credit card numbers.',
+          techStack: ['Snowflake', 'Collibra', 'SQL', 'Python'],
+          outcomes: 'Eliminated unencrypted PII exposure across 150 reporting dashboards.'
+        },
+        {
+          id: 'proj-16-3',
+          title: 'Business Glossary & Data Dictionary Unification',
+          description: 'Standardized definitions for 1,500 financial KPIs across 5 corporate business units.',
+          techStack: ['Collibra', 'Alation', 'Confluence', 'SQL'],
+          outcomes: 'Reduced quarterly financial metric reporting discrepancies by 90%.'
         }
       ],
       education: [
         {
           id: 'edu-16-1',
+          degree: 'M.S. in Information & Data Strategy',
+          institution: 'Duke University',
+          location: 'Durham, NC',
+          startDate: '2011',
+          endDate: '2013',
+          gpa: '3.92 / 4.0'
+        },
+        {
+          id: 'edu-16-2',
           degree: 'B.S. in Management Information Systems',
           institution: 'University of North Carolina at Charlotte',
           location: 'Charlotte, NC',
-          startDate: '2014',
-          endDate: '2018',
-          gpa: '3.88 / 4.0'
+          startDate: '2007',
+          endDate: '2011'
         }
       ],
-      certifications: ['Certified Data Management Professional (CDMP)', 'Collibra Certified Solution Architect'],
-      technologies: ['Collibra', 'Alation', 'Informatica', 'Snowflake', 'SQL', 'Apache Atlas', 'Python']
+      certifications: [
+        'Certified Data Management Professional (CDMP)',
+        'Collibra Certified Solution Architect',
+        'Alation Certified Data Steward'
+      ],
+      technologies: ['Collibra', 'Alation', 'Informatica MDM', 'Snowflake', 'BigQuery', 'SQL', 'dbt', 'Python']
     },
     presetData: {
-      title: 'Data Governance Specialist Resume (Example)',
+      title: 'Data Governance Specialist Resume (3-Page Example)',
       personalInfo: {
         fullName: 'Isabella Rossi',
         jobTitle: 'Senior Data Governance Manager',
@@ -2006,9 +3012,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         location: 'Charlotte, NC',
         website: 'isabellarossi.demo',
         linkedin: 'linkedin.com/in/isabellarossi-demo',
-        github: ''
+        github: 'github.com/isabellarossi-data'
       },
-      summary: 'Data Lineage & Quality Lead with 6+ years of experience deploying enterprise data catalogs (Collibra, Alation), establishing master data management (MDM) policies.',
+      summary: 'Data Lineage & Quality Lead with 8+ years of experience deploying enterprise data catalogs (Collibra, Alation), establishing master data management (MDM) policies, and ensuring 100% compliance with GDPR/CCPA regulations across multi-terabyte financial databases. Proven track record auditing 450+ data assets, cutting bad data incidents by 75%, and training 500+ corporate data stewards.',
       experience: [
         {
           id: 'exp-16-1',
@@ -2019,25 +3025,104 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Deployed Collibra Data Catalog across 450 assets, expanding metadata lineage coverage from 35% to 95%.',
-            'Implemented automated PII scanning and masking policies, achieving 100% pass rate in GDPR/CCPA audits.',
-            'Cut bad data incidents by 75% via automated schema drift detection.'
+            'Deployed Collibra Data Catalog across 450 enterprise data assets, expanding metadata lineage coverage from 35% to 95%.',
+            'Implemented automated PII scanning and masking policies in Snowflake, achieving 100% pass rate during external GDPR and CCPA audits.',
+            'Established Data Quality Index dashboard tracking missing values and schema drifts, cutting bad data incidents by 75%.',
+            'Directed team of 6 data stewards enforcing data classification policies across sales, marketing, and finance databases.'
           ]
+        },
+        {
+          id: 'exp-16-2',
+          role: 'Lead Data Steward Specialist',
+          company: 'Financial Data Security',
+          location: 'Charlotte, NC',
+          startDate: '2018-01',
+          endDate: '2021-03',
+          current: false,
+          highlights: [
+            'Authored enterprise business glossary defining 1,500+ standardized metrics across banking divisions.',
+            'Audited database access controls to eliminate unnecessary PII table privileges across 120 database users.',
+            'Integrated Alation catalog with dbt metadata models to track automated column-level data lineage.'
+          ]
+        },
+        {
+          id: 'exp-16-3',
+          role: 'Senior Data Analyst & Quality Auditor',
+          company: 'Charlotte Banking Corp',
+          location: 'Charlotte, NC',
+          startDate: '2015-06',
+          endDate: '2017-12',
+          current: false,
+          highlights: [
+            'Built automated data profiling scripts in SQL and Python detecting duplicate record anomalies in customer master databases.',
+            'Collaborated with risk management team to enforce data retention schedules for financial transaction archives.'
+          ]
+        },
+        {
+          id: 'exp-16-4',
+          role: 'Database Specialist',
+          company: 'Mid-Atlantic Systems',
+          location: 'Raleigh, NC',
+          startDate: '2013-06',
+          endDate: '2015-05',
+          current: false,
+          highlights: [
+            'Maintained relational database schemas in Oracle and SQL Server, configuring user access roles and table indexes.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-16-1',
+          title: 'Automated Metadata Lineage Extraction Engine',
+          description: 'Configured automated SQL query parser capturing table dependencies into Apache Atlas.',
+          techStack: ['Apache Atlas', 'SQL', 'Snowflake', 'Python'],
+          outcomes: 'Automated data lineage tracking for 2,000 daily ETL pipelines.'
+        },
+        {
+          id: 'proj-16-2',
+          title: 'Enterprise PII Dynamic Masking Architecture',
+          description: 'Implemented automated column-level security policies masking customer SSN and credit card numbers.',
+          techStack: ['Snowflake', 'Collibra', 'SQL', 'Python'],
+          outcomes: 'Eliminated unencrypted PII exposure across 150 reporting dashboards.'
+        },
+        {
+          id: 'proj-16-3',
+          title: 'Business Glossary & Data Dictionary Unification',
+          description: 'Standardized definitions for 1,500 financial KPIs across 5 corporate business units.',
+          techStack: ['Collibra', 'Alation', 'Confluence', 'SQL'],
+          outcomes: 'Reduced quarterly financial metric reporting discrepancies by 90%.'
         }
       ],
       education: [
         {
           id: 'edu-16-1',
-          degree: 'B.S. in MIS',
-          institution: 'UNC Charlotte',
+          degree: 'M.S. in Information & Data Strategy',
+          institution: 'Duke University',
+          location: 'Durham, NC',
+          startDate: '2011',
+          endDate: '2013',
+          gpa: '3.92 / 4.0'
+        },
+        {
+          id: 'edu-16-2',
+          degree: 'B.S. in Management Information Systems',
+          institution: 'University of North Carolina at Charlotte',
           location: 'Charlotte, NC',
-          startDate: '2014',
-          endDate: '2018',
-          gpa: '3.88 / 4.0'
+          startDate: '2007',
+          endDate: '2011'
         }
       ],
+      certifications: [
+        { id: 'cert-16-1', name: 'Certified Data Management Professional (CDMP)', issuer: 'DAMA International', date: '2019' },
+        { id: 'cert-16-2', name: 'Collibra Certified Solution Architect', issuer: 'Collibra', date: '2021' },
+        { id: 'cert-16-3', name: 'Alation Certified Data Steward', issuer: 'Alation', date: '2020' }
+      ],
       skills: [
-        { id: 's-16-1', category: 'Data Governance', items: ['Collibra', 'Alation', 'GDPR/CCPA', 'Data Lineage', 'SQL'] }
+        { id: 's-16-1', category: 'Data Governance Tools', items: ['Collibra Data Governance', 'Alation Data Catalog', 'Informatica MDM', 'Apache Atlas', 'Data Quality Frameworks'] },
+        { id: 's-16-2', category: 'Compliance & Privacy', items: ['GDPR / CCPA Data Lineage', 'PII Masking & Anonymization', 'Data Retention Frameworks', 'SOC 2 Data Controls'] },
+        { id: 's-16-3', category: 'Analytics & Warehousing', items: ['Advanced SQL', 'Snowflake', 'Google BigQuery', 'dbt Data Modeling', 'Apache Spark', 'Python'] },
+        { id: 's-16-4', category: 'Governance Operations', items: ['Master Data Management (MDM)', 'Business Glossary Standardization', 'Metadata Lineage Automation', 'Jira Service Desk'] }
       ]
     }
   },
@@ -2064,7 +3149,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       summary: 'Battle-tested Senior Zero Trust Security Architect with 8+ years of experience designing Identity & Access Management (IAM) frameworks, Least-Privilege RBAC models, and Zscaler SASE micro-segmentation. Proven track record onboarding 15,000 enterprise users to Zero Trust identity controls with zero security breaches.',
       skills: [
         { category: 'IAM & Identity', items: ['Okta Universal Directory', 'Azure Entra ID', 'SAML 2.0 / OAuth2.0 / OIDC', 'Privileged Access Management (CyberArk)', 'MFA Enforcement'] },
-        { category: 'Zero Trust & Network', items: ['Zscaler Private Access (ZPA)', 'Least-Privilege RBAC/ABAC', 'Micro-segmentation', 'Python', 'Terraform IAM Modules'] }
+        { category: 'Zero Trust & Network', items: ['Zscaler Private Access (ZPA)', 'Least-Privilege RBAC/ABAC', 'Micro-segmentation', 'Python', 'Terraform IAM Modules'] },
+        { category: 'Security Compliance', items: ['NIST 800-207 Zero Trust Architecture', 'ISO 27001', 'SOC 2 Type II Audits', 'FIDO2 Passwordless WebAuthn', 'SCIM 2.0'] }
       ],
       experience: [
         {
@@ -2078,7 +3164,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Architected end-to-end Zero Trust Network Access (ZTNA) transition replacing legacy VPNs with Zscaler for 15,000 global remote employees.',
             'Implemented passwordless FIDO2 MFA and risk-based conditional access policies in Okta, achieving 100% MFA compliance and zero identity credential breaches.',
-            'Automated IAM role lifecycle provisioning via Terraform and SCIM APIs, eliminating 8 hours of manual ticket processing weekly.'
+            'Automated IAM role lifecycle provisioning via Terraform and SCIM APIs, eliminating 8 hours of manual ticket processing weekly.',
+            'Enforced least-privilege role-based access control (RBAC) governance across 350 AWS accounts and Kubernetes namespaces.'
           ]
         },
         {
@@ -2091,7 +3178,21 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           current: false,
           highlights: [
             'Deployed CyberArk PAM vault securing root administrative credentials across 400 cloud server instances.',
-            'Configured SAML single sign-on (SSO) integrations for 85 SaaS enterprise applications.'
+            'Configured SAML single sign-on (SSO) integrations for 85 SaaS enterprise applications.',
+            'Automated identity de-provisioning workflows for terminated employee accounts within 5 minutes of HR event trigger.'
+          ]
+        },
+        {
+          id: 'exp-17-3',
+          role: 'Information Security Analyst',
+          company: 'Pacific Cyber Systems',
+          location: 'San Diego, CA',
+          startDate: '2014-06',
+          endDate: '2016-07',
+          current: false,
+          highlights: [
+            'Monitored SIEM log streams (Splunk) detecting anomalous login attempts and potential identity compromise alerts.',
+            'Assisted internal security auditors during annual SOC 2 Type II and ISO 27001 compliance reviews.'
           ]
         }
       ],
@@ -2102,6 +3203,13 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           description: 'Built Python tool analyzing active user entitlements to suggest least-privilege role shrinkages.',
           techStack: ['Python', 'Okta API', 'Azure Entra ID', 'SQL'],
           outcomes: 'Removed 3,500 stale over-privileged access permissions.'
+        },
+        {
+          id: 'proj-17-2',
+          title: 'Passwordless FIDO2 WebAuthn Rollout',
+          description: 'Configured hardware security key (YubiKey) authentication policy across 15,000 corporate workstations.',
+          techStack: ['Okta IAM', 'WebAuthn', 'FIDO2', 'Azure Entra ID'],
+          outcomes: 'Eliminated password-phishing attack surface to 0%.'
         }
       ],
       education: [
@@ -2110,16 +3218,19 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           degree: 'B.S. in Cybersecurity & Information Assurance',
           institution: 'San Diego State University',
           location: 'San Diego, CA',
-          startDate: '2012',
-          endDate: '2016',
+          startDate: '2010',
+          endDate: '2014',
           gpa: '3.87 / 4.0'
         }
       ],
-      certifications: ['Certified Information Systems Security Professional (CISSP)', 'Okta Certified Solution Architect'],
+      certifications: [
+        'Certified Information Systems Security Professional (CISSP)',
+        'Okta Certified Solution Architect'
+      ],
       technologies: ['Okta', 'Azure Entra ID', 'Zscaler', 'CyberArk', 'SAML', 'OAuth2', 'Terraform', 'Python']
     },
     presetData: {
-      title: 'IAM and Zero Trust Architect Resume (Example)',
+      title: 'IAM and Zero Trust Architect Resume (2-Page Example)',
       personalInfo: {
         fullName: 'Gabriel Thorne',
         jobTitle: 'Senior Zero Trust Security Architect',
@@ -2128,9 +3239,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         location: 'San Diego, CA',
         website: 'gabrielthorne.demo',
         linkedin: 'linkedin.com/in/gabrielthorne-demo',
-        github: ''
+        github: 'github.com/gabrielthorne-cyber'
       },
-      summary: 'Battle-tested Senior Zero Trust Security Architect with 8+ years of experience designing Identity & Access Management (IAM) frameworks and Zscaler SASE micro-segmentation.',
+      summary: 'Battle-tested Senior Zero Trust Security Architect with 8+ years of experience designing Identity & Access Management (IAM) frameworks, Least-Privilege RBAC models, and Zscaler SASE micro-segmentation. Proven track record onboarding 15,000 enterprise users to Zero Trust identity controls with zero security breaches.',
       experience: [
         {
           id: 'exp-17-1',
@@ -2141,25 +3252,75 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Architected ZTNA transition replacing legacy VPNs with Zscaler for 15,000 global remote employees.',
-            'Implemented passwordless FIDO2 MFA in Okta, achieving zero identity credential breaches.',
-            'Automated IAM role lifecycle provisioning via Terraform and SCIM APIs.'
+            'Architected end-to-end Zero Trust Network Access (ZTNA) transition replacing legacy VPNs with Zscaler for 15,000 global remote employees.',
+            'Implemented passwordless FIDO2 MFA and risk-based conditional access policies in Okta, achieving 100% MFA compliance and zero identity credential breaches.',
+            'Automated IAM role lifecycle provisioning via Terraform and SCIM APIs, eliminating 8 hours of manual ticket processing weekly.',
+            'Enforced least-privilege role-based access control (RBAC) governance across 350 AWS accounts and Kubernetes namespaces.'
           ]
+        },
+        {
+          id: 'exp-17-2',
+          role: 'IAM Systems Engineer',
+          company: 'IdentityGuard Enterprise',
+          location: 'San Diego, CA',
+          startDate: '2016-08',
+          endDate: '2020-08',
+          current: false,
+          highlights: [
+            'Deployed CyberArk PAM vault securing root administrative credentials across 400 cloud server instances.',
+            'Configured SAML single sign-on (SSO) integrations for 85 SaaS enterprise applications.',
+            'Automated identity de-provisioning workflows for terminated employee accounts within 5 minutes of HR event trigger.'
+          ]
+        },
+        {
+          id: 'exp-17-3',
+          role: 'Information Security Analyst',
+          company: 'Pacific Cyber Systems',
+          location: 'San Diego, CA',
+          startDate: '2014-06',
+          endDate: '2016-07',
+          current: false,
+          highlights: [
+            'Monitored SIEM log streams (Splunk) detecting anomalous login attempts and potential identity compromise alerts.',
+            'Assisted internal security auditors during annual SOC 2 Type II and ISO 27001 compliance reviews.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-17-1',
+          title: 'Automated RBAC Role Mining Engine',
+          description: 'Built Python tool analyzing active user entitlements to suggest least-privilege role shrinkages.',
+          techStack: ['Python', 'Okta API', 'Azure Entra ID', 'SQL'],
+          outcomes: 'Removed 3,500 stale over-privileged access permissions.'
+        },
+        {
+          id: 'proj-17-2',
+          title: 'Passwordless FIDO2 WebAuthn Rollout',
+          description: 'Configured hardware security key (YubiKey) authentication policy across 15,000 corporate workstations.',
+          techStack: ['Okta IAM', 'WebAuthn', 'FIDO2', 'Azure Entra ID'],
+          outcomes: 'Eliminated password-phishing attack surface to 0%.'
         }
       ],
       education: [
         {
           id: 'edu-17-1',
-          degree: 'B.S. in Cybersecurity',
+          degree: 'B.S. in Cybersecurity & Information Assurance',
           institution: 'San Diego State University',
           location: 'San Diego, CA',
-          startDate: '2012',
-          endDate: '2016',
+          startDate: '2010',
+          endDate: '2014',
           gpa: '3.87 / 4.0'
         }
       ],
+      certifications: [
+        { id: 'cert-17-1', name: 'Certified Information Systems Security Professional (CISSP)', issuer: '(ISC)²', date: '2018' },
+        { id: 'cert-17-2', name: 'Okta Certified Solution Architect', issuer: 'Okta', date: '2021' }
+      ],
       skills: [
-        { id: 's-17-1', category: 'Zero Trust & IAM', items: ['Zero Trust', 'Okta IAM', 'Azure Entra ID', 'Zscaler ZPA', 'CISSP'] }
+        { id: 's-17-1', category: 'IAM & Identity', items: ['Okta Universal Directory', 'Azure Entra ID', 'SAML 2.0 / OAuth2.0 / OIDC', 'Privileged Access Management (CyberArk)', 'MFA Enforcement'] },
+        { id: 's-17-2', category: 'Zero Trust & Network', items: ['Zscaler Private Access (ZPA)', 'Least-Privilege RBAC/ABAC', 'Micro-segmentation', 'Python', 'Terraform IAM Modules'] },
+        { id: 's-17-3', category: 'Security Compliance', items: ['NIST 800-207 Zero Trust Architecture', 'ISO 27001', 'SOC 2 Type II Audits', 'FIDO2 Passwordless WebAuthn', 'SCIM 2.0'] }
       ]
     }
   },
@@ -2305,10 +3466,12 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     skillsBadge: ['Stakeholder Alignment', 'Executive Communication', 'Change Management', 'SaaS Retention', 'SQL'],
     pageLength: '3-Page',
     fullResume: {
-      summary: 'Diplomatic Lead Product Manager with 7+ years of experience aligning executive C-suite stakeholders, sales leadership, and engineering teams behind strategic product initiatives. Proven track record achieving 98% cross-functional requirement alignment and reducing enterprise customer churn by 18%.',
+      summary: 'Diplomatic Lead Product Manager with 8+ years of experience aligning executive C-suite stakeholders, sales leadership, and cross-functional engineering teams behind strategic SaaS product initiatives. Proven track record achieving 98% cross-functional requirement alignment, managing Customer Advisory Boards (CAB) representing $12M+ ARR, and reducing annual enterprise customer churn by 18%.',
       skills: [
-        { category: 'Stakeholder Governance', items: ['Executive C-Suite Alignment', 'Customer Advisory Boards (CAB)', 'Change Management', 'Conflict Resolution', 'Feature Negotiation'] },
-        { category: 'Product Strategy', items: ['Product Discovery', 'Value Proposition Design', 'GTM Strategy', 'SQL Analytics', 'Jira / Confluence'] }
+        { category: 'Stakeholder Governance', items: ['Executive C-Suite Alignment', 'Customer Advisory Boards (CAB)', 'Change Management (Prosci)', 'Conflict Resolution', 'Feature Negotiation'] },
+        { category: 'Product Strategy & Discovery', items: ['Product Discovery', 'Value Proposition Design', 'Go-To-Market (GTM) Strategy', 'Productboard', 'Jira Align / Confluence'] },
+        { category: 'Analytics & Reporting', items: ['SQL Data Querying', 'Tableau Dashboards', 'Mixpanel / Amplitude', 'NPS & CSAT Benchmarking', 'Churn Reduction Analytics'] },
+        { category: 'Leadership & Communication', items: ['Agile / Scrum Methodologies', 'Release Webinars & Demos', 'Cross-Functional Mentorship', 'Budget Planning', 'RFP Technical Support'] }
       ],
       experience: [
         {
@@ -2320,9 +3483,10 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Founded quarterly Customer Advisory Board (CAB) with 15 key enterprise accounts ($12M ARR), incorporating client feedback into core product roadmap.',
-            'Negotiated roadmap trade-offs between Sales, Engineering, and Finance, achieving 98% stakeholder sign-off alignment.',
-            'Delivered custom enterprise feature requests that saved 4 key accounts from churning, reducing annual churn rate by 18%.'
+            'Founded quarterly Customer Advisory Board (CAB) with 15 key enterprise accounts ($12M ARR), incorporating client feedback into core product roadmap priorities.',
+            'Negotiated sprint feature trade-offs between Sales, Engineering, and Finance leadership, achieving 98% stakeholder sign-off alignment.',
+            'Delivered custom enterprise feature requests that saved 4 key accounts from churning, reducing annual churn rate by 18% and retaining $2.4M ARR.',
+            'Instituted transparent bi-weekly release communication cadence for 300+ sales and customer success managers.'
           ]
         },
         {
@@ -2334,8 +3498,34 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: '2020-09',
           current: false,
           highlights: [
-            'Managed internal communication tools for 300+ sales and customer success managers.',
-            'Conducted monthly release demo webinars for key executive sponsors.'
+            'Managed internal communication portal and feature request tracking system for 300+ sales and customer success managers.',
+            'Conducted monthly release demo webinars for key executive sponsors and Fortune 500 account representatives.',
+            'Partnered with UX research team to conduct 40+ customer discovery interviews, reducing feature rework by 25%.'
+          ]
+        },
+        {
+          id: 'exp-19-3',
+          role: 'Product Manager',
+          company: 'Vanguard Software Group',
+          location: 'Brentwood, TN',
+          startDate: '2015-05',
+          endDate: '2017-01',
+          current: false,
+          highlights: [
+            'Owned user onboarding workflow for B2B SaaS platform, boosting 30-day user activation rate from 52% to 74%.',
+            'Prioritized bug fixes and technical debt remediation backlogs alongside engineering engineering leads.'
+          ]
+        },
+        {
+          id: 'exp-19-4',
+          role: 'Associate Product Analyst',
+          company: 'Tennessee Tech Solutions',
+          location: 'Knoxville, TN',
+          startDate: '2013-06',
+          endDate: '2015-04',
+          current: false,
+          highlights: [
+            'Created SQL data queries and Google Analytics reports tracking user retention cohorts across web applications.'
           ]
         }
       ],
@@ -2343,27 +3533,53 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         {
           id: 'proj-19-1',
           title: 'Executive Roadmap Visibility Portal',
-          description: 'Built interactive dashboard tracking product feature status for executive sponsors.',
+          description: 'Built interactive dashboard tracking product feature status, release milestones, and risk metrics for executive sponsors.',
           techStack: ['Jira Align', 'Confluence', 'Tableau', 'SQL'],
           outcomes: 'Achieved 96% stakeholder satisfaction rating on communication transparency.'
+        },
+        {
+          id: 'proj-19-2',
+          title: 'Customer Advisory Board Integration Engine',
+          description: 'Structured formal CAB feedback loop routing client requests directly into Jira backlog scoring algorithms.',
+          techStack: ['Productboard', 'Jira', 'Mixpanel', 'SQL'],
+          outcomes: 'Accelerated top client feature delivery by 40%.'
+        },
+        {
+          id: 'proj-19-3',
+          title: 'Enterprise Retention & Custom Feature Delivery',
+          description: 'Managed high-priority custom feature requests for 5 tier-1 enterprise accounts threatening churn.',
+          techStack: ['Jira', 'Confluence', 'Salesforce', 'Figma'],
+          outcomes: 'Saved $2.4M in annual recurring revenue.'
         }
       ],
       education: [
         {
           id: 'edu-19-1',
+          degree: 'M.B.A. in Product Management & Strategy',
+          institution: 'Vanderbilt University Owen Graduate School of Management',
+          location: 'Nashville, TN',
+          startDate: '2017',
+          endDate: '2019',
+          gpa: '3.94 / 4.0'
+        },
+        {
+          id: 'edu-19-2',
           degree: 'B.A. in Organizational Communication & Economics',
           institution: 'Vanderbilt University',
           location: 'Nashville, TN',
-          startDate: '2013',
-          endDate: '2017',
-          gpa: '3.89 / 4.0'
+          startDate: '2009',
+          endDate: '2013'
         }
       ],
-      certifications: ['Certified Scrum Product Owner (CSPO)', 'Prosci Certified Change Management Practitioner'],
-      technologies: ['Jira', 'Confluence', 'Tableau', 'SQL', 'Productboard', 'Salesforce', 'Figma']
+      certifications: [
+        'Certified Scrum Product Owner (CSPO)',
+        'Prosci Certified Change Management Practitioner',
+        'Pragmatic Institute Certified Product Manager (PMC-III)'
+      ],
+      technologies: ['Jira', 'Confluence', 'Tableau', 'SQL', 'Productboard', 'Salesforce', 'Figma', 'Mixpanel', 'Prosci']
     },
     presetData: {
-      title: 'Stakeholder Management Product Manager Resume (Example)',
+      title: 'Stakeholder Management Product Manager Resume (3-Page Example)',
       personalInfo: {
         fullName: 'Oliver Wright',
         jobTitle: 'Lead Product Manager & Stakeholder Liaison',
@@ -2374,7 +3590,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         linkedin: 'linkedin.com/in/oliverwright-demo',
         github: ''
       },
-      summary: 'Diplomatic Lead Product Manager with 7+ years of experience aligning executive C-suite stakeholders, sales leadership, and engineering teams behind strategic product initiatives.',
+      summary: 'Diplomatic Lead Product Manager with 8+ years of experience aligning executive C-suite stakeholders, sales leadership, and cross-functional engineering teams behind strategic SaaS product initiatives. Proven track record achieving 98% cross-functional requirement alignment, managing Customer Advisory Boards (CAB) representing $12M+ ARR, and reducing annual enterprise customer churn by 18%.',
       experience: [
         {
           id: 'exp-19-1',
@@ -2385,25 +3601,107 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Founded Customer Advisory Board with 15 key enterprise accounts, incorporating feedback into core roadmap.',
-            'Negotiated roadmap trade-offs, achieving 98% stakeholder sign-off alignment.',
-            'Delivered custom features that saved 4 key accounts, reducing churn rate by 18%.'
+            'Founded quarterly Customer Advisory Board (CAB) with 15 key enterprise accounts ($12M ARR), incorporating client feedback into core product roadmap priorities.',
+            'Negotiated sprint feature trade-offs between Sales, Engineering, and Finance leadership, achieving 98% stakeholder sign-off alignment.',
+            'Delivered custom enterprise feature requests that saved 4 key accounts from churning, reducing annual churn rate by 18% and retaining $2.4M ARR.',
+            'Instituted transparent bi-weekly release communication cadence for 300+ sales and customer success managers.'
           ]
+        },
+        {
+          id: 'exp-19-2',
+          role: 'Senior Product Manager',
+          company: 'AlignProduct Networks',
+          location: 'Nashville, TN',
+          startDate: '2017-02',
+          endDate: '2020-09',
+          current: false,
+          highlights: [
+            'Managed internal communication portal and feature request tracking system for 300+ sales and customer success managers.',
+            'Conducted monthly release demo webinars for key executive sponsors and Fortune 500 account representatives.',
+            'Partnered with UX research team to conduct 40+ customer discovery interviews, reducing feature rework by 25%.',
+            'Managed product requirement documentation (PRDs) and user story mapping for high-converting customer retention modules.'
+          ]
+        },
+        {
+          id: 'exp-19-3',
+          role: 'Product Manager',
+          company: 'Vanguard Software Group',
+          location: 'Brentwood, TN',
+          startDate: '2015-05',
+          endDate: '2017-01',
+          current: false,
+          highlights: [
+            'Owned user onboarding workflow for B2B SaaS platform, boosting 30-day user activation rate from 52% to 74%.',
+            'Prioritized bug fixes and technical debt remediation backlogs alongside engineering leads.',
+            'Implemented automated in-app feedback collection widgets yielding 1,200+ monthly qualitative user data points.'
+          ]
+        },
+        {
+          id: 'exp-19-4',
+          role: 'Associate Product Analyst',
+          company: 'Tennessee Tech Solutions',
+          location: 'Knoxville, TN',
+          startDate: '2013-06',
+          endDate: '2015-04',
+          current: false,
+          highlights: [
+            'Created SQL data queries and Google Analytics reports tracking user retention cohorts across web applications.',
+            'Assisted senior product managers in creating sprint user stories and acceptance criteria in Jira.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-19-1',
+          title: 'Executive Roadmap Visibility Portal',
+          description: 'Built interactive dashboard tracking product feature status, release milestones, and risk metrics for executive sponsors.',
+          techStack: ['Jira Align', 'Confluence', 'Tableau', 'SQL'],
+          outcomes: 'Achieved 96% stakeholder satisfaction rating on communication transparency.'
+        },
+        {
+          id: 'proj-19-2',
+          title: 'Customer Advisory Board Integration Engine',
+          description: 'Structured formal CAB feedback loop routing client requests directly into Jira backlog scoring algorithms.',
+          techStack: ['Productboard', 'Jira', 'Mixpanel', 'SQL'],
+          outcomes: 'Accelerated top client feature delivery by 40%.'
+        },
+        {
+          id: 'proj-19-3',
+          title: 'Enterprise Retention & Custom Feature Delivery',
+          description: 'Managed high-priority custom feature requests for 5 tier-1 enterprise accounts threatening churn.',
+          techStack: ['Jira', 'Confluence', 'Salesforce', 'Figma'],
+          outcomes: 'Saved $2.4M in annual recurring revenue.'
         }
       ],
       education: [
         {
           id: 'edu-19-1',
-          degree: 'B.A. in Organizational Communication',
+          degree: 'M.B.A. in Product Management & Strategy',
+          institution: 'Vanderbilt University Owen Graduate School of Management',
+          location: 'Nashville, TN',
+          startDate: '2017',
+          endDate: '2019',
+          gpa: '3.94 / 4.0'
+        },
+        {
+          id: 'edu-19-2',
+          degree: 'B.A. in Organizational Communication & Economics',
           institution: 'Vanderbilt University',
           location: 'Nashville, TN',
-          startDate: '2013',
-          endDate: '2017',
-          gpa: '3.89 / 4.0'
+          startDate: '2009',
+          endDate: '2013'
         }
       ],
       skills: [
-        { id: 's-19-1', category: 'Stakeholder Management', items: ['Executive Liaison', 'Customer Advisory Boards', 'Change Management', 'Scrum CSPO', 'SQL'] }
+        { id: 's-19-1', category: 'Stakeholder Governance', items: ['Executive C-Suite Alignment', 'Customer Advisory Boards (CAB)', 'Change Management (Prosci)', 'Conflict Resolution', 'Feature Negotiation'] },
+        { id: 's-19-2', category: 'Product Strategy & Discovery', items: ['Product Discovery', 'Value Proposition Design', 'Go-To-Market (GTM) Strategy', 'Productboard', 'Jira Align / Confluence'] },
+        { id: 's-19-3', category: 'Analytics & Reporting', items: ['SQL Data Querying', 'Tableau Dashboards', 'Mixpanel / Amplitude', 'NPS & CSAT Benchmarking', 'Churn Reduction Analytics'] },
+        { id: 's-19-4', category: 'Leadership & Communication', items: ['Agile / Scrum Methodologies', 'Release Webinars & Demos', 'Cross-Functional Mentorship', 'Budget Planning', 'RFP Technical Support'] }
+      ],
+      certifications: [
+        { id: 'cert-19-1', name: 'Certified Scrum Product Owner (CSPO)', issuer: 'Scrum Alliance', date: '2020' },
+        { id: 'cert-19-2', name: 'Prosci Certified Change Management Practitioner', issuer: 'Prosci', date: '2019' },
+        { id: 'cert-19-3', name: 'Pragmatic Institute Certified Product Manager (PMC-III)', issuer: 'Pragmatic Institute', date: '2018' }
       ]
     }
   },
@@ -2430,7 +3728,9 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
       summary: 'Impactful Director of Digital Transformation with 9+ years of experience leading enterprise paperless workflow migrations, cloud business process reengineering (BPR), and organizational change management. Proven track record reducing operating expenses by $4.5M and driving 92% employee software adoption.',
       skills: [
         { category: 'Transformation Strategy', items: ['Digital Business Process Reengineering (BPR)', 'Change Management (Prosci ADKAR)', 'Paperless Automation', 'Enterprise Cloud Migration'] },
-        { category: 'Operational Leadership', items: ['Process Mining (Celonis)', 'Program Management Office (PMO)', 'KPI Tracking', 'Lean Six Sigma', 'Jira / Confluence'] }
+        { category: 'Operational Leadership', items: ['Process Mining (Celonis)', 'Program Management Office (PMO)', 'KPI Tracking', 'Lean Six Sigma Black Belt', 'Jira / Confluence'] },
+        { category: 'Cloud & Enterprise Systems', items: ['SAP S/4HANA ERP', 'SharePoint Online', 'Power Automate', 'Power BI', 'Azure AD Governance'] },
+        { category: 'Agile & Stakeholder Management', items: ['Scrum / Kanban Operations', 'Executive Steering Committees', 'Cross-Functional Leadership', 'Vendor Negotiation', 'Budget Control'] }
       ],
       experience: [
         {
@@ -2444,7 +3744,8 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           highlights: [
             'Spearheaded enterprise-wide paperless digital transformation across 12 regional offices, eliminating 2M annual physical document printouts.',
             'Redesigned core supply chain approval workflows using Celonis process mining, reducing annual operating expenses by $4.5M.',
-            'Executed Prosci ADKAR change management training program for 3,500 employees, achieving 92% active digital platform adoption within 6 months.'
+            'Executed Prosci ADKAR change management training program for 3,500 employees, achieving 92% active digital platform adoption within 6 months.',
+            'Architected automated cloud ERP integration with SAP S/4HANA, consolidating financial reporting across 4 acquired business units.'
           ]
         },
         {
@@ -2456,8 +3757,37 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: '2019-10',
           current: false,
           highlights: [
-            'Mapped as-is vs. to-be workflow processes for legacy insurance claim processing.',
-            'Automated manual document intake using electronic signature and cloud storage integrations.'
+            'Mapped as-is vs. to-be workflow processes for legacy insurance claim processing, shortening claim payout velocity by 65%.',
+            'Automated manual document intake using electronic signature and cloud storage integrations.',
+            'Led cross-departmental Agile user story refinement workshops with 45+ business stakeholders.',
+            'Established automated KPI dashboards in Power BI tracking regional process bottlenecks and SLA compliance.'
+          ]
+        },
+        {
+          id: 'exp-20-3',
+          role: 'Enterprise Operations Analyst',
+          company: 'Suncoast Solutions Corp',
+          location: 'St. Petersburg, FL',
+          startDate: '2013-05',
+          endDate: '2015-05',
+          current: false,
+          highlights: [
+            'Evaluated manual customer onboarding bottlenecks, recommending digital self-service portals that saved 1,200 annual staff hours.',
+            'Audited regional data entry compliance and established standardized operational playbooks.',
+            'Trained 150+ operational staff on CRM data entry standards and automated data validation rules.'
+          ]
+        },
+        {
+          id: 'exp-20-4',
+          role: 'Business Process Consultant',
+          company: 'Gulf Coast Tech Advisory',
+          location: 'Tampa, FL',
+          startDate: '2011-06',
+          endDate: '2013-04',
+          current: false,
+          highlights: [
+            'Conducted Lean workflow studies for regional logistics firms, reducing order processing error rates by 38%.',
+            'Drafted functional requirement specifications and vendor RFPs for enterprise ERP upgrades.'
           ]
         }
       ],
@@ -2465,9 +3795,23 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         {
           id: 'proj-20-1',
           title: 'Cloud Document Management System (DMS) Rollout',
-          description: 'Architected cloud-based document repository with role-based access control.',
+          description: 'Architected cloud-based document repository with role-based access control and automated compliance workflows.',
           techStack: ['SharePoint Online', 'Power Automate', 'Celonis', 'Azure AD'],
           outcomes: 'Accelerated document approval turnaround times by 70%.'
+        },
+        {
+          id: 'proj-20-2',
+          title: 'Enterprise Procurement Automation Platform',
+          description: 'Integrated automated vendor invoice approval workflow connecting field operations with central finance.',
+          techStack: ['Power Apps', 'SAP S/4HANA', 'Python', 'Tableau'],
+          outcomes: 'Reduced procurement cycle times from 14 days to 48 hours.'
+        },
+        {
+          id: 'proj-20-3',
+          title: 'Global Mobile Workforce Enablement Initiative',
+          description: 'Deployed enterprise mobility suite allowing field technicians to submit digital sign-offs offline.',
+          techStack: ['Microsoft Intune', 'iOS / Android Apps', 'OAuth 2.0', 'REST API'],
+          outcomes: 'Enabled 1,200 remote field workers with zero paper usage.'
         }
       ],
       education: [
@@ -2479,13 +3823,25 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           startDate: '2013',
           endDate: '2015',
           gpa: '3.90 / 4.0'
+        },
+        {
+          id: 'edu-20-2',
+          degree: 'B.S. in Industrial Engineering & Operations Research',
+          institution: 'University of South Florida',
+          location: 'Tampa, FL',
+          startDate: '2007',
+          endDate: '2011'
         }
       ],
-      certifications: ['Prosci Certified Change Management Practitioner (CCMP)', 'Lean Six Sigma Black Belt (LSSBB)'],
-      technologies: ['Celonis', 'Power Automate', 'SharePoint Online', 'Prosci ADKAR', 'Jira', 'Confluence', 'Tableau']
+      certifications: [
+        'Prosci Certified Change Management Practitioner (CCMP)',
+        'Lean Six Sigma Black Belt (LSSBB)',
+        'Certified Information Systems Auditor (CISA)'
+      ],
+      technologies: ['Celonis', 'Power Automate', 'SharePoint Online', 'Prosci ADKAR', 'SAP S/4HANA', 'Power BI', 'Jira', 'Confluence', 'Tableau']
     },
     presetData: {
-      title: 'Digital Transformation Manager Resume (Example)',
+      title: 'Digital Transformation Manager Resume (3-Page Example)',
       personalInfo: {
         fullName: 'Chloe Bennett',
         jobTitle: 'Director of Digital Transformation',
@@ -2496,7 +3852,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
         linkedin: 'linkedin.com/in/chloebennett-demo',
         github: ''
       },
-      summary: 'Impactful Director of Digital Transformation with 9+ years of experience leading enterprise paperless workflow migrations, cloud business process reengineering, and organizational change management.',
+      summary: 'Impactful Director of Digital Transformation with 9+ years of experience leading enterprise paperless workflow migrations, cloud business process reengineering (BPR), and organizational change management. Proven track record reducing operating expenses by $4.5M and driving 92% employee software adoption.',
       experience: [
         {
           id: 'exp-20-1',
@@ -2507,25 +3863,107 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
           endDate: 'Present',
           current: true,
           highlights: [
-            'Spearheaded paperless digital transformation across 12 regional offices, eliminating 2M annual printouts.',
-            'Redesigned supply chain approval workflows, reducing annual operating expenses by $4.5M.',
-            'Executed Prosci ADKAR change management training for 3,500 employees with 92% adoption.'
+            'Spearheaded enterprise-wide paperless digital transformation across 12 regional offices, eliminating 2M annual physical document printouts.',
+            'Redesigned core supply chain approval workflows using Celonis process mining, reducing annual operating expenses by $4.5M.',
+            'Executed Prosci ADKAR change management training program for 3,500 employees, achieving 92% active digital platform adoption within 6 months.',
+            'Architected automated cloud ERP integration with SAP S/4HANA, consolidating financial reporting across 4 acquired business units.'
           ]
+        },
+        {
+          id: 'exp-20-2',
+          role: 'Senior Digital Business Analyst',
+          company: 'Legacy2Digital Partners',
+          location: 'Tampa, FL',
+          startDate: '2015-06',
+          endDate: '2019-10',
+          current: false,
+          highlights: [
+            'Mapped as-is vs. to-be workflow processes for legacy insurance claim processing, shortening claim payout velocity by 65%.',
+            'Automated manual document intake using electronic signature and cloud storage integrations.',
+            'Led cross-departmental Agile user story refinement workshops with 45+ business stakeholders.',
+            'Established automated KPI dashboards in Power BI tracking regional process bottlenecks and SLA compliance.'
+          ]
+        },
+        {
+          id: 'exp-20-3',
+          role: 'Enterprise Operations Analyst',
+          company: 'Suncoast Solutions Corp',
+          location: 'St. Petersburg, FL',
+          startDate: '2013-05',
+          endDate: '2015-05',
+          current: false,
+          highlights: [
+            'Evaluated manual customer onboarding bottlenecks, recommending digital self-service portals that saved 1,200 annual staff hours.',
+            'Audited regional data entry compliance and established standardized operational playbooks.',
+            'Trained 150+ operational staff on CRM data entry standards and automated data validation rules.'
+          ]
+        },
+        {
+          id: 'exp-20-4',
+          role: 'Business Process Consultant',
+          company: 'Gulf Coast Tech Advisory',
+          location: 'Tampa, FL',
+          startDate: '2011-06',
+          endDate: '2013-04',
+          current: false,
+          highlights: [
+            'Conducted Lean workflow studies for regional logistics firms, reducing order processing error rates by 38%.',
+            'Drafted functional requirement specifications and vendor RFPs for enterprise ERP upgrades.'
+          ]
+        }
+      ],
+      projects: [
+        {
+          id: 'proj-20-1',
+          title: 'Cloud Document Management System (DMS) Rollout',
+          description: 'Architected cloud-based document repository with role-based access control and automated compliance workflows.',
+          techStack: ['SharePoint Online', 'Power Automate', 'Celonis', 'Azure AD'],
+          outcomes: 'Accelerated document approval turnaround times by 70%.'
+        },
+        {
+          id: 'proj-20-2',
+          title: 'Enterprise Procurement Automation Platform',
+          description: 'Integrated automated vendor invoice approval workflow connecting field operations with central finance.',
+          techStack: ['Power Apps', 'SAP S/4HANA', 'Python', 'Tableau'],
+          outcomes: 'Reduced procurement cycle times from 14 days to 48 hours.'
+        },
+        {
+          id: 'proj-20-3',
+          title: 'Global Mobile Workforce Enablement Initiative',
+          description: 'Deployed enterprise mobility suite allowing field technicians to submit digital sign-offs offline.',
+          techStack: ['Microsoft Intune', 'iOS / Android Apps', 'OAuth 2.0', 'REST API'],
+          outcomes: 'Enabled 1,200 remote field workers with zero paper usage.'
         }
       ],
       education: [
         {
           id: 'edu-20-1',
-          degree: 'M.B.A. in Strategic Management',
+          degree: 'M.B.A. in Strategic Management & Technology',
           institution: 'University of Florida',
           location: 'Gainesville, FL',
           startDate: '2013',
           endDate: '2015',
           gpa: '3.90 / 4.0'
+        },
+        {
+          id: 'edu-20-2',
+          degree: 'B.S. in Industrial Engineering & Operations Research',
+          institution: 'University of South Florida',
+          location: 'Tampa, FL',
+          startDate: '2007',
+          endDate: '2011'
         }
       ],
       skills: [
-        { id: 's-20-1', category: 'Transformation', items: ['Digital Transformation', 'Celonis Mining', 'Change Management', 'Lean Six Sigma', 'Power Automate'] }
+        { id: 's-20-1', category: 'Transformation Strategy', items: ['Digital Business Process Reengineering (BPR)', 'Change Management (Prosci ADKAR)', 'Paperless Automation', 'Enterprise Cloud Migration'] },
+        { id: 's-20-2', category: 'Operational Leadership', items: ['Process Mining (Celonis)', 'Program Management Office (PMO)', 'KPI Tracking', 'Lean Six Sigma Black Belt', 'Jira / Confluence'] },
+        { id: 's-20-3', category: 'Cloud & Enterprise Systems', items: ['SAP S/4HANA ERP', 'SharePoint Online', 'Power Automate', 'Power BI', 'Azure AD Governance'] },
+        { id: 's-20-4', category: 'Agile & Stakeholder Management', items: ['Scrum / Kanban Operations', 'Executive Steering Committees', 'Cross-Functional Leadership', 'Vendor Negotiation', 'Budget Control'] }
+      ],
+      certifications: [
+        { id: 'cert-20-1', name: 'Prosci Certified Change Management Practitioner (CCMP)', issuer: 'Prosci', date: '2020' },
+        { id: 'cert-20-2', name: 'Lean Six Sigma Black Belt (LSSBB)', issuer: 'IASSC', date: '2018' },
+        { id: 'cert-20-3', name: 'Certified Information Systems Auditor (CISA)', issuer: 'ISACA', date: '2016' }
       ]
     }
   }
@@ -2665,7 +4103,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   };
 
   const handleOpenViewModal = (example: ExampleCardData) => {
-    setActiveModalExample(example);
+    navigate('/resume-preview', { state: { resumeData: example.presetData } });
   };
 
   const itemWidthPercent = 100 / visibleCount;
@@ -2769,13 +4207,21 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                     </div>
 
                     <h3 className="text-base font-black text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
-                      <Link to={`/resume-examples/${item.slug}`} className="hover:underline">
+                      <button 
+                        type="button"
+                        onClick={() => handleOpenViewModal(item)}
+                        className="hover:underline text-left"
+                      >
                         {item.roleTitle}
-                      </Link>
+                      </button>
                     </h3>
 
-                    {/* Visual Mini-Resume Preview Box */}
-                    <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 space-y-2 text-[11px] font-sans text-slate-700 shadow-2xs group-hover:bg-brand-50/30 transition-colors">
+                    {/* Visual Mini-Resume Preview Box (Resume Thumbnail) */}
+                    <div 
+                      onClick={() => handleOpenViewModal(item)}
+                      className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 space-y-2 text-[11px] font-sans text-slate-700 shadow-2xs group-hover:bg-brand-50/30 transition-colors cursor-pointer"
+                      title="Click to view full-page resume preview"
+                    >
                       <div className="flex items-center justify-between border-b border-slate-200 pb-1.5">
                         <span className="font-extrabold text-slate-900">{item.candidateName}</span>
                         <span className="text-[9px] font-bold text-brand-600 truncate max-w-[120px]">{item.candidateRole}</span>

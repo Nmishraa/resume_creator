@@ -32,57 +32,63 @@ export const HomePage: React.FC = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploadInitialStep, setUploadInitialStep] = useState<'upload' | 'template' | 'preview'>('upload');
 
-  const handleUseAlexMorganLayout = () => {
-    updateResume({
-      title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
-      personalInfo: {
-        fullName: 'Alex Morgan',
-        jobTitle: 'Senior Full-Stack Engineer',
-        email: 'alex.morgan@dev.io',
-        phone: '(555) 234-5678',
+  const alexMorganData = {
+    title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
+    personalInfo: {
+      fullName: 'Alex Morgan',
+      jobTitle: 'Senior Full-Stack Engineer',
+      email: 'alex.morgan@dev.io',
+      phone: '(555) 234-5678',
+      location: 'San Francisco, CA',
+      website: 'alexmorgan.dev',
+      linkedin: 'linkedin.com/in/alexmorgan',
+      github: 'github.com/alexmorgan'
+    },
+    summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
+    experience: [
+      {
+        id: 'exp-1',
+        role: 'Lead Systems Engineer',
+        company: 'Cloud Scale',
         location: 'San Francisco, CA',
-        website: 'alexmorgan.dev',
-        linkedin: 'linkedin.com/in/alexmorgan',
-        github: 'github.com/alexmorgan'
-      },
-      summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
-      experience: [
-        {
-          id: 'exp-1',
-          role: 'Lead Systems Engineer',
-          company: 'Cloud Scale',
-          location: 'San Francisco, CA',
-          startDate: '2021',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
-            'Optimized API gateway throughput by 42% using React & Node.js microservices.'
-          ]
-        }
-      ],
-      skills: [
-        {
-          id: 'skill-1',
-          category: 'Core Stack',
-          items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']
-        }
-      ],
-      education: [
-        {
-          id: 'edu-1',
-          degree: 'B.S. in Computer Science',
-          institution: 'UC Berkeley',
-          location: 'Berkeley, CA',
-          startDate: '2013',
-          endDate: '2017'
-        }
-      ],
-      projects: [],
-      certifications: [],
-      customSections: []
-    });
+        startDate: '2021',
+        endDate: 'Present',
+        current: true,
+        highlights: [
+          'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
+          'Optimized API gateway throughput by 42% using React & Node.js microservices.'
+        ]
+      }
+    ],
+    skills: [
+      {
+        id: 'skill-1',
+        category: 'Core Stack',
+        items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']
+      }
+    ],
+    education: [
+      {
+        id: 'edu-1',
+        degree: 'B.S. in Computer Science',
+        institution: 'UC Berkeley',
+        location: 'Berkeley, CA',
+        startDate: '2013',
+        endDate: '2017'
+      }
+    ],
+    projects: [],
+    certifications: [],
+    customSections: []
+  };
+
+  const handleUseAlexMorganLayout = () => {
+    updateResume(alexMorganData);
     navigate('/builder');
+  };
+
+  const handlePreviewAlexMorganLayout = () => {
+    navigate('/resume-preview', { state: { resumeData: alexMorganData } });
   };
 
   const homeFaqs = [
@@ -177,7 +183,11 @@ export const HomePage: React.FC = () => {
 
             {/* Right Column: Single Professional Resume Preview Visual (5 cols) */}
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform">
+              <div 
+                onClick={handlePreviewAlexMorganLayout}
+                className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform cursor-pointer"
+                title="Click to view full-page resume preview"
+              >
                 
                 {/* Floating ATS Score Badge */}
                 <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">

@@ -157,9 +157,13 @@ export const ResumeExamplesHubPage: React.FC = () => {
               </div>
 
               <h2 className="text-lg font-black text-slate-950 group-hover:text-brand-600 transition-colors">
-                <Link to={`/resume-examples/${ex.slug}`}>
+                <button
+                  type="button"
+                  onClick={() => navigate('/resume-preview', { state: { resumeData: ex.presetData } })}
+                  className="hover:underline text-left"
+                >
                   {ex.roleTitle} Resume Example
-                </Link>
+                </button>
               </h2>
 
               <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">

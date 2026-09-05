@@ -717,7 +717,46 @@ export default function ResumeExamples({ user, onAuthSuccess, isEmbedded = false
 
               <div style={{ display: 'flex', gap: '0.75rem', paddingTop: '1rem', borderTop: '1px solid #f1f5f9' }}>
                 <button
-                  onClick={() => setPreviewSample(sample)}
+                  onClick={() => {
+                    const presetData = sample.presetData || {
+                      title: `${sample.roleTitle} Resume`,
+                      personalInfo: {
+                        fullName: sample.data?.personal?.name || '',
+                        jobTitle: sample.data?.personal?.role || sample.roleTitle || '',
+                        email: sample.data?.personal?.email || '',
+                        phone: sample.data?.personal?.phone || '',
+                        location: sample.data?.personal?.location || '',
+                        linkedin: sample.data?.personal?.linkedin || '',
+                        github: sample.data?.personal?.github || ''
+                      },
+                      summary: sample.data?.personal?.summary || '',
+                      experience: (sample.data?.experience || []).map((exp) => ({
+                        id: exp.id,
+                        role: exp.role,
+                        company: exp.company,
+                        location: exp.location,
+                        startDate: exp.startDate,
+                        endDate: exp.endDate,
+                        current: exp.endDate === 'Present',
+                        highlights: exp.description ? exp.description.split('\n').map((s) => s.replace(/^•\s*/, '')) : []
+                      })),
+                      education: (sample.data?.education || []).map((edu) => ({
+                        id: edu.id,
+                        degree: edu.degree,
+                        institution: edu.school,
+                        location: edu.location,
+                        startDate: edu.startDate,
+                        endDate: edu.endDate,
+                        highlights: edu.description ? [edu.description] : []
+                      })),
+                      skills: (sample.data?.skills || []).map((sk) => ({
+                        id: sk.id,
+                        category: 'Core Skills',
+                        items: [sk.name]
+                      }))
+                    };
+                    navigate('/resume-preview', { state: { resumeData: presetData } });
+                  }}
                   style={{
                     flex: 1,
                     padding: '0.75rem',

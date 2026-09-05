@@ -111,7 +111,7 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
 
             {/* Skills */}
             {skills && skills.length > 0 && (
-              <div className="border-t pt-3 border-slate-100">
+              <div className="resume-section page-break-avoid border-t pt-3 border-slate-100">
                 <h2
                   style={{
                     fontSize: 'var(--resume-section-title-size, 13px)',
@@ -142,7 +142,7 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
 
             {/* Education */}
             {education && education.length > 0 && (
-              <div className="border-t pt-3 border-slate-100">
+              <div className="resume-section page-break-avoid border-t pt-3 border-slate-100">
                 <h2
                   style={{
                     fontSize: 'var(--resume-section-title-size, 13px)',
@@ -171,7 +171,7 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
 
             {/* Certs */}
             {certifications && certifications.length > 0 && (
-              <div className="border-t pt-3 border-slate-100">
+              <div className="resume-section page-break-avoid border-t pt-3 border-slate-100">
                 <h2
                   style={{
                     fontSize: 'var(--resume-section-title-size, 13px)',
@@ -205,7 +205,7 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
           >
           {/* Summary */}
           {summary && (
-            <div>
+            <div className="resume-section page-break-avoid">
               <h2
                 style={{
                   fontSize: 'var(--resume-section-title-size, 14px)',
@@ -231,7 +231,7 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
 
           {/* Experience */}
           {experience && experience.length > 0 && (
-            <div>
+            <div className="resume-section">
               <h2
                 style={{
                   fontSize: 'var(--resume-section-title-size, 14px)',
@@ -272,7 +272,7 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
 
           {/* Projects */}
           {projects && projects.length > 0 && (
-            <div>
+            <div className="resume-section">
               <h2
                 style={{
                   fontSize: 'var(--resume-section-title-size, 14px)',

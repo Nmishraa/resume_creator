@@ -62,7 +62,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
         {/* Summary */}
         {summary && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-1 flex items-center gap-2"
@@ -89,7 +89,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
           const gridCols = validSkills.length === 1 ? 'grid-cols-1 w-full' : 'grid-cols-1 sm:grid-cols-2';
 
           return (
-            <div>
+            <div className="resume-section page-break-avoid">
               <div
                 style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
                 className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
@@ -117,7 +117,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
 
         {/* Experience */}
         {experience && experience.length > 0 && (
-          <div>
+          <div className="resume-section">
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
@@ -157,7 +157,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
 
         {/* Projects */}
         {projects && projects.length > 0 && (
-          <div>
+          <div className="resume-section">
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
@@ -197,7 +197,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
 
         {/* Education */}
         {education && education.length > 0 && (
-          <div>
+          <div className="resume-section page-break-avoid">
             <div
               style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
               className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
