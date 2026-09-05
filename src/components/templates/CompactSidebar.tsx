@@ -287,12 +287,15 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
                 {projects.map((proj) => (
-                  <div key={proj.id} className="page-break-avoid resume-section-item text-xs">
-                    <div className="flex justify-between items-baseline">
-                      <span className="font-bold text-slate-900">{proj.title}</span>
-                      <span className="text-[11px] text-slate-500">{proj.startDate}</span>
+                  <div key={proj.id} className="project-entry resume-entry page-break-avoid resume-section-item text-xs">
+                    <div className="flex justify-between items-baseline flex-wrap gap-x-2">
+                      <div>
+                        <span className="font-bold text-slate-900">{proj.title}</span>
+                        {proj.subtitle && <span className="text-slate-500 text-[11px]"> ({proj.subtitle})</span>}
+                      </div>
+                      {proj.startDate && <span className="text-[11px] text-slate-500">{proj.startDate}{proj.endDate ? ` - ${proj.endDate}` : ''}</span>}
                     </div>
-                    {proj.highlights && (
+                    {proj.highlights && proj.highlights.length > 0 && (
                       <ul
                         style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
                         className="mt-1 list-disc list-outside ml-4 text-slate-700"

@@ -459,23 +459,17 @@ export function sanitizeSkillsAndProjects(
     }
   }
 
-  // Assign pending implementation sentences into extracted projects
-  if (pendingSentences.length > 0) {
-    if (extractedProjects.length === 0) {
-      extractedProjects.push({
-        id: `proj-auto-1`,
-        title: 'Key Project',
-        subtitle: '',
-        highlights: pendingSentences
-      });
-    } else {
-      // Append sentences to the most relevant project or first project
-      const targetProj = extractedProjects.find(p => p.title.toLowerCase().includes('ai travel') || p.title.toLowerCase().includes('assistant')) || extractedProjects[0];
-      targetProj.highlights = Array.from(new Set([...(targetProj.highlights || []), ...pendingSentences]));
-    }
+  // Only create auto project if no projects exist at all
+  if (pendingSentences.length > 0 && extractedProjects.length === 0) {
+    extractedProjects.push({
+      id: `proj-auto-1`,
+      title: 'Key Project',
+      subtitle: '',
+      highlights: pendingSentences
+    });
   }
 
-  // Clean and merge projects
+  // Clean projects while preserving original wording, order, and project content isolation
   const sanitizedProjects: ProjectItem[] = [];
   for (const proj of extractedProjects) {
     const title = cleanString(proj.title);
@@ -484,11 +478,11 @@ export function sanitizeSkillsAndProjects(
     const startDate = cleanString(proj.startDate);
     const endDate = cleanString(proj.endDate);
     const highlights = (proj.highlights || [])
-      .map(h => cleanBulletSentence(h))
+      .map(h => cleanString(h))
       .filter(Boolean);
 
     // Ignore project titles created from bullet fragments or incomplete sentences
-    if (title && !title.startsWith('with ') && !title.startsWith('using ') && title.length >= 3) {
+    if (title && !title.startsWith('with ') && !title.startsWith('using ') && title.length >= 2) {
       sanitizedProjects.push({
         id: proj.id || `proj-${sanitizedProjects.length + 1}`,
         title,

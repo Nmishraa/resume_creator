@@ -121,6 +121,51 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
           </div>
         )}
 
+        {/* Projects */}
+        {projects && projects.length > 0 && (
+          <div>
+            <div className="resume-section-title flex items-center gap-2 mb-2.5" style={{ breakAfter: 'avoid', pageBreakAfter: 'avoid' }}>
+              <span className="w-1.5 h-4 bg-slate-800 rounded-sm"></span>
+              <h2
+                style={{ fontSize: 'var(--resume-section-title-size, 14px)' }}
+                className="font-bold uppercase tracking-wider text-slate-900"
+              >
+                Key Projects
+              </h2>
+            </div>
+            <div
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}
+              className="pl-3.5 border-l border-slate-200"
+            >
+              {projects.map((proj) => (
+                <div key={proj.id} className="project-entry resume-entry page-break-avoid resume-section-item">
+                  <div className="flex justify-between items-baseline flex-wrap">
+                    <div>
+                      <span className="font-bold text-slate-900 text-sm">{proj.title}</span>
+                      {proj.subtitle && <span className="text-slate-600 text-xs font-semibold"> • {proj.subtitle}</span>}
+                    </div>
+                    {proj.startDate && (
+                      <span className="text-xs text-slate-500 font-mono">
+                        {proj.startDate}{proj.endDate ? ` - ${proj.endDate}` : ''}
+                      </span>
+                    )}
+                  </div>
+                  {proj.highlights && proj.highlights.length > 0 && (
+                    <ul
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                      className="mt-1 list-disc list-outside ml-4 text-slate-700"
+                    >
+                      {proj.highlights.map((h, i) => (
+                        <li key={i}>{h}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Skills */}
         {skills && skills.length > 0 && (
           <div>

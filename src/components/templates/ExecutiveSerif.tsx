@@ -130,6 +130,48 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           </div>
         )}
 
+        {/* Projects */}
+        {projects && projects.length > 0 && (
+          <div>
+            <h2
+              style={{
+                fontSize: 'var(--resume-section-title-size, 15px)',
+                breakAfter: 'avoid',
+                pageBreakAfter: 'avoid'
+              }}
+              className="resume-section-title font-bold font-serif text-slate-950 mb-2 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+            >
+              Key Projects
+            </h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
+              {projects.map((proj) => (
+                <div key={proj.id} className="project-entry resume-entry page-break-avoid resume-section-item font-serif">
+                  <div className="flex justify-between items-baseline flex-wrap">
+                    <div className="font-bold text-slate-950">
+                      {proj.title} {proj.subtitle && <span className="font-normal italic">({proj.subtitle})</span>}
+                    </div>
+                    {proj.startDate && (
+                      <div className="text-xs text-slate-600 font-sans">
+                        {proj.startDate}{proj.endDate ? ` – ${proj.endDate}` : ''}
+                      </div>
+                    )}
+                  </div>
+                  {proj.highlights && proj.highlights.length > 0 && (
+                    <ul
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
+                      className="mt-1 list-disc list-outside ml-4 text-slate-800"
+                    >
+                      {proj.highlights.map((h, i) => (
+                        <li key={i} className="pl-0.5">{h}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Skills */}
         {skills && skills.length > 0 && (
           <div>
