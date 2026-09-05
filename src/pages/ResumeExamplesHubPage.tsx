@@ -15,7 +15,8 @@ import {
   FileText,
   Briefcase,
   Layers,
-  GraduationCap
+  GraduationCap,
+  HelpCircle
 } from 'lucide-react';
 
 export const ResumeExamplesHubPage: React.FC = () => {
@@ -114,6 +115,29 @@ export const ResumeExamplesHubPage: React.FC = () => {
 
       {/* Featured Examples Carousel */}
       <ResumeExamplesCarousel />
+
+      {/* Internal Link Banner: Interview Question Generator */}
+      <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="space-y-2 text-center md:text-left">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-extrabold border border-brand-400/30">
+            <HelpCircle size={14} className="text-brand-400" />
+            <span>Role-Specific Interview Prep</span>
+          </div>
+          <h3 className="text-xl sm:text-2xl font-black tracking-tight">
+            Preparing for Your Upcoming Job Interview?
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-300 font-medium">
+            Generate 10 targeted interview questions with STAR method sample answers for any position.
+          </p>
+        </div>
+        <Link
+          to="/interview-questions"
+          className="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-2xl text-xs sm:text-sm transition-all shadow-lg flex items-center gap-2 cursor-pointer shrink-0"
+        >
+          <span>Interview Question Generator</span>
+          <ArrowRight size={16} />
+        </Link>
+      </div>
 
       {/* Examples Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

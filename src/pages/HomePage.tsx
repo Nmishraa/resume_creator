@@ -18,7 +18,8 @@ import {
   CheckCircle,
   Zap,
   Layout,
-  Award
+  Award,
+  HelpCircle
 } from 'lucide-react';
 import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { TEMPLATE_LIST } from '../components/templates';
@@ -252,6 +253,31 @@ export const HomePage: React.FC = () => {
             className="px-6 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-2xl text-sm transition-all shadow-lg flex items-center gap-2.5 cursor-pointer shrink-0"
           >
             <span>Explore Job Matcher</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+
+      {/* FEATURE BANNER: INTERVIEW QUESTION GENERATOR */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-3 text-center md:text-left max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-extrabold border border-purple-200">
+              <HelpCircle size={14} className="text-purple-600" />
+              <span>Free Role-Based Interview Prep</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+              Prepare for Interviews by Job Role
+            </h3>
+            <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+              Generate 10 role-specific interview questions, technical trade-off scenarios, and STAR framework answer blueprints for any job title.
+            </p>
+          </div>
+          <Link
+            to="/interview-questions"
+            className="px-6 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-extrabold rounded-2xl text-sm transition-all shadow-lg flex items-center gap-2.5 cursor-pointer shrink-0"
+          >
+            <span>Interview Question Generator</span>
             <ArrowRight size={16} />
           </Link>
         </div>

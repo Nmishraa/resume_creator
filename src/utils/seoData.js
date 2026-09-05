@@ -219,11 +219,11 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/interview-questions': {
-    title: 'Prepare for Your Target Job Interview | Resume Craft',
-    description: 'Generate 10 role-specific interview questions with sample answers, STAR framework tips, and interactive answer practice for any job role.',
-    keywords: 'interview questions, job interview preparation, STAR method interview questions, role specific interview questions',
+    title: 'Free AI Interview Question Generator by Job Role | Resume Craft',
+    description: 'Generate free AI-powered interview questions for any job role. Practice common, behavioral, technical, and role-specific questions with Resume Craft.',
+    keywords: 'AI interview question generator, interview questions by job role, behavioral interview questions, technical interview prep',
     canonical: `${SITE_URL}/interview-questions`,
-    h1: 'Prepare for Your Target Job Interview',
+    h1: 'AI Interview Question Generator',
     faqs: [
       {
         q: 'What type of interview questions are generated?',

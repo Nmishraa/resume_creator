@@ -100,7 +100,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/interview-questions" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Interview Questions
+                  Interview Question Generator
                 </Link>
               </li>
             </ul>

@@ -40,7 +40,7 @@ export const Navbar: React.FC = () => {
 
   const additionalTools = [
     { label: 'Find Jobs With Your Resume', path: '/job-description-resume-matcher', desc: 'Ranked job search matching your resume', icon: Target },
-    { label: 'Interview Questions', path: '/interview-questions', desc: '10-Q role-specific mock questions & STAR prep', icon: HelpCircle },
+    { label: 'Interview Question Generator', path: '/interview-questions', desc: '10-Q role-specific mock questions & STAR prep', icon: HelpCircle },
     { label: 'AI Bullet Writer', path: '/ai-resume-builder', desc: 'Google X-Y-Z formula bullet writer', icon: Sparkles },
     { label: 'Student Resume Builder', path: '/resume-builder-for-students', desc: 'Coursework, projects & beginner tips', icon: GraduationCap },
     { label: 'Cover Letter Generator', path: '/cover-letters', desc: 'AI-tailored cover letters in seconds', icon: Mail },

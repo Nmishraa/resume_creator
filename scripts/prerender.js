@@ -97,10 +97,10 @@ const PAGES = [
   },
   {
     path: '/interview-questions',
-    title: 'Prepare for Your Target Job Interview | Resume Craft',
-    description: 'Generate 10 role-specific interview questions with sample answers, STAR framework tips, and interactive answer practice for any job role.',
-    h1: 'Prepare for Your Target Job Interview',
-    intro: 'Generate 10 tailored interview questions specifically designed for your target position—covering general fundamentals, technical expertise, behavioral scenarios, and crisis problem-solving.'
+    title: 'Free AI Interview Question Generator by Job Role | Resume Craft',
+    description: 'Generate free AI-powered interview questions for any job role. Practice common, behavioral, technical, and role-specific questions with Resume Craft.',
+    h1: 'AI Interview Question Generator',
+    intro: 'Generate free AI-powered interview questions for any job role. Practice common, behavioral, technical, and role-specific questions with Resume Craft.'
   },
   {
     path: '/cover-letter-generator',

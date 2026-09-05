@@ -138,6 +138,15 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     changefreq: 'weekly'
   },
   {
+    path: '/interview-questions',
+    title: 'Free AI Interview Question Generator by Job Role | Resume Craft',
+    description: 'Generate free AI-powered interview questions for any job role. Practice common, behavioral, technical, and role-specific questions with Resume Craft.',
+    targetKeyword: 'AI interview question generator',
+    canonical: `${SITE_URL}/interview-questions`,
+    priority: 0.95,
+    changefreq: 'weekly'
+  },
+  {
     path: '/cover-letter-generator',
     title: 'Free AI Cover Letter Generator – Tailored in Seconds | Resume Craft',
     description: 'Generate customized, role-tailored cover letters from your resume experience and target job title. Download as PDF or copy instantly.',

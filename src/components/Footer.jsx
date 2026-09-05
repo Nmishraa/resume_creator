@@ -24,7 +24,7 @@ export default function Footer() {
             <li><Link to="/ats-resume-checker" style={{ color: '#e2e8f0', textDecoration: 'none' }}>ATS Resume Checker</Link></li>
             <li><Link to="/resume-templates" style={{ color: '#e2e8f0', textDecoration: 'none' }}>ATS Resume Templates</Link></li>
             <li><Link to="/cover-letters" style={{ color: '#e2e8f0', textDecoration: 'none' }}>Cover Letter Builder</Link></li>
-            <li><Link to="/interview-prep" style={{ color: '#e2e8f0', textDecoration: 'none' }}>AI Interview Practice</Link></li>
+            <li><Link to="/interview-questions" style={{ color: '#e2e8f0', textDecoration: 'none' }}>Interview Question Generator</Link></li>
             <li><Link to="/linkedin-optimizer" style={{ color: '#e2e8f0', textDecoration: 'none' }}>LinkedIn Bio Generator</Link></li>
           </ul>
         </div>
