@@ -345,13 +345,6 @@ for (const page of PAGES) {
         price: '0.00',
         priceCurrency: 'USD'
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        ratingCount: '1420',
-        bestRating: '5',
-        worstRating: '1'
-      },
       description: 'Free ATS-compatible resume builder and resume score checker powered by AI bullet optimization.'
     },
     {
