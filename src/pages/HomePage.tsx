@@ -77,7 +77,10 @@ export const HomePage: React.FC = () => {
           startDate: '2013',
           endDate: '2017'
         }
-      ]
+      ],
+      projects: [],
+      certifications: [],
+      customSections: []
     });
     navigate('/builder');
   };
