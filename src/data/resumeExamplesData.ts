@@ -20,6 +20,7 @@ export interface ResumeExampleItem {
   atsKeywords: string[];
   commonMistakes: string[];
   formattingTips: string[];
+  pageLength?: string;
   faqs: {
     question: string;
     answer: string;

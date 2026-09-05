@@ -84,6 +84,7 @@ export interface ExampleCardData {
   shortDescription: string;
   metrics: string[];
   skillsBadge: string[];
+  pageLength: '1-Page' | '2-Page' | '3-Page';
   fullResume: ResumeSectionData;
   presetData: any;
 }
@@ -106,6 +107,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Product Leader scaling LLM agent features, vector search, and RAG pipelines resulting in $4.2M ARR growth.',
     metrics: ['ARR Growth +$4.2M', 'User Retention +34%', 'Inference Cost -40%'],
     skillsBadge: ['LLM Product Strategy', 'RAG Agents', 'Prompt Ops', 'A/B Testing', 'PyTorch'],
+    pageLength: '1-Page',
     fullResume: {
       summary: 'Results-oriented Senior AI Product Manager with 6+ years of experience leading cross-functional squads to launch generative AI features, vector search engines, and multi-modal ML microservices. Proven track record increasing product adoption by 34% and cutting model inference expenses by 40%.',
       skills: [
@@ -227,6 +229,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'API & Microservices Product Leader optimizing backend architecture, developer experience, and system throughput.',
     metrics: ['API Throughput 10k/sec', 'Sprint Velocity +28%', 'Onboarding Time -50%'],
     skillsBadge: ['API First Architecture', 'Microservices', 'GraphQL', 'Agile Scrum', 'Kafka'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Data-driven Lead Technical Product Manager with 7+ years of experience managing developer-facing APIs, distributed microservices, and cloud infrastructure platforms. Proven track record scaling API throughput to 10,000 requests/sec and accelerating developer onboarding by 50%.',
       skills: [
@@ -348,6 +351,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Enterprise Systems Architect modernizing legacy IT portfolios, TOGAF frameworks, and multi-million dollar cloud migrations.',
     metrics: ['Legacy IT Cost -35%', 'ERP Migration 100%', '$18M Portfolio Managed'],
     skillsBadge: ['TOGAF 10', 'Cloud Governance', 'ERP Transformation', 'SOA', 'EA Governance'],
+    pageLength: '3-Page',
     fullResume: {
       summary: 'Strategic Chief Enterprise Architect with 11+ years of experience aligning IT capabilities with business goals across Fortune 500 financial and manufacturing sectors. Expert in TOGAF framework implementation, legacy modernization, and governing an $18M annual technology budget.',
       skills: [
@@ -469,6 +473,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Cloud Solutions Architect building fault-tolerant SaaS infrastructure on AWS with 99.99% availability SLAs.',
     metrics: ['Cloud Cost -25%', 'SLA Uptime 99.99%', '12 Enterprise Deployments'],
     skillsBadge: ['AWS Architecture', 'Serverless', 'Terraform', 'Microservices', 'Disaster Recovery'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Accomplished Principal Cloud Solutions Architect with 8+ years of experience designing scalable cloud-native applications, serverless microservices, and automated DevOps deployment pipelines. Proven track record reducing cloud infrastructure spend by 25% while maintaining 99.99% system availability SLAs.',
       skills: [
@@ -590,6 +595,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Product Lead launching GenAI content automation, LLM fine-tuning features, and text-to-code assistants.',
     metrics: ['DAU 1.5M+', 'Prompt Accuracy 94%', 'ARR Growth +$5.8M'],
     skillsBadge: ['Generative AI', 'LLM Fine-Tuning', 'Diffusion Models', 'Product Analytics', 'User Research'],
+    pageLength: '1-Page',
     fullResume: {
       summary: 'Forward-thinking Generative AI Product Lead with 5+ years of experience commercializing LLM content generation tools, AI copilot assistants, and synthetic media engines. Proven track record growing active user base to 1.5M+ DAU and driving $5.8M in annual recurring revenue.',
       skills: [
@@ -711,6 +717,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Retrieval-Augmented Generation Specialist optimizing vector databases, hybrid search reranking, and contextual recall.',
     metrics: ['Hallucinations -72%', 'Retrieval Latency <50ms', '800k Monthly Queries'],
     skillsBadge: ['RAG Architecture', 'Vector Databases', 'Milvus', 'Hybrid Search', 'LangChain'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Specialized Principal RAG Architect with 6+ years of experience engineering high-accuracy Retrieval-Augmented Generation systems, vector embedding pipelines, and semantic knowledge graphs. Proven track record reducing LLM hallucination rates by 72% and achieving sub-50ms vector query latency.',
       skills: [
@@ -832,6 +839,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Systems Engineer specializing in vLLM throughput, TensorRT-LLM, model caching, and multi-LLM router gateways.',
     metrics: ['vLLM Throughput 3.5x', 'Token Spend -45%', 'p95 Latency 180ms'],
     skillsBadge: ['vLLM', 'TensorRT-LLM', 'Semantic Caching', 'Python', 'Kubernetes'],
+    pageLength: '3-Page',
     fullResume: {
       summary: 'Performance-focused Senior LLM Systems Engineer with 4+ years of experience optimizing open-source LLM inference engines, semantic caching layers, and multi-model router gateways. Proven track record increasing GPU inference throughput by 3.5x and reducing API token spend by 45%.',
       skills: [
@@ -953,6 +961,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Autonomous Agent Engineer designing LangGraph multi-agent loops, tool-calling workflows, and self-healing pipelines.',
     metrics: ['Task Accuracy 96%', 'Manual Overhead -65%', '10k Daily Pipelines'],
     skillsBadge: ['LangGraph', 'AutoGPT Frameworks', 'Tool Calling', 'Python', 'FastAPI'],
+    pageLength: '1-Page',
     fullResume: {
       summary: 'Innovative Lead Autonomous Agent Engineer with 5+ years of experience constructing multi-agent coordination loops, automated tool-calling workflows, and self-correcting AI pipelines. Proven track record eliminating 65% of manual operational overhead and executing 10,000 daily autonomous workflows with 96% task completion accuracy.',
       skills: [
@@ -1074,6 +1083,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'AI Compliance Manager auditing EU AI Act requirements, algorithmic bias mitigation, and responsible AI policies.',
     metrics: ['EU AI Act Audit 100%', 'Bias Rate -80%', '45 Enterprise Audits'],
     skillsBadge: ['EU AI Act', 'NIST AI RMF', 'Algorithmic Bias Audit', 'Model Lineage', 'ISO 42001'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Authoritative Senior AI Governance & Ethics Manager with 7+ years of experience auditing enterprise AI models, implementing NIST AI Risk Management Frameworks (RMF), and enforcing EU AI Act compliance. Proven track record conducting 45+ enterprise AI risk audits and reducing model algorithmic bias by 80%.',
       skills: [
@@ -1195,6 +1205,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Modernization Architect refactoring mainframe monoliths into microservices with zero downtime.',
     metrics: ['Mainframe Decom -$6M/yr', '40 Microservices', 'Zero Downtime'],
     skillsBadge: ['Cloud Migration', 'Mainframe Refactoring', 'Containerization', 'AWS', 'Strangler Fig Pattern'],
+    pageLength: '3-Page',
     fullResume: {
       summary: 'Seasoned Principal Cloud Modernization Architect with 9+ years of experience refactoring legacy mainframe applications, monolithic codebases, and database architectures into cloud-native AWS microservices. Proven track record decommissioning legacy infrastructure to save $6M annually while achieving zero downtime.',
       skills: [
@@ -1316,6 +1327,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Multi-Cloud Architect managing hybrid AWS & Azure environments with automated Terraform landing zones.',
     metrics: ['Multi-Cloud Cost -30%', 'RTO <5min', '150+ Tenants'],
     skillsBadge: ['AWS Architecture', 'Azure Cloud', 'Terraform', 'Hybrid Identity', 'Kubernetes'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Expert Senior Multi-Cloud Architect with 8+ years of experience designing high-resilience infrastructure across AWS and Microsoft Azure platforms. Specialized in hybrid cloud identity federation, cross-cloud disaster recovery, and cost governance across 150+ enterprise cloud subscriptions.',
       skills: [
@@ -1437,6 +1449,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'DevOps & GitOps Specialist automating EKS/GKE clusters, Helm charts, and Terraform IaC pipelines.',
     metrics: ['100% IaC Coverage', 'Deploy Frequency 50/day', 'MTTR -60%'],
     skillsBadge: ['Kubernetes (EKS)', 'Terraform', 'ArgoCD GitOps', 'Helm', 'Prometheus'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Hands-on Senior DevOps & Platform Engineer with 5+ years of experience automating Kubernetes cluster management, Infrastructure-as-Code (Terraform), and GitOps continuous delivery pipelines. Proven track record achieving 100% IaC coverage and increasing release deployment frequency to 50+ per day.',
       skills: [
@@ -1558,6 +1571,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'API Governance & Ecosystem Lead designing Kong gateways, OpenAPI specs, and developer portal ecosystems.',
     metrics: ['100M+ Daily API Calls', 'Portal Adoption +180%', 'p99 Latency <20ms'],
     skillsBadge: ['Kong Gateway', 'OpenAPI 3.0', 'API Governance', 'OAuth2 / OIDC', 'GraphQL'],
+    pageLength: '1-Page',
     fullResume: {
       summary: 'Visionary Principal API Strategy Architect with 8+ years of experience leading enterprise API governance, API gateway design (Kong / Apigee), and developer portal ecosystems processing 100M+ daily API transactions. Proven track record increasing external developer API adoption by 180%.',
       skills: [
@@ -1679,6 +1693,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Clinical Workflow Automation Specialist integrating Epic EHR, HL7/FHIR protocols, and RPA bot streams.',
     metrics: ['EHR Doc Time -3 hrs/day', 'HIPAA Audit 100%', 'Patient CSAT 98%'],
     skillsBadge: ['Epic EHR', 'HL7 / FHIR', 'UiPath RPA', 'HIPAA Compliance', 'Python'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Accomplished Lead Healthcare Automation Specialist with 6+ years of experience integrating Epic EHR systems, HL7/FHIR data interoperability protocols, and UiPath RPA bots. Proven track record eliminating 3 hours of daily clinical documentation overhead for physicians and achieving 100% HIPAA compliance.',
       skills: [
@@ -1800,6 +1815,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Computer Vision & OCR Engineer building Tesseract/AWS Textract document extraction models with 99.4% precision.',
     metrics: ['Extraction Accuracy 99.4%', 'Invoices 500k/mo', 'OpEx -55%'],
     skillsBadge: ['AWS Textract', 'Tesseract OCR', 'OpenCV', 'Python', 'PDF Parsing'],
+    pageLength: '1-Page',
     fullResume: {
       summary: 'Detail-driven Senior OCR & Computer Vision Engineer with 4+ years of experience engineering intelligent document processing (IDP) pipelines, AWS Textract models, and OpenCV image preprocessing. Proven track record extracting structured data from 500,000 monthly invoices with 99.4% character accuracy.',
       skills: [
@@ -1921,6 +1937,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Data Lineage & Catalog Specialist enforcing Collibra, Alation, metadata quality, and GDPR data compliance.',
     metrics: ['GDPR Pass 100%', 'Metadata Coverage 95%', '0 Data Breaches'],
     skillsBadge: ['Collibra', 'Alation', 'Metadata Management', 'GDPR / CCPA', 'SQL'],
+    pageLength: '3-Page',
     fullResume: {
       summary: 'Data Lineage & Quality Lead with 6+ years of experience deploying enterprise data catalogs (Collibra, Alation), establishing master data management (MDM) policies, and ensuring 100% compliance with GDPR/CCPA regulations across multi-terabyte financial databases.',
       skills: [
@@ -2042,6 +2059,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Zero Trust Security Architect designing Okta/Entra ID IAM topologies, RBAC policies, and micro-segmentation.',
     metrics: ['Zero Trust Onboarding 15k Users', '0 Security Breaches', 'MFA 100%'],
     skillsBadge: ['Zero Trust Architecture', 'Okta IAM', 'Azure Entra ID', 'OAuth2 / SAML', 'SASE / Zscaler'],
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Battle-tested Senior Zero Trust Security Architect with 8+ years of experience designing Identity & Access Management (IAM) frameworks, Least-Privilege RBAC models, and Zscaler SASE micro-segmentation. Proven track record onboarding 15,000 enterprise users to Zero Trust identity controls with zero security breaches.',
       skills: [
@@ -2163,6 +2181,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Product Strategy Manager specializing in multi-horizon roadmap planning, RICE prioritization, and sprint execution.',
     metrics: ['On-Time Delivery 94%', 'NPS +22 Points', 'Efficiency +30%'],
     skillsBadge: ['Product Roadmapping', 'RICE Scoring', 'Jira Align', 'Productboard', 'Stakeholder Strategy'],
+    pageLength: '1-Page',
     fullResume: {
       summary: 'Strategic Senior Product Roadmap Manager with 6+ years of experience driving product vision, RICE framework backlog scoring, and multi-quarter release alignment across engineering squads. Proven track record elevating on-time feature delivery to 94% and boosting Net Promoter Score (NPS) by 22 points.',
       skills: [
@@ -2284,6 +2303,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Executive Liaison Product Leader negotiating cross-functional requirements, sales alignment, and customer retention.',
     metrics: ['Alignment Rate 98%', 'Churn Rate -18%', 'Stakeholder CSAT 96%'],
     skillsBadge: ['Stakeholder Alignment', 'Executive Communication', 'Change Management', 'SaaS Retention', 'SQL'],
+    pageLength: '3-Page',
     fullResume: {
       summary: 'Diplomatic Lead Product Manager with 7+ years of experience aligning executive C-suite stakeholders, sales leadership, and engineering teams behind strategic product initiatives. Proven track record achieving 98% cross-functional requirement alignment and reducing enterprise customer churn by 18%.',
       skills: [
@@ -2405,6 +2425,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Digital Transformation Leader guiding paperless workflow transitions, OpEx reductions, and cloud adoption.',
     metrics: ['Paperless Transition 100%', 'OpEx Reduction $4.5M', 'Adoption Rate 92%'],
     skillsBadge: ['Digital Transformation', 'Business Process Reengineering', 'Change Management', 'Cloud Transition', 'Agile Operations'],
+    pageLength: '3-Page',
     fullResume: {
       summary: 'Impactful Director of Digital Transformation with 9+ years of experience leading enterprise paperless workflow migrations, cloud business process reengineering (BPR), and organizational change management. Proven track record reducing operating expenses by $4.5M and driving 92% employee software adoption.',
       skills: [
@@ -2510,19 +2531,36 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
   }
 ];
 
+export const FEATURED_FIVE_EXAMPLES: ExampleCardData[] = [
+  TWENTY_ATS_EXAMPLES[0],  // 1. Alexandra Vance - Senior AI Product Manager (1-Page)
+  TWENTY_ATS_EXAMPLES[11], // 2. Sarah Jenkins - Lead Full-Stack Engineer (2-Page)
+  TWENTY_ATS_EXAMPLES[2],  // 3. Marcus Chen - Principal Cloud Architect (3-Page)
+  TWENTY_ATS_EXAMPLES[17], // 4. Elena Rostova - Product Marketing Manager (1-Page)
+  TWENTY_ATS_EXAMPLES[5]   // 5. David K. Miller - Senior Data Scientist & ML Engineer (2-Page)
+];
+
 interface ResumeExamplesCarouselProps {
   onSelectExample?: (example: ExampleCardData) => void;
   title?: string;
   subtitle?: string;
+  featuredOnly?: boolean;
 }
 
 export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   onSelectExample,
-  title = "20 Professional ATS Resume Examples",
-  subtitle = "Hover over any card to pause auto-scrolling. Click 'View Example' to inspect the full resume, or 'Use This Example' to edit in the builder."
+  featuredOnly = false,
+  title,
+  subtitle
 }) => {
   const { updateResume } = useResume();
   const navigate = useNavigate();
+
+  const sourceExamples = featuredOnly ? FEATURED_FIVE_EXAMPLES : TWENTY_ATS_EXAMPLES;
+
+  const displayTitle = title ?? (featuredOnly ? "5 Featured ATS Resume Examples" : "20 Professional ATS Resume Examples");
+  const displaySubtitle = subtitle ?? (featuredOnly
+    ? "Explore 5 recruiter-vetted resume samples spanning 1-page, 2-page, and 3-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder."
+    : "Explore 20 complete, recruiter-vetted resume samples. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder.");
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -2535,14 +2573,14 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   const [activeModalExample, setActiveModalExample] = useState<ExampleCardData | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const totalOriginal = TWENTY_ATS_EXAMPLES.length;
+  const totalOriginal = sourceExamples.length;
 
   // Quadruple items to ensure smooth infinite looping in both directions
   const carouselItems = [
-    ...TWENTY_ATS_EXAMPLES,
-    ...TWENTY_ATS_EXAMPLES,
-    ...TWENTY_ATS_EXAMPLES,
-    ...TWENTY_ATS_EXAMPLES
+    ...sourceExamples,
+    ...sourceExamples,
+    ...sourceExamples,
+    ...sourceExamples
   ];
 
   // Responsive column counts (Desktop: 4, Tablet: 2, Mobile: 1)
@@ -2642,20 +2680,20 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-extrabold border border-brand-200 mb-2">
             <Sparkles size={14} className="text-brand-600 animate-pulse" />
-            <span>20 Complete ATS Resume Examples • Infinite Carousel</span>
+            <span>{featuredOnly ? '5 Featured ATS Resume Examples' : '20 Complete ATS Resume Examples • Infinite Carousel'}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
-            {title}
+            {displayTitle}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-            {subtitle}
+            {displaySubtitle}
           </p>
         </div>
 
         {/* Manual Arrow Controls & Indicators */}
         <div className="flex items-center gap-2 self-end sm:self-auto">
           <span className="text-xs font-bold text-slate-400 mr-2 hidden sm:inline">
-            Showing {visibleCount} of 20
+            Showing {Math.min(visibleCount, totalOriginal)} of {totalOriginal}
           </span>
           <button
             onClick={handlePrev}
@@ -2705,13 +2743,13 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                   
                   {/* Card Header & Badge */}
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between gap-1.5 flex-wrap">
+                      <div className="flex items-center gap-1.5">
                         <div
-                          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                          className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
                           style={{ backgroundColor: `${item.badgeColor}15` }}
                         >
-                          <IconComp size={16} color={item.badgeColor} />
+                          <IconComp size={15} color={item.badgeColor} />
                         </div>
                         <span
                           className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md"
@@ -2720,9 +2758,14 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                           {item.category}
                         </span>
                       </div>
-                      <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
-                        {item.experienceLevel}
-                      </span>
+                      <div className="flex items-center gap-1">
+                        <span className="text-[10px] font-extrabold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                          {item.pageLength}
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
+                          {item.experienceLevel}
+                        </span>
+                      </div>
                     </div>
 
                     <h3 className="text-base font-black text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">

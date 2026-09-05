@@ -422,8 +422,9 @@ export const HomePage: React.FC = () => {
       {/* 5. RESUME EXAMPLES CAROUSEL */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ResumeExamplesCarousel
-          title="20 Professional ATS Resume Examples"
-          subtitle="Explore 20 complete, recruiter-vetted resume samples. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder."
+          featuredOnly={true}
+          title="5 Featured ATS Resume Examples"
+          subtitle="Explore 5 recruiter-vetted resume samples spanning 1-page, 2-page, and 3-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit."
         />
       </section>
 
