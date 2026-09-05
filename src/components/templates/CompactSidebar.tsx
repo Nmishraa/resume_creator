@@ -16,6 +16,24 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
   const accentColor = formatting.accentColor || '#1e40af';
   const densityStyles = getAdaptiveDensityStyles(densityMode);
 
+  const hasSidebarContent =
+    Boolean(skills && skills.length > 0) ||
+    Boolean(education && education.length > 0) ||
+    Boolean(certifications && certifications.length > 0);
+
+  const hasMainContent =
+    Boolean(summary) ||
+    Boolean(experience && experience.length > 0) ||
+    Boolean(projects && projects.length > 0);
+
+  const gridColsClass =
+    hasSidebarContent && hasMainContent
+      ? 'grid grid-cols-1 md:grid-cols-3 items-stretch'
+      : 'grid grid-cols-1 items-stretch';
+
+  const sidebarColSpan = !hasMainContent ? 'col-span-1 md:col-span-3' : 'col-span-1';
+  const mainColSpan = !hasSidebarContent ? 'col-span-1 md:col-span-3' : 'col-span-1 md:col-span-2';
+
   return (
     <div
       className={`w-full max-w-[794px] box-border bg-white text-slate-800 ${fontClass} page-break-container`}
@@ -28,10 +46,11 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
     >
       <div
         style={{ columnGap: 'var(--resume-column-gap, 24px)' }}
-        className="grid grid-cols-1 md:grid-cols-3 items-stretch"
+        className={gridColsClass}
       >
-        {/* Left Sidebar Column (1/3) */}
-        <div className="md:border-r md:pr-5 border-slate-200 h-full flex flex-col justify-between">
+        {/* Left Sidebar Column (1/3 or 3/3 if main is empty) */}
+        {hasSidebarContent && (
+          <div className={`md:border-r md:pr-5 border-slate-200 h-full flex flex-col justify-between ${sidebarColSpan}`}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
             <div>
               <div
@@ -176,12 +195,14 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
             )}
           </div>
         </div>
+        )}
 
-        {/* Right Main Column (2/3) */}
-        <div
-          style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}
-          className="md:col-span-2"
-        >
+        {/* Right Main Column (2/3 or 3/3 if sidebar is empty) */}
+        {hasMainContent && (
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}
+            className={mainColSpan}
+          >
           {/* Summary */}
           {summary && (
             <div>
@@ -287,6 +308,7 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
             </div>
           )}
         </div>
+        )}
       </div>
     </div>
   );

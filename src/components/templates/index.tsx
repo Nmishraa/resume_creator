@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResumeData, TemplateType, DensityMode } from '../../types/resume';
 import { useResume } from '../../context/ResumeContext';
+import { sanitizeResumeData } from '../../services/resumeSanitizer';
 import { ModernClean } from './ModernClean';
 import { TechMinimal } from './TechMinimal';
 import { ExecutiveSerif } from './ExecutiveSerif';
@@ -59,23 +60,28 @@ export const ResumeRenderer: React.FC<TemplateProps> = ({ resume, densityMode: o
 
   if (overrideMode) {
     activeMode = overrideMode;
-  } else if (resume.formatting?.spacing === 'compact') {
+  } else if (resume?.formatting?.spacing === 'compact') {
     activeMode = 'compact';
-  } else if (resume.formatting?.spacing === 'relaxed') {
+  } else if (resume?.formatting?.spacing === 'relaxed') {
     activeMode = 'spacious';
   }
 
-  switch (resume.formatting.template) {
+  // Globally sanitize resume data so contact, skills, projects, experience, and education
+  // are automatically placed in correct sections without empty boxes or cutoffs across all templates.
+  const sanitizedResume = (resume ? (sanitizeResumeData(resume) as ResumeData) : resume) || resume;
+  const templateType = sanitizedResume?.formatting?.template || 'modern';
+
+  switch (templateType) {
     case 'tech':
-      return <TechMinimal resume={resume} densityMode={activeMode} />;
+      return <TechMinimal resume={sanitizedResume} densityMode={activeMode} />;
     case 'executive':
-      return <ExecutiveSerif resume={resume} densityMode={activeMode} />;
+      return <ExecutiveSerif resume={sanitizedResume} densityMode={activeMode} />;
     case 'slate':
-      return <ProfessionalSlate resume={resume} densityMode={activeMode} />;
+      return <ProfessionalSlate resume={sanitizedResume} densityMode={activeMode} />;
     case 'compact':
-      return <CompactSidebar resume={resume} densityMode={activeMode} />;
+      return <CompactSidebar resume={sanitizedResume} densityMode={activeMode} />;
     case 'modern':
     default:
-      return <ModernClean resume={resume} densityMode={activeMode} />;
+      return <ModernClean resume={sanitizedResume} densityMode={activeMode} />;
   }
 };
