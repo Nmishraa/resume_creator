@@ -5,6 +5,7 @@ import { useResume } from '../context/ResumeContext';
 import { SeoHead } from '../components/common/SeoHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { FaqAccordion } from '../components/common/FaqAccordion';
+import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
 import {
   Compass,
   Search,
@@ -110,6 +111,9 @@ export const ResumeExamplesHubPage: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* Featured Examples Carousel */}
+      <ResumeExamplesCarousel />
 
       {/* Examples Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

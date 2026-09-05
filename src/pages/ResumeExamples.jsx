@@ -19,6 +19,7 @@ import {
   X 
 } from 'lucide-react';
 import { api } from '../utils/api';
+import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
 
 const SAMPLE_RESUMES = [
   {
@@ -631,6 +632,9 @@ export default function ResumeExamples({ user, onAuthSuccess, isEmbedded = false
           Explore battle-tested resume templates designed across tech, design, data, finance, healthcare, marketing, and entry-level roles. Click any template to customize and export your PDF instantly.
         </p>
       </div>
+
+      {/* Featured Examples Carousel */}
+      <ResumeExamplesCarousel />
 
       {/* Category Filter Pills */}
       <div style={{ display: 'flex', gap: '0.6rem', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '2.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
