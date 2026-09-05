@@ -94,9 +94,12 @@ export function App() {
             
             {/* Cover Letter & Templates */}
             <Route path="cover-letters" element={<CoverLetterPage />} />
-            <Route path="cover-letter-generator" element={<Navigate to="/cover-letters" replace />} />
+            <Route path="cover-letter-builder" element={<CoverLetterPage />} />
+            <Route path="cover-letter-generator" element={<Navigate to="/cover-letter-builder" replace />} />
             <Route path="templates" element={<Navigate to="/resume-templates" replace />} />
             <Route path="resume-templates" element={<TemplatesGalleryPage />} />
+            <Route path="resume-templates/:role" element={<ResumeExampleDetailPage />} />
+            <Route path="resume-skills/:role" element={<ResumeExampleDetailPage />} />
 
             {/* Resume Examples Hub & Dynamic Detail */}
             <Route path="resume-examples" element={<ResumeExamplesHubPage />} />

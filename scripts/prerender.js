@@ -26,6 +26,20 @@ const PAGES = [
     intro: 'Resume Craft empowers job seekers to build ATS-friendly resumes and CVs for free with AI-powered bullet points, Google X-Y-Z formulas, professional templates, and instant vector PDF downloads.'
   },
   {
+    path: '/resume-builder',
+    title: 'Free Online Resume Builder – Create ATS Resumes | Resume Craft',
+    description: 'Build professional, ATS-friendly resumes for free with live preview, AI bullet enhancers, and vector PDF exports.',
+    h1: 'Free Online Resume Builder',
+    intro: 'Build professional, ATS-friendly resumes for free with live preview, AI bullet enhancers, and vector PDF exports.'
+  },
+  {
+    path: '/cover-letter-builder',
+    title: 'Free AI Cover Letter Builder – Tailored Cover Letters | Resume Craft',
+    description: 'Generate customized, role-tailored cover letters from your resume experience and target job title in seconds.',
+    h1: 'Free AI Cover Letter Builder',
+    intro: 'Generate customized, role-tailored cover letters from your resume experience and target job title in seconds.'
+  },
+  {
     path: '/free-resume-builder',
     title: 'Free Resume Builder – Create ATS-Friendly Resumes Online | Resume Craft',
     description: '100% free resume builder with ATS-compliant templates, vector PDF export, and no paywalls. Build and download your professional resume in minutes.',

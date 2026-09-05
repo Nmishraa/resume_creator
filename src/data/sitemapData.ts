@@ -21,12 +21,30 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     changefreq: 'daily'
   },
   {
+    path: '/resume-builder',
+    title: 'Free Online Resume Builder – Create ATS Resumes | Resume Craft',
+    description: 'Build professional, ATS-friendly resumes for free with live preview, AI bullet enhancers, and vector PDF exports.',
+    targetKeyword: 'resume builder',
+    canonical: `${SITE_URL}/resume-builder`,
+    priority: 1.0,
+    changefreq: 'daily'
+  },
+  {
     path: '/free-resume-builder',
     title: 'Free Resume Builder – Create ATS-Friendly Resumes Online | Resume Craft',
     description: '100% free resume builder with ATS-compliant templates, vector PDF export, and no paywalls. Build and download your professional resume in minutes.',
     targetKeyword: 'free resume builder',
     canonical: `${SITE_URL}/free-resume-builder`,
     priority: 0.95,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/cover-letter-builder',
+    title: 'Free AI Cover Letter Builder – Tailored Cover Letters | Resume Craft',
+    description: 'Generate customized, role-tailored cover letters from your resume experience and target job title in seconds.',
+    targetKeyword: 'cover letter builder',
+    canonical: `${SITE_URL}/cover-letter-builder`,
+    priority: 0.9,
     changefreq: 'weekly'
   },
   {
