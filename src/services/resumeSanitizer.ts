@@ -455,7 +455,9 @@ export function sanitizeSkillsAndProjects(
     const link = cleanString(proj.link);
     const startDate = cleanString(proj.startDate);
     const endDate = cleanString(proj.endDate);
-    const highlights = (proj.highlights || []).map(h => cleanString(h)).filter(Boolean);
+    const highlights = (proj.highlights || [])
+      .map(h => cleanBulletSentence(h))
+      .filter(Boolean);
 
     // Ignore project titles created from bullet fragments or incomplete sentences
     if (title && !title.startsWith('with ') && !title.startsWith('using ') && title.length >= 3) {
@@ -478,6 +480,29 @@ export function sanitizeSkillsAndProjects(
 }
 
 /**
+ * Formats bullet points into complete, well-formed sentences ending with proper punctuation.
+ * Strips dangling preposition/conjunction fragments and capitalizes the starting letter.
+ */
+export function cleanBulletSentence(text: string | null | undefined): string {
+  if (!text) return '';
+  let cleaned = cleanString(text);
+  if (!cleaned) return '';
+
+  // Capitalize first letter if needed
+  cleaned = cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+
+  // Strip dangling trailing prepositions or conjunctions (e.g. "with", "using", "for", "via", "and")
+  cleaned = cleaned.replace(/\s+\b(with|using|for|via|and|by|to|of|in|at|on|from)\s*$/i, '');
+
+  // Ensure sentence ends with proper punctuation
+  if (!/[.!?]$/.test(cleaned)) {
+    cleaned += '.';
+  }
+
+  return cleaned;
+}
+
+/**
  * 5. Sanitizes Work & Volunteer Experience
  */
 export function sanitizeExperience(experienceList: ExperienceItem[]): ExperienceItem[] {
@@ -491,7 +516,9 @@ export function sanitizeExperience(experienceList: ExperienceItem[]): Experience
     const location = cleanString(exp.location);
     const startDate = cleanString(exp.startDate);
     const endDate = cleanString(exp.endDate);
-    const highlights = (exp.highlights || []).map(h => cleanString(h)).filter(Boolean);
+    const highlights = (exp.highlights || [])
+      .map(h => cleanBulletSentence(h))
+      .filter(Boolean);
 
     if (role || company) {
       cleanExp.push({

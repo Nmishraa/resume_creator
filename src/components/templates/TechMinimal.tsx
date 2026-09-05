@@ -132,7 +132,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                       </span>
                     )}
                   </div>
-                  {exp.highlights && (
+                  {exp.highlights && exp.highlights.length > 0 && (
                     <ul
                       style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
                       className="mt-1.5 list-disc list-outside ml-4 text-slate-700 font-sans"
@@ -172,7 +172,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
                       </span>
                     )}
                   </div>
-                  {proj.highlights && (
+                  {proj.highlights && proj.highlights.length > 0 && (
                     <ul
                       style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
                       className="mt-1.5 list-disc list-outside ml-4 text-slate-700 font-sans"
