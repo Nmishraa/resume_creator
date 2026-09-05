@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { TEMPLATE_LIST } from '../components/templates';
+import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
 
 export const HomePage: React.FC = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
@@ -333,6 +334,14 @@ export const HomePage: React.FC = () => {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* 5. RESUME EXAMPLES CAROUSEL */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ResumeExamplesCarousel
+          title="20 Professional ATS Resume Examples"
+          subtitle="Explore 20 complete, recruiter-vetted resume samples. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder."
+        />
       </section>
 
 

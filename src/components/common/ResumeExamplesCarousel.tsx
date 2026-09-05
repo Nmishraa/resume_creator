@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useResume } from '../../context/ResumeContext';
 import { 
   ChevronLeft, 
@@ -2726,7 +2726,9 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                     </div>
 
                     <h3 className="text-base font-black text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
-                      {item.roleTitle}
+                      <Link to={`/resume-examples/${item.slug}`} className="hover:underline">
+                        {item.roleTitle}
+                      </Link>
                     </h3>
 
                     {/* Visual Mini-Resume Preview Box */}
