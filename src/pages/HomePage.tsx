@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useResume } from '../context/ResumeContext';
 import { SeoHead } from '../components/common/SeoHead';
 import { FaqAccordion } from '../components/common/FaqAccordion';
 import {
@@ -27,63 +26,9 @@ import { TEMPLATE_LIST } from '../components/templates';
 import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
 
 export const HomePage: React.FC = () => {
-  const { updateResume } = useResume();
   const navigate = useNavigate();
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploadInitialStep, setUploadInitialStep] = useState<'upload' | 'template' | 'preview'>('upload');
-
-  const handleUseAlexMorganLayout = () => {
-    updateResume({
-      title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
-      personalInfo: {
-        fullName: 'Alex Morgan',
-        jobTitle: 'Senior Full-Stack Engineer',
-        email: 'alex.morgan@dev.io',
-        phone: '(555) 234-5678',
-        location: 'San Francisco, CA',
-        website: 'alexmorgan.dev',
-        linkedin: 'linkedin.com/in/alexmorgan',
-        github: 'github.com/alexmorgan'
-      },
-      summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
-      experience: [
-        {
-          id: 'exp-1',
-          role: 'Lead Systems Engineer',
-          company: 'Cloud Scale',
-          location: 'San Francisco, CA',
-          startDate: '2021',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
-            'Optimized API gateway throughput by 42% using React & Node.js microservices.'
-          ]
-        }
-      ],
-      skills: [
-        {
-          id: 'skill-1',
-          category: 'Core Stack',
-          items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']
-        }
-      ],
-      education: [
-        {
-          id: 'edu-1',
-          degree: 'B.S. in Computer Science',
-          institution: 'UC Berkeley',
-          location: 'Berkeley, CA',
-          startDate: '2013',
-          endDate: '2017'
-        }
-      ],
-      projects: [],
-      certifications: [],
-      customSections: []
-    });
-    navigate('/builder');
-  };
 
   const homeFaqs = [
     {
@@ -119,129 +64,55 @@ export const HomePage: React.FC = () => {
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-slate-50 pt-10 pb-16 border-b border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Left Column: Focused Copy & Primary Action (7 cols) */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100/90 border border-brand-200 text-brand-950 text-xs sm:text-sm font-extrabold shadow-2xs">
-                <Sparkles size={15} className="text-brand-600 shrink-0" />
-                <span>No login, no watermark, and no hidden fees.</span>
-              </div>
+      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-slate-50 pt-12 pb-16 border-b border-slate-200/80">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100/90 border border-brand-200 text-brand-950 text-xs sm:text-sm font-extrabold shadow-2xs">
+            <Sparkles size={15} className="text-brand-600 shrink-0" />
+            <span>No login, no watermark, and no hidden fees.</span>
+          </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.12]">
-                Build an <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-600">ATS-Friendly Resume</span> for Free
-              </h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.12]">
+            Build an <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-600">ATS-Friendly Resume</span> for Free
+          </h1>
 
-              <p className="text-base sm:text-lg text-slate-700 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Create a professional, interview-ready resume in minutes with our guided builder, AI bullet enhancers, and direct vector PDF export.
-              </p>
+          <p className="text-base sm:text-lg text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed">
+            Create a professional, interview-ready resume in minutes with our guided builder, AI bullet enhancers, and direct vector PDF export.
+          </p>
 
-              {/* Single Primary Action Button + Secondary Options */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                <Link
-                  to="/builder"
-                  className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-2xl text-base shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[44px]"
-                >
-                  <FileText size={20} />
-                  <span>Build My Resume Free</span>
-                  <ArrowRight size={18} />
-                </Link>
+          {/* Primary Action Button + Secondary Options */}
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <Link
+              to="/builder"
+              className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-2xl text-base shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[44px]"
+            >
+              <FileText size={20} />
+              <span>Build My Resume Free</span>
+              <ArrowRight size={18} />
+            </Link>
 
-                <button
-                  onClick={() => {
-                    setUploadInitialStep('upload');
-                    setShowUploadModal(true);
-                  }}
-                  className="w-full sm:w-auto px-6 py-4 bg-white hover:bg-slate-50 text-slate-800 font-extrabold rounded-2xl text-sm sm:text-base border border-slate-300 shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
-                >
-                  <UploadCloud size={18} className="text-brand-600" />
-                  <span>Upload Existing Resume</span>
-                </button>
-              </div>
+            <button
+              onClick={() => {
+                setUploadInitialStep('upload');
+                setShowUploadModal(true);
+              }}
+              className="w-full sm:w-auto px-6 py-4 bg-white hover:bg-slate-50 text-slate-800 font-extrabold rounded-2xl text-sm sm:text-base border border-slate-300 shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+            >
+              <UploadCloud size={18} className="text-brand-600" />
+              <span>Upload Existing Resume</span>
+            </button>
+          </div>
 
-              {/* Trust Badges */}
-              <div className="pt-4 border-t border-slate-200/90 flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-6 text-sm text-slate-700 font-semibold">
-                <span className="flex items-center gap-1.5">
-                  <Check size={16} className="text-emerald-600 stroke-[3]" /> 100% Free Forever
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Check size={16} className="text-emerald-600 stroke-[3]" /> No Registration Required
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Check size={16} className="text-emerald-600 stroke-[3]" /> Direct PDF Download
-                </span>
-              </div>
-            </div>
-
-            {/* Right Column: Single Professional Resume Preview Visual (5 cols) */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform">
-                
-                {/* Floating ATS Score Badge */}
-                <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
-                  <CheckCircle2 size={15} />
-                  <span>(Example result) ATS Score: 98/100</span>
-                </div>
-
-                {/* Sample Resume Header */}
-                <div className="border-b border-slate-200 pb-3 space-y-1">
-                  <h3 className="text-xl font-black text-slate-900">Alex Morgan</h3>
-                  <p className="text-xs font-bold text-brand-600">Senior Full-Stack Engineer</p>
-                  <p className="text-[11px] text-slate-500">alex.morgan@dev.io • (555) 234-5678 • San Francisco, CA</p>
-                </div>
-
-                {/* Summary Section */}
-                <div className="space-y-1">
-                  <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Professional Summary</h4>
-                  <p className="text-[11px] text-slate-600 leading-relaxed">
-                    Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.
-                  </p>
-                </div>
-
-                {/* Experience Section */}
-                <div className="space-y-1.5">
-                  <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Work Experience</h4>
-                  <div>
-                    <div className="flex justify-between items-baseline text-[11px]">
-                      <span className="font-bold text-slate-800">Lead Systems Engineer • Cloud Scale</span>
-                      <span className="text-slate-500 font-medium">2021 – Present</span>
-                    </div>
-                    <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
-                      <li>Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.</li>
-                      <li>Optimized API gateway throughput by 42% using React &amp; Node.js microservices.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Skills Section */}
-                <div className="space-y-1">
-                  <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Core Skills</h4>
-                  <div className="flex flex-wrap gap-1 pt-0.5">
-                    {['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'].map((skill) => (
-                      <span key={skill} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-bold">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Interactive Preview Link Button */}
-                <div className="pt-2">
-                  <button
-                    type="button"
-                    onClick={handleUseAlexMorganLayout}
-                    className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
-                  >
-                    <span>Use This Layout in Builder</span>
-                    <ArrowRight size={14} />
-                  </button>
-                </div>
-
-              </div>
-            </div>
-
+          {/* Trust Badges */}
+          <div className="pt-6 border-t border-slate-200/90 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-sm text-slate-700 font-semibold">
+            <span className="flex items-center gap-1.5">
+              <Check size={16} className="text-emerald-600 stroke-[3]" /> 100% Free Forever
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Check size={16} className="text-emerald-600 stroke-[3]" /> No Registration Required
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Check size={16} className="text-emerald-600 stroke-[3]" /> Direct PDF Download
+            </span>
           </div>
         </div>
       </section>
