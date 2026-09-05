@@ -396,6 +396,9 @@ for (const page of PAGES) {
 
   let rendered = baseTemplate;
 
+  // Strip vendor-pdf modulepreload links from head if present
+  rendered = rendered.replace(/<link[^>]*rel="modulepreload"[^>]*vendor-pdf[^>]*\/?>/gi, '');
+
   // Replace Title & Description in head
   rendered = rendered.replace(/<title>.*?<\/title>/i, '');
   rendered = rendered.replace(/<meta\s+name="description"\s+content=".*?"\s*\/?>/i, '');
