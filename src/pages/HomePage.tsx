@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useResume } from '../context/ResumeContext';
 import { SeoHead } from '../components/common/SeoHead';
 import { FaqAccordion } from '../components/common/FaqAccordion';
 import {
@@ -26,8 +27,60 @@ import { TEMPLATE_LIST } from '../components/templates';
 import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
 
 export const HomePage: React.FC = () => {
+  const { updateResume } = useResume();
+  const navigate = useNavigate();
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploadInitialStep, setUploadInitialStep] = useState<'upload' | 'template' | 'preview'>('upload');
+
+  const handleUseAlexMorganLayout = () => {
+    updateResume({
+      title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
+      personalInfo: {
+        fullName: 'Alex Morgan',
+        jobTitle: 'Senior Full-Stack Engineer',
+        email: 'alex.morgan@dev.io',
+        phone: '(555) 234-5678',
+        location: 'San Francisco, CA',
+        website: 'alexmorgan.dev',
+        linkedin: 'linkedin.com/in/alexmorgan',
+        github: 'github.com/alexmorgan'
+      },
+      summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
+      experience: [
+        {
+          id: 'exp-1',
+          role: 'Lead Systems Engineer',
+          company: 'Cloud Scale',
+          location: 'San Francisco, CA',
+          startDate: '2021',
+          endDate: 'Present',
+          current: true,
+          highlights: [
+            'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
+            'Optimized API gateway throughput by 42% using React & Node.js microservices.'
+          ]
+        }
+      ],
+      skills: [
+        {
+          id: 'skill-1',
+          category: 'Core Stack',
+          items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']
+        }
+      ],
+      education: [
+        {
+          id: 'edu-1',
+          degree: 'B.S. in Computer Science',
+          institution: 'UC Berkeley',
+          location: 'Berkeley, CA',
+          startDate: '2013',
+          endDate: '2017'
+        }
+      ]
+    });
+    navigate('/builder');
+  };
 
   const homeFaqs = [
     {
@@ -173,13 +226,14 @@ export const HomePage: React.FC = () => {
 
                 {/* Interactive Preview Link Button */}
                 <div className="pt-2">
-                  <Link
-                    to="/builder"
-                    className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-extrabold text-xs rounded-xl transition-colors flex items-center justify-center gap-1.5 border border-brand-200"
+                  <button
+                    type="button"
+                    onClick={handleUseAlexMorganLayout}
+                    className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
                   >
                     <span>Use This Layout in Builder</span>
                     <ArrowRight size={14} />
-                  </Link>
+                  </button>
                 </div>
 
               </div>
