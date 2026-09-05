@@ -241,10 +241,13 @@ export const HomePage: React.FC = () => {
                 <div className="pt-2">
                   <button
                     type="button"
-                    onClick={handleUseAlexMorganLayout}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePreviewAlexMorganLayout();
+                    }}
                     className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
                   >
-                    <span>Use This Layout in Builder</span>
+                    <span>View &amp; Use Layout Preview</span>
                     <ArrowRight size={14} />
                   </button>
                 </div>
