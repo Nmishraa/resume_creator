@@ -129,6 +129,15 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     changefreq: 'weekly'
   },
   {
+    path: '/find-jobs-by-resume',
+    title: 'Find Jobs By Resume – Free AI Job Matcher | Resume Craft',
+    description: 'Find matching jobs by uploading or creating your resume. Automatically discover open roles based on your skills, experience level, and preferred location.',
+    targetKeyword: 'find jobs by resume',
+    canonical: `${SITE_URL}/find-jobs-by-resume`,
+    priority: 0.95,
+    changefreq: 'weekly'
+  },
+  {
     path: '/job-description-resume-matcher',
     title: 'Job Description Resume Matcher – ATS Keyword Match Tool | Resume Craft',
     description: 'Match your resume against any job description to discover missing technical skills, keyword frequency, and recruiter requirements in real-time.',

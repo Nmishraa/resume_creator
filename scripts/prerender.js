@@ -89,6 +89,13 @@ const PAGES = [
     intro: 'Create or upload your resume to discover matching jobs. Automatically match open positions based on your target role, skills, experience, education, and location.'
   },
   {
+    path: '/find-jobs-by-resume',
+    title: 'Find Jobs By Resume – Free AI Job Matcher | Resume Craft',
+    description: 'Find matching jobs by uploading or creating your resume. Automatically discover open roles based on your skills, experience level, and preferred location.',
+    h1: 'Find Jobs By Resume',
+    intro: 'Find matching jobs by uploading or creating your resume. Automatically discover open roles based on your skills, experience level, and preferred location.'
+  },
+  {
     path: '/job-description-resume-matcher',
     title: 'Job Description Resume Matcher – ATS Keyword Match Tool | Resume Craft',
     description: 'Match your resume against any job description to discover missing technical skills, keyword frequency, and recruiter requirements in real-time.',
