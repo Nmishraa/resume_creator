@@ -227,6 +227,17 @@ export function sanitizePersonalInfo(info: PersonalInfo): PersonalInfo {
       }
     });
     location = uniqueParts.join(', ');
+
+    // Strip location if it was appended/embedded in jobTitle or fullName
+    if (location.length >= 3) {
+      const locRegex = new RegExp(`[\\s,\\-|–—]*${location.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')}`, 'gi');
+      if (jobTitle) {
+        jobTitle = jobTitle.replace(locRegex, '').trim();
+      }
+      if (fullName) {
+        fullName = fullName.replace(locRegex, '').trim();
+      }
+    }
   }
 
   if (email && email.includes(',')) {
