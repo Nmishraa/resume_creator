@@ -129,7 +129,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
               <span>Real-Time Career Matching Engine</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
-              Find Matching Jobs for Your Resume
+              Find Jobs With Your Resume
             </h2>
             <p className="text-sm sm:text-base text-slate-300 font-medium max-w-2xl leading-relaxed">
               Our AI analyzes your skills, experience, and location to match you with live, verified job listings ranked by candidate compatibility.

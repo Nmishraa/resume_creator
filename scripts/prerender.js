@@ -68,6 +68,13 @@ const PAGES = [
     intro: 'You have more experience than you think. Learn how to transform volunteer hours, school activities, personal projects, and transferable skills into an employer-ready resume.'
   },
   {
+    path: '/find-jobs-with-resume',
+    title: 'Find Jobs With Your Resume | Free AI Job Matcher',
+    description: 'Create or upload your resume to discover matching jobs. Automatically match open positions based on your target role, skills, experience, education, and location.',
+    h1: 'Find Jobs With Your Resume',
+    intro: 'Create or upload your resume to discover matching jobs. Automatically match open positions based on your target role, skills, experience, education, and location.'
+  },
+  {
     path: '/job-description-resume-matcher',
     title: 'Job Description Resume Matcher – ATS Keyword Match Tool | Resume Craft',
     description: 'Match your resume against any job description to discover missing technical skills, keyword frequency, and recruiter requirements in real-time.',

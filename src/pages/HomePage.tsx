@@ -231,6 +231,31 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* FEATURE BANNER: FIND JOBS WITH YOUR RESUME */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-brand-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-xl border border-brand-800 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-3 text-center md:text-left max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-extrabold border border-brand-400/30">
+              <Briefcase size={14} className="text-brand-400" />
+              <span>AI Job Matcher</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+              Find Jobs With Your Resume
+            </h3>
+            <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed">
+              Upload your resume or build one free to discover verified live job openings matched to your target role, technical skills, experience level, and preferred location.
+            </p>
+          </div>
+          <Link
+            to="/find-jobs-with-resume"
+            className="px-6 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-2xl text-sm transition-all shadow-lg flex items-center gap-2.5 cursor-pointer shrink-0"
+          >
+            <span>Explore Job Matcher</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+
       {/* 3. HOW IT WORKS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-xs space-y-8">

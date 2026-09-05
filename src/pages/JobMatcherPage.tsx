@@ -11,12 +11,13 @@ export const JobMatcherPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
       <SeoHead
-        title="Find Matching Jobs for Your Resume | Resume Craft"
+        title="Find Jobs With Your Resume | Resume Craft"
         description="Discover live verified job listings ranked by match percentage against your resume's skills, experience, and location with verified application links."
         canonicalPath="/job-description-resume-matcher"
+        noindex={true}
       />
 
-      <Breadcrumbs items={[{ name: 'Find Matching Jobs', path: '/job-description-resume-matcher' }]} />
+      <Breadcrumbs items={[{ name: 'Find Jobs With Your Resume', path: '/job-description-resume-matcher' }]} />
 
       {/* Hero Header */}
       <div className="text-center space-y-4 max-w-3xl mx-auto">
@@ -26,7 +27,7 @@ export const JobMatcherPage: React.FC = () => {
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-          Find Jobs That Match Your Resume
+          Find Jobs With Your Resume
         </h1>
 
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -47,7 +48,7 @@ export const JobMatcherPage: React.FC = () => {
             }`}
           >
             <Briefcase size={18} />
-            <span>Find Matching Jobs</span>
+            <span>Find Jobs With Your Resume</span>
           </button>
 
           <button

@@ -614,7 +614,7 @@ export default function Editor() {
             onClick={() => setActiveTab('jobmatch')}
             style={{ padding: '0.35rem 0.75rem', borderRadius: '20px', border: '1px solid #10b981', background: 'linear-gradient(135deg, #dcfce7 0%, #a7f3d0 100%)', color: '#065f46', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem', boxShadow: '0 2px 4px rgba(16,185,129,0.2)' }}
           >
-            <Briefcase size={14} color="#047857" /> Find Matching Jobs
+            <Briefcase size={14} color="#047857" /> Find Jobs With Your Resume
           </button>
 
           <button
@@ -790,7 +790,7 @@ export default function Editor() {
             </span>
           </div>
           <span style={{ fontSize: '0.72rem', background: '#e0e7ff', color: '#3730a3', padding: '0.25rem 0.65rem', borderRadius: '12px', fontWeight: 800 }}>
-            Active: {activeTab === 'jobmatch' ? 'Find Matching Jobs' : activeTab === 'aimatch' ? 'AI Job Matcher' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+            Active: {activeTab === 'jobmatch' ? 'Find Jobs With Your Resume' : activeTab === 'aimatch' ? 'AI Job Matcher' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
           </span>
         </div>
 

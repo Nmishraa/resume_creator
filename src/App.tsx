@@ -33,6 +33,7 @@ const ResumeScoreCheckerPage = lazyWithRetry(() => import('./pages/ResumeScoreCh
 const StudentResumeBuilderPage = lazyWithRetry(() => import('./pages/StudentResumeBuilderPage').then(m => ({ default: m.StudentResumeBuilderPage })));
 const NoExperienceResumeBuilderPage = lazyWithRetry(() => import('./pages/NoExperienceResumeBuilderPage').then(m => ({ default: m.NoExperienceResumeBuilderPage })));
 const JobMatcherPage = lazyWithRetry(() => import('./pages/JobMatcherPage').then(m => ({ default: m.JobMatcherPage })));
+const FindJobsWithResumePage = lazyWithRetry(() => import('./pages/seo/FindJobsWithResumePage').then(m => ({ default: m.FindJobsWithResumePage })));
 const CoverLetterPage = lazyWithRetry(() => import('./pages/CoverLetterPage').then(m => ({ default: m.CoverLetterPage })));
 const TemplatesGalleryPage = lazyWithRetry(() => import('./pages/TemplatesGalleryPage').then(m => ({ default: m.TemplatesGalleryPage })));
 const ResumeExamplesHubPage = lazyWithRetry(() => import('./pages/ResumeExamplesHubPage').then(m => ({ default: m.ResumeExamplesHubPage })));
@@ -86,6 +87,7 @@ export function App() {
             <Route path="resume-builder-no-experience" element={<NoExperienceResumeBuilderPage />} />
             <Route path="resume-builder-for-software-engineers" element={<SoftwareEngineerBuilderPage />} />
             <Route path="job-description-resume-matcher" element={<JobMatcherPage />} />
+            <Route path="find-jobs-with-resume" element={<FindJobsWithResumePage />} />
             <Route path="find-matching-jobs" element={<JobMatcherPage />} />
             <Route path="matching-jobs" element={<Navigate to="/find-matching-jobs" replace />} />
             <Route path="resume-keyword-matcher" element={<KeywordMatcherPage />} />

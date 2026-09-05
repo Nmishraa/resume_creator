@@ -415,7 +415,7 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
                   className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-brand-600 hover:bg-brand-700 text-white shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles size={14} />
-                  <span>Find Matching Jobs</span>
+                  <span>Find Jobs With Your Resume</span>
                 </button>
               </>
             )}

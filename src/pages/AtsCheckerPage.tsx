@@ -387,8 +387,8 @@ export const AtsCheckerPage: React.FC = () => {
           <p className="text-xs text-slate-400">Apply your ATS optimizations directly with our free builder and templates.</p>
         </div>
         <div className="flex flex-wrap gap-2.5 justify-center">
-          <Link to="/job-description-resume-matcher" className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors">
-            Find Matching Jobs
+          <Link to="/find-jobs-with-resume" className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors">
+            Find Jobs With Your Resume
           </Link>
           <Link to="/builder" className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-colors">
             Open Resume Builder

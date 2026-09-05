@@ -8,6 +8,7 @@ export interface SeoHeadProps {
   ogType?: 'website' | 'article';
   ogImage?: string;
   jsonLd?: Record<string, any> | Array<Record<string, any>>;
+  noindex?: boolean;
 }
 
 export const SeoHead: React.FC<SeoHeadProps> = ({
@@ -16,7 +17,8 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
   canonicalPath,
   ogType = 'website',
   ogImage = `${SITE_URL}/og-image.png`,
-  jsonLd
+  jsonLd,
+  noindex = false
 }) => {
   const fullCanonical = canonicalPath
     ? (canonicalPath.startsWith('http') ? canonicalPath : `${SITE_URL}${canonicalPath.startsWith('/') ? '' : '/'}${canonicalPath}`)
@@ -39,7 +41,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
 
     // Standard Meta
     setMetaTag('name', 'description', description);
-    setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    setMetaTag('name', 'robots', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
     // OpenGraph
     setMetaTag('property', 'og:title', title);

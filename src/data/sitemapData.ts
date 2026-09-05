@@ -102,6 +102,15 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     changefreq: 'weekly'
   },
   {
+    path: '/find-jobs-with-resume',
+    title: 'Find Jobs With Your Resume | Free AI Job Matcher',
+    description: 'Create or upload your resume to discover matching jobs. Automatically match open positions based on your target role, skills, experience, education, and location.',
+    targetKeyword: 'find jobs with your resume',
+    canonical: `${SITE_URL}/find-jobs-with-resume`,
+    priority: 0.95,
+    changefreq: 'weekly'
+  },
+  {
     path: '/job-description-resume-matcher',
     title: 'Job Description Resume Matcher – ATS Keyword Match Tool | Resume Craft',
     description: 'Match your resume against any job description to discover missing technical skills, keyword frequency, and recruiter requirements in real-time.',

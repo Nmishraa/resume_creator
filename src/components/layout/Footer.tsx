@@ -55,8 +55,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/job-description-resume-matcher" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Job Description Matcher
+                <Link to="/find-jobs-with-resume" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Find Jobs With Your Resume
                 </Link>
               </li>
               <li>

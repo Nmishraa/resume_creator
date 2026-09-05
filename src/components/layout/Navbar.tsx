@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
   ];
 
   const additionalTools = [
-    { label: 'Find Matching Jobs', path: '/job-description-resume-matcher', desc: 'Ranked job search matching your resume', icon: Target },
+    { label: 'Find Jobs With Your Resume', path: '/job-description-resume-matcher', desc: 'Ranked job search matching your resume', icon: Target },
     { label: 'Interview Questions', path: '/interview-questions', desc: '10-Q role-specific mock questions & STAR prep', icon: HelpCircle },
     { label: 'AI Bullet Writer', path: '/ai-resume-builder', desc: 'Google X-Y-Z formula bullet writer', icon: Sparkles },
     { label: 'Student Resume Builder', path: '/resume-builder-for-students', desc: 'Coursework, projects & beginner tips', icon: GraduationCap },
@@ -103,17 +103,17 @@ export const Navbar: React.FC = () => {
               <span>ATS Checker</span>
             </Link>
 
-            {/* Find Matching Jobs Link */}
+            {/* Find Jobs With Your Resume Link */}
             <Link
               to="/job-description-resume-matcher"
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
-                location.pathname.includes('job-description-resume-matcher') || location.pathname.includes('find-matching-jobs')
+                location.pathname.includes('job-description-resume-matcher') || location.pathname.includes('find-matching-jobs') || location.pathname.includes('find-jobs-with-resume')
                   ? 'bg-brand-50 text-brand-700'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/70'
               }`}
             >
               <Target size={15} className="text-brand-600" />
-              <span>Find Matching Jobs</span>
+              <span>Find Jobs With Your Resume</span>
             </Link>
 
             {/* Templates Link */}
