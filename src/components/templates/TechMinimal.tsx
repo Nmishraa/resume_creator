@@ -82,31 +82,38 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
         )}
 
         {/* Skills */}
-        {skills && skills.length > 0 && (
-          <div>
-            <div
-              style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
-              className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
-            >
-              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
-              {getSectionNum()} // TECHNICAL SKILLS
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              {skills.map((s) => (
-                <div key={s.id} className="skill-group resume-entry bg-slate-50 p-2 rounded border border-slate-200 page-break-avoid">
-                  <div className="font-mono font-semibold text-slate-900 mb-1">{s.category}</div>
-                  <div className="flex flex-wrap gap-1">
-                    {s.items.map((item, idx) => (
-                      <span key={idx} className="bg-white border border-slate-200 px-1.5 py-0.5 rounded font-mono text-[10px] text-slate-700">
-                        {item}
-                      </span>
-                    ))}
+        {(() => {
+          const validSkills = (skills || []).filter(s => s && s.items && s.items.length > 0);
+          if (validSkills.length === 0) return null;
+
+          const gridCols = validSkills.length === 1 ? 'grid-cols-1 w-full' : 'grid-cols-1 sm:grid-cols-2';
+
+          return (
+            <div>
+              <div
+                style={{ fontSize: 'var(--resume-section-title-size, 13px)', breakAfter: 'avoid', pageBreakAfter: 'avoid' }}
+                className="resume-section-title font-mono font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2"
+              >
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }}></span>
+                {getSectionNum()} // TECHNICAL SKILLS
+              </div>
+              <div className={`grid ${gridCols} items-start gap-2 text-xs`}>
+                {validSkills.map((s) => (
+                  <div key={s.id} className="skill-group resume-entry bg-slate-50 p-2 rounded border border-slate-200 page-break-avoid h-auto">
+                    <div className="font-mono font-semibold text-slate-900 mb-1 break-words">{s.category}</div>
+                    <div className="flex flex-wrap gap-1">
+                      {s.items.map((item, idx) => (
+                        <span key={idx} className="bg-white border border-slate-200 px-1.5 py-0.5 rounded font-mono text-[10px] text-slate-700 break-words break-all">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* Experience */}
         {experience && experience.length > 0 && (

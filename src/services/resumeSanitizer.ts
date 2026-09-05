@@ -391,6 +391,23 @@ export function sanitizeSkillsAndProjects(
   for (const cat of skillsList || []) {
     const catNameClean = cleanString(cat.category);
     
+    // Check if category title itself is a Project Title (e.g., "AI Travel Assistant")
+    if (catNameClean && isProjectTitle(catNameClean)) {
+      const existingProj = extractedProjects.find(p => p.title.toLowerCase() === catNameClean.toLowerCase());
+      const projHighlights: string[] = (cat.items || []).map(cleanString).filter(Boolean);
+      if (existingProj) {
+        existingProj.highlights = Array.from(new Set([...(existingProj.highlights || []), ...projHighlights]));
+      } else {
+        extractedProjects.push({
+          id: `proj-extracted-cat-${Date.now()}-${extractedProjects.length}`,
+          title: catNameClean,
+          subtitle: '',
+          highlights: projHighlights
+        });
+      }
+      continue; // Skip processing as a skill category
+    }
+
     // Ignore category headings if they match SKILL_CATEGORY_HEADINGS
     let validCategoryTitle = 'Technical Skills';
     if (catNameClean && !SKILL_CATEGORY_HEADINGS.includes(catNameClean.toLowerCase())) {
