@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useResume } from '../context/ResumeContext';
 import { SeoHead } from '../components/common/SeoHead';
@@ -34,6 +34,9 @@ export const HomePage: React.FC = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploadInitialStep, setUploadInitialStep] = useState<'upload' | 'template' | 'preview'>('upload');
   const [activeHeroCardIndex, setActiveHeroCardIndex] = useState(0);
+  const [isHeroCarouselPaused, setIsHeroCarouselPaused] = useState(false);
+  const [heroTouchStart, setHeroTouchStart] = useState<number | null>(null);
+  const [heroTouchEnd, setHeroTouchEnd] = useState<number | null>(null);
 
   const alexMorganData = {
     title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
@@ -369,6 +372,37 @@ export const HomePage: React.FC = () => {
     }
   ];
 
+  // Hero Carousel Auto-play timer
+  useEffect(() => {
+    if (isHeroCarouselPaused) return;
+    const timer = setInterval(() => {
+      setActiveHeroCardIndex((prev) => (prev >= heroResumeCards.length - 1 ? 0 : prev + 1));
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [isHeroCarouselPaused, heroResumeCards.length]);
+
+  // Mobile Touch Swipe Handlers for Hero Carousel
+  const handleHeroTouchStart = (e: React.TouchEvent) => {
+    setIsHeroCarouselPaused(true);
+    setHeroTouchEnd(null);
+    setHeroTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleHeroTouchMove = (e: React.TouchEvent) => {
+    setHeroTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleHeroTouchEnd = () => {
+    setIsHeroCarouselPaused(false);
+    if (!heroTouchStart || !heroTouchEnd) return;
+    const distance = heroTouchStart - heroTouchEnd;
+    if (distance > 40) {
+      setActiveHeroCardIndex((prev) => (prev >= heroResumeCards.length - 1 ? 0 : prev + 1));
+    } else if (distance < -40) {
+      setActiveHeroCardIndex((prev) => (prev <= 0 ? heroResumeCards.length - 1 : prev - 1));
+    }
+  };
+
   const handleUseAlexMorganLayout = () => {
     updateResume(alexMorganData);
     navigate('/builder');
@@ -494,8 +528,15 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: 6 Interactive Resume Previews Deck (5 cols) */}
-            <div className="lg:col-span-5 space-y-3">
+            {/* Right Column: 6 Interactive Resume Previews Carousel (5 cols) */}
+            <div 
+              className="lg:col-span-5 space-y-3 relative overflow-hidden"
+              onMouseEnter={() => setIsHeroCarouselPaused(true)}
+              onMouseLeave={() => setIsHeroCarouselPaused(false)}
+              onTouchStart={handleHeroTouchStart}
+              onTouchMove={handleHeroTouchMove}
+              onTouchEnd={handleHeroTouchEnd}
+            >
               {/* Header Selector Pills & Navigation Controls */}
               <div className="flex items-center justify-between gap-2 bg-white/90 backdrop-blur-xs border border-slate-300 rounded-2xl p-2 shadow-xs">
                 <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[280px] sm:max-w-[320px]">
@@ -534,83 +575,106 @@ export const HomePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Active Resume Card Display */}
-              {heroResumeCards.map((card, idx) => {
-                if (idx !== activeHeroCardIndex) return null;
-                return (
-                  <div
-                    key={card.id}
-                    onClick={() => navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } })}
-                    className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform cursor-pointer"
-                    title="Click to view full-page resume preview"
-                  >
-                    {/* Floating ATS Score Badge */}
-                    <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
-                      <CheckCircle2 size={15} />
-                      <span>(Example result) ATS Score: {card.atsScore}</span>
-                    </div>
-
-                    {/* Sample Resume Header */}
-                    <div className="border-b border-slate-200 pb-3 space-y-1">
-                      <h3 className="text-xl font-black text-slate-900">{card.fullName}</h3>
-                      <p className="text-xs font-bold text-brand-600">{card.jobTitle}</p>
-                      <p className="text-[11px] text-slate-500">{card.contact}</p>
-                    </div>
-
-                    {/* Summary Section */}
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Professional Summary</h4>
-                      <p className="text-[11px] text-slate-600 leading-relaxed">
-                        {card.summary}
-                      </p>
-                    </div>
-
-                    {/* Experience Section */}
-                    <div className="space-y-1.5">
-                      <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Work Experience</h4>
-                      <div>
-                        <div className="flex justify-between items-baseline text-[11px]">
-                          <span className="font-bold text-slate-800">{card.expTitle}</span>
-                          <span className="text-slate-500 font-medium">{card.expDates}</span>
-                        </div>
-                        <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
-                          {card.expHighlights.map((hl, hIdx) => (
-                            <li key={hIdx}>{hl}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Skills Section */}
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Core Skills</h4>
-                      <div className="flex flex-wrap gap-1 pt-0.5">
-                        {card.skills.map((skill) => (
-                          <span key={skill} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-bold">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Interactive Preview Link Button */}
-                    <div className="pt-2">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } });
-                        }}
-                        className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
+              {/* Sliding Horizontal Carousel Track Container */}
+              <div className="w-full overflow-hidden pt-2 pb-1">
+                <div
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{ transform: `translateX(-${activeHeroCardIndex * 100}%)` }}
+                >
+                  {heroResumeCards.map((card) => (
+                    <div
+                      key={card.id}
+                      className="w-full shrink-0 px-1 box-border"
+                    >
+                      <div
+                        onClick={() => navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } })}
+                        className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform cursor-pointer"
+                        title="Click to view full-page resume preview"
                       >
-                        <span>View &amp; Use Layout Preview</span>
-                        <ArrowRight size={14} />
-                      </button>
-                    </div>
+                        {/* Floating ATS Score Badge */}
+                        <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
+                          <CheckCircle2 size={15} />
+                          <span>(Example result) ATS Score: {card.atsScore}</span>
+                        </div>
 
-                  </div>
-                );
-              })}
+                        {/* Sample Resume Header */}
+                        <div className="border-b border-slate-200 pb-3 space-y-1">
+                          <h3 className="text-xl font-black text-slate-900">{card.fullName}</h3>
+                          <p className="text-xs font-bold text-brand-600">{card.jobTitle}</p>
+                          <p className="text-[11px] text-slate-500">{card.contact}</p>
+                        </div>
+
+                        {/* Summary Section */}
+                        <div className="space-y-1">
+                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Professional Summary</h4>
+                          <p className="text-[11px] text-slate-600 leading-relaxed">
+                            {card.summary}
+                          </p>
+                        </div>
+
+                        {/* Experience Section */}
+                        <div className="space-y-1.5">
+                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Work Experience</h4>
+                          <div>
+                            <div className="flex justify-between items-baseline text-[11px]">
+                              <span className="font-bold text-slate-800">{card.expTitle}</span>
+                              <span className="text-slate-500 font-medium">{card.expDates}</span>
+                            </div>
+                            <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
+                              {card.expHighlights.map((hl, hIdx) => (
+                                <li key={hIdx}>{hl}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+
+                        {/* Skills Section */}
+                        <div className="space-y-1">
+                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Core Skills</h4>
+                          <div className="flex flex-wrap gap-1 pt-0.5">
+                            {card.skills.map((skill) => (
+                              <span key={skill} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-bold">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Interactive Preview Link Button */}
+                        <div className="pt-2">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } });
+                            }}
+                            className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
+                          >
+                            <span>View &amp; Use Layout Preview</span>
+                            <ArrowRight size={14} />
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Carousel Dot Indicators */}
+              <div className="flex items-center justify-center gap-1.5 pt-1">
+                {heroResumeCards.map((_, dotIdx) => (
+                  <button
+                    key={dotIdx}
+                    onClick={() => setActiveHeroCardIndex(dotIdx)}
+                    aria-label={`Go to slide ${dotIdx + 1}`}
+                    className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                      activeHeroCardIndex === dotIdx ? 'w-6 bg-brand-600' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
+                    }`}
+                  />
+                ))}
+              </div>
+
             </div>
 
           </div>
