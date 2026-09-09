@@ -103,6 +103,7 @@ export const HomePage: React.FC = () => {
       atsScore: '98/100',
       templateId: 'modern',
       templateName: 'Modern Clean',
+      templateTag: 'Most Popular',
       pageLength: '1-Page',
       fullName: 'Alex Morgan',
       jobTitle: 'Senior Full-Stack Engineer',
@@ -122,6 +123,7 @@ export const HomePage: React.FC = () => {
       atsScore: '96/100',
       templateId: 'tech',
       templateName: 'Tech Minimal',
+      templateTag: 'Tech Favorite',
       pageLength: '2-Page',
       fullName: 'Sophia Chen',
       jobTitle: 'Lead Data Scientist & AI Specialist',
@@ -187,6 +189,7 @@ export const HomePage: React.FC = () => {
       atsScore: '99/100',
       templateId: 'executive',
       templateName: 'Executive Serif',
+      templateTag: 'Executive',
       pageLength: '3-Page',
       fullName: 'Marcus Vance',
       jobTitle: 'Principal Cloud & DevOps Architect',
@@ -252,6 +255,7 @@ export const HomePage: React.FC = () => {
       atsScore: '97/100',
       templateId: 'slate',
       templateName: 'Professional Slate',
+      templateTag: 'Modern',
       pageLength: '1-Page',
       fullName: 'Elena Rostova',
       jobTitle: 'Staff Technical Product Manager',
@@ -317,6 +321,7 @@ export const HomePage: React.FC = () => {
       atsScore: '95/100',
       templateId: 'compact',
       templateName: 'Compact Sidebar',
+      templateTag: 'Space Saver',
       pageLength: '2-Page',
       fullName: 'David Miller',
       jobTitle: 'Senior Frontend Architect',
@@ -382,6 +387,7 @@ export const HomePage: React.FC = () => {
       atsScore: '98/100',
       templateId: 'modern',
       templateName: 'Modern Clean',
+      templateTag: 'Most Popular',
       pageLength: '3-Page',
       fullName: 'Amara Okafor',
       jobTitle: 'Senior Cybersecurity & IAM Engineer',
@@ -506,6 +512,263 @@ export const HomePage: React.FC = () => {
       answer: 'Yes. All resume data is stored locally in your web browser. We do not sell your personal data or track your resume contents.'
     }
   ];
+
+  const renderHeroTemplateBody = (card: typeof heroResumeCards[0]) => {
+    if (card.templateId === 'tech') {
+      return (
+        <div className="font-mono text-slate-800 space-y-3 text-left">
+          {/* Terminal Header */}
+          <div className="bg-slate-950 text-slate-100 p-3 rounded-lg border border-slate-800 shadow-xs space-y-1">
+            <div className="flex items-center justify-between text-[10px] text-slate-400 border-b border-slate-800 pb-1 font-mono">
+              <span>root@sys:~/{card.fullName.toLowerCase().replace(/\s+/g, '_')}</span>
+              <span className="text-emerald-400 font-bold">● ONLINE</span>
+            </div>
+            <h3 className="text-base font-bold text-emerald-400 font-mono pt-0.5">{card.fullName}</h3>
+            <p className="text-xs font-semibold text-sky-300 font-mono">{card.jobTitle}</p>
+            <p className="text-[10px] text-slate-400 font-mono">{card.contact}</p>
+          </div>
+
+          {/* Summary */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-bold text-slate-800 font-mono border-b border-slate-300 pb-0.5">// PROFESSIONAL_SUMMARY</h4>
+            <p className="text-[11px] text-slate-700 leading-relaxed font-mono">
+              {card.summary}
+            </p>
+          </div>
+
+          {/* Experience */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-bold text-slate-800 font-mono border-b border-slate-300 pb-0.5">// WORK_EXPERIENCE</h4>
+            <div>
+              <div className="flex justify-between items-baseline text-[11px] font-mono font-bold text-slate-900">
+                <span>{card.expTitle}</span>
+                <span className="text-slate-500 text-[10px]">{card.expDates}</span>
+              </div>
+              <ul className="text-[11px] text-slate-700 space-y-0.5 mt-0.5 font-mono list-none">
+                {card.expHighlights.map((hl, hIdx) => (
+                  <li key={hIdx} className="flex items-start gap-1">
+                    <span className="text-sky-600 font-bold shrink-0">&gt;</span>
+                    <span>{hl}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Tech Stack Skills */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-bold text-slate-800 font-mono border-b border-slate-300 pb-0.5">// TECH_STACK_TAGS</h4>
+            <div className="flex flex-wrap gap-1 pt-0.5">
+              {card.skills.map((skill) => (
+                <span key={skill} className="px-2 py-0.5 bg-slate-900 text-emerald-400 border border-slate-800 rounded font-mono text-[10px] font-bold">
+                  [{skill}]
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (card.templateId === 'executive') {
+      return (
+        <div className="font-serif text-slate-900 space-y-3 text-center sm:text-left">
+          {/* Header - Centered Serif */}
+          <div className="border-b-2 border-amber-400/80 pb-2 text-center space-y-0.5">
+            <h3 className="text-xl font-black font-serif text-slate-900 tracking-wide">{card.fullName}</h3>
+            <p className="text-xs font-serif font-bold text-amber-800 uppercase tracking-widest">{card.jobTitle}</p>
+            <p className="text-[11px] font-serif text-slate-600">{card.contact}</p>
+          </div>
+
+          {/* Summary - Italic Serif */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-serif font-extrabold text-amber-950 uppercase tracking-widest text-center border-b border-amber-200 pb-0.5">Executive Summary</h4>
+            <p className="text-[11px] font-serif italic text-slate-700 leading-relaxed text-center">
+              "{card.summary}"
+            </p>
+          </div>
+
+          {/* Experience */}
+          <div className="space-y-1 text-left">
+            <h4 className="text-xs font-serif font-extrabold text-amber-950 uppercase tracking-widest text-center border-b border-amber-200 pb-0.5">Leadership &amp; Experience</h4>
+            <div>
+              <div className="flex justify-between items-baseline text-[11px] font-serif font-bold text-slate-900">
+                <span>{card.expTitle}</span>
+                <span className="text-slate-600 text-[10px] italic">{card.expDates}</span>
+              </div>
+              <ul className="text-[11px] font-serif text-slate-700 list-disc list-inside space-y-0.5 mt-0.5">
+                {card.expHighlights.map((hl, hIdx) => (
+                  <li key={hIdx}>{hl}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Skills */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-serif font-extrabold text-amber-950 uppercase tracking-widest text-center border-b border-amber-200 pb-0.5">Core Competencies</h4>
+            <div className="flex flex-wrap justify-center gap-1 pt-0.5">
+              {card.skills.map((skill) => (
+                <span key={skill} className="px-2.5 py-0.5 bg-amber-50/90 text-amber-950 border border-amber-200/90 rounded-xs font-serif text-[10px] font-bold">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (card.templateId === 'slate') {
+      return (
+        <div className="text-slate-900 space-y-3 text-left">
+          {/* Header - Slate Dark Banner */}
+          <div className="bg-slate-900 text-white rounded-t-xl p-3.5 -mx-6 -mt-6 mb-1 border-b-4 border-emerald-500 shadow-xs space-y-0.5">
+            <h3 className="text-xl font-black text-white tracking-tight">{card.fullName}</h3>
+            <p className="text-xs font-extrabold text-emerald-400 uppercase tracking-wide">{card.jobTitle}</p>
+            <p className="text-[10px] text-slate-300">{card.contact}</p>
+          </div>
+
+          {/* Summary */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-l-4 border-slate-900 pl-2">Professional Summary</h4>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              {card.summary}
+            </p>
+          </div>
+
+          {/* Experience */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-l-4 border-slate-900 pl-2">Work Experience</h4>
+            <div>
+              <div className="flex justify-between items-baseline text-[11px]">
+                <span className="font-bold text-slate-900">{card.expTitle}</span>
+                <span className="text-slate-500 font-medium text-[10px]">{card.expDates}</span>
+              </div>
+              <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
+                {card.expHighlights.map((hl, hIdx) => (
+                  <li key={hIdx}>{hl}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Skills */}
+          <div className="space-y-1">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-l-4 border-slate-900 pl-2">Skills &amp; Expertise</h4>
+            <div className="flex flex-wrap gap-1 pt-0.5">
+              {card.skills.map((skill) => (
+                <span key={skill} className="px-2 py-0.5 bg-slate-800 text-white rounded text-[10px] font-bold">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (card.templateId === 'compact') {
+      return (
+        <div className="text-slate-900 space-y-2 text-left">
+          {/* 2-Column Grid Layout */}
+          <div className="grid grid-cols-12 gap-2.5 bg-slate-50/70 p-2.5 rounded-xl border border-slate-200/80">
+            {/* Left Dedicated Sidebar (4 cols) */}
+            <div className="col-span-4 bg-slate-100/90 p-2 rounded-lg border border-slate-200 space-y-2 shrink-0">
+              <div className="space-y-0.5 border-b border-slate-200 pb-1.5">
+                <span className="text-[9px] font-black text-amber-800 uppercase block tracking-wider">Contact</span>
+                <p className="text-[9px] text-slate-600 leading-tight break-words">{card.contact.replace(/ • /g, '\n')}</p>
+              </div>
+              <div className="space-y-1">
+                <span className="text-[9px] font-black text-amber-800 uppercase block tracking-wider">Core Skills</span>
+                <div className="flex flex-wrap gap-1">
+                  {card.skills.map((skill) => (
+                    <span key={skill} className="w-full text-[9px] font-bold bg-white border border-slate-300 text-slate-800 px-1 py-0.5 rounded text-center truncate shadow-2xs">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Main Column (8 cols) */}
+            <div className="col-span-8 space-y-2 pl-0.5">
+              <div className="border-b border-slate-200 pb-1">
+                <h3 className="text-base font-black text-slate-900 leading-tight">{card.fullName}</h3>
+                <p className="text-[11px] font-bold text-amber-700">{card.jobTitle}</p>
+              </div>
+
+              <div className="space-y-0.5">
+                <h4 className="text-[10px] font-black text-slate-900 uppercase border-b border-slate-200 pb-0.5">Summary</h4>
+                <p className="text-[10px] text-slate-600 leading-tight">{card.summary}</p>
+              </div>
+
+              <div className="space-y-0.5">
+                <h4 className="text-[10px] font-black text-slate-900 uppercase border-b border-slate-200 pb-0.5">Experience</h4>
+                <div>
+                  <p className="text-[10px] font-bold text-slate-800">{card.expTitle}</p>
+                  <p className="text-[9px] text-slate-500 font-medium">{card.expDates}</p>
+                  <ul className="text-[9px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
+                    {card.expHighlights.map((hl, hIdx) => (
+                      <li key={hIdx} className="leading-tight">{hl}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Default: Modern Clean
+    return (
+      <div className="text-slate-900 space-y-3 text-left">
+        {/* Sample Resume Header */}
+        <div className="border-b-2 border-brand-600 pb-2 space-y-0.5">
+          <h3 className="text-xl font-black text-slate-900">{card.fullName}</h3>
+          <p className="text-xs font-bold text-brand-600">{card.jobTitle}</p>
+          <p className="text-[11px] text-slate-500">{card.contact}</p>
+        </div>
+
+        {/* Summary Section */}
+        <div className="space-y-1">
+          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Professional Summary</h4>
+          <p className="text-[11px] text-slate-600 leading-relaxed">
+            {card.summary}
+          </p>
+        </div>
+
+        {/* Experience Section */}
+        <div className="space-y-1">
+          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Work Experience</h4>
+          <div>
+            <div className="flex justify-between items-baseline text-[11px]">
+              <span className="font-bold text-slate-800">{card.expTitle}</span>
+              <span className="text-slate-500 font-medium text-[10px]">{card.expDates}</span>
+            </div>
+            <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
+              {card.expHighlights.map((hl, hIdx) => (
+                <li key={hIdx}>{hl}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Skills Section */}
+        <div className="space-y-1">
+          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Core Skills</h4>
+          <div className="flex flex-wrap gap-1 pt-0.5">
+            {card.skills.map((skill) => (
+              <span key={skill} className="px-2 py-0.5 bg-brand-50 text-brand-700 border border-brand-200 rounded text-[10px] font-bold">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-16 pb-16 bg-slate-50/50">
@@ -660,66 +923,43 @@ export const HomePage: React.FC = () => {
                     >
                       <div
                         onClick={() => navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } })}
-                        className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform cursor-pointer"
+                        className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-3.5 transform hover:scale-[1.01] transition-transform cursor-pointer overflow-hidden min-h-[460px] flex flex-col justify-between"
                         title="Click to view full-page resume preview"
                       >
                         {/* Floating ATS Score Badge */}
-                        <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
+                        <div className="absolute -top-3 -right-3 z-10 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
                           <CheckCircle2 size={15} />
                           <span>(Example result) ATS Score: {card.atsScore}</span>
                         </div>
 
-                        {/* Template & Page Length Badges */}
-                        <div className="flex items-center justify-between gap-1.5 pt-0.5">
-                          <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-md bg-brand-50 text-brand-700 border border-brand-200">
-                            🎨 Template: {card.templateName}
-                          </span>
-                          <span className="text-[10px] font-black px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
+                        {/* Top Metadata Badges Header */}
+                        <div className="flex flex-wrap items-center justify-between gap-1.5 pt-0.5 pb-1 border-b border-slate-100">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-md bg-brand-50 text-brand-700 border border-brand-200">
+                              🎨 Template: {card.templateName}
+                            </span>
+                            <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${
+                              card.templateTag === 'Most Popular' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' :
+                              card.templateTag === 'Tech Favorite' ? 'bg-sky-100 text-sky-800 border-sky-300' :
+                              card.templateTag === 'Executive' ? 'bg-amber-100 text-amber-900 border-amber-300' :
+                              card.templateTag === 'Modern' ? 'bg-indigo-100 text-indigo-900 border-indigo-300' :
+                              'bg-rose-100 text-rose-900 border-rose-300'
+                            }`}>
+                              🏷️ {card.templateTag}
+                            </span>
+                          </div>
+                          <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-md border ${
+                            card.pageLength === '1-Page' ? 'bg-slate-100 text-slate-700 border-slate-300' :
+                            card.pageLength === '2-Page' ? 'bg-blue-50 text-blue-800 border-blue-300' :
+                            'bg-purple-50 text-purple-800 border-purple-300'
+                          }`}>
                             📄 {card.pageLength} Layout
                           </span>
                         </div>
 
-                        {/* Sample Resume Header */}
-                        <div className="border-b border-slate-200 pb-3 space-y-1">
-                          <h3 className="text-xl font-black text-slate-900">{card.fullName}</h3>
-                          <p className="text-xs font-bold text-brand-600">{card.jobTitle}</p>
-                          <p className="text-[11px] text-slate-500">{card.contact}</p>
-                        </div>
-
-                        {/* Summary Section */}
-                        <div className="space-y-1">
-                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Professional Summary</h4>
-                          <p className="text-[11px] text-slate-600 leading-relaxed">
-                            {card.summary}
-                          </p>
-                        </div>
-
-                        {/* Experience Section */}
-                        <div className="space-y-1.5">
-                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Work Experience</h4>
-                          <div>
-                            <div className="flex justify-between items-baseline text-[11px]">
-                              <span className="font-bold text-slate-800">{card.expTitle}</span>
-                              <span className="text-slate-500 font-medium">{card.expDates}</span>
-                            </div>
-                            <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
-                              {card.expHighlights.map((hl, hIdx) => (
-                                <li key={hIdx}>{hl}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-
-                        {/* Skills Section */}
-                        <div className="space-y-1">
-                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Core Skills</h4>
-                          <div className="flex flex-wrap gap-1 pt-0.5">
-                            {card.skills.map((skill) => (
-                              <span key={skill} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-bold">
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
+                        {/* Authentic Template Visual Body */}
+                        <div className="grow flex flex-col justify-center py-1">
+                          {renderHeroTemplateBody(card)}
                         </div>
 
                         {/* Interactive Preview Link Button */}
@@ -736,7 +976,6 @@ export const HomePage: React.FC = () => {
                             <ArrowRight size={14} />
                           </button>
                         </div>
-
                       </div>
                     </div>
                   ))}
