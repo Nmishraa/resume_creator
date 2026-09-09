@@ -4000,7 +4000,8 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
     ? "Explore 5 recruiter-vetted resume samples spanning 1-page, 2-page, and 3-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder."
     : "Explore 20 complete, recruiter-vetted resume samples. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder.");
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalOriginal = sourceExamples.length;
+  const [currentIndex, setCurrentIndex] = useState(totalOriginal);
   const [isPaused, setIsPaused] = useState(false);
   const [visibleCount, setVisibleCount] = useState(4); // 4 desktop, 2 tablet, 1 mobile
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -4011,7 +4012,6 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   const [activeModalExample, setActiveModalExample] = useState<ExampleCardData | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const totalOriginal = sourceExamples.length;
 
   // Quadruple items to ensure smooth infinite looping in both directions
   const carouselItems = [
@@ -4057,14 +4057,17 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
 
   const handlePrev = () => {
     setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev <= 0 ? totalOriginal - 1 : prev - 1));
+    setCurrentIndex((prev) => prev - 1);
   };
 
   // Reset index seamlessly when reaching boundary without visual jump
   const handleTransitionEnd = () => {
     if (currentIndex >= totalOriginal * 2) {
       setIsTransitioning(false);
-      setCurrentIndex(currentIndex % totalOriginal);
+      setCurrentIndex((currentIndex % totalOriginal) + totalOriginal);
+    } else if (currentIndex < totalOriginal) {
+      setIsTransitioning(false);
+      setCurrentIndex(currentIndex + totalOriginal);
     }
   };
 
