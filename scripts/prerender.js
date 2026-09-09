@@ -180,6 +180,14 @@ const PAGES = [
     ogType: 'article'
   },
   {
+    path: '/resume-examples/product-manager',
+    title: 'Product Manager Resume Example & ATS Guide (2026) | Resume Craft',
+    description: 'Complete Product Manager resume example with ATS-friendly bullet points, metrics, product roadmap achievements, and 1-click builder template.',
+    h1: 'Product Manager Resume Example & ATS Optimization Guide',
+    intro: 'A recruiter-vetted Product Manager resume sample highlighting product strategy, cross-functional engineering leadership, user metrics, and sprint execution.',
+    ogType: 'article'
+  },
+  {
     path: '/resume-examples/project-manager',
     title: 'Project Manager Resume Example & PMP Keywords | Resume Craft',
     description: 'ATS-optimized Project Manager resume example with budget management, Agile delivery, risk mitigation, and PMP certification highlights.',

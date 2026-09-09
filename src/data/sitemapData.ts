@@ -183,6 +183,15 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     changefreq: 'weekly'
   },
   {
+    path: '/resume-examples/product-manager',
+    title: 'Product Manager Resume Example & ATS Guide (2026) | Resume Craft',
+    description: 'Complete Product Manager resume example with ATS-friendly bullet points, metrics, product roadmap achievements, and 1-click builder template.',
+    targetKeyword: 'product manager resume example',
+    canonical: `${SITE_URL}/resume-examples/product-manager/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
     path: '/guides',
     title: 'Career & ATS Resume Writing Guides | Resume Craft',
     description: 'Expert guides on beating ATS scanners, mastering the Google X-Y-Z formula, finding high-value keywords, and structuring modern resumes.',
