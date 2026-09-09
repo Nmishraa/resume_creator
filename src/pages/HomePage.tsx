@@ -287,7 +287,16 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. CORE BENEFITS */}
+      {/* 2. RESUME EXAMPLES CAROUSEL */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ResumeExamplesCarousel
+          featuredOnly={true}
+          title="5 Featured ATS Resume Examples"
+          subtitle="Explore 5 recruiter-vetted resume samples spanning 1-page, 2-page, and 3-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit."
+        />
+      </section>
+
+      {/* 3. CORE BENEFITS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
           <span className="text-xs font-extrabold text-brand-600 uppercase tracking-wider bg-brand-50 px-3 py-1 rounded-full border border-brand-100">
@@ -381,7 +390,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. HOW IT WORKS */}
+      {/* HOW IT WORKS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-xs space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -427,7 +436,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. TEMPLATES GALLERY */}
+      {/* TEMPLATES GALLERY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
           <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
@@ -458,15 +467,6 @@ export const HomePage: React.FC = () => {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* 5. RESUME EXAMPLES CAROUSEL */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ResumeExamplesCarousel
-          featuredOnly={true}
-          title="5 Featured ATS Resume Examples"
-          subtitle="Explore 5 recruiter-vetted resume samples spanning 1-page, 2-page, and 3-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit."
-        />
       </section>
 
 

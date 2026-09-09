@@ -60,7 +60,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 group" aria-label="Resume Craft Home">
+          <Link to="/" className="flex items-center gap-3 group shrink-0" aria-label="Resume Craft Home">
             <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-brand-600 via-brand-700 to-slate-900 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 font-black text-base sm:text-lg tracking-wider group-hover:scale-105 transition-all">
               RC
             </div>
@@ -74,8 +74,8 @@ export const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links - Pushed to the far right side */}
-          <nav className="hidden lg:flex items-center gap-2 lg:gap-3.5 xl:gap-5 ml-auto">
+          {/* Desktop Navigation Links - Positioned on the Left side next to logo */}
+          <nav className="hidden lg:flex items-center gap-1.5 lg:gap-2.5 xl:gap-3.5 ml-6 lg:ml-8">
             
             {/* Resume Builder Link */}
             <Link
