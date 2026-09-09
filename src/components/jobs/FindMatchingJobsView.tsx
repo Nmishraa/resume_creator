@@ -16,8 +16,10 @@ import {
   RefreshCw,
   Globe,
   Zap,
-  Target
+  Target,
+  UploadCloud
 } from 'lucide-react';
+import { UploadResumeModal } from '../builder/UploadResumeModal';
 import {
   fetchMatchingJobs,
   MatchingJob,
@@ -53,6 +55,7 @@ export const FindMatchingJobsView: React.FC<Props> = ({
   
   const [savedJobIds, setSavedJobIds] = useState<Record<string, boolean>>({});
   const [saveSuccessMsg, setSaveSuccessMsg] = useState<string | null>(null);
+  const [showUploadModal, setShowUploadModal] = useState(false);
 
   const loadJobs = async (customFilters?: JobSearchFilters) => {
     setLoading(true);
@@ -136,15 +139,26 @@ export const FindMatchingJobsView: React.FC<Props> = ({
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={() => loadJobs()}
-            disabled={loading}
-            className="self-start sm:self-center px-4 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-xl text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-95 disabled:opacity-70 shrink-0"
-          >
-            <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
-            <span>Re-Analyze Jobs</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-center shrink-0">
+            <button
+              type="button"
+              onClick={() => setShowUploadModal(true)}
+              className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-95 border border-emerald-400/30"
+            >
+              <UploadCloud size={16} />
+              <span>Upload Resume (PDF / Word)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => loadJobs()}
+              disabled={loading}
+              className="px-4 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-extrabold rounded-xl text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-95 disabled:opacity-70"
+            >
+              <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+              <span>Re-Analyze Jobs</span>
+            </button>
+          </div>
         </div>
 
         {/* Candidate Resume Pill Insights */}
@@ -601,6 +615,9 @@ export const FindMatchingJobsView: React.FC<Props> = ({
           </div>
         </div>
       )}
+
+      {/* Global Upload Resume Modal */}
+      <UploadResumeModal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} />
     </div>
   );
 };

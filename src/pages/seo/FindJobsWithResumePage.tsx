@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/common/SeoHead';
 import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { FaqAccordion } from '../../components/common/FaqAccordion';
+import { UploadResumeModal } from '../../components/builder/UploadResumeModal';
 import {
   Briefcase,
   Target,
@@ -20,6 +21,7 @@ import {
 } from 'lucide-react';
 
 export const FindJobsWithResumePage: React.FC = () => {
+  const [showUploadModal, setShowUploadModal] = useState(false);
   const faqs = [
     {
       question: 'How does finding jobs with your resume work?',
@@ -68,23 +70,31 @@ export const FindJobsWithResumePage: React.FC = () => {
           Upload your existing resume or build a new ATS-friendly CV to instantly match with relevant job openings based on your target role, technical skills, experience level, and preferred location.
         </p>
 
-        {/* Primary CTA */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Primary Action Buttons */}
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+          <button
+            onClick={() => setShowUploadModal(true)}
+            className="w-full sm:w-auto px-7 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-2xl text-base sm:text-lg shadow-xl shadow-emerald-600/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[50px] border border-emerald-400/30"
+          >
+            <UploadCloud size={22} className="animate-bounce" />
+            <span>Upload Resume From Computer (PDF / Word)</span>
+          </button>
+
           <Link
             to="/job-description-resume-matcher"
-            className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-2xl text-base sm:text-lg shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-3 active:scale-95 cursor-pointer min-h-[48px]"
+            className="w-full sm:w-auto px-6 py-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-2xl text-base sm:text-lg shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[50px]"
           >
-            <Briefcase size={22} />
-            <span>Find Jobs From My Resume</span>
-            <ArrowRight size={20} />
+            <Briefcase size={20} />
+            <span>Find Jobs From Built Resume</span>
+            <ArrowRight size={18} />
           </Link>
 
           <Link
             to="/builder"
-            className="w-full sm:w-auto px-6 py-4 bg-white hover:bg-slate-50 text-slate-800 font-extrabold rounded-2xl text-sm sm:text-base border border-slate-300 shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer min-h-[48px]"
+            className="w-full sm:w-auto px-5 py-4 bg-white hover:bg-slate-50 text-slate-800 font-extrabold rounded-2xl text-sm sm:text-base border border-slate-300 shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer min-h-[50px]"
           >
             <FileText size={18} className="text-brand-600" />
-            <span>Build Resume First</span>
+            <span>Build From Scratch</span>
           </Link>
         </div>
 
@@ -233,6 +243,9 @@ export const FindJobsWithResumePage: React.FC = () => {
           </Link>
         </div>
       </section>
+
+      {/* Upload Modal */}
+      <UploadResumeModal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} />
     </div>
   );
 };
