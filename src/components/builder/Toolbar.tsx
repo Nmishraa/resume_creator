@@ -18,7 +18,8 @@ import {
   MoreVertical,
   Check,
   FilePlus,
-  RotateCcw
+  RotateCcw,
+  Globe
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -28,6 +29,7 @@ interface ToolbarProps {
   onOpenUploadModal: () => void;
   onOpenAtsDrawer: () => void;
   onOpenJobTailorModal?: () => void;
+  onOpenShareModal?: () => void;
   onOpenMobilePreview?: () => void;
 }
 
@@ -37,6 +39,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onOpenUploadModal,
   onOpenAtsDrawer,
   onOpenJobTailorModal,
+  onOpenShareModal,
   onOpenMobilePreview
 }) => {
   const {
@@ -212,6 +215,18 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             >
               <Sparkles size={14} className="text-amber-600 fill-amber-400" />
               <span>Job Matcher</span>
+            </button>
+          )}
+
+          {/* 🌐 Free Public Web Portfolio Link */}
+          {onOpenShareModal && (
+            <button
+              onClick={onOpenShareModal}
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-extrabold text-brand-900 bg-brand-50 hover:bg-brand-100 border border-brand-300 transition-colors cursor-pointer shadow-2xs"
+              title="Share Public Web Portfolio Link"
+            >
+              <Globe size={14} className="text-brand-600" />
+              <span>Share Link</span>
             </button>
           )}
         </div>

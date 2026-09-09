@@ -54,6 +54,7 @@ const AtsResumeBuilderPage = lazyWithRetry(() => import('./pages/seo/AtsResumeBu
 const SoftwareEngineerBuilderPage = lazyWithRetry(() => import('./pages/seo/SoftwareEngineerBuilderPage').then(m => ({ default: m.SoftwareEngineerBuilderPage })));
 const KeywordMatcherPage = lazyWithRetry(() => import('./pages/seo/KeywordMatcherPage').then(m => ({ default: m.KeywordMatcherPage })));
 const FullPagePreviewPage = lazyWithRetry(() => import('./pages/FullPagePreviewPage').then(m => ({ default: m.FullPagePreviewPage })));
+const PublicPortfolioPage = lazyWithRetry(() => import('./pages/PublicPortfolioPage').then(m => ({ default: m.PublicPortfolioPage })));
 
 const RouteLoadingFallback = () => (
   <div className="min-h-[60vh] flex items-center justify-center p-8">
@@ -102,6 +103,11 @@ export function App() {
             <Route path="resume-templates" element={<TemplatesGalleryPage />} />
             <Route path="resume-templates/:role" element={<ResumeExampleDetailPage />} />
             <Route path="resume-skills/:role" element={<ResumeExampleDetailPage />} />
+
+            {/* Dynamic Public Web Portfolio */}
+            <Route path="p/:slug" element={<PublicPortfolioPage />} />
+            <Route path="p" element={<PublicPortfolioPage />} />
+            <Route path="portfolio" element={<PublicPortfolioPage />} />
 
             {/* Resume Examples Hub & Dynamic Detail */}
             <Route path="resume-examples" element={<ResumeExamplesHubPage />} />

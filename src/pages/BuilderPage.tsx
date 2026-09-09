@@ -7,6 +7,7 @@ import { ImportModal } from '../components/builder/ImportModal';
 import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { AtsScoreDrawer } from '../components/ats/AtsScoreDrawer';
 import { JobTailorModal } from '../components/builder/JobTailorModal';
+import { SharePortfolioModal } from '../components/common/SharePortfolioModal';
 import { SeoHead } from '../components/common/SeoHead';
 import { Edit3, Eye, X } from 'lucide-react';
 
@@ -16,6 +17,7 @@ export const BuilderPage: React.FC = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showAtsDrawer, setShowAtsDrawer] = useState(false);
   const [showJobTailorModal, setShowJobTailorModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const [showMobilePreviewModal, setShowMobilePreviewModal] = useState(false);
   const [mobileTab, setMobileTab] = useState<'edit' | 'preview'>('edit');
 
@@ -37,6 +39,7 @@ export const BuilderPage: React.FC = () => {
         onOpenUploadModal={() => setShowUploadModal(true)}
         onOpenAtsDrawer={() => setShowAtsDrawer(true)}
         onOpenJobTailorModal={() => setShowJobTailorModal(true)}
+        onOpenShareModal={() => setShowShareModal(true)}
         onOpenMobilePreview={() => setShowMobilePreviewModal(true)}
       />
 
@@ -135,6 +138,7 @@ export const BuilderPage: React.FC = () => {
       <UploadResumeModal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} />
       <AtsScoreDrawer isOpen={showAtsDrawer} onClose={() => setShowAtsDrawer(false)} />
       <JobTailorModal isOpen={showJobTailorModal} onClose={() => setShowJobTailorModal(false)} />
+      <SharePortfolioModal isOpen={showShareModal} onClose={() => setShowShareModal(false)} />
     </div>
   );
 };

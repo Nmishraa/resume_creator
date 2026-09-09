@@ -144,31 +144,59 @@ export const HomePage: React.FC = () => {
                 Create a professional, interview-ready resume in minutes with our guided builder, AI bullet enhancers, and direct vector PDF export.
               </p>
 
-              {/* Single Primary Action Button + Secondary Options */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                <Link
-                  to="/builder"
-                  className="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-2xl text-base shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[44px]"
-                >
-                  <FileText size={20} />
-                  <span>Build My Resume Free</span>
-                  <ArrowRight size={18} />
-                </Link>
-
+              {/* Prominent Action Buttons with Front-and-Center PDF Importer */}
+              <div className="flex flex-col sm:flex-row items-stretch justify-center lg:justify-start gap-3.5 pt-2">
                 <button
                   onClick={() => {
                     setUploadInitialStep('upload');
                     setShowUploadModal(true);
                   }}
-                  className="w-full sm:w-auto px-6 py-4 bg-white hover:bg-slate-50 text-slate-800 font-extrabold rounded-2xl text-sm sm:text-base border border-slate-300 shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                  className="px-7 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-2xl text-base shadow-xl shadow-emerald-600/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[50px] border border-emerald-400/30"
                 >
-                  <UploadCloud size={18} className="text-brand-600" />
-                  <span>Upload Existing Resume</span>
+                  <UploadCloud size={22} className="animate-bounce" />
+                  <div className="text-left leading-tight">
+                    <span className="block font-black text-base">Upload &amp; Parse Existing Resume</span>
+                    <span className="block text-[11px] font-semibold text-emerald-100 opacity-90">Auto-fill builder in 3 seconds (PDF / Word)</span>
+                  </div>
                 </button>
+
+                <Link
+                  to="/builder"
+                  className="px-7 py-4 bg-slate-900 hover:bg-slate-800 text-white font-extrabold rounded-2xl text-base shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer min-h-[50px]"
+                >
+                  <FileText size={20} className="text-brand-400" />
+                  <span>Build From Scratch</span>
+                  <ArrowRight size={18} />
+                </Link>
+              </div>
+
+              {/* Instant Dropzone Quick-Import Highlight Banner */}
+              <div
+                onClick={() => {
+                  setUploadInitialStep('upload');
+                  setShowUploadModal(true);
+                }}
+                className="bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200/90 rounded-2xl p-3.5 text-center lg:text-left flex items-center justify-between gap-3 cursor-pointer transition-all shadow-xs group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                    <UploadCloud size={20} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+                      <span>🚀 PDF &amp; Word Resume Importer</span>
+                      <span className="text-[10px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-extrabold">Instant Parse</span>
+                    </div>
+                    <p className="text-[11px] text-emerald-800 font-medium">Already have a resume? Upload your PDF or Word document to pre-fill all sections automatically.</p>
+                  </div>
+                </div>
+                <span className="hidden sm:inline-block text-xs font-bold text-emerald-700 group-hover:translate-x-0.5 transition-transform shrink-0">
+                  Upload PDF &rarr;
+                </span>
               </div>
 
               {/* Trust Badges */}
-              <div className="pt-4 border-t border-slate-200/90 flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-6 text-sm text-slate-700 font-semibold">
+              <div className="pt-3 border-t border-slate-200/90 flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-6 text-sm text-slate-700 font-semibold">
                 <span className="flex items-center gap-1.5">
                   <Check size={16} className="text-emerald-600 stroke-[3]" /> 100% Free Forever
                 </span>
