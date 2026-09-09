@@ -97,25 +97,41 @@ export const FullPageResumePreview: React.FC<FullPageResumePreviewProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Measure content height and calculate page breaks
+  // Measure content height and calculate page breaks cleanly
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (sheetRef.current) {
-        const innerContainer =
-          (sheetRef.current.querySelector('.page-break-container') as HTMLElement) ||
-          (sheetRef.current.firstElementChild as HTMLElement) ||
-          sheetRef.current;
+    let isMounted = true;
 
-        const computedPageCount = applyBlockAwarePagination(innerContainer);
-        const contentHeight = innerContainer.scrollHeight || innerContainer.offsetHeight;
-        const result = calculateDensityModeFromHeight(contentHeight, 1010);
-        
-        setPageCount(Math.max(result.pageCount, computedPageCount, 1));
-        setPaginatedHtml(sheetRef.current.innerHTML);
-      }
-    }, 150);
+    const runPagination = () => {
+      if (!isMounted || !sheetRef.current) return;
+      const innerContainer =
+        (sheetRef.current.querySelector('.page-break-container') as HTMLElement) ||
+        (sheetRef.current.firstElementChild as HTMLElement) ||
+        sheetRef.current;
 
-    return () => clearTimeout(timer);
+      const computedPageCount = applyBlockAwarePagination(innerContainer);
+      const contentHeight = innerContainer.scrollHeight || innerContainer.offsetHeight;
+      const result = calculateDensityModeFromHeight(contentHeight, 1010);
+      
+      setPageCount(Math.max(result.pageCount, computedPageCount, 1));
+      setPaginatedHtml(sheetRef.current.innerHTML);
+    };
+
+    // Run initial pagination immediately
+    runPagination();
+
+    // Run again after short layout & web font settle delay
+    const timer = setTimeout(runPagination, 120);
+
+    if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        if (isMounted) runPagination();
+      }).catch(() => {});
+    }
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, [resumeData]);
 
   return (
@@ -144,9 +160,20 @@ export const FullPageResumePreview: React.FC<FullPageResumePreviewProps> = ({
 
       {/* Main Full-Page Document Viewing Canvas — Displaying All Pages Clearly */}
       <main ref={containerRef} className="flex-1 overflow-y-auto bg-slate-950/90 py-8 px-4 flex flex-col items-center space-y-8">
-        {/* Hidden measurement container to run block-aware pagination */}
-        <div className="sr-only fixed pointer-events-none -left-[9999px] opacity-0" aria-hidden="true">
-          <div ref={sheetRef} className="w-[794px]">
+        {/* Hidden measurement container rendered with absolute visibility for 100% accurate layout metrics */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '794px',
+            visibility: 'hidden',
+            pointerEvents: 'none',
+            zIndex: -9999
+          }}
+          aria-hidden="true"
+        >
+          <div ref={sheetRef} className="w-[794px] bg-white text-black box-border">
             <ResumeRenderer resume={fullResumeData} />
           </div>
         </div>

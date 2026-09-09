@@ -47,8 +47,9 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
   const containerPaddingTop = parseFloat(computedStyle.paddingTop) || 56;
   const containerPaddingBottom = parseFloat(computedStyle.paddingBottom) || 60;
 
-  const TOP_MARGIN_PADDING_PX = Math.max(containerPaddingTop, 48);
-  const BOTTOM_MARGIN_LIMIT_PX = Math.max(containerPaddingBottom, 48);
+  const TOP_MARGIN_PADDING_PX = Math.max(containerPaddingTop, 52);
+  // Add a 24px safety buffer to ensure content never touches or clips at the 1123px A4 page bottom limit
+  const BOTTOM_MARGIN_LIMIT_PX = Math.max(containerPaddingBottom + 24, 72);
 
   // 1. Reset any previously applied pagination margins/spacers
   const allManagedElements = Array.from(
