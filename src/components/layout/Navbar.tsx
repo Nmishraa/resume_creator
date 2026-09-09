@@ -192,17 +192,7 @@ export const Navbar: React.FC = () => {
 
           </nav>
 
-          {/* Right Actions */}
-          <div className="hidden sm:flex items-center gap-3">
-            {/* High-Converting Primary CTA */}
-            <Link
-              to="/builder"
-              className="px-5 py-2.5 text-sm font-extrabold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
-            >
-              <span>Build My Resume Free</span>
-              <ArrowRight size={15} />
-            </Link>
-          </div>
+
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
