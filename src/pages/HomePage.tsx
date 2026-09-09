@@ -40,6 +40,15 @@ export const HomePage: React.FC = () => {
 
   const alexMorganData = {
     title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
+    formatting: {
+      template: 'modern' as const,
+      fontFamily: 'inter' as const,
+      fontSize: 'base' as const,
+      spacing: 'normal' as const,
+      accentColor: '#2563eb',
+      showIcons: true,
+      sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+    },
     personalInfo: {
       fullName: 'Alex Morgan',
       jobTitle: 'Senior Full-Stack Engineer',
@@ -92,6 +101,9 @@ export const HomePage: React.FC = () => {
     {
       id: 'alex-morgan',
       atsScore: '98/100',
+      templateId: 'modern',
+      templateName: 'Modern Clean',
+      pageLength: '1-Page',
       fullName: 'Alex Morgan',
       jobTitle: 'Senior Full-Stack Engineer',
       contact: 'alex.morgan@dev.io • (555) 234-5678 • San Francisco, CA',
@@ -108,6 +120,9 @@ export const HomePage: React.FC = () => {
     {
       id: 'sophia-chen',
       atsScore: '96/100',
+      templateId: 'tech',
+      templateName: 'Tech Minimal',
+      pageLength: '2-Page',
       fullName: 'Sophia Chen',
       jobTitle: 'Lead Data Scientist & AI Specialist',
       contact: 'sophia.chen@ai-nexus.io • (555) 345-6789 • Seattle, WA',
@@ -121,6 +136,15 @@ export const HomePage: React.FC = () => {
       skills: ['Python', 'PyTorch', 'LangChain', 'Pinecone', 'AWS', 'Docker'],
       presetData: {
         title: 'Sophia Chen - Lead Data Scientist Resume',
+        formatting: {
+          template: 'tech' as const,
+          fontFamily: 'mono' as const,
+          fontSize: 'base' as const,
+          spacing: 'normal' as const,
+          accentColor: '#0284c7',
+          showIcons: true,
+          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+        },
         personalInfo: {
           fullName: 'Sophia Chen',
           jobTitle: 'Lead Data Scientist & AI Specialist',
@@ -161,6 +185,9 @@ export const HomePage: React.FC = () => {
     {
       id: 'marcus-vance',
       atsScore: '99/100',
+      templateId: 'executive',
+      templateName: 'Executive Serif',
+      pageLength: '3-Page',
       fullName: 'Marcus Vance',
       jobTitle: 'Principal Cloud & DevOps Architect',
       contact: 'marcus.vance@cloudstrata.io • (555) 456-7890 • Austin, TX',
@@ -174,6 +201,15 @@ export const HomePage: React.FC = () => {
       skills: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Go', 'Docker'],
       presetData: {
         title: 'Marcus Vance - Principal Cloud Architect Resume',
+        formatting: {
+          template: 'executive' as const,
+          fontFamily: 'serif' as const,
+          fontSize: 'base' as const,
+          spacing: 'normal' as const,
+          accentColor: '#059669',
+          showIcons: true,
+          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+        },
         personalInfo: {
           fullName: 'Marcus Vance',
           jobTitle: 'Principal Cloud & DevOps Architect',
@@ -214,6 +250,9 @@ export const HomePage: React.FC = () => {
     {
       id: 'elena-rostova',
       atsScore: '97/100',
+      templateId: 'slate',
+      templateName: 'Professional Slate',
+      pageLength: '1-Page',
       fullName: 'Elena Rostova',
       jobTitle: 'Staff Technical Product Manager',
       contact: 'elena.rostova@horizon.io • (555) 567-8901 • New York, NY',
@@ -227,6 +266,15 @@ export const HomePage: React.FC = () => {
       skills: ['Product Strategy', 'A/B Testing', 'SQL', 'Mixpanel', 'Jira', 'OpenAPI'],
       presetData: {
         title: 'Elena Rostova - Staff Technical Product Manager Resume',
+        formatting: {
+          template: 'slate' as const,
+          fontFamily: 'inter' as const,
+          fontSize: 'base' as const,
+          spacing: 'normal' as const,
+          accentColor: '#4f46e5',
+          showIcons: true,
+          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+        },
         personalInfo: {
           fullName: 'Elena Rostova',
           jobTitle: 'Staff Technical Product Manager',
@@ -267,6 +315,9 @@ export const HomePage: React.FC = () => {
     {
       id: 'david-miller',
       atsScore: '95/100',
+      templateId: 'compact',
+      templateName: 'Compact Sidebar',
+      pageLength: '2-Page',
       fullName: 'David Miller',
       jobTitle: 'Senior Frontend Architect',
       contact: 'david.miller@pixelcraft.dev • (555) 678-9012 • Chicago, IL',
@@ -280,6 +331,15 @@ export const HomePage: React.FC = () => {
       skills: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Web Vitals', 'GraphQL'],
       presetData: {
         title: 'David Miller - Senior Frontend Architect Resume',
+        formatting: {
+          template: 'compact' as const,
+          fontFamily: 'inter' as const,
+          fontSize: 'base' as const,
+          spacing: 'compact' as const,
+          accentColor: '#d97706',
+          showIcons: true,
+          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+        },
         personalInfo: {
           fullName: 'David Miller',
           jobTitle: 'Senior Frontend Architect',
@@ -320,6 +380,9 @@ export const HomePage: React.FC = () => {
     {
       id: 'amara-okafor',
       atsScore: '98/100',
+      templateId: 'modern',
+      templateName: 'Modern Clean',
+      pageLength: '3-Page',
       fullName: 'Amara Okafor',
       jobTitle: 'Senior Cybersecurity & IAM Engineer',
       contact: 'amara.okafor@cipherguard.sec • (555) 789-0123 • Boston, MA',
@@ -333,6 +396,15 @@ export const HomePage: React.FC = () => {
       skills: ['Cyber Security', 'Zero Trust', 'Okta', 'Python', 'AWS Security', 'CISSP'],
       presetData: {
         title: 'Amara Okafor - Senior Cybersecurity Engineer Resume',
+        formatting: {
+          template: 'modern' as const,
+          fontFamily: 'outfit' as const,
+          fontSize: 'base' as const,
+          spacing: 'normal' as const,
+          accentColor: '#10b981',
+          showIcons: true,
+          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+        },
         personalInfo: {
           fullName: 'Amara Okafor',
           jobTitle: 'Senior Cybersecurity & IAM Engineer',
@@ -550,7 +622,7 @@ export const HomePage: React.FC = () => {
                           : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
                       }`}
                     >
-                      {card.fullName.split(' ')[0]} ({card.atsScore.split('/')[0]})
+                      {card.fullName.split(' ')[0]} ({card.pageLength})
                     </button>
                   ))}
                 </div>
@@ -595,6 +667,16 @@ export const HomePage: React.FC = () => {
                         <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
                           <CheckCircle2 size={15} />
                           <span>(Example result) ATS Score: {card.atsScore}</span>
+                        </div>
+
+                        {/* Template & Page Length Badges */}
+                        <div className="flex items-center justify-between gap-1.5 pt-0.5">
+                          <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-md bg-brand-50 text-brand-700 border border-brand-200">
+                            🎨 Template: {card.templateName}
+                          </span>
+                          <span className="text-[10px] font-black px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            📄 {card.pageLength} Layout
+                          </span>
                         </div>
 
                         {/* Sample Resume Header */}
