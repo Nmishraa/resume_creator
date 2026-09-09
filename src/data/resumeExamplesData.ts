@@ -1409,6 +1409,49 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
     presetData: marcusVanceData
   },
   {
+    slug: 'product-manager',
+    roleTitle: 'Product Manager',
+    category: 'Product & Tech',
+    experienceLevel: 'Senior (5-8+ Years)',
+    metaTitle: 'Product Manager Resume Example & ATS Guide (2026) | Resume Craft',
+    metaDescription: 'Complete Product Manager resume example with ATS-friendly bullet points, metrics, product roadmap achievements, and 1-click builder template.',
+    targetKeyword: 'product manager resume',
+    h1: 'Product Manager Resume Example & ATS Guide',
+    shortIntro: 'Highlight your product roadmap strategy, user metrics, Agile leadership, and business impact with this recruiter-vetted ATS resume template.',
+    summaryExample: 'Data-driven Senior Product Manager with 7+ years of experience leading cross-functional engineering, design, and growth teams to build scalable B2B & consumer SaaS products. Spearheaded product discovery, roadmap strategy, and AI feature launches that generated $14M ARR and increased DAU retention by 38%.',
+    skills: [
+      { category: 'Product Strategy & Analytics', items: ['Product Roadmapping', 'User Research & Personas', 'A/B Testing & Experimentation', 'Amplitude / Mixpanel', 'SQL Data Analysis'] },
+      { category: 'Agile & Execution', items: ['Scrum & Kanban', 'Jira / Confluence / Figma', 'Feature Prioritization (RICE/Kano)', 'Go-To-Market Strategy'] }
+    ],
+    experienceBullets: [
+      'Led end-to-end product roadmap and execution for AI-assisted workflow engine, driving $8.5M in new ARR within 12 months of launch.',
+      'Spearheaded cross-functional team of 18 software engineers, UX designers, and data scientists across 3 Agile squads.',
+      'Ran 40+ growth experiments and A/B tests, optimizing onboarding funnel conversion rates by 32%.',
+      'Managed core subscription & checkout workflows, increasing customer LTV by 24% and reducing churn by 18%.'
+    ],
+    keyAchievements: [
+      'Generated $14M ARR through AI feature launches and subscription funnel optimizations.',
+      'Increased DAU retention by 38% via user research insights and onboarding redesign.'
+    ],
+    atsKeywords: ['Product Management', 'Product Strategy', 'Roadmapping', 'Agile', 'Scrum', 'User Research', 'A/B Testing', 'Product Analytics', 'SQL', 'Jira', 'Go-To-Market'],
+    commonMistakes: [
+      'Listing feature task lists without measuring revenue or DAU retention impact.',
+      'Omitting team size or scale of products managed.'
+    ],
+    formattingTips: [
+      'Include metrics like ARR growth, conversion rates, and retention percentages in every bullet.',
+      'Highlight cross-functional collaboration with engineering, design, and marketing teams.'
+    ],
+    pageLength: '2 Pages',
+    faqs: [
+      {
+        question: 'What metrics should I include on a Product Manager resume?',
+        answer: 'Focus on metrics like ARR/MRR growth, DAU/MAU retention rates, funnel conversion lifts, customer acquisition cost (CAC) reductions, and feature adoption percentages.'
+      }
+    ],
+    presetData: marcusVanceData
+  },
+  {
     slug: 'project-manager',
     roleTitle: 'Project Manager',
     category: 'Management & Operations',
