@@ -692,19 +692,13 @@ export const HomePage: React.FC = () => {
                         className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 transform hover:scale-[1.01] transition-transform cursor-pointer overflow-hidden h-[540px] flex flex-col justify-between"
                         title="Click to view full-page resume preview"
                       >
-                        {/* Floating ATS Score Badge */}
-                        <div className="absolute -top-3 -right-3 z-10 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
-                          <CheckCircle2 size={15} />
-                          <span>(Example result) ATS Score: {card.atsScore}</span>
-                        </div>
-
-                        {/* Top Metadata Badges Header */}
+                        {/* Top Metadata Badges & ATS Score Header */}
                         <div className="flex flex-wrap items-center justify-between gap-1.5 pt-0.5 pb-2 border-b border-slate-100 shrink-0">
                           <div className="flex items-center gap-1.5 flex-wrap">
-                            <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-md bg-brand-50 text-brand-700 border border-brand-200">
+                            <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-md bg-brand-50 text-brand-700 border border-brand-200">
                               🎨 Template: {card.templateName}
                             </span>
-                            <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${
+                            <span className={`text-[11px] font-extrabold px-2 py-0.5 rounded-md border ${
                               card.templateTag === 'Most Popular' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' :
                               card.templateTag === 'Tech Favorite' ? 'bg-sky-100 text-sky-800 border-sky-300' :
                               card.templateTag === 'Executive' ? 'bg-amber-100 text-amber-900 border-amber-300' :
@@ -713,14 +707,20 @@ export const HomePage: React.FC = () => {
                             }`}>
                               🏷️ {card.templateTag}
                             </span>
+                            <span className={`text-[11px] font-black px-2 py-0.5 rounded-md border ${
+                              card.pageLength === '1-Page' ? 'bg-slate-100 text-slate-700 border-slate-300' :
+                              card.pageLength === '2-Page' ? 'bg-blue-50 text-blue-800 border-blue-300' :
+                              'bg-purple-50 text-purple-800 border-purple-300'
+                            }`}>
+                              📄 {card.pageLength}
+                            </span>
                           </div>
-                          <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-md border ${
-                            card.pageLength === '1-Page' ? 'bg-slate-100 text-slate-700 border-slate-300' :
-                            card.pageLength === '2-Page' ? 'bg-blue-50 text-blue-800 border-blue-300' :
-                            'bg-purple-50 text-purple-800 border-purple-300'
-                          }`}>
-                            📄 {card.pageLength} Layout
-                          </span>
+
+                          {/* Prominent ATS Score Badge - Positioned safely inside card header */}
+                          <div className="bg-emerald-600 text-white px-2.5 py-1 rounded-full font-black text-[12px] shadow-xs flex items-center gap-1 shrink-0">
+                            <CheckCircle2 size={13} />
+                            <span>ATS Score: {card.atsScore}</span>
+                          </div>
                         </div>
 
                         {/* Consistent Fixed-Height Preview Container */}
