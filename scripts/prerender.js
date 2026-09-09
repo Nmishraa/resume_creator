@@ -180,6 +180,22 @@ const PAGES = [
     ogType: 'article'
   },
   {
+    path: '/resume-examples/enterprise-architect',
+    title: 'Enterprise Architect Resume Example & TOGAF Keywords (2026) | Resume Craft',
+    description: 'Complete Enterprise Architect resume example with TOGAF framework, cloud migration metrics, system governance, and 1-click builder template.',
+    h1: 'Enterprise Architect Resume Example & ATS Guide',
+    intro: 'A recruiter-vetted Enterprise Architect resume sample highlighting IT governance, TOGAF 10, cloud strategy, and multimillion-dollar system modernizations.',
+    ogType: 'article'
+  },
+  {
+    path: '/resume-examples/cloud-architect',
+    title: 'Cloud Architect Resume Example & AWS/GCP Keywords | Resume Craft',
+    description: 'ATS-optimized Cloud Architect resume example featuring Kubernetes, Terraform IaC, multi-cloud strategy, cost optimization, and free vector PDF export.',
+    h1: 'Cloud Architect Resume Example & ATS Guide',
+    intro: 'A high-impact Cloud Architect resume sample demonstrating AWS/GCP infrastructure, Kubernetes orchestration, Terraform, and FinOps cost savings.',
+    ogType: 'article'
+  },
+  {
     path: '/resume-examples/product-manager',
     title: 'Product Manager Resume Example & ATS Guide (2026) | Resume Craft',
     description: 'Complete Product Manager resume example with ATS-friendly bullet points, metrics, product roadmap achievements, and 1-click builder template.',

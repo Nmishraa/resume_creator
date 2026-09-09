@@ -1409,6 +1409,91 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
     presetData: marcusVanceData
   },
   {
+    slug: 'enterprise-architect',
+    roleTitle: 'Enterprise Architect',
+    category: 'Architecture & Leadership',
+    experienceLevel: 'Executive / Principal (10+ Years)',
+    metaTitle: 'Enterprise Architect Resume Example & TOGAF Keywords (2026) | Resume Craft',
+    metaDescription: 'Complete Enterprise Architect resume example with TOGAF framework, cloud migration metrics, system governance, and 1-click builder template.',
+    targetKeyword: 'enterprise architect resume',
+    h1: 'Enterprise Architect Resume Example & ATS Guide',
+    shortIntro: 'Highlight your IT governance, TOGAF framework, cloud migration strategy, and multimillion-dollar cost reductions with this recruiter-vetted ATS resume template.',
+    summaryExample: 'TOGAF-certified Principal Enterprise Architect with 12+ years of experience leading global IT transformations, multi-cloud architectures (AWS/Azure), and enterprise governance frameworks. Spearheaded legacy monolith modernizations for Fortune 500 enterprises, cutting operational cost by $14M and reducing technical debt across 120+ applications.',
+    skills: [
+      { category: 'Architecture & Governance', items: ['TOGAF 10 & Zachman', 'Enterprise Strategy', 'Technology Roadmapping', 'Governance Boards (EARB)', 'Vendor Governance'] },
+      { category: 'Cloud & Infrastructure', items: ['AWS & Azure Multi-Cloud', 'Microservices & Event-Driven Architecture', 'Zero-Trust Security (SAML/OAuth2)', 'Data Warehouse (Snowflake)'] }
+    ],
+    experienceBullets: [
+      'Designed target-state enterprise architecture roadmap for 120+ cloud microservices, cutting annual infrastructure spend by $4.8M.',
+      'Established Enterprise Architecture Review Board (EARB) and TOGAF 10 governance standards across 250+ software developers.',
+      'Orchestrated multi-region active-active disaster recovery architecture with 99.999% uptime and zero-RPO data replication.',
+      'Migrated 45 legacy SAP and Oracle databases to containerized AWS EKS and Snowflake data warehouses with zero customer downtime.'
+    ],
+    keyAchievements: [
+      'Reduced enterprise technical debt across 120+ applications and cut annual operating expenses by $14M.',
+      'TOGAF 10 & AWS Certified Solutions Architect Professional.'
+    ],
+    atsKeywords: ['Enterprise Architecture', 'TOGAF', 'Cloud Migration', 'AWS', 'Azure', 'Governance', 'Microservices', 'SOA', 'System Architecture', 'Roadmapping'],
+    commonMistakes: [
+      'Focusing only on tactical coding rather than enterprise strategy, governance, and business alignment.',
+      'Omitting financial cost savings and portfolio application numbers.'
+    ],
+    formattingTips: [
+      'Prominently display TOGAF, AWS, or Azure certifications in your resume header.',
+      'Quantify the number of systems, applications, and budget scale managed.'
+    ],
+    pageLength: '3 Pages',
+    faqs: [
+      {
+        question: 'Should an Enterprise Architect resume include coding languages?',
+        answer: 'Yes, but emphasize architectural governance, system integration blueprints, and framework design over day-to-day syntax.'
+      }
+    ],
+    presetData: marcusVanceData
+  },
+  {
+    slug: 'cloud-architect',
+    roleTitle: 'Cloud Architect',
+    category: 'Architecture & Leadership',
+    experienceLevel: 'Senior (7-10+ Years)',
+    metaTitle: 'Cloud Architect Resume Example & AWS/GCP Keywords | Resume Craft',
+    metaDescription: 'ATS-optimized Cloud Architect resume example featuring Kubernetes, Terraform IaC, multi-cloud strategy, cost optimization, and free vector PDF export.',
+    targetKeyword: 'cloud architect resume',
+    h1: 'Cloud Architect Resume Example & ATS Guide',
+    shortIntro: 'Highlight your cloud infrastructure design, Kubernetes orchestration, Terraform automation, and FinOps savings with this ATS-friendly resume.',
+    summaryExample: 'AWS Certified Solutions Architect Professional with 9+ years of experience engineering cloud-native infrastructure, Kubernetes clusters, and automated Terraform CI/CD pipelines. Spearheaded high-availability cloud migration for 80+ microservices handling 20M daily requests with sub-30ms latency.',
+    skills: [
+      { category: 'Cloud Platforms', items: ['AWS (EKS, Lambda, S3, RDS)', 'Google Cloud Platform (GCP)', 'Microsoft Azure'] },
+      { category: 'IaC & Containerization', items: ['Terraform & CloudFormation', 'Docker & Kubernetes (Helm)', 'CI/CD Pipelines (GitHub Actions)', 'FinOps & Cost Optimization'] }
+    ],
+    experienceBullets: [
+      'Designed multi-region AWS EKS & Terraform infrastructure supporting 20M daily active users with 99.99% service availability.',
+      'Reduced cloud hosting overhead by 34% ($1.2M annually) via spot instance orchestration, FinOps policies, and auto-scaling.',
+      'Implemented Zero-Trust security architecture with HashiCorp Vault, AWS IAM Identity Center, and automated SOC2 compliance scanning.'
+    ],
+    keyAchievements: [
+      'Cut annual cloud infrastructure bill by $1.2M via FinOps auto-scaling and spot instances.',
+      'AWS Certified Solutions Architect Professional & CKA (Certified Kubernetes Administrator).'
+    ],
+    atsKeywords: ['Cloud Architecture', 'AWS', 'Kubernetes', 'Docker', 'Terraform', 'Infrastructure as Code', 'GCP', 'DevOps', 'FinOps', 'Zero Trust'],
+    commonMistakes: [
+      'Omitting security protocols or compliance frameworks (SOC2, HIPAA, ISO27001).',
+      'Failing to specify cloud vendor specifics (AWS EKS vs GCP GKE).'
+    ],
+    formattingTips: [
+      'List Cloud certifications (AWS Professional, CKA, Azure Solutions Architect) near your contact information.',
+      'Highlight uptime metrics (99.99%) and latency figures.'
+    ],
+    pageLength: '2 Pages',
+    faqs: [
+      {
+        question: 'How do I format cloud certifications on an ATS resume?',
+        answer: 'Place full certification names (e.g. AWS Certified Solutions Architect - Professional) in a dedicated Certifications section and in your summary.'
+      }
+    ],
+    presetData: alexMorganData
+  },
+  {
     slug: 'product-manager',
     roleTitle: 'Product Manager',
     category: 'Product & Tech',

@@ -183,6 +183,24 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     changefreq: 'weekly'
   },
   {
+    path: '/resume-examples/enterprise-architect',
+    title: 'Enterprise Architect Resume Example & TOGAF Keywords (2026) | Resume Craft',
+    description: 'Complete Enterprise Architect resume example with TOGAF framework, cloud migration metrics, system governance, and 1-click builder template.',
+    targetKeyword: 'enterprise architect resume example',
+    canonical: `${SITE_URL}/resume-examples/enterprise-architect/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/cloud-architect',
+    title: 'Cloud Architect Resume Example & AWS/GCP Keywords | Resume Craft',
+    description: 'ATS-optimized Cloud Architect resume example featuring Kubernetes, Terraform IaC, multi-cloud strategy, cost optimization, and free vector PDF export.',
+    targetKeyword: 'cloud architect resume example',
+    canonical: `${SITE_URL}/resume-examples/cloud-architect/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
     path: '/resume-examples/product-manager',
     title: 'Product Manager Resume Example & ATS Guide (2026) | Resume Craft',
     description: 'Complete Product Manager resume example with ATS-friendly bullet points, metrics, product roadmap achievements, and 1-click builder template.',
