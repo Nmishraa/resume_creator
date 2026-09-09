@@ -1,8 +1,8 @@
 /**
  * Block-Aware Resume Pagination Engine
  * Calculates heights and page boundaries (1123px per A4 page).
- * If an entry block overflows the printable area of a page, it pushes the entry block
- * (and its section title if it's the first entry in that section) cleanly to the top of the next page using top margins.
+ * If an entry block or bullet item overflows the printable area of a page, it cleanly pushes
+ * the element (or its parent entry / section title if orphaned) to the top of the next page using top margins.
  * Eliminates text clipping, line splitting, orphaned headings, and overlapping across page boundaries.
  */
 export function applyBlockAwarePagination(containerEl: HTMLElement | null): number {
@@ -10,12 +10,12 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
 
   const A4_PAGE_HEIGHT_PX = 1123;
   const TOP_MARGIN_PADDING_PX = 56; // ~15mm top padding
-  const BOTTOM_MARGIN_LIMIT_PX = 56; // ~15mm bottom margin limit
+  const BOTTOM_MARGIN_LIMIT_PX = 60; // ~16mm bottom margin limit for safe line spacing
 
   // 1. Reset any previously applied pagination margins/spacers
   const allManagedElements = Array.from(
     containerEl.querySelectorAll<HTMLElement>(
-      '.resume-section, .resume-section-title, h2, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .page-break-avoid, .resume-section-item'
+      '.resume-section, .resume-section-title, h2, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .page-break-avoid, .resume-section-item, li'
     )
   );
 
@@ -33,7 +33,7 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
   // 2. Select manageable blocks
   const blocks = Array.from(
     containerEl.querySelectorAll<HTMLElement>(
-      '.resume-section.page-break-avoid, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item, .page-break-avoid'
+      '.resume-section.page-break-avoid, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item, li, .page-break-avoid'
     )
   ).filter((el, index, self) => {
     // Deduplicate
@@ -70,52 +70,64 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
     // If block extends past the printable area of the current page
     if (currentTop + currentHeight > printableBottom) {
       const nextPageContentTop = ((pageIndex + 1) * A4_PAGE_HEIGHT_PX) + TOP_MARGIN_PADDING_PX;
-      const spacerNeeded = Math.max(0, nextPageContentTop - currentTop);
 
-      if (spacerNeeded > 0) {
-        // Find parent resume-section and section title
-        const section = el.closest('.resume-section');
-        const sectionTitle = section
-          ? (section.querySelector('.resume-section-title, h2, [role="heading"]') as HTMLElement | null)
-          : null;
+      // Determine the ideal element to push to avoid orphan headers or split bullet entries
+      let targetToPush: HTMLElement = el;
 
-        let pushedHeading = false;
+      // If el is an <li> bullet inside an entry block
+      if (el.tagName.toLowerCase() === 'li') {
+        const entryBlock = el.closest(
+          '.education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item'
+        ) as HTMLElement | null;
 
-        if (section && sectionTitle && section.contains(sectionTitle)) {
-          const titleRect = sectionTitle.getBoundingClientRect();
-          const titleTop = titleRect.top - containerTop;
-          const titlePageIndex = Math.floor(titleTop / A4_PAGE_HEIGHT_PX);
-
-          // Find all entry blocks in this section
-          const sectionEntries = Array.from(
-            section.querySelectorAll<HTMLElement>(
-              '.education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item'
-            )
-          );
-
-          // Check if there are any prior entries in this section that remain on titlePageIndex
-          const hasPriorEntriesOnTitlePage = sectionEntries.some(entry => {
-            if (entry === el || sectionTitle.contains(entry)) return false;
-            const entryRect = entry.getBoundingClientRect();
-            const entryTop = entryRect.top - containerTop;
-            return Math.floor(entryTop / A4_PAGE_HEIGHT_PX) === titlePageIndex && entryTop < currentTop;
-          });
-
-          // If title is on titlePageIndex and no prior entries remain on titlePageIndex, push the section title!
-          if (!hasPriorEntriesOnTitlePage && titleTop < nextPageContentTop) {
-            const headingSpacer = Math.max(0, nextPageContentTop - titleTop);
-            if (headingSpacer > 0) {
-              sectionTitle.style.marginTop = `${headingSpacer}px`;
-              pushedHeading = true;
-            }
+        if (entryBlock) {
+          const bullets = Array.from(entryBlock.querySelectorAll<HTMLElement>('li'));
+          const isFirstBullet = bullets.length > 0 && bullets[0] === el;
+          if (isFirstBullet) {
+            targetToPush = entryBlock;
           }
         }
+      }
 
-        if (!pushedHeading) {
-          el.style.marginTop = `${spacerNeeded}px`;
+      // Check if targetToPush is the first entry in its section
+      const section = targetToPush.closest('.resume-section');
+      const sectionTitle = section
+        ? (section.querySelector('.resume-section-title, h2, [role="heading"]') as HTMLElement | null)
+        : null;
+
+      if (section && sectionTitle && section.contains(sectionTitle)) {
+        const titleRect = sectionTitle.getBoundingClientRect();
+        const titleTop = titleRect.top - containerTop;
+        const titlePageIndex = Math.floor(titleTop / A4_PAGE_HEIGHT_PX);
+
+        const sectionEntries = Array.from(
+          section.querySelectorAll<HTMLElement>(
+            '.education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item, li'
+          )
+        );
+
+        const targetTop = targetToPush.getBoundingClientRect().top - containerTop;
+
+        const hasPriorContentOnTitlePage = sectionEntries.some(item => {
+          if (item === targetToPush || targetToPush.contains(item) || sectionTitle.contains(item)) return false;
+          const itemTop = item.getBoundingClientRect().top - containerTop;
+          return Math.floor(itemTop / A4_PAGE_HEIGHT_PX) === titlePageIndex && itemTop < targetTop;
+        });
+
+        if (!hasPriorContentOnTitlePage && titleTop < nextPageContentTop) {
+          targetToPush = sectionTitle;
         }
+      }
 
-        // Recalculate page for max page tracking
+      // Calculate required spacer for targetToPush
+      const targetRect = targetToPush.getBoundingClientRect();
+      const targetTop = targetRect.top - containerTop;
+      const spacerNeeded = Math.max(0, nextPageContentTop - targetTop);
+
+      if (spacerNeeded > 0) {
+        targetToPush.style.marginTop = `${spacerNeeded}px`;
+
+        // Recalculate max page found
         const updatedRect = el.getBoundingClientRect();
         const updatedTop = updatedRect.top - containerTop;
         const newPage = Math.floor(updatedTop / A4_PAGE_HEIGHT_PX) + 1;
