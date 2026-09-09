@@ -1,4 +1,36 @@
 /**
+ * Helper to resolve the safe top-level block element to push to a new page.
+ * Avoids setting inline marginTop on CSS Grid / Flex-row child items (which causes layout distortion and text overlap).
+ */
+function getValidPushTarget(el: HTMLElement): HTMLElement {
+  // If element is a child inside a major entry block (e.g. an <li> bullet inside a job or project entry)
+  const entryBlock = el.closest(
+    '.education-entry, .experience-entry, .project-entry, .certification-entry, .summary-entry'
+  ) as HTMLElement | null;
+
+  let target: HTMLElement = entryBlock || el;
+
+  // Check if target is inside a grid or flex-row container (like multi-column skill items or side-by-side cards)
+  const parent = target.parentElement;
+  if (parent) {
+    const parentStyle = window.getComputedStyle(parent);
+    const parentDisplay = parentStyle.display;
+    const parentFlexDir = parentStyle.flexDirection;
+    const isGridOrFlexRow = parentDisplay.includes('grid') || (parentDisplay.includes('flex') && !parentFlexDir.includes('column'));
+
+    if (isGridOrFlexRow) {
+      // Push the parent section container instead of an individual grid child cell
+      const parentSection = target.closest('.resume-section') as HTMLElement | null;
+      if (parentSection) {
+        target = parentSection;
+      }
+    }
+  }
+
+  return target;
+}
+
+/**
  * Template-Aware Block Pagination Engine
  * Dynamically measures container paddings, font metrics, line heights, and element boundaries.
  * If an entry block, section title, or bullet item overflows the printable area of a page (1123px per A4 sheet),
@@ -39,7 +71,7 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
   // 2. Select manageable blocks across single-column and multi-column templates
   const blocks = Array.from(
     containerEl.querySelectorAll<HTMLElement>(
-      '.resume-section-title, h2, .resume-section.page-break-avoid, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item, li, .page-break-avoid'
+      '.resume-section-title, h2, .resume-section.page-break-avoid, .education-entry, .experience-entry, .project-entry, .certification-entry, .summary-entry, .resume-entry, .resume-section-item, li, .page-break-avoid'
     )
   ).filter((el, index, self) => {
     // Deduplicate
@@ -71,18 +103,7 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
       const nextPageContentTop = ((pageIndex + 1) * A4_PAGE_HEIGHT_PX) + TOP_MARGIN_PADDING_PX;
 
       // Determine the ideal element to push to avoid orphan headers or split bullet entries
-      let targetToPush: HTMLElement = el;
-
-      // If el is an <li> bullet or an entry item inside an entry block
-      if (el.tagName.toLowerCase() === 'li' || el.classList.contains('resume-section-item')) {
-        const entryBlock = el.closest(
-          '.education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item, .page-break-avoid'
-        ) as HTMLElement | null;
-
-        if (entryBlock) {
-          targetToPush = entryBlock;
-        }
-      }
+      let targetToPush: HTMLElement = getValidPushTarget(el);
 
       // Check if targetToPush is the first entry in its section to prevent orphaned section titles
       const section = targetToPush.closest('.resume-section');
@@ -97,7 +118,7 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
 
         const sectionEntries = Array.from(
           section.querySelectorAll<HTMLElement>(
-            '.education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item, li'
+            '.education-entry, .experience-entry, .project-entry, .certification-entry, .summary-entry, .resume-entry, .resume-section-item, li'
           )
         );
 
