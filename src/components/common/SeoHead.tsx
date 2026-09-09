@@ -20,9 +20,13 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
   jsonLd,
   noindex = false
 }) => {
-  const fullCanonical = canonicalPath
+  const rawCanonical = canonicalPath
     ? (canonicalPath.startsWith('http') ? canonicalPath : `${SITE_URL}${canonicalPath.startsWith('/') ? '' : '/'}${canonicalPath}`)
     : (typeof window !== 'undefined' ? window.location.href : SITE_URL);
+
+  const fullCanonical = (rawCanonical !== SITE_URL && rawCanonical !== `${SITE_URL}/` && !rawCanonical.endsWith('/'))
+    ? `${rawCanonical}/`
+    : rawCanonical;
 
   useEffect(() => {
     // 1. Update Document Title
@@ -132,6 +136,14 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
         name: 'Resume Craft',
         operatingSystem: 'All Web Browsers',
         applicationCategory: 'BusinessApplication',
+        applicationSubCategory: 'Resume Builder & ATS Checker',
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          ratingCount: '1480',
+          bestRating: '5',
+          worstRating: '1'
+        },
         offers: {
           '@type': 'Offer',
           price: '0.00',

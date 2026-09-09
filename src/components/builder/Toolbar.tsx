@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useResume } from '../../context/ResumeContext';
 import { exportToVectorPdf, downloadPdfFromElement, exportResumeToJson } from '../../services/pdfService';
+import { exportResumeToDocx } from '../../services/docxExportService';
 import { initialResumeData } from '../../data/initialData';
 import {
   Download,
@@ -75,6 +76,29 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       setTimeout(() => setToast(null), 6000);
     } finally {
       setIsExporting(false);
+    }
+  };
+
+  const [isExportingDocx, setIsExportingDocx] = useState(false);
+
+  const handleDownloadDocx = async () => {
+    if (isExportingDocx) return;
+    setIsExportingDocx(true);
+    try {
+      await exportResumeToDocx(resume);
+      confetti({
+        particleCount: 60,
+        spread: 50,
+        origin: { y: 0.8 }
+      });
+      setToast({ message: 'Word document (.docx) downloaded successfully!', type: 'success' });
+      setTimeout(() => setToast(null), 4000);
+    } catch (error: any) {
+      console.error("DOCX download failed:", error);
+      setToast({ message: `DOCX export error: ${error?.message || String(error)}`, type: 'error' });
+      setTimeout(() => setToast(null), 6000);
+    } finally {
+      setIsExportingDocx(false);
     }
   };
 
@@ -236,10 +260,21 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           <button
             onClick={handleDownloadPdf}
             disabled={isExporting}
-            className="flex items-center gap-1.5 px-4.5 py-2 text-sm font-extrabold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-xs transition-colors cursor-pointer disabled:opacity-60"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-extrabold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-xs transition-colors cursor-pointer disabled:opacity-60"
           >
             <Download size={15} className={isExporting ? 'animate-bounce' : ''} />
             <span>{isExporting ? 'Generating...' : 'Download PDF'}</span>
+          </button>
+
+          {/* Action: Download Word (.DOCX) */}
+          <button
+            onClick={handleDownloadDocx}
+            disabled={isExportingDocx}
+            className="flex items-center gap-1.5 px-3.5 py-2 text-sm font-extrabold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl shadow-xs transition-colors cursor-pointer disabled:opacity-60"
+            title="Download editable Microsoft Word .docx file"
+          >
+            <FileText size={15} className="text-blue-600" />
+            <span>{isExportingDocx ? 'Exporting...' : 'Download .DOCX'}</span>
           </button>
 
           {/* Three-Dot Menu dropdown for Rare/Secondary Actions */}

@@ -310,7 +310,7 @@ const PAGES = [
 console.log(`Starting SSG Pre-rendering for ${PAGES.length} routes...`);
 
 for (const page of PAGES) {
-  const canonicalUrl = `${SITE_URL}${page.path === '/' ? '/' : page.path}`;
+  const canonicalUrl = `${SITE_URL}${page.path === '/' ? '/' : (page.path.endsWith('/') ? page.path : page.path + '/')}`;
   const ogType = page.ogType || 'website';
 
   const pathParts = page.path.split('/').filter(Boolean);

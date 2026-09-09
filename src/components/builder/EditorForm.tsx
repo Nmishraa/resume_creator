@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useResume } from '../../context/ResumeContext';
 import { enhanceBulletPoint, generateSummary } from '../../services/aiService';
 import { exportToVectorPdf, downloadPdfFromElement, exportResumeToJson } from '../../services/pdfService';
+import { exportResumeToDocx } from '../../services/docxExportService';
 import { TEMPLATE_LIST } from '../templates';
 import {
   User,
@@ -173,6 +174,25 @@ export const EditorForm: React.FC = () => {
       console.error('Download failed', error);
     } finally {
       setIsExporting(false);
+    }
+  };
+
+  const [isExportingDocx, setIsExportingDocx] = useState(false);
+
+  const handleDownloadDocx = async () => {
+    if (isExportingDocx) return;
+    setIsExportingDocx(true);
+    try {
+      await exportResumeToDocx(resume);
+      confetti({
+        particleCount: 60,
+        spread: 50,
+        origin: { y: 0.8 }
+      });
+    } catch (error) {
+      console.error('DOCX Download failed', error);
+    } finally {
+      setIsExportingDocx(false);
     }
   };
 
@@ -1114,7 +1134,17 @@ export const EditorForm: React.FC = () => {
             {/* Secondary Export Options */}
             <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-3.5">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-600">Alternative Formats &amp; Print Options</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                <button
+                  type="button"
+                  onClick={handleDownloadDocx}
+                  disabled={isExportingDocx}
+                  className="p-3.5 bg-blue-50 hover:bg-blue-100 text-blue-900 rounded-xl text-sm font-extrabold flex items-center justify-center gap-2 border border-blue-200 transition-colors cursor-pointer disabled:opacity-60"
+                >
+                  <FileText size={16} className="text-blue-600" />
+                  <span>{isExportingDocx ? 'Exporting Word...' : 'Download Word (.DOCX)'}</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={exportToVectorPdf}
