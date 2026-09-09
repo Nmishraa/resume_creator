@@ -1,9 +1,9 @@
 /**
  * Block-Aware Resume Pagination Engine
  * Calculates heights and page boundaries (1123px per A4 page).
- * If an entry block overflows the printable area of a page, it pushes the entire entry block
- * (and its section title if it's the first entry) cleanly to the top of the next page using top margins.
- * Eliminates text clipping, line splitting, and overlapping across page boundaries.
+ * If an entry block overflows the printable area of a page, it pushes the entry block
+ * (and its section title if it's the first entry in that section) cleanly to the top of the next page using top margins.
+ * Eliminates text clipping, line splitting, orphaned headings, and overlapping across page boundaries.
  */
 export function applyBlockAwarePagination(containerEl: HTMLElement | null): number {
   if (!containerEl) return 1;
@@ -15,7 +15,7 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
   // 1. Reset any previously applied pagination margins/spacers
   const allManagedElements = Array.from(
     containerEl.querySelectorAll<HTMLElement>(
-      '.resume-section, .resume-section-title, .education-entry, .experience-entry, .project-entry, .certification-entry, .page-break-avoid, .resume-section-item'
+      '.resume-section, .resume-section-title, h2, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .page-break-avoid, .resume-section-item'
     )
   );
 
@@ -30,22 +30,31 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
   const containerTop = containerRect.top;
   let maxPageFound = 1;
 
-  // 2. Iterate through section containers & entry blocks
+  // 2. Select manageable blocks
   const blocks = Array.from(
     containerEl.querySelectorAll<HTMLElement>(
-      '.resume-section, .education-entry, .experience-entry, .project-entry, .certification-entry, .page-break-avoid, .resume-section-item'
+      '.resume-section.page-break-avoid, .education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item, .page-break-avoid'
     )
-  ).filter(el => {
+  ).filter((el, index, self) => {
+    // Deduplicate
+    if (self.indexOf(el) !== index) return false;
+
+    // Skip resume-section unless marked as page-break-avoid
+    if (el.classList.contains('resume-section') && !el.classList.contains('page-break-avoid')) {
+      return false;
+    }
+
     const parent = el.parentElement;
     if (!parent) return true;
     const parentDisplay = window.getComputedStyle(parent).display;
-    // Skip child items inside grid or flex containers unless it's a section wrapper
+    // Skip child items inside grid/flex containers unless appropriate
     if (!el.classList.contains('resume-section') && (parentDisplay.includes('grid') || (parentDisplay.includes('flex') && !parent.classList.contains('page-break-container') && parent.tagName.toLowerCase() !== 'div'))) {
       return false;
     }
     return true;
   });
 
+  // 3. Iterate through elements and handle page breaks
   for (let i = 0; i < blocks.length; i++) {
     const el = blocks[i];
     const rect = el.getBoundingClientRect();
@@ -64,22 +73,52 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
       const spacerNeeded = Math.max(0, nextPageContentTop - currentTop);
 
       if (spacerNeeded > 0) {
-        // If this entry is preceded immediately by a section title on the same page, push the section title instead
-        const prevEl = el.previousElementSibling as HTMLElement | null;
-        if (prevEl && (prevEl.classList.contains('resume-section-title') || prevEl.tagName.toLowerCase() === 'h2')) {
-          const prevRect = prevEl.getBoundingClientRect();
-          const prevTop = prevRect.top - containerTop;
-          const headingSpacer = Math.max(0, nextPageContentTop - prevTop);
-          if (headingSpacer > 0) {
-            prevEl.style.marginTop = `${headingSpacer}px`;
+        // Find parent resume-section and section title
+        const section = el.closest('.resume-section');
+        const sectionTitle = section
+          ? (section.querySelector('.resume-section-title, h2, [role="heading"]') as HTMLElement | null)
+          : null;
+
+        let pushedHeading = false;
+
+        if (section && sectionTitle && section.contains(sectionTitle)) {
+          const titleRect = sectionTitle.getBoundingClientRect();
+          const titleTop = titleRect.top - containerTop;
+          const titlePageIndex = Math.floor(titleTop / A4_PAGE_HEIGHT_PX);
+
+          // Find all entry blocks in this section
+          const sectionEntries = Array.from(
+            section.querySelectorAll<HTMLElement>(
+              '.education-entry, .experience-entry, .project-entry, .certification-entry, .skill-group, .summary-entry, .resume-entry, .resume-section-item'
+            )
+          );
+
+          // Check if there are any prior entries in this section that remain on titlePageIndex
+          const hasPriorEntriesOnTitlePage = sectionEntries.some(entry => {
+            if (entry === el || sectionTitle.contains(entry)) return false;
+            const entryRect = entry.getBoundingClientRect();
+            const entryTop = entryRect.top - containerTop;
+            return Math.floor(entryTop / A4_PAGE_HEIGHT_PX) === titlePageIndex && entryTop < currentTop;
+          });
+
+          // If title is on titlePageIndex and no prior entries remain on titlePageIndex, push the section title!
+          if (!hasPriorEntriesOnTitlePage && titleTop < nextPageContentTop) {
+            const headingSpacer = Math.max(0, nextPageContentTop - titleTop);
+            if (headingSpacer > 0) {
+              sectionTitle.style.marginTop = `${headingSpacer}px`;
+              pushedHeading = true;
+            }
           }
-        } else {
+        }
+
+        if (!pushedHeading) {
           el.style.marginTop = `${spacerNeeded}px`;
         }
 
-        // Update page count
-        const newTop = currentTop + spacerNeeded;
-        const newPage = Math.floor(newTop / A4_PAGE_HEIGHT_PX) + 1;
+        // Recalculate page for max page tracking
+        const updatedRect = el.getBoundingClientRect();
+        const updatedTop = updatedRect.top - containerTop;
+        const newPage = Math.floor(updatedTop / A4_PAGE_HEIGHT_PX) + 1;
         maxPageFound = Math.max(maxPageFound, newPage);
       }
     } else {
@@ -88,7 +127,7 @@ export function applyBlockAwarePagination(containerEl: HTMLElement | null): numb
     }
   }
 
-  // 3. Final total page calculation from container scrollHeight
+  // 4. Final total page calculation from container scrollHeight
   const totalHeight = containerEl.scrollHeight;
   const pageCountFromHeight = Math.ceil(totalHeight / A4_PAGE_HEIGHT_PX);
 
