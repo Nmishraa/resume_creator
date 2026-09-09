@@ -151,15 +151,22 @@ export const ResumeExamplesHubPage: React.FC = () => {
                 <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">
                   {ex.category}
                 </span>
-                <span className="text-[11px] font-semibold text-brand-600">
-                  {ex.experienceLevel}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  {ex.pageLength && (
+                    <span className="text-[10px] font-extrabold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                      {ex.pageLength}
+                    </span>
+                  )}
+                  <span className="text-[11px] font-semibold text-brand-600">
+                    {ex.experienceLevel}
+                  </span>
+                </div>
               </div>
 
               <h2 className="text-lg font-black text-slate-950 group-hover:text-brand-600 transition-colors">
                 <button
                   type="button"
-                  onClick={() => navigate('/resume-preview', { state: { resumeData: ex.presetData } })}
+                  onClick={() => navigate('/resume-preview?slug=' + ex.slug, { state: { resumeData: ex.presetData } })}
                   className="hover:underline text-left"
                 >
                   {ex.roleTitle} Resume Example

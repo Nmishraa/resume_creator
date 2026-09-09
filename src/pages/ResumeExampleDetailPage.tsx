@@ -88,6 +88,11 @@ export const ResumeExampleDetailPage: React.FC = () => {
           <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-700">
             {example.experienceLevel}
           </span>
+          {example.pageLength && (
+            <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+              {example.pageLength}
+            </span>
+          )}
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight">

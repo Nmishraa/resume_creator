@@ -154,7 +154,7 @@ export const StudentResumeBuilderPage: React.FC = () => {
         <div 
           onClick={() => {
             if (studentExample?.presetData) {
-              navigate('/resume-preview', { state: { resumeData: studentExample.presetData } });
+              navigate('/resume-preview?slug=college-student', { state: { resumeData: studentExample.presetData } });
             }
           }}
           className="bg-white p-6 rounded-xl border border-slate-200 space-y-4 font-sans text-xs text-slate-700 cursor-pointer hover:border-brand-300 hover:shadow-md transition-all"

@@ -11,6 +11,10 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
   const { personalInfo, summary, experience, education, skills, projects, certifications, customSections, formatting } = resume;
   const size = getFontSizeClass(formatting.fontSize);
   const densityStyles = getAdaptiveDensityStyles(densityMode);
+  // Default accent color for Executive Serif is rich Amber/Gold (#b45309)
+  const accentColor = (formatting.accentColor && !['#059669', '#0284c7', '#2563eb'].includes(formatting.accentColor))
+    ? formatting.accentColor
+    : '#b45309';
 
   return (
     <div
@@ -33,14 +37,13 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           {personalInfo.fullName || 'Candidate Name'}
         </h1>
 
-        {/* Dual Horizontal Border Divider */}
-        <div className="w-full my-2" aria-hidden="true">
-          <div className="border-t-2 border-slate-950 mb-[3px]"></div>
-          <div className="border-t border-slate-950"></div>
-        </div>
+        {/* Executive Job Title in Accent Amber/Gold */}
+        <p className="text-xs sm:text-sm font-bold uppercase tracking-widest mb-2" style={{ color: accentColor }}>
+          {personalInfo.jobTitle || 'Executive Leader'}
+        </p>
 
         {/* Centered Contact Info Line */}
-        <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-xs text-slate-800 font-serif">
+        <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-xs text-slate-700 font-serif mb-2">
           {personalInfo.location && <span>{personalInfo.location}</span>}
           {personalInfo.phone && (
             <span>
@@ -63,6 +66,12 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
             </span>
           )}
         </div>
+
+        {/* Dual Horizontal Border Divider */}
+        <div className="w-full my-1.5" aria-hidden="true">
+          <div className="border-t-2 mb-[3px]" style={{ borderColor: accentColor }}></div>
+          <div className="border-t" style={{ borderColor: accentColor }}></div>
+        </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
@@ -71,13 +80,15 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           <div className="resume-section page-break-avoid">
             <h2
               style={{
-                fontSize: 'var(--resume-section-title-size, 15px)',
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}35`,
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-center mb-2 uppercase tracking-wider border-b pb-0.5"
             >
-              Professional Summary
+              Executive Summary
             </h2>
             <ul
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-bullet-gap, 6px)' }}
@@ -95,13 +106,15 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           <div className="resume-section">
             <h2
               style={{
-                fontSize: 'var(--resume-section-title-size, 15px)',
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}35`,
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="resume-section-title font-bold font-serif text-slate-950 mb-2 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-center mb-2.5 uppercase tracking-wider border-b pb-0.5"
             >
-              Work Experience
+              Leadership & Experience
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {experience.map((exp) => (
@@ -110,7 +123,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                     <div className="font-bold text-slate-950">
                       {exp.role} <span className="font-normal italic">at {exp.company}</span>
                     </div>
-                    <div className="text-xs text-slate-600 font-sans">
+                    <div className="text-xs text-slate-600 font-sans italic">
                       {exp.startDate} – {exp.current ? 'Present' : exp.endDate} {exp.location && `(${exp.location})`}
                     </div>
                   </div>
@@ -135,11 +148,13 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           <div className="resume-section">
             <h2
               style={{
-                fontSize: 'var(--resume-section-title-size, 15px)',
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}35`,
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="resume-section-title font-bold font-serif text-slate-950 mb-2 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-center mb-2.5 uppercase tracking-wider border-b pb-0.5"
             >
               Key Projects
             </h2>
@@ -151,7 +166,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                       {proj.title} {proj.subtitle && <span className="font-normal italic">({proj.subtitle})</span>}
                     </div>
                     {proj.startDate && (
-                      <div className="text-xs text-slate-600 font-sans">
+                      <div className="text-xs text-slate-600 font-sans italic">
                         {proj.startDate}{proj.endDate ? ` – ${proj.endDate}` : ''}
                       </div>
                     )}
@@ -172,29 +187,31 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           </div>
         )}
 
-        {/* Skills */}
+        {/* Skills / Core Competencies */}
         {skills && skills.length > 0 && (
           <div className="resume-section page-break-avoid">
             <h2
               style={{
-                fontSize: 'var(--resume-section-title-size, 15px)',
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}35`,
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-center mb-2 uppercase tracking-wider border-b pb-0.5"
             >
-              Skills
+              Core Competencies
             </h2>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-1 text-xs font-serif text-slate-800">
-              {skills.map((s) => {
-                const itemsToRender = s.items && s.items.length > 0 ? s.items : [s.category];
-                return itemsToRender.map((item, idx) => (
-                  <div key={`${s.id}-${idx}`} className="skill-group resume-entry flex items-center gap-2 page-break-avoid">
-                    <span className="text-slate-950 font-bold">•</span>
-                    <span>{item.trim().replace(/\.?$/, '.')}</span>
-                  </div>
-                ));
-              })}
+            <div className="flex flex-wrap justify-center gap-2 text-xs font-serif">
+              {skills.flatMap((s) => s.items || [s.category]).map((item, idx) => (
+                <span
+                  key={idx}
+                  style={{ borderColor: `${accentColor}50`, backgroundColor: `${accentColor}08`, color: accentColor }}
+                  className="px-3 py-1 rounded font-bold border font-serif"
+                >
+                  {item.trim().replace(/\.?$/, '')}
+                </span>
+              ))}
             </div>
           </div>
         )}
@@ -204,13 +221,15 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           <div className="resume-section page-break-avoid">
             <h2
               style={{
-                fontSize: 'var(--resume-section-title-size, 15px)',
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}35`,
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-center mb-2 uppercase tracking-wider border-b pb-0.5"
             >
-              Education
+              Education & Credentials
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-item-gap, 10px)' }}>
               {education.map((edu) => (
@@ -218,7 +237,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                   <div className="font-bold text-slate-950">
                     {edu.degree}{edu.degree && edu.institution ? ' — ' : ''}{edu.institution}
                   </div>
-                  <div className="text-xs text-slate-600 font-sans">
+                  <div className="text-xs text-slate-600 font-sans italic">
                     {[edu.location, edu.endDate || edu.startDate].filter(Boolean).join(' | ')}
                   </div>
                 </div>
@@ -232,13 +251,15 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
           <div className="resume-section page-break-avoid">
             <h2
               style={{
-                fontSize: 'var(--resume-section-title-size, 15px)',
+                fontSize: 'var(--resume-section-title-size, 14px)',
+                color: accentColor,
+                borderColor: `${accentColor}35`,
                 breakAfter: 'avoid',
                 pageBreakAfter: 'avoid'
               }}
-              className="resume-section-title font-bold font-serif text-slate-950 mb-1.5 uppercase tracking-wide border-b border-slate-200 pb-0.5"
+              className="resume-section-title font-bold font-serif text-center mb-2 uppercase tracking-wider border-b pb-0.5"
             >
-              Certifications
+              Certifications & Leadership
             </h2>
             <div className="space-y-1 text-xs font-serif text-slate-800">
               {certifications.map((cert) => (
@@ -247,7 +268,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
                     <span className="font-bold">{cert.name}</span>
                     {cert.issuer && <span> — {cert.issuer}</span>}
                   </div>
-                  {cert.date && <span className="text-slate-600 font-sans">{cert.date}</span>}
+                  {cert.date && <span className="text-slate-600 font-sans italic">{cert.date}</span>}
                 </div>
               ))}
             </div>

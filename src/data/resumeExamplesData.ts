@@ -1,5 +1,4 @@
 import { ResumeData } from '../types/resume';
-import { generateRandomResume } from '../services/aiService';
 
 export interface ResumeExampleItem {
   slug: string;
@@ -124,6 +123,19 @@ export const alexMorganData: Partial<ResumeData> = {
         'Created technical documentation and user guides for REST API endpoints.',
         'Resolved 60+ customer-reported bug tickets during initial onboarding phase.'
       ]
+    },
+    {
+      id: 'exp-alex-7',
+      role: 'Associate Software Developer',
+      company: 'TechCraft Solutions',
+      location: 'San Francisco, CA',
+      startDate: '2012-06',
+      endDate: '2013-04',
+      current: false,
+      highlights: [
+        'Built internal admin UI dashboards using JavaScript and HTML5/CSS3.',
+        'Managed daily SQL database backups and automated customer email notification queues.'
+      ]
     }
   ],
   education: [
@@ -179,6 +191,18 @@ export const alexMorganData: Partial<ResumeData> = {
       highlights: [
         'Automated cross-region cluster failover achieving zero-downtime SLA during simulated cloud outages.'
       ]
+    },
+    {
+      id: 'proj-alex-3',
+      title: 'Distributed Event-Driven Logging Pipeline',
+      subtitle: 'Open-Source Observability Engine',
+      link: 'https://github.com/alexmorgan/event-logger',
+      startDate: '2021',
+      endDate: '2022',
+      technologies: ['Go', 'Kafka', 'Elasticsearch', 'Docker'],
+      highlights: [
+        'Built real-time log collector processing 50,000 events/sec with automated anomaly detection.'
+      ]
     }
   ],
   certifications: [
@@ -204,9 +228,922 @@ export const alexMorganData: Partial<ResumeData> = {
           subtitle: 'Cloud Native Summit',
           date: '2022',
           description: 'Presented to 1,500+ engineers on automated zero-downtime failover strategies in Kubernetes.'
+        },
+        {
+          id: 'custom-item-alex-3',
+          title: 'Author: Enterprise Microservices & Vector Database Architecture',
+          subtitle: 'Technical Whitepaper Series',
+          date: '2023',
+          description: 'Published authoritative guide on vector index tuning and low-latency gRPC service orchestration.'
         }
       ]
     }
+  ],
+  formatting: {
+    template: 'modern',
+    fontFamily: 'inter',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0284c7',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications', 'customSections']
+  }
+};
+
+export const alexMorgan1PageData: Partial<ResumeData> = {
+  title: 'Alex Morgan - Senior Full-Stack Engineer Resume (1 Page)',
+  personalInfo: {
+    fullName: 'Alex Morgan',
+    jobTitle: 'Senior Full-Stack Engineer',
+    email: 'alex.morgan@dev.io',
+    phone: '(555) 234-5678',
+    location: 'San Francisco, CA',
+    website: 'alexmorgan.dev',
+    linkedin: 'linkedin.com/in/alexmorgan',
+    github: 'github.com/alexmorgan'
+  },
+  summary: 'Results-driven Senior Full-Stack Engineer with 7+ years of experience building high-throughput microservices, web applications, and cloud infrastructures. Spearheaded system architecture handling 5M daily active users.',
+  experience: [
+    {
+      id: 'exp-alex1p-1',
+      role: 'Lead Systems Engineer',
+      company: 'Cloud Scale Technologies',
+      location: 'San Francisco, CA',
+      startDate: '2021-03',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Architected multi-region Kubernetes clusters, reducing annual downtime by 99.9%.',
+        'Optimized GraphQL API gateway throughput by 42% using React and Node.js microservices serving 15M daily calls.'
+      ]
+    },
+    {
+      id: 'exp-alex1p-2',
+      role: 'Senior Full-Stack Developer',
+      company: 'Vanguard SaaS Labs',
+      location: 'San Francisco, CA',
+      startDate: '2018-06',
+      endDate: '2021-02',
+      current: false,
+      highlights: [
+        'Engineered real-time collaboration dashboard in Next.js and WebSockets, boosting session duration by 35%.',
+        'Integrated Stripe billing pipelines generating $8.4M in annual recurring revenue.'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 'edu-alex1p-1',
+      degree: 'B.S. in Computer Science',
+      institution: 'UC Berkeley',
+      location: 'Berkeley, CA',
+      startDate: '2014',
+      endDate: '2018',
+      gpa: '3.88 / 4.0'
+    }
+  ],
+  skills: [
+    { id: 'sk-alex1p-1', category: 'Core Stack', items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'GraphQL'] }
+  ],
+  formatting: {
+    template: 'modern',
+    fontFamily: 'inter',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0284c7',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education']
+  }
+};
+
+export const sophiaChenData: Partial<ResumeData> = {
+  title: 'Sophia Chen - Lead Data Scientist & AI Specialist Resume (2 Pages)',
+  personalInfo: {
+    fullName: 'Sophia Chen',
+    jobTitle: 'Lead Data Scientist & AI Specialist',
+    email: 'sophia.chen@ai-nexus.io',
+    phone: '(555) 345-6789',
+    location: 'Seattle, WA',
+    website: 'sophiachen.ai',
+    linkedin: 'linkedin.com/in/sophiachen-ai',
+    github: 'github.com/sophiachen-ai'
+  },
+  summary: 'Senior ML practitioner specializing in LLM fine-tuning, RAG pipelines, and high-throughput vector search engines processing 3M+ daily queries. Proven track record reducing inference costs by 45% while elevating model accuracy.',
+  experience: [
+    {
+      id: 'exp-sophia-1',
+      role: 'Principal AI Engineer',
+      company: 'Nexus Analytics',
+      location: 'Seattle, WA',
+      startDate: '2022-03',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Fine-tuned domain LLMs using LoRA and QLoRA, cutting external model API costs by $45,000/month.',
+        'Designed vector search architecture using Pinecone and Milvus achieving sub-40ms latency across 10M vector embeddings.',
+        'Built automated RAG evaluation benchmark framework measuring BLEU, ROUGE, and cosine similarity metrics across 800k monthly requests.'
+      ]
+    },
+    {
+      id: 'exp-sophia-2',
+      role: 'Senior Data Scientist',
+      company: 'CloudScale Intelligence',
+      location: 'Seattle, WA',
+      startDate: '2019-06',
+      endDate: '2022-02',
+      current: false,
+      highlights: [
+        'Engineered customer churn prediction algorithms with XGBoost handling 4M+ user records, saving $1.8M annually.',
+        'Deployed scalable PyTorch deep learning microservices on AWS SageMaker serving 5M daily API requests.',
+        'Conducted 30+ A/B tests on recommendation engines boosting conversion rates by 6.4%.'
+      ]
+    },
+    {
+      id: 'exp-sophia-3',
+      role: 'Machine Learning Engineer',
+      company: 'Apex Data Labs',
+      location: 'Seattle, WA',
+      startDate: '2017-08',
+      endDate: '2019-05',
+      current: false,
+      highlights: [
+        'Constructed ETL data pipelines in Python and Apache Spark processing 500GB daily transaction logs.',
+        'Built NLP sentiment classification models achieving 91.2% F1 score on customer support feedback.'
+      ]
+    },
+    {
+      id: 'exp-sophia-4',
+      role: 'Data Analyst',
+      company: 'Cascade Analytics',
+      location: 'Bellevue, WA',
+      startDate: '2016-01',
+      endDate: '2017-07',
+      current: false,
+      highlights: [
+        'Automated executive Tableau dashboards tracking $30M in annual sales pipeline revenue.',
+        'Optimized SQL queries across PostgreSQL databases, reducing query runtime by 50%.'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 'edu-sophia-1',
+      degree: 'M.S. in Data Science & Machine Learning',
+      institution: 'University of Washington',
+      location: 'Seattle, WA',
+      startDate: '2017',
+      endDate: '2019',
+      gpa: '3.95 / 4.0'
+    },
+    {
+      id: 'edu-sophia-2',
+      degree: 'B.S. in Statistics & Applied Mathematics',
+      institution: 'Seattle University',
+      location: 'Seattle, WA',
+      startDate: '2013',
+      endDate: '2017',
+      gpa: '3.89 / 4.0'
+    }
+  ],
+  projects: [
+    {
+      id: 'proj-sophia-1',
+      title: 'Multi-Modal RAG Agent Framework',
+      subtitle: 'Open-Source AI Assistant',
+      link: 'https://github.com/sophiachen-ai/rag-framework',
+      startDate: '2023',
+      endDate: '2024',
+      technologies: ['PyTorch', 'LangChain', 'Pinecone', 'FastAPI'],
+      highlights: [
+        'Built hybrid keyword and vector retrieval system decreasing hallucination rates by 60%.'
+      ]
+    }
+  ],
+  certifications: [
+    { id: 'cert-sophia-1', name: 'AWS Certified Machine Learning – Specialty', issuer: 'Amazon Web Services', date: '2023' },
+    { id: 'cert-sophia-2', name: 'TensorFlow Developer Certificate', issuer: 'Google', date: '2022' }
+  ],
+  skills: [
+    { id: 'sk-sophia-1', category: 'AI & Machine Learning', items: ['PyTorch', 'TensorFlow', 'LangChain', 'Pinecone', 'RAG Pipelines', 'Hugging Face'] },
+    { id: 'sk-sophia-2', category: 'Languages & Infrastructure', items: ['Python', 'SQL', 'AWS SageMaker', 'Docker', 'Kubernetes', 'FastAPI', 'Spark'] }
+  ],
+  formatting: {
+    template: 'tech',
+    fontFamily: 'mono',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0284c7',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+  }
+};
+
+export const sophiaChen3PageData: Partial<ResumeData> = {
+  title: 'Sophia Chen - Lead Data Scientist & AI Specialist Resume (3 Pages)',
+  personalInfo: {
+    fullName: 'Sophia Chen',
+    jobTitle: 'Lead Data Scientist & AI Specialist',
+    email: 'sophia.chen@ai-nexus.io',
+    phone: '(555) 345-6789',
+    location: 'Seattle, WA',
+    website: 'sophiachen.ai',
+    linkedin: 'linkedin.com/in/sophiachen-ai',
+    github: 'github.com/sophiachen-ai'
+  },
+  summary: 'Senior ML practitioner specializing in LLM fine-tuning, RAG pipelines, and high-throughput vector search engines processing 3M+ daily queries. Proven track record reducing inference costs by 45% while elevating model accuracy across multi-region GPU clusters.',
+  experience: [
+    {
+      id: 'exp-sophia3p-1',
+      role: 'Principal AI Engineer',
+      company: 'Nexus Analytics',
+      location: 'Seattle, WA',
+      startDate: '2022-03',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Fine-tuned domain LLMs using LoRA and QLoRA, cutting external model API costs by $45,000/month.',
+        'Designed vector search architecture using Pinecone and Milvus achieving sub-40ms latency across 10M vector embeddings.',
+        'Built automated RAG evaluation benchmark framework measuring BLEU, ROUGE, and cosine similarity metrics across 800k monthly requests.',
+        'Mentored 8 senior machine learning engineers across 2 cross-functional AI squads.'
+      ]
+    },
+    {
+      id: 'exp-sophia3p-2',
+      role: 'Senior Data Scientist',
+      company: 'CloudScale Intelligence',
+      location: 'Seattle, WA',
+      startDate: '2019-06',
+      endDate: '2022-02',
+      current: false,
+      highlights: [
+        'Engineered customer churn prediction algorithms with XGBoost handling 4M+ user records, saving $1.8M annually.',
+        'Deployed scalable PyTorch deep learning microservices on AWS SageMaker serving 5M daily API requests.',
+        'Conducted 30+ A/B tests on recommendation engines boosting conversion rates by 6.4%.'
+      ]
+    },
+    {
+      id: 'exp-sophia3p-3',
+      role: 'Machine Learning Engineer',
+      company: 'Apex Data Labs',
+      location: 'Seattle, WA',
+      startDate: '2017-08',
+      endDate: '2019-05',
+      current: false,
+      highlights: [
+        'Constructed ETL data pipelines in Python and Apache Spark processing 500GB daily transaction logs.',
+        'Built NLP sentiment classification models achieving 91.2% F1 score on customer support feedback.'
+      ]
+    },
+    {
+      id: 'exp-sophia3p-4',
+      role: 'Data Analyst Specialist',
+      company: 'Cascade Analytics',
+      location: 'Bellevue, WA',
+      startDate: '2016-01',
+      endDate: '2017-07',
+      current: false,
+      highlights: [
+        'Automated executive Tableau dashboards tracking $30M in annual sales pipeline revenue.',
+        'Optimized SQL queries across PostgreSQL databases, reducing query runtime by 50%.'
+      ]
+    },
+    {
+      id: 'exp-sophia3p-5',
+      role: 'Quantitative Data Analyst',
+      company: 'Pacific Tech Research',
+      location: 'Seattle, WA',
+      startDate: '2014-06',
+      endDate: '2015-12',
+      current: false,
+      highlights: [
+        'Analyzed time-series financial data for automated algorithmic trading models.',
+        'Developed statistical hypothesis testing suites for risk management reports.'
+      ]
+    },
+    {
+      id: 'exp-sophia3p-6',
+      role: 'Junior Data Analyst Intern',
+      company: 'Northwest Data Systems',
+      location: 'Seattle, WA',
+      startDate: '2013-05',
+      endDate: '2013-12',
+      current: false,
+      highlights: [
+        'Maintained data hygiene across corporate MySQL databases and generated weekly sales reports.'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 'edu-sophia3p-1',
+      degree: 'M.S. in Data Science & Machine Learning',
+      institution: 'University of Washington',
+      location: 'Seattle, WA',
+      startDate: '2017',
+      endDate: '2019',
+      gpa: '3.95 / 4.0'
+    },
+    {
+      id: 'edu-sophia3p-2',
+      degree: 'B.S. in Statistics & Applied Mathematics',
+      institution: 'Seattle University',
+      location: 'Seattle, WA',
+      startDate: '2013',
+      endDate: '2017',
+      gpa: '3.89 / 4.0'
+    }
+  ],
+  projects: [
+    {
+      id: 'proj-sophia3p-1',
+      title: 'Multi-Modal RAG Agent Framework',
+      subtitle: 'Open-Source AI Assistant',
+      link: 'https://github.com/sophiachen-ai/rag-framework',
+      startDate: '2023',
+      endDate: '2024',
+      technologies: ['PyTorch', 'LangChain', 'Pinecone', 'FastAPI'],
+      highlights: ['Built hybrid keyword and vector retrieval system decreasing hallucination rates by 60%.']
+    },
+    {
+      id: 'proj-sophia3p-2',
+      title: 'Distributed Vector Quantization Indexer',
+      subtitle: 'Embedding Optimization Engine',
+      link: 'https://github.com/sophiachen-ai/vector-quantization',
+      startDate: '2022',
+      endDate: '2023',
+      technologies: ['Python', 'Milvus', 'Faiss', 'Docker'],
+      highlights: ['Reduced memory footprint of 50M embeddings by 40% using scalar quantization.']
+    }
+  ],
+  certifications: [
+    { id: 'cert-sophia3p-1', name: 'AWS Certified Machine Learning – Specialty', issuer: 'Amazon Web Services', date: '2023' },
+    { id: 'cert-sophia3p-2', name: 'TensorFlow Developer Certificate', issuer: 'Google', date: '2022' },
+    { id: 'cert-sophia3p-3', name: 'Databricks Certified Machine Learning Professional', issuer: 'Databricks', date: '2021' }
+  ],
+  customSections: [
+    {
+      id: 'custom-sophia3p-1',
+      title: 'Peer-Reviewed Research Publications',
+      items: [
+        {
+          id: 'custom-item-sophia3p-1',
+          title: 'Parameter-Efficient Fine-Tuning in Low-Resource Domains',
+          subtitle: 'Co-Author • NeurIPS Workshop 2023',
+          date: '2023',
+          description: 'Evaluated QLoRA memory reductions across 70B parameter models in production environments.'
+        }
+      ]
+    }
+  ],
+  skills: [
+    { id: 'sk-sophia3p-1', category: 'AI & Machine Learning', items: ['PyTorch', 'TensorFlow', 'LangChain', 'Pinecone', 'RAG Pipelines', 'Hugging Face'] },
+    { id: 'sk-sophia3p-2', category: 'Languages & Infrastructure', items: ['Python', 'SQL', 'AWS SageMaker', 'Docker', 'Kubernetes', 'FastAPI', 'Spark'] }
+  ],
+  formatting: {
+    template: 'tech',
+    fontFamily: 'mono',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0284c7',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications', 'customSections']
+  }
+};
+
+export const marcusVanceData: Partial<ResumeData> = {
+  title: 'Marcus Vance - Principal Cloud & DevOps Architect Resume (4 Pages)',
+  personalInfo: {
+    fullName: 'Marcus Vance',
+    jobTitle: 'Principal Cloud & DevOps Architect',
+    email: 'marcus.vance@cloudstrata.io',
+    phone: '(555) 456-7890',
+    location: 'Austin, TX',
+    website: 'marcusvance.cloud',
+    linkedin: 'linkedin.com/in/marcusvance-cloud',
+    github: 'github.com/marcusvance-cloud'
+  },
+  summary: 'Cloud Architect with 8+ years automating multi-region Kubernetes clusters, zero-downtime CI/CD pipelines, and enterprise IaC infrastructure. Proven track record directing multimillion-dollar cloud infrastructure budgets, enforcing Zero-Trust security governance, and scaling high-availability workloads across AWS and GCP.',
+  experience: [
+    {
+      id: 'exp-marcus-1',
+      role: 'Lead Cloud Architect',
+      company: 'Strata Infrastructure',
+      location: 'Austin, TX',
+      startDate: '2020-05',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Managed $14M annual AWS cloud budget, reducing infrastructure operational costs by 32% through auto-scaling and spot instance optimization.',
+        'Engineered automated failover across dual cloud regions achieving 99.999% uptime SLA during simulated outage drills.',
+        'Architected GitOps continuous delivery pipelines using ArgoCD and Terraform for 45 enterprise engineering squads.',
+        'Implemented Zero-Trust IAM security architecture federated across Okta and AWS IAM Identity Center for 5,000 corporate users.'
+      ]
+    },
+    {
+      id: 'exp-marcus-2',
+      role: 'Principal DevOps Engineer',
+      company: 'Apex Cloud Systems',
+      location: 'Austin, TX',
+      startDate: '2017-03',
+      endDate: '2020-04',
+      current: false,
+      highlights: [
+        'Automated multi-region infrastructure provisioning using Terraform, Helm, and AWS CloudFormation.',
+        'Containerized 60+ legacy enterprise workloads using Docker and EKS, speeding up release cycles by 4x.',
+        'Built centralized logging and monitoring architecture with Prometheus, Grafana, and Datadog, cutting incident response times by 65%.'
+      ]
+    },
+    {
+      id: 'exp-marcus-3',
+      role: 'Senior Infrastructure Engineer',
+      company: 'Vanguard Data Systems',
+      location: 'Austin, TX',
+      startDate: '2015-01',
+      endDate: '2017-02',
+      current: false,
+      highlights: [
+        'Designed high-availability PostgreSQL and Redis database clusters with automated continuous backup and point-in-time recovery.',
+        'Migrated on-premise VMware infrastructure to AWS VPCs, eliminating $1.2M in annual datacenter lease expenses.'
+      ]
+    },
+    {
+      id: 'exp-marcus-4',
+      role: 'Systems Administrator & Security Consultant',
+      company: 'Enterprise Cloud Solutions',
+      location: 'Dallas, TX',
+      startDate: '2013-06',
+      endDate: '2014-12',
+      current: false,
+      highlights: [
+        'Maintained Linux server fleets across 200+ instances, ensuring PCI-DSS and SOC 2 Type II security compliance.',
+        'Automated server patch management using Ansible scripts, reducing vulnerability remediations from weeks to hours.'
+      ]
+    },
+    {
+      id: 'exp-marcus-5',
+      role: 'Cloud Infrastructure Engineer',
+      company: 'Strata Networks',
+      location: 'Austin, TX',
+      startDate: '2012-01',
+      endDate: '2013-05',
+      current: false,
+      highlights: [
+        'Configured BGP routing, VPN tunnels, and AWS DirectConnect connections for hybrid enterprise networks.',
+        'Authored technical runbooks and disaster recovery recovery plans.'
+      ]
+    },
+    {
+      id: 'exp-marcus-6',
+      role: 'Junior Systems Administrator Intern',
+      company: 'Texan Tech Labs',
+      location: 'Austin, TX',
+      startDate: '2011-05',
+      endDate: '2011-12',
+      current: false,
+      highlights: [
+        'Provisioned virtual machines and managed DNS records for internal staging environments.'
+      ]
+    },
+    {
+      id: 'exp-marcus-7',
+      role: 'Junior Infrastructure Associate',
+      company: 'Austin Tech Systems',
+      location: 'Austin, TX',
+      startDate: '2010-06',
+      endDate: '2011-04',
+      current: false,
+      highlights: [
+        'Configured rack servers and Cisco routers across corporate staging environments.',
+        'Wrote Bash scripts for server uptime monitoring and automated daily data backups.'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 'edu-marcus-1',
+      degree: 'M.S. in Cloud Computing & Systems Engineering',
+      institution: 'University of Texas at Austin',
+      location: 'Austin, TX',
+      startDate: '2014',
+      endDate: '2016',
+      gpa: '3.92 / 4.0'
+    },
+    {
+      id: 'edu-marcus-2',
+      degree: 'B.S. in Computer Engineering',
+      institution: 'UT Austin',
+      location: 'Austin, TX',
+      startDate: '2010',
+      endDate: '2014',
+      gpa: '3.88 / 4.0'
+    }
+  ],
+  projects: [
+    {
+      id: 'proj-marcus-1',
+      title: 'Automated Multi-Region Kubernetes Failover',
+      subtitle: 'Open-Source Cloud Resilience Tool',
+      link: 'https://github.com/marcusvance-cloud/k8s-failover',
+      startDate: '2023',
+      endDate: '2024',
+      technologies: ['Go', 'Kubernetes', 'AWS Route53', 'Terraform'],
+      highlights: ['Automated cross-region cluster DNS routing during cloud outages.']
+    },
+    {
+      id: 'proj-marcus-2',
+      title: 'GitOps Compliance Scanner',
+      subtitle: 'Kubernetes Policy Enforcer',
+      link: 'https://github.com/marcusvance-cloud/gitops-scanner',
+      startDate: '2022',
+      endDate: '2023',
+      technologies: ['Python', 'OPA Gatekeeper', 'ArgoCD'],
+      highlights: ['Enforced SOC 2 security compliance policies prior to deployment.']
+    },
+    {
+      id: 'proj-marcus-3',
+      title: 'Automated Terraform Cost Governance Bot',
+      subtitle: 'Cloud FinOps Automation',
+      link: 'https://github.com/marcusvance-cloud/finops-bot',
+      startDate: '2021',
+      endDate: '2022',
+      technologies: ['Python', 'AWS Infracost', 'Slack API'],
+      highlights: ['Automated PR cost estimation preventing $120k in accidental cloud overspending.']
+    }
+  ],
+  certifications: [
+    { id: 'cert-marcus-1', name: 'AWS Certified Solutions Architect – Professional', issuer: 'Amazon Web Services', date: '2023' },
+    { id: 'cert-marcus-2', name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '2022' },
+    { id: 'cert-marcus-3', name: 'HashiCorp Certified: Terraform Associate', issuer: 'HashiCorp', date: '2021' },
+    { id: 'cert-marcus-4', name: 'Certified Information Systems Security Professional (CISSP)', issuer: 'ISC2', date: '2020' }
+  ],
+  customSections: [
+    {
+      id: 'custom-marcus-1',
+      title: 'Publications & Speaking Engagements',
+      items: [
+        {
+          id: 'custom-item-marcus-1',
+          title: 'Keynote Speaker: Building Resilient Multi-Region Infrastructure',
+          subtitle: 'KubeCon North America 2023',
+          date: '2023',
+          description: 'Presented automated zero-downtime failover strategies to 2,000+ DevOps engineers.'
+        },
+        {
+          id: 'custom-item-marcus-2',
+          title: 'Author: Cloud Native Architecture Patterns & GitOps Best Practices',
+          subtitle: 'O’Reilly Media Whitepaper',
+          date: '2022',
+          description: 'Authored comprehensive guide on enterprise Kubernetes cluster management.'
+        },
+        {
+          id: 'custom-item-marcus-3',
+          title: 'Panelist: Zero-Trust Security in Distributed Kubernetes Clusters',
+          subtitle: 'Cloud Security Summit',
+          date: '2021',
+          description: 'Discussed federated identity controls and runtime security policy enforcement.'
+        }
+      ]
+    }
+  ],
+  skills: [
+    { id: 'sk-marcus-1', category: 'Cloud & Infrastructure', items: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Docker', 'GitOps', 'Helm'] },
+    { id: 'sk-marcus-2', category: 'Languages & Automation', items: ['Go', 'Python', 'Bash', 'Prometheus', 'Grafana', 'CI/CD', 'Ansible'] }
+  ],
+  formatting: {
+    template: 'executive',
+    fontFamily: 'serif',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#d97706',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications', 'customSections']
+  }
+};
+
+export const elenaRostovaData: Partial<ResumeData> = {
+  title: 'Elena Rostova - Staff Technical Product Manager Resume (1 Page)',
+  personalInfo: {
+    fullName: 'Elena Rostova',
+    jobTitle: 'Staff Technical Product Manager',
+    email: 'elena.rostova@horizon.io',
+    phone: '(555) 567-8901',
+    location: 'New York, NY',
+    website: 'elenarostova.pm',
+    linkedin: 'linkedin.com/in/elenarostova-pm',
+    github: 'github.com/elenarostova'
+  },
+  summary: 'Product Leader scaling enterprise B2B SaaS platforms, developer-facing APIs, and AI features resulting in $6.5M net-new annual revenue. Expert in Agile roadmapping and data-driven customer discovery.',
+  experience: [
+    {
+      id: 'exp-elena-1',
+      role: 'Senior Product Manager',
+      company: 'Horizon SaaS',
+      location: 'New York, NY',
+      startDate: '2021-04',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Spearheaded enterprise API portal launch, boosting 90-day active user retention by 38%.',
+        'Directed product discovery across 4 engineering squads with 96% sprint velocity delivery.'
+      ]
+    },
+    {
+      id: 'exp-elena-2',
+      role: 'Product Manager',
+      company: 'Vanguard Tech',
+      location: 'New York, NY',
+      startDate: '2018-01',
+      endDate: '2021-03',
+      current: false,
+      highlights: [
+        'Designed analytics integration dashboard used by 250,000 active users.',
+        'Conducted 50+ user interviews and A/B experiments to optimize checkout funnel conversion rates.'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 'edu-elena-1',
+      degree: 'B.A. in Economics & Computer Science',
+      institution: 'Columbia University',
+      location: 'New York, NY',
+      startDate: '2014',
+      endDate: '2018',
+      gpa: '3.91 / 4.0'
+    }
+  ],
+  skills: [
+    { id: 'sk-elena-1', category: 'Product Strategy', items: ['Product Strategy', 'Roadmapping', 'A/B Testing', 'User Research', 'Agile/Scrum', 'SQL', 'Mixpanel'] }
+  ],
+  formatting: {
+    template: 'slate',
+    fontFamily: 'inter',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0d9488',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education']
+  }
+};
+
+export const davidMillerData: Partial<ResumeData> = {
+  title: 'David Miller - Senior Frontend Architect Resume (2 Pages)',
+  personalInfo: {
+    fullName: 'David Miller',
+    jobTitle: 'Senior Frontend Architect',
+    email: 'david.miller@pixelcraft.dev',
+    phone: '(555) 678-9012',
+    location: 'Chicago, IL',
+    website: 'davidmiller.dev',
+    linkedin: 'linkedin.com/in/davidmiller-fe',
+    github: 'github.com/davidmiller-fe'
+  },
+  summary: 'Frontend Architect crafting resilient web applications, micro-frontends, and accessible design systems serving 10M+ monthly users. Expert in Core Web Vitals performance optimization and TypeScript engineering.',
+  experience: [
+    {
+      id: 'exp-david-1',
+      role: 'Lead Frontend Engineer',
+      company: 'Pixel Craft Labs',
+      location: 'Chicago, IL',
+      startDate: '2021-06',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Optimized Core Web Vitals (LCP/INP), improving mobile page load performance by 55%.',
+        'Architected cross-app design system component library adopted by 60+ engineers.',
+        'Built high-performance React and Next.js applications serving 10M+ monthly visitors.'
+      ]
+    },
+    {
+      id: 'exp-david-2',
+      role: 'Senior React Developer',
+      company: 'Interactive Web Studios',
+      location: 'Chicago, IL',
+      startDate: '2017-08',
+      endDate: '2021-05',
+      current: false,
+      highlights: [
+        'Developed state management pipelines with Redux and Zustand for complex web apps.',
+        'Led web accessibility audit achieving WCAG 2.1 AA compliance across all products.',
+        'Refactored legacy single-page application reducing initial JavaScript bundle size by 40%.'
+      ]
+    },
+    {
+      id: 'exp-david-3',
+      role: 'Frontend UI Engineer',
+      company: 'Apex Digital Studio',
+      location: 'Chicago, IL',
+      startDate: '2015-05',
+      endDate: '2017-07',
+      current: false,
+      highlights: [
+        'Created 30+ responsive UI components in HTML5, CSS3, and JavaScript.',
+        'Authored automated Cypress end-to-end test suites improving test coverage to 88%.'
+      ]
+    },
+    {
+      id: 'exp-david-4',
+      role: 'Web Developer Specialist',
+      company: 'Midwest Interactive',
+      location: 'Chicago, IL',
+      startDate: '2014-01',
+      endDate: '2015-04',
+      current: false,
+      highlights: [
+        'Maintained enterprise client web portals and optimized cross-browser CSS layouts.'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 'edu-david-1',
+      degree: 'B.S. in Computer Science',
+      institution: 'Northwestern University',
+      location: 'Evanston, IL',
+      startDate: '2013',
+      endDate: '2017',
+      gpa: '3.86 / 4.0'
+    }
+  ],
+  projects: [
+    {
+      id: 'proj-david-1',
+      title: 'Accessible Design System UI',
+      subtitle: 'Open-Source React Component Library',
+      link: 'https://github.com/davidmiller-fe/ui-system',
+      startDate: '2023',
+      endDate: '2024',
+      technologies: ['React', 'TypeScript', 'Tailwind', 'Storybook'],
+      highlights: ['Built accessible component library with 100% WCAG AA compliance.']
+    }
+  ],
+  certifications: [
+    { id: 'cert-david-1', name: 'Meta Front-End Developer Professional Certificate', issuer: 'Meta', date: '2022' }
+  ],
+  skills: [
+    { id: 'sk-david-1', category: 'Frontend Core', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'GraphQL', 'Web Vitals'] },
+    { id: 'sk-david-2', category: 'Tooling & Testing', items: ['Jest', 'Cypress', 'Webpack', 'Vite', 'Design Systems', 'Redux'] }
+  ],
+  formatting: {
+    template: 'compact',
+    fontFamily: 'inter',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0284c7',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+  }
+};
+
+export const amaraOkaforData: Partial<ResumeData> = {
+  title: 'Amara Okafor - Senior Cybersecurity & IAM Engineer Resume (3 Pages)',
+  personalInfo: {
+    fullName: 'Amara Okafor',
+    jobTitle: 'Senior Cybersecurity & IAM Engineer',
+    email: 'amara.okafor@cipherguard.sec',
+    phone: '(555) 789-0123',
+    location: 'Boston, MA',
+    website: 'amaraokafor.sec',
+    linkedin: 'linkedin.com/in/amaraokafor-sec',
+    github: 'github.com/amaraokafor-sec'
+  },
+  summary: 'Cybersecurity Architect with 7+ years enforcing Zero-Trust IAM security, automated threat detection, and SOC 2 Type II compliance. Proven track record leading enterprise security operations, deploying federated identity management, and conducting penetration test remediations.',
+  experience: [
+    {
+      id: 'exp-amara-1',
+      role: 'Lead Security Engineer',
+      company: 'Cipher Guard',
+      location: 'Boston, MA',
+      startDate: '2022-01',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Deployed Okta & Azure Entra ID federated Zero-Trust IAM across 15,000 corporate users.',
+        'Achieved 100% compliance score during ISO 27001 and SOC 2 Type II audit certifications.',
+        'Built automated threat monitoring scripts in Python detecting unauthorized access attempts.',
+        'Managed incident response team mitigating 50+ critical security alerts with zero data loss.'
+      ]
+    },
+    {
+      id: 'exp-amara-2',
+      role: 'Principal IAM Security Architect',
+      company: 'SecureNet Systems',
+      location: 'Boston, MA',
+      startDate: '2019-04',
+      endDate: '2021-12',
+      current: false,
+      highlights: [
+        'Architected single sign-on (SSO) and multi-factor authentication (MFA) protocols cutting credential breaches by 90%.',
+        'Conducted vulnerability scans and penetration test remediations across 300+ AWS instances.',
+        'Instituted automated SIEM logging infrastructure in Splunk, reducing threat detection MTTR by 45%.'
+      ]
+    },
+    {
+      id: 'exp-amara-3',
+      role: 'Senior Cybersecurity Analyst',
+      company: 'Vanguard Security Labs',
+      location: 'Boston, MA',
+      startDate: '2017-03',
+      endDate: '2019-03',
+      current: false,
+      highlights: [
+        'Authored security governance policies for cloud data encryption and key management.',
+        'Performed security code reviews and static analysis (SAST) for internal web microservices.'
+      ]
+    },
+    {
+      id: 'exp-amara-4',
+      role: 'Network Security Engineer',
+      company: 'Beacon Infrastructure Solutions',
+      location: 'Boston, MA',
+      startDate: '2015-06',
+      endDate: '2017-02',
+      current: false,
+      highlights: [
+        'Configured Cisco ASA firewalls, intrusion detection systems (IDS), and VPN access gateways.',
+        'Remediated critical network vulnerabilities identified during third-party penetration audits.'
+      ]
+    },
+    {
+      id: 'exp-amara-5',
+      role: 'Information Security Specialist',
+      company: 'Boston Data Systems',
+      location: 'Boston, MA',
+      startDate: '2014-01',
+      endDate: '2015-05',
+      current: false,
+      highlights: [
+        'Monitored security event logs and resolved user privilege escalation tickets.'
+      ]
+    },
+    {
+      id: 'exp-amara-6',
+      role: 'Cybersecurity Specialist Intern',
+      company: 'CyberShield Corp',
+      location: 'Boston, MA',
+      startDate: '2013-05',
+      endDate: '2013-12',
+      current: false,
+      highlights: [
+        'Assisted security team with phishing awareness simulation training campaigns.'
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 'edu-amara-1',
+      degree: 'M.S. in Cybersecurity & Information Assurance',
+      institution: 'Northeastern University',
+      location: 'Boston, MA',
+      startDate: '2015',
+      endDate: '2017',
+      gpa: '3.92 / 4.0'
+    },
+    {
+      id: 'edu-amara-2',
+      degree: 'B.S. in Computer Science',
+      institution: 'Boston University',
+      location: 'Boston, MA',
+      startDate: '2011',
+      endDate: '2015',
+      gpa: '3.89 / 4.0'
+    }
+  ],
+  projects: [
+    {
+      id: 'proj-amara-1',
+      title: 'Automated Zero-Trust IAM Enforcer',
+      subtitle: 'Identity Governance Tool',
+      link: 'https://github.com/amaraokafor-sec/iam-enforcer',
+      startDate: '2023',
+      endDate: '2024',
+      technologies: ['Python', 'Okta API', 'AWS IAM'],
+      highlights: ['Automated quarterly access review audits across corporate identity providers.']
+    }
+  ],
+  certifications: [
+    { id: 'cert-amara-1', name: 'Certified Information Systems Security Professional (CISSP)', issuer: 'ISC2', date: '2022' },
+    { id: 'cert-amara-2', name: 'Certified Information Security Manager (CISM)', issuer: 'ISACA', date: '2021' },
+    { id: 'cert-amara-3', name: 'AWS Certified Security – Specialty', issuer: 'Amazon Web Services', date: '2020' }
+  ],
+  customSections: [
+    {
+      id: 'custom-amara-1',
+      title: 'Threat Research & CVE Disclosures',
+      items: [
+        {
+          id: 'custom-item-amara-1',
+          title: 'CVE-2023-49210: Authentication Bypass Vulnerability Disclosure',
+          subtitle: 'Published Security Advisory',
+          date: '2023',
+          description: 'Discovered and responsibly disclosed critical authentication bypass in open-source SAML library.'
+        }
+      ]
+    }
+  ],
+  skills: [
+    { id: 'sk-amara-1', category: 'Security & Compliance', items: ['Cyber Security', 'Zero Trust IAM', 'Okta', 'Azure Entra ID', 'SOC 2 Type II', 'ISO 27001'] },
+    { id: 'sk-amara-2', category: 'Tools & Code', items: ['Python', 'AWS Security', 'Splunk', 'Wireshark', 'SIEM', 'CISSP'] }
   ],
   formatting: {
     template: 'modern',
@@ -295,7 +1232,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes! If you have built open-source tools, Kaggle competition solutions, or production web apps with LLMs, include them under a dedicated "Projects" section with GitHub links.'
       }
     ],
-    presetData: generateRandomResume(2, 'Senior AI Engineer', 'tech')
+    presetData: sophiaChenData
   },
   {
     slug: 'software-engineer',
@@ -334,14 +1271,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Format dates consistently as YYYY-MM or Month YYYY.',
       'Keep resume to 1-2 pages maximum with clear bullet margins.'
     ],
-    pageLength: '2 Pages',
+    pageLength: '1 Page',
     faqs: [
       {
         question: 'How many bullet points should I have per software engineering role?',
         answer: 'Aim for 3 to 5 strong bullets per recent role, focusing on technical architecture, quantifiable performance metrics, and business outcome.'
       }
     ],
-    presetData: generateRandomResume(2, 'Full-Stack Software Engineer', 'modern')
+    presetData: alexMorgan1PageData
   },
   {
     slug: 'data-scientist',
@@ -385,7 +1322,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes, adding links to public notebooks, repositories, or Kaggle achievements establishes strong technical credibility.'
       }
     ],
-    presetData: generateRandomResume(3, 'Senior Data Scientist', 'slate')
+    presetData: sophiaChen3PageData
   },
   {
     slug: 'data-analyst',
@@ -427,7 +1364,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes, mentioning Advanced Excel (Pivot Tables, XLOOKUP, Power Query, Macros) shows hands-on data manipulation capabilities.'
       }
     ],
-    presetData: generateRandomResume(1, 'Business & Data Analyst', 'compact')
+    presetData: davidMillerData
   },
   {
     slug: 'business-analyst',
@@ -469,7 +1406,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes, mentioning sprint planning, user story drafting, backlog grooming, and UAT demonstrates proven Agile project readiness.'
       }
     ],
-    presetData: generateRandomResume(2, 'Senior Business Analyst', 'executive')
+    presetData: marcusVanceData
   },
   {
     slug: 'project-manager',
@@ -511,7 +1448,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes! Specifying budget scale (e.g. $5M-$15M) proves your capacity to handle significant fiscal responsibility.'
       }
     ],
-    presetData: generateRandomResume(3, 'Senior Technical Project Manager (PMP)', 'executive')
+    presetData: marcusVanceData
   },
   {
     slug: 'customer-service',
@@ -553,7 +1490,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'CSAT (Customer Satisfaction), FRT (First Response Time), FCR (First Contact Resolution), and daily ticket volumes are the top metrics hiring managers look for.'
       }
     ],
-    presetData: generateRandomResume(1, 'Customer Experience Specialist', 'modern')
+    presetData: amaraOkaforData
   },
   {
     slug: 'teacher',
@@ -595,7 +1532,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Place your State Teaching License, endorsements, and CPR/First Aid certifications in a dedicated section above or alongside your Education.'
       }
     ],
-    presetData: generateRandomResume(1, 'Certified STEM Educator', 'slate')
+    presetData: elenaRostovaData
   },
   {
     slug: 'nurse',
@@ -637,7 +1574,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes! Nurse managers specifically look for shift patient ratios (e.g. 1:5 in Med-Surg or 1:2 in ICU) to gauge workload capability.'
       }
     ],
-    presetData: generateRandomResume(2, 'Registered Nurse (Med-Surg / Acute Care)', 'compact')
+    presetData: davidMillerData
   },
   {
     slug: 'college-student',
@@ -679,7 +1616,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Include your GPA if it is 3.5 or higher. If lower, focus on relevant coursework, technical skills, and projects instead.'
       }
     ],
-    presetData: generateRandomResume(1, 'Computer Science Undergraduate', 'tech')
+    presetData: alexMorgan1PageData
   },
   {
     slug: 'internship',
@@ -721,7 +1658,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes! Treat major academic projects like real jobs: give the project a clear title, specify technologies used, and write 2-3 achievement bullets.'
       }
     ],
-    presetData: generateRandomResume(1, 'Software & Product Management Intern Candidate', 'modern')
+    presetData: alexMorgan1PageData
   },
   {
     slug: 'no-experience',
@@ -763,6 +1700,6 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'You can include volunteer experience, school clubs, sports team leadership, academic projects, certifications, freelance gigs, babysitting/pet sitting, and coursework.'
       }
     ],
-    presetData: generateRandomResume(1, 'Entry-Level Associate', 'modern')
+    presetData: elenaRostovaData
   }
 ];

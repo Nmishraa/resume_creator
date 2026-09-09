@@ -84,7 +84,7 @@ export interface ExampleCardData {
   shortDescription: string;
   metrics: string[];
   skillsBadge: string[];
-  pageLength: '1-Page' | '2-Page' | '3-Page';
+  pageLength: '1-Page' | '2-Page' | '3-Page' | '4-Page';
   fullResume: ResumeSectionData;
   presetData: any;
 }
@@ -424,7 +424,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Enterprise Systems Architect modernizing legacy IT portfolios, TOGAF frameworks, and multi-million dollar cloud migrations.',
     metrics: ['Legacy IT Cost -35%', 'ERP Migration 100%', '$18M Portfolio Managed'],
     skillsBadge: ['TOGAF 10', 'Cloud Governance', 'ERP Transformation', 'SOA', 'EA Governance'],
-    pageLength: '3-Page',
+    pageLength: '4-Page',
     fullResume: {
       summary: 'Strategic Chief Enterprise Architect with 11+ years of experience aligning IT capabilities with business goals across Fortune 500 financial and manufacturing sectors. Expert in TOGAF 10 framework implementation, legacy mainframe modernization, multi-cloud governance, and governing an $18M annual technology portfolio.',
       skills: [
@@ -4045,7 +4045,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
 
     const timer = setInterval(() => {
       handleNext();
-    }, 3200);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, [isPaused, currentIndex, activeModalExample]);
@@ -4106,7 +4106,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   };
 
   const handleOpenViewModal = (example: ExampleCardData) => {
-    navigate('/resume-preview', { state: { resumeData: example.presetData } });
+    navigate('/resume-preview?slug=' + (example.slug || example.id), { state: { resumeData: example.presetData } });
   };
 
   const itemWidthPercent = 100 / visibleCount;
@@ -4132,24 +4132,36 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
         </div>
 
         {/* Manual Arrow Controls & Indicators */}
-        <div className="flex items-center gap-2 self-end sm:self-auto">
-          <span className="text-xs font-bold text-slate-400 mr-2 hidden sm:inline">
-            Showing {Math.min(visibleCount, totalOriginal)} of {totalOriginal}
-          </span>
-          <button
-            onClick={handlePrev}
-            aria-label="Previous Example"
-            className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-brand-600 hover:border-brand-300 shadow-xs hover:shadow-md flex items-center justify-center transition-all cursor-pointer"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            onClick={handleNext}
-            aria-label="Next Example"
-            className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-brand-600 hover:border-brand-300 shadow-xs hover:shadow-md flex items-center justify-center transition-all cursor-pointer"
-          >
-            <ChevronRight size={20} />
-          </button>
+        <div className="flex flex-col items-end gap-1.5 self-end sm:self-auto">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-slate-400 mr-2 hidden sm:inline">
+              Showing {Math.min(visibleCount, totalOriginal)} of {totalOriginal}
+            </span>
+            <button
+              onClick={handlePrev}
+              aria-label="Previous Example"
+              className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-brand-600 hover:border-brand-300 shadow-xs hover:shadow-md flex items-center justify-center transition-all cursor-pointer"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next Example"
+              className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-brand-600 hover:border-brand-300 shadow-xs hover:shadow-md flex items-center justify-center transition-all cursor-pointer"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          {/* Animated Carousel Status Progress Bar Track */}
+          <div className="w-32 sm:w-40 bg-slate-200/80 rounded-full h-1.5 overflow-hidden border border-slate-200/60 p-0.5">
+            <div
+              className="bg-gradient-to-r from-brand-600 to-indigo-600 h-full rounded-full transition-all duration-500 ease-out shadow-2xs"
+              style={{
+                width: `${(((currentIndex % totalOriginal) + 1) / totalOriginal) * 100}%`
+              }}
+            />
+          </div>
         </div>
       </div>
 

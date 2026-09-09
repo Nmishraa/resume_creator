@@ -755,7 +755,7 @@ export default function ResumeExamples({ user, onAuthSuccess, isEmbedded = false
                         items: [sk.name]
                       }))
                     };
-                    navigate('/resume-preview', { state: { resumeData: presetData } });
+                    navigate('/resume-preview?slug=' + sample.id, { state: { resumeData: presetData } });
                   }}
                   style={{
                     flex: 1,

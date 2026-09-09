@@ -500,29 +500,55 @@ export function generateRandomResume(
     }
   ];
 
-  // Custom section for 3-page resumes
-  const customSections = pageCount === 3 ? [
-    {
-      id: `custom-${Date.now()}-1`,
-      title: 'Patents & Technical Publications',
-      items: [
-        {
-          id: `custom-item-1`,
-          title: 'US Patent #11,842,109: Distributed Vector Indexing in Neural Search Systems',
-          subtitle: 'Co-Inventor • Granted 2023',
-          date: '2023',
-          description: 'Architected novel quantization technique for vector embeddings reducing memory footprint by 60% without loss of recall precision.'
-        },
-        {
-          id: `custom-item-2`,
-          title: 'Keynote Speaker: Building Resilient Microservices at Scale',
-          subtitle: 'Cloud Native Summit',
-          date: '2022',
-          description: 'Delivered technical presentation to 2,000+ engineers on automated zero-downtime failovers and multi-region Kubernetes architectures.'
-        }
-      ]
-    }
-  ] : [];
+  // Custom sections for multi-page resumes to naturally fill target page lengths
+  const leadershipSection = {
+    id: `custom-${Date.now()}-lead`,
+    title: 'Key Leadership & Technical Initiatives',
+    items: [
+      {
+        id: `custom-item-lead-1`,
+        title: 'Cross-Functional Agile Guild Lead',
+        subtitle: 'Engineering Excellence Initiative',
+        date: '2023',
+        description: 'Established organization-wide testing standards, automated security scanning, and CI/CD best practices across 6 product teams.'
+      },
+      {
+        id: `custom-item-lead-2`,
+        title: 'Cloud Cost Governance & Optimization Taskforce',
+        subtitle: 'Infrastructure Efficiency',
+        date: '2022',
+        description: 'Spearheaded automated resource auditing and spot-instance workload migration, cutting annual cloud expenses by 24%.'
+      }
+    ]
+  };
+
+  const patentsSection = {
+    id: `custom-${Date.now()}-patents`,
+    title: 'Patents & Technical Publications',
+    items: [
+      {
+        id: `custom-item-pat-1`,
+        title: 'US Patent #11,842,109: Distributed Vector Indexing in Neural Search Systems',
+        subtitle: 'Co-Inventor • Granted 2023',
+        date: '2023',
+        description: 'Architected novel quantization technique for vector embeddings reducing memory footprint by 60% without loss of recall precision.'
+      },
+      {
+        id: `custom-item-pat-2`,
+        title: 'Keynote Speaker: Building Resilient Microservices at Scale',
+        subtitle: 'Cloud Native Summit',
+        date: '2022',
+        description: 'Delivered technical presentation to 2,000+ engineers on automated zero-downtime failovers and multi-region Kubernetes architectures.'
+      }
+    ]
+  };
+
+  let customSections: any[] = [];
+  if (pageCount === 2) {
+    customSections = [leadershipSection];
+  } else if (pageCount === 3) {
+    customSections = [patentsSection, leadershipSection];
+  }
 
   // Slice data content precisely according to pageCount to guarantee REAL 1, 2, or 3 page count!
   let expToUse = allExperience.slice(0, 2);
@@ -536,8 +562,8 @@ export function generateRandomResume(
     expToUse = allExperience.slice(0, 4);
     eduToUse = allEducation.slice(0, 2);
     skillsToUse = allSkills.slice(0, 4);
-    projToUse = allProjects.slice(0, 2);
-    certsToUse = allCertifications.slice(0, 2);
+    projToUse = allProjects.slice(0, 3);
+    certsToUse = allCertifications.slice(0, 3);
     summaryText = `Performance-driven ${candidate.jobTitle} with 6+ years of experience designing scalable distributed cloud architectures, real-time AI microservices, and high-conversion web applications. Proven track record reducing API latency by 45% and leading cross-functional engineering teams to deliver enterprise SaaS platforms serving 2M+ active monthly users.`;
   } else if (pageCount === 3) {
     expToUse = allExperience.slice(0, 6);

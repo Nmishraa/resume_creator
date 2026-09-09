@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useResume } from '../context/ResumeContext';
 import { SeoHead } from '../components/common/SeoHead';
@@ -27,7 +27,16 @@ import {
 import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { TEMPLATE_LIST } from '../components/templates';
 import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
-import { generateRandomResume } from '../services/aiService';
+import {
+  alexMorganData,
+  alexMorgan1PageData,
+  sophiaChenData,
+  sophiaChen3PageData,
+  marcusVanceData,
+  elenaRostovaData,
+  davidMillerData,
+  amaraOkaforData
+} from '../data/resumeExamplesData';
 
 export const HomePage: React.FC = () => {
   const { updateResume } = useResume();
@@ -39,8 +48,6 @@ export const HomePage: React.FC = () => {
   const [heroTouchStart, setHeroTouchStart] = useState<number | null>(null);
   const [heroTouchEnd, setHeroTouchEnd] = useState<number | null>(null);
 
-  const alexMorganData = generateRandomResume(1, 'Senior Full-Stack Engineer', 'modern');
-
   const heroResumeCards = [
     {
       id: 'alex-morgan',
@@ -48,7 +55,7 @@ export const HomePage: React.FC = () => {
       templateId: 'modern' as const,
       templateName: 'Modern Clean',
       templateTag: 'Most Popular',
-      pageLength: '1-Page',
+      pageLength: '4-Page',
       fullName: 'Alex Morgan',
       jobTitle: 'Senior Full-Stack Engineer',
       contact: 'alex.morgan@dev.io • (555) 234-5678 • San Francisco, CA',
@@ -68,7 +75,7 @@ export const HomePage: React.FC = () => {
       templateId: 'tech' as const,
       templateName: 'Tech Minimal',
       templateTag: 'Tech Favorite',
-      pageLength: '2-Page',
+      pageLength: '3-Page',
       fullName: 'Sophia Chen',
       jobTitle: 'Lead Data Scientist & AI Specialist',
       contact: 'sophia.chen@ai-nexus.io • (555) 345-6789 • Seattle, WA',
@@ -80,7 +87,7 @@ export const HomePage: React.FC = () => {
         'Designed vector search architecture achieving sub-40ms latency across 10M vectors.'
       ],
       skills: ['Python', 'PyTorch', 'LangChain', 'Pinecone', 'AWS', 'Docker'],
-      presetData: generateRandomResume(2, 'Lead Data Scientist & AI Specialist', 'tech')
+      presetData: sophiaChen3PageData
     },
     {
       id: 'marcus-vance',
@@ -88,7 +95,7 @@ export const HomePage: React.FC = () => {
       templateId: 'executive' as const,
       templateName: 'Executive Serif',
       templateTag: 'Executive',
-      pageLength: '3-Page',
+      pageLength: '4-Page',
       fullName: 'Marcus Vance',
       jobTitle: 'Principal Cloud & DevOps Architect',
       contact: 'marcus.vance@cloudstrata.io • (555) 456-7890 • Austin, TX',
@@ -100,7 +107,7 @@ export const HomePage: React.FC = () => {
         'Engineered automated failover across dual cloud regions achieving 99.999% uptime SLA.'
       ],
       skills: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Go', 'Docker'],
-      presetData: generateRandomResume(3, 'Principal Cloud & DevOps Architect', 'executive')
+      presetData: marcusVanceData
     },
     {
       id: 'elena-rostova',
@@ -120,7 +127,7 @@ export const HomePage: React.FC = () => {
         'Directed product discovery across 4 engineering squads with 96% sprint velocity delivery.'
       ],
       skills: ['Product Strategy', 'A/B Testing', 'SQL', 'Mixpanel', 'Jira', 'OpenAPI'],
-      presetData: generateRandomResume(1, 'Staff Technical Product Manager', 'slate')
+      presetData: elenaRostovaData
     },
     {
       id: 'david-miller',
@@ -140,7 +147,7 @@ export const HomePage: React.FC = () => {
         'Architected cross-app design system component library adopted by 60+ engineers.'
       ],
       skills: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Web Vitals', 'GraphQL'],
-      presetData: generateRandomResume(2, 'Senior Frontend Architect', 'compact')
+      presetData: davidMillerData
     },
     {
       id: 'amara-okafor',
@@ -160,18 +167,31 @@ export const HomePage: React.FC = () => {
         'Achieved 100% compliance score during ISO 27001 and SOC 2 Type II audit certifications.'
       ],
       skills: ['Cyber Security', 'Zero Trust', 'Okta', 'Python', 'AWS Security', 'CISSP'],
-      presetData: generateRandomResume(3, 'Senior Cybersecurity & IAM Engineer', 'modern')
+      presetData: amaraOkaforData
     }
   ];
+
+  const heroTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   // Hero Carousel Auto-play timer
   useEffect(() => {
     if (isHeroCarouselPaused) return;
     const timer = setInterval(() => {
       setActiveHeroCardIndex((prev) => (prev >= heroResumeCards.length - 1 ? 0 : prev + 1));
-    }, 3500);
+    }, 3000);
     return () => clearInterval(timer);
   }, [isHeroCarouselPaused, heroResumeCards.length]);
+
+  // Auto-scroll active tab button into view when carousel index changes
+  useEffect(() => {
+    if (heroTabRefs.current[activeHeroCardIndex]) {
+      heroTabRefs.current[activeHeroCardIndex]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  }, [activeHeroCardIndex]);
 
   // Mobile Touch Swipe Handlers for Hero Carousel
   const handleHeroTouchStart = (e: React.TouchEvent) => {
@@ -587,40 +607,53 @@ export const HomePage: React.FC = () => {
               onTouchEnd={handleHeroTouchEnd}
             >
               {/* Header Selector Pills & Navigation Controls */}
-              <div className="flex items-center justify-between gap-2 bg-white/90 backdrop-blur-xs border border-slate-300 rounded-2xl p-2 shadow-xs">
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[280px] sm:max-w-[320px]">
-                  {heroResumeCards.map((card, idx) => (
+              <div className="bg-white/90 backdrop-blur-xs border border-slate-300 rounded-2xl p-2 shadow-xs space-y-1.5">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[280px] sm:max-w-[320px] scroll-smooth">
+                    {heroResumeCards.map((card, idx) => (
+                      <button
+                        key={card.id}
+                        ref={(el) => { heroTabRefs.current[idx] = el; }}
+                        onClick={() => setActiveHeroCardIndex(idx)}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                          activeHeroCardIndex === idx
+                            ? 'bg-slate-900 text-white shadow-xs'
+                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
+                        }`}
+                      >
+                        {card.fullName.split(' ')[0]} ({card.pageLength})
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
                     <button
-                      key={card.id}
-                      onClick={() => setActiveHeroCardIndex(idx)}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                        activeHeroCardIndex === idx
-                          ? 'bg-slate-900 text-white shadow-xs'
-                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
-                      }`}
+                      onClick={() => setActiveHeroCardIndex((prev) => (prev <= 0 ? heroResumeCards.length - 1 : prev - 1))}
+                      aria-label="Previous Resume Card"
+                      className="w-7 h-7 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center transition-colors cursor-pointer"
                     >
-                      {card.fullName.split(' ')[0]} ({card.pageLength})
+                      <ChevronLeft size={16} />
                     </button>
-                  ))}
+                    <span className="text-[11px] font-black text-slate-700 min-w-[32px] text-center">
+                      {activeHeroCardIndex + 1}/{heroResumeCards.length}
+                    </span>
+                    <button
+                      onClick={() => setActiveHeroCardIndex((prev) => (prev >= heroResumeCards.length - 1 ? 0 : prev + 1))}
+                      aria-label="Next Resume Card"
+                      className="w-7 h-7 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center transition-colors cursor-pointer"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1 shrink-0">
-                  <button
-                    onClick={() => setActiveHeroCardIndex((prev) => (prev <= 0 ? heroResumeCards.length - 1 : prev - 1))}
-                    aria-label="Previous Resume Card"
-                    className="w-7 h-7 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center transition-colors cursor-pointer"
-                  >
-                    <ChevronLeft size={16} />
-                  </button>
-                  <span className="text-[11px] font-black text-slate-700 min-w-[32px] text-center">
-                    {activeHeroCardIndex + 1}/{heroResumeCards.length}
-                  </span>
-                  <button
-                    onClick={() => setActiveHeroCardIndex((prev) => (prev >= heroResumeCards.length - 1 ? 0 : prev + 1))}
-                    aria-label="Next Resume Card"
-                    className="w-7 h-7 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center transition-colors cursor-pointer"
-                  >
-                    <ChevronRight size={16} />
-                  </button>
+
+                {/* Animated Carousel Status Progress Bar Track */}
+                <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden border border-slate-200/60 p-0.5">
+                  <div
+                    className="bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-500 h-full rounded-full transition-all duration-500 ease-out shadow-2xs"
+                    style={{
+                      width: `${((activeHeroCardIndex + 1) / heroResumeCards.length) * 100}%`
+                    }}
+                  />
                 </div>
               </div>
 
