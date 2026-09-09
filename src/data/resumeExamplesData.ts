@@ -1,4 +1,5 @@
 import { ResumeData } from '../types/resume';
+import { generateRandomResume } from '../services/aiService';
 
 export interface ResumeExampleItem {
   slug: string;
@@ -32,7 +33,7 @@ export const alexMorganData: Partial<ResumeData> = {
   title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
   personalInfo: {
     fullName: 'Alex Morgan',
-    jobTitle: 'Senior Full-Stack Engineer',
+    jobTitle: 'Senior Full-Stack & Systems Architect',
     email: 'alex.morgan@dev.io',
     phone: '(555) 234-5678',
     location: 'San Francisco, CA',
@@ -40,42 +41,182 @@ export const alexMorganData: Partial<ResumeData> = {
     linkedin: 'linkedin.com/in/alexmorgan',
     github: 'github.com/alexmorgan'
   },
-  summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
+  summary: 'Results-driven Senior Full-Stack & Systems Architect with 8+ years of experience building high-throughput microservices, multi-region cloud infrastructures, and high-availability web applications. Spearheaded distributed system architecture handling 5M daily active users with sub-50ms latency. Accomplished speaker, open-source contributor, and engineering director.',
   experience: [
     {
-      id: 'exp-1',
-      role: 'Lead Systems Engineer',
-      company: 'Cloud Scale',
+      id: 'exp-alex-1',
+      role: 'Principal Systems Architect',
+      company: 'Cloud Scale Technologies',
       location: 'San Francisco, CA',
-      startDate: '2021',
+      startDate: '2022-03',
       endDate: 'Present',
       current: true,
       highlights: [
-        'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
-        'Optimized API gateway throughput by 42% using React & Node.js microservices.'
+        'Architected multi-region Kubernetes clusters across AWS and GCP, achieving 99.999% availability for payment APIs.',
+        'Optimized GraphQL API gateway throughput by 42% using React, Node.js, and Redis microservices, serving 15M daily calls.',
+        'Managed an annual cloud infrastructure budget of $4.2M, implementing auto-scaling policies that cut compute expenses by $680,000.',
+        'Led a team of 14 senior engineers across 3 squads, driving agile release frequency from bi-weekly to 4x daily.'
       ]
-    }
-  ],
-  skills: [
+    },
     {
-      id: 'skill-1',
-      category: 'Core Stack',
-      items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']
+      id: 'exp-alex-2',
+      role: 'Staff Full-Stack Engineer',
+      company: 'Vanguard SaaS Platforms',
+      location: 'San Francisco, CA',
+      startDate: '2019-06',
+      endDate: '2022-02',
+      current: false,
+      highlights: [
+        'Engineered real-time collaboration dashboard in Next.js, WebSockets, and Tailwind CSS, boosting user session time by 35%.',
+        'Integrated Stripe Connect billing pipelines and OAuth2 SSO authentication, generating $8.4M in annual recurring revenue.',
+        'Refactored legacy monolithic backend into containerized Go microservices, reducing p99 response times from 380ms to 60ms.'
+      ]
+    },
+    {
+      id: 'exp-alex-3',
+      role: 'Senior Software Engineer',
+      company: 'Apex Digital Labs',
+      location: 'San Jose, CA',
+      startDate: '2017-02',
+      endDate: '2019-05',
+      current: false,
+      highlights: [
+        'Built automated CI/CD deployment pipelines using Terraform, Docker, and GitHub Actions, reducing build times by 65%.',
+        'Spearheaded ATS-compliant document parsing engine with Gemini LLM embeddings, improving extraction accuracy by 40%.',
+        'Authored end-to-end Jest and Cypress testing suites, increasing code coverage from 45% to 92%.'
+      ]
+    },
+    {
+      id: 'exp-alex-4',
+      role: 'Full-Stack Developer',
+      company: 'Nova Interactive',
+      location: 'Oakland, CA',
+      startDate: '2015-08',
+      endDate: '2017-01',
+      current: false,
+      highlights: [
+        'Developed 25+ responsive UI components in React and TypeScript, accelerating team feature velocity by 25%.',
+        'Optimized PostgreSQL database queries and indexing strategies, eliminating database CPU bottlenecks during peak traffic.'
+      ]
+    },
+    {
+      id: 'exp-alex-5',
+      role: 'Systems Engineer & Consultant',
+      company: 'Strata Tech Solutions',
+      location: 'San Francisco, CA',
+      startDate: '2014-01',
+      endDate: '2015-07',
+      current: false,
+      highlights: [
+        'Constructed ETL data pipelines in Python processing 400GB daily log data feeds with sub-1% failure rates.',
+        'Partnered with enterprise clients to conduct security threat modeling and penetration test remediation.'
+      ]
+    },
+    {
+      id: 'exp-alex-6',
+      role: 'Junior Developer Intern',
+      company: 'PixelCraft Studios',
+      location: 'Berkeley, CA',
+      startDate: '2013-05',
+      endDate: '2013-12',
+      current: false,
+      highlights: [
+        'Created technical documentation and user guides for REST API endpoints.',
+        'Resolved 60+ customer-reported bug tickets during initial onboarding phase.'
+      ]
     }
   ],
   education: [
     {
-      id: 'edu-1',
+      id: 'edu-alex-1',
+      degree: 'M.S. in Computer Science (Distributed Systems)',
+      institution: 'Stanford University',
+      location: 'Stanford, CA',
+      startDate: '2015',
+      endDate: '2017',
+      gpa: '3.94 / 4.0',
+      highlights: ['Thesis on High-Throughput Vector Databases and Consensus Protocols']
+    },
+    {
+      id: 'edu-alex-2',
       degree: 'B.S. in Computer Science',
       institution: 'UC Berkeley',
       location: 'Berkeley, CA',
-      startDate: '2013',
-      endDate: '2017'
+      startDate: '2011',
+      endDate: '2015',
+      gpa: '3.88 / 4.0',
+      highlights: ['Dean’s Honor List (All Semesters)', 'President of ACM Student Chapter']
     }
   ],
-  projects: [],
-  certifications: [],
-  customSections: []
+  skills: [
+    { id: 'sk-alex-1', category: 'Languages & Core', items: ['TypeScript', 'JavaScript (ES6+)', 'Go', 'Python', 'SQL', 'HTML5/CSS3', 'Rust'] },
+    { id: 'sk-alex-2', category: 'Frontend & UI', items: ['React', 'Next.js', 'Redux / Zustand', 'Tailwind CSS', 'GraphQL', 'Webpack'] },
+    { id: 'sk-alex-3', category: 'Backend & Cloud', items: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'AWS (EKS, S3, Lambda)', 'Docker', 'Kubernetes'] },
+    { id: 'sk-alex-4', category: 'DevOps & AI', items: ['Terraform', 'CI/CD Pipelines', 'Kafka', 'Prometheus', 'Grafana', 'LangChain', 'Pinecone'] }
+  ],
+  projects: [
+    {
+      id: 'proj-alex-1',
+      title: 'High-Throughput Vector Search Engine',
+      subtitle: 'Open-Source Distributed Indexer',
+      link: 'https://github.com/alexmorgan/vector-search',
+      startDate: '2023',
+      endDate: '2024',
+      technologies: ['Go', 'Pinecone', 'Docker', 'gRPC'],
+      highlights: [
+        'Engineered semantic search engine handling 10M+ vector embeddings with sub-30ms retrieval latency.',
+        'Slashing external LLM API cost overhead by $40,000/year.'
+      ]
+    },
+    {
+      id: 'proj-alex-2',
+      title: 'Multi-Region Kubernetes Failover Tool',
+      subtitle: 'Infrastructure Resilience',
+      link: 'https://github.com/alexmorgan/k8s-failover',
+      startDate: '2022',
+      endDate: '2023',
+      technologies: ['Python', 'Kubernetes', 'AWS Route53', 'Terraform'],
+      highlights: [
+        'Automated cross-region cluster failover achieving zero-downtime SLA during simulated cloud outages.'
+      ]
+    }
+  ],
+  certifications: [
+    { id: 'cert-alex-1', name: 'AWS Certified Solutions Architect – Professional', issuer: 'Amazon Web Services', date: '2023' },
+    { id: 'cert-alex-2', name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '2022' },
+    { id: 'cert-alex-3', name: 'Google Cloud Certified Professional Cloud Architect', issuer: 'Google Cloud', date: '2021' }
+  ],
+  customSections: [
+    {
+      id: 'custom-alex-1',
+      title: 'Patents & Technical Keynotes',
+      items: [
+        {
+          id: 'custom-item-alex-1',
+          title: 'US Patent #11,940,210: Distributed Quantization in Neural Search Engines',
+          subtitle: 'Co-Inventor • Granted 2023',
+          date: '2023',
+          description: 'Architected vector compression algorithm reducing index memory footprint by 55% without precision loss.'
+        },
+        {
+          id: 'custom-item-alex-2',
+          title: 'Keynote Speaker: Building Resilient Microservices at Scale',
+          subtitle: 'Cloud Native Summit',
+          date: '2022',
+          description: 'Presented to 1,500+ engineers on automated zero-downtime failover strategies in Kubernetes.'
+        }
+      ]
+    }
+  ],
+  formatting: {
+    template: 'modern',
+    fontFamily: 'inter',
+    fontSize: 'base',
+    spacing: 'normal',
+    accentColor: '#0284c7',
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications', 'customSections']
+  }
 };
 
 export const RESUME_EXAMPLES: ResumeExampleItem[] = [
@@ -101,6 +242,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
     atsKeywords: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'Kubernetes'],
     commonMistakes: [],
     formattingTips: [],
+    pageLength: '3 Pages',
     faqs: [],
     presetData: alexMorganData
   },
@@ -142,6 +284,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Group technical competencies into clear categories (Frameworks, Languages, Cloud).',
       'Structure every bullet point using the Google X-Y-Z formula: Accomplished [X] as measured by [Y], by doing [Z].'
     ],
+    pageLength: '2 Pages',
     faqs: [
       {
         question: 'What is the most important section on an AI Engineer resume?',
@@ -152,64 +295,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
         answer: 'Yes! If you have built open-source tools, Kaggle competition solutions, or production web apps with LLMs, include them under a dedicated "Projects" section with GitHub links.'
       }
     ],
-    presetData: {
-      title: 'AI & Machine Learning Engineer (ATS Example)',
-      personalInfo: {
-        fullName: 'Elena Rostova',
-        jobTitle: 'Senior AI Engineer',
-        email: 'elena.rostova@example.com',
-        phone: '+1 (555) 456-7890',
-        location: 'San Francisco, CA',
-        website: 'elenarostova.ai',
-        linkedin: 'linkedin.com/in/elena-rostova-ai',
-        github: 'github.com/elena-rostova'
-      },
-      summary: 'Innovative AI & Machine Learning Engineer with 5+ years of experience designing and deploying scalable deep learning architectures, LLM fine-tuning pipelines, and production RAG microservices. Proven track record reducing inference latency by 45% and elevating model accuracy across 5M+ daily user interactions.',
-      experience: [
-        {
-          id: 'exp-ai-1',
-          role: 'Senior AI Engineer',
-          company: 'Nexus Cognitive Systems',
-          location: 'San Francisco, CA',
-          startDate: '2022-04',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Architected and deployed a multi-stage Retrieval-Augmented Generation (RAG) pipeline with Pinecone and GPT-4o, reducing hallucination rates by 64% across 800k monthly queries.',
-            'Fine-tuned open-source LLaMA 3 70B models using LoRA/QLoRA on domain datasets, elevating response accuracy from 71% to 92.4%.',
-            'Optimized model inference latency with TensorRT-LLM on NVIDIA H100 clusters, cutting p95 response time from 1.8s to 240ms and reducing compute expenses by $22,000/month.'
-          ]
-        },
-        {
-          id: 'exp-ai-2',
-          role: 'Machine Learning Engineer',
-          company: 'QuantData Intelligence',
-          location: 'San Jose, CA',
-          startDate: '2019-08',
-          endDate: '2022-03',
-          current: false,
-          highlights: [
-            'Engineered real-time NLP classification models for financial sentiment analysis processing 10k messages/second with 94% precision.',
-            'Built automated MLOps pipelines using Kubeflow and Docker on AWS SageMaker, decreasing deployment friction by 50%.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-ai-1',
-          degree: 'M.S. in Computer Science (Artificial Intelligence)',
-          institution: 'Stanford University',
-          location: 'Stanford, CA',
-          startDate: '2017',
-          endDate: '2019',
-          gpa: '3.92 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-ai-1', category: 'AI & ML', items: ['PyTorch', 'TensorFlow', 'Hugging Face', 'LangChain', 'LlamaIndex', 'Pinecone', 'RAG'] },
-        { id: 'sk-ai-2', category: 'Languages & Tools', items: ['Python', 'TypeScript', 'Docker', 'Kubernetes', 'AWS SageMaker', 'FastAPI', 'Git'] }
-      ]
-    }
+    presetData: generateRandomResume(2, 'Senior AI Engineer', 'tech')
   },
   {
     slug: 'software-engineer',
@@ -248,57 +334,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Format dates consistently as YYYY-MM or Month YYYY.',
       'Keep resume to 1-2 pages maximum with clear bullet margins.'
     ],
+    pageLength: '2 Pages',
     faqs: [
       {
         question: 'How many bullet points should I have per software engineering role?',
         answer: 'Aim for 3 to 5 strong bullets per recent role, focusing on technical architecture, quantifiable performance metrics, and business outcome.'
       }
     ],
-    presetData: {
-      title: 'Full-Stack Software Engineer (ATS Optimized)',
-      personalInfo: {
-        fullName: 'Marcus Chen',
-        jobTitle: 'Full-Stack Software Engineer',
-        email: 'marcus.chen@example.com',
-        phone: '+1 (555) 321-9876',
-        location: 'Seattle, WA',
-        website: 'marcuschen.dev',
-        linkedin: 'linkedin.com/in/marcuschen-dev',
-        github: 'github.com/marcuschen'
-      },
-      summary: 'Full-Stack Software Engineer with 4+ years of expertise architecting high-availability distributed systems, responsive React applications, and secure REST/GraphQL APIs. Proven record improving application response times by 40% and deploying microservices serving 2M+ active users.',
-      experience: [
-        {
-          id: 'exp-swe-1',
-          role: 'Full-Stack Software Engineer',
-          company: 'Vanguard Cloud Solutions',
-          location: 'Seattle, WA',
-          startDate: '2021-06',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Architected customer-facing dashboard in React & TypeScript, boosting user session duration by 35% and supporting 1.2M daily active users.',
-            'Optimized backend PostgreSQL indexing and Redis caching layer, decreasing p99 API latency from 420ms to 85ms across 12M daily requests.',
-            'Led migration of services to Dockerized microservices on AWS ECS, enabling 99.99% service uptime.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-swe-1',
-          degree: 'B.S. in Computer Science',
-          institution: 'University of Washington',
-          location: 'Seattle, WA',
-          startDate: '2017',
-          endDate: '2021',
-          gpa: '3.82 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-swe-1', category: 'Frontend', items: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Redux Toolkit'] },
-        { id: 'sk-swe-2', category: 'Backend & Cloud', items: ['Node.js', 'PostgreSQL', 'Redis', 'AWS', 'Docker', 'GraphQL'] }
-      ]
-    }
+    presetData: generateRandomResume(2, 'Full-Stack Software Engineer', 'modern')
   },
   {
     slug: 'data-scientist',
@@ -335,56 +378,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Highlight specific business impacts (revenue saved, churn reduced, conversion lift).',
       'Group technical tools into Data Science, Programming, and Visualization categories.'
     ],
+    pageLength: '3 Pages',
     faqs: [
       {
         question: 'Should a Data Scientist resume include GitHub or Kaggle profiles?',
         answer: 'Yes, adding links to public notebooks, repositories, or Kaggle achievements establishes strong technical credibility.'
       }
     ],
-    presetData: {
-      title: 'Data Scientist (ATS Example)',
-      personalInfo: {
-        fullName: 'Sarah Jenkins',
-        jobTitle: 'Senior Data Scientist',
-        email: 'sarah.jenkins@example.com',
-        phone: '+1 (555) 789-0123',
-        location: 'Boston, MA',
-        website: 'sarahjenkins-data.com',
-        linkedin: 'linkedin.com/in/sarahjenkins-ds',
-        github: 'github.com/sarahjenkins-ds'
-      },
-      summary: 'Data Scientist with 4+ years of experience transforming complex datasets into predictive machine learning models and actionable executive insights. Expert in Python, SQL, and A/B testing.',
-      experience: [
-        {
-          id: 'exp-ds-1',
-          role: 'Data Scientist',
-          company: 'Apex Analytics Corp',
-          location: 'Boston, MA',
-          startDate: '2021-03',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Developed customer churn prediction algorithm using XGBoost, improving user retention by 14% and saving $1.8M annually.',
-            'Designed and analyzed 40+ A/B experiments, generating a 6.2% lift in conversion rates.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-ds-1',
-          degree: 'M.S. in Applied Statistics & Data Science',
-          institution: 'MIT',
-          location: 'Cambridge, MA',
-          startDate: '2019',
-          endDate: '2021',
-          gpa: '3.90 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-ds-1', category: 'Machine Learning', items: ['Python', 'XGBoost', 'scikit-learn', 'A/B Testing', 'Predictive Modeling'] },
-        { id: 'sk-ds-2', category: 'Data & Cloud', items: ['SQL', 'Snowflake', 'BigQuery', 'Apache Spark', 'Tableau'] }
-      ]
-    }
+    presetData: generateRandomResume(3, 'Senior Data Scientist', 'slate')
   },
   {
     slug: 'data-analyst',
@@ -419,55 +420,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Quantify results in hours saved, revenue uplift, or report performance improvement.',
       'Keep formatting clean with uniform bullet points.'
     ],
+    pageLength: '1 Page',
     faqs: [
       {
         question: 'Should I list Excel formulas on my Data Analyst resume?',
         answer: 'Yes, mentioning Advanced Excel (Pivot Tables, XLOOKUP, Power Query, Macros) shows hands-on data manipulation capabilities.'
       }
     ],
-    presetData: {
-      title: 'Data Analyst (ATS Example)',
-      personalInfo: {
-        fullName: 'David Kim',
-        jobTitle: 'Business & Data Analyst',
-        email: 'david.kim@example.com',
-        phone: '+1 (555) 234-5671',
-        location: 'Chicago, IL',
-        website: '',
-        linkedin: 'linkedin.com/in/davidkim-analyst',
-        github: ''
-      },
-      summary: 'Detail-oriented Data Analyst with 3+ years of experience analyzing business metrics, optimizing complex SQL queries, and designing interactive Power BI dashboards.',
-      experience: [
-        {
-          id: 'exp-da-1',
-          role: 'Data Analyst',
-          company: 'Summit Retail Group',
-          location: 'Chicago, IL',
-          startDate: '2022-01',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Designed and automated 12+ real-time enterprise Power BI dashboards tracking $45M in annual sales, eliminating 15 hours of manual weekly reporting.',
-            'Wrote and optimized complex SQL queries across 10M+ transaction rows, cutting report generation runtime by 55%.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-da-1',
-          degree: 'B.S. in Information Systems',
-          institution: 'University of Illinois',
-          location: 'Champaign, IL',
-          startDate: '2018',
-          endDate: '2022',
-          gpa: '3.75 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-da-1', category: 'Analysis & BI', items: ['SQL', 'Power BI', 'Tableau', 'Excel (Power Query)', 'Python', 'ETL'] }
-      ]
-    }
+    presetData: generateRandomResume(1, 'Business & Data Analyst', 'compact')
   },
   {
     slug: 'business-analyst',
@@ -502,55 +462,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Emphasize collaboration between engineering, QA, and business leadership.',
       'Include certifications prominently in a dedicated section.'
     ],
+    pageLength: '2 Pages',
     faqs: [
       {
         question: 'Should I list Agile ceremonies on a Business Analyst resume?',
         answer: 'Yes, mentioning sprint planning, user story drafting, backlog grooming, and UAT demonstrates proven Agile project readiness.'
       }
     ],
-    presetData: {
-      title: 'Senior Business Analyst (ATS Example)',
-      personalInfo: {
-        fullName: 'Rachel Green',
-        jobTitle: 'Senior Business Analyst',
-        email: 'rachel.green@example.com',
-        phone: '+1 (555) 987-6543',
-        location: 'New York, NY',
-        website: '',
-        linkedin: 'linkedin.com/in/rachelgreen-ba',
-        github: ''
-      },
-      summary: 'Strategic Business Analyst with 5+ years of experience leading cross-functional digital transformations, eliciting stakeholder requirements, and streamlining enterprise workflows.',
-      experience: [
-        {
-          id: 'exp-ba-1',
-          role: 'Senior Business Analyst',
-          company: 'Apex Financial Services',
-          location: 'New York, NY',
-          startDate: '2021-04',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Authored 45+ comprehensive Business Requirement Documents (BRDs) and user stories with 98% first-pass acceptance.',
-            'Conducted end-to-end gap analysis, reducing operational turnaround time by 30%.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-ba-1',
-          degree: 'B.A. in Business Administration & Finance',
-          institution: 'NYU Stern',
-          location: 'New York, NY',
-          startDate: '2015',
-          endDate: '2019',
-          gpa: '3.80 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-ba-1', category: 'Core Competencies', items: ['Agile / Scrum', 'BRD / FRD Documentation', 'Jira', 'SQL', 'Process Mapping', 'UAT Testing'] }
-      ]
-    }
+    presetData: generateRandomResume(2, 'Senior Business Analyst', 'executive')
   },
   {
     slug: 'project-manager',
@@ -585,55 +504,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Place PMP, CSM, or Prince2 credentials directly in the header or summary.',
       'Quantify budgets and project delivery timelines clearly.'
     ],
+    pageLength: '3 Pages',
     faqs: [
       {
         question: 'Should I highlight budget size on a Project Manager resume?',
         answer: 'Yes! Specifying budget scale (e.g. $5M-$15M) proves your capacity to handle significant fiscal responsibility.'
       }
     ],
-    presetData: {
-      title: 'Senior Project Manager (PMP Example)',
-      personalInfo: {
-        fullName: 'Robert Sterling',
-        jobTitle: 'Senior Technical Project Manager (PMP)',
-        email: 'robert.sterling@example.com',
-        phone: '+1 (555) 678-9012',
-        location: 'Austin, TX',
-        website: '',
-        linkedin: 'linkedin.com/in/robertsterling-pmp',
-        github: ''
-      },
-      summary: 'PMP-certified Senior Project Manager with 7+ years of experience orchestrating multimillion-dollar enterprise software implementations.',
-      experience: [
-        {
-          id: 'exp-pm-1',
-          role: 'Senior Project Manager',
-          company: 'Pinnacle Systems',
-          location: 'Austin, TX',
-          startDate: '2020-05',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Delivered 8 concurrent cloud migration projects totaling $6.5M on time and 7% under budget.',
-            'Managed cross-functional team of 24 engineers and designers, boosting sprint velocity by 28%.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-pm-1',
-          degree: 'B.S. in Industrial Engineering',
-          institution: 'University of Texas at Austin',
-          location: 'Austin, TX',
-          startDate: '2013',
-          endDate: '2017',
-          gpa: '3.85 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-pm-1', category: 'Management', items: ['PMP Certified', 'Budget Oversight ($10M+)', 'Agile / Scrum', 'Risk Mitigation', 'Jira', 'Vendor Management'] }
-      ]
-    }
+    presetData: generateRandomResume(3, 'Senior Technical Project Manager (PMP)', 'executive')
   },
   {
     slug: 'customer-service',
@@ -668,55 +546,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Quantify your daily or weekly ticket volume.',
       'Highlight software proficiency clearly.'
     ],
+    pageLength: '1 Page',
     faqs: [
       {
         question: 'What metrics should I put on a Customer Service resume?',
         answer: 'CSAT (Customer Satisfaction), FRT (First Response Time), FCR (First Contact Resolution), and daily ticket volumes are the top metrics hiring managers look for.'
       }
     ],
-    presetData: {
-      title: 'Customer Service Representative (ATS Example)',
-      personalInfo: {
-        fullName: 'Emily Watson',
-        jobTitle: 'Customer Experience Specialist',
-        email: 'emily.watson@example.com',
-        phone: '+1 (555) 432-1098',
-        location: 'Atlanta, GA',
-        website: '',
-        linkedin: 'linkedin.com/in/emilywatson-cx',
-        github: ''
-      },
-      summary: 'Customer-focused Support Specialist with 3+ years of experience in high-volume omnichannel support environments. Maintained a 98.4% Customer Satisfaction (CSAT) rating.',
-      experience: [
-        {
-          id: 'exp-cs-1',
-          role: 'Customer Support Specialist',
-          company: 'OmniCloud SaaS',
-          location: 'Atlanta, GA',
-          startDate: '2022-03',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Resolved 75+ customer inquiries daily with a 98.4% CSAT rating, exceeding team benchmark by 6%.',
-            'Reduced average first-response time from 4.5 minutes to 1.8 minutes via Zendesk macro automation.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-cs-1',
-          degree: 'B.A. in Communications',
-          institution: 'Georgia State University',
-          location: 'Atlanta, GA',
-          startDate: '2018',
-          endDate: '2022',
-          gpa: '3.70 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-cs-1', category: 'Support Tools', items: ['Zendesk', 'Salesforce CRM', 'Intercom', 'CSAT Optimization', 'Conflict Resolution'] }
-      ]
-    }
+    presetData: generateRandomResume(1, 'Customer Experience Specialist', 'modern')
   },
   {
     slug: 'teacher',
@@ -751,55 +588,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Place state teaching certification details prominently near the top of the resume.',
       'Quantify student cohort sizes and test score improvements.'
     ],
+    pageLength: '1 Page',
     faqs: [
       {
         question: 'Where should I place teaching certifications on my resume?',
         answer: 'Place your State Teaching License, endorsements, and CPR/First Aid certifications in a dedicated section above or alongside your Education.'
       }
     ],
-    presetData: {
-      title: 'Certified Science Educator (ATS Example)',
-      personalInfo: {
-        fullName: 'Jessica Miller',
-        jobTitle: 'Certified STEM Educator (Grades 6-12)',
-        email: 'jessica.miller@example.com',
-        phone: '+1 (555) 876-5432',
-        location: 'Denver, CO',
-        website: '',
-        linkedin: 'linkedin.com/in/jessicamiller-edu',
-        github: ''
-      },
-      summary: 'State-certified Secondary Educator with 5+ years of experience developing interactive STEM curricula and implementing differentiated instruction.',
-      experience: [
-        {
-          id: 'exp-tch-1',
-          role: 'Middle School Science & STEM Teacher',
-          company: 'Aspen Ridge Middle School',
-          location: 'Denver, CO',
-          startDate: '2021-08',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Executed STEM curriculum for 140+ students, elevating state benchmark science scores by 18% year-over-year.',
-            'Integrated Google Classroom and robotics lab, boosting student assignment completion by 24%.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-tch-1',
-          degree: 'B.A. in Science Education (Summa Cum Laude)',
-          institution: 'University of Colorado Boulder',
-          location: 'Boulder, CO',
-          startDate: '2016',
-          endDate: '2020',
-          gpa: '3.91 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-tch-1', category: 'Instruction', items: ['Curriculum Design', 'Differentiated Instruction', 'IEP / 504 Compliance', 'Google Classroom', 'STEM Pedagogy'] }
-      ]
-    }
+    presetData: generateRandomResume(1, 'Certified STEM Educator', 'slate')
   },
   {
     slug: 'nurse',
@@ -834,55 +630,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'List Licenses & Certifications right after the professional summary.',
       'Specify unit type (ICU, Med-Surg, ER, PACU) and nurse-to-patient ratios.'
     ],
+    pageLength: '2 Pages',
     faqs: [
       {
         question: 'Should I include my nurse-to-patient ratio on my resume?',
         answer: 'Yes! Nurse managers specifically look for shift patient ratios (e.g. 1:5 in Med-Surg or 1:2 in ICU) to gauge workload capability.'
       }
     ],
-    presetData: {
-      title: 'Registered Nurse (RN, BSN Example)',
-      personalInfo: {
-        fullName: 'Ashley Taylor, RN, BSN',
-        jobTitle: 'Registered Nurse (Med-Surg / Acute Care)',
-        email: 'ashley.taylor@example.com',
-        phone: '+1 (555) 765-4321',
-        location: 'Houston, TX',
-        website: '',
-        linkedin: 'linkedin.com/in/ashleytaylor-rn',
-        github: ''
-      },
-      summary: 'Compassionate Registered Nurse (RN, BSN) with 4+ years of acute care experience. Proficient in Epic EHR, IV therapy, and telemetry monitoring with 99.2% medication safety score.',
-      experience: [
-        {
-          id: 'exp-rn-1',
-          role: 'Staff Registered Nurse (Med-Surg)',
-          company: 'Houston Memorial Hospital',
-          location: 'Houston, TX',
-          startDate: '2021-01',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Delivered clinical care for 5-6 acute patients per shift, maintaining 99.2% medication safety record.',
-            'Documented patient vitals and care plans in Epic EHR with 100% HIPAA compliance.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-rn-1',
-          degree: 'Bachelor of Science in Nursing (BSN)',
-          institution: 'University of Texas Health Science Center',
-          location: 'Houston, TX',
-          startDate: '2016',
-          endDate: '2020',
-          gpa: '3.86 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-rn-1', category: 'Clinical Skills', items: ['Acute Care', 'IV Therapy', 'Epic EHR', 'BLS / ACLS Certified', 'Telemetry', 'Patient Advocacy'] }
-      ]
-    }
+    presetData: generateRandomResume(2, 'Registered Nurse (Med-Surg / Acute Care)', 'compact')
   },
   {
     slug: 'college-student',
@@ -917,56 +672,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Place Education and GPA (if >= 3.5) near the top of the resume.',
       'Create a dedicated "Academic Projects" section to demonstrate hands-on skills.'
     ],
+    pageLength: '1 Page',
     faqs: [
       {
         question: 'Should I include my GPA on a student resume?',
         answer: 'Include your GPA if it is 3.5 or higher. If lower, focus on relevant coursework, technical skills, and projects instead.'
       }
     ],
-    presetData: {
-      title: 'College Student / Intern (ATS Example)',
-      personalInfo: {
-        fullName: 'Lucas Bennett',
-        jobTitle: 'Computer Science Undergraduate',
-        email: 'lucas.bennett@example.com',
-        phone: '+1 (555) 654-3210',
-        location: 'Ann Arbor, MI',
-        website: 'lucasbennett.dev',
-        linkedin: 'linkedin.com/in/lucasbennett-cs',
-        github: 'github.com/lucasbennett'
-      },
-      summary: 'Driven Computer Science sophomore at University of Michigan with a 3.84 GPA. Seeking a summer software engineering internship.',
-      experience: [
-        {
-          id: 'exp-cs-stu-1',
-          role: 'Undergraduate Teaching Assistant (Data Structures)',
-          company: 'University of Michigan',
-          location: 'Ann Arbor, MI',
-          startDate: '2024-09',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Tutored 30+ students in Data Structures and Algorithms in C++ and Python.',
-            'Graded weekly coding assignments and led lab discussions for 45 students.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-cs-stu-1',
-          degree: 'B.S. in Computer Science (Expected May 2027)',
-          institution: 'University of Michigan',
-          location: 'Ann Arbor, MI',
-          startDate: '2023',
-          endDate: '2027',
-          gpa: '3.84 / 4.0',
-          highlights: ['Dean’s Honor List (All Semesters)', 'Relevant Coursework: Data Structures, Algorithms, Web Systems, Linear Algebra']
-        }
-      ],
-      skills: [
-        { id: 'sk-cs-stu-1', category: 'Programming', items: ['Python', 'Java', 'C++', 'SQL', 'Git', 'HTML/CSS'] }
-      ]
-    }
+    presetData: generateRandomResume(1, 'Computer Science Undergraduate', 'tech')
   },
   {
     slug: 'internship',
@@ -1001,55 +714,14 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Use single-page layout exclusively.',
       'Highlight volunteer positions, extracurricular clubs, and hackathons.'
     ],
+    pageLength: '1 Page',
     faqs: [
       {
         question: 'Can I list school projects as experience on an internship resume?',
         answer: 'Yes! Treat major academic projects like real jobs: give the project a clear title, specify technologies used, and write 2-3 achievement bullets.'
       }
     ],
-    presetData: {
-      title: 'Internship Candidate (ATS Example)',
-      personalInfo: {
-        fullName: 'Jordan Lee',
-        jobTitle: 'Software & Product Management Intern Candidate',
-        email: 'jordan.lee@example.com',
-        phone: '+1 (555) 543-2109',
-        location: 'Chicago, IL',
-        website: '',
-        linkedin: 'linkedin.com/in/jordanlee-intern',
-        github: 'github.com/jordanlee'
-      },
-      summary: 'Eager third-year undergraduate seeking a technical internship. Experienced in Python, SQL, and agile team project collaboration.',
-      experience: [
-        {
-          id: 'exp-intern-1',
-          role: 'Lead Project Developer (Academic Project)',
-          company: 'University Coursework',
-          location: 'Chicago, IL',
-          startDate: '2024-01',
-          endDate: '2024-05',
-          current: false,
-          highlights: [
-            'Built an automated inventory tracking script in Python and SQLite, decreasing audit time by 40%.',
-            'Coordinated sprint tasks and GitHub pull requests across a 3-person team.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-intern-1',
-          degree: 'B.S. in Information Technology',
-          institution: 'DePaul University',
-          location: 'Chicago, IL',
-          startDate: '2023',
-          endDate: '2027',
-          gpa: '3.78 / 4.0'
-        }
-      ],
-      skills: [
-        { id: 'sk-intern-1', category: 'Skills', items: ['Python', 'SQL', 'JavaScript', 'Git', 'Agile Collaboration', 'Excel'] }
-      ]
-    }
+    presetData: generateRandomResume(1, 'Software & Product Management Intern Candidate', 'modern')
   },
   {
     slug: 'no-experience',
@@ -1084,55 +756,13 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Use a functional or hybrid chronological layout emphasizing skills and education first.',
       'Include a "Volunteer Work & Community Leadership" section to prove reliability and initiative.'
     ],
+    pageLength: '1 Page',
     faqs: [
       {
         question: 'What can I put on a resume if I have never had a job?',
         answer: 'You can include volunteer experience, school clubs, sports team leadership, academic projects, certifications, freelance gigs, babysitting/pet sitting, and coursework.'
       }
     ],
-    presetData: {
-      title: 'First Job / Entry-Level (No Experience)',
-      personalInfo: {
-        fullName: 'Maya Robinson',
-        jobTitle: 'Entry-Level Associate',
-        email: 'maya.robinson@example.com',
-        phone: '+1 (555) 345-6789',
-        location: 'Philadelphia, PA',
-        website: '',
-        linkedin: 'linkedin.com/in/mayarobinson',
-        github: ''
-      },
-      summary: 'Reliable, organized high school graduate with strong communication and digital skills. Seeking an entry-level position to apply enthusiasm and fast learning agility.',
-      experience: [
-        {
-          id: 'exp-noexp-1',
-          role: 'Lead Community Volunteer',
-          company: 'Philadelphia Community Outreach',
-          location: 'Philadelphia, PA',
-          startDate: '2023-06',
-          endDate: 'Present',
-          current: true,
-          highlights: [
-            'Coordinated food distribution logistics for 300+ families weekly with 100% sorting accuracy.',
-            'Trained and guided 10 new volunteer assistants on safety procedures.'
-          ]
-        }
-      ],
-      education: [
-        {
-          id: 'edu-noexp-1',
-          degree: 'High School Diploma (Honor Roll)',
-          institution: 'Central High School',
-          location: 'Philadelphia, PA',
-          startDate: '2020',
-          endDate: '2024',
-          gpa: '3.80 / 4.0',
-          highlights: ['Student Council Treasurer', 'Captain of Varsity Track Team']
-        }
-      ],
-      skills: [
-        { id: 'sk-noexp-1', category: 'Core Skills', items: ['Customer Service', 'Google Docs & Sheets', 'Time Management', 'Cash Handling', 'Team Leadership'] }
-      ]
-    }
+    presetData: generateRandomResume(1, 'Entry-Level Associate', 'modern')
   }
 ];
