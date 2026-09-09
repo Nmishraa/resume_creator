@@ -15,6 +15,7 @@ import { analyzeAtsScore } from '../services/atsChecker';
 import { saveResumeApi, fetchUserResumesApi } from '../services/apiAuth';
 import { useAuth } from './AuthContext';
 import { trackResumeCreated } from '../services/analytics';
+import { generateRandomResume } from '../services/aiService';
 
 export interface AdaptiveDensityInfo {
   mode: DensityMode;
@@ -403,11 +404,7 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   };
 
   const loadSampleResume = () => {
-    const sample: ResumeData = {
-      ...initialResumeData,
-      id: `sample-resume-${Date.now()}`,
-      updatedAt: new Date().toISOString()
-    };
+    const sample = generateRandomResume();
     setResumeState(sample);
     setHistory([sample]);
     setHistoryIndex(0);

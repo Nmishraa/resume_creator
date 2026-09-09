@@ -27,6 +27,7 @@ import {
 import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { TEMPLATE_LIST } from '../components/templates';
 import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
+import { generateRandomResume } from '../services/aiService';
 
 export const HomePage: React.FC = () => {
   const { updateResume } = useResume();
@@ -38,70 +39,13 @@ export const HomePage: React.FC = () => {
   const [heroTouchStart, setHeroTouchStart] = useState<number | null>(null);
   const [heroTouchEnd, setHeroTouchEnd] = useState<number | null>(null);
 
-  const alexMorganData = {
-    title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
-    formatting: {
-      template: 'modern' as const,
-      fontFamily: 'inter' as const,
-      fontSize: 'base' as const,
-      spacing: 'normal' as const,
-      accentColor: '#2563eb',
-      showIcons: true,
-      sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
-    },
-    personalInfo: {
-      fullName: 'Alex Morgan',
-      jobTitle: 'Senior Full-Stack Engineer',
-      email: 'alex.morgan@dev.io',
-      phone: '(555) 234-5678',
-      location: 'San Francisco, CA',
-      website: 'alexmorgan.dev',
-      linkedin: 'linkedin.com/in/alexmorgan',
-      github: 'github.com/alexmorgan'
-    },
-    summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
-    experience: [
-      {
-        id: 'exp-1',
-        role: 'Lead Systems Engineer',
-        company: 'Cloud Scale',
-        location: 'San Francisco, CA',
-        startDate: '2021',
-        endDate: 'Present',
-        current: true,
-        highlights: [
-          'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
-          'Optimized API gateway throughput by 42% using React & Node.js microservices.'
-        ]
-      }
-    ],
-    skills: [
-      {
-        id: 'skill-1',
-        category: 'Core Stack',
-        items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']
-      }
-    ],
-    education: [
-      {
-        id: 'edu-1',
-        degree: 'B.S. in Computer Science',
-        institution: 'UC Berkeley',
-        location: 'Berkeley, CA',
-        startDate: '2013',
-        endDate: '2017'
-      }
-    ],
-    projects: [],
-    certifications: [],
-    customSections: []
-  };
+  const alexMorganData = generateRandomResume(1, 'Senior Full-Stack Engineer', 'modern');
 
   const heroResumeCards = [
     {
       id: 'alex-morgan',
       atsScore: '98/100',
-      templateId: 'modern',
+      templateId: 'modern' as const,
       templateName: 'Modern Clean',
       templateTag: 'Most Popular',
       pageLength: '1-Page',
@@ -121,7 +65,7 @@ export const HomePage: React.FC = () => {
     {
       id: 'sophia-chen',
       atsScore: '96/100',
-      templateId: 'tech',
+      templateId: 'tech' as const,
       templateName: 'Tech Minimal',
       templateTag: 'Tech Favorite',
       pageLength: '2-Page',
@@ -136,58 +80,12 @@ export const HomePage: React.FC = () => {
         'Designed vector search architecture achieving sub-40ms latency across 10M vectors.'
       ],
       skills: ['Python', 'PyTorch', 'LangChain', 'Pinecone', 'AWS', 'Docker'],
-      presetData: {
-        title: 'Sophia Chen - Lead Data Scientist Resume',
-        formatting: {
-          template: 'tech' as const,
-          fontFamily: 'mono' as const,
-          fontSize: 'base' as const,
-          spacing: 'normal' as const,
-          accentColor: '#0284c7',
-          showIcons: true,
-          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
-        },
-        personalInfo: {
-          fullName: 'Sophia Chen',
-          jobTitle: 'Lead Data Scientist & AI Specialist',
-          email: 'sophia.chen@ai-nexus.io',
-          phone: '(555) 345-6789',
-          location: 'Seattle, WA',
-          website: 'sophiachen.ai',
-          linkedin: 'linkedin.com/in/sophiachen-ai',
-          github: 'github.com/sophiachen-ai'
-        },
-        summary: 'Senior ML practitioner specializing in LLM fine-tuning, RAG pipelines, and high-throughput vector search engines processing 3M+ daily queries.',
-        experience: [
-          {
-            id: 'exp-sc-1',
-            role: 'Principal AI Engineer',
-            company: 'Nexus Analytics',
-            location: 'Seattle, WA',
-            startDate: '2022',
-            endDate: 'Present',
-            current: true,
-            highlights: [
-              'Fine-tuned domain LLMs, cutting external model API costs by $45,000/month.',
-              'Designed vector search architecture achieving sub-40ms latency across 10M vectors.'
-            ]
-          }
-        ],
-        skills: [
-          { id: 'sk-sc-1', category: 'AI & Data', items: ['Python', 'PyTorch', 'LangChain', 'Pinecone', 'AWS', 'Docker'] }
-        ],
-        education: [
-          { id: 'edu-sc-1', degree: 'M.S. in Data Science', institution: 'University of Washington', location: 'Seattle, WA', startDate: '2016', endDate: '2018' }
-        ],
-        projects: [],
-        certifications: [],
-        customSections: []
-      }
+      presetData: generateRandomResume(2, 'Lead Data Scientist & AI Specialist', 'tech')
     },
     {
       id: 'marcus-vance',
       atsScore: '99/100',
-      templateId: 'executive',
+      templateId: 'executive' as const,
       templateName: 'Executive Serif',
       templateTag: 'Executive',
       pageLength: '3-Page',
@@ -202,58 +100,12 @@ export const HomePage: React.FC = () => {
         'Engineered automated failover across dual cloud regions achieving 99.999% uptime SLA.'
       ],
       skills: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Go', 'Docker'],
-      presetData: {
-        title: 'Marcus Vance - Principal Cloud Architect Resume',
-        formatting: {
-          template: 'executive' as const,
-          fontFamily: 'serif' as const,
-          fontSize: 'base' as const,
-          spacing: 'normal' as const,
-          accentColor: '#059669',
-          showIcons: true,
-          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
-        },
-        personalInfo: {
-          fullName: 'Marcus Vance',
-          jobTitle: 'Principal Cloud & DevOps Architect',
-          email: 'marcus.vance@cloudstrata.io',
-          phone: '(555) 456-7890',
-          location: 'Austin, TX',
-          website: 'marcusvance.cloud',
-          linkedin: 'linkedin.com/in/marcusvance-cloud',
-          github: 'github.com/marcusvance-cloud'
-        },
-        summary: 'Cloud Architect with 8+ years automating multi-region Kubernetes clusters, zero-downtime CI/CD pipelines, and enterprise IaC infrastructure.',
-        experience: [
-          {
-            id: 'exp-mv-1',
-            role: 'Lead Cloud Architect',
-            company: 'Strata Infrastructure',
-            location: 'Austin, TX',
-            startDate: '2020',
-            endDate: 'Present',
-            current: true,
-            highlights: [
-              'Managed $14M annual AWS cloud budget, reducing infrastructure operational costs by 32%.',
-              'Engineered automated failover across dual cloud regions achieving 99.999% uptime SLA.'
-            ]
-          }
-        ],
-        skills: [
-          { id: 'sk-mv-1', category: 'DevOps & Cloud', items: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Go', 'Docker'] }
-        ],
-        education: [
-          { id: 'edu-mv-1', degree: 'B.S. in Computer Engineering', institution: 'UT Austin', location: 'Austin, TX', startDate: '2012', endDate: '2016' }
-        ],
-        projects: [],
-        certifications: [],
-        customSections: []
-      }
+      presetData: generateRandomResume(3, 'Principal Cloud & DevOps Architect', 'executive')
     },
     {
       id: 'elena-rostova',
       atsScore: '97/100',
-      templateId: 'slate',
+      templateId: 'slate' as const,
       templateName: 'Professional Slate',
       templateTag: 'Modern',
       pageLength: '1-Page',
@@ -268,58 +120,12 @@ export const HomePage: React.FC = () => {
         'Directed product discovery across 4 engineering squads with 96% sprint velocity delivery.'
       ],
       skills: ['Product Strategy', 'A/B Testing', 'SQL', 'Mixpanel', 'Jira', 'OpenAPI'],
-      presetData: {
-        title: 'Elena Rostova - Staff Technical Product Manager Resume',
-        formatting: {
-          template: 'slate' as const,
-          fontFamily: 'inter' as const,
-          fontSize: 'base' as const,
-          spacing: 'normal' as const,
-          accentColor: '#4f46e5',
-          showIcons: true,
-          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
-        },
-        personalInfo: {
-          fullName: 'Elena Rostova',
-          jobTitle: 'Staff Technical Product Manager',
-          email: 'elena.rostova@horizon.io',
-          phone: '(555) 567-8901',
-          location: 'New York, NY',
-          website: 'elenarostova.pm',
-          linkedin: 'linkedin.com/in/elenarostova-pm',
-          github: 'github.com/elenarostova'
-        },
-        summary: 'Product Leader scaling enterprise B2B SaaS platforms, developer-facing APIs, and AI features resulting in $6.5M net-new annual revenue.',
-        experience: [
-          {
-            id: 'exp-er-1',
-            role: 'Senior Product Manager',
-            company: 'Horizon SaaS',
-            location: 'New York, NY',
-            startDate: '2021',
-            endDate: 'Present',
-            current: true,
-            highlights: [
-              'Spearheaded enterprise API portal launch, boosting 90-day active user retention by 38%.',
-              'Directed product discovery across 4 engineering squads with 96% sprint velocity delivery.'
-            ]
-          }
-        ],
-        skills: [
-          { id: 'sk-er-1', category: 'Product', items: ['Product Strategy', 'A/B Testing', 'SQL', 'Mixpanel', 'Jira', 'OpenAPI'] }
-        ],
-        education: [
-          { id: 'edu-er-1', degree: 'B.S. in Information Systems', institution: 'NYU Stern', location: 'New York, NY', startDate: '2014', endDate: '2018' }
-        ],
-        projects: [],
-        certifications: [],
-        customSections: []
-      }
+      presetData: generateRandomResume(1, 'Staff Technical Product Manager', 'slate')
     },
     {
       id: 'david-miller',
       atsScore: '95/100',
-      templateId: 'compact',
+      templateId: 'compact' as const,
       templateName: 'Compact Sidebar',
       templateTag: 'Space Saver',
       pageLength: '2-Page',
@@ -334,58 +140,12 @@ export const HomePage: React.FC = () => {
         'Architected cross-app design system component library adopted by 60+ engineers.'
       ],
       skills: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Web Vitals', 'GraphQL'],
-      presetData: {
-        title: 'David Miller - Senior Frontend Architect Resume',
-        formatting: {
-          template: 'compact' as const,
-          fontFamily: 'inter' as const,
-          fontSize: 'base' as const,
-          spacing: 'compact' as const,
-          accentColor: '#d97706',
-          showIcons: true,
-          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
-        },
-        personalInfo: {
-          fullName: 'David Miller',
-          jobTitle: 'Senior Frontend Architect',
-          email: 'david.miller@pixelcraft.dev',
-          phone: '(555) 678-9012',
-          location: 'Chicago, IL',
-          website: 'davidmiller.dev',
-          linkedin: 'linkedin.com/in/davidmiller-fe',
-          github: 'github.com/davidmiller-fe'
-        },
-        summary: 'Frontend Architect crafting resilient web applications, micro-frontends, and accessible design systems serving 10M+ monthly users.',
-        experience: [
-          {
-            id: 'exp-dm-1',
-            role: 'Lead Frontend Engineer',
-            company: 'Pixel Craft Labs',
-            location: 'Chicago, IL',
-            startDate: '2021',
-            endDate: 'Present',
-            current: true,
-            highlights: [
-              'Optimized Core Web Vitals (LCP/INP), improving mobile page load performance by 55%.',
-              'Architected cross-app design system component library adopted by 60+ engineers.'
-            ]
-          }
-        ],
-        skills: [
-          { id: 'sk-dm-1', category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Web Vitals', 'GraphQL'] }
-        ],
-        education: [
-          { id: 'edu-dm-1', degree: 'B.S. in Computer Science', institution: 'UIUC', location: 'Urbana, IL', startDate: '2013', endDate: '2017' }
-        ],
-        projects: [],
-        certifications: [],
-        customSections: []
-      }
+      presetData: generateRandomResume(2, 'Senior Frontend Architect', 'compact')
     },
     {
       id: 'amara-okafor',
       atsScore: '98/100',
-      templateId: 'modern',
+      templateId: 'modern' as const,
       templateName: 'Modern Clean',
       templateTag: 'Most Popular',
       pageLength: '3-Page',
@@ -400,53 +160,7 @@ export const HomePage: React.FC = () => {
         'Achieved 100% compliance score during ISO 27001 and SOC 2 Type II audit certifications.'
       ],
       skills: ['Cyber Security', 'Zero Trust', 'Okta', 'Python', 'AWS Security', 'CISSP'],
-      presetData: {
-        title: 'Amara Okafor - Senior Cybersecurity Engineer Resume',
-        formatting: {
-          template: 'modern' as const,
-          fontFamily: 'outfit' as const,
-          fontSize: 'base' as const,
-          spacing: 'normal' as const,
-          accentColor: '#10b981',
-          showIcons: true,
-          sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
-        },
-        personalInfo: {
-          fullName: 'Amara Okafor',
-          jobTitle: 'Senior Cybersecurity & IAM Engineer',
-          email: 'amara.okafor@cipherguard.sec',
-          phone: '(555) 789-0123',
-          location: 'Boston, MA',
-          website: 'amaraokafor.sec',
-          linkedin: 'linkedin.com/in/amaraokafor-sec',
-          github: 'github.com/amaraokafor-sec'
-        },
-        summary: 'Cybersecurity Architect with 7+ years enforcing Zero-Trust IAM security, automated threat detection, and SOC 2 Type II compliance.',
-        experience: [
-          {
-            id: 'exp-ao-1',
-            role: 'Lead Security Engineer',
-            company: 'Cipher Guard',
-            location: 'Boston, MA',
-            startDate: '2022',
-            endDate: 'Present',
-            current: true,
-            highlights: [
-              'Deployed Okta & Azure Entra ID federated Zero-Trust IAM across 15,000 corporate users.',
-              'Achieved 100% compliance score during ISO 27001 and SOC 2 Type II audit certifications.'
-            ]
-          }
-        ],
-        skills: [
-          { id: 'sk-ao-1', category: 'Security', items: ['Cyber Security', 'Zero Trust', 'Okta', 'Python', 'AWS Security', 'CISSP'] }
-        ],
-        education: [
-          { id: 'edu-ao-1', degree: 'B.S. in Cybersecurity Engineering', institution: 'Northeastern University', location: 'Boston, MA', startDate: '2015', endDate: '2019' }
-        ],
-        projects: [],
-        certifications: [],
-        customSections: []
-      }
+      presetData: generateRandomResume(3, 'Senior Cybersecurity & IAM Engineer', 'modern')
     }
   ];
 

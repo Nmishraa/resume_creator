@@ -381,3 +381,6 @@ export const generate10InterviewQuestions = (resumeData, targetJob) => {
     }
   ];
 };
+
+export { generateRandomResume } from '../services/aiService';
+
