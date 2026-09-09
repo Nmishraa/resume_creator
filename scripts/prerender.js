@@ -130,6 +130,13 @@ const PAGES = [
     h1: 'Professional Resume Examples & ATS Samples',
     intro: 'Explore recruiter-aligned resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.'
   },
+  {
+    path: '/resume-preview',
+    title: 'Full-Page Resume Preview | Resume Craft',
+    description: 'Full-page ATS resume preview with high-resolution layout rendering.',
+    h1: 'Resume Preview',
+    intro: 'Preview high-resolution ATS-optimized resume layouts.'
+  },
 
   // 12 Resume Examples
   {

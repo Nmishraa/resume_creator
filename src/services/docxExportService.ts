@@ -3,6 +3,7 @@ import {
   Packer,
   Paragraph,
   TextRun,
+  Tab,
   HeadingLevel,
   BorderStyle,
   AlignmentType,
@@ -23,8 +24,9 @@ function parseHexColor(hexColor?: string): string {
  * Generate and download an editable Microsoft Word (.docx) file from ResumeData
  */
 export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
-  const accentHex = parseHexColor(resume.formatting?.accentColor);
-  const pInfo: PersonalInfo = resume.personalInfo || {
+  const safeResume = resume || ({} as ResumeData);
+  const accentHex = parseHexColor(safeResume.formatting?.accentColor);
+  const pInfo: PersonalInfo = safeResume.personalInfo || {
     fullName: '',
     jobTitle: '',
     email: '',
@@ -125,14 +127,14 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
 
   // Section Builders
   const buildSummarySection = () => {
-    if (!resume.summary || !resume.summary.trim()) return;
+    if (!safeResume.summary || !safeResume.summary.trim()) return;
     children.push(createSectionHeader('Professional Summary'));
     children.push(
       new Paragraph({
         spacing: { after: 180 },
         children: [
           new TextRun({
-            text: resume.summary.trim(),
+            text: safeResume.summary.trim(),
             size: 21, // 10.5pt
             color: '334155',
             font: 'Calibri'
@@ -143,8 +145,8 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   };
 
   const buildExperienceSection = () => {
-    if (!resume.experience || resume.experience.length === 0) return;
-    const validItems = resume.experience.filter(
+    if (!safeResume.experience || safeResume.experience.length === 0) return;
+    const validItems = safeResume.experience.filter(
       (e) => (e.role && e.role.trim()) || (e.company && e.company.trim())
     );
     if (validItems.length === 0) return;
@@ -179,8 +181,9 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
             }),
             ...(rightMetaParts
               ? [
+                  new Tab(),
                   new TextRun({
-                    text: `\t${rightMetaParts}`,
+                    text: rightMetaParts,
                     italics: true,
                     size: 20,
                     color: '64748B',
@@ -215,8 +218,8 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   };
 
   const buildEducationSection = () => {
-    if (!resume.education || resume.education.length === 0) return;
-    const validItems = resume.education.filter(
+    if (!safeResume.education || safeResume.education.length === 0) return;
+    const validItems = safeResume.education.filter(
       (e) => (e.degree && e.degree.trim()) || (e.institution && e.institution.trim())
     );
     if (validItems.length === 0) return;
@@ -247,8 +250,9 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
             }),
             ...(rightMetaParts
               ? [
+                  new Tab(),
                   new TextRun({
-                    text: `\t${rightMetaParts}`,
+                    text: rightMetaParts,
                     italics: true,
                     size: 20,
                     color: '64748B',
@@ -299,8 +303,8 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   };
 
   const buildSkillsSection = () => {
-    if (!resume.skills || resume.skills.length === 0) return;
-    const validCategories = resume.skills.filter(
+    if (!safeResume.skills || safeResume.skills.length === 0) return;
+    const validCategories = safeResume.skills.filter(
       (s) => s.items && s.items.length > 0
     );
     if (validCategories.length === 0) return;
@@ -339,8 +343,8 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   };
 
   const buildProjectsSection = () => {
-    if (!resume.projects || resume.projects.length === 0) return;
-    const validItems = resume.projects.filter((p) => p.title && p.title.trim());
+    if (!safeResume.projects || safeResume.projects.length === 0) return;
+    const validItems = safeResume.projects.filter((p) => p.title && p.title.trim());
     if (validItems.length === 0) return;
 
     children.push(createSectionHeader('Projects'));
@@ -372,8 +376,9 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
               : []),
             ...(dates
               ? [
+                  new Tab(),
                   new TextRun({
-                    text: `\t${dates}`,
+                    text: dates,
                     italics: true,
                     size: 20,
                     color: '64748B',
@@ -424,8 +429,8 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   };
 
   const buildCertificationsSection = () => {
-    if (!resume.certifications || resume.certifications.length === 0) return;
-    const validItems = resume.certifications.filter((c) => c.name && c.name.trim());
+    if (!safeResume.certifications || safeResume.certifications.length === 0) return;
+    const validItems = safeResume.certifications.filter((c) => c.name && c.name.trim());
     if (validItems.length === 0) return;
 
     children.push(createSectionHeader('Certifications'));
@@ -455,8 +460,9 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
               : []),
             ...(cert.date
               ? [
+                  new Tab(),
                   new TextRun({
-                    text: `\t${cert.date}`,
+                    text: cert.date,
                     italics: true,
                     size: 20,
                     color: '64748B',
@@ -471,9 +477,9 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   };
 
   const buildCustomSections = () => {
-    if (!resume.customSections || resume.customSections.length === 0) return;
+    if (!safeResume.customSections || safeResume.customSections.length === 0) return;
 
-    resume.customSections.forEach((cs) => {
+    safeResume.customSections.forEach((cs) => {
       if (!cs.items || cs.items.length === 0) return;
       const validItems = cs.items.filter((item) => item.title && item.title.trim());
       if (validItems.length === 0) return;
@@ -505,8 +511,9 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
                 : []),
               ...(item.date
                 ? [
+                    new Tab(),
                     new TextRun({
-                      text: `\t${item.date}`,
+                      text: item.date,
                       italics: true,
                       size: 20,
                       color: '64748B',
@@ -538,7 +545,7 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   };
 
   // Section Order Mapping
-  const sectionOrder = resume.formatting?.sectionOrder || [
+  const sectionOrder = safeResume.formatting?.sectionOrder || [
     'summary',
     'experience',
     'skills',
@@ -604,7 +611,15 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
   });
 
   // Generate Blob and Download
-  const blob = await Packer.toBlob(doc);
+  let blob: Blob;
+  try {
+    blob = await Packer.toBlob(doc);
+  } catch (e) {
+    const buffer = await Packer.toBuffer(doc);
+    blob = new Blob([buffer as unknown as BlobPart], {
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    });
+  }
 
   // Filename logic: FirstName_LastName_Resume.docx
   const fullName = (pInfo.fullName || 'Resume').trim();
@@ -619,13 +634,20 @@ export async function exportResumeToDocx(resume: ResumeData): Promise<void> {
     filename = `${firstName}_${lastName}_Resume.docx`;
   }
 
-  // Trigger browser download
+  // Trigger browser download safely without immediate URL revocation
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = filename;
+  a.style.display = 'none';
   document.body.appendChild(a);
   a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+
+  setTimeout(() => {
+    if (document.body.contains(a)) {
+      document.body.removeChild(a);
+    }
+    URL.revokeObjectURL(url);
+  }, 2000);
 }
+

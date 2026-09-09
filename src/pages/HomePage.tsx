@@ -88,7 +88,7 @@ export const HomePage: React.FC = () => {
   };
 
   const handlePreviewAlexMorganLayout = () => {
-    navigate('/resume-preview', { state: { resumeData: alexMorganData } });
+    navigate('/resume-preview?slug=alex-morgan', { state: { resumeData: alexMorganData } });
   };
 
   const homeFaqs = [

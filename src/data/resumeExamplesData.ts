@@ -28,7 +28,82 @@ export interface ResumeExampleItem {
   presetData: Partial<ResumeData>;
 }
 
+export const alexMorganData: Partial<ResumeData> = {
+  title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
+  personalInfo: {
+    fullName: 'Alex Morgan',
+    jobTitle: 'Senior Full-Stack Engineer',
+    email: 'alex.morgan@dev.io',
+    phone: '(555) 234-5678',
+    location: 'San Francisco, CA',
+    website: 'alexmorgan.dev',
+    linkedin: 'linkedin.com/in/alexmorgan',
+    github: 'github.com/alexmorgan'
+  },
+  summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
+  experience: [
+    {
+      id: 'exp-1',
+      role: 'Lead Systems Engineer',
+      company: 'Cloud Scale',
+      location: 'San Francisco, CA',
+      startDate: '2021',
+      endDate: 'Present',
+      current: true,
+      highlights: [
+        'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
+        'Optimized API gateway throughput by 42% using React & Node.js microservices.'
+      ]
+    }
+  ],
+  skills: [
+    {
+      id: 'skill-1',
+      category: 'Core Stack',
+      items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']
+    }
+  ],
+  education: [
+    {
+      id: 'edu-1',
+      degree: 'B.S. in Computer Science',
+      institution: 'UC Berkeley',
+      location: 'Berkeley, CA',
+      startDate: '2013',
+      endDate: '2017'
+    }
+  ],
+  projects: [],
+  certifications: [],
+  customSections: []
+};
+
 export const RESUME_EXAMPLES: ResumeExampleItem[] = [
+  {
+    slug: 'alex-morgan',
+    roleTitle: 'Senior Full-Stack Engineer',
+    category: 'Engineering & Technology',
+    experienceLevel: 'Senior (7+ Years)',
+    metaTitle: 'Alex Morgan - Senior Full-Stack Engineer Resume Example | Resume Craft',
+    metaDescription: 'Results-driven Senior Full-Stack Engineer resume example.',
+    targetKeyword: 'senior full stack engineer resume',
+    h1: 'Alex Morgan - Senior Full-Stack Engineer Resume',
+    shortIntro: 'Results-driven engineer with 7+ years of experience building high-throughput microservices.',
+    summaryExample: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
+    skills: [
+      { category: 'Core Stack', items: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'] }
+    ],
+    experienceBullets: [
+      'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
+      'Optimized API gateway throughput by 42% using React & Node.js microservices.'
+    ],
+    keyAchievements: ['Reduced downtime by 99.9%'],
+    atsKeywords: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'Kubernetes'],
+    commonMistakes: [],
+    formattingTips: [],
+    faqs: [],
+    presetData: alexMorganData
+  },
   {
     slug: 'ai-engineer',
     roleTitle: 'AI Engineer',
