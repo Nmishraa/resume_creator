@@ -86,7 +86,7 @@ export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'st
           const validSkills = (skills || []).filter(s => s && s.items && s.items.length > 0);
           if (validSkills.length === 0) return null;
 
-          const gridCols = validSkills.length === 1 ? 'grid-cols-1 w-full' : 'grid-cols-1 sm:grid-cols-2';
+          const gridCols = validSkills.length === 1 ? 'grid-cols-1 w-full' : 'grid-cols-2';
 
           return (
             <div className="resume-section page-break-avoid">

@@ -185,7 +185,7 @@ export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 
             >
               Skills
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1 text-xs font-serif text-slate-800">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-1 text-xs font-serif text-slate-800">
               {skills.map((s) => {
                 const itemsToRender = s.items && s.items.length > 0 ? s.items : [s.category];
                 return itemsToRender.map((item, idx) => (

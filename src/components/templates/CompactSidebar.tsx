@@ -28,11 +28,11 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
 
   const gridColsClass =
     hasSidebarContent && hasMainContent
-      ? 'grid grid-cols-1 md:grid-cols-3 items-stretch'
+      ? 'grid grid-cols-3 items-stretch'
       : 'grid grid-cols-1 items-stretch';
 
-  const sidebarColSpan = !hasMainContent ? 'col-span-1 md:col-span-3' : 'col-span-1';
-  const mainColSpan = !hasSidebarContent ? 'col-span-1 md:col-span-3' : 'col-span-1 md:col-span-2';
+  const sidebarColSpan = !hasMainContent ? 'col-span-3' : 'col-span-1';
+  const mainColSpan = !hasSidebarContent ? 'col-span-3' : 'col-span-2';
 
   return (
     <div
@@ -48,9 +48,9 @@ export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 
         style={{ columnGap: 'var(--resume-column-gap, 24px)' }}
         className={gridColsClass}
       >
-        {/* Left Sidebar Column (1/3 or 3/3 if main is empty) */}
+        {/* Left Sidebar Column */}
         {hasSidebarContent && (
-          <div className={`md:border-r md:pr-5 border-slate-200 h-full flex flex-col justify-between ${sidebarColSpan}`}>
+          <div className={`border-r pr-5 border-slate-200 h-full flex flex-col justify-between ${sidebarColSpan}`}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--resume-section-gap, 18px)' }}>
             <div>
               <div

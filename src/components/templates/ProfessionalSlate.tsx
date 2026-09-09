@@ -26,8 +26,11 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
         lineHeight: 'var(--resume-line-height, 1.45)'
       }}
     >
-      {/* Banner Top Header */}
-      <div className="bg-slate-900 text-white -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 p-5 sm:p-6 mb-5 box-border rounded-t-sm">
+      {/* Banner Top Header - Full Width Dark Banner Header */}
+      <div 
+        style={{ backgroundColor: accentColor && accentColor !== '#334155' ? accentColor : '#0f172a' }}
+        className="text-white -mx-[13mm] -mt-[15mm] px-[13mm] pt-6 pb-6 mb-5 box-border rounded-t-sm"
+      >
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
             <div
@@ -38,15 +41,15 @@ export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode
             >
               {personalInfo.fullName || 'Candidate Name'}
             </div>
-            <p className="text-sm font-medium text-slate-300 tracking-wide mt-0.5">
+            <p className="text-sm font-medium text-slate-200 tracking-wide mt-0.5">
               {personalInfo.jobTitle || 'Senior Software Engineer'}
             </p>
           </div>
-          <div className="flex flex-col sm:items-end gap-1 text-xs text-slate-300">
-            {personalInfo.email && <span className="flex items-center gap-1.5"><Mail size={12} className="text-brand-300" /> {personalInfo.email}</span>}
-            {personalInfo.phone && <span className="flex items-center gap-1.5"><Phone size={12} className="text-brand-300" /> {personalInfo.phone}</span>}
-            {personalInfo.location && <span className="flex items-center gap-1.5"><MapPin size={12} className="text-brand-300" /> {personalInfo.location}</span>}
-            <div className="flex gap-3 mt-1 text-[11px] text-slate-400">
+          <div className="flex flex-col items-start sm:items-end gap-1 text-xs text-slate-200">
+            {personalInfo.email && <span className="flex items-center gap-1.5"><Mail size={12} className="text-sky-300" /> {personalInfo.email}</span>}
+            {personalInfo.phone && <span className="flex items-center gap-1.5"><Phone size={12} className="text-sky-300" /> {personalInfo.phone}</span>}
+            {personalInfo.location && <span className="flex items-center gap-1.5"><MapPin size={12} className="text-sky-300" /> {personalInfo.location}</span>}
+            <div className="flex flex-wrap gap-3 mt-1 text-[11px] text-slate-300">
               {personalInfo.linkedin && <span className="flex items-center gap-1"><LinkedinIcon size={11} /> {personalInfo.linkedin}</span>}
               {personalInfo.github && <span className="flex items-center gap-1"><GithubIcon size={11} /> {personalInfo.github}</span>}
             </div>
