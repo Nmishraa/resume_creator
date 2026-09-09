@@ -20,7 +20,9 @@ import {
   Zap,
   Layout,
   Award,
-  HelpCircle
+  HelpCircle,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { TEMPLATE_LIST } from '../components/templates';
@@ -31,6 +33,7 @@ export const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploadInitialStep, setUploadInitialStep] = useState<'upload' | 'template' | 'preview'>('upload');
+  const [activeHeroCardIndex, setActiveHeroCardIndex] = useState(0);
 
   const alexMorganData = {
     title: 'Alex Morgan - Senior Full-Stack Engineer Resume',
@@ -82,6 +85,290 @@ export const HomePage: React.FC = () => {
     customSections: []
   };
 
+  const heroResumeCards = [
+    {
+      id: 'alex-morgan',
+      atsScore: '98/100',
+      fullName: 'Alex Morgan',
+      jobTitle: 'Senior Full-Stack Engineer',
+      contact: 'alex.morgan@dev.io • (555) 234-5678 • San Francisco, CA',
+      summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
+      expTitle: 'Lead Systems Engineer • Cloud Scale',
+      expDates: '2021 – Present',
+      expHighlights: [
+        'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
+        'Optimized API gateway throughput by 42% using React & Node.js microservices.'
+      ],
+      skills: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'],
+      presetData: alexMorganData
+    },
+    {
+      id: 'sophia-chen',
+      atsScore: '96/100',
+      fullName: 'Sophia Chen',
+      jobTitle: 'Lead Data Scientist & AI Specialist',
+      contact: 'sophia.chen@ai-nexus.io • (555) 345-6789 • Seattle, WA',
+      summary: 'Senior ML practitioner specializing in LLM fine-tuning, RAG pipelines, and high-throughput vector search engines processing 3M+ daily queries.',
+      expTitle: 'Principal AI Engineer • Nexus Analytics',
+      expDates: '2022 – Present',
+      expHighlights: [
+        'Fine-tuned domain LLMs, cutting external model API costs by $45,000/month.',
+        'Designed vector search architecture achieving sub-40ms latency across 10M vectors.'
+      ],
+      skills: ['Python', 'PyTorch', 'LangChain', 'Pinecone', 'AWS', 'Docker'],
+      presetData: {
+        title: 'Sophia Chen - Lead Data Scientist Resume',
+        personalInfo: {
+          fullName: 'Sophia Chen',
+          jobTitle: 'Lead Data Scientist & AI Specialist',
+          email: 'sophia.chen@ai-nexus.io',
+          phone: '(555) 345-6789',
+          location: 'Seattle, WA',
+          website: 'sophiachen.ai',
+          linkedin: 'linkedin.com/in/sophiachen-ai',
+          github: 'github.com/sophiachen-ai'
+        },
+        summary: 'Senior ML practitioner specializing in LLM fine-tuning, RAG pipelines, and high-throughput vector search engines processing 3M+ daily queries.',
+        experience: [
+          {
+            id: 'exp-sc-1',
+            role: 'Principal AI Engineer',
+            company: 'Nexus Analytics',
+            location: 'Seattle, WA',
+            startDate: '2022',
+            endDate: 'Present',
+            current: true,
+            highlights: [
+              'Fine-tuned domain LLMs, cutting external model API costs by $45,000/month.',
+              'Designed vector search architecture achieving sub-40ms latency across 10M vectors.'
+            ]
+          }
+        ],
+        skills: [
+          { id: 'sk-sc-1', category: 'AI & Data', items: ['Python', 'PyTorch', 'LangChain', 'Pinecone', 'AWS', 'Docker'] }
+        ],
+        education: [
+          { id: 'edu-sc-1', degree: 'M.S. in Data Science', institution: 'University of Washington', location: 'Seattle, WA', startDate: '2016', endDate: '2018' }
+        ],
+        projects: [],
+        certifications: [],
+        customSections: []
+      }
+    },
+    {
+      id: 'marcus-vance',
+      atsScore: '99/100',
+      fullName: 'Marcus Vance',
+      jobTitle: 'Principal Cloud & DevOps Architect',
+      contact: 'marcus.vance@cloudstrata.io • (555) 456-7890 • Austin, TX',
+      summary: 'Cloud Architect with 8+ years automating multi-region Kubernetes clusters, zero-downtime CI/CD pipelines, and enterprise IaC infrastructure.',
+      expTitle: 'Lead Cloud Architect • Strata Infrastructure',
+      expDates: '2020 – Present',
+      expHighlights: [
+        'Managed $14M annual AWS cloud budget, reducing infrastructure operational costs by 32%.',
+        'Engineered automated failover across dual cloud regions achieving 99.999% uptime SLA.'
+      ],
+      skills: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Go', 'Docker'],
+      presetData: {
+        title: 'Marcus Vance - Principal Cloud Architect Resume',
+        personalInfo: {
+          fullName: 'Marcus Vance',
+          jobTitle: 'Principal Cloud & DevOps Architect',
+          email: 'marcus.vance@cloudstrata.io',
+          phone: '(555) 456-7890',
+          location: 'Austin, TX',
+          website: 'marcusvance.cloud',
+          linkedin: 'linkedin.com/in/marcusvance-cloud',
+          github: 'github.com/marcusvance-cloud'
+        },
+        summary: 'Cloud Architect with 8+ years automating multi-region Kubernetes clusters, zero-downtime CI/CD pipelines, and enterprise IaC infrastructure.',
+        experience: [
+          {
+            id: 'exp-mv-1',
+            role: 'Lead Cloud Architect',
+            company: 'Strata Infrastructure',
+            location: 'Austin, TX',
+            startDate: '2020',
+            endDate: 'Present',
+            current: true,
+            highlights: [
+              'Managed $14M annual AWS cloud budget, reducing infrastructure operational costs by 32%.',
+              'Engineered automated failover across dual cloud regions achieving 99.999% uptime SLA.'
+            ]
+          }
+        ],
+        skills: [
+          { id: 'sk-mv-1', category: 'DevOps & Cloud', items: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Go', 'Docker'] }
+        ],
+        education: [
+          { id: 'edu-mv-1', degree: 'B.S. in Computer Engineering', institution: 'UT Austin', location: 'Austin, TX', startDate: '2012', endDate: '2016' }
+        ],
+        projects: [],
+        certifications: [],
+        customSections: []
+      }
+    },
+    {
+      id: 'elena-rostova',
+      atsScore: '97/100',
+      fullName: 'Elena Rostova',
+      jobTitle: 'Staff Technical Product Manager',
+      contact: 'elena.rostova@horizon.io • (555) 567-8901 • New York, NY',
+      summary: 'Product Leader scaling enterprise B2B SaaS platforms, developer-facing APIs, and AI features resulting in $6.5M net-new annual revenue.',
+      expTitle: 'Senior Product Manager • Horizon SaaS',
+      expDates: '2021 – Present',
+      expHighlights: [
+        'Spearheaded enterprise API portal launch, boosting 90-day active user retention by 38%.',
+        'Directed product discovery across 4 engineering squads with 96% sprint velocity delivery.'
+      ],
+      skills: ['Product Strategy', 'A/B Testing', 'SQL', 'Mixpanel', 'Jira', 'OpenAPI'],
+      presetData: {
+        title: 'Elena Rostova - Staff Technical Product Manager Resume',
+        personalInfo: {
+          fullName: 'Elena Rostova',
+          jobTitle: 'Staff Technical Product Manager',
+          email: 'elena.rostova@horizon.io',
+          phone: '(555) 567-8901',
+          location: 'New York, NY',
+          website: 'elenarostova.pm',
+          linkedin: 'linkedin.com/in/elenarostova-pm',
+          github: 'github.com/elenarostova'
+        },
+        summary: 'Product Leader scaling enterprise B2B SaaS platforms, developer-facing APIs, and AI features resulting in $6.5M net-new annual revenue.',
+        experience: [
+          {
+            id: 'exp-er-1',
+            role: 'Senior Product Manager',
+            company: 'Horizon SaaS',
+            location: 'New York, NY',
+            startDate: '2021',
+            endDate: 'Present',
+            current: true,
+            highlights: [
+              'Spearheaded enterprise API portal launch, boosting 90-day active user retention by 38%.',
+              'Directed product discovery across 4 engineering squads with 96% sprint velocity delivery.'
+            ]
+          }
+        ],
+        skills: [
+          { id: 'sk-er-1', category: 'Product', items: ['Product Strategy', 'A/B Testing', 'SQL', 'Mixpanel', 'Jira', 'OpenAPI'] }
+        ],
+        education: [
+          { id: 'edu-er-1', degree: 'B.S. in Information Systems', institution: 'NYU Stern', location: 'New York, NY', startDate: '2014', endDate: '2018' }
+        ],
+        projects: [],
+        certifications: [],
+        customSections: []
+      }
+    },
+    {
+      id: 'david-miller',
+      atsScore: '95/100',
+      fullName: 'David Miller',
+      jobTitle: 'Senior Frontend Architect',
+      contact: 'david.miller@pixelcraft.dev • (555) 678-9012 • Chicago, IL',
+      summary: 'Frontend Architect crafting resilient web applications, micro-frontends, and accessible design systems serving 10M+ monthly users.',
+      expTitle: 'Lead Frontend Engineer • Pixel Craft Labs',
+      expDates: '2021 – Present',
+      expHighlights: [
+        'Optimized Core Web Vitals (LCP/INP), improving mobile page load performance by 55%.',
+        'Architected cross-app design system component library adopted by 60+ engineers.'
+      ],
+      skills: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Web Vitals', 'GraphQL'],
+      presetData: {
+        title: 'David Miller - Senior Frontend Architect Resume',
+        personalInfo: {
+          fullName: 'David Miller',
+          jobTitle: 'Senior Frontend Architect',
+          email: 'david.miller@pixelcraft.dev',
+          phone: '(555) 678-9012',
+          location: 'Chicago, IL',
+          website: 'davidmiller.dev',
+          linkedin: 'linkedin.com/in/davidmiller-fe',
+          github: 'github.com/davidmiller-fe'
+        },
+        summary: 'Frontend Architect crafting resilient web applications, micro-frontends, and accessible design systems serving 10M+ monthly users.',
+        experience: [
+          {
+            id: 'exp-dm-1',
+            role: 'Lead Frontend Engineer',
+            company: 'Pixel Craft Labs',
+            location: 'Chicago, IL',
+            startDate: '2021',
+            endDate: 'Present',
+            current: true,
+            highlights: [
+              'Optimized Core Web Vitals (LCP/INP), improving mobile page load performance by 55%.',
+              'Architected cross-app design system component library adopted by 60+ engineers.'
+            ]
+          }
+        ],
+        skills: [
+          { id: 'sk-dm-1', category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Web Vitals', 'GraphQL'] }
+        ],
+        education: [
+          { id: 'edu-dm-1', degree: 'B.S. in Computer Science', institution: 'UIUC', location: 'Urbana, IL', startDate: '2013', endDate: '2017' }
+        ],
+        projects: [],
+        certifications: [],
+        customSections: []
+      }
+    },
+    {
+      id: 'amara-okafor',
+      atsScore: '98/100',
+      fullName: 'Amara Okafor',
+      jobTitle: 'Senior Cybersecurity & IAM Engineer',
+      contact: 'amara.okafor@cipherguard.sec • (555) 789-0123 • Boston, MA',
+      summary: 'Cybersecurity Architect with 7+ years enforcing Zero-Trust IAM security, automated threat detection, and SOC 2 Type II compliance.',
+      expTitle: 'Lead Security Engineer • Cipher Guard',
+      expDates: '2022 – Present',
+      expHighlights: [
+        'Deployed Okta & Azure Entra ID federated Zero-Trust IAM across 15,000 corporate users.',
+        'Achieved 100% compliance score during ISO 27001 and SOC 2 Type II audit certifications.'
+      ],
+      skills: ['Cyber Security', 'Zero Trust', 'Okta', 'Python', 'AWS Security', 'CISSP'],
+      presetData: {
+        title: 'Amara Okafor - Senior Cybersecurity Engineer Resume',
+        personalInfo: {
+          fullName: 'Amara Okafor',
+          jobTitle: 'Senior Cybersecurity & IAM Engineer',
+          email: 'amara.okafor@cipherguard.sec',
+          phone: '(555) 789-0123',
+          location: 'Boston, MA',
+          website: 'amaraokafor.sec',
+          linkedin: 'linkedin.com/in/amaraokafor-sec',
+          github: 'github.com/amaraokafor-sec'
+        },
+        summary: 'Cybersecurity Architect with 7+ years enforcing Zero-Trust IAM security, automated threat detection, and SOC 2 Type II compliance.',
+        experience: [
+          {
+            id: 'exp-ao-1',
+            role: 'Lead Security Engineer',
+            company: 'Cipher Guard',
+            location: 'Boston, MA',
+            startDate: '2022',
+            endDate: 'Present',
+            current: true,
+            highlights: [
+              'Deployed Okta & Azure Entra ID federated Zero-Trust IAM across 15,000 corporate users.',
+              'Achieved 100% compliance score during ISO 27001 and SOC 2 Type II audit certifications.'
+            ]
+          }
+        ],
+        skills: [
+          { id: 'sk-ao-1', category: 'Security', items: ['Cyber Security', 'Zero Trust', 'Okta', 'Python', 'AWS Security', 'CISSP'] }
+        ],
+        education: [
+          { id: 'edu-ao-1', degree: 'B.S. in Cybersecurity Engineering', institution: 'Northeastern University', location: 'Boston, MA', startDate: '2015', endDate: '2019' }
+        ],
+        projects: [],
+        certifications: [],
+        customSections: []
+      }
+    }
+  ];
+
   const handleUseAlexMorganLayout = () => {
     updateResume(alexMorganData);
     navigate('/builder');
@@ -109,12 +396,10 @@ export const HomePage: React.FC = () => {
       answer: 'Clicking "Download PDF" directly generates and downloads a clean .pdf file onto your device. It preserves exact fonts, colors, and margins without opening print dialogs.'
     },
     {
-      question: 'Is my personal information kept private?',
+      question: 'Is My personal information kept private?',
       answer: 'Yes. All resume data is stored locally in your web browser. We do not sell your personal data or track your resume contents.'
     }
   ];
-
-
 
   return (
     <div className="space-y-16 pb-16 bg-slate-50/50">
@@ -209,78 +494,123 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Single Professional Resume Preview Visual (5 cols) */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <div 
-                onClick={handlePreviewAlexMorganLayout}
-                className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform cursor-pointer"
-                title="Click to view full-page resume preview"
-              >
-                
-                {/* Floating ATS Score Badge */}
-                <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
-                  <CheckCircle2 size={15} />
-                  <span>(Example result) ATS Score: 98/100</span>
+            {/* Right Column: 6 Interactive Resume Previews Deck (5 cols) */}
+            <div className="lg:col-span-5 space-y-3">
+              {/* Header Selector Pills & Navigation Controls */}
+              <div className="flex items-center justify-between gap-2 bg-white/90 backdrop-blur-xs border border-slate-300 rounded-2xl p-2 shadow-xs">
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[280px] sm:max-w-[320px]">
+                  {heroResumeCards.map((card, idx) => (
+                    <button
+                      key={card.id}
+                      onClick={() => setActiveHeroCardIndex(idx)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                        activeHeroCardIndex === idx
+                          ? 'bg-slate-900 text-white shadow-xs'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
+                      }`}
+                    >
+                      {card.fullName.split(' ')[0]} ({card.atsScore.split('/')[0]})
+                    </button>
+                  ))}
                 </div>
-
-                {/* Sample Resume Header */}
-                <div className="border-b border-slate-200 pb-3 space-y-1">
-                  <h3 className="text-xl font-black text-slate-900">Alex Morgan</h3>
-                  <p className="text-xs font-bold text-brand-600">Senior Full-Stack Engineer</p>
-                  <p className="text-[11px] text-slate-500">alex.morgan@dev.io • (555) 234-5678 • San Francisco, CA</p>
-                </div>
-
-                {/* Summary Section */}
-                <div className="space-y-1">
-                  <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Professional Summary</h4>
-                  <p className="text-[11px] text-slate-600 leading-relaxed">
-                    Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.
-                  </p>
-                </div>
-
-                {/* Experience Section */}
-                <div className="space-y-1.5">
-                  <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Work Experience</h4>
-                  <div>
-                    <div className="flex justify-between items-baseline text-[11px]">
-                      <span className="font-bold text-slate-800">Lead Systems Engineer • Cloud Scale</span>
-                      <span className="text-slate-500 font-medium">2021 – Present</span>
-                    </div>
-                    <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
-                      <li>Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.</li>
-                      <li>Optimized API gateway throughput by 42% using React &amp; Node.js microservices.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Skills Section */}
-                <div className="space-y-1">
-                  <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Core Skills</h4>
-                  <div className="flex flex-wrap gap-1 pt-0.5">
-                    {['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'].map((skill) => (
-                      <span key={skill} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-bold">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Interactive Preview Link Button */}
-                <div className="pt-2">
+                <div className="flex items-center gap-1 shrink-0">
                   <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePreviewAlexMorganLayout();
-                    }}
-                    className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
+                    onClick={() => setActiveHeroCardIndex((prev) => (prev <= 0 ? heroResumeCards.length - 1 : prev - 1))}
+                    aria-label="Previous Resume Card"
+                    className="w-7 h-7 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center transition-colors cursor-pointer"
                   >
-                    <span>View &amp; Use Layout Preview</span>
-                    <ArrowRight size={14} />
+                    <ChevronLeft size={16} />
+                  </button>
+                  <span className="text-[11px] font-black text-slate-700 min-w-[32px] text-center">
+                    {activeHeroCardIndex + 1}/{heroResumeCards.length}
+                  </span>
+                  <button
+                    onClick={() => setActiveHeroCardIndex((prev) => (prev >= heroResumeCards.length - 1 ? 0 : prev + 1))}
+                    aria-label="Next Resume Card"
+                    className="w-7 h-7 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <ChevronRight size={16} />
                   </button>
                 </div>
-
               </div>
+
+              {/* Active Resume Card Display */}
+              {heroResumeCards.map((card, idx) => {
+                if (idx !== activeHeroCardIndex) return null;
+                return (
+                  <div
+                    key={card.id}
+                    onClick={() => navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } })}
+                    className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-4 transform hover:scale-[1.01] transition-transform cursor-pointer"
+                    title="Click to view full-page resume preview"
+                  >
+                    {/* Floating ATS Score Badge */}
+                    <div className="absolute -top-3 -right-3 bg-emerald-600 text-white px-3.5 py-1.5 rounded-full font-black text-xs sm:text-sm shadow-md border-2 border-white flex items-center gap-1.5">
+                      <CheckCircle2 size={15} />
+                      <span>(Example result) ATS Score: {card.atsScore}</span>
+                    </div>
+
+                    {/* Sample Resume Header */}
+                    <div className="border-b border-slate-200 pb-3 space-y-1">
+                      <h3 className="text-xl font-black text-slate-900">{card.fullName}</h3>
+                      <p className="text-xs font-bold text-brand-600">{card.jobTitle}</p>
+                      <p className="text-[11px] text-slate-500">{card.contact}</p>
+                    </div>
+
+                    {/* Summary Section */}
+                    <div className="space-y-1">
+                      <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Professional Summary</h4>
+                      <p className="text-[11px] text-slate-600 leading-relaxed">
+                        {card.summary}
+                      </p>
+                    </div>
+
+                    {/* Experience Section */}
+                    <div className="space-y-1.5">
+                      <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Work Experience</h4>
+                      <div>
+                        <div className="flex justify-between items-baseline text-[11px]">
+                          <span className="font-bold text-slate-800">{card.expTitle}</span>
+                          <span className="text-slate-500 font-medium">{card.expDates}</span>
+                        </div>
+                        <ul className="text-[11px] text-slate-600 list-disc list-inside space-y-0.5 mt-0.5">
+                          {card.expHighlights.map((hl, hIdx) => (
+                            <li key={hIdx}>{hl}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Skills Section */}
+                    <div className="space-y-1">
+                      <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-0.5">Core Skills</h4>
+                      <div className="flex flex-wrap gap-1 pt-0.5">
+                        {card.skills.map((skill) => (
+                          <span key={skill} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-bold">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Interactive Preview Link Button */}
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } });
+                        }}
+                        className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
+                      >
+                        <span>View &amp; Use Layout Preview</span>
+                        <ArrowRight size={14} />
+                      </button>
+                    </div>
+
+                  </div>
+                );
+              })}
             </div>
 
           </div>
