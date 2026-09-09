@@ -53,6 +53,10 @@ const FaqPage = lazyWithRetry(() => import('./pages/FaqPage').then(m => ({ defau
 const AtsResumeBuilderPage = lazyWithRetry(() => import('./pages/seo/AtsResumeBuilderPage').then(m => ({ default: m.AtsResumeBuilderPage })));
 const SoftwareEngineerBuilderPage = lazyWithRetry(() => import('./pages/seo/SoftwareEngineerBuilderPage').then(m => ({ default: m.SoftwareEngineerBuilderPage })));
 const KeywordMatcherPage = lazyWithRetry(() => import('./pages/seo/KeywordMatcherPage').then(m => ({ default: m.KeywordMatcherPage })));
+const MainResumeBuilderSeoPage = lazyWithRetry(() => import('./pages/seo/MainResumeBuilderSeoPage').then(m => ({ default: m.MainResumeBuilderSeoPage })));
+const CoverLetterBuilderSeoPage = lazyWithRetry(() => import('./pages/seo/CoverLetterBuilderSeoPage').then(m => ({ default: m.CoverLetterBuilderSeoPage })));
+const ResumeTemplateDetailPage = lazyWithRetry(() => import('./pages/seo/ResumeTemplateDetailPage').then(m => ({ default: m.ResumeTemplateDetailPage })));
+const ResumeSkillsDetailPage = lazyWithRetry(() => import('./pages/seo/ResumeSkillsDetailPage').then(m => ({ default: m.ResumeSkillsDetailPage })));
 const FullPagePreviewPage = lazyWithRetry(() => import('./pages/FullPagePreviewPage').then(m => ({ default: m.FullPagePreviewPage })));
 const PublicPortfolioPage = lazyWithRetry(() => import('./pages/PublicPortfolioPage').then(m => ({ default: m.PublicPortfolioPage })));
 
@@ -97,12 +101,12 @@ export function App() {
             
             {/* Cover Letter & Templates */}
             <Route path="cover-letters" element={<CoverLetterPage />} />
-            <Route path="cover-letter-builder" element={<CoverLetterPage />} />
+            <Route path="cover-letter-builder" element={<CoverLetterBuilderSeoPage />} />
             <Route path="cover-letter-generator" element={<Navigate to="/cover-letter-builder" replace />} />
             <Route path="templates" element={<Navigate to="/resume-templates" replace />} />
             <Route path="resume-templates" element={<TemplatesGalleryPage />} />
-            <Route path="resume-templates/:role" element={<ResumeExampleDetailPage />} />
-            <Route path="resume-skills/:role" element={<ResumeExampleDetailPage />} />
+            <Route path="resume-templates/:role" element={<ResumeTemplateDetailPage />} />
+            <Route path="resume-skills/:role" element={<ResumeSkillsDetailPage />} />
 
             {/* Dynamic Public Web Portfolio */}
             <Route path="p/:slug" element={<PublicPortfolioPage />} />
@@ -124,7 +128,7 @@ export function App() {
             <Route path="editor/demo" element={<BuilderPage />} />
             <Route path="editor/:id" element={<BuilderPage />} />
             <Route path="editor/new" element={<BuilderPage />} />
-            <Route path="resume-builder" element={<BuilderPage />} />
+            <Route path="resume-builder" element={<MainResumeBuilderSeoPage />} />
             <Route path="applications" element={<JobTrackerPage />} />
             <Route path="interview-questions" element={<InterviewQuestionsPage />} />
             <Route path="interview-prep" element={<InterviewQuestionsPage />} />

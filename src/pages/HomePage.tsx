@@ -45,8 +45,10 @@ export const HomePage: React.FC = () => {
   const [uploadInitialStep, setUploadInitialStep] = useState<'upload' | 'template' | 'preview'>('upload');
   const [activeHeroCardIndex, setActiveHeroCardIndex] = useState(0);
   const [isHeroCarouselPaused, setIsHeroCarouselPaused] = useState(false);
-  const [heroTouchStart, setHeroTouchStart] = useState<number | null>(null);
-  const [heroTouchEnd, setHeroTouchEnd] = useState<number | null>(null);
+  const [heroTouchStartPos, setHeroTouchStartPos] = useState<{ x: number; y: number } | null>(null);
+  const [heroTouchEndPos, setHeroTouchEndPos] = useState<{ x: number; y: number } | null>(null);
+  const heroTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const heroTabContainerRef = useRef<HTMLDivElement | null>(null);
 
   const heroResumeCards = [
     {
@@ -171,8 +173,6 @@ export const HomePage: React.FC = () => {
     }
   ];
 
-  const heroTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
   // Hero Carousel Auto-play timer
   useEffect(() => {
     if (isHeroCarouselPaused) return;
@@ -182,13 +182,18 @@ export const HomePage: React.FC = () => {
     return () => clearInterval(timer);
   }, [isHeroCarouselPaused, heroResumeCards.length]);
 
-  // Auto-scroll active tab button into view when carousel index changes
+  // Auto-scroll active tab button inside container without window scroll jumping
   useEffect(() => {
-    if (heroTabRefs.current[activeHeroCardIndex]) {
-      heroTabRefs.current[activeHeroCardIndex]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
+    const activeTab = heroTabRefs.current[activeHeroCardIndex];
+    const container = heroTabContainerRef.current;
+    if (activeTab && container) {
+      const tabLeft = activeTab.offsetLeft;
+      const tabWidth = activeTab.offsetWidth;
+      const containerWidth = container.clientWidth;
+      const targetScrollLeft = tabLeft - (containerWidth / 2) + (tabWidth / 2);
+      container.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth'
       });
     }
   }, [activeHeroCardIndex]);
@@ -196,21 +201,34 @@ export const HomePage: React.FC = () => {
   // Mobile Touch Swipe Handlers for Hero Carousel
   const handleHeroTouchStart = (e: React.TouchEvent) => {
     setIsHeroCarouselPaused(true);
-    setHeroTouchEnd(null);
-    setHeroTouchStart(e.targetTouches[0].clientX);
+    setHeroTouchEndPos(null);
+    setHeroTouchStartPos({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
   };
 
   const handleHeroTouchMove = (e: React.TouchEvent) => {
-    setHeroTouchEnd(e.targetTouches[0].clientX);
+    setHeroTouchEndPos({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
   };
 
   const handleHeroTouchEnd = () => {
     setIsHeroCarouselPaused(false);
-    if (!heroTouchStart || !heroTouchEnd) return;
-    const distance = heroTouchStart - heroTouchEnd;
-    if (distance > 40) {
+    if (!heroTouchStartPos || !heroTouchEndPos) return;
+    const deltaX = heroTouchStartPos.x - heroTouchEndPos.x;
+    const deltaY = heroTouchStartPos.y - heroTouchEndPos.y;
+
+    // Prioritize vertical page scroll if vertical movement exceeds horizontal movement
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+      return;
+    }
+
+    if (deltaX > 40) {
       setActiveHeroCardIndex((prev) => (prev >= heroResumeCards.length - 1 ? 0 : prev + 1));
-    } else if (distance < -40) {
+    } else if (deltaX < -40) {
       setActiveHeroCardIndex((prev) => (prev <= 0 ? heroResumeCards.length - 1 : prev - 1));
     }
   };
@@ -519,16 +537,16 @@ export const HomePage: React.FC = () => {
             
             {/* Left Column: Focused Copy & Primary Action (7 cols) */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100/90 border border-brand-200 text-brand-950 text-xs sm:text-sm font-extrabold shadow-2xs">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100/90 border border-brand-200 text-brand-950 text-[13px] sm:text-[14px] font-extrabold shadow-2xs">
                 <Sparkles size={15} className="text-brand-600 shrink-0" />
                 <span>No login, no watermark, and no hidden fees.</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.12]">
+              <h1 className="text-3xl sm:text-4xl lg:text-[48px] xl:text-[54px] font-black text-slate-950 tracking-tight leading-[1.12]">
                 Build an <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-600">ATS-Friendly Resume</span> for Free
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-700 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-[18px] sm:text-[19px] lg:text-[20px] text-slate-700 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                 Create a professional, interview-ready resume in minutes with our guided builder, AI bullet enhancers, and direct vector PDF export.
               </p>
 
@@ -539,18 +557,18 @@ export const HomePage: React.FC = () => {
                     setUploadInitialStep('upload');
                     setShowUploadModal(true);
                   }}
-                  className="px-7 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-2xl text-base shadow-xl shadow-emerald-600/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[50px] border border-emerald-400/30"
+                  className="px-7 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-2xl text-[16px] sm:text-[17px] shadow-xl shadow-emerald-600/25 transition-all flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer min-h-[52px] border border-emerald-400/30"
                 >
                   <UploadCloud size={22} className="animate-bounce" />
                   <div className="text-left leading-tight">
-                    <span className="block font-black text-base">Upload &amp; Parse Existing Resume</span>
-                    <span className="block text-[11px] font-semibold text-emerald-100 opacity-90">Auto-fill builder in 3 seconds (PDF / Word)</span>
+                    <span className="block font-black text-[16px] sm:text-[17px]">Upload &amp; Parse Existing Resume</span>
+                    <span className="block text-[13px] font-semibold text-emerald-100 opacity-90">Auto-fill builder in 3 seconds (PDF / Word)</span>
                   </div>
                 </button>
 
                 <Link
                   to="/builder"
-                  className="px-7 py-4 bg-slate-900 hover:bg-slate-800 text-white font-extrabold rounded-2xl text-base shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer min-h-[50px]"
+                  className="px-7 py-4 bg-slate-900 hover:bg-slate-800 text-white font-extrabold rounded-2xl text-[16px] sm:text-[17px] shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer min-h-[52px]"
                 >
                   <FileText size={20} className="text-brand-400" />
                   <span>Build From Scratch</span>
@@ -571,14 +589,14 @@ export const HomePage: React.FC = () => {
                     <UploadCloud size={20} />
                   </div>
                   <div>
-                    <div className="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+                    <div className="text-[13px] sm:text-[14px] font-black text-emerald-950 flex items-center gap-1.5">
                       <span>🚀 PDF &amp; Word Resume Importer</span>
-                      <span className="text-[10px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-extrabold">Instant Parse</span>
+                      <span className="text-[12px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-extrabold">Instant Parse</span>
                     </div>
-                    <p className="text-[11px] text-emerald-800 font-medium">Already have a resume? Upload your PDF or Word document to pre-fill all sections automatically.</p>
+                    <p className="text-[13px] text-emerald-800 font-medium">Already have a resume? Upload your PDF or Word document to pre-fill all sections automatically.</p>
                   </div>
                 </div>
-                <span className="hidden sm:inline-block text-xs font-bold text-emerald-700 group-hover:translate-x-0.5 transition-transform shrink-0">
+                <span className="hidden sm:inline-block text-[13px] sm:text-[14px] font-bold text-emerald-700 group-hover:translate-x-0.5 transition-transform shrink-0">
                   Upload PDF &rarr;
                 </span>
               </div>
@@ -600,6 +618,7 @@ export const HomePage: React.FC = () => {
             {/* Right Column: 6 Interactive Resume Previews Carousel (5 cols) */}
             <div 
               className="lg:col-span-5 space-y-3 relative overflow-hidden"
+              style={{ touchAction: 'pan-y' }}
               onMouseEnter={() => setIsHeroCarouselPaused(true)}
               onMouseLeave={() => setIsHeroCarouselPaused(false)}
               onTouchStart={handleHeroTouchStart}
@@ -609,7 +628,7 @@ export const HomePage: React.FC = () => {
               {/* Header Selector Pills & Navigation Controls */}
               <div className="bg-white/90 backdrop-blur-xs border border-slate-300 rounded-2xl p-2 shadow-xs space-y-1.5">
                 <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[280px] sm:max-w-[320px] scroll-smooth">
+                  <div ref={heroTabContainerRef} className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[280px] sm:max-w-[320px] scroll-smooth">
                     {heroResumeCards.map((card, idx) => (
                       <button
                         key={card.id}
@@ -670,7 +689,7 @@ export const HomePage: React.FC = () => {
                     >
                       <div
                         onClick={() => navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } })}
-                        className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 space-y-3.5 transform hover:scale-[1.01] transition-transform cursor-pointer overflow-hidden min-h-[460px] flex flex-col justify-between"
+                        className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 transform hover:scale-[1.01] transition-transform cursor-pointer overflow-hidden h-[540px] flex flex-col justify-between"
                         title="Click to view full-page resume preview"
                       >
                         {/* Floating ATS Score Badge */}
@@ -680,7 +699,7 @@ export const HomePage: React.FC = () => {
                         </div>
 
                         {/* Top Metadata Badges Header */}
-                        <div className="flex flex-wrap items-center justify-between gap-1.5 pt-0.5 pb-1 border-b border-slate-100">
+                        <div className="flex flex-wrap items-center justify-between gap-1.5 pt-0.5 pb-2 border-b border-slate-100 shrink-0">
                           <div className="flex items-center gap-1.5 flex-wrap">
                             <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-md bg-brand-50 text-brand-700 border border-brand-200">
                               🎨 Template: {card.templateName}
@@ -704,13 +723,15 @@ export const HomePage: React.FC = () => {
                           </span>
                         </div>
 
-                        {/* Authentic Template Visual Body */}
-                        <div className="grow flex flex-col justify-center py-1">
-                          {renderHeroTemplateBody(card)}
+                        {/* Consistent Fixed-Height Preview Container */}
+                        <div className="w-full h-[390px] overflow-hidden flex items-center justify-center rounded-xl p-3 bg-slate-50/40 border border-slate-200/60 my-auto shrink-0">
+                          <div className="w-full max-h-full flex flex-col justify-center my-auto">
+                            {renderHeroTemplateBody(card)}
+                          </div>
                         </div>
 
                         {/* Interactive Preview Link Button */}
-                        <div className="pt-2">
+                        <div className="pt-2 shrink-0">
                           <button
                             type="button"
                             onClick={(e) => {

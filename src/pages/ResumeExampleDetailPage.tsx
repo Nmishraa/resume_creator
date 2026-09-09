@@ -103,7 +103,7 @@ export const ResumeExampleDetailPage: React.FC = () => {
           {example.shortIntro}
         </p>
 
-        {/* Primary Action Buttons */}
+        {/* Primary Action Buttons & Inter-Linking */}
         <div className="flex flex-wrap items-center gap-3 pt-2">
           <button
             onClick={handleUsePreset}
@@ -113,11 +113,18 @@ export const ResumeExampleDetailPage: React.FC = () => {
             <span>Use This Resume Template</span>
           </button>
           <Link
-            to="/ats-checker"
+            to={`/resume-templates/${example.slug}`}
             className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-xs sm:text-sm border border-slate-300 shadow-xs transition-all flex items-center gap-2"
           >
-            <CheckCircle2 size={16} className="text-emerald-600" />
-            <span>Scan with ATS Checker</span>
+            <Layers size={16} className="text-purple-600" />
+            <span>View {example.roleTitle} Template</span>
+          </Link>
+          <Link
+            to={`/resume-skills/${example.slug}`}
+            className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-xs sm:text-sm border border-slate-300 shadow-xs transition-all flex items-center gap-2"
+          >
+            <Zap size={16} className="text-amber-600" />
+            <span>View {example.roleTitle} Skills</span>
           </Link>
         </div>
       </section>

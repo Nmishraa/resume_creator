@@ -16,11 +16,17 @@ import { ResumeData } from '../types/resume';
 
 const HERO_CANDIDATE_MAP: Record<string, Partial<ResumeData>> = {
   'alex-morgan': alexMorganData,
+  'alex-morgan-1page': alexMorganData,
   'sophia-chen': sophiaChen3PageData,
+  'sophia-chen-3page': sophiaChen3PageData,
   'marcus-vance': marcusVanceData,
+  'marcus-vance-4page': marcusVanceData,
   'elena-rostova': elenaRostovaData,
+  'elena-rostova-2page': elenaRostovaData,
   'david-miller': davidMillerData,
-  'amara-okafor': amaraOkaforData
+  'david-miller-2page': davidMillerData,
+  'amara-okafor': amaraOkaforData,
+  'amara-okafor-1page': amaraOkaforData
 };
 
 export const FullPagePreviewPage: React.FC = () => {

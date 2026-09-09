@@ -80,52 +80,52 @@ export const Navbar: React.FC = () => {
             {/* Resume Builder Link */}
             <Link
               to="/builder"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-semibold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[15px] xl:text-[16px] font-semibold transition-all whitespace-nowrap ${
                 location.pathname === '/builder' || location.pathname === '/resume-builder'
                   ? 'bg-brand-50 text-brand-700 font-bold shadow-xs'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/80'
               }`}
             >
-              <FileText size={15} className="text-brand-600 shrink-0" />
+              <FileText size={16} className="text-brand-600 shrink-0" />
               <span>Resume Builder</span>
             </Link>
 
             {/* ATS Checker Link */}
             <Link
               to="/ats-resume-checker"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-semibold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[15px] xl:text-[16px] font-semibold transition-all whitespace-nowrap ${
                 location.pathname.startsWith('/ats')
                   ? 'bg-brand-50 text-brand-700 font-bold shadow-xs'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/80'
               }`}
             >
-              <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
+              <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
               <span>ATS Checker</span>
             </Link>
 
             {/* Find Jobs With Your Resume Link */}
             <Link
               to="/job-description-resume-matcher"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-semibold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[15px] xl:text-[16px] font-semibold transition-all whitespace-nowrap ${
                 location.pathname.includes('job-description-resume-matcher') || location.pathname.includes('find-matching-jobs') || location.pathname.includes('find-jobs-with-resume')
                   ? 'bg-brand-50 text-brand-700 font-bold shadow-xs'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/80'
               }`}
             >
-              <Target size={15} className="text-brand-600 shrink-0" />
+              <Target size={16} className="text-brand-600 shrink-0" />
               <span>Find Jobs With Your Resume</span>
             </Link>
 
             {/* Templates Link */}
             <Link
               to="/resume-templates"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-semibold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[15px] xl:text-[16px] font-semibold transition-all whitespace-nowrap ${
                 location.pathname === '/templates' || location.pathname === '/resume-templates'
                   ? 'bg-brand-50 text-brand-700 font-bold shadow-xs'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/80'
               }`}
             >
-              <Layers size={15} className="text-slate-500 shrink-0" />
+              <Layers size={16} className="text-slate-500 shrink-0" />
               <span>Templates</span>
             </Link>
 
@@ -136,14 +136,14 @@ export const Navbar: React.FC = () => {
               onMouseLeave={() => setResourcesDropdown(false)}
             >
               <button
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[15px] xl:text-[16px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
                   isResourcesActive
                     ? 'bg-brand-50 text-brand-700 font-bold shadow-xs'
                     : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/80'
                 }`}
                 aria-expanded={resourcesDropdown}
               >
-                <Compass size={15} className="text-blue-600 shrink-0" />
+                <Compass size={16} className="text-blue-600 shrink-0" />
                 <span>Resources</span>
                 <ChevronDown size={14} className={`transition-transform duration-150 ${resourcesDropdown ? 'rotate-180 text-brand-600' : 'text-slate-400'}`} />
               </button>
@@ -163,10 +163,10 @@ export const Navbar: React.FC = () => {
                           <Icon size={16} />
                         </div>
                         <div>
-                          <div className="text-xs font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+                          <div className="text-[14px] font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
                             {item.label}
                           </div>
-                          <div className="text-[11px] text-slate-500 line-clamp-1">
+                          <div className="text-[13px] text-slate-500 line-clamp-1">
                             {item.desc}
                           </div>
                         </div>
@@ -180,13 +180,13 @@ export const Navbar: React.FC = () => {
             {/* About Link */}
             <Link
               to="/about"
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-semibold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[15px] xl:text-[16px] font-semibold transition-all whitespace-nowrap ${
                 location.pathname === '/about'
                   ? 'bg-brand-50 text-brand-700 font-bold shadow-xs'
                   : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100/80'
               }`}
             >
-              <UserIcon size={15} className="text-purple-600 shrink-0" />
+              <UserIcon size={16} className="text-purple-600 shrink-0" />
               <span>About</span>
             </Link>
 

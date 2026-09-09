@@ -5,6 +5,14 @@ import { FaqAccordion } from '../../components/common/FaqAccordion';
 import { Target, Search, CheckCircle2, ArrowRight, FileCheck, Zap } from 'lucide-react';
 
 export const KeywordMatcherPage: React.FC = () => {
+  const pageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Resume Keyword Matcher – Match Your Resume to a Job Description',
+    description: 'Paste a job description and compare it against your resume. Identify matching and missing keywords, technical skills, and requirements to boost ATS score.',
+    url: 'https://resume.gnanamai.com/resume-keyword-matcher'
+  };
+
   const faqs = [
     {
       question: 'Why is resume keyword matching important?',
@@ -21,45 +29,44 @@ export const KeywordMatcherPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-16 pb-20">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
-        title="Free Resume Keyword Matcher – Compare Resume Against Job Description | Resume Craft"
-        description="Scan your resume against any job description to find missing technical skills, keyword frequency, and recruiter requirements in real-time."
+        title="Resume Keyword Matcher – Match Your Resume to a Job Description"
+        description="Paste a job description and compare it against your resume. Identify matching and missing keywords, technical skills, and requirements to boost ATS score."
         canonicalPath="/resume-keyword-matcher"
+        jsonLd={pageSchema}
       />
 
       {/* Hero Header */}
-      <section className="bg-gradient-to-b from-slate-900 via-teal-950 to-slate-900 text-white py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-500/20 border border-teal-500/30 text-teal-300 text-xs font-bold">
-            <Target size={14} />
-            <span>Targeting Google Search: "Resume Keyword Matcher"</span>
-          </div>
+      <section className="text-center space-y-6 max-w-3xl mx-auto pt-2">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold">
+          <Target size={14} className="text-teal-600" />
+          <span>Real-Time Job Description Analysis • 100% Free</span>
+        </div>
 
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
-            Free <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-emerald-400 to-cyan-300">Resume Keyword Matcher</span>
-          </h1>
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+          Resume Keyword Matcher
+        </h1>
 
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Instantly compare your resume against any job posting to discover missing keywords, technical skills gaps, and recruiter requirements.
-          </p>
+        <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+          Paste any job description to compare it against your resume in real time. Identify matching keywords, discover missing technical skills, and tailor your application to pass ATS filters effortlessly.
+        </p>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/job-description-resume-matcher"
-              className="w-full sm:w-auto px-8 py-4 bg-teal-500 hover:bg-teal-400 text-slate-950 font-black rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
-            >
-              <Search size={18} />
-              <span>Scan Resume Keywords Free &rarr;</span>
-            </Link>
-            <Link
-              to="/ats-resume-checker"
-              className="w-full sm:w-auto px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 transition-all flex items-center justify-center gap-2"
-            >
-              <CheckCircle2 size={18} className="text-teal-300" />
-              <span>Check ATS Score</span>
-            </Link>
-          </div>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <Link
+            to="/job-description-resume-matcher"
+            className="w-full sm:w-auto px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-teal-500/25 transition-all flex items-center justify-center gap-2 min-h-[44px]"
+          >
+            <Search size={18} />
+            <span>Launch Keyword Matcher Scanner &rarr;</span>
+          </Link>
+          <Link
+            to="/resume-builder"
+            className="w-full sm:w-auto px-7 py-4 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-sm border border-slate-300 shadow-xs transition-all flex items-center justify-center gap-2 min-h-[44px]"
+          >
+            <FileCheck size={18} className="text-brand-600" />
+            <span>Go to Free Resume Builder</span>
+          </Link>
         </div>
       </section>
 

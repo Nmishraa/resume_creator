@@ -4004,8 +4004,8 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   const [currentIndex, setCurrentIndex] = useState(totalOriginal);
   const [isPaused, setIsPaused] = useState(false);
   const [visibleCount, setVisibleCount] = useState(4); // 4 desktop, 2 tablet, 1 mobile
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null);
+  const [touchEndPos, setTouchEndPos] = useState<{ x: number; y: number } | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(true);
 
   // Full Resume Modal State for "View Example"
@@ -4074,20 +4074,33 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   // Touch Swipe Handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsPaused(true);
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+    setTouchEndPos(null);
+    setTouchStartPos({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    setTouchEndPos({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
   };
 
   const handleTouchEnd = () => {
     setIsPaused(false);
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 40;
-    const isRightSwipe = distance < -40;
+    if (!touchStartPos || !touchEndPos) return;
+    const deltaX = touchStartPos.x - touchEndPos.x;
+    const deltaY = touchStartPos.y - touchEndPos.y;
+
+    // Prioritize vertical page scroll if vertical movement exceeds horizontal movement
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+      return;
+    }
+
+    const isLeftSwipe = deltaX > 40;
+    const isRightSwipe = deltaX < -40;
 
     if (isLeftSwipe) {
       handleNext();
@@ -4123,10 +4136,10 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
             <Sparkles size={14} className="text-brand-600 animate-pulse" />
             <span>{featuredOnly ? '5 Featured ATS Resume Examples' : '20 Complete ATS Resume Examples • Infinite Carousel'}</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[36px] font-black text-slate-950 tracking-tight leading-tight">
             {displayTitle}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+          <p className="text-base sm:text-[17px] text-slate-600 mt-1 max-w-2xl leading-relaxed">
             {displaySubtitle}
           </p>
         </div>
@@ -4134,7 +4147,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
         {/* Manual Arrow Controls & Indicators */}
         <div className="flex flex-col items-end gap-1.5 self-end sm:self-auto">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-slate-400 mr-2 hidden sm:inline">
+            <span className="text-[13px] sm:text-[14px] font-bold text-slate-400 mr-2 hidden sm:inline">
               Showing {Math.min(visibleCount, totalOriginal)} of {totalOriginal}
             </span>
             <button
@@ -4168,6 +4181,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
       {/* Outer Carousel Container - Strictly Prevents Page Overflow */}
       <div
         className="w-full overflow-hidden rounded-2xl p-1 relative"
+        style={{ touchAction: 'pan-y' }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -4205,23 +4219,23 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                           <IconComp size={15} color={item.badgeColor} />
                         </div>
                         <span
-                          className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md"
+                          className="text-[12px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md"
                           style={{ color: item.badgeColor, backgroundColor: `${item.badgeColor}10` }}
                         >
                           {item.category}
                         </span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="text-[10px] font-extrabold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                        <span className="text-[12px] font-extrabold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
                           {item.pageLength}
                         </span>
-                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
+                        <span className="text-[12px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
                           {item.experienceLevel}
                         </span>
                       </div>
                     </div>
 
-                    <h3 className="text-base font-black text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
+                    <h3 className="text-[17px] sm:text-[18px] lg:text-[19px] font-black text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
                       <button 
                         type="button"
                         onClick={() => handleOpenViewModal(item)}
@@ -4234,19 +4248,19 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                     {/* Visual Mini-Resume Preview Box (Resume Thumbnail) */}
                     <div 
                       onClick={() => handleOpenViewModal(item)}
-                      className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 space-y-2 text-[11px] font-sans text-slate-700 shadow-2xs group-hover:bg-brand-50/30 transition-colors cursor-pointer"
+                      className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 space-y-2 text-[12px] font-sans text-slate-700 shadow-2xs group-hover:bg-brand-50/30 transition-colors cursor-pointer"
                       title="Click to view full-page resume preview"
                     >
                       <div className="flex items-center justify-between border-b border-slate-200 pb-1.5">
                         <span className="font-extrabold text-slate-900">{item.candidateName}</span>
-                        <span className="text-[9px] font-bold text-brand-600 truncate max-w-[120px]">{item.candidateRole}</span>
+                        <span className="text-[11px] font-bold text-brand-600 truncate max-w-[120px]">{item.candidateRole}</span>
                       </div>
 
                       {/* Measurable Achievement Highlights */}
                       <div className="space-y-1 pt-0.5">
                         {item.metrics.map((m, mIdx) => (
-                          <div key={mIdx} className="flex items-center gap-1.5 text-[10px] text-slate-600">
-                            <CheckCircle2 size={11} className="text-emerald-500 shrink-0" />
+                          <div key={mIdx} className="flex items-center gap-1.5 text-[11px] text-slate-600">
+                            <CheckCircle2 size={12} className="text-emerald-500 shrink-0" />
                             <span className="truncate font-medium">{m}</span>
                           </div>
                         ))}
@@ -4255,7 +4269,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                       {/* Technical Keyword Badges */}
                       <div className="flex flex-wrap gap-1 pt-1 border-t border-slate-200/60">
                         {item.skillsBadge.slice(0, 3).map((sk, skIdx) => (
-                          <span key={skIdx} className="text-[9px] font-semibold bg-white border border-slate-200 text-slate-700 px-1.5 py-0.5 rounded">
+                          <span key={skIdx} className="text-[10px] font-semibold bg-white border border-slate-200 text-slate-700 px-1.5 py-0.5 rounded">
                             {sk}
                           </span>
                         ))}
@@ -4263,7 +4277,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                     </div>
 
                     {/* Short Description */}
-                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                    <p className="text-[13px] sm:text-[14px] text-slate-600 leading-relaxed line-clamp-2">
                       {item.shortDescription}
                     </p>
                   </div>
@@ -4272,7 +4286,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                   <div className="pt-3 border-t border-slate-100 flex items-center gap-2">
                     <button
                       onClick={() => handleOpenViewModal(item)}
-                      className="flex-1 py-2 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="flex-1 py-2 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-[14px] sm:text-[15px] font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <Eye size={14} className="text-slate-600" />
                       <span>View Example</span>
@@ -4280,7 +4294,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
 
                     <button
                       onClick={() => handleUseExample(item)}
-                      className="flex-1 py-2 px-2.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-xl text-xs font-bold shadow-xs hover:shadow transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="flex-1 py-2 px-2.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-xl text-[14px] sm:text-[15px] font-bold shadow-xs hover:shadow transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <span>Use Example</span>
                       <ArrowRight size={13} />
