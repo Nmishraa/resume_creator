@@ -12,11 +12,11 @@ export const Footer: React.FC = () => {
           
           {/* Brand Column */}
           <div className="space-y-4 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 via-brand-700 to-slate-900 flex items-center justify-center text-white font-black text-sm shadow-md">
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-brand-600 via-brand-700 to-slate-900 flex items-center justify-center text-white font-black text-base sm:text-lg shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-all">
                 RC
               </div>
-              <span className="font-extrabold text-white text-lg tracking-tight">Resume Craft</span>
+              <span className="font-extrabold text-white text-xl tracking-tight">Resume Craft</span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed font-medium">
               Modern AI Resume Builder &amp; ATS Optimization Suite. Build, enhance, test against job descriptions, and download vector PDFs with zero paywalls.

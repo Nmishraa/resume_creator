@@ -178,11 +178,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         {/* Left: Brand / Title & ATS Score */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <Link to="/" className="flex items-center gap-2 group" title="Return to Homepage">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-600 to-slate-900 flex items-center justify-center text-white font-black text-xs">
+            <Link to="/" className="flex items-center gap-2.5 group" title="Return to Homepage">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-brand-600 via-brand-700 to-slate-900 flex items-center justify-center text-white font-black text-sm sm:text-base shadow-md shadow-brand-500/20 group-hover:scale-105 transition-all">
                 RC
               </div>
-              <span className="font-extrabold text-slate-950 text-sm sm:text-base tracking-tight hover:text-brand-600 transition-colors hidden sm:inline">
+              <span className="font-extrabold text-slate-950 text-base sm:text-lg tracking-tight hover:text-brand-600 transition-colors hidden sm:inline">
                 Resume Craft
               </span>
             </Link>
