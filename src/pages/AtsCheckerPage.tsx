@@ -13,11 +13,13 @@ import {
   FileText
 } from 'lucide-react';
 import { trackAtsCheckCompleted } from '../services/analytics';
+import { JobTailorModal } from '../components/builder/JobTailorModal';
 import confetti from 'canvas-confetti';
 
 export const AtsCheckerPage: React.FC = () => {
   const { resume, atsAnalysis, targetJobDescription, setTargetJobDescription, updateResume, loadSampleResume } = useResume();
   const [showUploadModal, setShowUploadModal] = React.useState(false);
+  const [showJobTailorModal, setShowJobTailorModal] = React.useState(false);
 
   const {
     overallScore,
@@ -145,10 +147,17 @@ export const AtsCheckerPage: React.FC = () => {
               💡 <strong>Instant Sync:</strong> Match score updates automatically as you paste or type the job description.
             </div>
 
-            <div className="pt-2 border-t border-slate-100 flex gap-2">
+            <div className="pt-2 border-t border-slate-100 flex flex-col sm:flex-row gap-2">
+              <button
+                onClick={() => setShowJobTailorModal(true)}
+                className="flex-1 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-sm hover:shadow"
+              >
+                <Zap size={15} className="fill-slate-950" />
+                <span>1-Click Job Description Tailor ⚡</span>
+              </button>
               <Link
                 to="/builder"
-                className="flex-1 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+                className="py-2.5 px-4 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm"
               >
                 <FileText size={15} />
                 <span>Open Builder &rarr;</span>
@@ -398,6 +407,8 @@ export const AtsCheckerPage: React.FC = () => {
           </Link>
         </div>
       </section>
+      {/* Modal */}
+      <JobTailorModal isOpen={showJobTailorModal} onClose={() => setShowJobTailorModal(false)} />
     </div>
   );
 };

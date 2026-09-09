@@ -27,6 +27,7 @@ interface ToolbarProps {
   onOpenImportModal: () => void;
   onOpenUploadModal: () => void;
   onOpenAtsDrawer: () => void;
+  onOpenJobTailorModal?: () => void;
   onOpenMobilePreview?: () => void;
 }
 
@@ -35,6 +36,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onOpenImportModal,
   onOpenUploadModal,
   onOpenAtsDrawer,
+  onOpenJobTailorModal,
   onOpenMobilePreview
 }) => {
   const {
@@ -200,6 +202,18 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             <CheckCircle2 size={14} className={hasResumeContent ? (score >= 80 ? 'text-emerald-600' : 'text-amber-600') : 'text-slate-500'} />
             <span>{hasResumeContent ? `ATS Score: ${score}/100` : 'Check ATS Score'}</span>
           </button>
+
+          {/* ⚡ 1-Click Job Description Tailor & Keyword Matcher */}
+          {onOpenJobTailorModal && (
+            <button
+              onClick={onOpenJobTailorModal}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-extrabold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 transition-colors cursor-pointer shadow-2xs"
+              title="1-Click Job Description Tailor & Keyword Matcher"
+            >
+              <Sparkles size={14} className="text-amber-600 fill-amber-400" />
+              <span>Job Matcher</span>
+            </button>
+          )}
         </div>
 
         {/* Center: Undo / Redo */}

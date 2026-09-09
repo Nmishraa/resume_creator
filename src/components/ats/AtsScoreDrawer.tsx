@@ -15,9 +15,10 @@ import {
 interface AtsScoreDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenJobTailorModal?: () => void;
 }
 
-export const AtsScoreDrawer: React.FC<AtsScoreDrawerProps> = ({ isOpen, onClose }) => {
+export const AtsScoreDrawer: React.FC<AtsScoreDrawerProps> = ({ isOpen, onClose, onOpenJobTailorModal }) => {
   const { resume, atsAnalysis, targetJobDescription, setTargetJobDescription, loadSampleResume } = useResume();
 
   if (!isOpen) return null;
@@ -137,9 +138,11 @@ export const AtsScoreDrawer: React.FC<AtsScoreDrawerProps> = ({ isOpen, onClose 
 
               {/* Target Job Description Matcher */}
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 mb-1.5">
-                  <Target size={14} className="text-brand-600" />
-                  <span>Target Job Description (Optional)</span>
+                <div className="flex items-center justify-between text-xs font-bold text-slate-900 mb-1.5">
+                  <span className="flex items-center gap-1.5">
+                    <Target size={14} className="text-brand-600" />
+                    <span>Target Job Description</span>
+                  </span>
                 </div>
                 <textarea
                   rows={3}
@@ -148,6 +151,20 @@ export const AtsScoreDrawer: React.FC<AtsScoreDrawerProps> = ({ isOpen, onClose 
                   placeholder="Paste job posting text here to scan specific role keywords..."
                   className="w-full text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                 />
+
+                {onOpenJobTailorModal && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      onOpenJobTailorModal();
+                    }}
+                    className="w-full mt-2 py-2 px-3 bg-amber-50 hover:bg-amber-100 text-amber-900 font-extrabold text-xs rounded-xl border border-amber-300 transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                  >
+                    <Sparkles size={14} className="text-amber-600 fill-amber-400" />
+                    <span>Open 1-Click Job Tailor &amp; Keyword Matcher ⚡</span>
+                  </button>
+                )}
               </div>
 
               {/* Matched & Missing Keywords */}
