@@ -181,15 +181,6 @@ export const FullPageResumePreview: React.FC<FullPageResumePreviewProps> = ({
         {/* Render each page as a clean, separate A4 page sheet */}
         {Array.from({ length: pageCount }).map((_, pageIdx) => (
           <div key={pageIdx} className="flex flex-col items-center shrink-0">
-            {/* Clean Page Header Label for Multi-Page Resumes */}
-            {pageCount > 1 && (
-              <div 
-                className="mb-2 flex items-center justify-between text-[11px] font-bold text-slate-400 font-mono tracking-wider select-none px-1" 
-                style={{ width: `${Math.min(window.innerWidth - 32, 794 * scale)}px` }}
-              >
-                <span>PAGE {pageIdx + 1} OF {pageCount}</span>
-              </div>
-            )}
 
             {/* A4 Sheet Card */}
             <div
