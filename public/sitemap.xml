@@ -1,93 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Core Homepage & Main SEO Landing Pages -->
   <url>
     <loc>https://resume.gnanamai.com/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/resume-builder/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.98</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/free-resume-builder/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/ai-resume-builder/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/ats-resume-builder/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/cover-letter-builder/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume.gnanamai.com/resume-keyword-matcher/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/cover-letter-builder/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/free-resume-builder/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/ai-resume-builder/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/ats-resume-checker/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/resume-score-checker/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/resume-builder-for-students/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/resume-builder-no-experience/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/find-jobs-with-resume/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/find-jobs-by-resume/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/job-description-resume-matcher/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.90</priority>
   </url>
-  <!-- Competitor Comparison Pages -->
+  <url>
+    <loc>https://resume.gnanamai.com/interview-questions/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/cover-letter-generator/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-templates/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-examples/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resumes/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resumes/senior-devops-platform-engineer/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resumes/product-manager/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resumes/ai-product-manager/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resumes/enterprise-architect/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resumes/cloud-architect/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resumes/technical-product-manager/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
   <url>
     <loc>https://resume.gnanamai.com/vs/zety-alternative/</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.92</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/vs/resume-io-alternative/</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.92</priority>
+    <priority>0.90</priority>
   </url>
-
-  <!-- 23 Role-Specific Resume Template Pages -->
+  <url>
+    <loc>https://resume.gnanamai.com/resume-preview/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
   <url>
     <loc>https://resume.gnanamai.com/resume-templates/product-manager/</loc>
     <lastmod>2026-09-10</lastmod>
@@ -262,50 +330,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.88</priority>
   </url>
-
-  <!-- Dedicated /resumes/ Role Pages -->
-  <url>
-    <loc>https://resume.gnanamai.com/resumes/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.92</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resumes/senior-devops-platform-engineer/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resumes/product-manager/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resumes/ai-product-manager/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resumes/enterprise-architect/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resumes/cloud-architect/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resumes/technical-product-manager/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
   <url>
     <loc>https://resume.gnanamai.com/resumes/solutions-architect/</loc>
     <lastmod>2026-09-10</lastmod>
@@ -342,186 +366,154 @@
     <changefreq>weekly</changefreq>
     <priority>0.88</priority>
   </url>
-
-  <!-- Resume Examples Hub & 13 Role Example Pages -->
   <url>
-    <loc>https://resume.gnanamai.com/resume-examples/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/ai-engineer/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-examples/software-engineer/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-examples/data-scientist/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-examples/data-analyst/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-examples/business-analyst/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-examples/enterprise-architect/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/resume-examples/cloud-architect/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/resume-examples/product-manager/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-examples/software-engineer/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/resume-examples/project-manager/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume.gnanamai.com/resume-examples/data-analyst/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/customer-service/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume.gnanamai.com/resume-examples/ai-engineer/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/teacher/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume.gnanamai.com/resume-examples/technical-product-manager/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/nurse/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume.gnanamai.com/resume-examples/enterprise-architect/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/college-student/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume.gnanamai.com/resume-examples/cloud-architect/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/internship/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://resume.gnanamai.com/resume-examples/ai-product-manager/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://resume.gnanamai.com/resume-examples/no-experience/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.90</priority>
   </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-examples/business-analyst/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-examples/data-scientist/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-examples/marketing-manager/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-examples/financial-analyst/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-
-  <!-- Role-Specific Resume Skills Pages -->
-  <url>
-    <loc>https://resume.gnanamai.com/resume-skills/product-manager/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-skills/software-engineer/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-skills/project-manager/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-skills/data-analyst/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-skills/ai-engineer/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://resume.gnanamai.com/resume-skills/cloud-architect/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <!-- Guides Hub & Detail Pages -->
   <url>
     <loc>https://resume.gnanamai.com/guides/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/guides/how-to-make-ats-friendly-resume/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/guides/google-xyz-formula-guide/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/guides/how-to-improve-resume-score/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
   </url>
-
-  <!-- Trust, E-E-A-T & Legal Pages -->
   <url>
     <loc>https://resume.gnanamai.com/how-it-works/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://resume.gnanamai.com/faq/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/about/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.60</priority>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/contact/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.50</priority>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/privacy/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.40</priority>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://resume.gnanamai.com/terms/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.40</priority>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
 </urlset>

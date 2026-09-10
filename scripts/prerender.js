@@ -775,3 +775,17 @@ for (const page of PAGES) {
 }
 
 console.log(`Successfully pre-rendered ${PAGES.length} static SEO HTML routes into dist/ !`);
+
+// Dynamically generate sitemap.xml for all pre-rendered PAGES
+const sitemapUrls = PAGES.map(p => {
+  const loc = `${SITE_URL}${p.path === '/' ? '/' : (p.path.endsWith('/') ? p.path : p.path + '/')}`;
+  const priority = p.path === '/' ? '1.0' : (p.path.startsWith('/resumes/') || p.path.startsWith('/resume-templates/')) ? '0.88' : '0.90';
+  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+}).join('\n');
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls}\n</urlset>\n`;
+
+fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf8');
+const PUBLIC_SITEMAP = path.resolve(__dirname, '../public/sitemap.xml');
+fs.writeFileSync(PUBLIC_SITEMAP, sitemapXml, 'utf8');
+console.log(`✅ Dynamically generated sitemap.xml with ${PAGES.length} URLs in dist/ and public/!`);
