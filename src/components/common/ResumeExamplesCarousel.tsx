@@ -84,7 +84,7 @@ export interface ExampleCardData {
   shortDescription: string;
   metrics: string[];
   skillsBadge: string[];
-  pageLength: '1-Page' | '2-Page' | '3-Page' | '4-Page';
+  pageLength: '2-Page' | '3-Page' | '4-Page' | '5-Page';
   fullResume: ResumeSectionData;
   presetData: any;
 }
@@ -107,7 +107,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Product Leader scaling LLM agent features, vector search, and RAG pipelines resulting in $4.2M ARR growth.',
     metrics: ['ARR Growth +$4.2M', 'User Retention +34%', 'Inference Cost -40%'],
     skillsBadge: ['LLM Product Strategy', 'RAG Agents', 'Prompt Ops', 'A/B Testing', 'PyTorch'],
-    pageLength: '1-Page',
+    pageLength: '5-Page',
     fullResume: {
       summary: 'Results-oriented Senior AI Product Manager with 6+ years of experience leading cross-functional squads to launch generative AI features, vector search engines, and multi-modal ML microservices. Proven track record increasing product adoption by 34% and cutting model inference expenses by 40%.',
       skills: [
@@ -875,7 +875,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Product Lead launching GenAI content automation, LLM fine-tuning features, and text-to-code assistants.',
     metrics: ['DAU 1.5M+', 'Prompt Accuracy 94%', 'ARR Growth +$5.8M'],
     skillsBadge: ['Generative AI', 'LLM Fine-Tuning', 'Diffusion Models', 'Product Analytics', 'User Research'],
-    pageLength: '1-Page',
+    pageLength: '4-Page',
     fullResume: {
       summary: 'Forward-thinking Generative AI Product Lead with 5+ years of experience commercializing LLM content generation tools, AI copilot assistants, and synthetic media engines. Proven track record growing active user base to 1.5M+ DAU and driving $5.8M in annual recurring revenue.',
       skills: [
@@ -1463,7 +1463,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Autonomous Agent Engineer designing LangGraph multi-agent loops, tool-calling workflows, and self-healing pipelines.',
     metrics: ['Task Accuracy 96%', 'Manual Overhead -65%', '10k Daily Pipelines'],
     skillsBadge: ['LangGraph', 'AutoGPT Frameworks', 'Tool Calling', 'Python', 'FastAPI'],
-    pageLength: '1-Page',
+    pageLength: '4-Page',
     fullResume: {
       summary: 'Innovative Lead Autonomous Agent Engineer with 5+ years of experience constructing multi-agent coordination loops, automated tool-calling workflows, and self-correcting AI pipelines. Proven track record eliminating 65% of manual operational overhead and executing 10,000 daily autonomous workflows with 96% task completion accuracy.',
       skills: [
@@ -2446,7 +2446,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'API Governance & Ecosystem Lead designing Kong gateways, OpenAPI specs, and developer portal ecosystems.',
     metrics: ['100M+ Daily API Calls', 'Portal Adoption +180%', 'p99 Latency <20ms'],
     skillsBadge: ['Kong Gateway', 'OpenAPI 3.0', 'API Governance', 'OAuth2 / OIDC', 'GraphQL'],
-    pageLength: '1-Page',
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Visionary Principal API Strategy Architect with 8+ years of experience leading enterprise API governance, API gateway design (Kong / Apigee), and developer portal ecosystems processing 100M+ daily API transactions. Proven track record increasing external developer API adoption by 180%.',
       skills: [
@@ -2766,7 +2766,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Computer Vision & OCR Engineer building Tesseract/AWS Textract document extraction models with 99.4% precision.',
     metrics: ['Extraction Accuracy 99.4%', 'Invoices 500k/mo', 'OpEx -55%'],
     skillsBadge: ['AWS Textract', 'Tesseract OCR', 'OpenCV', 'Python', 'PDF Parsing'],
-    pageLength: '1-Page',
+    pageLength: '2-Page',
     fullResume: {
       summary: 'Detail-driven Senior OCR & Computer Vision Engineer with 4+ years of experience engineering intelligent document processing (IDP) pipelines, AWS Textract models, and OpenCV image preprocessing. Proven track record extracting structured data from 500,000 monthly invoices with 99.4% character accuracy.',
       skills: [
@@ -3342,7 +3342,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Product Strategy Manager specializing in multi-horizon roadmap planning, RICE prioritization, and sprint execution.',
     metrics: ['On-Time Delivery 94%', 'NPS +22 Points', 'Efficiency +30%'],
     skillsBadge: ['Product Roadmapping', 'RICE Scoring', 'Jira Align', 'Productboard', 'Stakeholder Strategy'],
-    pageLength: '1-Page',
+    pageLength: '3-Page',
     fullResume: {
       summary: 'Strategic Senior Product Roadmap Manager with 6+ years of experience driving product vision, RICE framework backlog scoring, and multi-quarter release alignment across engineering squads. Proven track record elevating on-time feature delivery to 94% and boosting Net Promoter Score (NPS) by 22 points.',
       skills: [
@@ -3997,7 +3997,7 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
 
   const displayTitle = title ?? (featuredOnly ? "5 Featured ATS Resume Examples" : "20 Professional ATS Resume Examples");
   const displaySubtitle = subtitle ?? (featuredOnly
-    ? "Explore 5 recruiter-vetted resume samples spanning 1-page, 2-page, and 3-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder."
+    ? "Explore 5 recruiter-vetted resume samples spanning 2-page, 3-page, 4-page, and 5-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder."
     : "Explore 20 complete, recruiter-vetted resume samples. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit in the builder.");
 
   const totalOriginal = sourceExamples.length;

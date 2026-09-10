@@ -6,7 +6,7 @@ export interface HeroResumeCard {
   templateId: 'modern' | 'tech' | 'executive' | 'slate' | 'compact';
   templateName: string;
   templateTag: string;
-  pageLength: '1-Page' | '2-Page' | '3-Page' | '4-Page';
+  pageLength: '2-Page' | '3-Page' | '4-Page' | '5-Page';
   fullName: string;
   jobTitle: string;
   contact: string;
@@ -25,7 +25,7 @@ export const HERO_RESUME_CARDS: HeroResumeCard[] = [
     templateId: 'modern',
     templateName: 'Modern Clean',
     templateTag: 'Most Popular',
-    pageLength: '4-Page',
+    pageLength: '5-Page',
     fullName: 'Alex Morgan',
     jobTitle: 'Senior Full-Stack Engineer',
     contact: 'alex.morgan@dev.io • (555) 234-5678 • San Francisco, CA',
@@ -294,7 +294,7 @@ export const HERO_RESUME_CARDS: HeroResumeCard[] = [
     templateId: 'slate',
     templateName: 'Professional Slate',
     templateTag: 'Modern',
-    pageLength: '1-Page',
+    pageLength: '5-Page',
     fullName: 'Elena Rostova',
     jobTitle: 'Staff Technical Product Manager',
     contact: 'elena.rostova@horizon.io • (555) 567-8901 • New York, NY',

@@ -117,7 +117,7 @@ export const HomePage: React.FC = () => {
       templateId: 'slate' as const,
       templateName: 'Professional Slate',
       templateTag: 'Modern',
-      pageLength: '1-Page',
+      pageLength: '5-Page',
       fullName: 'Elena Rostova',
       jobTitle: 'Staff Technical Product Manager',
       contact: 'elena.rostova@horizon.io • (555) 567-8901 • New York, NY',
@@ -769,7 +769,7 @@ export const HomePage: React.FC = () => {
         <ResumeExamplesCarousel
           featuredOnly={true}
           title="5 Featured ATS Resume Examples"
-          subtitle="Explore 5 recruiter-vetted resume samples spanning 1-page, 2-page, and 3-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit."
+          subtitle="Explore 5 recruiter-vetted resume samples spanning 2-page, 3-page, 4-page, and 5-page layouts across diverse roles. Hover to pause auto-scroll, click 'View Example' for full details, or 'Use Example' to edit."
         />
       </section>
 

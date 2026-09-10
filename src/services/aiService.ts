@@ -179,11 +179,11 @@ export async function callGeminiApi(prompt: string, apiKey: string): Promise<str
  * Generates a full, realistic ResumeData object with a REAL random page length of exactly 1, 2, or 3 pages.
  */
 export function generateRandomResume(
-  targetPageCount?: 1 | 2 | 3 | 4,
+  targetPageCount?: 2 | 3 | 4 | 5,
   targetRole?: string,
   targetTemplate?: TemplateType
 ): ResumeData {
-  const pageCount = targetPageCount || ((Math.floor(Math.random() * 4) + 1) as 1 | 2 | 3 | 4);
+  const pageCount = targetPageCount || (([2, 3, 4, 5][Math.floor(Math.random() * 4)]) as 2 | 3 | 4 | 5);
   const templates: TemplateType[] = ['modern', 'tech', 'executive', 'slate', 'compact'];
   const template = targetTemplate || templates[Math.floor(Math.random() * templates.length)];
   const fontFamily: FontFamilyType = template === 'tech' ? 'mono' : template === 'executive' ? 'serif' : 'inter';
@@ -543,44 +543,69 @@ export function generateRandomResume(
     ]
   };
 
+  const advisoryBoardSection = {
+    id: `custom-${Date.now()}-advisory`,
+    title: 'Executive Advisory & Board Governance',
+    items: [
+      {
+        id: `custom-item-adv-1`,
+        title: 'Cloud Native Steering Committee Member',
+        subtitle: 'Global Technology Standards Body',
+        date: '2022 – Present',
+        description: 'Advising enterprise technology leaders on open-source vector infrastructure standards, zero-trust IAM frameworks, and cloud security governance.'
+      },
+      {
+        id: `custom-item-adv-2`,
+        title: 'University Computer Science Industry Advisory Board',
+        subtitle: 'Curriculum & Research Strategic Advisor',
+        date: '2021 – Present',
+        description: 'Collaborating with academic department heads to align graduate software architecture research with high-scale enterprise cloud demands.'
+      }
+    ]
+  };
+
   let customSections: any[] = [];
-  if (pageCount === 2) {
+  if (pageCount === 3) {
     customSections = [leadershipSection];
-  } else if (pageCount === 3) {
-    customSections = [patentsSection, leadershipSection];
   } else if (pageCount === 4) {
     customSections = [patentsSection, leadershipSection];
+  } else if (pageCount === 5) {
+    customSections = [advisoryBoardSection, patentsSection, leadershipSection];
   }
 
-  // Slice data content precisely according to pageCount to guarantee REAL 1, 2, 3, or 4 page count!
+  // Slice data content precisely according to pageCount to guarantee REAL 2, 3, 4, or 5 page count!
+  // 2 pages: Entry-Level / Early-Career (2 roles, 1 edu, 2 skill categories, 1 project, 1 cert)
   let expToUse = allExperience.slice(0, 2);
   let eduToUse = allEducation.slice(0, 1);
   let skillsToUse = allSkills.slice(0, 2);
   let projToUse = allProjects.slice(0, 1);
   let certsToUse = allCertifications.slice(0, 1);
-  let summaryText = `Results-driven ${candidate.jobTitle} with experience architecting high-availability systems and scalable microservices. Proven track record reducing API latency by 45% and leading teams to deliver enterprise products.`;
+  let summaryText = `Early-career ${candidate.jobTitle} with foundational experience building modern software applications, responsive web interfaces, and scalable API endpoints. Quick learner with strong analytical skills and dedication to engineering excellence.`;
 
-  if (pageCount === 2) {
+  if (pageCount === 3) {
+    // 3 pages: Moderate Experience (4 roles, 2 edu, 4 skill categories, 3 projects, 3 certs, 1 custom section)
     expToUse = allExperience.slice(0, 4);
     eduToUse = allEducation.slice(0, 2);
     skillsToUse = allSkills.slice(0, 4);
     projToUse = allProjects.slice(0, 3);
     certsToUse = allCertifications.slice(0, 3);
     summaryText = `Performance-driven ${candidate.jobTitle} with 6+ years of experience designing scalable distributed cloud architectures, real-time AI microservices, and high-conversion web applications. Proven track record reducing API latency by 45% and leading cross-functional engineering teams to deliver enterprise SaaS platforms serving 2M+ active monthly users.`;
-  } else if (pageCount === 3) {
+  } else if (pageCount === 4) {
+    // 4 pages: Senior Candidates with extensive experience (5 roles, 3 edu, all skills, 4 projects, all certs, 2 custom sections)
     expToUse = allExperience.slice(0, 5);
     eduToUse = allEducation.slice(0, 3);
     skillsToUse = allSkills;
     projToUse = allProjects.slice(0, 4);
     certsToUse = allCertifications;
-    summaryText = `Executive ${candidate.jobTitle} with 8+ years of technical leadership driving multi-region cloud infrastructures, zero-downtime CI/CD pipelines, and high-throughput AI vector search engines. Accomplished author, patent co-inventor, and engineering director with proven success scaling engineering orgs, managing $3.5M+ annual cloud budgets, and delivering enterprise software generating $10M+ in net new ARR.`;
-  } else if (pageCount === 4) {
+    summaryText = `Senior ${candidate.jobTitle} with 8+ years of technical leadership driving multi-region cloud infrastructures, zero-downtime CI/CD pipelines, and high-throughput AI vector search engines. Accomplished author, patent co-inventor, and engineering lead with proven success scaling engineering orgs, managing $3.5M+ annual cloud budgets, and delivering enterprise software generating $10M+ in net new ARR.`;
+  } else if (pageCount === 5) {
+    // 5 pages: Highly experienced candidates, executives, CTOs, Principal Architects (6 roles with full details, 3 edu, all skills, 4 projects, all certs, 3 custom sections)
     expToUse = allExperience;
     eduToUse = allEducation;
     skillsToUse = allSkills;
     projToUse = allProjects;
     certsToUse = allCertifications;
-    summaryText = `Chief Technical Officer & Principal ${candidate.jobTitle} with 12+ years of enterprise IT leadership guiding Fortune 500 digital transformations, TOGAF architecture governance, and multi-region cloud infrastructure scaling. Co-inventor of 2 granted US software patents, key speaker at global Cloud Native summits, and executive technology strategist governing an $18M annual technology portfolio across 14 subsidiaries.`;
+    summaryText = `Chief Technical Officer & Principal ${candidate.jobTitle} with 14+ years of enterprise IT leadership guiding Fortune 500 digital transformations, TOGAF architecture governance, and multi-region cloud infrastructure scaling. Co-inventor of 2 granted US software patents, key speaker at global Cloud Native summits, board advisor, and executive technology strategist governing an $18M annual technology portfolio across 14 subsidiaries.`;
   }
 
   return {
