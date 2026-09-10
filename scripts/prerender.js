@@ -130,6 +130,55 @@ const PAGES = [
     h1: 'Professional Resume Examples & ATS Samples',
     intro: 'Explore recruiter-aligned resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.'
   },
+  {
+    path: '/resumes',
+    title: 'Professional Resumes Directory (ATS-Optimized) | Resume Craft',
+    description: 'Browse recruiter-vetted ATS resumes by job title and professional role with instant PDF/DOCX downloads.',
+    h1: 'Professional Resumes Directory',
+    intro: 'Browse recruiter-vetted ATS resumes by job title and professional role with instant PDF/DOCX downloads.'
+  },
+  {
+    path: '/resumes/senior-devops-platform-engineer',
+    title: 'Senior DevOps & Platform Engineer Resume Example | Resume Craft',
+    description: 'Recruiter-vetted Senior DevOps & Platform Engineer resume example with Kubernetes, Terraform, AWS, and CI/CD metrics.',
+    h1: 'Senior DevOps & Platform Engineer Resume',
+    intro: 'Explore our recruiter-vetted Senior DevOps & Platform Engineer resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/product-manager',
+    title: 'Product Manager Resume Example | Resume Craft',
+    description: 'Professional Product Manager ATS resume example featuring product strategy, user discovery, and roadmap metrics.',
+    h1: 'Product Manager Resume',
+    intro: 'Explore our recruiter-vetted Product Manager resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/ai-product-manager',
+    title: 'AI Product Manager Resume Example | Resume Craft',
+    description: 'Recruiter-approved AI Product Manager ATS resume example featuring LLMs, RAG pipelines, and model metrics.',
+    h1: 'AI Product Manager Resume',
+    intro: 'Explore our recruiter-vetted AI Product Manager resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/enterprise-architect',
+    title: 'Enterprise Architect Resume Example | Resume Craft',
+    description: 'Executive Enterprise Architect ATS resume example featuring TOGAF governance, cloud architecture, and IT portfolio metrics.',
+    h1: 'Enterprise Architect Resume',
+    intro: 'Explore our recruiter-vetted Enterprise Architect resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/cloud-architect',
+    title: 'Cloud Architect Resume Example | Resume Craft',
+    description: 'Principal Cloud Architect ATS resume example with AWS, GCP, multi-region failovers, and IaC automation.',
+    h1: 'Cloud Architect Resume',
+    intro: 'Explore our recruiter-vetted Cloud Architect resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/technical-product-manager',
+    title: 'Technical Product Manager Resume Example | Resume Craft',
+    description: 'Staff Technical Product Manager ATS resume example featuring API portals, developer experience, and product discovery.',
+    h1: 'Technical Product Manager Resume',
+    intro: 'Explore our recruiter-vetted Technical Product Manager resume example built to pass ATS scanners.'
+  },
   // Competitor Comparison Pages
   {
     path: '/vs/zety-alternative',

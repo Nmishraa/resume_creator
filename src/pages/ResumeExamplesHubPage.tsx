@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RESUME_EXAMPLES } from '../data/resumeExamplesData';
 import { useResume } from '../context/ResumeContext';
+import { getResumeUrl } from '../services/resumeRegistry';
 import { SeoHead } from '../components/common/SeoHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { FaqAccordion } from '../components/common/FaqAccordion';
@@ -161,7 +162,7 @@ export const ResumeExamplesHubPage: React.FC = () => {
               <h2 className="text-lg font-black text-slate-950 group-hover:text-brand-600 transition-colors">
                 <button
                   type="button"
-                  onClick={() => navigate('/resume-preview?slug=' + ex.slug, { state: { resumeData: ex.presetData } })}
+                  onClick={() => navigate(getResumeUrl(ex.presetData.personalInfo?.jobTitle || ex.roleTitle))}
                   className="hover:underline text-left"
                 >
                   {ex.roleTitle} Resume Example
@@ -185,10 +186,10 @@ export const ResumeExamplesHubPage: React.FC = () => {
             {/* Actions */}
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
               <Link
-                to={`/resume-examples/${ex.slug}`}
+                to={getResumeUrl(ex.presetData.personalInfo?.jobTitle || ex.roleTitle)}
                 className="text-xs font-bold text-slate-700 hover:text-brand-600 flex items-center gap-1 transition-colors"
               >
-                <span>Read Full Guide</span>
+                <span>View Dedicated Resume</span>
                 <ArrowRight size={13} />
               </Link>
 

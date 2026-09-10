@@ -60,6 +60,7 @@ const ResumeSkillsDetailPage = lazyWithRetry(() => import('./pages/seo/ResumeSki
 const CompetitorComparisonPage = lazyWithRetry(() => import('./pages/seo/CompetitorComparisonPage').then(m => ({ default: m.CompetitorComparisonPage })));
 const FullPagePreviewPage = lazyWithRetry(() => import('./pages/FullPagePreviewPage').then(m => ({ default: m.FullPagePreviewPage })));
 const PublicPortfolioPage = lazyWithRetry(() => import('./pages/PublicPortfolioPage').then(m => ({ default: m.PublicPortfolioPage })));
+const DedicatedResumePage = lazyWithRetry(() => import('./pages/DedicatedResumePage').then(m => ({ default: m.DedicatedResumePage })));
 
 const RouteLoadingFallback = () => (
   <div className="min-h-[60vh] flex items-center justify-center p-8">
@@ -122,11 +123,13 @@ export function App() {
             <Route path="p" element={<PublicPortfolioPage />} />
             <Route path="portfolio" element={<PublicPortfolioPage />} />
 
-            {/* Resume Examples Hub & Dynamic Detail */}
+            {/* Dedicated Job Title Resumes & Examples */}
+            <Route path="resumes" element={<ResumeExamplesHubPage />} />
+            <Route path="resumes/:slug" element={<DedicatedResumePage />} />
             <Route path="resume-examples" element={<ResumeExamplesHubPage />} />
-            <Route path="examples" element={<Navigate to="/resume-examples" replace />} />
-            <Route path="resume-examples/:role" element={<ResumeExampleDetailPage />} />
-            <Route path="resume-preview" element={<FullPagePreviewPage />} />
+            <Route path="examples" element={<Navigate to="/resumes" replace />} />
+            <Route path="resume-examples/:role" element={<DedicatedResumePage />} />
+            <Route path="resume-preview" element={<DedicatedResumePage />} />
 
             {/* Career & ATS Guides */}
             <Route path="guides" element={<GuidesHubPage />} />

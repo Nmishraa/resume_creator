@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useResume } from '../context/ResumeContext';
+import { getResumeUrl } from '../services/resumeRegistry';
 import { SeoHead } from '../components/common/SeoHead';
 import { FaqAccordion } from '../components/common/FaqAccordion';
 import {
@@ -689,9 +690,9 @@ export const HomePage: React.FC = () => {
                       className="w-full shrink-0 px-1 box-border"
                     >
                       <div
-                        onClick={() => navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } })}
+                        onClick={() => navigate(getResumeUrl(card.jobTitle))}
                         className="relative w-full max-w-md mx-auto lg:ml-auto bg-white rounded-2xl shadow-2xl border border-slate-300 p-6 transform hover:scale-[1.01] transition-transform cursor-pointer overflow-hidden h-[540px] flex flex-col justify-between"
-                        title="Click to view full-page resume preview"
+                        title="Click to view full-page resume"
                       >
                         {/* Top Metadata Badges & ATS Score Header */}
                         <div className="flex flex-wrap items-center justify-between gap-1.5 pt-0.5 pb-2 border-b border-slate-100 shrink-0">
@@ -730,11 +731,11 @@ export const HomePage: React.FC = () => {
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigate('/resume-preview?slug=' + card.id, { state: { resumeData: card.presetData } });
+                              navigate(getResumeUrl(card.jobTitle));
                             }}
                             className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
                           >
-                            <span>View &amp; Use Layout Preview</span>
+                            <span>View Full Dedicated Resume</span>
                             <ArrowRight size={14} />
                           </button>
                         </div>

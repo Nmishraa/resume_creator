@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useResume } from '../../context/ResumeContext';
+import { getResumeUrl } from '../../services/resumeRegistry';
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -4119,7 +4120,8 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
   };
 
   const handleOpenViewModal = (example: ExampleCardData) => {
-    navigate('/resume-preview?slug=' + (example.slug || example.id), { state: { resumeData: example.presetData } });
+    const url = getResumeUrl(example.candidateRole || example.roleTitle || example.slug);
+    navigate(url);
   };
 
   const itemWidthPercent = 100 / visibleCount;
