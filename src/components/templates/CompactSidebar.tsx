@@ -10,10 +10,19 @@ interface TemplateProps {
 }
 
 export const CompactSidebar: React.FC<TemplateProps> = ({ resume, densityMode = 'standard' }) => {
-  const { personalInfo, summary, experience, education, skills, projects, certifications, formatting } = resume;
-  const fontClass = getFontFamilyClass(formatting.fontFamily);
-  const size = getFontSizeClass(formatting.fontSize);
-  const accentColor = formatting.accentColor || '#1e40af';
+  const {
+    personalInfo = { fullName: '', jobTitle: '', email: '', phone: '', location: '', website: '', linkedin: '', github: '' },
+    summary,
+    experience,
+    education,
+    skills,
+    projects,
+    certifications,
+    formatting = { template: 'compact', fontFamily: 'inter', fontSize: 'base', accentColor: '#1e40af', spacing: 'normal', showIcons: true }
+  } = resume || {};
+  const fontClass = getFontFamilyClass(formatting?.fontFamily);
+  const size = getFontSizeClass(formatting?.fontSize);
+  const accentColor = formatting?.accentColor || '#1e40af';
   const densityStyles = getAdaptiveDensityStyles(densityMode);
 
   const hasSidebarContent =

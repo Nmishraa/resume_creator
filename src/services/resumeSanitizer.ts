@@ -563,7 +563,22 @@ export function sanitizeExperience(experienceList: ExperienceItem[]): Experience
  * Master Sanitizer for complete ResumeData object
  */
 export function sanitizeResumeData(data: Partial<ResumeData>): Partial<ResumeData> {
-  const personalInfo = sanitizePersonalInfo(data.personalInfo || {
+  const defaultFormatting = {
+    template: 'modern' as const,
+    fontFamily: 'inter' as const,
+    fontSize: 'base' as const,
+    accentColor: '#0284c7',
+    spacing: 'normal' as const,
+    showIcons: true,
+    sectionOrder: ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+  };
+
+  const formatting = {
+    ...defaultFormatting,
+    ...(data?.formatting || {})
+  };
+
+  const personalInfo = sanitizePersonalInfo(data?.personalInfo || {
     fullName: '',
     jobTitle: '',
     email: '',
@@ -574,16 +589,16 @@ export function sanitizeResumeData(data: Partial<ResumeData>): Partial<ResumeDat
     github: ''
   });
 
-  const summary = sanitizeSummary(data.summary || '');
-  const experience = sanitizeExperience(data.experience || []);
-  const education = sanitizeEducation(data.education || []);
+  const summary = sanitizeSummary(data?.summary || '');
+  const experience = sanitizeExperience(data?.experience || []);
+  const education = sanitizeEducation(data?.education || []);
 
   const { skills, projects } = sanitizeSkillsAndProjects(
-    data.skills || [],
-    data.projects || []
+    data?.skills || [],
+    data?.projects || []
   );
 
-  const certifications: CertificationItem[] = (data.certifications || [])
+  const certifications: CertificationItem[] = (data?.certifications || [])
     .map(c => ({
       id: c.id,
       name: cleanString(c.name),
@@ -600,6 +615,7 @@ export function sanitizeResumeData(data: Partial<ResumeData>): Partial<ResumeDat
     education,
     skills,
     projects,
-    certifications
+    certifications,
+    formatting
   };
 }

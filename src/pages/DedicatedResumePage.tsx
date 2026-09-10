@@ -35,13 +35,42 @@ export const DedicatedResumePage: React.FC = () => {
     return <Navigate to="/resume-examples" replace />;
   }
 
-  const fullResumeData = resume.presetData as ResumeData;
+  const preset = resume.presetData || {};
+  const fullResumeData: ResumeData = {
+    id: (preset as any).id || `resume-${resume.slug}`,
+    title: (preset as any).title || `${resume.jobTitle} Resume`,
+    updatedAt: (preset as any).updatedAt || new Date().toISOString(),
+    personalInfo: {
+      fullName: preset.personalInfo?.fullName || '',
+      jobTitle: preset.personalInfo?.jobTitle || resume.jobTitle,
+      email: preset.personalInfo?.email || '',
+      phone: preset.personalInfo?.phone || '',
+      location: preset.personalInfo?.location || '',
+      website: preset.personalInfo?.website || '',
+      linkedin: preset.personalInfo?.linkedin || '',
+      github: preset.personalInfo?.github || ''
+    },
+    summary: preset.summary || '',
+    experience: preset.experience || [],
+    education: preset.education || [],
+    skills: preset.skills || [],
+    projects: preset.projects || [],
+    certifications: preset.certifications || [],
+    customSections: preset.customSections || [],
+    formatting: {
+      template: preset.formatting?.template || 'modern',
+      fontFamily: preset.formatting?.fontFamily || 'inter',
+      fontSize: preset.formatting?.fontSize || 'base',
+      accentColor: preset.formatting?.accentColor || '#0284c7',
+      spacing: preset.formatting?.spacing || 'normal',
+      showIcons: preset.formatting?.showIcons ?? true,
+      sectionOrder: preset.formatting?.sectionOrder || ['summary', 'experience', 'skills', 'education', 'projects', 'certifications']
+    }
+  };
 
   const handleUsePreset = () => {
-    if (resume.presetData) {
-      updateResume(resume.presetData);
-      navigate('/builder');
-    }
+    updateResume(fullResumeData);
+    navigate('/builder');
   };
 
   const handleDownloadPdf = async () => {

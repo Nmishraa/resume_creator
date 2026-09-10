@@ -10,10 +10,19 @@ interface TemplateProps {
 }
 
 export const ModernClean: React.FC<TemplateProps> = ({ resume, densityMode = 'standard' }) => {
-  const { personalInfo, summary, experience, education, skills, projects, certifications, formatting } = resume;
-  const fontClass = getFontFamilyClass(formatting.fontFamily);
-  const size = getFontSizeClass(formatting.fontSize);
-  const accentColor = formatting.accentColor || '#0284c7';
+  const {
+    personalInfo = { fullName: '', jobTitle: '', email: '', phone: '', location: '', website: '', linkedin: '', github: '' },
+    summary,
+    experience,
+    education,
+    skills,
+    projects,
+    certifications,
+    formatting = { template: 'modern', fontFamily: 'inter', fontSize: 'base', accentColor: '#0284c7', spacing: 'normal', showIcons: true }
+  } = resume || {};
+  const fontClass = getFontFamilyClass(formatting?.fontFamily);
+  const size = getFontSizeClass(formatting?.fontSize);
+  const accentColor = formatting?.accentColor || '#0284c7';
   const densityStyles = getAdaptiveDensityStyles(densityMode);
 
   return (

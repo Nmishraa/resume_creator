@@ -1,21 +1,21 @@
 import React, { CSSProperties } from 'react';
 import { ResumeData, DensityMode } from '../../types/resume';
 
-export function getFontFamilyClass(fontFamily: ResumeData['formatting']['fontFamily']): string {
+export function getFontFamilyClass(fontFamily?: ResumeData['formatting']['fontFamily']): string {
+  if (!fontFamily) return 'font-sans';
   switch (fontFamily) {
     case 'serif':
       return 'font-serif';
     case 'mono':
       return 'font-mono';
     case 'inter':
-      return 'font-sans';
     case 'outfit':
     default:
       return 'font-sans';
   }
 }
 
-export function getFontSizeClass(fontSize: ResumeData['formatting']['fontSize']): {
+export function getFontSizeClass(fontSize?: ResumeData['formatting']['fontSize']): {
   body: string;
   name: string;
   sectionTitle: string;

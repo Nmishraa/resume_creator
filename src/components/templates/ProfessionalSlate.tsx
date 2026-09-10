@@ -10,10 +10,19 @@ interface TemplateProps {
 }
 
 export const ProfessionalSlate: React.FC<TemplateProps> = ({ resume, densityMode = 'standard' }) => {
-  const { personalInfo, summary, experience, education, skills, projects, certifications, formatting } = resume;
-  const fontClass = getFontFamilyClass(formatting.fontFamily);
-  const size = getFontSizeClass(formatting.fontSize);
-  const accentColor = formatting.accentColor || '#334155';
+  const {
+    personalInfo = { fullName: '', jobTitle: '', email: '', phone: '', location: '', website: '', linkedin: '', github: '' },
+    summary,
+    experience,
+    education,
+    skills,
+    projects,
+    certifications,
+    formatting = { template: 'slate', fontFamily: 'inter', fontSize: 'base', accentColor: '#334155', spacing: 'normal', showIcons: true }
+  } = resume || {};
+  const fontClass = getFontFamilyClass(formatting?.fontFamily);
+  const size = getFontSizeClass(formatting?.fontSize);
+  const accentColor = formatting?.accentColor || '#334155';
   const densityStyles = getAdaptiveDensityStyles(densityMode);
 
   return (

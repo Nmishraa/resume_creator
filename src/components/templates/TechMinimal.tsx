@@ -10,10 +10,19 @@ interface TemplateProps {
 }
 
 export const TechMinimal: React.FC<TemplateProps> = ({ resume, densityMode = 'standard' }) => {
-  const { personalInfo, summary, experience, education, skills, projects, certifications, formatting } = resume;
-  const fontClass = getFontFamilyClass(formatting.fontFamily);
-  const size = getFontSizeClass(formatting.fontSize);
-  const accentColor = formatting.accentColor || '#0f766e';
+  const {
+    personalInfo = { fullName: '', jobTitle: '', email: '', phone: '', location: '', website: '', linkedin: '', github: '' },
+    summary,
+    experience,
+    education,
+    skills,
+    projects,
+    certifications,
+    formatting = { template: 'tech', fontFamily: 'mono', fontSize: 'base', accentColor: '#0f766e', spacing: 'normal', showIcons: true }
+  } = resume || {};
+  const fontClass = getFontFamilyClass(formatting?.fontFamily);
+  const size = getFontSizeClass(formatting?.fontSize);
+  const accentColor = formatting?.accentColor || '#0f766e';
   const densityStyles = getAdaptiveDensityStyles(densityMode);
 
   let sectionCounter = 1;

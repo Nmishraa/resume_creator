@@ -8,11 +8,21 @@ interface TemplateProps {
 }
 
 export const ExecutiveSerif: React.FC<TemplateProps> = ({ resume, densityMode = 'standard' }) => {
-  const { personalInfo, summary, experience, education, skills, projects, certifications, customSections, formatting } = resume;
-  const size = getFontSizeClass(formatting.fontSize);
+  const {
+    personalInfo = { fullName: '', jobTitle: '', email: '', phone: '', location: '', website: '', linkedin: '', github: '' },
+    summary,
+    experience,
+    education,
+    skills,
+    projects,
+    certifications,
+    customSections,
+    formatting = { template: 'executive', fontFamily: 'serif', fontSize: 'base', accentColor: '#b45309', spacing: 'normal', showIcons: true }
+  } = resume || {};
+  const size = getFontSizeClass(formatting?.fontSize);
   const densityStyles = getAdaptiveDensityStyles(densityMode);
   // Default accent color for Executive Serif is rich Amber/Gold (#b45309)
-  const accentColor = (formatting.accentColor && !['#059669', '#0284c7', '#2563eb'].includes(formatting.accentColor))
+  const accentColor = (formatting?.accentColor && !['#059669', '#0284c7', '#2563eb'].includes(formatting.accentColor))
     ? formatting.accentColor
     : '#b45309';
 
