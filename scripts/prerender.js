@@ -130,12 +130,190 @@ const PAGES = [
     h1: 'Professional Resume Examples & ATS Samples',
     intro: 'Explore recruiter-aligned resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.'
   },
+  // Competitor Comparison Pages
+  {
+    path: '/vs/zety-alternative',
+    title: 'Free Zety Alternative (No Watermark & Free PDF Download) | Resume Craft',
+    description: 'Looking for a free alternative to Zety? Build, ATS-check, and download vector PDF resumes 100% free on Resume Craft with no watermarks or credit card required.',
+    h1: 'Free Zety Alternative (No Watermark & Free Vector PDF)',
+    intro: 'Resume Craft is 100% free forever. Build ATS-friendly resumes, enhance bullet points with AI, and download vector PDFs with zero watermarks or credit card requirements.'
+  },
+  {
+    path: '/vs/resume-io-alternative',
+    title: 'Free Resume.io Alternative (No Watermark & Free Vector PDF) | Resume Craft',
+    description: 'Switch from Resume.io to Resume Craft. Build ATS-optimized resumes, enhance bullet points with AI, and download high-resolution vector PDFs 100% free with no watermark.',
+    h1: 'Free Resume.io Alternative (No Watermark & Free Vector PDF)',
+    intro: 'Switch from Resume.io to Resume Craft. Export high-resolution vector PDFs for free without plain text restrictions or monthly subscription fees.'
+  },
   {
     path: '/resume-preview',
     title: 'Full-Page Resume Preview | Resume Craft',
     description: 'Full-page ATS resume preview with high-resolution layout rendering.',
     h1: 'Resume Preview',
     intro: 'Preview high-resolution ATS-optimized resume layouts.'
+  },
+
+  // 23 Role Template Pages
+  {
+    path: '/resume-templates/product-manager',
+    title: 'Product Manager Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Product Manager resume with Resume Craft. Use an ATS-friendly template, customize your experience and skills, and download your resume as PDF or Word.',
+    h1: 'Product Manager Resume Template',
+    intro: 'Craft a high-impact Product Manager resume designed to pass ATS screening and impress VP of Product recruiters. Highlight product vision, roadmapping, user research, and metric-backed growth.'
+  },
+  {
+    path: '/resume-templates/technical-product-manager',
+    title: 'Technical Product Manager Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Technical Product Manager resume with Resume Craft. Use an ATS-friendly template, customize your technical skills and system architecture, and download as PDF or Word.',
+    h1: 'Technical Product Manager Resume Template',
+    intro: 'Highlight your bridge between engineering architecture and product vision. Feature API strategy, system design, technical roadmaps, and developer ecosystem growth.'
+  },
+  {
+    path: '/resume-templates/ai-product-manager',
+    title: 'AI Product Manager Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS-friendly AI Product Manager resume. Showcase LLM applications, RAG pipelines, model evaluation metrics, and responsible AI governance.',
+    h1: 'AI Product Manager Resume Template',
+    intro: 'Build a recruiter-vetted resume tailored for GenAI and machine learning product management. Highlight prompt engineering, model benchmarks, product analytics, and AI ethics.'
+  },
+  {
+    path: '/resume-templates/enterprise-architect',
+    title: 'Enterprise Architect Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Download a free ATS Enterprise Architect resume template. Showcase TOGAF 10 governance, cloud strategy, digital transformation, and multimillion-dollar IT roadmaps.',
+    h1: 'Enterprise Architect Resume Template',
+    intro: 'Demonstrate top-tier IT leadership, TOGAF framework governance, digital transformation roadmaps, and enterprise software architecture across global business units.'
+  },
+  {
+    path: '/resume-templates/cloud-architect',
+    title: 'Cloud Architect Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Cloud Architect resume with Resume Craft. Feature AWS, Azure, GCP, Kubernetes, Terraform IaC, multi-region failover, and cloud cost optimization.',
+    h1: 'Cloud Architect Resume Template',
+    intro: 'Highlight multi-cloud infrastructure design, Kubernetes orchestration, Terraform IaC automation, FinOps cost savings, and zero-downtime disaster recovery.'
+  },
+  {
+    path: '/resume-templates/software-engineer',
+    title: 'Software Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Software Engineer resume. Highlight Full-Stack skills, React, TypeScript, Node.js, Python, system performance, and unit testing.',
+    h1: 'Software Engineer Resume Template',
+    intro: 'Build a recruiter-approved Software Engineer resume. Showcase full-stack web applications, microservices performance, system optimization, and clean code principles.'
+  },
+  {
+    path: '/resume-templates/senior-software-engineer',
+    title: 'Senior Software Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Senior Software Engineer resume. Showcase technical leadership, distributed system design, code reviews, and high-throughput backend scaling.',
+    h1: 'Senior Software Engineer Resume Template',
+    intro: 'Highlight staff engineering leadership, system architecture, mentoring, multi-region cloud scaling, and measurable business impact.'
+  },
+  {
+    path: '/resume-templates/data-scientist',
+    title: 'Data Scientist Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Download a free ATS Data Scientist resume template. Feature Machine Learning, Python, PyTorch, XGBoost, A/B testing, and predictive modeling.',
+    h1: 'Data Scientist Resume Template',
+    intro: 'Highlight predictive modeling, A/B testing, statistical inference, machine learning pipelines, Python/SQL proficiency, and revenue impact.'
+  },
+  {
+    path: '/resume-templates/data-analyst',
+    title: 'Data Analyst Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS-friendly Data Analyst resume. Highlight SQL query optimization, Tableau, Power BI dashboards, KPI tracking, and Excel modeling.',
+    h1: 'Data Analyst Resume Template',
+    intro: 'Build a standout Data Analyst resume emphasizing complex SQL queries, interactive BI dashboards, revenue trend analysis, and data hygiene.'
+  },
+  {
+    path: '/resume-templates/machine-learning-engineer',
+    title: 'Machine Learning Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Machine Learning Engineer resume with Resume Craft. Feature PyTorch, TensorFlow, MLOps, Model Deployment, Docker, and SageMaker.',
+    h1: 'Machine Learning Engineer Resume Template',
+    intro: 'Highlight MLOps pipelines, production model deployment, PyTorch/TensorFlow deep learning, model quantization, and low-latency GPU inference.'
+  },
+  {
+    path: '/resume-templates/ai-engineer',
+    title: 'AI Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Download a free ATS AI Engineer resume template. Showcase Python, LLMs, RAG, LangChain, Vector Databases, APIs, Prompt Engineering, and Model Deployment.',
+    h1: 'AI Engineer Resume Template',
+    intro: 'Highlight LLM integration, LangChain agents, RAG document search, Pinecone vector databases, prompt engineering, and GenAI production deployment.'
+  },
+  {
+    path: '/resume-templates/devops-engineer',
+    title: 'DevOps Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a DevOps Engineer resume with Resume Craft. Feature CI/CD pipelines, Kubernetes, Docker, Terraform, AWS, Ansible, and Prometheus monitoring.',
+    h1: 'DevOps Engineer Resume Template',
+    intro: 'Demonstrate automated CI/CD deployment pipelines, Infrastructure as Code with Terraform, Kubernetes cluster administration, and high-availability cloud monitoring.'
+  },
+  {
+    path: '/resume-templates/cloud-engineer',
+    title: 'Cloud Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Cloud Engineer resume. Feature AWS, Azure, Terraform, Linux administration, VPC networking, and cloud migration.',
+    h1: 'Cloud Engineer Resume Template',
+    intro: 'Highlight cloud infrastructure provisioning, AWS/Azure server management, VPC networking, IAM security policies, and automated Terraform scripts.'
+  },
+  {
+    path: '/resume-templates/frontend-developer',
+    title: 'Frontend Developer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Frontend Developer resume with Resume Craft. Feature React, Next.js, TypeScript, Tailwind CSS, Web Vitals optimization, and responsive UI design.',
+    h1: 'Frontend Developer Resume Template',
+    intro: 'Showcase responsive React & Next.js user interfaces, TypeScript type safety, Core Web Vitals performance tuning, and accessible web standards.'
+  },
+  {
+    path: '/resume-templates/backend-developer',
+    title: 'Backend Developer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Backend Developer resume with Resume Craft. Highlight Node.js, Python, Go, PostgreSQL, Redis, Microservices, and REST/GraphQL APIs.',
+    h1: 'Backend Developer Resume Template',
+    intro: 'Demonstrate microservices architecture, REST/GraphQL API design, SQL database indexing, Redis caching, and p99 latency optimization.'
+  },
+  {
+    path: '/resume-templates/full-stack-developer',
+    title: 'Full-Stack Developer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Full-Stack Developer resume. Feature React, Next.js, Node.js, TypeScript, PostgreSQL, AWS, and end-to-end web architecture.',
+    h1: 'Full-Stack Developer Resume Template',
+    intro: 'Highlight end-to-end web engineering, React/Next.js frontends, Node.js/Python backends, SQL databases, and seamless cloud deployments.'
+  },
+  {
+    path: '/resume-templates/project-manager',
+    title: 'Project Manager Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Project Manager resume. Highlight PMP certification, Agile, Scrum, budget management, risk mitigation, and Jira delivery.',
+    h1: 'Project Manager Resume Template',
+    intro: 'Showcase PMP certifications, Agile/Scrum delivery, multimillion-dollar project budgets, cross-functional risk mitigation, and on-time project completion.'
+  },
+  {
+    path: '/resume-templates/business-analyst',
+    title: 'Business Analyst Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Business Analyst resume. Highlight requirements gathering, Agile user stories, process mapping, SQL, and stakeholder alignment.',
+    h1: 'Business Analyst Resume Template',
+    intro: 'Highlight business requirements gathering, BRD/FRD authoring, process mapping (BPMN), SQL data analysis, and bridging business needs with technical solutions.'
+  },
+  {
+    path: '/resume-templates/marketing-manager',
+    title: 'Marketing Manager Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Marketing Manager resume. Highlight digital marketing, SEO/SEM, customer acquisition, ROI metrics, and campaign management.',
+    h1: 'Marketing Manager Resume Template',
+    intro: 'Highlight multi-channel campaign management, SEO/SEM growth, customer acquisition cost (CAC) reduction, content strategy, and return on ad spend (ROAS).'
+  },
+  {
+    path: '/resume-templates/financial-analyst',
+    title: 'Financial Analyst Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Financial Analyst resume with Resume Craft. Showcase financial modeling, forecasting, variance analysis, Excel DCF models, and SQL.',
+    h1: 'Financial Analyst Resume Template',
+    intro: 'Highlight financial modeling (DCF, LBO), budget forecasting, variance analysis, SQL data extraction, and executive presentation of financial reports.'
+  },
+  {
+    path: '/resume-templates/human-resources-manager',
+    title: 'Human Resources Manager Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Human Resources Manager resume. Highlight talent acquisition, employee relations, HRIS (Workday), compensation, and compliance.',
+    h1: 'Human Resources Manager Resume Template',
+    intro: 'Showcase talent acquisition scaling, HRIS software management (Workday, BambooHR), employee retention programs, labor law compliance, and culture building.'
+  },
+  {
+    path: '/resume-templates/ux-designer',
+    title: 'UX Designer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional UX Designer resume. Feature user research, wireframing, Figma, usability testing, design systems, and prototyping.',
+    h1: 'UX Designer Resume Template',
+    intro: 'Highlight user research methodologies, Figma wireframing, interactive prototyping, usability testing, and accessible design systems.'
+  },
+  {
+    path: '/resume-templates/ui-ux-designer',
+    title: 'UI/UX Designer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a UI/UX Designer resume with Resume Craft. Feature Figma, UI visual design, user research, design tokens, micro-interactions, and mobile responsiveness.',
+    h1: 'UI/UX Designer Resume Template',
+    intro: 'Combine aesthetic visual UI design with deep UX research, Figma design token libraries, responsive layouts, and interactive micro-animations.'
   },
 
   // 12 Resume Examples

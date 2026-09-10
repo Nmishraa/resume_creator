@@ -53,7 +53,7 @@ export const FreeResumeBuilderPage: React.FC = () => {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight">
-            Free AI Resume Builder &amp; Format Checker
+            Free Resume Builder — No Login Required
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">

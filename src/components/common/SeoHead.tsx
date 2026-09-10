@@ -1,6 +1,25 @@
 import React, { useEffect } from 'react';
 import { SITE_URL } from '../../data/sitemapData';
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface HowToStepItem {
+  name: string;
+  text: string;
+  url?: string;
+  image?: string;
+}
+
+export interface HowToData {
+  name: string;
+  description: string;
+  totalTime?: string;
+  steps: HowToStepItem[];
+}
+
 export interface SeoHeadProps {
   title: string;
   description: string;
@@ -8,6 +27,8 @@ export interface SeoHeadProps {
   ogType?: 'website' | 'article';
   ogImage?: string;
   jsonLd?: Record<string, any> | Array<Record<string, any>>;
+  faqItems?: FaqItem[];
+  howToSteps?: HowToData;
   noindex?: boolean;
 }
 
@@ -18,6 +39,8 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
   ogType = 'website',
   ogImage = `${SITE_URL}/og-image.png`,
   jsonLd,
+  faqItems,
+  howToSteps,
   noindex = false
 }) => {
   const rawCanonical = canonicalPath
@@ -158,12 +181,45 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       }
     ];
 
+    if (faqItems && faqItems.length > 0) {
+      defaultSchemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer
+          }
+        }))
+      });
+    }
+
+    if (howToSteps && howToSteps.steps && howToSteps.steps.length > 0) {
+      defaultSchemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: howToSteps.name,
+        description: howToSteps.description,
+        totalTime: howToSteps.totalTime || 'PT5M',
+        step: howToSteps.steps.map((step, idx) => ({
+          '@type': 'HowToStep',
+          position: idx + 1,
+          name: step.name,
+          text: step.text,
+          url: step.url || fullCanonical,
+          ...(step.image ? { image: step.image } : {})
+        }))
+      });
+    }
+
     const activeSchema = jsonLd
       ? (Array.isArray(jsonLd) ? [...defaultSchemas, ...jsonLd] : [...defaultSchemas, jsonLd])
       : defaultSchemas;
 
     scriptEl.textContent = JSON.stringify(activeSchema);
-  }, [title, description, fullCanonical, ogType, ogImage, jsonLd]);
+  }, [title, description, fullCanonical, ogType, ogImage, jsonLd, faqItems, howToSteps]);
 
   return null;
 };

@@ -74,6 +74,7 @@ export const FaqPage: React.FC = () => {
         title="Frequently Asked Questions (FAQ) | Resume Craft"
         description="Find answers to common questions about Resume Craft, ATS resume scoring, AI bullet improvements, vector PDF downloads, and data privacy."
         canonicalPath="/faq"
+        faqItems={ALL_FAQS.map(({ question, answer }) => ({ question, answer }))}
       />
 
       {/* Hero Header */}

@@ -528,6 +528,7 @@ export const HomePage: React.FC = () => {
         title="Build an ATS-Friendly Resume for Free | Resume Craft"
         description="Create an ATS-optimized resume in minutes. No login, no watermark, and no hidden fees. Download high-resolution vector PDFs free."
         canonicalPath="/"
+        faqItems={homeFaqs}
       />
 
       {/* 1. HERO SECTION */}

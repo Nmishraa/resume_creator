@@ -88,12 +88,41 @@ export const AtsCheckerPage: React.FC = () => {
     }
   ];
 
+  const atsHowToSteps = {
+    name: 'How to check and optimize your resume for ATS screening',
+    description: 'A step-by-step guide to scanning your resume against job postings, detecting missing keywords, and fixing formatting issues.',
+    steps: [
+      {
+        name: 'Upload or Load Your Resume',
+        text: 'Enter your resume details in the Resume Craft builder or upload an existing PDF/Word file to parse your content.'
+      },
+      {
+        name: 'Paste the Target Job Description',
+        text: 'Copy and paste the job description or requirements section from the employer job posting into the target job description box.'
+      },
+      {
+        name: 'Review Your 0-100 Compatibility Score',
+        text: 'Check your overall ATS score and category breakdown for keyword density, Google X-Y-Z metrics, action verbs, and formatting.'
+      },
+      {
+        name: 'Add Missing Keywords',
+        text: 'Click on missing keywords to automatically add them into your resume skills section with 1 click.'
+      },
+      {
+        name: 'Export ATS-Friendly Vector PDF',
+        text: 'Download your optimized resume as a clean, single-column vector PDF with no watermark.'
+      }
+    ]
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
         title="Free ATS Resume Checker – Check Your Resume Score | Resume Craft"
         description="Instant 0-100 ATS resume score checker. Compare your resume against any job description, find missing keywords, and fix weak bullet points for free."
         canonicalPath="/ats-resume-checker"
+        faqItems={atsFaqs}
+        howToSteps={atsHowToSteps}
       />
 
       <Breadcrumbs items={[{ name: 'ATS Resume Checker', path: '/ats-resume-checker' }]} />

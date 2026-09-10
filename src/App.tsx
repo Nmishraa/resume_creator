@@ -57,6 +57,7 @@ const MainResumeBuilderSeoPage = lazyWithRetry(() => import('./pages/seo/MainRes
 const CoverLetterBuilderSeoPage = lazyWithRetry(() => import('./pages/seo/CoverLetterBuilderSeoPage').then(m => ({ default: m.CoverLetterBuilderSeoPage })));
 const ResumeTemplateDetailPage = lazyWithRetry(() => import('./pages/seo/ResumeTemplateDetailPage').then(m => ({ default: m.ResumeTemplateDetailPage })));
 const ResumeSkillsDetailPage = lazyWithRetry(() => import('./pages/seo/ResumeSkillsDetailPage').then(m => ({ default: m.ResumeSkillsDetailPage })));
+const CompetitorComparisonPage = lazyWithRetry(() => import('./pages/seo/CompetitorComparisonPage').then(m => ({ default: m.CompetitorComparisonPage })));
 const FullPagePreviewPage = lazyWithRetry(() => import('./pages/FullPagePreviewPage').then(m => ({ default: m.FullPagePreviewPage })));
 const PublicPortfolioPage = lazyWithRetry(() => import('./pages/PublicPortfolioPage').then(m => ({ default: m.PublicPortfolioPage })));
 
@@ -84,6 +85,7 @@ export function App() {
             <Route path="ai-resume-builder" element={<AiResumeBuilderPage />} />
             <Route path="ats-resume-builder" element={<AtsResumeBuilderPage />} />
             <Route path="ats-resume-checker" element={<AtsCheckerPage />} />
+            <Route path="resume-checker" element={<AtsCheckerPage />} />
             <Route path="ats-checker" element={<Navigate to="/ats-resume-checker" replace />} />
             <Route path="ats-methodology" element={<Navigate to="/ats-resume-checker" replace />} />
             <Route path="ats-resume-checker-without-signup" element={<Navigate to="/ats-resume-checker" replace />} />
@@ -99,9 +101,16 @@ export function App() {
             <Route path="matching-jobs" element={<Navigate to="/find-matching-jobs" replace />} />
             <Route path="resume-keyword-matcher" element={<KeywordMatcherPage />} />
             
+            {/* Competitor Comparison Pages */}
+            <Route path="vs/:competitor" element={<CompetitorComparisonPage />} />
+            <Route path="zety-alternative" element={<Navigate to="/vs/zety-alternative" replace />} />
+            <Route path="resume-io-alternative" element={<Navigate to="/vs/resume-io-alternative" replace />} />
+            
             {/* Cover Letter & Templates */}
             <Route path="cover-letters" element={<CoverLetterPage />} />
             <Route path="cover-letter-builder" element={<CoverLetterBuilderSeoPage />} />
+            <Route path="free-cover-letter-builder" element={<Navigate to="/cover-letter-builder" replace />} />
+            <Route path="ai-cover-letter-builder" element={<Navigate to="/cover-letter-builder" replace />} />
             <Route path="cover-letter-generator" element={<Navigate to="/cover-letter-builder" replace />} />
             <Route path="templates" element={<Navigate to="/resume-templates" replace />} />
             <Route path="resume-templates" element={<TemplatesGalleryPage />} />

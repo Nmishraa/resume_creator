@@ -48,12 +48,37 @@ export const AiResumeBuilderPage: React.FC = () => {
     }
   ];
 
+  const aiHowToSteps = {
+    name: 'How to build an AI-optimized ATS resume for free',
+    description: 'A 4-step guide to using AI bullet point enhancers, automated summaries, and vector PDF exports with zero sign-up.',
+    steps: [
+      {
+        name: 'Enter Your Work History & Skills',
+        text: 'Input your job titles, experience bullets, and skills into the guided form sections.'
+      },
+      {
+        name: 'Enhance Bullets with AI Formula',
+        text: 'Click the AI Bullet Enhancer button to convert duty bullets into Google X-Y-Z metric achievements.'
+      },
+      {
+        name: 'Select an ATS-Friendly Template',
+        text: 'Choose from recruiter-approved single-column resume templates designed to pass automated systems.'
+      },
+      {
+        name: 'Download Vector PDF Free',
+        text: 'Export your high-resolution vector PDF immediately to your device without creating an account or paying fees.'
+      }
+    ]
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
         title="Free AI Resume Builder—No Login Required | Resume Craft"
         description="Create an ATS-friendly resume with AI and download a vector PDF for free. No login, signup, credit card, watermark, or hidden paywall required."
         canonicalPath="/ai-resume-builder"
+        faqItems={aiFaqs}
+        howToSteps={aiHowToSteps}
       />
 
       <Breadcrumbs items={[{ name: 'AI Resume Builder', path: '/ai-resume-builder' }]} />
@@ -66,7 +91,7 @@ export const AiResumeBuilderPage: React.FC = () => {
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-          Free AI Resume Builder—No Login or Credit Card Required
+          AI Resume Builder
         </h1>
 
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">

@@ -37,7 +37,7 @@ export const AtsResumeBuilderPage: React.FC = () => {
           </div>
           
           <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
-            Free <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">ATS Resume Builder</span> Engineered for Modern Hiring Systems
+            ATS-Friendly Resume Builder
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
