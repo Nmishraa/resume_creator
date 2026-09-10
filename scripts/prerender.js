@@ -364,6 +364,90 @@ const PAGES = [
     h1: 'UI/UX Designer Resume Template',
     intro: 'Combine aesthetic visual UI design with deep UX research, Figma design token libraries, responsive layouts, and interactive micro-animations.'
   },
+  {
+    path: '/resume-templates/solutions-architect',
+    title: 'Solutions Architect Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Solutions Architect resume with Resume Craft. Feature AWS/Azure Cloud, Microservices, System Architecture, Integration, and Enterprise Security.',
+    h1: 'Solutions Architect Resume Template',
+    intro: 'Highlight technical cloud architecture, microservices integrations, client requirements translation, security frameworks, and high-availability systems design.'
+  },
+  {
+    path: '/resume-templates/scrum-master',
+    title: 'Scrum Master Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Download a free ATS Scrum Master resume template. Highlight CSM/PSM certifications, Agile ceremonies, sprint velocity, Jira, and team coaching.',
+    h1: 'Scrum Master Resume Template',
+    intro: 'Demonstrate Agile ceremonies facilitation, CSM/PSM certifications, sprint velocity improvement, Jira workflow optimization, and team coaching.'
+  },
+  {
+    path: '/resume-templates/qa-automation-engineer',
+    title: 'QA Automation Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a QA Automation Engineer resume. Feature Selenium, Cypress, Playwright, Python, Java, API Testing, CI/CD integration, and test frameworks.',
+    h1: 'QA Automation Engineer Resume Template',
+    intro: 'Highlight automated test frameworks (Selenium, Cypress, Playwright), CI/CD pipeline integration, API testing (Postman, REST Assured), and bug reduction.'
+  },
+  {
+    path: '/resume-templates/sales-director',
+    title: 'Sales Director Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Download an executive Sales Director resume template. Highlight enterprise deal closure, quota attainment, revenue growth, Salesforce, and team leadership.',
+    h1: 'Sales Director Resume Template',
+    intro: 'Highlight multi-million dollar quota attainment, enterprise SaaS sales pipelines, team leadership, Salesforce CRM management, and revenue expansion.'
+  },
+  {
+    path: '/resume-templates/operations-manager',
+    title: 'Operations Manager Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a professional Operations Manager resume. Feature process optimization, Lean Six Sigma, budget management, vendor relations, and team efficiency.',
+    h1: 'Operations Manager Resume Template',
+    intro: 'Highlight operational efficiency, process optimization, Lean Six Sigma methodologies, operating budget management, supply chain coordination, and KPI tracking.'
+  },
+  {
+    path: '/resume-templates/cybersecurity-analyst',
+    title: 'Cybersecurity Analyst Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create a Cybersecurity Analyst resume. Showcase SOC operations, SIEM (Splunk), threat intelligence, incident response, vulnerability assessment, and CISSP/CEH.',
+    h1: 'Cybersecurity Analyst Resume Template',
+    intro: 'Highlight Security Operations Center (SOC) monitoring, SIEM tool management (Splunk), incident response protocols, vulnerability assessments, and security compliance.'
+  },
+  {
+    path: '/resumes/solutions-architect',
+    title: 'Solutions Architect Resume Example | Resume Craft',
+    description: 'Recruiter-vetted Solutions Architect resume example with AWS/Azure microservices, system design, and client blueprinting.',
+    h1: 'Solutions Architect Resume',
+    intro: 'Explore our recruiter-vetted Solutions Architect resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/scrum-master',
+    title: 'Scrum Master Resume Example | Resume Craft',
+    description: 'Recruiter-vetted Scrum Master resume example with CSM certification, Agile sprint velocity, Jira, and team coaching.',
+    h1: 'Scrum Master Resume',
+    intro: 'Explore our recruiter-vetted Scrum Master resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/qa-automation-engineer',
+    title: 'QA Automation Engineer Resume Example | Resume Craft',
+    description: 'Recruiter-vetted QA Automation Engineer resume example with Selenium, Cypress, Playwright, Python, and CI/CD pipelines.',
+    h1: 'QA Automation Engineer Resume',
+    intro: 'Explore our recruiter-vetted QA Automation Engineer resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/sales-director',
+    title: 'Sales Director Resume Example | Resume Craft',
+    description: 'Executive Sales Director resume example featuring quota attainment, enterprise SaaS sales, Salesforce, and GTM strategy.',
+    h1: 'Sales Director Resume',
+    intro: 'Explore our recruiter-vetted Sales Director resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/operations-manager',
+    title: 'Operations Manager Resume Example | Resume Craft',
+    description: 'Recruiter-vetted Operations Manager resume example featuring process optimization, Lean Six Sigma, and budget management.',
+    h1: 'Operations Manager Resume',
+    intro: 'Explore our recruiter-vetted Operations Manager resume example built to pass ATS scanners.'
+  },
+  {
+    path: '/resumes/cybersecurity-analyst',
+    title: 'Cybersecurity Analyst Resume Example | Resume Craft',
+    description: 'Recruiter-vetted Cybersecurity Analyst resume example featuring SOC monitoring, SIEM Splunk, incident response, and CISSP.',
+    h1: 'Cybersecurity Analyst Resume',
+    intro: 'Explore our recruiter-vetted Cybersecurity Analyst resume example built to pass ATS scanners.'
+  },
 
   // 12 Resume Examples
   {

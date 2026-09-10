@@ -1162,5 +1162,288 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
       ],
       skills: [{ id: 'sk-uiux-1', category: 'UI/UX Core', items: ['UI/UX Designer', 'Figma', 'UI Design', 'UX Research', 'Design Systems', 'Wireframing', 'Prototyping', 'Typography'] }]
     }
+  },
+
+  'solutions-architect': {
+    slug: 'solutions-architect',
+    roleTitle: 'Solutions Architect',
+    category: 'Architecture & Technology',
+    experienceLevel: 'Senior (6-10 Years)',
+    metaTitle: 'Solutions Architect Resume Template — Free ATS Resume | Resume Craft',
+    metaDescription: 'Create a Solutions Architect resume with Resume Craft. Feature AWS/Azure Cloud, Microservices, System Architecture, Integration, and Enterprise Security.',
+    h1: 'Solutions Architect Resume Template',
+    shortIntro: 'Highlight technical cloud architecture, microservices integrations, client requirements translation, security frameworks, and high-availability systems design.',
+    pageLength: '3-Page',
+    skills: [
+      { category: 'Architecture & Systems', items: ['Solutions Architecture', 'System Design', 'Microservices', 'API Management', 'Cloud Security', 'High Availability'] },
+      { category: 'Cloud & Tech Stack', items: ['AWS / Azure / GCP', 'Docker & Kubernetes', 'SQL & NoSQL', 'Kafka', 'Terraform', 'TOGAF'] },
+      { category: 'Business & Leadership', items: ['RFP Proposals', 'Client Consultations', 'Cost Optimization', 'Stakeholder Alignment', 'Solution Blueprints'] }
+    ],
+    summaryExamples: [
+      'Customer-focused Senior Solutions Architect with 8+ years designing enterprise cloud architectures for Fortune 500 financial and SaaS platforms. Architected resilient microservices systems handling $100M+ in annual transaction volume.',
+      'AWS Certified Solutions Architect specializing in cloud migrations, event-driven integrations, and security governance. Reduced enterprise client infrastructure operating costs by 30%.'
+    ],
+    experienceBullets: [
+      'Architected end-to-end cloud solution blueprints for 15 enterprise clients, generating $12M in new ARR contract value.',
+      'Designed zero-downtime multi-tenant microservices platform processing 25M daily transactions on AWS and Kubernetes.',
+      'Authored 40+ technical proposal responses (RFPs) and architectural decision records (ADRs) for C-suite stakeholders.',
+      'Slashing client infrastructure overhead by 30% through containerization and serverless computing migration.'
+    ],
+    atsKeywords: ['Solutions Architect', 'AWS', 'Azure', 'System Design', 'Microservices', 'Cloud Architecture', 'APIs', 'TOGAF', 'RFPs', 'Security'],
+    faqs: [
+      {
+        question: 'What is the most important skill for a Solutions Architect resume?',
+        answer: 'Demonstrate balance between deep technical architecture (AWS/Azure, APIs, System Design, Microservices) and business strategy (RFP proposals, ROI impact, executive stakeholder alignment).'
+      }
+    ],
+    relatedRoles: [
+      { slug: 'enterprise-architect', title: 'Enterprise Architect', category: 'Architecture' },
+      { slug: 'cloud-architect', title: 'Cloud Architect', category: 'Cloud' }
+    ],
+    presetData: {
+      title: 'Solutions Architect Resume',
+      personalInfo: { fullName: 'David Miller', jobTitle: 'Senior Solutions Architect', email: 'david.solutions@cloudcraft.io', location: 'Chicago, IL' },
+      summary: 'Senior Solutions Architect with 8+ years designing AWS/Azure microservices architectures for $100M+ transaction volume platforms.',
+      experience: [
+        { id: 'exp-sa-1', role: 'Principal Solutions Architect', company: 'Cloud Solutions Group', location: 'Chicago, IL', startDate: '2020-02', endDate: 'Present', current: true, highlights: ['Architected multi-tenant cloud platform processing 25M transactions daily.', 'Authored 40+ technical solution proposals yielding $12M ARR.'] }
+      ],
+      skills: [{ id: 'sk-sa-1', category: 'Solutions Core', items: ['Solutions Architect', 'AWS', 'Azure', 'System Design', 'Microservices', 'Cloud Architecture', 'APIs', 'Security'] }]
+    }
+  },
+
+  'scrum-master': {
+    slug: 'scrum-master',
+    roleTitle: 'Scrum Master',
+    category: 'Agile & Project Management',
+    experienceLevel: 'Mid-Senior (4-7 Years)',
+    metaTitle: 'Scrum Master Resume Template — Free ATS Resume | Resume Craft',
+    metaDescription: 'Download a free ATS Scrum Master resume template. Highlight CSM/PSM certifications, Agile ceremonies, sprint velocity, Jira, and team coaching.',
+    h1: 'Scrum Master Resume Template',
+    shortIntro: 'Demonstrate Agile ceremonies facilitation, CSM/PSM certifications, sprint velocity improvement, Jira workflow optimization, and team coaching.',
+    pageLength: '2-Page',
+    skills: [
+      { category: 'Agile & Frameworks', items: ['Certified Scrum Master (CSM)', 'PSM I / II', 'SAFe Agilist', 'Kanban', 'Scrum Framework', 'Agile Coaching'] },
+      { category: 'Ceremonies & Delivery', items: ['Sprint Planning', 'Daily Standups', 'Sprint Retrospectives', 'Backlog Grooming', 'Velocity Metrics', 'Burn-down Charts'] },
+      { category: 'Tools & Collaboration', items: ['Jira Software', 'Confluence', 'Miro', 'Azure DevOps', 'Trello', 'Conflict Resolution'] }
+    ],
+    summaryExamples: [
+      'Certified Scrum Master (CSM & PSM II) with 6+ years of experience guiding multi-squad software engineering teams through Agile transformations. Boosted sprint delivery velocity by 35% while cutting team turnover to zero.',
+      'Agile Coach & Senior Scrum Master adept at clearing blockers, optimizing Jira backlogs, and fostering psychological safety across distributed engineering teams.'
+    ],
+    experienceBullets: [
+      'Facilitated daily Scrum ceremonies, sprint planning, and retrospective sessions for 4 cross-functional engineering squads in Jira.',
+      'Elevated average sprint velocity delivery from 45 to 68 story points per sprint over 6 months.',
+      'Coached 30+ developers, product owners, and QA engineers on Agile metrics, story sizing, and definition of done (DoD).',
+      'Removed 150+ operational sprint impediments, reducing dependency resolution delays by 40%.'
+    ],
+    atsKeywords: ['Scrum Master', 'CSM', 'Agile', 'Sprint Planning', 'Jira', 'Kanban', 'Sprint Velocity', 'Backlog Grooming', 'Scrum Ceremonies', 'Agile Coaching'],
+    faqs: [
+      {
+        question: 'What certifications should a Scrum Master include on an ATS resume?',
+        answer: 'Prominently display CSM (Certified ScrumMaster), PSM I/II (Professional Scrum Master), SAFe Agilist, or PMI-ACP in your header and certification section.'
+      }
+    ],
+    relatedRoles: [
+      { slug: 'project-manager', title: 'Project Manager', category: 'Management' },
+      { slug: 'product-manager', title: 'Product Manager', category: 'Product' }
+    ],
+    presetData: {
+      title: 'Scrum Master Resume',
+      personalInfo: { fullName: 'Elena Rostova', jobTitle: 'Senior Certified Scrum Master (CSM)', email: 'elena.csm@agilecraft.io', location: 'New York, NY' },
+      summary: 'Certified Scrum Master (CSM) with 6+ years guiding engineering squads, elevating sprint velocity by 35% in Jira.',
+      experience: [
+        { id: 'exp-sm-1', role: 'Lead Scrum Master', company: 'Agile Engineering Labs', location: 'New York, NY', startDate: '2021-01', endDate: 'Present', current: true, highlights: ['Facilitated Agile Scrum ceremonies for 4 cross-functional squads in Jira.', 'Elevated sprint velocity from 45 to 68 story points.'] }
+      ],
+      skills: [{ id: 'sk-sm-1', category: 'Scrum Core', items: ['Scrum Master', 'CSM', 'Agile', 'Sprint Planning', 'Jira', 'Kanban', 'Sprint Velocity', 'Backlog Grooming'] }]
+    }
+  },
+
+  'qa-automation-engineer': {
+    slug: 'qa-automation-engineer',
+    roleTitle: 'QA Automation Engineer',
+    category: 'Engineering & Quality Assurance',
+    experienceLevel: 'Mid-Senior (3-7 Years)',
+    metaTitle: 'QA Automation Engineer Resume Template — Free ATS Resume | Resume Craft',
+    metaDescription: 'Create a QA Automation Engineer resume. Feature Selenium, Cypress, Playwright, Python, Java, API Testing, CI/CD integration, and test frameworks.',
+    h1: 'QA Automation Engineer Resume Template',
+    shortIntro: 'Highlight automated test frameworks (Selenium, Cypress, Playwright), CI/CD pipeline integration, API testing (Postman, REST Assured), and bug reduction.',
+    pageLength: '3-Page',
+    skills: [
+      { category: 'Automation Tools', items: ['Selenium WebDriver', 'Cypress', 'Playwright', 'Appium', 'Postman', 'REST Assured', 'JUnit / TestNG'] },
+      { category: 'Languages & Scripting', items: ['Python', 'Java', 'JavaScript / TypeScript', 'SQL', 'Bash / Shell Scripting'] },
+      { category: 'CI/CD & DevOps', items: ['Jenkins', 'GitHub Actions', 'Docker', 'Jira / Xray', 'Git', 'Agile QA'] }
+    ],
+    summaryExamples: [
+      'QA Automation Engineer with 5+ years of experience constructing scalable UI and API test automation frameworks using Cypress, Selenium, and Python. Reduced regression testing execution time from 3 days to 45 minutes.',
+      'Senior Quality Engineer specializing in Playwright automation, Postman API testing, and CI/CD Jenkins pipeline integration. Maintained 99.4% release stability across mobile and web platforms.'
+    ],
+    experienceBullets: [
+      'Built automated Cypress & TypeScript end-to-end test framework covering 450+ critical user paths, slashing manual regression testing time by 85%.',
+      'Integrated automated regression test suites into GitHub Actions CI/CD pipelines, preventing 120+ critical bugs from reaching production.',
+      'Created REST API automated testing scripts using Postman and Python requests, validating 200+ endpoint responses per build.',
+      'Authored comprehensive QA test plans, bug reports, and traceability matrices in Jira and Xray.'
+    ],
+    atsKeywords: ['QA Automation Engineer', 'Selenium', 'Cypress', 'Playwright', 'Python', 'Java', 'API Testing', 'Jenkins', 'Postman', 'Test Automation', 'Jira'],
+    faqs: [
+      {
+        question: 'What are the most in-demand keywords for a QA Automation Engineer?',
+        answer: 'Key ATS terms include Selenium, Cypress, Playwright, API Testing (Postman, REST Assured), Python/Java, CI/CD (Jenkins, GitHub Actions), and Automation Framework Design.'
+      }
+    ],
+    relatedRoles: [
+      { slug: 'software-engineer', title: 'Software Engineer', category: 'Engineering' },
+      { slug: 'devops-engineer', title: 'DevOps Engineer', category: 'DevOps' }
+    ],
+    presetData: {
+      title: 'QA Automation Engineer Resume',
+      personalInfo: { fullName: 'Marcus Vance', jobTitle: 'Senior QA Automation Engineer', email: 'marcus.qa@qualitycraft.dev', location: 'Austin, TX' },
+      summary: 'QA Automation Engineer with 5+ years building Cypress, Selenium, and Playwright automated test frameworks, cutting regression times by 85%.',
+      experience: [
+        { id: 'exp-qa-1', role: 'Lead QA Automation Engineer', company: 'Apex Quality Labs', location: 'Austin, TX', startDate: '2021-02', endDate: 'Present', current: true, highlights: ['Built Cypress test framework covering 450+ user paths.', 'Integrated automated regression suites into CI/CD pipelines.'] }
+      ],
+      skills: [{ id: 'sk-qa-1', category: 'QA Core', items: ['QA Automation Engineer', 'Selenium', 'Cypress', 'Playwright', 'Python', 'Java', 'API Testing', 'Jenkins', 'Postman'] }]
+    }
+  },
+
+  'sales-director': {
+    slug: 'sales-director',
+    roleTitle: 'Sales Director',
+    category: 'Sales & Business Development',
+    experienceLevel: 'Executive (8-15 Years)',
+    metaTitle: 'Sales Director Resume Template — Free ATS Resume | Resume Craft',
+    metaDescription: 'Download an executive Sales Director resume template. Highlight enterprise deal closure, quota attainment, revenue growth, Salesforce, and team leadership.',
+    h1: 'Sales Director Resume Template',
+    shortIntro: 'Highlight multi-million dollar quota attainment, enterprise SaaS sales pipelines, team leadership, Salesforce CRM management, and revenue expansion.',
+    pageLength: '4-Page',
+    skills: [
+      { category: 'Sales Strategy & Revenue', items: ['Enterprise Sales', 'Revenue Growth', 'Quota Attainment', 'SaaS Sales', 'Go-To-Market (GTM)', 'Pipeline Generation'] },
+      { category: 'Leadership & Negotiation', items: ['Sales Team Leadership', 'Contract Negotiation', 'Executive Relationship Building', 'Key Account Management', 'MEDDPICC'] },
+      { category: 'CRM & Analytics', items: ['Salesforce (SFDC)', 'Gong', 'Outreach', 'HubSpot', 'Sales Analytics & Forecasting'] }
+    ],
+    summaryExamples: [
+      'High-performing Sales Director with 10+ years driving enterprise B2B SaaS revenue growth, managing $25M+ annual quotas, and leading global sales organizations. Consistently exceeded sales targets by an average of 140%.',
+      'Vice President of Sales & Executive Leader skilled in MEDDPICC sales methodology, strategic account expansion, and building high-velocity AE teams from scratch.'
+    ],
+    experienceBullets: [
+      'Directed regional sales team of 18 Account Executives, generating $32M in new ARR and exceeding annual quota targets by 142%.',
+      'Closed 15 multi-year enterprise SaaS contracts with Fortune 500 clients valued at $1.5M+ average deal size.',
+      'Implemented MEDDPICC sales qualification methodology across sales organization, increasing deal win rates from 22% to 38%.',
+      'Recruited, onboarded, and coached 25 top-tier sales reps, cutting average ramp time from 6 months to 60 days.'
+    ],
+    atsKeywords: ['Sales Director', 'Enterprise Sales', 'Revenue Growth', 'Quota Attainment', 'Salesforce', 'MEDDPICC', 'SaaS Sales', 'Pipeline Generation', 'Contract Negotiation'],
+    faqs: [
+      {
+        question: 'What metrics should a Sales Director feature on a resume?',
+        answer: 'Include specific numbers: annual quota size ($), quota attainment (%), ARR generated ($), team size managed, average deal size ($), and sales win rate improvement (%).'
+      }
+    ],
+    relatedRoles: [
+      { slug: 'account-executive', title: 'Account Executive', category: 'Sales' },
+      { slug: 'marketing-manager', title: 'Marketing Manager', category: 'Marketing' }
+    ],
+    presetData: {
+      title: 'Sales Director Resume',
+      personalInfo: { fullName: 'Arthur Pendelton', jobTitle: 'Vice President of Enterprise Sales', email: 'arthur.sales@revenuecraft.io', location: 'Chicago, IL' },
+      summary: 'Executive Sales Director with 12+ years leading enterprise SaaS sales teams, exceeding $25M+ quotas by 140% using MEDDPICC methodology.',
+      experience: [
+        { id: 'exp-sd-1', role: 'Regional Sales Director', company: 'Nexus Enterprise SaaS', location: 'Chicago, IL', startDate: '2019-03', endDate: 'Present', current: true, highlights: ['Directed team of 18 AEs generating $32M new ARR at 142% quota.', 'Closed 15 Fortune 500 enterprise deals over $1.5M average value.'] }
+      ],
+      skills: [{ id: 'sk-sd-1', category: 'Sales Leadership Core', items: ['Sales Director', 'Enterprise Sales', 'Revenue Growth', 'Quota Attainment', 'Salesforce', 'MEDDPICC', 'SaaS Sales', 'Pipeline'] }]
+    }
+  },
+
+  'operations-manager': {
+    slug: 'operations-manager',
+    roleTitle: 'Operations Manager',
+    category: 'Operations & Management',
+    experienceLevel: 'Mid-Senior (5-10 Years)',
+    metaTitle: 'Operations Manager Resume Template — Free ATS Resume | Resume Craft',
+    metaDescription: 'Create a professional Operations Manager resume. Feature process optimization, Lean Six Sigma, budget management, vendor relations, and team efficiency.',
+    h1: 'Operations Manager Resume Template',
+    shortIntro: 'Highlight operational efficiency, process optimization, Lean Six Sigma methodologies, operating budget management, supply chain coordination, and KPI tracking.',
+    pageLength: '2-Page',
+    skills: [
+      { category: 'Operations & Efficiency', items: ['Operations Management', 'Process Optimization', 'Lean Six Sigma', 'Workflow Streamlining', 'Vendor Management', 'Cost Reduction'] },
+      { category: 'Planning & Finance', items: ['Operating Budgets', 'Resource Allocation', 'Inventory Control', 'Compliance & Safety', 'KPI Dashboarding'] },
+      { category: 'Tools & Systems', items: ['ERP Systems (SAP, Oracle)', 'Asana', 'Jira', 'Excel (Advanced)', 'Tableau'] }
+    ],
+    summaryExamples: [
+      'Results-driven Operations Manager with 7+ years of experience optimizing enterprise workflows, managing $15M operating budgets, and leading teams of 60+ staff. Reduced operational expenses by $1.2M through Lean process redesign.',
+      'Operations Director specializing in cross-departmental alignment, vendor contract negotiation, and warehouse supply chain logistics.'
+    ],
+    experienceBullets: [
+      'Managed $15M annual operating budget across 3 regional fulfillment facilities, cutting operational waste by 18%.',
+      'Implemented Lean Six Sigma process workflows, improving daily order fulfillment throughput by 40%.',
+      'Renegotiated 20+ logistics vendor contracts, securing a 15% cost reduction saving $450,000 annually.',
+      'Supervised a multidisciplinary operations team of 65 employees, achieving a 98% safety compliance audit rating.'
+    ],
+    atsKeywords: ['Operations Manager', 'Process Optimization', 'Lean Six Sigma', 'Operating Budget', 'Vendor Management', 'Workflow Streamlining', 'Supply Chain', 'KPIs'],
+    faqs: [
+      {
+        question: 'What are key metrics for an Operations Manager resume?',
+        answer: 'Quantify operational impact: budget managed ($), cost savings achieved ($ or %), throughput increases (%), team headcount supervised, and error/incident reduction rates.'
+      }
+    ],
+    relatedRoles: [
+      { slug: 'project-manager', title: 'Project Manager', category: 'Management' },
+      { slug: 'supply-chain-manager', title: 'Supply Chain Manager', category: 'Supply Chain' }
+    ],
+    presetData: {
+      title: 'Operations Manager Resume',
+      personalInfo: { fullName: 'Elena Rostova', jobTitle: 'Senior Operations Manager', email: 'elena.ops@opscraft.io', location: 'New York, NY' },
+      summary: 'Operations Manager with 7+ years optimizing workflows, managing $15M budgets, and applying Lean Six Sigma to save $1.2M in annual expenses.',
+      experience: [
+        { id: 'exp-om-1', role: 'Director of Operations', company: 'Nexus Logistics & Operations', location: 'New York, NY', startDate: '2020-05', endDate: 'Present', current: true, highlights: ['Managed $15M operating budget cutting waste by 18%.', 'Implemented Lean Six Sigma workflows improving throughput by 40%.'] }
+      ],
+      skills: [{ id: 'sk-om-1', category: 'Operations Core', items: ['Operations Manager', 'Process Optimization', 'Lean Six Sigma', 'Operating Budget', 'Vendor Management', 'Workflow Streamlining'] }]
+    }
+  },
+
+  'cybersecurity-analyst': {
+    slug: 'cybersecurity-analyst',
+    roleTitle: 'Cybersecurity Analyst',
+    category: 'Cybersecurity & IT',
+    experienceLevel: 'Mid-Senior (3-7 Years)',
+    metaTitle: 'Cybersecurity Analyst Resume Template — Free ATS Resume | Resume Craft',
+    metaDescription: 'Create a Cybersecurity Analyst resume. Showcase SOC operations, SIEM (Splunk), threat intelligence, incident response, vulnerability assessment, and CISSP/CEH.',
+    h1: 'Cybersecurity Analyst Resume Template',
+    shortIntro: 'Highlight Security Operations Center (SOC) monitoring, SIEM tool management (Splunk), incident response protocols, vulnerability assessments, and security compliance.',
+    pageLength: '2-Page',
+    skills: [
+      { category: 'Security & Operations', items: ['SOC Monitoring', 'Incident Response', 'SIEM (Splunk, QRadar)', 'Threat Intelligence', 'Vulnerability Assessment (Nessus)', 'Penetration Testing'] },
+      { category: 'Network & Cloud Security', items: ['Firewall Management', 'Zero Trust Architecture', 'IAM Policies', 'AWS / Azure Security', 'Wireshark', 'Endpoint Protection (CrowdStrike)'] },
+      { category: 'Certifications & Standards', items: ['CISSP', 'CEH (Certified Ethical Hacker)', 'CompTIA Security+', 'NIST Framework', 'ISO 27001', 'SOC 2 Compliance'] }
+    ],
+    summaryExamples: [
+      'Detail-oriented Cybersecurity Analyst (CISSP & CEH) with 5+ years of experience in 24/7 SOC incident response, SIEM log analysis, and enterprise threat hunting. Neutralized 200+ security incidents with zero data breaches.',
+      'Information Security Specialist skilled in vulnerability scanning, penetration testing, and NIST compliance governance across cloud and on-premise environments.'
+    ],
+    experienceBullets: [
+      'Monitored 24/7 Security Operations Center (SOC) using Splunk SIEM, analyzing 10M+ daily security log events across corporate network.',
+      'Led incident response protocols during ransomware threat attempt, isolating compromised nodes within 12 minutes to prevent data exfiltration.',
+      'Conducted quarterly vulnerability assessments with Nessus across 1,500 server endpoints, remediating 98% of high-severity vulnerabilities.',
+      'Spearheaded SOC 2 Type II and ISO 27001 compliance audit preparation, achieving 100% audit pass rate.'
+    ],
+    atsKeywords: ['Cybersecurity Analyst', 'SOC', 'SIEM', 'Splunk', 'Incident Response', 'CISSP', 'Vulnerability Assessment', 'NIST', 'CrowdStrike', 'Penetration Testing'],
+    faqs: [
+      {
+        question: 'What certifications should a Cybersecurity Analyst highlight?',
+        answer: 'Include CISSP, CEH (Certified Ethical Hacker), CompTIA Security+, CySA+, CISM, or GIAC (GSEC/GCIH) in your header and certification section.'
+      }
+    ],
+    relatedRoles: [
+      { slug: 'cloud-architect', title: 'Cloud Architect', category: 'Cloud' },
+      { slug: 'devops-engineer', title: 'DevOps Engineer', category: 'DevOps' }
+    ],
+    presetData: {
+      title: 'Cybersecurity Analyst Resume',
+      personalInfo: { fullName: 'Marcus Vance', jobTitle: 'Senior Cybersecurity Analyst (CISSP)', email: 'marcus.sec@securitycraft.dev', location: 'Austin, TX' },
+      summary: 'CISSP-certified Cybersecurity Analyst with 5+ years experience in SOC incident response, Splunk SIEM monitoring, and NIST security governance.',
+      experience: [
+        { id: 'exp-csa-1', role: 'Lead SOC Security Analyst', company: 'Nexus Security Shield', location: 'Austin, TX', startDate: '2021-04', endDate: 'Present', current: true, highlights: ['Monitored Splunk SIEM log events analyzing 10M daily events.', 'Led incident response isolating ransomware threats within 12 minutes.'] }
+      ],
+      skills: [{ id: 'sk-csa-1', category: 'Security Core', items: ['Cybersecurity Analyst', 'SOC', 'SIEM', 'Splunk', 'Incident Response', 'CISSP', 'Vulnerability Assessment', 'NIST'] }]
+    }
   }
 };
+
