@@ -4226,9 +4226,6 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                         </span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="text-[12px] font-extrabold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
-                          {item.pageLength}
-                        </span>
                         <span className="text-[12px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
                           {item.experienceLevel}
                         </span>

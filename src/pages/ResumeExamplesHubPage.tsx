@@ -152,11 +152,6 @@ export const ResumeExamplesHubPage: React.FC = () => {
                   {ex.category}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  {ex.pageLength && (
-                    <span className="text-[10px] font-extrabold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
-                      {ex.pageLength}
-                    </span>
-                  )}
                   <span className="text-[11px] font-semibold text-brand-600">
                     {ex.experienceLevel}
                   </span>

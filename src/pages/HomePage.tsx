@@ -641,7 +641,7 @@ export const HomePage: React.FC = () => {
                             : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
                         }`}
                       >
-                        {card.fullName.split(' ')[0]} ({card.pageLength})
+                        {card.fullName.split(' ')[0]}
                       </button>
                     ))}
                   </div>
@@ -707,13 +707,6 @@ export const HomePage: React.FC = () => {
                               'bg-rose-100 text-rose-900 border-rose-300'
                             }`}>
                               🏷️ {card.templateTag}
-                            </span>
-                            <span className={`text-[11px] font-black px-2 py-0.5 rounded-md border ${
-                              card.pageLength === '1-Page' ? 'bg-slate-100 text-slate-700 border-slate-300' :
-                              card.pageLength === '2-Page' ? 'bg-blue-50 text-blue-800 border-blue-300' :
-                              'bg-purple-50 text-purple-800 border-purple-300'
-                            }`}>
-                              📄 {card.pageLength}
                             </span>
                           </div>
 
