@@ -176,7 +176,7 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
     metaDescription: 'Create an ATS-friendly AI Product Manager resume. Showcase LLM applications, RAG pipelines, model evaluation metrics, and responsible AI governance.',
     h1: 'AI Product Manager Resume Template',
     shortIntro: 'Build a recruiter-vetted resume tailored for GenAI and machine learning product management. Highlight prompt engineering, model benchmarks, product analytics, and AI ethics.',
-    pageLength: '2-Page',
+    pageLength: '4-Page',
     skills: [
       { category: 'GenAI & ML Core', items: ['Generative AI', 'Machine Learning', 'LLMs', 'Prompt Engineering', 'Model Evaluation', 'RAG Architectures', 'Fine-Tuning (LoRA)'] },
       { category: 'Product & Analytics', items: ['AI Product Strategy', 'Product Analytics', 'User Discovery', 'A/B Testing', 'Ethical AI', 'Responsible AI Governance', 'Cost Benchmarking'] },
@@ -224,7 +224,7 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
     metaDescription: 'Download a free ATS Enterprise Architect resume template. Showcase TOGAF 10 governance, cloud strategy, digital transformation, and multimillion-dollar IT roadmaps.',
     h1: 'Enterprise Architect Resume Template',
     shortIntro: 'Demonstrate top-tier IT leadership, TOGAF framework governance, digital transformation roadmaps, and enterprise software architecture across global business units.',
-    pageLength: '3-Page',
+    pageLength: '4-Page',
     skills: [
       { category: 'Frameworks & Strategy', items: ['Enterprise Architecture', 'TOGAF', 'Business Architecture', 'Cloud Strategy', 'IT Governance', 'Digital Transformation'] },
       { category: 'Systems & Integration', items: ['Solution Architecture', 'Integration Architecture', 'Microservices Architecture', 'Legacy Modernization', 'Data Architecture'] },
@@ -319,7 +319,7 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
     metaDescription: 'Create a professional Software Engineer resume. Highlight Full-Stack skills, React, TypeScript, Node.js, Python, system performance, and unit testing.',
     h1: 'Software Engineer Resume Template',
     shortIntro: 'Build a recruiter-approved Software Engineer resume. Showcase full-stack web applications, microservices performance, system optimization, and clean code principles.',
-    pageLength: '2-Page',
+    pageLength: '1-Page',
     skills: [
       { category: 'Languages', items: ['TypeScript', 'JavaScript (ES6+)', 'Python', 'Java', 'Go', 'SQL', 'C++'] },
       { category: 'Frameworks & Frontend', items: ['React', 'Next.js', 'Node.js', 'Express', 'Tailwind CSS', 'Redux / Zustand', 'REST APIs', 'GraphQL'] },
@@ -463,7 +463,7 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
     metaDescription: 'Create an ATS-friendly Data Analyst resume. Highlight SQL query optimization, Tableau, Power BI dashboards, KPI tracking, and Excel modeling.',
     h1: 'Data Analyst Resume Template',
     shortIntro: 'Build a standout Data Analyst resume emphasizing complex SQL queries, interactive BI dashboards, revenue trend analysis, and data hygiene.',
-    pageLength: '2-Page',
+    pageLength: '1-Page',
     skills: [
       { category: 'Querying & Analysis', items: ['SQL (PostgreSQL, Snowflake)', 'Python (Pandas, NumPy)', 'Data Cleaning', 'Statistical Analysis', 'Excel (VLOOKUP, Pivot Tables)'] },
       { category: 'Visualization & BI', items: ['Tableau', 'Power BI', 'Looker', 'Dashboard Design', 'Executive Reporting', 'KPI Tracking'] },
@@ -700,7 +700,7 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
     metaDescription: 'Create a Frontend Developer resume with Resume Craft. Feature React, Next.js, TypeScript, Tailwind CSS, Web Vitals optimization, and responsive UI design.',
     h1: 'Frontend Developer Resume Template',
     shortIntro: 'Showcase responsive React & Next.js user interfaces, TypeScript type safety, Core Web Vitals performance tuning, and accessible web standards.',
-    pageLength: '2-Page',
+    pageLength: '1-Page',
     skills: [
       { category: 'Frontend Core', items: ['React', 'Next.js', 'TypeScript', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Tailwind CSS', 'Sass'] },
       { category: 'State & Performance', items: ['Redux Toolkit', 'Zustand', 'React Query / SWR', 'Core Web Vitals (LCP/INP)', 'Code Splitting', 'Webpack / Vite'] },
@@ -891,7 +891,7 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
     metaDescription: 'Create an ATS Business Analyst resume. Highlight requirements gathering, Agile user stories, process mapping, SQL, and stakeholder alignment.',
     h1: 'Business Analyst Resume Template',
     shortIntro: 'Highlight business requirements gathering, BRD/FRD authoring, process mapping (BPMN), SQL data analysis, and bridging business needs with technical solutions.',
-    pageLength: '2-Page',
+    pageLength: '1-Page',
     skills: [
       { category: 'Requirements & Modeling', items: ['Requirements Gathering', 'BRD / FRD Authoring', 'Process Mapping (BPMN)', 'Gap Analysis', 'User Stories & Acceptance Criteria'] },
       { category: 'Data & Analytics', items: ['SQL', 'Excel (Advanced)', 'Tableau', 'Power BI', 'Data Modeling', 'UAT Testing'] },
@@ -1078,7 +1078,7 @@ export const ROLE_SEO_DATA: Record<string, RoleSeoData> = {
     metaDescription: 'Create a professional UX Designer resume. Feature user research, wireframing, Figma, usability testing, design systems, and prototyping.',
     h1: 'UX Designer Resume Template',
     shortIntro: 'Highlight user research methodologies, Figma wireframing, interactive prototyping, usability testing, and accessible design systems.',
-    pageLength: '2-Page',
+    pageLength: '1-Page',
     skills: [
       { category: 'UX Research & Strategy', items: ['UX Research', 'User Research', 'Usability Testing', 'Information Architecture', 'User Journey Mapping', 'Personas'] },
       { category: 'Design & Prototyping', items: ['Figma', 'Wireframing', 'Prototyping', 'Design Systems', 'Interactive Design', 'User Flows', 'WCAG Accessibility'] },

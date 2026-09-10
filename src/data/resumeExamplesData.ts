@@ -1179,7 +1179,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
     atsKeywords: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'Kubernetes'],
     commonMistakes: [],
     formattingTips: [],
-    pageLength: '3 Pages',
+    pageLength: '4 Pages',
     faqs: [],
     presetData: alexMorganData
   },
@@ -1442,7 +1442,7 @@ export const RESUME_EXAMPLES: ResumeExampleItem[] = [
       'Prominently display TOGAF, AWS, or Azure certifications in your resume header.',
       'Quantify the number of systems, applications, and budget scale managed.'
     ],
-    pageLength: '3 Pages',
+    pageLength: '4 Pages',
     faqs: [
       {
         question: 'Should an Enterprise Architect resume include coding languages?',

@@ -1799,7 +1799,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Modernization Architect refactoring mainframe monoliths into microservices with zero downtime.',
     metrics: ['Mainframe Decom -$6M/yr', '40 Microservices', 'Zero Downtime'],
     skillsBadge: ['Cloud Migration', 'Mainframe Refactoring', 'Containerization', 'AWS', 'Strangler Fig Pattern'],
-    pageLength: '3-Page',
+    pageLength: '4-Page',
     fullResume: {
       summary: 'Seasoned Principal Cloud Modernization Architect with 9+ years of experience refactoring legacy mainframe applications, monolithic codebases, and database architectures into cloud-native AWS microservices. Proven track record decommissioning legacy physical hardware to save $6M annually, managing multi-year enterprise transformation roadmaps, and achieving zero downtime migrations across 15M+ customer records.',
       skills: [
@@ -2888,7 +2888,7 @@ export const TWENTY_ATS_EXAMPLES: ExampleCardData[] = [
     shortDescription: 'Data Lineage & Catalog Specialist enforcing Collibra, Alation, metadata quality, and GDPR data compliance.',
     metrics: ['GDPR Pass 100%', 'Metadata Coverage 95%', '0 Data Breaches'],
     skillsBadge: ['Collibra', 'Alation', 'Metadata Management', 'GDPR / CCPA', 'SQL'],
-    pageLength: '3-Page',
+    pageLength: '4-Page',
     fullResume: {
       summary: 'Data Lineage & Quality Lead with 8+ years of experience deploying enterprise data catalogs (Collibra, Alation), establishing master data management (MDM) policies, and ensuring 100% compliance with GDPR/CCPA regulations across multi-terabyte financial databases. Proven track record auditing 450+ data assets, cutting bad data incidents by 75%, and training 500+ corporate data stewards.',
       skills: [
