@@ -104,8 +104,10 @@ export const BeforeAfterSlider: React.FC = () => {
               </div>
             </div>
 
-            <div className="text-center text-xs text-emerald-400/90 font-medium z-10">
-              ✅ Single-Column Standard Layout • Vector Text Extraction • Google X-Y-Z Metrics
+            <div className="flex justify-end items-center z-10">
+              <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-emerald-400 font-bold bg-slate-950/95 px-3.5 py-1.5 rounded-xl border border-emerald-500/30 shadow-lg backdrop-blur-md">
+                ✅ Single-Column Standard Layout • Vector Text Extraction • Google X-Y-Z Metrics
+              </span>
             </div>
           </div>
 
@@ -155,8 +157,10 @@ export const BeforeAfterSlider: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-xs text-rose-400/90 font-medium z-10">
-                ❌ Unparseable Tables • Missing Contact Info • Generic Non-Scannable Bullets
+              <div className="flex justify-start items-center z-10">
+                <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-rose-400 font-bold bg-slate-950/95 px-3.5 py-1.5 rounded-xl border border-rose-500/30 shadow-lg backdrop-blur-md">
+                  ❌ Unparseable Tables • Missing Contact Info • Generic Non-Scannable Bullets
+                </span>
               </div>
             </div>
           </div>
