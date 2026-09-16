@@ -4235,13 +4235,12 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                     </div>
 
                     <h3 className="text-[17px] sm:text-[18px] lg:text-[19px] font-black text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
-                      <button 
-                        type="button"
-                        onClick={() => handleOpenViewModal(item)}
-                        className="hover:underline text-left"
+                      <Link 
+                        to={getResumeUrl(item.slug || item.roleTitle)}
+                        className="hover:underline text-left block"
                       >
                         {item.roleTitle}
-                      </button>
+                      </Link>
                     </h3>
 
                     {/* Visual Mini-Resume Preview Box (Resume Thumbnail) */}
@@ -4283,13 +4282,13 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
 
                   {/* Dual Card Action Buttons */}
                   <div className="pt-3 border-t border-slate-100 flex items-center gap-2">
-                    <button
-                      onClick={() => handleOpenViewModal(item)}
+                    <Link
+                      to={getResumeUrl(item.slug || item.roleTitle)}
                       className="flex-1 py-2 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-[14px] sm:text-[15px] font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <Eye size={14} className="text-slate-600" />
                       <span>View Example</span>
-                    </button>
+                    </Link>
 
                     <button
                       onClick={() => handleUseExample(item)}

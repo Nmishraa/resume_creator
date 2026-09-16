@@ -1,7 +1,13 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
 import { HomePage } from './pages/HomePage';
+
+const LegacyResumeRedirect: React.FC = () => {
+  const { role, slug } = useParams<{ role?: string; slug?: string }>();
+  const target = role || slug || '';
+  return <Navigate to={target ? `/resume-examples/${target}` : '/resume-examples'} replace />;
+};
 
 // Resilient lazy loader wrapper that auto-reloads page once on deployment asset hash updates
 function lazyWithRetry<T extends React.ComponentType<any>>(
@@ -124,11 +130,12 @@ export function App() {
             <Route path="portfolio" element={<PublicPortfolioPage />} />
 
             {/* Dedicated Job Title Resumes & Examples */}
-            <Route path="resumes" element={<ResumeExamplesHubPage />} />
-            <Route path="resumes/:slug" element={<DedicatedResumePage />} />
             <Route path="resume-examples" element={<ResumeExamplesHubPage />} />
-            <Route path="examples" element={<Navigate to="/resumes" replace />} />
             <Route path="resume-examples/:role" element={<DedicatedResumePage />} />
+            <Route path="resumes" element={<Navigate to="/resume-examples" replace />} />
+            <Route path="resumes/:slug" element={<LegacyResumeRedirect />} />
+            <Route path="examples" element={<Navigate to="/resume-examples" replace />} />
+            <Route path="examples/:role" element={<LegacyResumeRedirect />} />
             <Route path="resume-preview" element={<DedicatedResumePage />} />
 
             {/* Career & ATS Guides */}

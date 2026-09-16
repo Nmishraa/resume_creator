@@ -104,7 +104,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/resumes/senior-devops-platform-engineer" className="text-slate-200 hover:text-white transition-colors font-medium">
+                <Link to="/resume-examples/devops-engineer" className="text-slate-200 hover:text-white transition-colors font-medium">
                   Senior DevOps Resume
                 </Link>
               </li>

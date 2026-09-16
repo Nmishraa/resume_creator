@@ -183,29 +183,191 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
     changefreq: 'weekly'
   },
   {
-    path: '/resume-examples/enterprise-architect',
-    title: 'Enterprise Architect Resume Example & TOGAF Keywords (2026) | Resume Craft',
-    description: 'Complete Enterprise Architect resume example with TOGAF framework, cloud migration metrics, system governance, and 1-click builder template.',
-    targetKeyword: 'enterprise architect resume example',
-    canonical: `${SITE_URL}/resume-examples/enterprise-architect/`,
+    path: '/resume-examples/senior-full-stack-engineer',
+    title: 'Senior Full-Stack Engineer Resume Example & Template | Resume Craft',
+    description: 'Explore a Senior Full-Stack Engineer resume example with experience, technical skills, projects, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'senior full stack engineer resume example',
+    canonical: `${SITE_URL}/resume-examples/senior-full-stack-engineer/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/product-manager',
+    title: 'Product Manager Resume Example & Template | Resume Craft',
+    description: 'Explore a Product Manager resume example with product strategy, analytics, leadership, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'product manager resume example',
+    canonical: `${SITE_URL}/resume-examples/product-manager/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/technical-product-manager',
+    title: 'Technical Product Manager Resume Example & Template | Resume Craft',
+    description: 'Explore a Technical Product Manager resume example with API strategy, system design, requirements, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'technical product manager resume example',
+    canonical: `${SITE_URL}/resume-examples/technical-product-manager/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/ai-product-manager',
+    title: 'AI Product Manager Resume Example & Template | Resume Craft',
+    description: 'Explore an AI Product Manager resume example with LLMs, RAG, prompt engineering, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'ai product manager resume example',
+    canonical: `${SITE_URL}/resume-examples/ai-product-manager/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/software-engineer',
+    title: 'Software Engineer Resume Example & Template | Resume Craft',
+    description: 'Explore a Software Engineer resume example with React, TypeScript, Node.js, microservices, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'software engineer resume example',
+    canonical: `${SITE_URL}/resume-examples/software-engineer/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/ai-engineer',
+    title: 'AI Engineer Resume Example & Template | Resume Craft',
+    description: 'Explore an AI Engineer resume example with PyTorch, RAG pipelines, LLMs, fine-tuning, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'ai engineer resume example',
+    canonical: `${SITE_URL}/resume-examples/ai-engineer/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/data-scientist',
+    title: 'Data Scientist Resume Example & Template | Resume Craft',
+    description: 'Explore a Data Scientist resume example with predictive modeling, Python, SQL, A/B testing, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'data scientist resume example',
+    canonical: `${SITE_URL}/resume-examples/data-scientist/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/data-analyst',
+    title: 'Data Analyst Resume Example & Template | Resume Craft',
+    description: 'Explore a Data Analyst resume example with SQL, Tableau, Power BI dashboards, KPI tracking, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'data analyst resume example',
+    canonical: `${SITE_URL}/resume-examples/data-analyst/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/devops-engineer',
+    title: 'DevOps Engineer Resume Example & Template | Resume Craft',
+    description: 'Explore a DevOps Engineer resume example with AWS, Terraform, Kubernetes, CI/CD pipelines, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'devops engineer resume example',
+    canonical: `${SITE_URL}/resume-examples/devops-engineer/`,
     priority: 0.9,
     changefreq: 'weekly'
   },
   {
     path: '/resume-examples/cloud-architect',
-    title: 'Cloud Architect Resume Example & AWS/GCP Keywords | Resume Craft',
-    description: 'ATS-optimized Cloud Architect resume example featuring Kubernetes, Terraform IaC, multi-cloud strategy, cost optimization, and free vector PDF export.',
+    title: 'Cloud Architect Resume Example & Template | Resume Craft',
+    description: 'Explore a Cloud Architect resume example with multi-cloud strategy, Kubernetes, Terraform IaC, cost optimization, and ATS-friendly formatting. Create your own resume with Resume Craft.',
     targetKeyword: 'cloud architect resume example',
     canonical: `${SITE_URL}/resume-examples/cloud-architect/`,
     priority: 0.9,
     changefreq: 'weekly'
   },
   {
-    path: '/resume-examples/product-manager',
-    title: 'Product Manager Resume Example & ATS Guide (2026) | Resume Craft',
-    description: 'Complete Product Manager resume example with ATS-friendly bullet points, metrics, product roadmap achievements, and 1-click builder template.',
-    targetKeyword: 'product manager resume example',
-    canonical: `${SITE_URL}/resume-examples/product-manager/`,
+    path: '/resume-examples/enterprise-architect',
+    title: 'Enterprise Architect Resume Example & Template | Resume Craft',
+    description: 'Explore an Enterprise Architect resume example with TOGAF 10, cloud governance, legacy modernization, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'enterprise architect resume example',
+    canonical: `${SITE_URL}/resume-examples/enterprise-architect/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/solutions-architect',
+    title: 'Solutions Architect Resume Example & Template | Resume Craft',
+    description: 'Explore a Solutions Architect resume example with AWS serverless, disaster recovery, microservices, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'solutions architect resume example',
+    canonical: `${SITE_URL}/resume-examples/solutions-architect/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/project-manager',
+    title: 'Project Manager Resume Example & Template | Resume Craft',
+    description: 'Explore a Project Manager resume example with budget governance, PMP certification, risk mitigation, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'project manager resume example',
+    canonical: `${SITE_URL}/resume-examples/project-manager/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/business-analyst',
+    title: 'Business Analyst Resume Example & Template | Resume Craft',
+    description: 'Explore a Business Analyst resume example with BRD documentation, user stories, gap analysis, SQL, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'business analyst resume example',
+    canonical: `${SITE_URL}/resume-examples/business-analyst/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/cybersecurity-engineer',
+    title: 'Cybersecurity Engineer Resume Example & Template | Resume Craft',
+    description: 'Explore a Cybersecurity Engineer resume example with Zero-Trust IAM, SOC 2 compliance, threat detection, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'cybersecurity engineer resume example',
+    canonical: `${SITE_URL}/resume-examples/cybersecurity-engineer/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/customer-service',
+    title: 'Customer Service Resume Example & Template | Resume Craft',
+    description: 'Explore a Customer Service resume example with CSAT score metrics, Zendesk tools, dispute resolution, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'customer service resume example',
+    canonical: `${SITE_URL}/resume-examples/customer-service/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/teacher',
+    title: 'Teacher Resume Example & Template | Resume Craft',
+    description: 'Explore a Teacher resume example with curriculum development, STEM integration, IEP compliance, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'teacher resume example',
+    canonical: `${SITE_URL}/resume-examples/teacher/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/nurse',
+    title: 'Registered Nurse (RN) Resume Example & Template | Resume Craft',
+    description: 'Explore a Registered Nurse resume example with acute patient care, Epic EHR, BLS/ACLS certifications, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'registered nurse resume example',
+    canonical: `${SITE_URL}/resume-examples/nurse/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/college-student',
+    title: 'College Student Resume Example & Template | Resume Craft',
+    description: 'Explore a College Student resume example featuring academic projects, GPA, club leadership, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'college student resume example',
+    canonical: `${SITE_URL}/resume-examples/college-student/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/internship',
+    title: 'Internship Applicant Resume Example & Template | Resume Craft',
+    description: 'Explore an Internship resume example with technical coursework, academic projects, transferable skills, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'internship resume example',
+    canonical: `${SITE_URL}/resume-examples/internship/`,
+    priority: 0.9,
+    changefreq: 'weekly'
+  },
+  {
+    path: '/resume-examples/no-experience',
+    title: 'No Experience Resume Example & Template | Resume Craft',
+    description: 'Explore a No Experience resume example with volunteer initiatives, transferable skills, certifications, and ATS-friendly formatting. Create your own resume with Resume Craft.',
+    targetKeyword: 'no experience resume example',
+    canonical: `${SITE_URL}/resume-examples/no-experience/`,
     priority: 0.9,
     changefreq: 'weekly'
   },

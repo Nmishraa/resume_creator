@@ -58,6 +58,7 @@ function initializeRegistry() {
     rawTitle: string,
     presetData: Partial<ResumeData>,
     metadata: {
+      preferredSlug?: string;
       category?: string;
       experienceLevel?: string;
       metaTitle?: string;
@@ -74,7 +75,7 @@ function initializeRegistry() {
     }
   ): RegisteredResume {
     const jobTitle = presetData.personalInfo?.jobTitle || rawTitle || 'Software Engineer';
-    const baseSlug = slugifyJobTitle(jobTitle);
+    const baseSlug = metadata.preferredSlug || slugifyJobTitle(jobTitle);
 
     let finalSlug = baseSlug;
     const count = usedSlugs.get(baseSlug) || 0;
@@ -85,14 +86,14 @@ function initializeRegistry() {
 
     const registered: RegisteredResume = {
       slug: finalSlug,
-      url: `/resumes/${finalSlug}`,
+      url: `/resume-examples/${finalSlug}`,
       roleTitle: jobTitle,
       jobTitle,
       category: metadata.category || 'Professional',
       experienceLevel: metadata.experienceLevel || 'Mid-Senior',
       presetData,
-      metaTitle: metadata.metaTitle || `${jobTitle} Resume Example — Free ATS Resume | Resume Craft`,
-      metaDescription: metadata.metaDescription || `Professional ATS-optimized ${jobTitle} resume example. Clean formatting, recruiter-vetted sections, and instant PDF/DOCX downloads.`,
+      metaTitle: metadata.metaTitle || `${jobTitle} Resume Example & Template | Resume Craft`,
+      metaDescription: metadata.metaDescription || `Explore a ${jobTitle} resume example with experience, technical skills, projects, and ATS-friendly formatting. Create your own resume with Resume Craft.`,
       h1: metadata.h1 || `${jobTitle} Resume Example`,
       shortIntro: metadata.shortIntro || `Explore our recruiter-vetted ${jobTitle} resume example built to pass ATS scanners and impress hiring managers.`,
       skills: metadata.skills || presetData.skills?.map(s => ({ category: s.category, items: s.items })),
@@ -111,43 +112,30 @@ function initializeRegistry() {
         if (key) SLUG_BY_ID_OR_ROLE.set(key, finalSlug);
       });
     }
+    SLUG_BY_ID_OR_ROLE.set(jobTitle.toLowerCase().trim(), finalSlug);
+    SLUG_BY_ID_OR_ROLE.set(slugifyJobTitle(jobTitle), finalSlug);
 
     return registered;
   }
 
-  // 1. Register 20 ATS Examples from Carousel
-  TWENTY_ATS_EXAMPLES.forEach(ats => {
-    const jobTitle = ats.candidateRole || ats.roleTitle;
-    register(jobTitle, ats.presetData, {
-      category: ats.category,
-      experienceLevel: ats.experienceLevel,
-      shortIntro: ats.shortDescription,
-      experienceBullets: ats.fullResume.experience.flatMap(e => e.highlights),
-      originalKeys: [ats.slug, ats.id]
-    });
-  });
+  // Explicit slug mapping for key roles
+  const explicitSlugMap: Record<string, string> = {
+    'alex-morgan': 'senior-full-stack-engineer',
+    'sophia-chen': 'data-scientist',
+    'marcus-vance': 'devops-engineer',
+    'elena-rostova': 'product-manager',
+    'david-miller': 'data-analyst',
+    'amara-okafor': 'cybersecurity-engineer'
+  };
 
-  // 2. Register HERO Resume Cards
-  HERO_RESUME_CARDS.forEach(card => {
-    const jobTitle = card.jobTitle;
-    // Check if already registered
-    const existingSlug = SLUG_BY_ID_OR_ROLE.get(card.id);
-    if (!existingSlug) {
-      register(jobTitle, card.presetData, {
-        category: card.templateTag || 'Engineering',
-        experienceLevel: 'Senior',
-        shortIntro: card.summary,
-        originalKeys: [card.id, `hero-${card.id}`]
-      });
-    }
-  });
-
-  // 3. Register RESUME_EXAMPLES from resumeExamplesData.ts
+  // 1. Register RESUME_EXAMPLES from resumeExamplesData.ts
   RESUME_EXAMPLES.forEach(ex => {
     const jobTitle = ex.presetData.personalInfo?.jobTitle || ex.roleTitle;
-    const existingSlug = SLUG_BY_ID_OR_ROLE.get(ex.slug);
+    const preferred = explicitSlugMap[ex.slug] || ex.slug;
+    const existingSlug = SLUG_BY_ID_OR_ROLE.get(preferred) || SLUG_BY_ID_OR_ROLE.get(ex.slug);
     if (!existingSlug) {
       register(jobTitle, ex.presetData, {
+        preferredSlug: preferred,
         category: ex.category,
         experienceLevel: ex.experienceLevel,
         metaTitle: ex.metaTitle,
@@ -160,7 +148,40 @@ function initializeRegistry() {
         commonMistakes: ex.commonMistakes,
         formattingTips: ex.formattingTips,
         faqs: ex.faqs,
-        originalKeys: [ex.slug]
+        originalKeys: [ex.slug, preferred]
+      });
+    }
+  });
+
+  // 2. Register 20 ATS Examples from Carousel
+  TWENTY_ATS_EXAMPLES.forEach(ats => {
+    const jobTitle = ats.candidateRole || ats.roleTitle;
+    const preferred = ats.slug;
+    const existingSlug = SLUG_BY_ID_OR_ROLE.get(preferred) || SLUG_BY_ID_OR_ROLE.get(ats.id);
+    if (!existingSlug) {
+      register(jobTitle, ats.presetData, {
+        preferredSlug: preferred,
+        category: ats.category,
+        experienceLevel: ats.experienceLevel,
+        shortIntro: ats.shortDescription,
+        experienceBullets: ats.fullResume.experience.flatMap(e => e.highlights),
+        originalKeys: [ats.slug, ats.id, preferred]
+      });
+    }
+  });
+
+  // 3. Register HERO Resume Cards
+  HERO_RESUME_CARDS.forEach(card => {
+    const jobTitle = card.jobTitle;
+    const preferred = explicitSlugMap[card.id] || card.id;
+    const existingSlug = SLUG_BY_ID_OR_ROLE.get(preferred) || SLUG_BY_ID_OR_ROLE.get(card.id);
+    if (!existingSlug) {
+      register(jobTitle, card.presetData, {
+        preferredSlug: preferred,
+        category: card.templateTag || 'Engineering',
+        experienceLevel: 'Senior',
+        shortIntro: card.summary,
+        originalKeys: [card.id, `hero-${card.id}`, preferred]
       });
     }
   });
@@ -168,9 +189,11 @@ function initializeRegistry() {
   // 4. Register ROLE_SEO_DATA entries if any remains unindexed
   Object.entries(ROLE_SEO_DATA).forEach(([roleKey, data]) => {
     const jobTitle = data.presetData?.personalInfo?.jobTitle || data.roleTitle;
-    const existingSlug = SLUG_BY_ID_OR_ROLE.get(roleKey) || SLUG_BY_ID_OR_ROLE.get(data.slug);
+    const preferred = data.slug || roleKey;
+    const existingSlug = SLUG_BY_ID_OR_ROLE.get(roleKey) || SLUG_BY_ID_OR_ROLE.get(preferred);
     if (!existingSlug && data.presetData) {
       register(jobTitle, data.presetData as Partial<ResumeData>, {
+        preferredSlug: preferred,
         category: data.category,
         experienceLevel: data.experienceLevel,
         metaTitle: data.metaTitle,
@@ -181,7 +204,7 @@ function initializeRegistry() {
         experienceBullets: data.experienceBullets,
         atsKeywords: data.atsKeywords,
         faqs: data.faqs,
-        originalKeys: [roleKey, data.slug]
+        originalKeys: [roleKey, data.slug, preferred]
       });
     }
   });
@@ -226,7 +249,7 @@ export function getResumeBySlug(slugOrAlias: string): RegisteredResume | undefin
 }
 
 /**
- * Returns the clean /resumes/<title-slug> URL for any job title or identifier
+ * Returns the clean /resume-examples/<title-slug> URL for any job title or identifier
  */
 export function getResumeUrl(identifierOrJobTitle: string): string {
   initializeRegistry();
@@ -234,5 +257,6 @@ export function getResumeUrl(identifierOrJobTitle: string): string {
   if (found) {
     return found.url;
   }
-  return `/resumes/${slugifyJobTitle(identifierOrJobTitle)}`;
+  return `/resume-examples/${slugifyJobTitle(identifierOrJobTitle)}`;
 }
+

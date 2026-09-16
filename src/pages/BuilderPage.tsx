@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useResume } from '../context/ResumeContext';
+import { getResumeBySlug } from '../services/resumeRegistry';
 import { Toolbar } from '../components/builder/Toolbar';
 import { EditorForm } from '../components/builder/EditorForm';
 import { ResumePreview } from '../components/builder/ResumePreview';
@@ -12,6 +15,19 @@ import { SeoHead } from '../components/common/SeoHead';
 import { Edit3, Eye, X } from 'lucide-react';
 
 export const BuilderPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const { updateResume } = useResume();
+  const exampleSlug = searchParams.get('example');
+
+  useEffect(() => {
+    if (exampleSlug) {
+      const found = getResumeBySlug(exampleSlug);
+      if (found?.presetData) {
+        updateResume(found.presetData);
+      }
+    }
+  }, [exampleSlug]);
+
   const [showAiModal, setShowAiModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);

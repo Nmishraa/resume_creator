@@ -160,13 +160,12 @@ export const ResumeExamplesHubPage: React.FC = () => {
               </div>
 
               <h2 className="text-lg font-black text-slate-950 group-hover:text-brand-600 transition-colors">
-                <button
-                  type="button"
-                  onClick={() => navigate(getResumeUrl(ex.presetData.personalInfo?.jobTitle || ex.roleTitle))}
-                  className="hover:underline text-left"
+                <Link
+                  to={getResumeUrl(ex.presetData.personalInfo?.jobTitle || ex.roleTitle || ex.slug)}
+                  className="hover:underline text-left block"
                 >
                   {ex.roleTitle} Resume Example
-                </button>
+                </Link>
               </h2>
 
               <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
@@ -186,7 +185,7 @@ export const ResumeExamplesHubPage: React.FC = () => {
             {/* Actions */}
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
               <Link
-                to={getResumeUrl(ex.presetData.personalInfo?.jobTitle || ex.roleTitle)}
+                to={getResumeUrl(ex.presetData.personalInfo?.jobTitle || ex.roleTitle || ex.slug)}
                 className="text-xs font-bold text-slate-700 hover:text-brand-600 flex items-center gap-1 transition-colors"
               >
                 <span>View Dedicated Resume</span>

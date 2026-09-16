@@ -70,7 +70,7 @@ export const DedicatedResumePage: React.FC = () => {
 
   const handleUsePreset = () => {
     updateResume(fullResumeData);
-    navigate('/builder');
+    navigate(`/builder?example=${resume.slug}`);
   };
 
   const handleDownloadPdf = async () => {
@@ -112,8 +112,33 @@ export const DedicatedResumePage: React.FC = () => {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://resume.gnanamai.com/resumes/${resume.slug}`
+      '@id': `https://resume.gnanamai.com/resume-examples/${resume.slug}`
     }
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://resume.gnanamai.com'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Resume Examples',
+        item: 'https://resume.gnanamai.com/resume-examples'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `${resume.jobTitle} Resume Example`,
+        item: `https://resume.gnanamai.com/resume-examples/${resume.slug}`
+      }
+    ]
   };
 
   return (
@@ -121,17 +146,18 @@ export const DedicatedResumePage: React.FC = () => {
       <SeoHead
         title={resume.metaTitle}
         description={resume.metaDescription}
-        canonicalPath={`/resumes/${resume.slug}`}
+        canonicalPath={`/resume-examples/${resume.slug}`}
         ogType="article"
-        jsonLd={articleSchema}
+        jsonLd={[articleSchema, breadcrumbSchema]}
       />
 
       {/* Top Header & Breadcrumbs Navigation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <Breadcrumbs
           items={[
-            { name: 'Resumes', path: '/resume-examples' },
-            { name: `${resume.jobTitle} Resume`, path: `/resumes/${resume.slug}` }
+            { name: 'Home', path: '/' },
+            { name: 'Resume Examples', path: '/resume-examples' },
+            { name: `${resume.jobTitle} Resume Example`, path: `/resume-examples/${resume.slug}` }
           ]}
         />
         <Link
@@ -172,7 +198,7 @@ export const DedicatedResumePage: React.FC = () => {
             className="px-6 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-extrabold rounded-xl text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
           >
             <Sparkles size={16} />
-            <span>Use This Resume Template</span>
+            <span>Create This Resume</span>
           </button>
 
           <button
@@ -229,8 +255,11 @@ export const DedicatedResumePage: React.FC = () => {
       <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-xs">
         <div className="flex items-center gap-2 text-brand-700 text-xs font-extrabold uppercase tracking-wider">
           <FileText size={16} />
-          <span>Professional Summary Example</span>
+          <span>{resume.jobTitle} Resume Summary Example</span>
         </div>
+        <h2 className="text-2xl font-black text-slate-950">
+          {resume.jobTitle} Resume Summary
+        </h2>
         <div className="p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed font-medium">
           &ldquo;{fullResumeData.summary || resume.metaDescription}&rdquo;
         </div>
@@ -240,7 +269,7 @@ export const DedicatedResumePage: React.FC = () => {
       {resume.skills && resume.skills.length > 0 && (
         <section className="space-y-4">
           <h2 className="text-2xl font-black text-slate-950">
-            Top Skills Highlighted for {resume.jobTitle}
+            {resume.jobTitle} Resume Skills
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {resume.skills.map((skillGroup, idx) => (
@@ -273,8 +302,11 @@ export const DedicatedResumePage: React.FC = () => {
               <span>Google X-Y-Z Bullet Highlights</span>
             </div>
             <h2 className="text-2xl font-black text-slate-950">
-              Work Accomplishment Examples
+              How to Write a {resume.jobTitle} Resume
             </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Use the Google X-Y-Z formula (Accomplished [X] as measured by [Y] by doing [Z]) to write metric-driven bullet points that impress recruiters:
+            </p>
           </div>
 
           <ul className="space-y-3">
@@ -301,7 +333,7 @@ export const DedicatedResumePage: React.FC = () => {
             <span>ATS Keyword Strategy</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-slate-950">
-            Targeted Keywords for {resume.jobTitle}
+            {resume.jobTitle} Resume Keywords
           </h2>
           <div className="flex flex-wrap gap-2 pt-2">
             {resume.atsKeywords.map((kw, idx) => (
@@ -353,8 +385,39 @@ export const DedicatedResumePage: React.FC = () => {
 
       {/* FAQs */}
       {resume.faqs && resume.faqs.length > 0 && (
-        <FaqAccordion items={resume.faqs} title={`${resume.jobTitle} Resume FAQs`} />
+        <FaqAccordion items={resume.faqs} title={`${resume.jobTitle} Resume FAQ`} />
       )}
+
+      {/* Internal Links Navigation Grid */}
+      <section className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 space-y-4 shadow-md">
+        <h3 className="text-lg font-extrabold text-white">Build &amp; Optimize Your {resume.jobTitle} Job Application</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
+          <Link to={`/builder?example=${resume.slug}`} className="p-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-colors text-center border border-slate-700">
+            Resume Builder
+          </Link>
+          <Link to="/ai-resume-builder" className="p-3 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-xl transition-colors text-center border border-slate-700">
+            AI Resume Builder
+          </Link>
+          <Link to="/ats-resume-checker" className="p-3 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-xl transition-colors text-center border border-slate-700">
+            ATS Resume Checker
+          </Link>
+          <Link to={`/resume-templates/${resume.slug}`} className="p-3 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-xl transition-colors text-center border border-slate-700">
+            Resume Templates
+          </Link>
+          <Link to="/resume-examples" className="p-3 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-xl transition-colors text-center border border-slate-700">
+            Resume Examples
+          </Link>
+          <Link to="/resume-keyword-matcher" className="p-3 bg-slate-800 hover:bg-slate-700 text-teal-300 rounded-xl transition-colors text-center border border-slate-700">
+            Keyword Matcher
+          </Link>
+          <Link to="/cover-letter-builder" className="p-3 bg-slate-800 hover:bg-slate-700 text-indigo-300 rounded-xl transition-colors text-center border border-slate-700">
+            Cover Letter Builder
+          </Link>
+          <Link to="/interview-questions" className="p-3 bg-slate-800 hover:bg-slate-700 text-rose-300 rounded-xl transition-colors text-center border border-slate-700">
+            Interview Questions
+          </Link>
+        </div>
+      </section>
 
       {/* Related Resumes */}
       <section className="space-y-4 border-t border-slate-200 pt-8">
