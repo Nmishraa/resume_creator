@@ -193,10 +193,10 @@ export const SEO_ROUTES: SeoRouteInfo[] = [
   },
   {
     path: '/resume-examples/product-manager',
-    title: 'Product Manager Resume Example & Template | Resume Craft',
-    description: 'Explore a Product Manager resume example with product strategy, analytics, leadership, and ATS-friendly formatting. Create your own resume with Resume Craft.',
-    targetKeyword: 'product manager resume example',
-    canonical: `${SITE_URL}/resume-examples/product-manager/`,
+    title: 'Product Manager Resume Example & ATS-Friendly Template | Resume Craft',
+    description: 'Explore a professional Product Manager resume example and learn how to create an ATS-friendly Product Manager resume with Resume Craft. Build and download your resume for free.',
+    targetKeyword: 'product manager resume',
+    canonical: `${SITE_URL}/resume-examples/product-manager`,
     priority: 0.9,
     changefreq: 'weekly'
   },

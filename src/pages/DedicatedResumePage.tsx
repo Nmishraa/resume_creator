@@ -21,9 +21,16 @@ import {
   ArrowLeft
 } from 'lucide-react';
 
+import { ProductManagerPage } from './seo/ProductManagerPage';
+
 export const DedicatedResumePage: React.FC = () => {
   const { slug, role } = useParams<{ slug?: string; role?: string }>();
-  const targetSlug = slug || role || '';
+  const targetSlug = (slug || role || '').toLowerCase().trim();
+
+  if (targetSlug === 'product-manager') {
+    return <ProductManagerPage />;
+  }
+
   const { updateResume } = useResume();
   const navigate = useNavigate();
   const [isExporting, setIsExporting] = useState(false);

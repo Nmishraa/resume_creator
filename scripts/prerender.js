@@ -508,10 +508,10 @@ const PAGES = [
   },
   {
     path: '/resume-examples/product-manager',
-    title: 'Product Manager Resume Example & ATS Guide (2026) | Resume Craft',
-    description: 'Complete Product Manager resume example with ATS-friendly bullet points, metrics, product roadmap achievements, and 1-click builder template.',
-    h1: 'Product Manager Resume Example & ATS Optimization Guide',
-    intro: 'A recruiter-vetted Product Manager resume sample highlighting product strategy, cross-functional engineering leadership, user metrics, and sprint execution.',
+    title: 'Product Manager Resume Example & ATS-Friendly Template | Resume Craft',
+    description: 'Explore a professional Product Manager resume example and learn how to create an ATS-friendly Product Manager resume with Resume Craft. Build and download your resume for free.',
+    h1: 'Product Manager Resume Example',
+    intro: 'Create a professional Product Manager resume that highlights product strategy, customer research, product discovery, roadmaps, analytics, experimentation, stakeholder management, and measurable business impact. Explore this ATS-friendly Product Manager resume example and use Resume Craft to create and download your own resume for free.',
     ogType: 'article'
   },
   {
