@@ -29,16 +29,8 @@ import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { TEMPLATE_LIST } from '../components/templates';
 import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
 import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
-import {
-  alexMorganData,
-  alexMorgan1PageData,
-  sophiaChenData,
-  sophiaChen3PageData,
-  marcusVanceData,
-  elenaRostovaData,
-  davidMillerData,
-  amaraOkaforData
-} from '../data/resumeExamplesData';
+import { HERO_RESUME_CARDS } from '../data/heroResumeCards';
+import { alexMorganData } from '../data/resumeExamplesData';
 
 export const HomePage: React.FC = () => {
   const { updateResume } = useResume();
@@ -49,131 +41,10 @@ export const HomePage: React.FC = () => {
   const [isHeroCarouselPaused, setIsHeroCarouselPaused] = useState(false);
   const [heroTouchStartPos, setHeroTouchStartPos] = useState<{ x: number; y: number } | null>(null);
   const [heroTouchEndPos, setHeroTouchEndPos] = useState<{ x: number; y: number } | null>(null);
-  const heroTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const heroTabRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const heroTabContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const heroResumeCards = [
-    {
-      id: 'alex-morgan',
-      atsScore: '98/100',
-      templateId: 'modern' as const,
-      templateName: 'Modern Clean',
-      templateTag: 'Most Popular',
-      pageLength: '4-Page',
-      fullName: 'Alex Morgan',
-      jobTitle: 'Senior Full-Stack Engineer',
-      contact: 'alex.morgan@dev.io • (555) 234-5678 • San Francisco, CA',
-      summary: 'Results-driven engineer with 7+ years of experience building high-throughput microservices. Spearheaded system architecture handling 5M daily active users.',
-      expTitle: 'Lead Systems Engineer • Cloud Scale',
-      expDates: '2021 – Present',
-      expHighlights: [
-        'Architected multi-region Kubernetes clusters, reducing downtime by 99.9%.',
-        'Optimized API gateway throughput by 42% using React & Node.js microservices.'
-      ],
-      skills: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'],
-      presetData: alexMorganData
-    },
-    {
-      id: 'sophia-chen',
-      atsScore: '96/100',
-      templateId: 'tech' as const,
-      templateName: 'Tech Minimal',
-      templateTag: 'Tech Favorite',
-      pageLength: '3-Page',
-      fullName: 'Sophia Chen',
-      jobTitle: 'Lead Data Scientist & AI Specialist',
-      contact: 'sophia.chen@ai-nexus.io • (555) 345-6789 • Seattle, WA',
-      summary: 'Senior ML practitioner specializing in LLM fine-tuning, RAG pipelines, and high-throughput vector search engines processing 3M+ daily queries.',
-      expTitle: 'Principal AI Engineer • Nexus Analytics',
-      expDates: '2022 – Present',
-      expHighlights: [
-        'Fine-tuned domain LLMs, cutting external model API costs by $45,000/month.',
-        'Designed vector search architecture achieving sub-40ms latency across 10M vectors.'
-      ],
-      skills: ['Python', 'PyTorch', 'LangChain', 'Pinecone', 'AWS', 'Docker'],
-      presetData: sophiaChen3PageData
-    },
-    {
-      id: 'marcus-vance',
-      atsScore: '99/100',
-      templateId: 'executive' as const,
-      templateName: 'Executive Serif',
-      templateTag: 'Executive',
-      pageLength: '4-Page',
-      fullName: 'Marcus Vance',
-      jobTitle: 'Principal Cloud & DevOps Architect',
-      contact: 'marcus.vance@cloudstrata.io • (555) 456-7890 • Austin, TX',
-      summary: 'Cloud Architect with 8+ years automating multi-region Kubernetes clusters, zero-downtime CI/CD pipelines, and enterprise IaC infrastructure.',
-      expTitle: 'Lead Cloud Architect • Strata Infrastructure',
-      expDates: '2020 – Present',
-      expHighlights: [
-        'Managed $14M annual AWS cloud budget, reducing infrastructure operational costs by 32%.',
-        'Engineered automated failover across dual cloud regions achieving 99.999% uptime SLA.'
-      ],
-      skills: ['AWS', 'Terraform', 'Kubernetes', 'ArgoCD', 'Go', 'Docker'],
-      presetData: marcusVanceData
-    },
-    {
-      id: 'elena-rostova',
-      atsScore: '97/100',
-      templateId: 'slate' as const,
-      templateName: 'Professional Slate',
-      templateTag: 'Modern',
-      pageLength: '5-Page',
-      fullName: 'Elena Rostova',
-      jobTitle: 'Staff Technical Product Manager',
-      contact: 'elena.rostova@horizon.io • (555) 567-8901 • New York, NY',
-      summary: 'Product Leader scaling enterprise B2B SaaS platforms, developer-facing APIs, and AI features resulting in $6.5M net-new annual revenue.',
-      expTitle: 'Senior Product Manager • Horizon SaaS',
-      expDates: '2021 – Present',
-      expHighlights: [
-        'Spearheaded enterprise API portal launch, boosting 90-day active user retention by 38%.',
-        'Directed product discovery across 4 engineering squads with 96% sprint velocity delivery.'
-      ],
-      skills: ['Product Strategy', 'A/B Testing', 'SQL', 'Mixpanel', 'Jira', 'OpenAPI'],
-      presetData: elenaRostovaData
-    },
-    {
-      id: 'david-miller',
-      atsScore: '95/100',
-      templateId: 'compact' as const,
-      templateName: 'Compact Sidebar',
-      templateTag: 'Space Saver',
-      pageLength: '2-Page',
-      fullName: 'David Miller',
-      jobTitle: 'Senior Frontend Architect',
-      contact: 'david.miller@pixelcraft.dev • (555) 678-9012 • Chicago, IL',
-      summary: 'Frontend Architect crafting resilient web applications, micro-frontends, and accessible design systems serving 10M+ monthly users.',
-      expTitle: 'Lead Frontend Engineer • Pixel Craft Labs',
-      expDates: '2021 – Present',
-      expHighlights: [
-        'Optimized Core Web Vitals (LCP/INP), improving mobile page load performance by 55%.',
-        'Architected cross-app design system component library adopted by 60+ engineers.'
-      ],
-      skills: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Web Vitals', 'GraphQL'],
-      presetData: davidMillerData
-    },
-    {
-      id: 'amara-okafor',
-      atsScore: '98/100',
-      templateId: 'modern' as const,
-      templateName: 'Modern Clean',
-      templateTag: 'Most Popular',
-      pageLength: '3-Page',
-      fullName: 'Amara Okafor',
-      jobTitle: 'Senior Cybersecurity & IAM Engineer',
-      contact: 'amara.okafor@cipherguard.sec • (555) 789-0123 • Boston, MA',
-      summary: 'Cybersecurity Architect with 7+ years enforcing Zero-Trust IAM security, automated threat detection, and SOC 2 Type II compliance.',
-      expTitle: 'Lead Security Engineer • Cipher Guard',
-      expDates: '2022 – Present',
-      expHighlights: [
-        'Deployed Okta & Azure Entra ID federated Zero-Trust IAM across 15,000 corporate users.',
-        'Achieved 100% compliance score during ISO 27001 and SOC 2 Type II audit certifications.'
-      ],
-      skills: ['Cyber Security', 'Zero Trust', 'Okta', 'Python', 'AWS Security', 'CISSP'],
-      presetData: amaraOkaforData
-    }
-  ];
+  const heroResumeCards = HERO_RESUME_CARDS;
 
   // Hero Carousel Auto-play timer
   useEffect(() => {
@@ -633,18 +504,25 @@ export const HomePage: React.FC = () => {
                 <div className="flex items-center justify-between gap-2">
                   <div ref={heroTabContainerRef} className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[280px] sm:max-w-[320px] scroll-smooth">
                     {heroResumeCards.map((card, idx) => (
-                      <button
+                      <Link
                         key={card.id}
+                        to={getResumeUrl(card.jobTitle)}
+                        aria-label={`View ${card.jobTitle} resume example`}
                         ref={(el) => { heroTabRefs.current[idx] = el; }}
-                        onClick={() => setActiveHeroCardIndex(idx)}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                        onClick={(e) => {
+                          if (activeHeroCardIndex !== idx) {
+                            e.preventDefault();
+                            setActiveHeroCardIndex(idx);
+                          }
+                        }}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer inline-block ${
                           activeHeroCardIndex === idx
                             ? 'bg-slate-900 text-white shadow-xs'
                             : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
                         }`}
                       >
-                        {card.fullName.split(' ')[0]}
-                      </button>
+                        {card.jobTitle}
+                      </Link>
                     ))}
                   </div>
                   <div className="flex items-center gap-1 shrink-0">
@@ -728,17 +606,17 @@ export const HomePage: React.FC = () => {
 
                         {/* Interactive Preview Link Button */}
                         <div className="pt-2 shrink-0">
-                          <button
-                            type="button"
+                          <Link
+                            to={getResumeUrl(card.jobTitle)}
+                            aria-label={`View ${card.jobTitle} resume example`}
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigate(getResumeUrl(card.jobTitle));
                             }}
                             className="w-full py-2.5 bg-brand-50 hover:bg-brand-100 active:scale-[0.99] text-brand-700 font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 border border-brand-200 cursor-pointer shadow-xs"
                           >
-                            <span>View Full Dedicated Resume</span>
+                            <span>View {card.jobTitle} Resume</span>
                             <ArrowRight size={14} />
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
