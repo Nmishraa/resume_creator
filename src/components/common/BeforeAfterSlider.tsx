@@ -62,14 +62,14 @@ export const BeforeAfterSlider: React.FC = () => {
         >
           {/* AFTER SIDE (Full Background - 100% ATS Scannable) */}
           <div className="absolute inset-0 w-full h-full bg-slate-900 p-6 sm:p-8 flex flex-col justify-between">
-            {/* Top Badge */}
-            <div className="flex items-center justify-between z-10">
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-black">
+            {/* Top Badge (Right Aligned) */}
+            <div className="flex items-center justify-end gap-2 z-10">
+              <div className="hidden sm:flex items-center gap-1.5 text-xs text-emerald-400 font-bold bg-slate-950/90 px-3 py-1.5 rounded-xl border border-emerald-800/40">
+                <CheckCircle2 size={14} /> Passes Workday, Taleo &amp; Greenhouse
+              </div>
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-950/95 border border-emerald-500/40 text-emerald-400 text-xs font-black shadow-lg">
                 <FileCheck2 size={16} />
                 <span>AFTER: 98% ATS Compatibility Score</span>
-              </div>
-              <div className="hidden sm:flex items-center gap-1.5 text-xs text-emerald-400 font-bold bg-emerald-950/60 px-3 py-1 rounded-lg border border-emerald-800/40">
-                <CheckCircle2 size={14} /> Passes Workday, Taleo &amp; Greenhouse
               </div>
             </div>
 
@@ -115,8 +115,8 @@ export const BeforeAfterSlider: React.FC = () => {
             style={{ width: `${sliderPos}%` }}
           >
             <div className="w-[800px] sm:w-[1000px] h-full flex flex-col justify-between">
-              {/* Top Badge */}
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-black w-fit z-10">
+              {/* Top Badge (Left Aligned) */}
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-950/95 border border-rose-500/50 text-rose-400 text-xs font-black w-fit z-10 shadow-lg">
                 <FileX size={16} />
                 <span>BEFORE: 35% ATS Score (Rejected)</span>
               </div>
