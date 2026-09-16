@@ -11,6 +11,7 @@ import {
   FileCheck,
   Zap
 } from 'lucide-react';
+import { AnimatedScoreGauge } from './AnimatedScoreGauge';
 
 interface AtsScoreDrawerProps {
   isOpen: boolean;
@@ -91,15 +92,11 @@ export const AtsScoreDrawer: React.FC<AtsScoreDrawerProps> = ({ isOpen, onClose,
             <>
               {/* Main Score Gauge */}
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
-                <div className="inline-flex items-baseline gap-1">
-                  <span className={`text-4xl font-black ${overallScore >= 80 ? 'text-emerald-600' : overallScore >= 60 ? 'text-amber-600' : 'text-rose-600'}`}>
-                    {overallScore}
-                  </span>
-                  <span className="text-sm font-bold text-slate-400">/ 100</span>
-                </div>
-                <div className="text-xs font-semibold text-slate-600 mt-1">
-                  {overallScore >= 80 ? '🎉 Excellent! High ATS Format Compatibility' : overallScore >= 60 ? '⚠️ Good, but requires keyword & metric optimization' : '🚨 High Risk of ATS rejection'}
-                </div>
+                <AnimatedScoreGauge
+                  score={overallScore}
+                  size="md"
+                  sublabel={overallScore >= 80 ? '🎉 Excellent! High ATS Format Compatibility' : overallScore >= 60 ? '⚠️ Good, but requires keyword & metric optimization' : '🚨 High Risk of ATS rejection'}
+                />
 
                 {/* Formula Explanation Callout */}
                 <div className="mt-3 p-2.5 bg-blue-50/80 border border-blue-200/80 rounded-xl text-[11px] text-blue-900 text-left space-y-1">

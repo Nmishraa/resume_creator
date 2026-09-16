@@ -4208,7 +4208,9 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
                 className="px-2.5 shrink-0 box-border"
                 style={{ width: `${itemWidthPercent}%` }}
               >
-                <div className="h-full bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-brand-400 hover:shadow-xl transition-all duration-300 group relative">
+                <div className="h-full bg-white/90 backdrop-blur-md border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-brand-500/80 hover:shadow-2xl hover:shadow-brand-500/10 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+                  {/* Subtle ambient hover glow gradient */}
+                  <div className="absolute -right-12 -top-12 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl group-hover:bg-brand-500/20 transition-all pointer-events-none" />
                   
                   {/* Card Header & Badge */}
                   <div className="space-y-3">

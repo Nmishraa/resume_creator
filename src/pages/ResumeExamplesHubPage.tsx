@@ -145,8 +145,10 @@ export const ResumeExamplesHubPage: React.FC = () => {
         {filteredExamples.map((ex) => (
           <div
             key={ex.slug}
-            className="bg-white rounded-2xl border border-slate-200/80 p-6 flex flex-col justify-between space-y-5 hover:border-brand-300 hover:shadow-md transition-all group"
+            className="bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-6 flex flex-col justify-between space-y-5 hover:border-brand-500/80 hover:shadow-2xl hover:shadow-brand-500/10 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
           >
+            {/* Subtle ambient hover glow gradient */}
+            <div className="absolute -right-12 -top-12 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl group-hover:bg-brand-500/20 transition-all pointer-events-none" />
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">

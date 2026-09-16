@@ -28,6 +28,7 @@ import {
 import { UploadResumeModal } from '../components/builder/UploadResumeModal';
 import { TEMPLATE_LIST } from '../components/templates';
 import { ResumeExamplesCarousel } from '../components/common/ResumeExamplesCarousel';
+import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
 import {
   alexMorganData,
   alexMorgan1PageData,
@@ -817,6 +818,9 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* BEFORE / AFTER INTERACTIVE SLIDER */}
+      <BeforeAfterSlider />
 
       {/* FEATURE BANNER: FIND JOBS WITH YOUR RESUME */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
