@@ -646,6 +646,41 @@ const PAGES = [
     description: 'Read the Terms of Service for using Resume Craft free resume builder, ATS checker, and career tools.',
     h1: 'Terms of Service',
     intro: 'By accessing or using Resume Craft, you agree to be bound by these Terms of Service.'
+  },
+  {
+    path: '/resume-templates/nursing',
+    title: 'Registered Nurse (RN) Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS-compliant Registered Nurse resume. Feature clinical skills, patient care metrics, EHR systems, and BLS/ACLS certifications.',
+    h1: 'Registered Nurse (RN) Resume Template',
+    intro: 'Highlight clinical competencies, acute patient care, medication administration, and patient advocacy with this ATS-friendly RN resume.'
+  },
+  {
+    path: '/resume-templates/executive-assistant',
+    title: 'Executive Assistant Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Executive Assistant resume. Feature calendar management, executive travel, C-suite support, expense reporting, and office operations.',
+    h1: 'Executive Assistant Resume Template',
+    intro: 'Highlight calendar management, travel coordination, executive C-suite support, expense reporting, and office operations.'
+  },
+  {
+    path: '/resume-templates/sales-representative',
+    title: 'Sales Representative Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Sales Representative resume. Feature revenue generation, quota attainment, CRM tools (Salesforce), prospecting, and deal closing.',
+    h1: 'Sales Representative Resume Template',
+    intro: 'Highlight quota attainment, revenue generation, Salesforce CRM pipeline management, prospecting, and enterprise deal closure.'
+  },
+  {
+    path: '/resume-templates/electrical-engineer',
+    title: 'Electrical Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Electrical Engineer resume. Feature circuit design, AutoCAD, PLC programming, MATLAB, power systems, and hardware testing.',
+    h1: 'Electrical Engineer Resume Template',
+    intro: 'Highlight circuit design, AutoCAD schematics, PLC programming, MATLAB calculations, power systems, and hardware testing.'
+  },
+  {
+    path: '/vs/canva-resume-alternative',
+    title: 'Free Canva Resume Alternative (100% ATS Friendly & Free Vector PDF) | Resume Craft',
+    description: 'Canva resume templates get rejected by ATS parsers due to graphical columns. Switch to Resume Craft for 100% ATS-compliant vector PDF resumes with zero paywall.',
+    h1: 'Free Canva Resume Alternative (100% ATS-Friendly & Free Vector PDF)',
+    intro: 'Switch from Canva to Resume Craft. Build 100% ATS-readable single-column resumes with selectable vector text and zero subscription paywalls.'
   }
 ];
 

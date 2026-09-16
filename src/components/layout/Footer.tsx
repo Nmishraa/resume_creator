@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/find-jobs-with-resume" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Find Jobs With Your Resume
+                  Find Jobs With Resume
                 </Link>
               </li>
               <li>
@@ -72,12 +72,22 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Specialized Builders */}
+          {/* Specialized & Alternatives */}
           <div className="space-y-3.5">
             <h4 className="text-white font-black text-sm uppercase tracking-wider">
-              Specialized Builders
+              Free Alternatives &amp; Role Builders
             </h4>
             <ul className="space-y-2.5">
+              <li>
+                <Link to="/vs/zety-alternative" className="text-emerald-400 hover:text-emerald-300 font-bold transition-colors">
+                  Free Zety Alternative
+                </Link>
+              </li>
+              <li>
+                <Link to="/vs/resume-io-alternative" className="text-emerald-400 hover:text-emerald-300 font-bold transition-colors">
+                  Free Resume.io Alternative
+                </Link>
+              </li>
               <li>
                 <Link to="/resume-builder-for-students" className="text-slate-200 hover:text-white transition-colors font-medium">
                   Student &amp; Fresher Builder
@@ -89,18 +99,13 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/resume-builder-for-software-engineers" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Software Engineer Builder
+                <Link to="/resume-templates/cloud-architect" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Cloud Architect Template
                 </Link>
               </li>
               <li>
-                <Link to="/applications" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Job Application Tracker
-                </Link>
-              </li>
-              <li>
-                <Link to="/interview-questions" className="text-slate-200 hover:text-white transition-colors font-medium">
-                  Interview Question Generator
+                <Link to="/resumes/senior-devops-platform-engineer" className="text-slate-200 hover:text-white transition-colors font-medium">
+                  Senior DevOps Resume
                 </Link>
               </li>
             </ul>

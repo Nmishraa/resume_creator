@@ -331,6 +331,41 @@ export const ROUTE_SEO_MAP = {
     keywords: 'computer science graduate resume builder, CS major CV template, software engineering new grad resume',
     canonical: `${SITE_URL}/computer-science-graduate-resume-builder/`,
     h1: 'Computer Science Graduate Resume Builder'
+  },
+  '/resume-templates/nursing': {
+    title: 'Registered Nurse (RN) Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS-compliant Registered Nurse resume. Feature clinical skills, patient care metrics, EHR systems, and BLS/ACLS certifications.',
+    keywords: 'nursing resume template, RN CV template, nurse resume builder, ATS nursing resume',
+    canonical: `${SITE_URL}/resume-templates/nursing/`,
+    h1: 'Registered Nurse (RN) Resume Template'
+  },
+  '/resume-templates/executive-assistant': {
+    title: 'Executive Assistant Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Executive Assistant resume. Feature calendar management, executive travel, C-suite support, expense reporting, and office operations.',
+    keywords: 'executive assistant resume template, EA CV sample, C-suite assistant resume builder',
+    canonical: `${SITE_URL}/resume-templates/executive-assistant/`,
+    h1: 'Executive Assistant Resume Template'
+  },
+  '/resume-templates/sales-representative': {
+    title: 'Sales Representative Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Sales Representative resume. Feature revenue generation, quota attainment, CRM tools (Salesforce), prospecting, and deal closing.',
+    keywords: 'sales representative resume template, sales CV sample, account executive resume builder',
+    canonical: `${SITE_URL}/resume-templates/sales-representative/`,
+    h1: 'Sales Representative Resume Template'
+  },
+  '/resume-templates/electrical-engineer': {
+    title: 'Electrical Engineer Resume Template — Free ATS Resume | Resume Craft',
+    description: 'Create an ATS Electrical Engineer resume. Feature circuit design, AutoCAD, PLC programming, MATLAB, power systems, and hardware testing.',
+    keywords: 'electrical engineer resume template, EE CV sample, hardware engineering resume builder',
+    canonical: `${SITE_URL}/resume-templates/electrical-engineer/`,
+    h1: 'Electrical Engineer Resume Template'
+  },
+  '/vs/canva-resume-alternative': {
+    title: 'Free Canva Resume Alternative (100% ATS Friendly & Free Vector PDF) | Resume Craft',
+    description: 'Canva resume templates get rejected by ATS parsers due to graphical columns. Switch to Resume Craft for 100% ATS-compliant vector PDF resumes with zero paywall.',
+    keywords: 'free canva resume alternative, ATS readable resume vs canva, free PDF resume builder no watermark',
+    canonical: `${SITE_URL}/vs/canva-resume-alternative/`,
+    h1: 'Free Canva Resume Alternative (100% ATS-Friendly & Free Vector PDF)'
   }
 };
 
