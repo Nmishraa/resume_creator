@@ -1,5 +1,3 @@
-import * as mammoth from 'mammoth';
-import * as pdfjsLib from 'pdfjs-dist';
 import { sanitizeResumeData } from './resumeSanitizer';
 import {
   ResumeData,
@@ -11,13 +9,6 @@ import {
   CertificationItem,
   CustomSection
 } from '../types/resume';
-
-// Configure pdfjs worker if available
-try {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version || '4.0.379'}/pdf.worker.min.mjs`;
-} catch (e) {
-  console.warn('PDF.js worker setup fallback:', e);
-}
 
 export interface FieldWarning {
   section: string;
@@ -35,7 +26,7 @@ export interface ExtractedResumeResult {
 export const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB
 
 /**
- * Validates and extracts text from uploaded file (PDF, DOCX, TXT)
+ * Validates and extracts text from uploaded file (PDF, DOCX, TXT) with dynamic library imports
  */
 export async function extractTextFromFile(file: File): Promise<string> {
   if (file.size > MAX_FILE_SIZE_BYTES) {
@@ -51,12 +42,19 @@ export async function extractTextFromFile(file: File): Promise<string> {
 
   if (fileExt === 'docx' || fileType.includes('wordprocessingml')) {
     const arrayBuffer = await file.arrayBuffer();
+    const mammoth = await import('mammoth');
     const result = await mammoth.extractRawText({ arrayBuffer });
     return result.value || '';
   }
 
   if (fileExt === 'pdf' || fileType === 'application/pdf') {
     const arrayBuffer = await file.arrayBuffer();
+    const pdfjsLib = await import('pdfjs-dist');
+    try {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version || '4.0.379'}/pdf.worker.min.mjs`;
+    } catch (e) {
+      console.warn('PDF.js worker setup fallback:', e);
+    }
     const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
     const pdfDoc = await loadingTask.promise;
     let fullText = '';
