@@ -60,6 +60,7 @@ const AtsResumeBuilderPage = lazyWithRetry(() => import('./pages/seo/AtsResumeBu
 const SoftwareEngineerBuilderPage = lazyWithRetry(() => import('./pages/seo/SoftwareEngineerBuilderPage').then(m => ({ default: m.SoftwareEngineerBuilderPage })));
 const KeywordMatcherPage = lazyWithRetry(() => import('./pages/seo/KeywordMatcherPage').then(m => ({ default: m.KeywordMatcherPage })));
 const MainResumeBuilderSeoPage = lazyWithRetry(() => import('./pages/seo/MainResumeBuilderSeoPage').then(m => ({ default: m.MainResumeBuilderSeoPage })));
+const ResumeBuilderWithoutLoginPage = lazyWithRetry(() => import('./pages/seo/ResumeBuilderWithoutLoginPage').then(m => ({ default: m.ResumeBuilderWithoutLoginPage })));
 const CoverLetterBuilderSeoPage = lazyWithRetry(() => import('./pages/seo/CoverLetterBuilderSeoPage').then(m => ({ default: m.CoverLetterBuilderSeoPage })));
 const ResumeTemplateDetailPage = lazyWithRetry(() => import('./pages/seo/ResumeTemplateDetailPage').then(m => ({ default: m.ResumeTemplateDetailPage })));
 const ResumeSkillsDetailPage = lazyWithRetry(() => import('./pages/seo/ResumeSkillsDetailPage').then(m => ({ default: m.ResumeSkillsDetailPage })));
@@ -97,9 +98,11 @@ export function App() {
             <Route path="ats-methodology" element={<Navigate to="/ats-resume-checker" replace />} />
             <Route path="ats-resume-checker-without-signup" element={<Navigate to="/ats-resume-checker" replace />} />
             <Route path="resume-score-checker" element={<ResumeScoreCheckerPage />} />
+            <Route path="resume-builder-without-login" element={<ResumeBuilderWithoutLoginPage />} />
             <Route path="resume-builder-for-students" element={<StudentResumeBuilderPage />} />
             <Route path="student-resume-example" element={<Navigate to="/resume-builder-for-students" replace />} />
             <Route path="resume-builder-no-experience" element={<NoExperienceResumeBuilderPage />} />
+            <Route path="resume-builder-for-no-experience" element={<NoExperienceResumeBuilderPage />} />
             <Route path="resume-builder-for-software-engineers" element={<SoftwareEngineerBuilderPage />} />
             <Route path="job-description-resume-matcher" element={<JobMatcherPage />} />
             <Route path="find-jobs-with-resume" element={<FindJobsWithResumePage />} />

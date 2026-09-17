@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useResume } from '../../context/ResumeContext';
 import { enhanceBulletPoint, generateSummary } from '../../services/aiService';
 import { exportToVectorPdf, downloadPdfFromElement, exportResumeToJson } from '../../services/pdfService';
-import { exportResumeToDocx } from '../../services/docxExportService';
 import { TEMPLATE_LIST } from '../templates';
 import {
   User,
@@ -183,6 +182,7 @@ export const EditorForm: React.FC = () => {
     if (isExportingDocx) return;
     setIsExportingDocx(true);
     try {
+      const { exportResumeToDocx } = await import('../../services/docxExportService');
       await exportResumeToDocx(resume);
       confetti({
         particleCount: 60,

@@ -398,8 +398,8 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-16 pb-16 bg-slate-50/50">
       <SeoHead
-        title="Resume Craft – Free AI Resume Builder & ATS Resume Checker"
-        description="Resume Craft is a free AI resume builder and ATS resume checker that helps you create professional, ATS-friendly resumes, tailor resumes to job descriptions, and download your resume as a PDF."
+        title="Free AI Resume Builder & ATS Resume Checker | Resume Craft"
+        description="Resume Craft is a free AI resume builder and ATS resume checker that helps you create professional, ATS-friendly resumes, check ATS compatibility, match keywords to job descriptions, and download vector PDFs with no signup requirement."
         canonicalPath="/"
         faqItems={homeFaqs}
       />
@@ -417,11 +417,11 @@ export const HomePage: React.FC = () => {
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] font-black text-slate-950 tracking-tight leading-[1.12]">
-                Free AI Resume Builder – <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-600">Create an ATS-Friendly Resume</span>
+                Free AI Resume Builder &amp; ATS Resume Checker
               </h1>
 
               <p className="text-[17px] sm:text-[18px] lg:text-[19px] text-slate-700 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Resume Craft is a free AI resume builder and ATS resume checker. Build a professional, ATS-friendly resume in minutes with guided AI bullet optimization, real-time keyword matching, and instant vector PDF downloads without login.
+                Resume Craft is a free AI resume builder and ATS resume checker. Create a professional, ATS-friendly resume in minutes with guided AI bullet optimization, real-time keyword matching, ATS compatibility checks, and instant vector PDF downloads with no unnecessary signup requirement for core functionality.
               </p>
 
               {/* Prominent Action Buttons with Front-and-Center PDF Importer */}

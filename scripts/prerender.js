@@ -82,6 +82,20 @@ const PAGES = [
     intro: 'You have more experience than you think. Learn how to transform volunteer hours, school activities, personal projects, and transferable skills into an employer-ready resume.'
   },
   {
+    path: '/resume-builder-for-no-experience',
+    title: 'Resume Builder for No Experience (Free ATS Templates) | Resume Craft',
+    description: 'Build a standout resume with no formal work experience. Highlight transferable skills, academic projects, volunteer work, and certifications for free.',
+    h1: 'Resume Builder for No Experience – Free ATS-Friendly Templates',
+    intro: 'You have more experience than you think. Learn how to transform volunteer hours, school activities, personal projects, and transferable skills into an employer-ready resume.'
+  },
+  {
+    path: '/resume-builder-without-login',
+    title: 'Free Resume Builder Without Login | Resume Craft',
+    description: 'Build and download a professional ATS-friendly resume for free without creating an account or logging in. 100% private local browser storage and zero watermarks.',
+    h1: 'Free Resume Builder Without Login',
+    intro: 'Create, edit, and export an ATS-friendly resume immediately without creating an account or subscribing. All data is kept 100% private in your web browser.'
+  },
+  {
     path: '/find-jobs-with-resume',
     title: 'Find Jobs With Your Resume | Free AI Job Matcher',
     description: 'Create or upload your resume to discover matching jobs. Automatically match open positions based on your target role, skills, experience, education, and location.',

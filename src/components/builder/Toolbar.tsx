@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useResume } from '../../context/ResumeContext';
 import { exportToVectorPdf, downloadPdfFromElement, exportResumeToJson } from '../../services/pdfService';
-import { exportResumeToDocx } from '../../services/docxExportService';
 import { initialResumeData } from '../../data/initialData';
 import {
   Download,
@@ -90,6 +89,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
     if (isExportingDocx) return;
     setIsExportingDocx(true);
     try {
+      const { exportResumeToDocx } = await import('../../services/docxExportService');
       await exportResumeToDocx(resume);
       confetti({
         particleCount: 60,
