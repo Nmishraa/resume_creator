@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link, useNavigate, Navigate } from 'react-router-dom';
+import { getResumeBySlug } from '../../services/resumeRegistry';
 import { RESUME_EXAMPLES } from '../../data/resumeExamplesData';
 import { SeoHead } from '../../components/common/SeoHead';
 import { Breadcrumbs } from '../../components/common/Breadcrumbs';
@@ -21,11 +22,30 @@ export const ResumeSkillsDetailPage: React.FC = () => {
   const { role } = useParams<{ role: string }>();
   const navigate = useNavigate();
 
-  const example = RESUME_EXAMPLES.find((ex) => ex.slug === role);
+  const registered = getResumeBySlug(role || '');
+  const legacyExample = RESUME_EXAMPLES.find((ex) => ex.slug === role);
 
-  if (!example) {
+  if (!registered && !legacyExample) {
     return <Navigate to="/resume-examples" replace />;
   }
+
+  const roleTitle = registered?.roleTitle || legacyExample?.roleTitle || 'Professional';
+  const slug = registered?.slug || legacyExample?.slug || role || 'skills';
+  const experienceLevel = registered?.experienceLevel || legacyExample?.experienceLevel || 'Mid-Senior';
+  const skills = (registered?.skills && registered.skills.length > 0)
+    ? registered.skills
+    : (legacyExample?.skills && legacyExample.skills.length > 0)
+    ? legacyExample.skills
+    : [{ category: 'Core Competencies', items: registered?.atsKeywords || ['Core Skills', 'Technical Proficiency', 'Best Practices'] }];
+  const atsKeywords = registered?.atsKeywords || legacyExample?.atsKeywords || ['Core Skills', 'Technical Proficiency'];
+
+  const example = {
+    slug,
+    roleTitle,
+    experienceLevel,
+    skills,
+    atsKeywords
+  };
 
   const skillsSchema = {
     '@context': 'https://schema.org',

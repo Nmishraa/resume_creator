@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate, Navigate } from 'react-router-dom';
 import { ResumeData } from '../../types/resume';
 import { ROLE_SEO_DATA } from '../../data/roleSeoData';
 import { RESUME_EXAMPLES } from '../../data/resumeExamplesData';
+import { getResumeBySlug } from '../../services/resumeRegistry';
 import { useResume } from '../../context/ResumeContext';
 import { SeoHead } from '../../components/common/SeoHead';
 import { Breadcrumbs } from '../../components/common/Breadcrumbs';
@@ -28,32 +29,33 @@ export const ResumeTemplateDetailPage: React.FC = () => {
   const { updateResume } = useResume();
   const navigate = useNavigate();
 
-  // Try finding role data in ROLE_SEO_DATA first, fallback to RESUME_EXAMPLES
+  // Try finding role data in ROLE_SEO_DATA, resumeRegistry, or RESUME_EXAMPLES
   const roleKey = role || '';
   const seoData = ROLE_SEO_DATA[roleKey];
+  const registered = getResumeBySlug(roleKey);
   const legacyExample = RESUME_EXAMPLES.find((ex) => ex.slug === roleKey);
 
-  if (!seoData && !legacyExample) {
+  if (!seoData && !legacyExample && !registered) {
     return <Navigate to="/resume-templates" replace />;
   }
 
   // Unified Data Accessors
-  const roleTitle = seoData?.roleTitle || legacyExample?.roleTitle || 'Professional';
-  const metaTitle = seoData?.metaTitle || `${roleTitle} Resume Template — Free ATS Resume | Resume Craft`;
-  const metaDescription = seoData?.metaDescription || `Create a professional ${roleTitle} resume with Resume Craft. Use an ATS-friendly template, customize your experience and skills, and download as PDF or Word.`;
-  const h1 = seoData?.h1 || `${roleTitle} Resume Template`;
-  const shortIntro = seoData?.shortIntro || legacyExample?.shortIntro || `Create a recruiter-vetted, ATS-friendly ${roleTitle} resume in minutes.`;
-  const skills = seoData?.skills || legacyExample?.skills || [];
-  const summaryExamples = seoData?.summaryExamples || (legacyExample?.summaryExample ? [legacyExample.summaryExample] : []);
-  const experienceBullets = seoData?.experienceBullets || legacyExample?.experienceBullets || [];
-  const atsKeywords = seoData?.atsKeywords || legacyExample?.atsKeywords || [];
-  const faqs = seoData?.faqs || legacyExample?.faqs || [];
+  const roleTitle = seoData?.roleTitle || registered?.roleTitle || legacyExample?.roleTitle || 'Professional';
+  const metaTitle = seoData?.metaTitle || registered?.metaTitle || `${roleTitle} Resume Template — Free ATS Resume | Resume Craft`;
+  const metaDescription = seoData?.metaDescription || registered?.metaDescription || `Create a professional ${roleTitle} resume with Resume Craft. Use an ATS-friendly template, customize your experience and skills, and download as PDF or Word.`;
+  const h1 = seoData?.h1 || registered?.h1 || `${roleTitle} Resume Template`;
+  const shortIntro = seoData?.shortIntro || registered?.shortIntro || legacyExample?.shortIntro || `Create a recruiter-vetted, ATS-friendly ${roleTitle} resume in minutes.`;
+  const skills = (seoData?.skills && seoData.skills.length > 0) ? seoData.skills : (registered?.skills && registered.skills.length > 0) ? registered.skills : legacyExample?.skills || [];
+  const summaryExamples = seoData?.summaryExamples || (legacyExample?.summaryExample ? [legacyExample.summaryExample] : [registered?.shortIntro || '']);
+  const experienceBullets = seoData?.experienceBullets || registered?.experienceBullets || legacyExample?.experienceBullets || [];
+  const atsKeywords = seoData?.atsKeywords || registered?.atsKeywords || legacyExample?.atsKeywords || [];
+  const faqs = seoData?.faqs || registered?.faqs || legacyExample?.faqs || [];
   const relatedRoles = seoData?.relatedRoles || [
     { slug: 'software-engineer', title: 'Software Engineer', category: 'Engineering' },
     { slug: 'product-manager', title: 'Product Manager', category: 'Product' },
     { slug: 'cloud-architect', title: 'Cloud Architect', category: 'Architecture' }
   ];
-  const presetData = seoData?.presetData || legacyExample?.presetData;
+  const presetData = seoData?.presetData || registered?.presetData || legacyExample?.presetData;
 
   const handleUseRoleTemplate = () => {
     if (presetData) {

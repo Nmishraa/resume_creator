@@ -698,6 +698,89 @@ const PAGES = [
   }
 ];
 
+const ALL_ROLES = [
+  { slug: 'product-manager', title: 'Product Manager' },
+  { slug: 'software-engineer', title: 'Software Engineer' },
+  { slug: 'senior-full-stack-engineer', title: 'Senior Full-Stack Engineer' },
+  { slug: 'ai-product-manager', title: 'AI Product Manager' },
+  { slug: 'technical-product-manager', title: 'Technical Product Manager' },
+  { slug: 'enterprise-architect', title: 'Enterprise Architect' },
+  { slug: 'cloud-architect', title: 'Cloud Architect' },
+  { slug: 'solutions-architect', title: 'Solutions Architect' },
+  { slug: 'devops-engineer', title: 'DevOps Engineer' },
+  { slug: 'data-scientist', title: 'Data Scientist' },
+  { slug: 'data-analyst', title: 'Data Analyst' },
+  { slug: 'ai-engineer', title: 'AI Engineer' },
+  { slug: 'machine-learning-engineer', title: 'Machine Learning Engineer' },
+  { slug: 'senior-software-engineer', title: 'Senior Software Engineer' },
+  { slug: 'full-stack-developer', title: 'Full-Stack Developer' },
+  { slug: 'frontend-developer', title: 'Frontend Developer' },
+  { slug: 'backend-developer', title: 'Backend Developer' },
+  { slug: 'project-manager', title: 'Project Manager' },
+  { slug: 'business-analyst', title: 'Business Analyst' },
+  { slug: 'scrum-master', title: 'Scrum Master' },
+  { slug: 'qa-automation-engineer', title: 'QA Automation Engineer' },
+  { slug: 'cybersecurity-analyst', title: 'Cybersecurity Analyst' },
+  { slug: 'operations-manager', title: 'Operations Manager' },
+  { slug: 'sales-director', title: 'Sales Director' },
+  { slug: 'marketing-manager', title: 'Marketing Manager' },
+  { slug: 'financial-analyst', title: 'Financial Analyst' },
+  { slug: 'human-resources-manager', title: 'Human Resources Manager' },
+  { slug: 'ux-designer', title: 'UX Designer' },
+  { slug: 'ui-ux-designer', title: 'UI/UX Designer' },
+  { slug: 'nursing', title: 'Registered Nurse (RN)' },
+  { slug: 'executive-assistant', title: 'Executive Assistant' },
+  { slug: 'sales-representative', title: 'Sales Representative' },
+  { slug: 'electrical-engineer', title: 'Electrical Engineer' },
+  { slug: 'cloud-engineer', title: 'Cloud Engineer' },
+  { slug: 'college-student', title: 'College Student' },
+  { slug: 'internship', title: 'Internship' },
+  { slug: 'no-experience', title: 'No Experience' },
+  { slug: 'customer-service', title: 'Customer Service' },
+  { slug: 'teacher', title: 'Teacher' },
+  { slug: 'nurse', title: 'Registered Nurse' }
+];
+
+const existingPaths = new Set(PAGES.map(p => p.path));
+
+for (const r of ALL_ROLES) {
+  const examplePath = `/resume-examples/${r.slug}`;
+  if (!existingPaths.has(examplePath)) {
+    existingPaths.add(examplePath);
+    PAGES.push({
+      path: examplePath,
+      title: `${r.title} Resume Example (ATS Tested) | Resume Craft`,
+      description: `Recruiter-vetted ${r.title} resume example with ATS-friendly bullet points, Google X-Y-Z metrics, and 1-click builder export.`,
+      h1: `${r.title} Resume Example`,
+      intro: `Explore our recruiter-vetted ${r.title} resume example built to pass ATS scanners and impress hiring managers.`
+    });
+  }
+
+  const templatePath = `/resume-templates/${r.slug}`;
+  if (!existingPaths.has(templatePath)) {
+    existingPaths.add(templatePath);
+    PAGES.push({
+      path: templatePath,
+      title: `${r.title} Resume Template — Free ATS Resume | Resume Craft`,
+      description: `Create a professional ${r.title} resume with Resume Craft. Use an ATS-friendly template, customize your experience and skills, and download as PDF or Word.`,
+      h1: `${r.title} Resume Template`,
+      intro: `Craft a high-impact ${r.title} resume designed to pass ATS screening and impress recruiters.`
+    });
+  }
+
+  const skillsPath = `/resume-skills/${r.slug}`;
+  if (!existingPaths.has(skillsPath)) {
+    existingPaths.add(skillsPath);
+    PAGES.push({
+      path: skillsPath,
+      title: `${r.title} Resume Skills – Technical Skills & Keywords | Resume Craft`,
+      description: `Complete list of essential technical skills, frameworks, databases, cloud tools, and ATS keywords for ${r.title} resumes.`,
+      h1: `${r.title} Resume Skills`,
+      intro: `In-depth guide to technical competencies, frameworks, databases, tools, soft skills, and ATS keywords needed to build an interview-ready ${r.title} resume.`
+    });
+  }
+}
+
 console.log(`Starting SSG Pre-rendering for ${PAGES.length} routes...`);
 
 for (const page of PAGES) {
