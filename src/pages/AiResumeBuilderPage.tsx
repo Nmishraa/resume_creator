@@ -74,7 +74,7 @@ export const AiResumeBuilderPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
-        title="Free AI Resume Builder—No Login Required | Resume Craft"
+        title="Resume Craft – Free AI Resume Builder"
         description="Create an ATS-friendly resume with AI and download a vector PDF for free. No login, signup, credit card, watermark, or hidden paywall required."
         canonicalPath="/ai-resume-builder"
         faqItems={aiFaqs}

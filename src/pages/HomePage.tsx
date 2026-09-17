@@ -398,8 +398,8 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-16 pb-16 bg-slate-50/50">
       <SeoHead
-        title="Build an ATS-Friendly Resume for Free | Resume Craft"
-        description="Create an ATS-optimized resume in minutes. No login, no watermark, and no hidden fees. Download high-resolution vector PDFs free."
+        title="Resume Craft – Free AI Resume Builder & ATS Resume Checker"
+        description="Resume Craft is a free AI resume builder and ATS resume checker that helps you create professional, ATS-friendly resumes, tailor resumes to job descriptions, and download your resume as a PDF."
         canonicalPath="/"
         faqItems={homeFaqs}
       />
@@ -413,15 +413,15 @@ export const HomePage: React.FC = () => {
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100/90 border border-brand-200 text-brand-950 text-[13px] sm:text-[14px] font-extrabold shadow-2xs">
                 <Sparkles size={15} className="text-brand-600 shrink-0" />
-                <span>No login, no watermark, and no hidden fees.</span>
+                <span>Free AI Resume Builder &amp; ATS Resume Checker</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-[48px] xl:text-[54px] font-black text-slate-950 tracking-tight leading-[1.12]">
-                Build an <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-600">ATS-Friendly Resume</span> for Free
+              <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] font-black text-slate-950 tracking-tight leading-[1.12]">
+                Free AI Resume Builder – <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-600">Create an ATS-Friendly Resume</span>
               </h1>
 
-              <p className="text-[18px] sm:text-[19px] lg:text-[20px] text-slate-700 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Create a professional, interview-ready resume in minutes with our guided builder, AI bullet enhancers, and direct vector PDF export.
+              <p className="text-[17px] sm:text-[18px] lg:text-[19px] text-slate-700 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Resume Craft is a free AI resume builder and ATS resume checker. Build a professional, ATS-friendly resume in minutes with guided AI bullet optimization, real-time keyword matching, and instant vector PDF downloads without login.
               </p>
 
               {/* Prominent Action Buttons with Front-and-Center PDF Importer */}
@@ -830,6 +830,130 @@ export const HomePage: React.FC = () => {
       </section>
 
 
+
+      {/* 5. WHY USE RESUME CRAFT (HOMEPAGE SEO SECTION) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-xs space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-extrabold text-brand-600 uppercase tracking-wider bg-brand-50 px-3 py-1 rounded-full border border-brand-100">
+              Complete Career Platform
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+              Why Use Resume Craft?
+            </h2>
+            <p className="text-base text-slate-600 leading-relaxed font-medium">
+              Resume Craft is built to help job seekers create professional, ATS-friendly resumes that stand out to corporate recruiters and automated screening software.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">Free AI Resume Building</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Transform generic work duties into high-impact metric bullet points using our Google X-Y-Z formula bullet writer and summary generator.
+              </p>
+              <Link to="/ai-resume-builder" className="inline-block text-xs font-bold text-brand-600 hover:text-brand-700 pt-1">
+                Create a free AI resume &rarr;
+              </Link>
+            </div>
+
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">ATS-Friendly Formatting</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Single-column reading structures and standard system typography ensure your resume parses cleanly across Workday, Greenhouse, and Lever.
+              </p>
+              <Link to="/ats-resume-builder" className="inline-block text-xs font-bold text-emerald-600 hover:text-emerald-700 pt-1">
+                Build an ATS-friendly resume &rarr;
+              </Link>
+            </div>
+
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">ATS Resume Checker</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Diagnostic 0–100 compatibility testing that evaluates metric density, action verb strength, contact info placement, and formatting safety.
+              </p>
+              <Link to="/ats-resume-checker" className="inline-block text-xs font-bold text-indigo-600 hover:text-indigo-700 pt-1">
+                Check your ATS resume score &rarr;
+              </Link>
+            </div>
+
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">Job Description Matcher</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Scan your target job description against your resume text to discover missing technical skills and recruiter keywords in real-time.
+              </p>
+              <Link to="/job-description-resume-matcher" className="inline-block text-xs font-bold text-purple-600 hover:text-purple-700 pt-1">
+                Match resume to job description &rarr;
+              </Link>
+            </div>
+
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">Resume Examples by Job Role</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Explore recruiter-aligned resume samples packed with real metrics and recommended skills for tech, management, and student roles.
+              </p>
+              <Link to="/resume-examples" className="inline-block text-xs font-bold text-blue-600 hover:text-blue-700 pt-1">
+                Browse resume examples by job role &rarr;
+              </Link>
+            </div>
+
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">Direct PDF Resume Download</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Download clean, high-resolution vector PDF files directly to your device with zero paywalls, zero watermarks, and zero print dialog issues.
+              </p>
+              <Link to="/resume-builder" className="inline-block text-xs font-bold text-brand-600 hover:text-brand-700 pt-1">
+                Free resume builder with PDF download &rarr;
+              </Link>
+            </div>
+
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">AI Cover Letter Generator</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Generate tailored, role-specific cover letters aligned with your resume experience and target company requirements in seconds.
+              </p>
+              <Link to="/cover-letter-builder" className="inline-block text-xs font-bold text-amber-600 hover:text-amber-700 pt-1">
+                Create a tailored cover letter &rarr;
+              </Link>
+            </div>
+
+            <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 space-y-2.5">
+              <h3 className="font-extrabold text-slate-900 text-base">For Beginners &amp; No Experience</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Transform academic capstones, coursework, volunteer leadership, and personal projects into an impressive entry-level resume.
+              </p>
+              <Link to="/resume-builder-for-students" className="inline-block text-xs font-bold text-rose-600 hover:text-rose-700 pt-1">
+                Build a student resume with no experience &rarr;
+              </Link>
+            </div>
+          </div>
+
+          {/* Contextual Links to Specific Key Roles */}
+          <div className="pt-4 border-t border-slate-200/80 text-xs text-slate-600 space-y-2">
+            <span className="font-extrabold text-slate-900 block">Featured Role Examples:</span>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 font-semibold">
+              <Link to="/resume-examples/software-engineer" className="text-brand-600 hover:underline">
+                Software Engineer Resume Example
+              </Link>
+              <Link to="/resume-examples/product-manager" className="text-brand-600 hover:underline">
+                Product Manager Resume Example
+              </Link>
+              <Link to="/resume-examples/enterprise-architect" className="text-brand-600 hover:underline">
+                Enterprise Architect Resume Example
+              </Link>
+              <Link to="/resume-examples/ai-engineer" className="text-brand-600 hover:underline">
+                AI Engineer Resume Example
+              </Link>
+              <Link to="/resume-examples/cloud-architect" className="text-brand-600 hover:underline">
+                Cloud Architect Resume Example
+              </Link>
+              <Link to="/resume-examples/devops-engineer" className="text-brand-600 hover:underline">
+                DevOps Engineer Resume Example
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 6. PRIVACY & FAQS */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">

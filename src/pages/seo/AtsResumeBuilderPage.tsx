@@ -23,7 +23,7 @@ export const AtsResumeBuilderPage: React.FC = () => {
   return (
     <div className="space-y-16 pb-20">
       <SeoHead
-        title="Free ATS Resume Builder – 100% ATS Compliant Layouts | Resume Craft"
+        title="Free ATS Resume Builder & ATS Resume Checker | Resume Craft"
         description="Build an ATS-compliant resume engineered to pass Workday, Greenhouse, and Taleo algorithms. Free vector PDF export with zero paywalls."
         canonicalPath="/ats-resume-builder"
       />
@@ -37,7 +37,7 @@ export const AtsResumeBuilderPage: React.FC = () => {
           </div>
           
           <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
-            ATS-Friendly Resume Builder
+            Free ATS Resume Builder &amp; ATS Resume Checker
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">

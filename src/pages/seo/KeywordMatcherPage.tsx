@@ -31,7 +31,7 @@ export const KeywordMatcherPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
-        title="Resume Keyword Matcher – Match Your Resume to a Job Description"
+        title="Free Resume Keyword Matcher | Match Your Resume to a Job Description | Resume Craft"
         description="Paste a job description and compare it against your resume. Identify matching and missing keywords, technical skills, and requirements to boost ATS score."
         canonicalPath="/resume-keyword-matcher"
         jsonLd={pageSchema}

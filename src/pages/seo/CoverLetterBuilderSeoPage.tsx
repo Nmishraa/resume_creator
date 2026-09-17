@@ -41,7 +41,7 @@ export const CoverLetterBuilderSeoPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
-        title="Free Cover Letter Builder – Create a Professional Cover Letter"
+        title="Free AI Cover Letter Builder | Resume Craft"
         description="Build a personalized, professional cover letter tailored to your target job role. Match your resume style, highlight key achievements, and download free."
         canonicalPath="/cover-letter-builder"
         jsonLd={pageSchema}

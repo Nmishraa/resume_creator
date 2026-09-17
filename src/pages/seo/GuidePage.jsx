@@ -150,7 +150,7 @@ export default function GuidePage() {
         <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)', color: '#ffffff', padding: '2.5rem', borderRadius: '20px', textAlign: 'center', marginTop: '3rem', boxShadow: '0 12px 32px rgba(79,70,229,0.3)' }}>
           <h3 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '0.8rem' }}>Build Your High-Scoring Resume in Minutes</h3>
           <p style={{ fontSize: '1.05rem', color: '#e0e7ff', maxWidth: '600px', margin: '0 auto 1.8rem auto' }}>
-            Stop stressing over formatting errors. Use Resume & CV Craft's free builder to generate ATS-optimized PDFs automatically.
+            Stop stressing over formatting errors. Use Resume Craft's free builder to generate ATS-optimized PDFs automatically.
           </p>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <button style={{ padding: '0.9rem 2.2rem', borderRadius: '12px', border: 'none', background: '#ffffff', color: '#4f46e5', fontWeight: 800, fontSize: '1rem', cursor: 'pointer', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>

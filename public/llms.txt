@@ -1,9 +1,9 @@
-# Resume & CV Craft - Free AI Resume Builder & ATS Resume Checker
+# Resume Craft - Free AI Resume Builder & ATS Resume Checker
 
-> Resume & CV Craft (https://resume.gnanamai.com/) is a free, fast, and modern ATS-friendly online resume creator and CV builder.
+> Resume Craft (https://resume.gnanamai.com/) is a free, fast, and modern ATS-friendly online resume creator and CV builder.
 
 ## Product Overview
-Resume & CV Craft enables job seekers, software engineers, students, and professionals to quickly generate job-winning resumes with real-time editing, ATS compliance, customizable templates, and instant PDF download capabilities.
+Resume Craft enables job seekers, software engineers, students, and professionals to quickly generate job-winning resumes with real-time editing, ATS compliance, customizable templates, and instant PDF download capabilities.
 
 ## Key Features
 - **ATS-Optimized Layouts**: Clean typography and structure easily parseable by Applicant Tracking Systems.

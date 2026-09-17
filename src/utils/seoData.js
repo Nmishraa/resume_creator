@@ -9,8 +9,8 @@ export const AUTHOR_INFO = {
 
 export const ROUTE_SEO_MAP = {
   '/': {
-    title: 'Resume Craft – Free AI Resume Builder and ATS Resume Checker',
-    description: 'Create professional ATS-friendly resumes with Resume Craft. Build, customize and download your resume using free AI-powered tools.',
+    title: 'Free AI Resume Builder & ATS Resume Checker | Resume Craft',
+    description: 'Build ATS-friendly resumes for free with AI bullet point optimization, real-time ATS scoring, Google X-Y-Z formula, and instant vector PDF downloads.',
     keywords: 'Resume Craft, free resume builder, ATS resume checker, AI resume creator, PDF resume export',
     canonical: `${SITE_URL}/`,
     h1: 'Build ATS-Friendly Resumes & Test ATS Compatibility Scores',
@@ -30,8 +30,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/ats-resume-checker': {
-    title: 'Free ATS Resume Checker & Compatibility Test | Resume & CV Craft',
-    description: 'Test your resume against ATS algorithms for free. Get immediate score breakdown, missing keyword alerts, and bullet point recommendations.',
+    title: 'Free ATS Resume Checker (Instant 0-100 Score) | Resume Craft',
+    description: 'Test your resume against ATS algorithms for free. Get immediate score breakdown, missing keyword alerts, bullet point tips, and 90+ score roadmap.',
     keywords: 'ATS resume checker, free resume score, ATS resume scanner, resume compatibility test',
     canonical: `${SITE_URL}/ats-resume-checker/`,
     h1: 'Test Your Resume ATS Score Free',
@@ -55,8 +55,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/resume-templates': {
-    title: 'Free ATS Resume Templates (PDF Export) | Resume & CV Craft',
-    description: 'Browse 100% free ATS-optimized resume templates designed for clean text parsing.',
+    title: 'Free ATS Resume Templates (Vector PDF Download) | Resume Craft',
+    description: 'Explore 100% free ATS-optimized resume templates. Designed with standard typography and clean single-column layouts for Workday, Greenhouse, and Lever.',
     keywords: 'free resume templates, ATS CV templates, modern resume layout, professional CV format',
     canonical: `${SITE_URL}/resume-templates/`,
     h1: 'ATS-Optimized Resume Templates',
@@ -76,8 +76,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/how-to-write-a-resume': {
-    title: 'How to Write a Resume in 2026: Step-by-Step Guide | Resume & CV Craft',
-    description: 'Complete guide on writing a high-scoring resume in 2026. Master action verbs, quantifiable metrics, and ATS keywords.',
+    title: 'How to Write an ATS Resume (Step-by-Step 2026) | Resume Craft',
+    description: 'Master how to write a high-scoring ATS resume in 2026. Learn Google X-Y-Z formula, quantifiable metrics, action verbs, and keyword density.',
     keywords: 'how to write a resume, resume guide 2026, resume bullet points, CV writing tips',
     canonical: `${SITE_URL}/how-to-write-a-resume/`,
     h1: 'How to Write a Professional Resume in 2026',
@@ -101,8 +101,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/resume-summary-examples': {
-    title: '50+ Resume Summary Examples for Every Career Level | Resume & CV Craft',
-    description: 'Copy and customize professional resume summary examples for software engineers, product managers, marketing, and students.',
+    title: '50+ Professional Resume Summary Examples (2026) | Resume Craft',
+    description: 'Copy and customize 50+ ATS-tested resume summary examples for Software Engineers, Product Managers, Data Analysts, Marketing, and Students.',
     keywords: 'resume summary examples, professional summary, profile statement, CV summary',
     canonical: `${SITE_URL}/resume-summary-examples/`,
     h1: 'Best Resume Summary Examples for 2026',
@@ -122,8 +122,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/ai-engineer-resume-example': {
-    title: 'AI & Machine Learning Engineer Resume Example | Resume & CV Craft',
-    description: 'Proven AI Engineer resume sample with high ATS score. Technical skills, PyTorch/TensorFlow metrics, and project structure.',
+    title: 'AI Engineer Resume Example (ATS Tested 2026) | Resume Craft',
+    description: 'Recruiter-vetted AI Engineer resume example with high ATS score. Features PyTorch, LLM fine-tuning, RAG metrics, and 1-click vector PDF export.',
     keywords: 'AI engineer resume, machine learning resume example, LLM engineer CV',
     canonical: `${SITE_URL}/ai-engineer-resume-example/`,
     h1: 'AI Engineer Resume Example & Template',
@@ -143,8 +143,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/student-resume-example': {
-    title: 'Student & Entry-Level Resume Example with No Experience | Resume & CV Craft',
-    description: 'Step-by-step entry-level resume template for college students and recent graduates.',
+    title: 'Student Resume Example with No Experience (Free PDF) | Resume Craft',
+    description: 'ATS-tested entry-level resume template for college students and recent grads. Turn coursework, projects, and leadership into employer value.',
     keywords: 'student resume, entry level resume, college graduate CV, no experience resume',
     canonical: `${SITE_URL}/student-resume-example/`,
     h1: 'Student & Entry-Level Resume Example',
@@ -164,8 +164,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/examples': {
-    title: 'Professional Resume Examples Library | Resume & CV Craft',
-    description: 'Explore sample resumes across engineering, management, design, and finance roles.',
+    title: 'Professional Resume Examples Directory (ATS Tested) | Resume Craft',
+    description: 'Explore recruiter-approved sample resumes across Software Engineering, Product Management, Design, Data Science, and Executive roles.',
     keywords: 'resume examples, CV samples, industry resume templates',
     canonical: `${SITE_URL}/examples/`,
     h1: 'ATS-Friendly Resume Templates & Examples',
@@ -181,8 +181,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/ats-tips': {
-    title: 'Top 10 ATS Optimization Strategies for Job Seekers | Resume Craft',
-    description: 'Learn how Applicant Tracking Systems parse resume text and how to format for candidate screeners.',
+    title: 'Top 10 ATS Resume Optimization Tips for 2026 | Resume Craft',
+    description: 'Learn how Applicant Tracking Systems parse resume text. Avoid formatting traps, optimize keyword density, and pass Workday and Greenhouse screeners.',
     keywords: 'ATS tips, optimize for ATS systems, resume formatting rules, applicant tracking systems',
     canonical: `${SITE_URL}/ats-tips/`,
     h1: 'Optimize Your Resume for Applicant Tracking Systems (ATS)',
@@ -202,8 +202,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/cover-letters': {
-    title: 'Free Interactive Cover Letter Generator & Templates | Resume Craft',
-    description: 'Generate customized, tailored cover letters in seconds. Choose from 4 proven formulas and download instant TXT/PDF.',
+    title: 'Free AI Cover Letter Builder & Tailored Templates | Resume Craft',
+    description: 'Generate customized, role-tailored cover letters in seconds. Select from 4 proven formulas, align with target job roles, and export instant PDF/TXT.',
     keywords: 'cover letter generator, cover letter builder, free cover letter templates, job application letter',
     canonical: `${SITE_URL}/cover-letters/`,
     h1: 'AI Cover Letter Builder & Writing Guide',
@@ -219,8 +219,8 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/interview-questions': {
-    title: 'Free AI Interview Question Generator by Job Role | Resume Craft',
-    description: 'Generate free AI-powered interview questions for any job role. Practice common, behavioral, technical, and role-specific questions with Resume Craft.',
+    title: 'Free AI Interview Question Generator by Role | Resume Craft',
+    description: 'Generate free AI-powered interview questions for any job role. Practice technical, behavioral, and STAR framework responses with Resume Craft.',
     keywords: 'AI interview question generator, interview questions by job role, behavioral interview questions, technical interview prep',
     canonical: `${SITE_URL}/interview-questions/`,
     h1: 'AI Interview Question Generator',
@@ -270,7 +270,7 @@ export const ROUTE_SEO_MAP = {
     ]
   },
   '/about': {
-    title: 'About Resume Craft - Mission & Free Career Tools',
+    title: 'About Resume Craft – Our Mission for Free Career Tools',
     description: 'Learn about Resume Craft, our mission to democratize job search tools, and how our free AI resume builder helps thousands of candidates.',
     keywords: 'about resume craft, AI resume builder mission, career tools',
     canonical: `${SITE_URL}/about/`,
@@ -291,77 +291,77 @@ export const ROUTE_SEO_MAP = {
     h1: 'Contact Us'
   },
   '/free-ai-engineer-resume-builder': {
-    title: 'Free AI Engineer Resume Builder | Resume Craft',
-    description: 'Build an optimized AI Engineer resume for free. Designed for PyTorch, LLMs, CUDA, and RAG architectures.',
+    title: 'Free AI Engineer ATS Resume Builder | Resume Craft',
+    description: 'Build an ATS-optimized AI Engineer resume for free. Tailored for PyTorch, LLMs, RAG, Pinecone, and instant vector PDF download.',
     keywords: 'free AI engineer resume builder, machine learning CV generator, LLM engineer resume tool',
     canonical: `${SITE_URL}/free-ai-engineer-resume-builder/`,
     h1: 'Free AI Engineer Resume Builder'
   },
   '/entry-level-ai-engineer-resume-example': {
-    title: 'Entry-Level AI Engineer Resume Example & Template | Resume Craft',
+    title: 'Entry-Level AI Engineer Resume Example (2026) | Resume Craft',
     description: 'Entry-level AI Engineer resume guide for new grads and junior developers. Highlight PyTorch projects, HuggingFace models, and hackathons.',
     keywords: 'entry level AI engineer resume, junior machine learning CV, new grad AI resume template',
     canonical: `${SITE_URL}/entry-level-ai-engineer-resume-example/`,
     h1: 'Entry-Level AI Engineer Resume Example'
   },
   '/rag-engineer-resume-example': {
-    title: 'RAG & LLM Engineer Resume Example & Template | Resume Craft',
+    title: 'RAG & LLM Engineer Resume Example (ATS Tested) | Resume Craft',
     description: 'Proven RAG Engineer resume template. Highlight vector databases, Pinecone, hybrid search, and LangChain embeddings.',
     keywords: 'RAG engineer resume example, LLM developer CV, vector database resume',
     canonical: `${SITE_URL}/rag-engineer-resume-example/`,
     h1: 'RAG Engineer Resume Example'
   },
   '/resume-builder-for-fresh-graduates': {
-    title: 'Free Resume Builder for Fresh Graduates | Resume Craft',
-    description: 'Create an ATS-optimized resume for fresh college graduates with no formal work experience. 100% free vector PDF export.',
+    title: 'Free Resume Builder for Fresh Graduates (Free PDF) | Resume Craft',
+    description: 'Create an ATS-optimized resume for fresh college graduates with no formal work experience. 100% free vector PDF export & AI bullet writer.',
     keywords: 'resume builder for fresh graduates, entry level resume creator, college graduate CV builder',
     canonical: `${SITE_URL}/resume-builder-for-fresh-graduates/`,
     h1: 'Resume Builder for Fresh Graduates'
   },
   '/ats-resume-checker-without-signup': {
-    title: 'ATS Resume Checker Without Signup or Registration | Resume Craft',
-    description: 'Scan your resume against ATS screeners instantly without creating an account or giving your email address.',
+    title: 'Free ATS Resume Checker (No Signup & 100% Private) | Resume Craft',
+    description: 'Scan your resume against ATS screeners instantly without creating an account or giving an email. Get instant ATS score & keyword recommendations.',
     keywords: 'ATS resume checker without signup, no registration ATS scanner, free private resume score',
     canonical: `${SITE_URL}/ats-resume-checker-without-signup/`,
     h1: 'ATS Resume Checker Without Signup'
   },
   '/computer-science-graduate-resume-builder': {
-    title: 'Computer Science Graduate Resume Builder | Resume Craft',
+    title: 'Computer Science Graduate Resume Builder (Free PDF) | Resume Craft',
     description: 'Engineered for CS majors and bootcamp graduates. Format GitHub repos, algorithms coursework, and full-stack projects for recruiters.',
     keywords: 'computer science graduate resume builder, CS major CV template, software engineering new grad resume',
     canonical: `${SITE_URL}/computer-science-graduate-resume-builder/`,
     h1: 'Computer Science Graduate Resume Builder'
   },
   '/resume-templates/nursing': {
-    title: 'Registered Nurse (RN) Resume Template — Free ATS Resume | Resume Craft',
+    title: 'Free Registered Nurse (RN) ATS Resume Template | Resume Craft',
     description: 'Create an ATS-compliant Registered Nurse resume. Feature clinical skills, patient care metrics, EHR systems, and BLS/ACLS certifications.',
     keywords: 'nursing resume template, RN CV template, nurse resume builder, ATS nursing resume',
     canonical: `${SITE_URL}/resume-templates/nursing/`,
     h1: 'Registered Nurse (RN) Resume Template'
   },
   '/resume-templates/executive-assistant': {
-    title: 'Executive Assistant Resume Template — Free ATS Resume | Resume Craft',
+    title: 'Free Executive Assistant ATS Resume Template | Resume Craft',
     description: 'Create an ATS Executive Assistant resume. Feature calendar management, executive travel, C-suite support, expense reporting, and office operations.',
     keywords: 'executive assistant resume template, EA CV sample, C-suite assistant resume builder',
     canonical: `${SITE_URL}/resume-templates/executive-assistant/`,
     h1: 'Executive Assistant Resume Template'
   },
   '/resume-templates/sales-representative': {
-    title: 'Sales Representative Resume Template — Free ATS Resume | Resume Craft',
+    title: 'Free Sales Representative ATS Resume Template | Resume Craft',
     description: 'Create an ATS Sales Representative resume. Feature revenue generation, quota attainment, CRM tools (Salesforce), prospecting, and deal closing.',
     keywords: 'sales representative resume template, sales CV sample, account executive resume builder',
     canonical: `${SITE_URL}/resume-templates/sales-representative/`,
     h1: 'Sales Representative Resume Template'
   },
   '/resume-templates/electrical-engineer': {
-    title: 'Electrical Engineer Resume Template — Free ATS Resume | Resume Craft',
+    title: 'Free Electrical Engineer ATS Resume Template | Resume Craft',
     description: 'Create an ATS Electrical Engineer resume. Feature circuit design, AutoCAD, PLC programming, MATLAB, power systems, and hardware testing.',
     keywords: 'electrical engineer resume template, EE CV sample, hardware engineering resume builder',
     canonical: `${SITE_URL}/resume-templates/electrical-engineer/`,
     h1: 'Electrical Engineer Resume Template'
   },
   '/vs/canva-resume-alternative': {
-    title: 'Free Canva Resume Alternative (100% ATS Friendly & Free Vector PDF) | Resume Craft',
+    title: 'Free Canva Resume Alternative: 100% ATS Vector PDF | Resume Craft',
     description: 'Canva resume templates get rejected by ATS parsers due to graphical columns. Switch to Resume Craft for 100% ATS-compliant vector PDF resumes with zero paywall.',
     keywords: 'free canva resume alternative, ATS readable resume vs canva, free PDF resume builder no watermark',
     canonical: `${SITE_URL}/vs/canva-resume-alternative/`,

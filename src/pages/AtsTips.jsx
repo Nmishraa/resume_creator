@@ -330,7 +330,7 @@ export default function AtsTips({ isEmbedded = false }) {
             <div style={{ padding: '1.2rem', borderRadius: '10px', background: '#f0fdf4', borderLeft: '4px solid #22c55e' }}>
               <h4 style={{ color: '#166534', fontWeight: 800, margin: '0 0 0.3rem 0' }}>✅ Fact: Single-column PDF layouts ensure clean text-stream extraction.</h4>
               <p style={{ color: '#14532d', margin: 0, fontSize: '0.9rem' }}>
-                Standard single-column PDFs created with clean HTML typography (like Resume & CV Craft exports) maintain 100% linear text reading order across ATS text parsers.
+                Standard single-column PDFs created with clean HTML typography (like Resume Craft exports) maintain 100% linear text reading order across ATS text parsers.
               </p>
             </div>
 

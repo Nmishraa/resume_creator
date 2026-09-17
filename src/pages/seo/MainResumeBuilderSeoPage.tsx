@@ -47,7 +47,7 @@ export const MainResumeBuilderSeoPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       <SeoHead
-        title="Free Resume Builder – Create an ATS-Friendly Resume"
+        title="Free Online Resume Builder with PDF Download | Resume Craft"
         description="Create a professional, ATS-friendly resume for free. Choose recruiter-tested templates, customize sections, and download vector PDFs instantly with no login or watermark."
         canonicalPath="/resume-builder"
         jsonLd={pageSchema}

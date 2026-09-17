@@ -147,10 +147,10 @@ export default function Login({ onAuthSuccess }) {
           {/* Quick FAQ Box */}
           <div style={{ background: '#ffffff', padding: '1.25rem', borderRadius: '14px', border: '1px solid #e2e8f0' }}>
             <h4 style={{ fontSize: '0.92rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.4rem' }}>
-              ❓ Is Resume & CV Craft completely free?
+              ❓ Is Resume Craft completely free?
             </h4>
             <p style={{ fontSize: '0.85rem', color: '#475569', margin: 0 }}>
-              Yes! Resume & CV Craft is 100% free to build, edit, tailor, and download your resume without subscriptions or paywalls.
+              Yes! Resume Craft is 100% free to build, edit, tailor, and download your resume without subscriptions or paywalls.
             </p>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function Login({ onAuthSuccess }) {
         {/* Right Column: Clean Login / Signup Card */}
         <div className="auth-card" style={{ width: '100%', padding: '2.5rem', background: '#ffffff', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.12)', border: '1px solid #e2e8f0' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: 900, color: '#0f172a', marginBottom: '0.4rem', textAlign: 'center' }}>
-            Resume & CV Craft Workspace
+            Resume Craft Workspace
           </h2>
           <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '1.75rem', textAlign: 'center' }}>
             {isSignUp ? 'Create a free account to get started' : 'Sign in to access your resumes & cover letters'}

@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /editor
+Disallow: /dashboard
+Disallow: /applications
 
 # Sitemaps
 Sitemap: https://resume.gnanamai.com/sitemap.xml

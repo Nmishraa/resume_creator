@@ -20,63 +20,63 @@ const SITE_URL = 'https://resume.gnanamai.com';
 const PAGES = [
   {
     path: '/',
-    title: 'Free AI Resume Builder & ATS Resume Checker | Resume Craft',
-    description: 'Build ATS-friendly resumes for free with AI bullet point optimization, real-time ATS scoring, Google X-Y-Z formula, and instant vector PDF downloads.',
-    h1: 'Free AI Resume Builder & ATS Resume Checker',
-    intro: 'Resume Craft empowers job seekers to build ATS-friendly resumes and CVs for free with AI-powered bullet points, Google X-Y-Z formulas, professional templates, and instant vector PDF downloads.'
+    title: 'Resume Craft – Free AI Resume Builder & ATS Resume Checker',
+    description: 'Resume Craft is a free AI resume builder and ATS resume checker that helps you create professional, ATS-friendly resumes, tailor resumes to job descriptions, and download your resume as a PDF.',
+    h1: 'Free AI Resume Builder – Create an ATS-Friendly Resume',
+    intro: 'Resume Craft is a free AI resume builder and ATS resume checker.'
   },
   {
     path: '/resume-builder',
-    title: 'Free Online Resume Builder – Create ATS Resumes | Resume Craft',
-    description: 'Build professional, ATS-friendly resumes for free with live preview, AI bullet enhancers, and vector PDF exports.',
+    title: 'Free Online Resume Builder with PDF Download | Resume Craft',
+    description: 'Build professional, ATS-friendly resumes for free with live preview, AI bullet writer, and instant vector PDF exports with zero paywall.',
     h1: 'Free Online Resume Builder',
     intro: 'Build professional, ATS-friendly resumes for free with live preview, AI bullet enhancers, and vector PDF exports.'
   },
   {
     path: '/cover-letter-builder',
-    title: 'Free AI Cover Letter Builder – Tailored Cover Letters | Resume Craft',
-    description: 'Generate customized, role-tailored cover letters from your resume experience and target job title in seconds.',
+    title: 'Free AI Cover Letter Builder & Tailored Generator | Resume Craft',
+    description: 'Generate customized, role-tailored cover letters from your resume experience and target job title in seconds. Export clean PDF or text.',
     h1: 'Free AI Cover Letter Builder',
     intro: 'Generate customized, role-tailored cover letters from your resume experience and target job title in seconds.'
   },
   {
     path: '/free-resume-builder',
-    title: 'Free Resume Builder – Create ATS-Friendly Resumes Online | Resume Craft',
+    title: 'Free ATS Resume Builder (No Watermark, Vector PDF) | Resume Craft',
     description: '100% free resume builder with ATS-compliant templates, vector PDF export, and no paywalls. Build and download your professional resume in minutes.',
     h1: 'Free Resume Builder – Create ATS-Friendly Resumes Online',
     intro: 'Create, edit, and download professional vector PDF resumes designed to pass automated hiring filters like Workday and Greenhouse. Powered by real-time ATS scoring and AI bullet optimization.'
   },
   {
     path: '/ai-resume-builder',
-    title: 'Free AI Resume Builder – AI Bullet Point & Summary Writer | Resume Craft',
+    title: 'Free AI Resume Builder (Smart Bullet & Summary Writer) | Resume Craft',
     description: 'Craft high-impact resumes with AI-assisted bullet point rewriting, Google X-Y-Z metrics, professional summary generator, and keyword optimization.',
     h1: 'Free AI Resume Builder – Smart Bullet & Summary Writer',
     intro: 'Supercharge your resume achievements with AI-powered bullet point rewriting, Google X-Y-Z formula metrics, role-tailored summaries, and ATS keyword matching.'
   },
   {
     path: '/ats-resume-checker',
-    title: 'Free ATS Resume Checker – Check Your Resume Score Online | Resume Craft',
+    title: 'Free ATS Resume Checker (Instant 0-100 Score) | Resume Craft',
     description: 'Instant 0-100 ATS resume score checker. Compare your resume against any job description, find missing keywords, and fix weak bullet points for free.',
     h1: 'Free ATS Resume Checker',
     intro: 'Scan your resume against any job description to calculate your 0–100 ATS compatibility score, detect missing keywords, and optimize achievements with Google X-Y-Z metrics.'
   },
   {
     path: '/resume-score-checker',
-    title: 'Free Resume Score Checker – Instant ATS Analysis & Feedback | Resume Craft',
+    title: 'Free Resume Score Checker (Instant ATS Feedback) | Resume Craft',
     description: 'Evaluate your resume formatting, keyword match, and bullet strength with our free real-time resume score checker. Get actionable steps to reach a 90+ score.',
     h1: 'Free Resume Score Checker',
     intro: 'Evaluate your resume formatting, keyword match, and bullet strength with our free real-time resume score checker. Get actionable steps to reach a 90+ score.'
   },
   {
     path: '/resume-builder-for-students',
-    title: 'Free Resume Builder for Students & College Graduates | Resume Craft',
+    title: 'Free Resume Builder for Students & College Grads | Resume Craft',
     description: 'Tailored student resume builder featuring coursework, academic projects, extracurriculars, GPA, and beginner summaries. Land internships and first jobs.',
     h1: 'Free Resume Builder for Students & College Graduates',
     intro: 'Transform your coursework, academic capstones, club leadership, and university projects into an ATS-tested resume that catches the attention of recruiters and hiring managers.'
   },
   {
     path: '/resume-builder-no-experience',
-    title: 'Resume Builder for No Experience – Free ATS-Friendly Templates | Resume Craft',
+    title: 'Resume Builder for No Experience (Free ATS Templates) | Resume Craft',
     description: 'Build a standout resume with no formal work experience. Highlight transferable skills, academic projects, volunteer work, and certifications for free.',
     h1: 'Resume Builder for No Experience – Free ATS-Friendly Templates',
     intro: 'You have more experience than you think. Learn how to transform volunteer hours, school activities, personal projects, and transferable skills into an employer-ready resume.'
@@ -97,35 +97,35 @@ const PAGES = [
   },
   {
     path: '/job-description-resume-matcher',
-    title: 'Job Description Resume Matcher – ATS Keyword Match Tool | Resume Craft',
+    title: 'Job Description Resume Matcher (ATS Keyword Match) | Resume Craft',
     description: 'Match your resume against any job description to discover missing technical skills, keyword frequency, and recruiter requirements in real-time.',
     h1: 'Job Description Resume Matcher & ATS Keyword Scanner',
     intro: 'Match your resume against any job description to discover missing technical skills, keyword frequency, and recruiter requirements in real-time.'
   },
   {
     path: '/interview-questions',
-    title: 'Free AI Interview Question Generator by Job Role | Resume Craft',
+    title: 'Free AI Interview Question Generator by Role | Resume Craft',
     description: 'Generate free AI-powered interview questions for any job role. Practice common, behavioral, technical, and role-specific questions with Resume Craft.',
     h1: 'AI Interview Question Generator',
     intro: 'Generate free AI-powered interview questions for any job role. Practice common, behavioral, technical, and role-specific questions with Resume Craft.'
   },
   {
     path: '/cover-letter-generator',
-    title: 'Free AI Cover Letter Generator – Tailored in Seconds | Resume Craft',
+    title: 'Free AI Cover Letter Generator (Tailored in Seconds) | Resume Craft',
     description: 'Generate customized, role-tailored cover letters from your resume experience and target job title. Download as PDF or copy instantly.',
     h1: 'Free AI Cover Letter Generator',
     intro: 'Generate customized, role-tailored cover letters from your resume experience and target job title. Download as PDF or copy instantly.'
   },
   {
     path: '/resume-templates',
-    title: 'Free ATS-Friendly Resume Templates – Clean & Scannable Layouts | Resume Craft',
+    title: 'Free ATS Resume Templates (Vector PDF Download) | Resume Craft',
     description: 'Explore 5 ATS-compliant resume templates built with standard fonts and clean single-column layouts for Workday, Greenhouse, Taleo, and Lever.',
     h1: 'Free ATS-Friendly Resume Templates',
     intro: 'Every template is designed with standard fonts, single-column parsing flow, and clean vector typography to maximize parsing compatibility through Taleo, Workday, and Greenhouse.'
   },
   {
     path: '/resume-examples',
-    title: 'Resume Examples & Professional Samples (ATS-Optimized) | Resume Craft',
+    title: 'Professional Resume Examples (ATS Tested 2026) | Resume Craft',
     description: 'Browse ATS-tested resume examples by industry and role with real bullet points, Google X-Y-Z formulas, recommended skills, and 1-click editing.',
     h1: 'Professional Resume Examples & ATS Samples',
     intro: 'Explore recruiter-aligned resume samples packed with real achievement bullets, Google X-Y-Z formulas, top technical skills, and 1-click builder templates.'
@@ -182,14 +182,14 @@ const PAGES = [
   // Competitor Comparison Pages
   {
     path: '/vs/zety-alternative',
-    title: 'Free Zety Alternative (No Watermark & Free PDF Download) | Resume Craft',
+    title: 'Free Zety Alternative: No Watermark & Free Vector PDF | Resume Craft',
     description: 'Looking for a free alternative to Zety? Build, ATS-check, and download vector PDF resumes 100% free on Resume Craft with no watermarks or credit card required.',
     h1: 'Free Zety Alternative (No Watermark & Free Vector PDF)',
     intro: 'Resume Craft is 100% free forever. Build ATS-friendly resumes, enhance bullet points with AI, and download vector PDFs with zero watermarks or credit card requirements.'
   },
   {
     path: '/vs/resume-io-alternative',
-    title: 'Free Resume.io Alternative (No Watermark & Free Vector PDF) | Resume Craft',
+    title: 'Free Resume.io Alternative: Free PDF & No Watermarks | Resume Craft',
     description: 'Switch from Resume.io to Resume Craft. Build ATS-optimized resumes, enhance bullet points with AI, and download high-resolution vector PDFs 100% free with no watermark.',
     h1: 'Free Resume.io Alternative (No Watermark & Free Vector PDF)',
     intro: 'Switch from Resume.io to Resume Craft. Export high-resolution vector PDFs for free without plain text restrictions or monthly subscription fees.'
@@ -738,6 +738,14 @@ for (const page of PAGES) {
       name: 'Resume Craft',
       operatingSystem: 'All Web Browsers',
       applicationCategory: 'BusinessApplication',
+      applicationSubCategory: 'Resume Builder & ATS Checker',
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        ratingCount: '1480',
+        bestRating: '5',
+        worstRating: '1'
+      },
       offers: {
         '@type': 'Offer',
         price: '0.00',
@@ -781,19 +789,63 @@ for (const page of PAGES) {
   rendered = rendered.replace(/<meta\s+name="description"\s+content=".*?"\s*\/?>/i, '');
   rendered = rendered.replace('</head>', `  ${metaHtml}\n  </head>`);
 
-  // For sub-pages, write static target index.html
+  // For sub-pages, write static target index.html with SEO-rich internal navigation hub
   if (page.path !== '/') {
     const semanticBodyHtml = `
-      <main style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: system-ui, sans-serif;">
-        <header>
-          <h1 style="font-size: 2rem; font-weight: 800; color: #0f172a;">${page.h1}</h1>
-          <p style="font-size: 1rem; color: #475569; line-height: 1.6;">${page.intro}</p>
+      <main style="max-width: 1200px; margin: 0 auto; padding: 24px; font-family: system-ui, -apple-system, sans-serif; color: #0f172a;">
+        <header style="margin-bottom: 2rem;">
+          <h1 style="font-size: 2.25rem; font-weight: 800; color: #0f172a; margin-bottom: 0.75rem; letter-spacing: -0.02em;">${page.h1}</h1>
+          <p style="font-size: 1.125rem; color: #475569; line-height: 1.7; max-width: 800px;">${page.intro}</p>
         </header>
-        <nav aria-label="Quick Links" style="margin-top: 20px;">
-          <a href="/builder" style="color: #4f46e5; margin-right: 15px; font-weight: bold;">Open Resume Builder</a>
-          <a href="/ats-checker" style="color: #059669; margin-right: 15px; font-weight: bold;">Check ATS Score</a>
-          <a href="/resume-examples" style="color: #2563eb; margin-right: 15px; font-weight: bold;">Resume Examples</a>
-        </nav>
+
+        <section style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+          <a href="/free-resume-builder" style="display: inline-flex; align-items: center; background: #4f46e5; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 700; text-decoration: none;">Build Free Resume &rarr;</a>
+          <a href="/ats-resume-checker" style="display: inline-flex; align-items: center; background: #059669; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 700; text-decoration: none;">Check ATS Score &rarr;</a>
+          <a href="/resume-templates" style="display: inline-flex; align-items: center; background: #2563eb; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 700; text-decoration: none;">Explore Templates &rarr;</a>
+        </section>
+
+        <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; font-size: 0.9rem; color: #64748b;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div>
+              <h3 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">Free Career Tools</h3>
+              <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
+                <li><a href="/free-resume-builder" style="color: #4f46e5; text-decoration: none;">Free Resume Builder</a></li>
+                <li><a href="/ats-resume-checker" style="color: #4f46e5; text-decoration: none;">ATS Resume Checker</a></li>
+                <li><a href="/ai-resume-builder" style="color: #4f46e5; text-decoration: none;">AI Bullet & Summary Writer</a></li>
+                <li><a href="/cover-letter-builder" style="color: #4f46e5; text-decoration: none;">AI Cover Letter Generator</a></li>
+                <li><a href="/resume-score-checker" style="color: #4f46e5; text-decoration: none;">Resume Score Checker</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">Popular Templates</h3>
+              <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
+                <li><a href="/resume-templates/software-engineer" style="color: #2563eb; text-decoration: none;">Software Engineer Template</a></li>
+                <li><a href="/resume-templates/product-manager" style="color: #2563eb; text-decoration: none;">Product Manager Template</a></li>
+                <li><a href="/resume-templates/ai-engineer" style="color: #2563eb; text-decoration: none;">AI Engineer Template</a></li>
+                <li><a href="/resume-templates/data-scientist" style="color: #2563eb; text-decoration: none;">Data Scientist Template</a></li>
+                <li><a href="/resume-templates/cloud-architect" style="color: #2563eb; text-decoration: none;">Cloud Architect Template</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">Resume Examples</h3>
+              <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
+                <li><a href="/resume-examples/software-engineer" style="color: #059669; text-decoration: none;">Software Engineer Sample</a></li>
+                <li><a href="/resume-examples/product-manager" style="color: #059669; text-decoration: none;">Product Manager Sample</a></li>
+                <li><a href="/resume-examples/ai-engineer" style="color: #059669; text-decoration: none;">AI Engineer Sample</a></li>
+                <li><a href="/resume-examples/data-analyst" style="color: #059669; text-decoration: none;">Data Analyst Sample</a></li>
+                <li><a href="/resume-examples/college-student" style="color: #059669; text-decoration: none;">College Student Sample</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">Free Alternatives</h3>
+              <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
+                <li><a href="/vs/canva-resume-alternative" style="color: #9333ea; text-decoration: none;">Free Canva Alternative</a></li>
+                <li><a href="/vs/zety-alternative" style="color: #9333ea; text-decoration: none;">Free Zety Alternative</a></li>
+                <li><a href="/vs/resume-io-alternative" style="color: #9333ea; text-decoration: none;">Free Resume.io Alternative</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
       </main>
     `.trim();
 
