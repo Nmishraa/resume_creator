@@ -125,7 +125,10 @@ function initializeRegistry() {
     'marcus-vance': 'devops-engineer',
     'elena-rostova': 'product-manager',
     'david-miller': 'data-analyst',
-    'amara-okafor': 'cybersecurity-engineer'
+    'amara-okafor': 'cybersecurity-engineer',
+    'senior-devops-platform-engineer': 'kubernetes-and-terraform-engineer',
+    'senior-devops-and-platform-engineer': 'kubernetes-and-terraform-engineer',
+    'devops-platform-engineer': 'kubernetes-and-terraform-engineer'
   };
 
   // 1. Register RESUME_EXAMPLES from resumeExamplesData.ts

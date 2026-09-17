@@ -27,7 +27,8 @@ import {
   Users,
   Search,
   BookOpen,
-  ArrowLeft
+  ArrowLeft,
+  Eye
 } from 'lucide-react';
 
 export const ProductManagerPage: React.FC = () => {
@@ -271,6 +272,15 @@ export const ProductManagerPage: React.FC = () => {
           </button>
 
           <Link
+            to="/resume-preview/product-manager"
+            state={{ resumeData: pmResumeData }}
+            className="px-5 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+          >
+            <Eye size={16} />
+            <span>View Full Page Preview</span>
+          </Link>
+
+          <Link
             to="/resume-templates/product-manager"
             className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl text-xs sm:text-sm border border-slate-300 shadow-xs transition-all flex items-center gap-2"
           >
@@ -297,9 +307,19 @@ export const ProductManagerPage: React.FC = () => {
               Interactive Product Manager Resume Preview
             </span>
           </div>
-          <span className="text-xs font-bold text-slate-500">
-            Senior Product Manager
-          </span>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/resume-preview/product-manager"
+              state={{ resumeData: pmResumeData }}
+              className="text-xs font-bold text-brand-600 hover:text-brand-700 hover:underline flex items-center gap-1"
+            >
+              <Eye size={14} />
+              <span>View Full Page Preview</span>
+            </Link>
+            <span className="text-xs font-bold text-slate-500">
+              Senior Product Manager
+            </span>
+          </div>
         </div>
 
         {/* Printable Resume Renderer */}

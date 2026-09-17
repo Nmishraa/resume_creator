@@ -26,6 +26,48 @@ const PAGES = [
     intro: 'Resume Craft is a free AI resume builder and ATS resume checker.'
   },
   {
+    path: '/resume-preview',
+    title: 'Full Page Resume Preview | Resume Craft',
+    description: 'View full-page interactive previews of recruiter-vetted ATS resumes across tech, product, architecture, and business roles.',
+    h1: 'Full Page Resume Preview',
+    intro: 'Interactive full-page preview of ATS-friendly resume templates.'
+  },
+  {
+    path: '/resume-preview/product-manager',
+    title: 'Product Manager Full Page Resume Preview | Resume Craft',
+    description: 'Interactive full-page preview of Product Manager resume example.',
+    h1: 'Product Manager Resume Preview',
+    intro: 'Full page preview of Product Manager resume example.'
+  },
+  {
+    path: '/resume-preview/technical-product-manager',
+    title: 'Technical Product Manager Full Page Resume Preview | Resume Craft',
+    description: 'Interactive full-page preview of Technical Product Manager resume example.',
+    h1: 'Technical Product Manager Resume Preview',
+    intro: 'Full page preview of Technical Product Manager resume example.'
+  },
+  {
+    path: '/resume-preview/senior-devops-platform-engineer',
+    title: 'Senior DevOps & Platform Engineer Full Page Resume Preview | Resume Craft',
+    description: 'Interactive full-page preview of Senior DevOps & Platform Engineer resume example.',
+    h1: 'Senior DevOps & Platform Engineer Resume Preview',
+    intro: 'Full page preview of Senior DevOps & Platform Engineer resume example.'
+  },
+  {
+    path: '/resume-preview/enterprise-architect',
+    title: 'Enterprise Architect Full Page Resume Preview | Resume Craft',
+    description: 'Interactive full-page preview of Enterprise Architect resume example.',
+    h1: 'Enterprise Architect Resume Preview',
+    intro: 'Full page preview of Enterprise Architect resume example.'
+  },
+  {
+    path: '/resume-preview/cloud-architect',
+    title: 'Cloud Architect Full Page Resume Preview | Resume Craft',
+    description: 'Interactive full-page preview of Cloud Architect resume example.',
+    h1: 'Cloud Architect Resume Preview',
+    intro: 'Full page preview of Cloud Architect resume example.'
+  },
+  {
     path: '/resume-builder',
     title: 'Free Online Resume Builder with PDF Download | Resume Craft',
     description: 'Build professional, ATS-friendly resumes for free with live preview, AI bullet writer, and instant vector PDF exports with zero paywall.',

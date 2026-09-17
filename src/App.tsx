@@ -139,7 +139,8 @@ export function App() {
             <Route path="resumes/:slug" element={<LegacyResumeRedirect />} />
             <Route path="examples" element={<Navigate to="/resume-examples" replace />} />
             <Route path="examples/:role" element={<LegacyResumeRedirect />} />
-            <Route path="resume-preview" element={<DedicatedResumePage />} />
+            <Route path="resume-preview" element={<FullPagePreviewPage />} />
+            <Route path="resume-preview/:slug" element={<FullPagePreviewPage />} />
 
             {/* Career & ATS Guides */}
             <Route path="guides" element={<GuidesHubPage />} />

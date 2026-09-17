@@ -4486,13 +4486,22 @@ export const ResumeExamplesCarousel: React.FC<ResumeExamplesCarouselProps> = ({
             </div>
 
             {/* Modal Bottom CTA Button */}
-            <div className="pt-4 border-t border-slate-200 flex justify-end gap-3">
+            <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-end gap-3">
               <button
                 onClick={() => setActiveModalExample(null)}
                 className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors cursor-pointer"
               >
                 Close Preview
               </button>
+              <Link
+                to={`/resume-preview/${activeModalExample.slug}`}
+                state={{ resumeData: activeModalExample.presetData }}
+                onClick={() => setActiveModalExample(null)}
+                className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+              >
+                <Eye size={15} />
+                <span>View Full Page Preview</span>
+              </Link>
               <button
                 onClick={() => {
                   const item = activeModalExample;

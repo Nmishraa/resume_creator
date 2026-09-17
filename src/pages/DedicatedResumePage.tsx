@@ -18,7 +18,8 @@ import {
   AlertTriangle,
   Zap,
   Tag,
-  ArrowLeft
+  ArrowLeft,
+  Eye
 } from 'lucide-react';
 
 import { ProductManagerPage } from './seo/ProductManagerPage';
@@ -227,6 +228,15 @@ export const DedicatedResumePage: React.FC = () => {
           </button>
 
           <Link
+            to={`/resume-preview/${resume.slug}`}
+            state={{ resumeData: fullResumeData }}
+            className="px-5 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+          >
+            <Eye size={16} />
+            <span>View Full Page Preview</span>
+          </Link>
+
+          <Link
             to={`/resume-templates/${resume.slug}`}
             className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-bold rounded-xl text-xs sm:text-sm border border-slate-300 shadow-xs transition-all flex items-center gap-2"
           >
@@ -245,9 +255,19 @@ export const DedicatedResumePage: React.FC = () => {
               Dedicated Interactive Resume Preview
             </span>
           </div>
-          <span className="text-xs font-bold text-slate-500">
-            {resume.jobTitle}
-          </span>
+          <div className="flex items-center gap-3">
+            <Link
+              to={`/resume-preview/${resume.slug}`}
+              state={{ resumeData: fullResumeData }}
+              className="text-xs font-bold text-brand-600 hover:text-brand-700 hover:underline flex items-center gap-1"
+            >
+              <Eye size={14} />
+              <span>View Full Page Preview</span>
+            </Link>
+            <span className="text-xs font-bold text-slate-500">
+              {resume.jobTitle}
+            </span>
+          </div>
         </div>
 
         {/* Clean Printable A4 Resume Renderer Sheet */}
