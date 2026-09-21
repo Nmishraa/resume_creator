@@ -384,18 +384,24 @@ export const UploadResumeModal: React.FC<UploadResumeModalProps> = ({
               <span>1. Upload</span>
             </button>
 
+            <button
+              onClick={() => editedData && setStep('review')}
+              disabled={!editedData}
+              title={!editedData ? 'Upload a resume file first to review extracted data' : ''}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                !editedData
+                  ? 'bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-60'
+                  : step === 'review'
+                  ? 'bg-brand-600 text-white shadow-xs cursor-pointer'
+                  : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-250 cursor-pointer'
+              }`}
+            >
+              <FileText size={14} className={step === 'review' ? 'text-white' : editedData ? 'text-emerald-600' : 'text-slate-400'} />
+              <span>2. Review Data</span>
+            </button>
+
             {editedData && (
               <>
-                <button
-                  onClick={() => setStep('review')}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
-                    step === 'review' ? 'bg-brand-600 text-white shadow-xs' : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-250'
-                  }`}
-                >
-                  <FileText size={14} className="text-emerald-600" />
-                  <span>2. Review Data</span>
-                </button>
-
                 <button
                   onClick={handleApplyAndEditInBuilder}
                   className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
